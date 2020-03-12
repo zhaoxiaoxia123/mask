@@ -1,0 +1,38 @@
+/* pages/member/grade/grade.wxss */
+
+.grade{
+  font-size:24rpx;
+  line-height: 2;
+  color:#e9d5a4;
+}
+.grade .head{
+  display: flex;
+  justify-content: center;
+  font-size:40rpx;
+  padding:10rpx 0;
+}
+.content{
+  padding:40rpx 0;
+}
+.content-head{
+  font-size:32rpx;
+}
+
+.grade .explain{
+  color:#8b8b8b;
+  padding-bottom:40rpx;
+}
+
+.agreement{
+  display: flex;
+  justify-content:center;
+  font-size:32rpx;
+  color:#8b8b8b;
+  padding: 40rpx 0;
+}
+.agreement-a{
+  color:#DAB866;
+}
+.decoration{
+  text-decoration:underline;
+}

@@ -1,0 +1,35 @@
+<!--pages/member/grade/grade.wxml-->
+
+<view class='page-pd'>
+  <view class='grade'>
+     <view class='head'><text>如何赚成长值</text></view>
+     <view class='content'>
+           <view class='content-head'><text>★ 购物金额累计</text></view>
+           <view class='content-text'><text>在冻龄之谜平台购物，每累计支付满1000元（包含运费和税费）即可获得1个成长值（直升礼包除外）。</text></view>
+     </view>
+
+     <view class='content'>
+           <view class='content-head'><text>★ 邀请好友成为会员</text></view>
+           <view class='content-text'><text>VIP用户可以邀请好友购买VIP礼包成为会员，双方均可会的相关成长值。</text></view>
+           <view class='content-text'><text>SVIP用户、钻卡用户可以邀请好友购买VIP礼包或SVIP礼包成为会员，双方均可获得相应的成长值。</text></view>
+     </view>
+     <view class='content'>
+           <view class='content-head'><text>★ 购买VIP/SVIP直升礼包可获得相应的成长值</text></view>
+           <view class='content-text'><text>普通用户和会员用户购买VIP和SVIP直升礼包可获得相应的成长值，VIP和SVIP直升礼包只能各购买一次。</text></view>
+     </view>
+
+
+
+     <view class='explain'><text>特别说明：成长值与消费金额的比例是1:1000，即每消费1000元可以积1分，保留小数点后1位，也可以算成每次积分/10。每年清零。成长值已近365天计算，超过365天的成长值会失效，但是不会影响当前等级的会员权利。</text></view>
+
+  
+  </view>
+
+  <view class='agreement' bindtap='agreementone'>
+        <text>查看</text>
+        <text class='agreement-a'>《</text>
+        <text class='agreement-a decoration'>单创会员服务协议</text>
+        <text class='agreement-a'>》</text>
+  </view>
+
+</view>
