@@ -1,0 +1,165 @@
+<!--pages/news/news.wxml-->
+<view class='padding:0 40rpx;'>
+  <view class="topbar">
+    <view class="topbar top">
+      <view class="topbar top text" bindtap="clickTab" data-current="0">
+        <view class="topbar top text tab ">待付款</view>
+        <view class="topbar top text status {{currentTab=='0'?'active':''}}" style="{{currentTab=='0'?'background-color:#b7aa00':'background-color:#FFF'}}"></view>
+      </view>
+      <!-- <view class="topbar top text" bindtap="clickTab" data-current="1">
+        <view class="topbar top text tab ">待发货</view>
+        <view class="topbar top text status {{currentTab=='1'?'active':''}}" style="{{currentTab=='1'?'background-color:#b7aa00':'background-color:#FFF'}}"></view>
+      </view> -->
+      <view class="topbar top text" bindtap="clickTab" data-current="2">
+        <view class="topbar top text tab ">待收货</view>
+        <view class="topbar top text status {{currentTab=='2'?'active':''}}" style="{{currentTab=='2'?'background-color:#b7aa00':'background-color:#FFF'}}"></view>
+      </view>
+      <view class="topbar top text" bindtap="clickTab" data-current="3">
+        <view class="topbar top text tab ">交易完成</view>
+        <view class="topbar top text status {{currentTab=='3'?'active':''}}" style="{{currentTab=='3'?'background-color:#b7aa00':'background-color:#FFF'}}"></view>
+      </view>
+
+    </view>
+  </view>
+
+
+  <view class='content'>
+    <view class="{{currentTab == 0 ? 'show':'hidden'}}">
+      <scroll-view>
+
+        <view class='search-no' style='display:none;'>
+          <view>
+            <image class='scimg' src='../../img/wu.png'></image>
+          </view>
+          <text>暂无订单~~</text>
+        </view>
+
+        <view class='lists'>
+          <!--bindtap绑定事件   待支付-->
+          <view class='list-order' bindtap='orderdetail' wx:key="*this" wx:for="{{items}}" data-id="{{item.order_id}}">
+            <view class='order'>
+              <view class='ordernum'>订单号：{{item.order_code}}</view>
+              <view class='status' wx:if="{{item.order_state == 1}}">待付款</view>
+            </view>
+            <view class='list'  wx:key="*this" wx:for="{{item.products}}">
+              <view class='list-left'>
+                <image src='{{item.product_image[0].image_url}}'></image>
+              </view>
+
+              <view class='list-right'>
+                <view class='column'>
+                  <view class='right-text'>{{item.product_name}}</view>
+                </view>
+                <view>
+                  <view class='column'>
+                    <view class='sale'>{{item.product_amount}}</view>
+                    <!-- <view class='money'>{{item.amount}}</view> --> X{{item.product_count}}
+                  </view>
+                </view>
+              </view>
+
+            </view>
+            <view class='order'>
+              <image class='del' src='../../img/del.png'></image>
+              <view class='pay'>共{{item.products_count}}件商品 实付款:
+                <label style='color:#b7aa00'>￥{{item.order_amount}}</label>
+              </view>
+            </view>
+            <view class='downline'></view>
+          </view>
+
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="{{currentTab == 1 ? 'show':'hidden'}}">
+      <scroll-view>
+        <view class='lists'>
+          <!--bindtap绑定事件   待发货-->
+          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
+            <view class='order'>
+              <view class='ordernum'>订单号：{{item.order_code}}</view>
+              <view class='status' wx:if="{{item.order_state == 2}}">待发货</view>
+            </view>
+            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
+              <view class='list-left'>
+                <image src='{{item1.product_image[0].image_url}}'></image>
+              </view>
+              <view class='list-right'>
+                <view class='column'>
+                  <view class='right-text'>{{item1.product_name}}</view>
+                </view>
+                <view>
+                  <view class='column'>
+                    <view class='sale'>{{item1.product_amount}} X{{item1.product_count}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </scroll-view>
+    </view>
+    <view class="{{currentTab == 2 ? 'show':'hidden'}}">
+      <scroll-view>
+        <view class='lists'>
+          <!--bindtap绑定事件   待发货-->
+          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
+            <view class='order'>
+              <view class='ordernum'>订单号：{{item.order_code}}</view>
+              <view class='status' wx:if="{{item.order_state == 3}}">已发货</view>
+            </view>
+            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
+              <view class='list-left'>
+                <image src='{{item1.product_image[0].image_url}}'></image>
+              </view>
+              <view class='list-right'>
+                <view class='column'>
+                  <view class='right-text'>{{item1.product_name}}</view>
+                </view>
+                <view>
+                  <view class='column'>
+                    <view class='sale'>{{item1.discount_amount}} X{{item1.product_count}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="{{currentTab == 3 ? 'show':'hidden'}}">
+      <scroll-view>
+        <view class='lists'>
+          <!--bindtap绑定事件  交易完成 -->
+          <view class='list-order' wx:key="*this" wx:for="{{items}}">
+            <view class='order'>
+              <view class='ordernum'>订单号：{{item.order_code}}</view>
+              <view class='status'>交易完成</view>
+            </view>
+            <view class='list'  wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
+              <view class='list-left'>
+                <image src='{{item1.product_image[0].image_url}}'></image>
+              </view>
+              <view class='list-right'>
+                <view class='column'>
+                  <view class='right-text'>{{item1.product_name}}</view>
+                </view>
+              </view>
+            </view>
+            <view class='order'>
+              <image class='del' src='../../img/del.png'></image>
+              <view class='pay'>共{{item.products_count}}件商品 实付款:
+                <label style='color:#b7aa00'>￥{{item.order_amount}}</label>
+              </view>
+            </view>
+            <view class='downline'></view>
+          </view>
+        </view>
+
+      </scroll-view>
+    </view>
+
+  </view>
+</view>

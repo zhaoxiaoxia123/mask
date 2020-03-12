@@ -1,0 +1,107 @@
+/* pages/home/home.wxss */
+
+.lists{
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+.list{
+   background: #FFF;
+   box-sizing: border-box;
+   padding-top: 10rpx;
+   margin-bottom: 20rpx;
+   padding: 20rpx;
+   font-size:28rpx;
+
+}
+.column{
+  margin-bottom:10rpx;
+  display: flex;
+}
+.space-between{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+.selected{
+  border-radius:5px;
+  background-color:#FF0000;
+  color: #ffffff;
+  font-size:9px;
+}
+
+.list-left{
+  width:40%;
+}
+.direction-row{
+  display: flex;
+   flex-direction: row;
+}
+.list-right{
+  width:60%;
+  display: flex;
+  justify-content:flex-end;
+  align-items: center;
+}
+.address{
+  color:#999;
+}
+.checkbox{
+  color: #112d86;
+}
+.edit{
+  padding-right:20rpx;
+}
+.list-right-img{
+  width:26rpx;
+  height:26rpx;
+  padding-right:10rpx;
+}
+/*底部操作栏*/
+.added{
+	width: 90%;
+  position: fixed;
+	bottom: 0;
+	display: block;
+
+}
+.bottom-operate{
+	width: 100%;
+	height: 90rpx;
+	display: flex;
+	justify-content: center;
+	flex-direction: row-reverse;
+	align-items: center;
+  font-size: 28rpx;
+  color: #fff;
+  background-color:#333;
+  margin-bottom:10px;
+  border-radius:10rpx;
+}
+
+/*细线*/
+.downline{
+  margin:20rpx 0;
+  position: relative;
+  height: 1rpx;
+  background-color: #ddd;
+  z-index: 10;
+}
+
+
+/* 无 */
+.search-no {
+width: 100%;
+display: block;
+color: #999;
+text-align: center;
+font-size: 24rpx;
+padding:100rpx 0;
+}
+.scimg {
+width: 300rpx;
+height: 350rpx;
+display: inline-block;
+background-size: 300rpx;
+padding-bottom:20rpx;
+
+}

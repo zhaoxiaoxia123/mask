@@ -1,0 +1,64 @@
+<!--pages/news/news.wxml-->
+<view>
+  <view class='lists'>
+ <!--订单-->
+ <view class='list-order'>
+    <view class='order'>
+      <view class='ordernum'>订单号：{{items.order_code}}</view>
+      <view class='status'>待付款</view>
+    </view>
+    <view class='downline'></view>
+    </view>
+  <!--商品-->
+  <view class='list' wx:key="*this" wx:for="{{items.products}}">
+    <image class='list-left' src='{{item.product_image[0].img_url}}'></image>
+    <view class='list-right'>
+    <view class='between'>
+      <view class='right-text'>{{item.product_name}}</view>
+      <view class='postage'>免邮</view>
+    </view>
+     <view>
+      <!-- <view class='spec'>{{item.product_core}}</view> -->
+       
+     <view class='between'>
+     <view class='sale'>￥{{item.product_amount}}</view>
+      <view class='postage'>× {{item.product_count}}</view>
+      
+      </view>
+     </view> 
+    </view>
+  </view>
+<!--个人信息-->
+<view class='column1' style='margin-top:15rpx;'>
+      <view class='name'>收货人：{{address.name}}</view>
+      <view class='phone'>{{address.phone}}</view>
+     </view>
+     <view class='column1'>
+      <view class='address'>{{address.province}} {{address.city}} {{address.area}} {{address.address}}</view>
+    </view>
+<!--下单信息-->
+<view class='list1'  style='margin-top:15rpx;'>
+      <view class='time'>下单时间：{{items.created_at}}</view>
+      <view class='time'>付款方式：微信支付</view>
+      <view class='time'>备注：</view>
+      <textarea class='area'></textarea>
+     </view>
+   <!--商品金额-->  
+<view class='between1' style='margin-top:15rpx;'>
+      <view class='time'>商品金额（{{items.products_count}}件）</view>
+      <view class='sale1'>{{items.order_amount}}</view>
+     </view>
+     <view class='between1'>
+      <view class='time'>运费</view>
+      <view class='sale1'>0.00</view>
+    </view>
+    <view class='column3'>
+      <view class='saletotal'>￥{{items.order_amount}}</view>
+      <view class='time'>实付款：</view>
+    </view>
+     
+   <view class="bottom">
+    <view class="bottom-operate button" bindtap='deleteOrder' style='background-color:#FF0000;'>删除订单</view>
+   </view>
+  </view>
+</view>

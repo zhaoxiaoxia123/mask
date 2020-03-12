@@ -1,0 +1,41 @@
+<view style='padding:0 10px;'>
+  <view class='lists'>
+
+    <view class='search-no' wx:if="{{items.length <= 0}}">
+      <view>
+        <image class='scimg' src='../../img/wu.png'></image>
+      </view>
+      <text>暂无地址~~</text>
+    </view>
+
+    <!--bindtap绑定事件-->
+    <view class='list' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+
+      <view class='column space-between' data-obj='{{item}}'>
+        <view class='name'>姓名：{{item.name}}</view>
+        <view class='phone'>{{item.phone}}</view>
+      </view>
+
+      <view class='column'>
+        <view class='address'>{{item.province}}{{item.city}}{{item.area}}{{item.address}}</view>
+      </view>
+      <view class='downline'></view>
+      <view class='column direction-row'>
+
+        <view class='list-left'>
+          <checkbox class='checkbox' disabled="disabled" checked="{{item.is_default == 1}}" >默认地址</checkbox>
+        </view>
+        <view class='list-right'>
+          <view class='edit' data-type="edit" data-id="{{item.customer_addr_id}}" bindtap='editAddress'>
+            <image class='list-right-img' src='../../img/edit.png'></image>编辑</view>
+          <view class='del' data-type="del" data-index="{{index}}" data-id="{{item.customer_addr_id}}" bindtap='editAddress'>
+            <image class='list-right-img' src='../../img/del.png'></image>删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom">
+    <view class="bottom-operate button" bindtap='addAddress'>新增地址</view>
+  </view>
+</view>

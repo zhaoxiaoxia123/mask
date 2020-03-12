@@ -1,0 +1,56 @@
+/* pages/my/member/member.wxss */
+
+.lists{
+  box-sizing: border-box;
+  margin: 100rpx 40rpx;
+}
+.list{
+   background: #FFF;
+   box-sizing: border-box;
+   padding-top: 10rpx;
+   margin-bottom: 20rpx;
+   padding: 20rpx;
+   font-size:28rpx;
+   border-radius:10px;
+}
+.column{
+  margin-bottom:10rpx;
+}
+.column-img {
+width: 100%;
+display: block;
+color: #333;
+text-align: center;
+padding:20rpx 0;
+}
+.column-text {
+width: 100%;
+display: block;
+color: #333;
+text-align: center;
+font-size: 28rpx;
+}
+.logo {
+width: 208rpx;
+height: 166rpx;
+display: inline-block;
+}
+.two{
+  width: 368rpx;
+  height: 362rpx;
+  display: inline-block;
+}
+.one{
+  width: 354rpx;
+  height: 88rpx;
+  display: inline-block;
+}
+.text-1{
+  font-size:36rpx;
+  font-weight:600;
+}
+.text-2{
+  font-size:32rpx;
+  font-weight:600;
+}
+

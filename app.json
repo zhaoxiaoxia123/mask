@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/my/address/addressdetail/addressdetail",
+    "pages/my/invoice/invoicedetail/invoicedetail",
+    "pages/kind/kind",
+    "pages/kind/search/search",
+    "pages/my/order/orderdetail/orderdetail",
+    "pages/shopcat/shopcat",
+    "pages/detail/detail",
+    "pages/my/order/order",
+    "pages/my/my",
+    "pages/my/address/address",
+    "pages/my/invoice/invoice",
+    "pages/my/member/member",
+    "pages/my/coupon/coupon",
+    "pages/logs/logs",
+    "pages/my/news/news",
+    "pages/register/register",
+    "pages/bind/bind"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "Fnogen young",
+    "navigationBarBackgroundColor": "#333",
+    "backgroundColor": "#f5f5f5",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#fff",
+    "borderStyle": "white",
+    "backgroundColor": "#333",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "selectedIconPath": "pages/img/home_true.png",
+        "iconPath": "pages/img/home_false.png"
+      },
+      {
+        "pagePath": "pages/kind/kind",
+        "text": "分类",
+        "selectedIconPath": "pages/img/kind_true.png",
+        "iconPath": "pages/img/kind_false.png"
+      },
+      {
+        "pagePath": "pages/shopcat/shopcat",
+        "text": "购物车",
+        "selectedIconPath": "pages/img/shopcat_true.png",
+        "iconPath": "pages/img/shopcat_false.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "selectedIconPath": "pages/img/person_true.png",
+        "iconPath": "pages/img/person_false.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

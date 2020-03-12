@@ -1,0 +1,31 @@
+<!--pages/my/coupon/coupon.wxml-->
+<view class="coupon">
+
+  <view class="wrapper {{(index%2 == 0)?'colour-bg2':'colour-bg1'}}" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+    <view class="content">
+        <view class="money">
+          <text>¥</text>{{item.ticket_amount}}
+        </view>
+      <view class='co'>
+        <!-- <view class='co_w'></view> -->
+        <view class="title">
+         {{item.ticket_start_date}}-{{item.ticket_end_date}}
+        </view>
+        <!-- <view class='co_l'></view> -->
+      </view>
+    </view>
+    <view class="split-line"></view>
+    <view class="tip">
+      <view class="conditions" wx:if="{{item.ticket_type == 1}}">
+        全场通用
+      </view>
+      <view class="conditions" wx:if="{{item.ticket_type == 2}}">
+        满{{item.satisfy_amount}}可使用
+      </view>
+      <button class="useNow colour-text1" data-id="{{item.ticket_id}}"  bindtap="goOrder">
+      立即使用
+      </button>
+    </view>
+  </view>
+
+</view>

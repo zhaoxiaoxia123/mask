@@ -1,0 +1,264 @@
+/* pages/news/news.wxss */
+
+.swiper-tab {
+  width: 100%;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  color: #ccc;
+  font-size: 24rpx;
+  
+}
+
+.swiper-tab-item {
+  width: 50%;
+  color: #434343;
+  background: #ccc;
+}
+
+.active {
+  background-color:#b7aa00;
+}
+
+.show {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.bottom{
+  padding-top:30rpx;
+  display: flex;
+  justify-content: space-between; 
+}
+/* pages/home/home.wxss */
+
+.lists{
+  padding:0 40rpx; 
+  box-sizing: border-box;
+  margin: 20rpx 0;
+}
+.list{
+  width:100%;
+   padding: 30rpx 10rpx;
+   background: #FFF;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: row;
+   margin-top: 20rpx;
+}
+.list-order{
+  width:100%;
+   padding: 30rpx 20rpx;
+   background: #FFF;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   border-radius: 10rpx;
+   margin-bottom: 20rpx;
+} 
+.column{
+  margin-top: 30rpx;
+   background: #FFF;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+.column1{
+   background: #FFF;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+.radio-group{
+margin-top: 7%;
+transform:scale(0.7);
+}
+.radio-total{
+transform:scale(0.7);
+}
+.list-left{
+  width:15%;
+}
+
+.list-right{
+  display: flex;
+  flex-direction: column;
+}
+.right-text{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.money{
+  text-decoration:line-through;
+  font-size:10px;
+  padding-left:36rpx;
+  padding-top:5rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sale{
+  color:#b7aa00;
+  font-weight:bold;
+  font-size:20px;
+}
+.sell{
+  width:40%;
+  margin-right: 0px;
+  padding-right: 0px;
+  text-align: right;
+  font-size: 10px;
+  color:#999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.abstract{
+   padding-top:30rpx;
+  font-size: 10px;
+  color:#999;
+   display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.order{
+height: 30rpx;
+display: flex;
+justify-content: space-between;
+}
+.del{
+width: 30rpx;
+height: 30rpx;
+}
+.status{
+  color: #ff4c4c;
+  font-weight: bold;
+  font-size: 24rpx;
+}
+.pay{
+  font-size:24rpx;
+}
+.ordernum{
+  font-size: 24rpx;
+  color: #999;
+}
+.sale{
+  color:#b7aa00;
+  font-weight:bold;
+  font-size:24rpx;
+  width: 80px;
+}
+
+.total{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color:#999;
+  width: 80px;
+}
+.item image{
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+
+
+/*细线*/
+.downline{
+  margin-top: 3px;
+  position: relative;
+  height: 1rpx;
+  width: 90%;
+  margin-left: 5%;
+  background-color: #ddd;
+  z-index: 10;
+}
+
+
+/* 顶部三大功能按钮，固定样式，显示于顶部而不被覆盖  */
+
+.topbar{
+	width: 100%;
+	height: 90rpx;
+	/* position: fixed;
+	z-index: 1;
+	top: 0; */
+}
+.topbar .top {
+  width: 100%;
+  height: 90rpx;
+  background-color: #FFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20rpx;
+  position: static;
+  
+}
+.topbar .top .text {
+  margin: 0;
+  padding: 0;
+  width: 250rpx;
+  height: 90rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.topbar .top .text .tab {
+  width: auto;
+  flex-basis: 90%;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  padding-top: 20rpx;
+}
+
+.topbar .top .text .status {
+  width: 120rpx;
+  height: 10%;
+}
+.topbar .top .text .status .active {
+  background-color:#b7aa00;
+}
+
+
+/* 无 */
+.search-no {
+width: 100%;
+display: block;
+color: #999;
+text-align: center;
+font-size: 24rpx;
+padding:100rpx 0;
+}
+.scimg {
+width: 300rpx;
+height: 350rpx;
+display: inline-block;
+background-size: 300rpx;
+padding-bottom:20rpx;
+
+}
+
+.list-left{
+  width:28%;
+}
+.list-left image{
+  border: 1px solid #eee;
+  width:80px;
+  height:80px;
+}

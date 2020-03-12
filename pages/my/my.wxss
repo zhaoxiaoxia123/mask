@@ -1,0 +1,243 @@
+/* pages/my/my.wxss */
+.parent{
+  height:400rpx;
+  background-image:url('https://static.kuangyibang.com/wp/2020/02/pho_person.png');
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  padding:0 40rpx;  
+  margin-bottom: 48rpx;
+}
+.top{
+  display: flex;
+}
+.name{
+  font-size:28rpx;
+  color: #ffffff;
+  padding-left:20rpx;
+  line-height:124rpx;
+}
+.head{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 40rpx;
+}
+.head .wx-image_SC1alK{
+  width:124rpx;
+  height:124rpx;
+  border-radius:80rpx;
+}
+.center-bg{
+  display: flex;
+  background-color:#fff;
+  margin-top:60rpx;
+  border-radius:10rpx;
+  padding:40rpx;
+  box-shadow: 0 0 6px rgba(0,0,0,.2);
+}
+.center-box{
+  text-align:center;
+color: #999;
+-webkit-box-flex: 1;
+-webkit-flex: 1;
+-ms-flex: 1;
+flex: 1;
+-webkit-tap-highlight-color: transparent;
+font-size: 24rpx;
+border-right: 1px solid #e6e6ea;
+padding: 12rpx 0;
+}
+.box-text{
+font-size: 48rpx;
+display: block;
+flex-direction: row-reverse;
+color: #333;
+font-weight: 600;
+margin: 0 auto;
+
+}
+.center-box image{
+  width:58rpx;
+  height:58rpx;
+  padding-bottom:10rpx;
+}
+.box-text-img{
+  border-right:none;
+}
+
+.payment{
+  background: #fff;
+  padding: 30rpx 40rpx;
+  margin-bottom:20rpx;
+}
+.payment-list{
+  display:flex;
+  justify-content:space-between;
+  padding-bottom:10rpx;
+  border-bottom:1px solid #EEE;
+  color:#999;
+  font-size:24rpx;
+}
+.payment-list-left text{
+ font-size:28rpx;
+}
+.payment-list-right image{
+  width:14rpx;
+  height:24rpx;
+  padding-left:10rpx;
+}
+.payment-center{
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+text-align: center;
+color: #999;
+}
+.payment-1{
+  font-size: 24rpx;
+padding: 20rpx 0;
+-webkit-box-flex: 1;
+-webkit-flex: 1;
+-ms-flex: 1;
+flex: 1;
+-webkit-tap-highlight-color: transparent;
+}
+.payment-img {
+width: 42rpx;
+height: 42rpx;
+display: block;
+text-align: center;
+margin: 0 auto;
+margin-bottom: 5rpx;
+}
+
+
+.money{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40rpx;
+}
+.money view{
+  font-size: 24rpx;
+  padding-bottom: 30rpx;
+}
+.btn{
+  background: #ff43da;
+  padding: 16rpx 40rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+}
+.orders{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #FFF;
+  padding: 26rpx 40rpx; 
+  margin-top: 40rpx;
+  border-radius: 10rpx;
+}
+.list{
+  text-align: center;
+}
+.list view{
+  font-size: 24rpx;
+}
+.lists{
+  background-color:#fff;
+  padding: 0 40rpx;
+}
+.list-wap{
+  display:flex;
+  justify-content:space-between;
+  padding-top:40rpx;
+  border-bottom:1px solid #EEE;
+  padding-bottom:40rpx;
+  
+}
+.left{
+  display: flex;
+  align-items: center;
+}
+.left image{
+  width: 42rpx;
+  height:42rpx;
+}
+.left text{
+  font-size:28rpx;
+  color:#333;
+  padding-left: 20rpx;
+}
+.right image{
+  width:14rpx;
+  height:24rpx;
+}
+
+ 
+/* 遮罩层 */
+.mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: 9000;
+    opacity: 0.5;
+}
+  
+/* 弹出层 */
+.modalDlg{
+    width: 70%;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius:5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ /* 弹出层里面的图片 */
+.modalDlg image{
+  width: 120px;
+  height: 120px;
+  margin-top: 30px;
+}
+
+/* .two {
+  width: 368rpx;
+  height: 362rpx;
+  display: inline-block;
+} */
+ 
+/* 弹出层里面的按钮 */
+.ok{
+  width: 80px;
+  height: 35px;
+  background: #44b549;
+  line-height: 35px;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  margin:20px auto;
+  border-radius: 100px;
+}
+ 
+/* 弹出层里面的文字 */
+.text{
+  text-align: justify;
+  font-size: 14px;
+  color: #666;
+  width: 180px;
+  margin-top: 10px;
+}

@@ -1,0 +1,65 @@
+<!--pages/home/home.wxml-->
+
+<view>
+  <view class='lists'>
+    <!--bindtap绑定事件-->
+    <view class='list' bindtap='toDetail' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
+      <view class='radio-group'>
+        <radio color='#333' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
+      </view>
+      <view class='list-left'>
+        <image src="{{item.product_image[0].image_url}}"></image>
+      </view>
+      <view class='list-right'>
+        <view class='right-text'>{{item.product_name}}</view>
+        <view>
+          <view class='total'>库存：100件</view>
+          <view class='column'>
+            <view class='sale'>￥{{item.discount_amount}}</view>
+            <view class='item'>
+              <image data-id='{{index}}' src='{{icons[1]}}' bind:tap="jianFn"></image>
+            </view>
+            <view class='item'>{{item.product_count}}</view>
+            <view class='item'>
+              <image data-id='{{index}}' src='{{icons[0]}}' bind:tap="plusFn"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='coupon'>
+      <view class='coupon-wap' bindtap="getTicketList">
+        <view class='coupon-left'>
+          <text>请选择优惠券</text>
+        </view>
+        <view class='coupon-right'>
+          <text>{{ticketList.length}}张可用</text>
+          <image src='../img/dv.png'></image>
+        </view>
+      </view>
+      <text wx:if="{{selectedTicketName}}">{{selectedTicketName}}   减￥{{ticketAmount}}</text>
+    <view style="{{showTicket}}">
+        <picker-view indicator-style="height: 50px;" style="width: 100%;height: 150px;text-align: center">
+          <text bindtap="getTicketList"> X </text>
+          <picker-view-column>
+              <view wx:for="{{ticketList}}" wx:key="*this"  wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">{{item.ticket_name}}</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom">
+    <view class="bottom-operate">
+      <view class="bottom-left count">
+        <radio color='#333' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选</view>
+      <view class="bottom-operate price">合计：
+        <text style="color:#d7a030">￥{{totalfee}}</text>
+      </view>
+      <view class="bottom-operate space"></view>
+      <view class="bottom-operate button" catchtap='submitSettlementGenerateOrder' style='background-color:#d7a030;'>立即购买</view>
+    </view>
+  </view>
+
+</view>

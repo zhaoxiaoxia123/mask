@@ -1,0 +1,160 @@
+/* pages/home/home.wxss */
+
+.lists{
+  padding: 10px;
+  box-sizing: border-box;
+}
+.list{
+   padding: 20rpx 10rpx;
+   background: #FFF;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: row;
+   margin-bottom: 20rpx;
+   border-radius: 10px;
+
+}
+.column{
+  margin-top: 30rpx;
+   background: #FFF;
+   display: flex;
+   flex-direction: row;
+}
+.radio-group{
+margin-top: 7%;
+transform:scale(0.7);
+}
+.radio-total{
+transform:scale(0.7);
+}
+.list-left{
+  width:20%;
+}
+.list-left image{
+  border: 1px solid #eee;
+  width:60px;
+  height:60px;
+  border-radius:10px;
+}
+.list-right{
+  width:70%;
+  height:100%;
+  padding-left:36rpx;
+  display: flex;
+  flex-direction: column;
+}
+.right-text{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.sale{
+  color:#d7a030;
+  font-weight:bold;
+  font-size:16px;
+  width: 200rpx;
+}
+
+.spec{
+  font-size: 10px;
+  color:#999;
+}
+.total{
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color:#999;
+  width: 80px;
+}
+.item image{
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+  width: 48rpx;
+  height: 48rpx;
+}
+
+/*底部操作栏*/
+.bottom{
+	width: 100%;
+	height: 90rpx;
+  position: fixed;
+	bottom: 0;
+	display: block;
+  /* border-top:2px solid #eee; */
+}
+.bottom-operate{
+	width: 100%;
+	height: 100rpx;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+  font-size: 32rpx;
+  background-color: #FFF;
+  color: #999;
+}
+.bottom-left{
+	width: 100%;
+	height: 100rpx;
+	display: flex;
+	justify-content: left;
+	flex-direction: row;
+	align-items: center;
+  font-size: 32rpx;
+  background-color: #FFF;
+  color: #999;
+}
+.bottom-operate .count{
+	width: 26%;
+	height: 100%;
+}
+.bottom-operate .price{
+	width: 42%;
+	height: 100%;
+}
+.bottom-operate .space{
+	width: 2%;
+	height: 100%;
+}
+.bottom-operate .button{
+	width: 40%;
+	height: 100%;
+  color:#FFF;
+}
+
+/* 优惠券 */
+.coupon{
+  background-color:#fff;
+  padding: 0 20rpx;
+  border-radius:10px;
+}
+.coupon-wap{
+  display:flex;
+  justify-content:space-between;
+  padding-top:40rpx;
+  border-bottom:1px solid #EEE;
+  padding-bottom:40rpx;
+  
+}
+.coupon-left{
+  display: flex;
+  align-items: center;
+}
+.coupon-left image{
+  width: 42rpx;
+  height:42rpx;
+}
+.coupon-left text{
+  font-size:28rpx;
+  color:#333;
+}
+.coupon-right text{
+  color:#c0ad87;
+  padding-right: 20rpx;
+}
+.coupon-right image{
+  width:14rpx;
+  height:24rpx;
+}

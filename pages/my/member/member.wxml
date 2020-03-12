@@ -1,0 +1,36 @@
+<!--pages/my/member/member.wxml-->
+<view style='padding:0 10px;'>
+  <view class='lists'>
+    <view wx:if="{{!memberId}}">
+      <button bindtap="registerMember">点击注册会员</button>
+    </view>
+    <!-- <view class='list' wx:if="{{memberId}}">
+      <view class='column'>
+        <view class='column-img'>
+          <image class='logo' src='../../img/logo.png'></image>
+        </view>
+
+        <view class='column-img'>
+          <text class='text-1'>向收银员出示二维码</text>
+        </view>
+
+        <view class='column-img'>
+          <canvas class='two' canvas-id="qrcode" />
+        </view>
+
+        <view class='column-text'>
+          <canvas class='one' canvas-id="barcode" />
+        </view>
+
+        <view class='column-text'>
+          <text>{{codeStr}}</text>
+        </view>
+
+        <view class='column-img'>
+          <text class='text-2'>会员号：{{codeStr}}</text>
+        </view>
+      </view>
+    </view> -->
+
+  </view>
+</view>

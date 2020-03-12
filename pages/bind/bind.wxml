@@ -1,0 +1,14 @@
+<view>
+  <!-- 遮罩层 -->
+  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <!-- 弹出层 -->
+  <view class="modalDlg" wx:if="{{showModal}}">
+    <input placeholder='请输入优惠码' bindinput="setShareByInput" bindconfirm="search" value='{{shareBy}}'></input>
+    <!-- <view bindtap="register" class="ok">确定</view> -->
+    <button open-type="getUserInfo" class="ok" bindgetuserinfo="bindGetUserInfo">确定</button>
+  </view>
+<image src="../img/logo.png"></image>
+
+    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">直接登录</button>
+    <button bindtap="bindNumber">绑定优惠码</button>
+</view>

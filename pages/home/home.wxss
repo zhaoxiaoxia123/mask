@@ -1,0 +1,187 @@
+/* pages/home/home.wxss */
+.slide-bolk{
+  width:100%;
+  height:900rpx;
+}
+.slide-image{
+  width: 100%;
+  height:100%;
+}
+
+/* 搜索栏 */
+
+.searchView {
+  width: 100%;
+  height: 80rpx;
+  z-index: 1;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+}
+
+
+.search {
+  width: 100%;
+  height: 100%;
+  /* background-color: #fff; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.search .input {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: 80%;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50rpx;
+}
+
+.search .input input {
+  width: 100%;
+  height: 100%;
+  font-size: 35rpx;
+  /* text-align: center; *//* background-color: #e5dede; */
+  padding: 0 50rpx;
+  border-radius: 50rpx;
+}
+
+.search .click {
+  width: 10%;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* 四个功能区 */
+
+.function {
+  width: 100%;
+  height: 190rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.function .item {
+  width: 150rpx;
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.function .item .img {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.function .item .label {
+  width: 150rpx;
+  height: 20rpx;
+  font-size: 28rpx;
+  color: rgb(90, 89, 89);
+}
+
+.home-content{
+  box-sizing: border-box;
+}
+.home-title{
+  margin-top: 20rpx;
+  padding-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  background: #FFF;
+  box-sizing: border-box;
+}
+.home-title text{
+  font-size: 20px;
+  color: #808080;
+}
+.lists{
+  padding: 0 20rpx ;
+  box-sizing: border-box;
+}
+.list{
+   padding: 30rpx 20rpx;
+   background: #FFF;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: row;
+   margin-top: 20rpx;
+   border-radius:10px;
+}
+.column{
+   background: #FFF;
+   display: flex;
+   flex-direction: row;
+}
+.list-left{
+  width:28%;
+}
+.list-left image{
+  border: 1px solid #eee;
+  width:80px;
+  height:80px;
+  border-radius:10px;
+}
+.list-right{
+  width:70%;
+  height:100%;
+  padding-left:36rpx;
+  display: flex;
+  flex-direction: column;
+}
+.right-text{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.money{
+  text-decoration:line-through;
+  font-size:10px;
+  padding-left:36rpx;
+  padding-top:5rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sale{
+  color:#b7aa00;
+  font-weight:bold;
+  font-size:20px;
+}
+.sell{
+  width:40%;
+  margin-right: 0px;
+  padding-right: 0px;
+  text-align: right;
+  font-size: 10px;
+  color:#999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.abstract{
+   padding-top:30rpx;
+  font-size: 10px;
+  color:#999;
+   display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.product text{
+  font-size:36rpx;
+  padding:40rpx 0 0 0;
+  color:#333;
+  display: flex;
+  justify-content:center;
+}
