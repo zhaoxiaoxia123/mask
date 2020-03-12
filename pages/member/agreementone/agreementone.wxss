@@ -1,0 +1,22 @@
+/* pages/member/agreementone/agreementone.wxss */
+.agreement{
+  font-size:24rpx;
+  line-height: 2;
+  color:#8b8b8b;
+}
+.agreement .head{
+  display: flex;
+  justify-content: center;
+  font-size:32rpx;
+  padding:40rpx 0;
+  font-weight: bold;
+}
+.agreement .content .a{
+  text-decoration:underline;
+  font-weight: bold;
+}
+.agreement .title{
+  font-size:32rpx;
+  font-weight: bold;
+  padding:20rpx 0;
+}

@@ -1,0 +1,72 @@
+<!--pages/member/grow/grow.wxml-->
+
+<view class='page-pd'>
+
+  <view class='integral'>
+
+        <view  class='integral-current'>
+           <text class='current1' >6 </text>
+           <text  >当前成长值 </text>
+        </view>
+
+      <view class='integral-current1'>
+          <image class="icon32 pdr10" src="../../img/mark@2x.png" ></image>
+          <text class='' >截止到2021年12月32日，合计2成长值将失效 </text>
+       </view>
+
+  </view>
+
+
+  <view class='integral-content'>
+
+     <view  class='integral-text'>
+          <view class='integral-title'>
+             <text class='text-title' >小程序商城无创水光套装</text>
+             <text  class='text-date'>2020-02-12  17:38:02 </text>
+          </view>
+
+          <view>
+          <text  class='text-add'>+2 </text>
+          </view>
+
+     </view>
+
+      <view  class='integral-text'>
+          <view class='integral-title'>
+             <text class='text-title' >小程序商城无创水光套装</text>
+             <text  class='text-date'>2020-02-12  17:38:02 </text>
+          </view>
+
+          <view>
+          <text  class='text-add'>+2 </text>
+          </view>
+
+      </view>
+
+       <view  class='integral-text'>
+          <view class='integral-title'>
+             <text class='text-title' >小程序商城无创水光套装</text>
+             <text  class='text-date'>2020-02-12  17:38:02 </text>
+          </view>
+
+          <view>
+          <text  class='text-add'>+2 </text>
+          </view>
+
+      </view>
+
+
+
+  </view>
+
+
+
+
+ 
+  <view class='footer'>
+     <text class=''>仅展示近两年的成长值</text>
+  </view>
+
+
+
+</view>
