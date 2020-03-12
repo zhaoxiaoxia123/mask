@@ -121,6 +121,7 @@ Page({
         //     delta: 1  //小程序关闭当前页面返回上一页面
         // })
         var datas = res.data.data;
+        console.log(datas);
         wx.setStorageSync('customerId', datas.customer_id);
         wx.setStorageSync('openid', datas.openid);
         wx.setStorageSync('memberNo', datas.number);  //会员号

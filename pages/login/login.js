@@ -105,7 +105,7 @@ Page({
         },
         success: function (res) {
           var datas = res.data.data;
-            this.setData({
+            that.setData({
               showModal: false,
               customer_id: datas.customer_id
           });
