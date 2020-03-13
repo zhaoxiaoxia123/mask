@@ -9,8 +9,10 @@ Page({
   data: {
     code: '',
     phone: '',
+    account:'',
     password: '',
     showModal: false,
+    showModalAccount: false,
     isBindWechat: false,
     customer_id: 0,
     verifyCode:''
@@ -82,14 +84,6 @@ Page({
   },
   // 弹出层里面的弹窗
   loginByPhone: function () {
-//     wx.setStorageSync('customerId', 2);
-//     that.setData({
-//       showModal: false,
-//       customer_id: 2,
-//         isBindWechat: true
-//       });
-  
-// return false;
     if (that.data.code == that.data.verifyCode && (that.data.verifyCode != '' && that.data.code != '')){
       var param = {
         page_code: "p010",
@@ -104,21 +98,28 @@ Page({
           "Content-Type": "application/x-www-form-urlencoded"
         },
         success: function (res) {
-          var datas = res.data.data;
+          var info = res.data;
+          var datas = info.data;
+          if(info.code == 201){
+            wx.showToast({
+              title: info.message
+            });
+            
+          }else{
             that.setData({
               showModal: false,
               customer_id: datas.customer_id
-          });
-          
-          wx.setStorageSync('customerId', datas.customer_id);
-          wx.setStorageSync('memberNo', datas.number);  //会员号
-          wx.setStorageSync('level', datas.level);  //等级
-          wx.setStorageSync('discount', datas.discount);  //折扣
+            });
+
+            wx.setStorageSync('customerId', datas.customer_id);
+            wx.setStorageSync('memberNo', datas.number);  //会员号
+            wx.setStorageSync('level', datas.level);  //等级
+            wx.setStorageSync('discount', datas.discount);  //折扣
             if (!datas.openid) {
               that.setData({
-                isBindWechat:true
+                isBindWechat: true
               });
-            }else{
+            } else {
               wx.setStorageSync('openid', datas.openid);
               app.globalData.canGetUserInfo = false;
               that.setData({
@@ -127,6 +128,7 @@ Page({
               wx.switchTab({
                 url: '../home/home',
               });
+            }
           }
         }
       });
@@ -224,8 +226,82 @@ Page({
     })
   },
   goLoginPage:function(){
-    wx.navigateTo({
-      url: '../bind/bind',
+    // wx.navigateTo({
+    //   url: '../bind/bind',
+    // });
+    that.setData({
+      showModalAccount: true
     });
-  }
+  },
+
+  setAccountInput: function (e) {
+    var value = e.detail.value;
+    that.setData({
+      account: e.detail.value
+    })
+  },
+  setPasswordInput: function (e) {
+    var value = e.detail.value;
+    that.setData({
+      password: e.detail.value
+    })
+  },
+  loginTo:function(){
+    if (that.data.phone == '' || that.data.password == '') {
+      wx.showToast({
+        title: '请确保信息填写完成',
+      })
+    }else{
+      var param = {
+        page_code: "p010",
+        type: 'loginTo',
+        account: that.data.account,
+        password: that.data.password
+      };
+      wx.request({
+        url: app.globalData.domainUrl,
+        method: "POST",
+        data: param,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        success: function (res) {
+          var info = res.data;
+          var datas = info.data;
+          if (info.code == 221) {
+            wx.showToast({
+              title: info.message
+            });
+
+          } else {
+            that.setData({
+              showModalAccount: false,
+              customer_id: datas.customer_id
+            });
+
+            wx.setStorageSync('customerId', datas.customer_id);
+            wx.setStorageSync('memberNo', datas.number);  //会员号
+            wx.setStorageSync('level', datas.level);  //等级
+            wx.setStorageSync('discount', datas.discount);  //折扣
+            if (!datas.openid) {
+              that.setData({
+                isBindWechat: true
+              });
+            } else {
+              wx.setStorageSync('openid', datas.openid);
+              app.globalData.canGetUserInfo = false;
+              that.setData({
+                canGetUserInfo: app.globalData.canGetUserInfo
+              });
+              wx.switchTab({
+                url: '../home/home',
+              });
+            }
+          }
+        }
+      });
+    } 
+
+
+  },
 })

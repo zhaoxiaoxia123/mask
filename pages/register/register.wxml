@@ -10,11 +10,6 @@
     <input placeholder='请输入验证码' bindinput="setCodeInput" bindconfirm="search" value='{{code}}'></input>
     <view class="bottom-operate button" bindtap='sendCode'>获取验证码</view>
     <input placeholder='请输入密码' bindinput="setPasswordInput" bindconfirm="search" value='{{password}}'></input>
-    <view bindtap="register" class="ok">马上注册</view>
+    <view bindtap="bindGetUserInfo" class="ok">马上注册</view>
   </view>
-
-  <!-- <view class='head' wx:if="{{canGetUserInfo}}">
-    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
-  </view> -->
-
 </view>

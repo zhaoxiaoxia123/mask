@@ -150,7 +150,33 @@ getAddress: function(){
       }
     })
   },
-
+  payOrder:function(){
+    wx.request({
+      url: app.globalData.domainUrl,
+      method: "POST",
+      data: {
+        page_code: 'p008',
+        type: 'delete',
+        order_id: that.data.items.order_id
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res);
+        var datas = res.data.data;
+        if (datas) {
+          console.log('付款成功。');
+          // that.setData({
+          //   shopping_count: parseInt(that.data.shopping_count) + 1
+          // });
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      }
+    })
+  }
  
   
 })

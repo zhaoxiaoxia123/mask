@@ -9,11 +9,21 @@
     <view bindtap="loginByPhone" class="ok">确定</view>
   </view>
 
+
+ <!-- 遮罩层 -->
+  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModalAccount}}"></view>
+  <!-- 弹出层 账号密码登录-->
+  <view class="modalDlg" wx:if="{{showModalAccount}}">
+    <input placeholder='请输入手机号' bindinput="setAccountInput" bindconfirm="search" value='{{account}}'></input>
+    <input placeholder='请输入密码' bindinput="setPasswordInput" bindconfirm="search" value='{{password}}'></input>
+    <view bindtap="loginTo" class="ok">确定</view>
+  </view>
+
   <view wx:if="{{!showModal && !customer_id}}">
     <button bindtap="showLoginByPhone">手机验证码登录/注册</button>
     <button bindtap="goLoginPage">账号密码登录</button>
     </view>
     <view wx:if="{{isBindWechat}}">
-        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录      </button>
     </view>
 </view>
