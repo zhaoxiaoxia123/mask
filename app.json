@@ -1,6 +1,5 @@
 {
   "pages": [
-     "pages/my/my",
     "pages/login/login",
     "pages/home/home",
     "pages/my/address/addressdetail/addressdetail",
@@ -9,10 +8,9 @@
     "pages/kind/search/search",
     "pages/my/order/orderdetail/orderdetail",
     "pages/shopcat/shopcat",
-    "pages/shopcat/orderconfirm/orderconfirm",
     "pages/detail/detail",
     "pages/my/order/order",
-    
+    "pages/my/my",
     "pages/my/address/address",
     "pages/my/invoice/invoice",
     "pages/my/member/member",
@@ -30,13 +28,13 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "冻龄之谜",
+    "navigationBarTitleText": "智美Mall",
     "navigationBarBackgroundColor": "#333",
     "backgroundColor": "#f5f5f5",
     "enablePullDownRefresh": true
   },
   "tabBar": {
-    "color": "#c6c6c6",
+    "color": "#999",
     "selectedColor": "#DAB866",
     "borderStyle": "white",
     "backgroundColor": "#333",
