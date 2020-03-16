@@ -1,0 +1,236 @@
+<!--pages/home/home.wxml-->
+
+<view >
+<view class='lists'>
+
+     <view class='goods' >
+          <view class='goods-content'> 
+              <view class='goods-icon'>
+                   <image class='icon58' src='../../img/address.png'></image>
+              </view>
+
+              <view class='goods-text'>
+           <view class='goods-name' >
+             <text class='name'>张三</text>
+             <text class='phone'>18749149555</text>
+           </view>
+             <view class='address'>成都市 成华区 二环路东二段29号</view>
+        </view>
+          
+          </view>
+
+          <view class='goods-image'>
+       <image   src='../../img/dv.png'></image>
+    </view>
+
+
+     </view>
+
+
+
+  
+
+     <view class='order'>
+           <text >订单</text>
+     </view>
+ <!--bindtap绑定事件-->
+  <view class='list' bindtap='toDetail' wx:key="*this" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
+ 
+    <view class='list-left'>
+       <image  src='{{item.imgUrl}}'></image>
+    </view>
+
+    <view class='list-right'>
+      <view class='right-text'>{{item.title}}</view>
+      <view class='sale'>￥{{item.sale}}</view>
+       <view  class='item'>
+      
+        <view class='abstract'>{{item.abstract}}</view>    
+         <view class='piece'>× 1</view>
+        
+        </view>
+
+     <view>
+
+        
+     </view>
+     
+    </view>
+  </view>
+
+  
+  <view class='gift'>
+           <text >赠送礼盒× 1</text>
+  </view>
+
+  <view class='coupon'>
+
+    <view class='coupon-wap' bindtap="delivery">
+      <view class='coupon-left'>
+        <text>配送方式</text>
+      </view>
+      <view class='coupon-right'>
+      <text>快递 免邮</text>
+        <image  src='../../img/dv.png'></image>
+      </view>
+    </view>
+    
+    </view>
+  
+
+
+  <view class='coupon' bindtap="coupon">
+
+    <view class='coupon-wap' >
+      <view class='coupon-left'>
+        <text>请选择优惠券</text>
+      </view>
+      <view class='coupon-right'>
+      <text>您没有何用的券</text>
+        <image  src='../../img/dv.png'></image>
+      </view>
+    </view>
+    
+    </view>
+
+     <view class='coupon'>
+
+    <view class='coupon-wap' >
+      <view class='coupon-left'>
+        <text>积分共6000,可用600，抵¥600.00</text>
+      </view>
+      <view class='coupon-right'>
+          <checkbox-group >
+                <label class="checkbox" >
+                <checkbox color='#333' checked=""/>
+       </label>
+    </checkbox-group>
+      </view>
+    </view>
+    
+    </view>
+
+
+    <view class='coupon'>
+
+    <view class='coupon-wap' >
+      <view class='coupon-left'>
+        <text>电子发票</text>
+      </view>
+      <view class='coupon-right'>
+      <text >不需要发票</text>
+        <image  src='../../img/dv.png'></image>
+      </view>
+    </view>
+    
+    </view>
+
+  <view class='space'></view>
+    <text class='mk'>备注</text>
+  <view class='space'></view>
+
+
+
+</view>
+
+
+<view class="bottom">
+
+  <view class="bottom-operate">
+    <view class="bottom-operate price">合计：
+      <text style="color:#DAB866">￥{{totalfee}}</text>
+    </view>
+    
+    <view class="bottom-operate button" catchtap='confirmPay' style='background-color:#DAB866;'>提交订单</view>
+  </view>
+</view>
+
+
+<!-- 配送方式 -->
+ <view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
+  <view class="just {{flexwindow==true?'': 'y'}}">
+    <!--bindtap绑定事件-->
+    <view class='lists'>
+      <view class='list'>
+        <view  class='detail-center'>
+
+        <view class='sales'>
+            <view class='detail-sales'>配送方式</view>
+            
+            <image class='icon40' src='../../img/close@2x.png' bindtap='close'></image>
+          </view>  
+         
+        </view>
+      </view>
+
+      <view class='column' >
+        <view >快递  免邮</view>
+        <view class='item'>
+             <checkbox-group >
+                <label class="checkbox" >
+                <checkbox color='#333' checked="checked"/>
+       </label>
+    </checkbox-group>
+         
+        </view>
+       
+      </view>
+    </view>
+
+  </view>
+
+
+  
+<!-- 优惠券 -->
+ <view class="just1 {{couponflexwindow==true?'': 'y'}}" bindtap='close1'></view>
+  <view class="just {{couponflexwindow==true?'': 'y'}}">
+    <!--bindtap绑定事件-->
+    <view class='lists'>
+      <view class='list'>
+        <view  class='detail-center'>
+
+        <view class='sales'>
+            <view class='detail-sales'>优惠活动</view>
+            
+            <image class='icon40' src='../../img/close@2x.png' bindtap='close1'></image>
+          </view>  
+         
+        </view>
+      </view>
+
+      <view class='column' >
+        <view >您没有可用的优惠券</view>
+  
+        </view>
+
+      <view class='column' >
+        <view >满减活动：满1000省10元</view>
+
+         <view class='item'>
+             <checkbox-group >
+                <label class="checkbox" >
+                <checkbox color='#333' checked=""/>
+       </label>
+    </checkbox-group>
+         </view>
+       
+      </view>
+
+       <view class='column' >
+        <view >不使用优惠</view>
+        <view class='item'>
+             <checkbox-group >
+                <label class="checkbox" >
+                <checkbox color='#333' checked=""/>
+       </label>
+    </checkbox-group>
+         
+        </view>
+        </view>
+    </view>
+
+  </view>
+
+
+
+</view>

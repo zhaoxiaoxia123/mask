@@ -5,6 +5,7 @@ page{
 .page-pd{
   padding:20rpx;
 }
+/* 图标 */
 .icon120{
   width:120rpx;
   height:120rpx;
@@ -20,6 +21,57 @@ page{
 .icon32{
   width:32rpx;
   height:32rpx;
+}
+
+
+/* 字号 */
+.wei{
+  font-weight:bold;
+}
+.size-numberone{
+  font-size:58rpx;
+  line-height:1.5; 
+}
+.size-numbertwo{
+  font-size:48rpx;
+  line-height:1.5; 
+}
+.size-titleone{
+  font-size:40rpx;
+  line-height: 1.5;
+}
+.size-titletwo{
+  font-size:32rpx;
+  line-height: 1.5;
+}
+.size-text{
+  font-size:28rpx;
+  line-height: 1.5;
+}
+.size-tagging{
+   font-size:24rpx;
+   line-height: 1.5; 
+}
+
+/* 背景颜色 */
+.bg-title{
+  background-color:#DAB866;
+}
+.bg-main{
+  background-color:#333;
+}
+.bg-box{
+  background-color:#404040;
+}
+/* 文字颜色 */
+.col-title{
+  color:#fff;
+}
+.col-main{
+  color:#DAB866;
+}
+.col-content{
+  color:#c6c6c6;
 }
 
 .pdr10{

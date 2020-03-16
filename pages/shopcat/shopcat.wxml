@@ -1,34 +1,41 @@
 <!--pages/home/home.wxml-->
 
 <view>
+
   <view class='lists'>
     <!--bindtap绑定事件-->
     <view class='list' bindtap='toDetail' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
       <view class='radio-group'>
-        <radio color='#333' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
+        <radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
       </view>
       <view class='list-left'>
         <image src="{{item.product_image[0].image_url}}"></image>
       </view>
       <view class='list-right'>
-        <view class='right-text'>{{item.product_name}}</view>
+      <view class='column'>
+
+       <view class='right-text'>{{item.product_name}}</view>
+      <image  class='icon40' src='../img/del.png'></image>
+      </view>
+      
+        <!-- <view class='right-text'>{{item.product_name}}</view> -->
         <view>
           <view class='total'>库存：100件</view>
-          <view class='column'>
+          <view class='column mt'>
             <view class='sale'>￥{{item.discount_amount}}</view>
-            <view class='item'>
-              <image data-id='{{index}}' src='{{icons[1]}}' bind:tap="jianFn"></image>
+            <view class='item-number'>
+              <image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
             </view>
-            <view class='item'>{{item.product_count}}</view>
-            <view class='item'>
-              <image data-id='{{index}}' src='{{icons[0]}}' bind:tap="plusFn"></image>
+            <view class='item-number'>{{item.product_count}}</view>
+            <view class='item-number'>
+              <image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32' bind:tap="plusFn"></image>
             </view>
           </view>
         </view>
       </view>
     </view>
 
-    <view class='coupon'>
+    <!-- <view class='coupon'>
       <view class='coupon-wap' bindtap="getTicketList">
         <view class='coupon-left'>
           <text>请选择优惠券</text>
@@ -48,18 +55,20 @@
         </picker-view>
       </view>
     </view>
-  </view>
+  </view> -->
 
   <view class="bottom">
     <view class="bottom-operate">
       <view class="bottom-left count">
-        <radio color='#333' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选</view>
+        <radio color='#262626' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选</view>
       <view class="bottom-operate price">合计：
-        <text style="color:#d7a030">￥{{totalfee}}</text>
+        <text style="color:#DAB866">￥{{totalfee}}</text>
       </view>
       <view class="bottom-operate space"></view>
-      <view class="bottom-operate button" catchtap='submitSettlementGenerateOrder' style='background-color:#d7a030;'>立即购买</view>
+      <view class="bottom-operate button" catchtap='submitSettlementGenerateOrder' style='background-color:#DAB866;'>结算</view>
     </view>
   </view>
+
+</view>
 
 </view>

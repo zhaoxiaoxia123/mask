@@ -10,32 +10,41 @@
     </block>
   </swiper>
 
-  <view class='lists'>
+  
 
-    <view class='product'>
-      <text>畅销明星产品</text>
-    </view>
+
+  <view class='lists  page-pd'>
     <!--bindtap绑定事件-->
     <view class="list" bindtap='toDetail' wx:key="*this" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
 
       <view class='list-left'>
-        <image src='{{item.image_url[0]?item.image_url[0]:"../img/shop3.jpg"}}'></image>
+        <image src='{{item.image_url[0]?item.image_url[0]:"../img/banner.jpg"}}'></image>
       </view>
 
-      <view class='list-right'>
-        <view class='column'>
+     <view class='list-right'>
+    
+      <view>
           <view class='right-text'>{{item.product_name}}</view>
-          <view class='sell'>销量：{{item.sale}}</view>
-        </view>
-        <view>
-          <view class='column'>
-            <view class='sale'>{{item.discount_amount}}</view>
-            <view class='money'>{{item.amount}}</view>
-          </view>
-          <view class='abstract'>{{item.introduction?item.introduction:''}}</view>
-        </view>
       </view>
+
+     <view>
+       <view class='abstract'>{{item.introduction?item.introduction:''}}</view>
+    </view>
+
+     <view class='column'>
+      <view class='sale'>{{item.discount_amount}}</view>
+      <view class='money'>{{item.amount}}</view>
+     </view>
+
+     <view class='list-button'>
+          <text>立即购买</text>
+     </view>
+  
+    </view>     
+
     </view>
 
   </view>
+
+  
 </view>

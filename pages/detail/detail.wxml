@@ -7,38 +7,58 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class='money'>
-    <text style='color:#b7aa00;font-size:20px;font-weignt:bold;'>￥{{items.discount_amount}}</text>
-    <text class='account'>￥{{items.amount}}</text>
-    <!-- <text style='color:#808080;font-size:15px;'>已售：1991件</text> -->
-  </view>
-  <view class='abstract'>{{items.introduction}}</view>
-  <view class='between'>
-    <text class='num'>销量：{{items.sale}}件</text>
-    <text class='num'>剩余：443件</text>
+
+  <view class='page-pd'>
+      <view class='money'>
+
+               <text>优惠价￥{{items.discount_amount}}</text>
+               <text class='text-size'>（</text>
+               <text class='decoration text-size'>￥{{items.amount}}</text>
+               <text class='text-size'> ）</text>
+             <!-- <text >优惠价</text>
+            <text class='account'></text> -->
+  
+      </view>
+      <view class='money-title'>无创水光套装</view>
+       <view class='money-text'>
+            <text>成长值：3</text>
+            <text>积分：32</text>
+       </view>
+      <view class='abstract'>探究奢华的产品质感，只为遇见最珍贵的您 紧致肌肤 收缩毛孔 提亮肤色 改善肤质 即刻保持肌肤年轻的秘密</view>
+       <view class='between'>
+       <text class='num'>销量：{{items.sale}}件</text>
+       <text class='num'>剩余：443件</text>
+       </view>
+
+
+  
+</view>
+
+ <view class='spec' bindtap="toggleDialog">
+    <text >选择规格</text>
+    <image src='../img/dv.png'></image>
   </view>
 
-  <view class='spec' bindtap="toggleDialog">
-    <text style='font-size:24rpx;color:#333;padding-bottom:10rpx;'>选择规格</text>
-    <image style='width:14rpx;height:24rpx;' src='../img/dv.png'></image>
-  </view>
+
   <view class='evaluate'>
 
-    <view style='text-align:center;padding:20rpx;'> 商品详情 </view>
-    <!-- <view class='img'>
-      <image style='margin-left: 20%;width: 60%;' src='../img/shop1.jpg'></image>
-      <image style='margin-left: 20%;width: 60%;' src='../img/shop1.jpg'></image>
-      <image style='margin-left: 20%;width: 60%;' src='../img/shop1.jpg'></image>
-    </view> -->
-    <text class='abstract'>{{items.description}}</text>
+    <view class='detail'> 商品详情 </view>
+    <view class='img'>
+      <image  src='../img/details2.jpg'></image>
+      <image  src='../img/details2.jpg'></image>
+      <image  src='../img/details2.jpg'></image>
+     
+    </view>
+     <text class='abstract'>{{items.description}}</text>
   </view>
+
   <view class="bottom">
     <view class="bottom-operate">
       <view class="bottom-left count">
-        <image class='bottom-left' style='width:50rpx;height:50rpx;' src='../img/service.png'></image>
+        <image class='icon58' src='../img/service.png'></image>
       </view>
       <view class="bottom-left count" catchtap="shoppingList">
-        <image class='bottom-left' style='width:50rpx;height:50rpx;' src='../img/shopcat_false.png'></image>
+        <image class='icon58' src='../img/shopcat_false.png'></image>
       </view>
       <view class="bottom-operate button1" catchtap='joinShopping'>加入购物</view>
       <view class="bottom-operate button" catchtap='joinOrder'>立即购买</view>
@@ -49,34 +69,45 @@
     <!--bindtap绑定事件-->
     <view class='lists'>
       <view class='list'>
-        <image class='list-left' src='{{swipers[0].img_url}}'></image>
-        <view>
-          <view class='be'>
-            <view class='sale' style='width:200px;'>{{items.product_name}}</view>
-            <image style='width:20px;height:20px;' src='../img/jian_grey.png' bindtap='close'></image>
+
+      <view class='detail-img'><image  src='{{swipers[0].img_url}}'></image> </view>
+        <view  class='detail-center'>
+          <view class='sales'>
+            <view class='detail-sales'>{{items.product_name}}</view>
+            
+            <image class='icon40' src='../img/close@2x.png' bindtap='close'></image>
           </view>
-          <view class='spec'>销量：{{items.sale}}</view>
+          <view class='sales-spec'>
+               <text>优惠价￥{{items.discount_amount}}（</text>
+               <text class='decoration'>￥{{items.amount}}</text>
+               <text>）</text>
+
+            </view>
+          <view class='text-size'>库存：443</view>
         </view>
       </view>
-      <view class='column' style='padding:20rpx;'>
-        <view class='item' style='width:200px;'>购买数量</view>
+
+      <view class='column' >
+        <view >购买数量</view>
         <view class='item'>
-          <image data-id='{{items.product_id}}' src='../img/jian_pink.png' bind:tap="jianFn"></image>
+             <view class='item-number'><image class='' data-id='{{items.product_id}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
+             </view>
+             <view class='item-number' >{{count}}</view>
+             <view class='item-number'> <image class='' data-id='{{items.product_id}}' src='../img/plus@2x.png' bind:tap="plusFn"></image>
+             </view>
+         
         </view>
-        <view class='item'>{{count}}</view>
-        <view class='item'>
-          <image data-id='{{items.product_id}}' src='../img/plus_pink.png' bind:tap="plusFn"></image>
-        </view>
+       
       </view>
     </view>
 
     <view class="bottom">
       <view class="bottom-operate">
         <view class="bottom-left count">
-          <image class='bottom-left' style='width:50rpx;height:50rpx;' src='../img/service.png'></image>
+          <image class='icon58' src='../img/service.png'></image>
         </view>
         <view class="bottom-left count" catchtap="shoppingList">
-          <image class='bottom-left' style='width:50rpx;height:50rpx;' src='../img/shopcat_false.png'></image>
+          <image class='icon58' src='../img/shopcat_false.png'></image>
         </view>
         <view class="bottom-operate button1" catchtap='joinShopping'>加入购物</view>
         <view class="bottom-operate button" catchtap='joinOrder'>立即购买</view>

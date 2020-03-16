@@ -80,7 +80,7 @@
 .member-branch{
   background-color: #333;
   padding:20rpx;
-  color: #8b8b8b;
+  color: #c6c6c6;
   font-size: 32rpx;
 }
 .branch-content{

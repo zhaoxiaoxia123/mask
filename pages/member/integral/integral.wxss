@@ -9,13 +9,13 @@
   line-height:2;
   padding:60rpx 0 40rpx 0;
   background:#404040;
-  color:#8b8b8b;
+  color:#c6c6c6;
 }
 .integral-current{
   display: flex;
   flex-direction: column;
   align-items:center;
-  color: #8b8b8b;
+  color: #c6c6c6;
  padding: 60rpx 0 40rpx 0;
 }
 .current1{
@@ -48,7 +48,7 @@
   font-size:24rpx;
   line-height:2;
   padding-top:10rpx;
-  color:#8b8b8b;
+  color:#c6c6c6;
 }
 .text-add{
   color:#DAB866;
@@ -57,7 +57,7 @@
 }
 .footer{
   text-align:center;
-  color:#8b8b8b;
+  color:#c6c6c6;
   font-size:24rpx;
   line-height:2;
   padding-top:60rpx;

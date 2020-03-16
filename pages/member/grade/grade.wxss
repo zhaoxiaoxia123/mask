@@ -1,5 +1,4 @@
 /* pages/member/grade/grade.wxss */
-
 .grade{
   font-size:24rpx;
   line-height: 2;
@@ -19,15 +18,15 @@
 }
 
 .grade .explain{
-  color:#8b8b8b;
+  color:#c6c6c6;
   padding-bottom:40rpx;
 }
 
 .agreement{
   display: flex;
   justify-content:center;
-  font-size:32rpx;
-  color:#8b8b8b;
+  font-size:24rpx;
+  color:#c6c6c6;
   padding: 40rpx 0;
 }
 .agreement-a{
