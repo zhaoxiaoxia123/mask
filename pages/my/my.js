@@ -43,6 +43,7 @@ Page({
     if (wx.getStorageSync('customerId')){
       var param = {
         page_code:'p004',
+        type:"mainCustomer",
         customer_id:wx.getStorageSync('customerId'),
         has_ticket_count: true,
         has_order_count: true

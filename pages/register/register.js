@@ -13,7 +13,9 @@ Page({
     showModal: false,
     shareCustomerInfo:[],
     verifyCode:'',
-    shareBy:''
+    shareBy:'',
+    nickname: '',
+    avatar: '',
   },
 
   /**
@@ -112,71 +114,37 @@ Page({
       }
     })
   },
+  bindGetUserInfo: function () {
+    console.log('userInfo');
+    wx.getUserInfo({
+      success: function (res) {
+        //获取openid，并更新到用户表
+        that.setData({
+          nickname: res.userInfo.nickName,
+          avatar: res.userInfo.avatarUrl,
+        });
 
-  // bindGetUserInfo: function () {
-  //   console.log('userInfo');
-  //   wx.getUserInfo({
-  //     success: function (res) {
-  //       //获取openid，并更新到用户表
-  //       that.updateUserInfo({
-  //         page_code: 'p010',
-  //         code: app.globalData.code,  //获取openid的code码
-  //         nickname: res.userInfo.nickName,
-  //         avatarUrl: res.userInfo.avatarUrl,
-  //       });
-  //     },
-  //     fail: function () {
-  //       wx.showToast({
-  //         title: '无获取信息权限',
-  //       })
-  //     }
-  //   });
-    
-  // },
-  // updateUserInfo: function (param) {  //更新用户信息
-  //   wx.request({
-  //     url: app.globalData.domainUrl,
-  //     method: "POST",
-  //     data: param,
-  //     header: {
-  //       "Content-Type": "application/x-www-form-urlencoded"
-  //     },
-  //     success: function (res) {
-  //       // wx.navigateBack({
-  //       //     delta: 1  //小程序关闭当前页面返回上一页面
-  //       // })
-  //       var datas = res.data.data;
-  //       wx.setStorageSync('customerId', datas.customer_id);
-  //       wx.setStorageSync('openid', datas.openid);
-  //       wx.setStorageSync('memberNo', datas.number);  //会员号
-  //       wx.setStorageSync('level', datas.level);  //等级
-  //       wx.setStorageSync('discount', datas.discount);  //折扣
-  //       app.globalData.canGetUserInfo = false;
-  //       that.setData({
-  //         canGetUserInfo: app.globalData.canGetUserInfo
-  //       });
-  //       if (datas.is_new == true) {  //若用户是新用户，则进行分享码进来用户注册
-  //         that.setData({
-  //           showModal: true
-  //         });
-  //         that.getShareCustomer();
-  //       }else{
-  //         wx.navigateTo({
-  //           url: '../my/my',
-  //         });
-  //       }
-  //     }
-  //   })
-  // },
+        var param = {
+          page_code: "p010",
+          type: "shareBy",
+          share_by: wx.getStorageSync('shareBy'),
+          phone: that.data.phone,
+          password: that.data.password,
+          code:app.globalData.code,
+          nickname: that.data.nickname,
+          avatar: that.data.avatar
+        };
+        that.register(param);
+      },
+      fail: function () {
+        wx.showToast({
+          title: '权限限制,操作无法继续',
+        })
+      }
+    });
+  },
   // 弹出层里面的弹窗
-  register: function () {
-    var param = {
-      page_code:"p010",
-      share_by: wx.getStorageSync('shareBy'),
-      phone: that.data.phone,
-      password:that.data.password
-    };
-    
+  register: function (param) {
     wx.request({
       url: app.globalData.domainUrl,
       method: "POST",
@@ -186,13 +154,21 @@ Page({
       },
       success: function (res) {
         var datas = res.data;
-        if (datas.data == false){
+        if (datas.data.has_share_by){
           wx.showToast({
             title: datas.message,
           })
         }else{
           this.setData({
             showModal: false
+          });
+          wx.setStorageSync('customerId', datas.customer_id);
+          wx.setStorageSync('openid', datas.openid);
+          wx.setStorageSync('memberNo', datas.number);  //会员号
+          wx.setStorageSync('level', datas.level);  //等级
+          wx.setStorageSync('discount', datas.discount);  //折扣
+          wx.switchTab({
+            url: '../home/home',
           });
         }
       }

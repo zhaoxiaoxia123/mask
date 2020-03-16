@@ -1,18 +1,24 @@
 // pages/member/agreementone/agreementone.js
+var that;
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    items: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    that = this;
+    var param = {
+      page_code: "p016"
+    };
+    that.getAgreement(param);
   },
 
   /**
@@ -62,5 +68,21 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  //获取服务协议
+  getAgreement: function (param) {
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: param,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var datas = res.data.data
+        that.setData({
+          items: datas
+        })
+      }
+    });
+  },
 })

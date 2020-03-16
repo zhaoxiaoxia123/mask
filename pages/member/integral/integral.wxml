@@ -1,72 +1,30 @@
 <!--pages/member/integral/integral.wxml-->
-
 <view class='page-pd'>
-
   <view class='integral'>
+    <view class='integral-current'>
+      <text class='current1'>{{customer.point?customer.point:0}}</text>
+      <text>当前积分 </text>
+    </view>
 
-        <view  class='integral-current'>
-           <text class='current1' >6300 </text>
-           <text  >当前积分 </text>
-        </view>
-
-      <view class='integral-current1'>
-          <image class="icon32 pdr10" src="../../img/mark@2x.png" ></image>
-          <text class='' >截止到2021年12月32日，合计200积分将失效 </text>
-       </view>
-
+    <!-- <view class='integral-current1'>
+        <image class="icon32 pdr10" src="../../img/mark@2x.png" ></image>
+        <text class='' >截止到2021年12月32日，合计200积分将失效 </text>
+      </view> -->
   </view>
-
-
   <view class='integral-content'>
-
-     <view  class='integral-text'>
-          <view class='integral-title'>
-             <text class='text-title' >小程序商城无创水光套装</text>
-             <text  class='text-date'>2020-02-12  17:38:02 </text>
-          </view>
-
-          <view>
-          <text  class='text-add'>+2 </text>
-          </view>
-
-     </view>
-
-      <view  class='integral-text'>
-          <view class='integral-title'>
-             <text class='text-title' >小程序商城无创水光套装</text>
-             <text  class='text-date'>2020-02-12  17:38:02 </text>
-          </view>
-
-          <view>
-          <text  class='text-add'>+2 </text>
-          </view>
-
+    <view class='integral-text' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
+      <view class='integral-title'>
+        <text class='text-title'>{{item.order_name}}</text>
+        <text class='text-date'>{{item.created_at}} </text>
       </view>
-
-       <view  class='integral-text'>
-          <view class='integral-title'>
-             <text class='text-title' >小程序商城无创水光套装</text>
-             <text  class='text-date'>2020-02-12  17:38:02 </text>
-          </view>
-
-          <view>
-          <text  class='text-add'>+2 </text>
-          </view>
-
+      <view>
+        <text class='text-add'>{{item.value}}</text>
       </view>
-
-
-
+    </view>
   </view>
 
-
-
-
- 
   <view class='footer'>
-     <text class=''>仅展示近六个月的消费积分</text>
+    <text class=''>仅展示近六个月的消费积分</text>
   </view>
-
-
-
 </view>
+

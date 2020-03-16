@@ -58,6 +58,7 @@
     </view>
      
    <view class="bottom">
+    <view class="bottom-operate button" bindtap='payOrder' style='background-color:#FF0000;'>付款</view>
     <view class="bottom-operate button" bindtap='deleteOrder' style='background-color:#FF0000;'>删除订单</view>
    </view>
   </view>
