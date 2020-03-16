@@ -1,11 +1,29 @@
 /* pages/my/my.wxss */
 .parent{
-  height:400rpx;
-  background-image:url('https://static.kuangyibang.com/wp/2020/02/pho_person.png');
-  background-size: 100% 100%;
-  background-repeat:no-repeat;
-  padding:0 40rpx;  
-  margin-bottom: 48rpx;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding:40rpx 20rpx;
+  border-radius:10px;
+}
+.parent-left{
+  display: flex;
+  align-content: center;
+}
+.wx-image_SC1alK{
+  width:124rpx;
+  height:124rpx;
+  border-radius:80rpx;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding-left:20rpx;
+}
+.parent-right{
+  display: flex;
+  align-items: center;
 }
 .top{
   display: flex;
@@ -21,11 +39,6 @@
   display: flex;
   justify-content: flex-start;
   padding-top: 40rpx;
-}
-.head .wx-image_SC1alK{
-  width:124rpx;
-  height:124rpx;
-  border-radius:80rpx;
 }
 .center-bg{
   display: flex;
@@ -66,20 +79,14 @@ margin: 0 auto;
 }
 
 .payment{
-  background: #fff;
-  padding: 30rpx 40rpx;
-  margin-bottom:20rpx;
+  padding: 40rpx 20rpx;
+  margin-top:20rpx;
+  border-radius: 10px;
 }
 .payment-list{
   display:flex;
   justify-content:space-between;
   padding-bottom:10rpx;
-  border-bottom:1px solid #EEE;
-  color:#999;
-  font-size:24rpx;
-}
-.payment-list-left text{
- font-size:28rpx;
 }
 .payment-list-right image{
   width:14rpx;
@@ -87,31 +94,18 @@ margin: 0 auto;
   padding-left:10rpx;
 }
 .payment-center{
-display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
-text-align: center;
-color: #999;
+  display: flex;
+  justify-content: space-around;
 }
 .payment-1{
-  font-size: 24rpx;
-padding: 20rpx 0;
--webkit-box-flex: 1;
--webkit-flex: 1;
--ms-flex: 1;
-flex: 1;
--webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  padding: 10rpx 0;
 }
-.payment-img {
-width: 42rpx;
-height: 42rpx;
-display: block;
-text-align: center;
-margin: 0 auto;
-margin-bottom: 5rpx;
+.payment-1 image{
+  padding-bottom:10rpx;
 }
-
 
 .money{
   width: 40%;
@@ -120,10 +114,7 @@ margin-bottom: 5rpx;
   align-items: center;
   padding-top: 40rpx;
 }
-.money view{
-  font-size: 24rpx;
-  padding-bottom: 30rpx;
-}
+
 .btn{
   background: #ff43da;
   padding: 16rpx 40rpx;
@@ -137,7 +128,6 @@ margin-bottom: 5rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: #FFF;
   padding: 26rpx 40rpx; 
   margin-top: 40rpx;
   border-radius: 10rpx;
@@ -145,18 +135,17 @@ margin-bottom: 5rpx;
 .list{
   text-align: center;
 }
-.list view{
-  font-size: 24rpx;
-}
+
 .lists{
-  background-color:#fff;
-  padding: 0 40rpx;
+  padding: 20rpx;
+  margin-top:20rpx;
+  border-radius: 10px;
 }
 .list-wap{
   display:flex;
   justify-content:space-between;
   padding-top:40rpx;
-  border-bottom:1px solid #EEE;
+  border-bottom:1px solid #4d4d4d;
   padding-bottom:40rpx;
   
 }
@@ -169,8 +158,6 @@ margin-bottom: 5rpx;
   height:42rpx;
 }
 .left text{
-  font-size:28rpx;
-  color:#333;
   padding-left: 20rpx;
 }
 .right image{
