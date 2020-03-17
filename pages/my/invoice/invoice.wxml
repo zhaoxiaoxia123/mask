@@ -10,7 +10,6 @@
     </view>
     <!--bindtap绑定事件-->
     <view class='list' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
-
       <view class='column space-between'>
         <view class='name'>{{item.username}}</view>
         <view class='phone'>{{item.phone}}</view>
