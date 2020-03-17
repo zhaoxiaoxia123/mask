@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/my/address/address",
-    
+   
+    "pages/my/my",
     "pages/login/login",
     "pages/home/home",
     "pages/my/address/addressdetail/addressdetail",
@@ -12,8 +12,8 @@
     "pages/shopcat/shopcat",
     "pages/detail/detail",
     "pages/my/order/order",
+    "pages/my/address/address",
     
-    "pages/my/my",
     "pages/my/invoice/invoice",
     "pages/my/member/member",
     "pages/my/coupon/coupon",

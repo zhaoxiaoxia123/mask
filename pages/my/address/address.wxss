@@ -1,17 +1,11 @@
-/* pages/home/home.wxss */
-
 
 .lists{
   box-sizing: border-box;
-  margin-top: 20rpx;
 }
 .list{
-   background: #FFF;
    box-sizing: border-box;
-   padding-top: 10rpx;
-   margin-bottom: 20rpx;
+   margin-bottom: 10rpx;
    padding: 20rpx;
-   font-size:28rpx;
 
 }
 .column{
@@ -36,12 +30,7 @@
   justify-content:flex-end;
   align-items: center;
 }
-.address{
-  color:#999;
-}
-.checkbox{
-  color: #112d86;
-}
+
 .edit{
   padding-right:20rpx;
 }
@@ -53,10 +42,11 @@
 
 /*底部操作栏*/
 .bottom{
-	width: 90%;
+	width: 94%;
   position: fixed;
 	bottom: 0;
 	display: block;
+  margin-bottom:20rpx;
 
 }
 .bottom-operate{
@@ -66,10 +56,6 @@
 	justify-content: center;
 	flex-direction: row-reverse;
 	align-items: center;
-  font-size:28rpx;
-  color: #fff;
-  background-color:#333;
-  margin-bottom:10px;
   border-radius:10rpx;
 }
 
@@ -86,9 +72,7 @@
 .search-no {
 width: 100%;
 display: block;
-color: #999;
 text-align: center;
-font-size: 24rpx;
 padding:100rpx 0;
 }
 .scimg {
