@@ -56,7 +56,18 @@
       <view class='saletotal'>￥{{items.order_amount}}</view>
       <view class='time'>实付款：</view>
     </view>
-     
+    <view class='between1' wx:if="{{transform.type == 2}}">
+      <view class='time'>满足积分抵扣实付款{{transform.rate}}%</view>
+      <view class='sale1'>{{usingPoint}}</view>
+    </view>
+    <view class='between1' wx:if="{{transform.type == 1}}">
+      <view class='time'>积分可抵扣</view>
+      <view class='sale1'>{{usingPoint}}</view>
+    </view>
+    <view class='column3'>
+      <view class='saletotal'>￥{{finalSum}}</view>
+      <view class='time'>实付款：</view>
+    </view>
    <view class="bottom">
     <view class="bottom-operate button" bindtap='payOrder' style='background-color:#FF0000;'>付款</view>
     <view class="bottom-operate button" bindtap='deleteOrder' style='background-color:#FF0000;'>删除订单</view>
