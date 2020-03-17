@@ -23,13 +23,16 @@
           <view class='total'>库存：100件</view>
           <view class='column mt'>
             <view class='sale'>￥{{item.discount_amount}}</view>
-            <view class='item-number'>
-              <image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
+              <view class='column-number'>
+                  <view class='item-number'>
+                    <image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
+                  </view>
+                  <view class='item-number'>{{item.product_count}}</view>
+                  <view class='item-number'>
+                    <image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32' bind:tap="plusFn"></image>
+                  </view>                  
             </view>
-            <view class='item-number'>{{item.product_count}}</view>
-            <view class='item-number'>
-              <image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32' bind:tap="plusFn"></image>
-            </view>
+
           </view>
         </view>
       </view>

@@ -25,10 +25,9 @@
             <text>积分：32</text>
        </view>
       <view class='abstract'>探究奢华的产品质感，只为遇见最珍贵的您 紧致肌肤 收缩毛孔 提亮肤色 改善肤质 即刻保持肌肤年轻的秘密</view>
-      <view class='abstract'>免邮</view>
        <view class='between'>
+       <text class='num'>免邮</text>
        <text class='num'>销量：{{items.sale}}件</text>
-       <text class='num'>剩余：443件</text>
        </view>
 
 
@@ -53,16 +52,19 @@
      <text class='abstract'>{{items.description}}</text>
   </view>
 
-  <view class="bottom">
-    <view class="bottom-operate">
-      <view class="bottom-left count">
+  <view class='bottom'>
+    <view class='bottom-operate'>
+      <view class='bottom-left count'>
         <image class='icon58' src='../img/service.png'></image>
       </view>
-      <view class="bottom-left count" catchtap="shoppingList">
+      <view class='bottom-left count' catchtap="shoppingList">
+       <view class='number'>
+                <text>3</text> 
+             </view>
         <image class='icon58' src='../img/shopcat_false.png'></image>
       </view>
-      <view class="bottom-operate button1" catchtap='joinShopping'>加入购物</view>
-      <view class="bottom-operate button" catchtap='joinOrder'>立即购买</view>
+      <view class='bottom-operate button1' catchtap='joinShopping'>加入购物</view>
+      <view class='bottom-operate button' catchtap='joinOrder'>立即购买</view>
     </view>
   </view>
   <view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
@@ -102,18 +104,21 @@
       </view>
     </view>
 
-    <view class="bottom">
-      <view class="bottom-operate">
-        <view class="bottom-left count">
-          <image class='icon58' src='../img/service.png'></image>
-        </view>
-        <view class="bottom-left count" catchtap="shoppingList">
-          <image class='icon58' src='../img/shopcat_false.png'></image>
-        </view>
-        <view class="bottom-operate button1" catchtap='joinShopping'>加入购物</view>
-        <view class="bottom-operate button" catchtap='joinOrder'>立即购买</view>
+    <view class='bottom'>
+    <view class='bottom-operate'>
+      <view class='bottom-left count'>
+        <image class='icon58' src='../img/service.png'></image>
       </view>
+      <view class='bottom-left count' catchtap="shoppingList">
+       <view class='number'>
+                <text>3</text> 
+             </view>
+        <image class='icon58' src='../img/shopcat_false.png'></image>
+      </view>
+      <view class='bottom-operate button1' catchtap='joinShopping'>加入购物</view>
+      <view class='bottom-operate button' catchtap='joinOrder'>立即购买</view>
     </view>
+  </view>
 
   </view>
 </view>

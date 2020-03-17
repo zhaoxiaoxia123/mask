@@ -1,7 +1,5 @@
 {
   "pages": [
-   
-    "pages/my/my",
     "pages/login/login",
     "pages/home/home",
     "pages/my/address/addressdetail/addressdetail",
@@ -10,10 +8,11 @@
     "pages/kind/search/search",
     "pages/my/order/orderdetail/orderdetail",
     "pages/shopcat/shopcat",
+    "pages/shopcat/orderconfirm/orderconfirm",
     "pages/detail/detail",
     "pages/my/order/order",
     "pages/my/address/address",
-    
+    "pages/my/my",
     "pages/my/invoice/invoice",
     "pages/my/member/member",
     "pages/my/coupon/coupon",
@@ -25,7 +24,8 @@
     "pages/member/integral/integral",
     "pages/member/grade/grade",
     "pages/member/grow/grow",
-    "pages/member/agreementone/agreementone"
+    "pages/member/agreementone/agreementone",
+    "pages/my/service/service"
   ],
   "window": {
     "backgroundTextStyle": "light",
