@@ -1,4 +1,3 @@
-<!--pages/home/home.wxml-->
 
 <view >
 <view class='lists'>
@@ -9,13 +8,19 @@
                    <image class='icon58' src='../../img/address.png'></image>
               </view>
 
+              <!-- 没有默认的收货地址时显示 -->
+
+                  <view class='goods-text' style="display: none;">
+                        <view class='size-titletwo'>请先添加收货地址</view>
+                  </view>
+
               <view class='goods-text'>
-           <view class='goods-name' >
-             <text class='name'>张三</text>
-             <text class='phone'>18749149555</text>
-           </view>
-             <view class='address'>成都市 成华区 二环路东二段29号</view>
-        </view>
+                  <view class='goods-name' >
+                    <text class='name'>张三</text>
+                    <text class='phone'>18749149555</text>
+                  </view>
+                    <view class='address'>成都市 成华区 二环路东二段29号</view>
+              </view>
           
           </view>
 

@@ -1,4 +1,3 @@
-/* pages/home/home.wxss */
 
 .lists{
   box-sizing: border-box;
@@ -12,6 +11,10 @@
   font-size:28rpx;
   line-height:1.5;
   padding:20rpx;
+}
+.goods-add{
+  padding:20rpx;
+  background:#404040;
 }
 .goods-content{
   display: flex;

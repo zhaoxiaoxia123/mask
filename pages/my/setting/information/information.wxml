@@ -9,7 +9,7 @@
 
 
   <view class='column bg-box'>
-    <label>小星星</label> <input placeholder='请输入内容' bindinput="searchValue" bindconfirm="search" value='张三'></input>
+    <label>用户名</label> <input placeholder='请输入内容' bindinput="searchValue" bindconfirm="search" value='张三'></input>
   </view>
 
   <view class='column bg-box'>
