@@ -10,7 +10,7 @@
   background:#404040;
   color:#c6c6c6;
   font-size:28rpx;
-  line-height:2;
+  line-height:1.5;
   padding:20rpx;
 }
 .goods-content{
@@ -90,7 +90,7 @@ background: #404040;
 .sale{
   color:#DAB866;
   font-size:40rpx;
-  line-height:2;
+  line-height:1.5;
 }
 
 .abstract{
@@ -231,7 +231,7 @@ display: none;
   color:#DAB866;
   font-weight:bold;
   font-size:24rpx;
-  line-height:2;
+  line-height:1.5;
   width: 80px;
 }
 .just .list-right{
@@ -245,14 +245,14 @@ display: none;
 .just .spec{
   padding: 20rpx;
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   color:#c6c6c6;
 }
 .just .btn{
   padding: 5rpx 15rpx;
   margin: 10rpx;
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   width: 100px;
 }
 .sel{
@@ -291,7 +291,7 @@ display: none;
 }
 .sales-spec{
   font-size:32rpx;
-  line-height:2;
+  line-height:1.5;
   color:#DAB866;
 }
 .just .column{

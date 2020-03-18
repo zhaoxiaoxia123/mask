@@ -6,7 +6,7 @@
   align-items:center;
   border-radius:10px;
   font-size:24rpx;
-  line-height:2;
+  line-height:1.5;
   padding:60rpx 0 40rpx 0;
   background:#404040;
   color:#c6c6c6;
@@ -21,7 +21,7 @@
 .current1{
   color:#DAB866;
   font-size:58rpx;
-  line-height:2;
+  line-height:1.5;
 }
 .integral-current1{
   display: flex;
@@ -35,7 +35,7 @@
   margin-top: 20rpx;
   padding: 20rpx;
   font-size: 32rpx;
-  line-height:2;
+  line-height:1.5;
 }
 .integral-title{
   display:flex;
@@ -46,19 +46,19 @@
 }
 .text-date{
   font-size:24rpx;
-  line-height:2;
+  line-height:1.5;
   padding-top:10rpx;
   color:#c6c6c6;
 }
 .text-add{
   color:#DAB866;
   font-size:40rpx;
-  line-height:2;
+  line-height:1.5;
 }
 .footer{
   text-align:center;
   color:#c6c6c6;
   font-size:24rpx;
-  line-height:2;
+  line-height:1.5;
   padding-top:60rpx;
 }

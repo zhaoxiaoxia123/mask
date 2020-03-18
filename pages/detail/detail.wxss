@@ -10,12 +10,12 @@
   font-size:40rpx;
   color:#DAB866;
   font-weight: bold;
-  line-height:2;
+  line-height:1.5;
 }
 .money-title{
   color: #fff;
   font-size: 40rpx;
-  line-height:2;
+  line-height:1.5;
 }
 .account{
   display: flex;
@@ -29,7 +29,7 @@
 .money-text{
   display: flex;
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   color:#fff;
 }
 .money-text text{
@@ -37,13 +37,13 @@
 }
 .num{
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   color:#c6c6c6;
 }
 .time{
   padding-right: 10rpx;
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   color:#c6c6c6;
 }
 
@@ -56,7 +56,7 @@
 }
 .abstract{
   font-size: 28rpx;
-  line-height:2;
+  line-height:1.5;
   color:#c6c6c6;
    display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -67,7 +67,7 @@
   padding: 20rpx 20rpx 0 20rpx;
   background: #fff;
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
 }
 
 .spec {
@@ -109,7 +109,7 @@
   background: #EEE;
   padding: 14rpx;
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   margin-left: 16rpx;
   margin-top: 16rpx;
   border-radius: 8rpx;
@@ -123,7 +123,7 @@
   background:#404040;
   color:#fff;
   font-size:40rpx;
-  line-height:2;
+  line-height:1.5;
   padding:20rpx 0;
 }
 .list{
@@ -173,7 +173,7 @@
 }
 .shop-money view{
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   color: #FFF;
 }
 .order{
@@ -224,7 +224,7 @@ display: none;
   color:#DAB866;
   font-weight:bold;
   font-size:24rpx;
-  line-height:2;
+  line-height:1.5;
   width: 80px;
 }
 .just .list-right{
@@ -238,14 +238,14 @@ display: none;
 .just .spec{
   padding: 20rpx;
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   color:#c6c6c6;
 }
 .just .btn{
   padding: 5rpx 15rpx;
   margin: 10rpx;
   font-size: 24rpx;
-  line-height:2;
+  line-height:1.5;
   width: 100px;
 }
 .sel{
@@ -284,7 +284,7 @@ display: none;
 }
 .sales-spec{
   font-size:32rpx;
-  line-height:2;
+  line-height:1.5;
   color:#DAB866;
 }
 .just .column{
@@ -339,7 +339,7 @@ display: none;
 	flex-direction: row;
 	align-items: center;
   font-size: 28rpx;
-  line-height:2;
+  line-height:1.5;
   color: #c6c6c6;
 }
 .bottom-operate .count{

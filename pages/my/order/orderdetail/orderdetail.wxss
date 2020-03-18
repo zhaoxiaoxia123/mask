@@ -15,7 +15,7 @@
   background:#404040;
   color:#c6c6c6;
   font-size:28rpx;
-  line-height:2;
+  line-height:1.5;
   padding:20rpx;
 }
 .goods-content{
@@ -105,7 +105,7 @@ background: #404040;
 .sale{
   color:#DAB866;
   font-size:40rpx;
-  line-height:2;
+  line-height:1.5;
 }
 
 .abstract{
