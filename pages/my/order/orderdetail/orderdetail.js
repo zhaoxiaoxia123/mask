@@ -16,7 +16,14 @@ Page({
     duration: 500,
     circular: true,
     items: [],
-    address:[]
+    address: [],
+    transform:[],
+    orderAmount:0,
+    rateAmount:0,
+    customerInfo: [],
+    finalSum: 0,   //使用积分后的实付款
+    usingPoint:0   //使用积分值
+
   },
 
   /**
@@ -27,6 +34,22 @@ Page({
     that.setData({
       order_id: options.order_id
     });
+
+    if (wx.getStorageSync('customerId')) {
+      var param = {
+        page_code: 'p004',
+        type: "mainCustomer",
+        customer_id: wx.getStorageSync('customerId')
+      };
+      that.getUserDetail(param);
+    }
+    //查询积分是否可抵用
+    var transformParam = {
+      page_code: 'p017',
+      code: 'jf01'
+    };
+    that.getTransform(transformParam);
+
     //获取订单详情
     var param = {
       page_code: 'p008',
@@ -85,6 +108,40 @@ Page({
 
   },
 
+  //获取用户信息 ：积分 等
+  getUserDetail: function (param) {
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: param,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        that.setData({
+          customerInfo: res.data.data
+        });
+      }
+    });
+  },
+
+  getTransform: function(param){
+    // jf01
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: param,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var datas = res.data.data;
+        that.setData({
+          transform: datas[0]
+        })
+      }
+    });
+
+  },
+
   getOrder: function (param) {  //读取订单
     wx.request({
       url: app.globalData.domainUrl,
@@ -97,9 +154,43 @@ Page({
         that.setData({
           items: datas[0]
         })
+
+        that.setData({
+          orderAmount: that.data.items.order_amount,
+          rateAmount: (that.data.items.order_amount * (that.data.transform.rate / 100))
+        });
+        console.log('getOrder:----------');
+        console.log((parseFloat(that.data.items.order_amount) >= parseFloat(that.data.transform.satisfy_amount)));
+        console.log(that.data.transform.type);
+        
+        if ((parseFloat(that.data.items.order_amount) >= parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
+          that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
+        } else if ((parseFloat(that.data.items.order_amount) < parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
+          that.sumAmount(0, that.data.rateAmount, that.data.orderAmount);
+        } else if (that.data.transform.type == 1) {
+          that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
+        }
+
       }
     });
   },
+  sumAmount: function (point, rateAmount, amount) {
+    console.log('sumAmount:----------');
+    console.log(parseFloat(point) >= parseFloat(rateAmount));
+    if (parseFloat(point) >= parseFloat(rateAmount)) {
+    that.setData({
+      usingPoint: rateAmount,
+      finalSum: parseFloat(amount) - parseFloat(rateAmount)
+    });
+  } else {
+    that.setData({
+      usingPoint: point,
+      finalSum: parseFloat(amount) - parseFloat(point)
+    });
+    }
+    console.log('finalSum:----------');
+    console.log(that.data.finalSum);
+},
 
 getAddress: function(){
   wx.request({
