@@ -19,7 +19,7 @@
   width:80%;
 }
 .address{
- color:#8b8b8b ;
+ color:#c6c6c6 ;
 }
 .goods-name{
   display: flex;
@@ -138,7 +138,7 @@ background: #404040;
 	align-items: center;
   font-size: 32rpx;
   background-color: #FFF;
-  color: #8b8b8b ;
+  color: #c6c6c6 ;
 }
 
 .bottom-operate .price{

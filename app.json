@@ -25,7 +25,10 @@
     "pages/member/grade/grade",
     "pages/member/grow/grow",
     "pages/member/agreementone/agreementone",
-    "pages/my/service/service"
+    "pages/my/service/service",
+    "pages/my/customer/customer",
+    "pages/my/setting/setting",
+    "pages/my/setting/information/information"
   ],
   "window": {
     "backgroundTextStyle": "light",

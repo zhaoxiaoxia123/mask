@@ -175,6 +175,24 @@ Page({
       url: '../my/coupon/coupon',
     })
   },
+  service: function (e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../my/service/service',
+    })
+  },
+  customer: function (e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../my/customer/customer',
+    })
+  },
+  setting: function (e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../my/setting/setting',
+    })
+  },
   member: function (e) {
     console.log(e)
     wx.navigateTo({

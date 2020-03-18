@@ -149,6 +149,9 @@ margin: 0 auto;
   padding-bottom:40rpx;
   
 }
+.border-none{
+  border:none;
+}
 .left{
   display: flex;
   align-items: center;

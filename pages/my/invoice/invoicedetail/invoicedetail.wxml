@@ -1,29 +1,34 @@
-<!--pages/my/my.wxml-->
 
-  <view class='column'>
+<view class='size-titletwo col-content'>
+  <view class='column bg-box'>
     <label>名称</label> <input placeholder='请输入名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}'></input>
   </view>
 
-  <view class='column'>
+  <view class='column bg-box'>
     <label>税号</label><input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}'></input>
   </view>
 
-  <view class='column'>
+  <view class='column bg-box'>
     <label>单位地址</label><input placeholder='请输入地址' bindinput="setAddressInput" bindconfirm="search" value='{{address}}'></input>
   </view>
 
-  <view class='column'>
+  <view class='column bg-box'>
     <label>电话号码</label><input placeholder='请输入电话号码' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}'></input>
   </view>
 
-  <view class='column'>
+  <view class='column bg-box'>
     <label>开户银行</label><input placeholder='请输入开户银行' bindinput="setBankInput" bindconfirm="search" value='{{bank}}'></input>
   </view>
 
-  <view class='column'>
+  <view class='column bg-box'>
     <label>银行账户</label><input placeholder='请输入银行账户' bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}'></input>
   </view>
   
-  <view class="bottom" style='padding:0 10px;'>
-    <view class="bottom-operate button" bindtap='submitInvoice' >确认</view>
+
+  <view class='page-pd '>
+    <view class="bottom bg-box size-titletwo col-title" >
+    <view class="bottom-operate button" >确认</view>
+    </view>
   </view>
+
+</view>

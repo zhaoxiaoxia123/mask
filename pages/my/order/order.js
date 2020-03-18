@@ -111,6 +111,29 @@ Page({
 
   },
 
+  // 跳转规格弹窗
+  logistics: function (e) {
+    var that = this;
+    var flexwindow;
+    if (this.data.flexwindow == true) {
+      flexwindow = false;
+    }
+    else {
+      flexwindow = true;
+    }
+    that.setData({
+      flexwindow: flexwindow
+    });
+  },
+  close: function (e) {
+    let self = this
+    let flexwindow = false;
+
+    self.setData({
+      flexwindow: flexwindow
+    })
+  },
+
   //以下为自定义点击事件
   getOrderList: function (param) {
     wx.request({

@@ -8,16 +8,9 @@
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  color: #ccc;
+  color: #c6c6c6;
 }
 
-
-
-.domain {
-  background-color: #fff;
-  height: 100%;
-  margin: 0 10px;
-}
 
 .show {
   display: block;
@@ -27,21 +20,34 @@
   display: none;
 }
 
-/* .content {
-  padding: 0 20rpx;
-} */
 
 .news {
-  color: #333;
-  border-radius: 16rpx;
-  margin-top: 30rpx;
-  font-size: 24rpx;
-  background-color: #fff;
+  color: #c6c6c6;
+  border-radius: 10px;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  background-color: #404040;
   padding: 30rpx;
 }
 .bottom{
-  color:#999;
+  color:#c6c6c6;
   padding-top:30rpx;
   display: flex;
   justify-content: space-between; 
+}
+
+/* 无 */
+.search-no {
+width: 100%;
+display: block;
+text-align: center;
+padding:100rpx 0;
+}
+.scimg {
+width: 300rpx;
+height: 350rpx;
+display: inline-block;
+background-size: 300rpx;
+padding-bottom:20rpx;
+
 }

@@ -1,4 +1,4 @@
-<!--pages/my/my.wxml-->
+
 
 <view class='size-titletwo col-content'>
   
@@ -40,6 +40,6 @@
 
 <view class='page-pd '>
    <view class="bottom bg-box size-titletwo col-title" >
-  <view class="bottom-operate button" bindtap='submitAddress'>确认</view>
+  <view class="bottom-operate button" >确认</view>
 </view>
 </view>

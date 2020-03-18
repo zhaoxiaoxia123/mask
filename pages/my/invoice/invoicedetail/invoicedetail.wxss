@@ -2,12 +2,11 @@
 .column{
   display: flex;
   flex-direction: row; 
-  padding-top: 10px;
   text-align: end;
-  background: #fff;
-  margin-bottom: 4rpx;
-  padding: 20rpx;
   justify-content: space-between;
+  margin-bottom: 10rpx;
+  padding: 40rpx 20rpx;
+
   
 }
 .end{
@@ -22,22 +21,16 @@
   margin-top:20rpx;
   border-radius:10rpx;
 }
-/*细线*/
-.downline{
-  position: relative;
-  height: 1rpx;
-  width: 90%;
-  margin-left: 5%;
-  background-color: #ddd;
-  z-index: 10;
-}
+
 /*底部操作栏*/
 .bottom{
-	width: 90%;
+	width: 94%;
   position: fixed;
 	bottom: 0;
 	display: block;
-
+  margin-bottom:20rpx;
+  border-radius: 10px;
+  border:1px solid #4d4d4d;
 }
 .bottom-operate{
 	width: 100%;
@@ -46,17 +39,10 @@
 	justify-content: center;
 	flex-direction: row-reverse;
 	align-items: center;
-  font-size:28rpx;
-  color: #fff;
-  background-color:#333;
-  margin-bottom:10px;
-  border-radius:10rpx;
 }
 label{
-  padding-left: 12rpx;
   width: 200rpx;
   text-align: left;
-  color: #999;
 }
 .address{
   display: -webkit-box;
@@ -64,7 +50,4 @@ label{
   -webkit-line-clamp: 2;
   overflow: hidden;
   height: 50px;
-}
-radio{
-transform:scale(0.7);
 }

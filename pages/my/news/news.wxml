@@ -1,6 +1,14 @@
 <!--pages/news/news.wxml-->
 <wxs module="share" src="../../../utils/share.wxs"></wxs>
-<view style='padding:0 10px;'>
+<view class='page-pd size-titletwo col-content'>
+
+
+<view class='search-no' >
+      <view> 
+        <image class='scimg' src='../../img/wu.png'></image>
+      </view>
+       <text>暂时没有消息~~</text>
+  </view>
 
   <view class='content'>
     <view class="{{currentTab == 0 ? 'show':'hidden'}}">

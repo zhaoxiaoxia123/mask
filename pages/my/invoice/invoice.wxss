@@ -1,16 +1,11 @@
-/* pages/home/home.wxss */
 
 .lists{
   box-sizing: border-box;
-  margin-top: 20rpx;
 }
 .list{
-   background: #FFF;
    box-sizing: border-box;
-   padding-top: 10rpx;
-   margin-bottom: 20rpx;
+   margin-bottom: 10rpx;
    padding: 20rpx;
-   font-size:28rpx;
 
 }
 .column{
@@ -22,13 +17,6 @@
   justify-content:space-between;
   align-items: center;
 }
-.selected{
-  border-radius:5px;
-  background-color:#FF0000;
-  color: #ffffff;
-  font-size:9px;
-}
-
 .list-left{
   width:40%;
 }
@@ -42,12 +30,7 @@
   justify-content:flex-end;
   align-items: center;
 }
-.address{
-  color:#999;
-}
-.checkbox{
-  color: #112d86;
-}
+
 .edit{
   padding-right:20rpx;
 }
@@ -56,13 +39,16 @@
   height:26rpx;
   padding-right:10rpx;
 }
+
 /*底部操作栏*/
-.added{
-	width: 90%;
+.bottom{
+	width: 94%;
   position: fixed;
 	bottom: 0;
 	display: block;
-
+  margin-bottom:20rpx;
+  border-radius: 10px;
+  border:1px solid #4d4d4d;
 }
 .bottom-operate{
 	width: 100%;
@@ -71,11 +57,6 @@
 	justify-content: center;
 	flex-direction: row-reverse;
 	align-items: center;
-  font-size: 28rpx;
-  color: #fff;
-  background-color:#333;
-  margin-bottom:10px;
-  border-radius:10rpx;
 }
 
 /*细线*/
@@ -83,18 +64,15 @@
   margin:20rpx 0;
   position: relative;
   height: 1rpx;
-  background-color: #ddd;
+  background-color: #4d4d4d;
   z-index: 10;
 }
-
 
 /* 无 */
 .search-no {
 width: 100%;
 display: block;
-color: #999;
 text-align: center;
-font-size: 24rpx;
 padding:100rpx 0;
 }
 .scimg {
