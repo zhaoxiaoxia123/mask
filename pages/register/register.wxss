@@ -37,7 +37,7 @@
  
 /* 弹出层里面的按钮 */
 .ok{
-  width: 80px;
+  width: 160px;
   height: 35px;
   background: #44b549;
   line-height: 35px;
@@ -48,6 +48,17 @@
   border-radius: 100px;
 }
  
+ .no{
+  width: 160px;
+  height: 35px;
+  background: #666;
+  line-height: 35px;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  margin:20px auto;
+  border-radius: 100px;
+}
 /* 弹出层里面的文字 */
 .text{
   text-align: justify;

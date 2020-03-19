@@ -125,7 +125,6 @@ Page({
   },
 
   getTransform: function(param){
-    // jf01
     wx.request({
       url: app.globalData.domainUrl,
       data: param,

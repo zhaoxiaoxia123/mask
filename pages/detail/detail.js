@@ -21,7 +21,11 @@ Page({
     duration: 500,
     circular: true,
     items: [],
-    productId:0
+    productId:0,
+    transform: [],
+    point:0,
+    growth:0
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -37,6 +41,15 @@ Page({
       // customer_id: wx.getStorageSync("customerId")
     };
     that.getProductDetail(param);
+
+    //查询积分，成长值兑换设置
+    var transformParam = {
+      page_code: 'p017',
+      code: ''
+    };
+    that.getTransform(transformParam);
+
+
   },
 
   /**
@@ -85,6 +98,41 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+
+  getTransform: function (param) {
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: param,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var datas = res.data.data;
+        that.setData({
+          transform: datas
+        });
+        if (datas){
+          for (var i = 0; i < datas.length; i++) {
+            console.log('for:----');
+            console.log(i);
+            console.log(datas[i].type);
+            console.log(datas[i].value_from / datas[i].value_to );
+            if (datas[i].code == "jf01"){
+              that.setData({
+                point: parseInt(that.data.items.discount_amount/(datas[i].value_from / datas[i].value_to) )
+              });
+            } else if (datas[i].code == "czz01") {
+              that.setData({
+                growth: parseFloat(that.data.items.discount_amount / (datas[i].value_from / datas[i].value_to) ).toFixed(2)
+              });
+            }
+          }
+        }
+
+      }
+    });
 
   },
   // 跳转规格弹窗

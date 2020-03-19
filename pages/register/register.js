@@ -9,13 +9,15 @@ Page({
   data: {
     code: '',
     phone: '',
-    password: '',
-    showModal: false,
+    pw1: '',
+    pw2: '',
+    // showModal: false,
     shareCustomerInfo:[],
     verifyCode:'',
     shareBy:'',
     nickname: '',
     avatar: '',
+    isSubmit: false,   //是否可以找回密码
   },
 
   /**
@@ -46,7 +48,12 @@ Page({
         url: '../home/home',
       });
     }else{
-      that.getShareCustomer();
+      if (wx.getStorageSync('shareBy')){
+        that.setData({
+          shareBy: wx.getStorageSync('shareBy')
+        });
+        that.getShareCustomer();
+      }
     }
   },
 
@@ -92,9 +99,9 @@ Page({
   },
   
   getShareCustomer: function () {  //获取分享用户信息
-    param = {
+    var param = {
       page_code: 'p004',
-      share_by: wx.getStorageSync("shareBy")
+      share_by: that.data.shareBy
     };
     wx.request({
       url: app.globalData.domainUrl,
@@ -108,14 +115,30 @@ Page({
           shareCustomerInfo:datas
         });
 
-        that.setData({
-          showModal: true
-        })
+        // that.setData({
+        //   showModal: true
+        // })
       }
     })
   },
+  phoneRegister: function(){
+    if (that.data.phone.length == 11 && that.data.pw1.length > 0 && that.data.pw1 == that.data.pw2){
+      var param = {
+        page_code: "p010",
+        type: "shareBy",
+        share_by: that.data.shareBy,
+        phone: that.data.phone,
+        password: that.data.pw1
+      };
+      that.register(param);
+    }else{
+      wx.showToast({
+        title: '填写信息不完整',
+      })
+    }
+  },
   bindGetUserInfo: function () {
-    console.log('userInfo');
+    // console.log('userInfo');
     wx.getUserInfo({
       success: function (res) {
         //获取openid，并更新到用户表
@@ -127,9 +150,9 @@ Page({
         var param = {
           page_code: "p010",
           type: "shareBy",
-          share_by: wx.getStorageSync('shareBy'),
+          share_by: that.data.shareBy,
           phone: that.data.phone,
-          password: that.data.password,
+          password: that.data.pw1,
           code:app.globalData.code,
           nickname: that.data.nickname,
           avatar: that.data.avatar
@@ -138,6 +161,7 @@ Page({
       },
       fail: function () {
         wx.showToast({
+          icon: "none",
           title: '权限限制,操作无法继续',
         })
       }
@@ -153,15 +177,17 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        var datas = res.data;
-        if (datas.data.has_share_by){
+        var ret = res.data;
+        var datas = ret.data;
+        if (datas.has_share_by || datas.customer_exist){
           wx.showToast({
-            title: datas.message,
+            icon: "none",
+            title: ret.message,
           })
         }else{
-          this.setData({
-            showModal: false
-          });
+          // this.setData({
+          //   showModal: false
+          // });
           wx.setStorageSync('customerId', datas.customer_id);
           wx.setStorageSync('openid', datas.openid);
           wx.setStorageSync('memberNo', datas.number);  //会员号
@@ -180,18 +206,41 @@ Page({
     that.setData({
       code: e.detail.value
     })
+    that.setbuttonStatus();
   },
   setPhoneInput: function (e) {
     var value = e.detail.value;
     that.setData({
       phone: e.detail.value
     })
+    that.setbuttonStatus();
   },
-  setPasswordInput: function (e) {
+  setPw1Input: function (e) {
     var value = e.detail.value;
     that.setData({
-      password: e.detail.value
+      pw1: e.detail.value
     })
+    that.setbuttonStatus();
+  },
+  setPw2Input: function (e) {
+    var value = e.detail.value;
+    that.setData({
+      pw2: e.detail.value
+    })
+    that.setbuttonStatus();
+  },
+  //返回按钮状态来 是否可以找回密码
+  setbuttonStatus: function () {
+    console.log('setbuttonStatus:----');
+    if (that.data.phone.length == 11 && that.data.verifyCode.length > 1 && that.data.pw1.length > 1 && that.data.pw2.length > 1 && that.data.pw1 == that.data.pw2 && that.data.code == that.data.verifyCode) {
+      that.setData({
+        isSubmit: true
+      })
+    } else {
+      that.setData({
+        isSubmit: false
+      })
+    }
   },
   sendCode: function() {  //发送手机验证码
     var phoneNum = that.data.phone;
@@ -199,23 +248,34 @@ Page({
     if (str.test(phoneNum)) {
       wx.request({
         url: app.globalData.domainUrl,
+        method: "POST",
         data: {
           page_code: 'p010',
-          phopne: phoneNum
+          type: "sendCode",
+          phone: phoneNum
         },
         header: {
-          'content-type': "application/json"
+          "Content-Type": "application/x-www-form-urlencoded"
         },
         success: function (res) {
-          var datas = res.data.data;
+          var ret = res.data;
+          var datas = ret.data;
           console.log(datas);
-          that.setData({
-            verifyCode: datas.verify_code
-          });
+          if (ret.code == 221) {
+            wx.showToast({
+              icon: "none",
+              title: ret.message,
+            })
+          } else {
+            that.setData({
+              verifyCode: datas.verify_code
+            });
+          }
         }
       })
     } else {
       wx.showToast({
+        icon: "none",
         title: '手机号不正确',
       })
     }
