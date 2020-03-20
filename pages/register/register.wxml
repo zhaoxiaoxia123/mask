@@ -1,16 +1,14 @@
 <view>
   <view class="login-bp col-content">
       <view  class="discount">
-          <image class="" src="../img/swiper1.png" ></image>
-          <view class="discount-text">
-          <text>某某赠送你的优惠码</text>
-          <text>512356546546316132123</text>
+          <image src='{{shareCustomerInfo.avatar}}' wx:if="{{shareBy}}" ></image>
+          <view class="discount-text" wx:if="{{shareBy}}">
+          <text>{{shareCustomerInfo.name}}赠送你的优惠码</text>
+          <text>{{shareCustomerInfo.number}}</text>
           </view>
       </view>
-      <image src='{{shareCustomerInfo.avatar}}' wx:if="{{shareBy}}"></image>
-      <view wx:if="{{shareBy}}">{{shareCustomerInfo.name}}赠送你的优惠码为{{shareCustomerInfo.number}}</view>
+    
       <view  class="t1">
-        <!-- <text>手机号</text> -->
         <image class="icon40" src="../img/number@2x.png" ></image>
         <input  class="use" placeholder='请输入手机号' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}'></input>
     </view>
@@ -21,12 +19,10 @@
           
       </view>
       <view  class="t1">
-          <!-- <text>密码</text> -->
           <image class="icon40" src="../img/password@2x.png" ></image>
           <input  class="use"  pplaceholder='请输入密码' bindinput="setPw1Input" bindconfirm="search" value='{{pw1}}'></input>
       </view>
       <view  class="t1">
-          <!-- <text>密码</text> -->
           <image class="icon40" src="../img/password@2x.png" ></image>
           <input  class="use"  placeholder='请输入确认密码' bindinput="setPw2Input" bindconfirm="search" value='{{pw2}}'></input>
       </view>
@@ -36,8 +32,6 @@
             <view class="login-bt disabled" wx:if="{{!isSubmit}}">手机号注册并授权微信</view>
             <view bindtap="phoneRegister" class="login-bt"  wx:if="{{isSubmit}}">手机号注册</view>
             <view class="login-bt disabled" wx:if="{{!isSubmit}}">手机号注册</view>
-          <!-- <view bindtap="findPassword" class="login-bt" wx:if="{{isSubmit}}">确定</view>
-          <view class="login-bt" wx:if="{{!isSubmit}}">确定</view> -->
       </view>
 
   </view>

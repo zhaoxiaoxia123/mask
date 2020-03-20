@@ -41,7 +41,7 @@
             </view>
             <view class="login-button">
                 <view bindtap="findPassword" class="login-bt" wx:if="{{isSubmit}}">确定</view>
-                <view class="login-bt" wx:if="{{!isSubmit}}">确定</view>
+                <view class="login-bt disabled" wx:if="{{!isSubmit}}">确定</view>
             </view>
 
       </view>
