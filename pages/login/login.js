@@ -33,9 +33,9 @@ Page({
         url: '../home/home',
       });
     }else{
-      that.setData({
-        isBindWechat: true
-      });
+      // that.setData({
+      //   isBindWechat: true
+      // });
     }
   },
 

@@ -3,8 +3,15 @@
   <!-- 遮罩层 请求授权微信 -->
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{isBindWechat}}"></view>
   <view class="modalDlg" wx:if="{{isBindWechat}}">
-    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信授权登录 </button>
-    <button type="primary" lang="zh_CN" open-type='getPhoneNumber'  bindgetphonenumber="getPhoneNumber">手机号授权</button>
+      <view  class="mod-head col-content">
+          <text>微信授权方式</text>
+          <image class="icon40" src="../img/close@2x.png" ></image>
+      </view>
+      <view  class="mod-content col-content">
+          <button class="login-bt mode mode-green" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信授权登录 </button>
+          <button class="login-bt mode"  lang="zh_CN" open-type='getPhoneNumber'  bindgetphonenumber="getPhoneNumber">手机号授权</button>
+      </view>
+
       
   </view>
 
@@ -12,30 +19,81 @@
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
   <!-- 弹出层 修改密码-->
   <view class="modalDlg" wx:if="{{showModal}}">
-    <input placeholder='请输入手机号' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}'></input>
-    <input placeholder='请输入验证码' bindinput="setCodeInput" bindconfirm="search" value='{{code}}'></input>
-    <view bindtap="sendCode" class="ok">获取验证码</view>
-    <!-- <view class="bottom-operate button" bindtap='sendCode'>获取验证码</view> -->
-    <input placeholder='请输入密码' bindinput="setPw1Input" bindconfirm="search" value='{{pw1}}'></input>
-    <input placeholder='请输入确认密码' bindinput="setPw2Input" bindconfirm="search" value='{{pw2}}'></input>
-    <view bindtap="findPassword" class="ok" wx:if="{{isSubmit}}">确定</view>
-    <view class="no" wx:if="{{!isSubmit}}">确定</view>
+      <view  class="mod-head col-content">
+          <text>修改密码</text>
+          <image class="icon40" src="../img/close@2x.png" ></image>
+      </view>
+      <view  class="mod-content col-content">
+
+            <view  class="t1">
+                  <input  class="use" placeholder='请输入手机号' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}'></input>
+            </view>
+            <view  class="t1 space-between">
+                <input class="use"placeholder='请输入验证码' bindinput="setCodeInput" bindconfirm="search" value='{{code}}'></input>
+                <view bindtap="sendCode" class="code">获取验证码</view>
+            </view>
+            <view  class="t1">
+                  <input class="use" placeholder='请输入密码' bindinput="setPw1Input" bindconfirm="search" value='{{pw1}}'></input>
+            </view>
+
+                <view  class="t1">
+                    <input class="use" placeholder='请输入确认密码' bindinput="setPw2Input" bindconfirm="search" value='{{pw2}}'></input>
+            </view>
+            <view class="login-button">
+                <view bindtap="findPassword" class="login-bt" wx:if="{{isSubmit}}">确定</view>
+                <view class="login-bt" wx:if="{{!isSubmit}}">确定</view>
+            </view>
+
+      </view>
+     
+
   </view>
 
   <!-- 账号密码登录-->
-  <view wx:if="{{isLogin}}">
-    <input placeholder='请输入手机号' bindinput="setAccountInput" bindconfirm="search" value='{{account}}'></input>
-    <input placeholder='请输入密码' bindinput="setPasswordInput" bindconfirm="search" value='{{password}}'></input>
-    <view bindtap="showFindPassword">忘记密码？</view>
-    <view>
-    <checkbox class='checkbox' catchtap="checkBox" checked="{{isCheck == 1}}" >已阅读《智美mall服务协议》</checkbox>
+  <view wx:if="{{isLogin}}" class="login-bp col-content">
+      <view class="timg">
+          <image class="" src="../img/frozen.png" ></image>
+      </view>
+      <view  class="t1">
+          <!-- <text>手机号</text> -->
+          <image class="icon40" src="../img/number@2x.png" ></image>
+          <input  class="use" placeholder='请输入手机号' bindinput="setAccountInput" bindconfirm="search" value='{{account}}'></input>
+      </view>
+      <view  class="t1">
+          <!-- <text>密码</text> -->
+          <image class="icon40" src="../img/password@2x.png" ></image>
+          <input  class="use"  placeholder='请输入密码' bindinput="setPasswordInput" bindconfirm="search" value='{{password}}'></input>
+      </view>
+    <!-- <input placeholder='请输入手机号' bindinput="setAccountInput" bindconfirm="search" value='{{account}}'></input>
+    <input placeholder='请输入密码' bindinput="setPasswordInput" bindconfirm="search" value='{{password}}'></input> -->
+    <view  class="login-reg">
+        <view bindtap="toRegister">免费注册</view>
+        <view bindtap="showFindPassword">|</view>
+        <view bindtap="showFindPassword">忘记密码</view>
+
     </view>
-    <view bindtap="loginTo" class="ok" wx:if="{{isInput}}">确定</view>
-    <view class="no" wx:if="{{!isInput}}">确定</view>
+
+    <view>
+    </view>
+    <view class="login-button">
+        <view  bindtap="loginTo" class="login-bt" wx:if="{{isInput}}">登录</view>
+        <view class="login-bt" wx:if="{{!isInput}}">登录</view>
+    </view>
+
     
   <view>
-    <button bindtap="bindWechat">微信登录</button>
-    <view bindtap="toRegister">还没有账号？免费注册></view>
+      <view class="weixin">
+          <text>其他方式登录</text>
+          <image bindtap="bindWechat" class="" src="../img/weixin@2x.png" ></image>
+      </view>
+
+    <view class="col-conten">
+        <text>已阅读</text>
+        <text>《智美mall服务协议》</text>
+        <text>和</text>
+        <text>《隐私政策》</text>
+    
+    </view>
   </view>
   </view>
 
