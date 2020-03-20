@@ -3,8 +3,8 @@
 <view>
 
   <view class='lists'>
-    <!--bindtap绑定事件-->
-    <view class='list' bindtap='toDetail' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
+    <!--bindtap绑定事件 bindtap='toDetail'-->
+    <view class='list' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
       <view class='radio-group'>
         <radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
       </view>
@@ -68,7 +68,7 @@
         <text style="color:#DAB866">￥{{totalfee}}</text>
       </view>
       <view class="bottom-operate space"></view>
-      <view class="bottom-operate button" catchtap='submitSettlementGenerateOrder' style='background-color:#DAB866;'>结算</view>
+      <view class="bottom-operate button" catchtap='goConfirm' style='background-color:#DAB866;'>结算</view>
     </view>
   </view>
 

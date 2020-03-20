@@ -51,7 +51,7 @@
       </view>
       <view class='bottom-left count' catchtap="shoppingList">
         <view class='number'>
-          <text>3</text>
+          <text>{{shopping_count}}</text>
         </view>
         <image class='icon58' src='../img/shopcat_false.png'></image>
       </view>

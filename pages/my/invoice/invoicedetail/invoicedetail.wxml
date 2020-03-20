@@ -27,7 +27,7 @@
 
   <view class='page-pd '>
     <view class="bottom bg-box size-titletwo col-title" >
-    <view class="bottom-operate button" >确认</view>
+    <view class="bottom-operate button" bindtap="submitInvoice">确认</view>
     </view>
   </view>
 

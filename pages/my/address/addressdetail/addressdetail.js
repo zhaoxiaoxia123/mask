@@ -24,6 +24,7 @@ Page({
     that.setData({
       addressId: id ? id : 0
     });
+
     if (that.data.addressId){
       wx.request({
         url: app.globalData.domainUrl,
@@ -148,7 +149,7 @@ Page({
       city: that.data.region[1],
       area: that.data.region[2],
       address: that.data.address,
-      is_default: that.data.is_default,
+      is_default: that.data.is_default?1:0,
       customer_id:wx.getStorageSync('customerId'),
       customer_addr_id: that.data.addressId
     };
