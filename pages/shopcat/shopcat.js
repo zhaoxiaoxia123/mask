@@ -15,6 +15,7 @@ Page({
     pageCount: 20,
     isLast: false,
     items: [],
+    isBack:false
     // ticketList: [],
     // selectedTicketType: 1,  //卡券类型 1：通用 2：满减
     // selectedSatisfyAmount: 0,   //卡券满足金额  即可使用该券
@@ -30,6 +31,10 @@ Page({
    */
   onLoad: function(options) {
     that = this;
+    console.log("onLoad:--~~~--");
+    that.setData({
+      isBack: false
+    });
     // var id = app.globalData.ticketId;
     // that.setData({
     //   queryTicketId: id
@@ -46,18 +51,17 @@ Page({
     //   // selectedTicketId: 0,
     //   showTicket: "display:none"
     // })
-    if (wx.getStorageSync('customerId')) {
-      var param = {
-        page_code: 'p012',
-        type: "shopping_list",
-        customer_id: wx.getStorageSync('customerId'),
-        offset: (that.data.offset - 1) * that.data.pageCount,
-        page: that.data.pageCount
-      };
-      that.getShoppingList(param);
-
-      // that.getTicketList();
-    }
+    // console.log("onShow:----");
+    // if (wx.getStorageSync('customerId') && that.data.items.length <= 0) {
+    //   var param = {
+    //     page_code: 'p012',
+    //     type: "shopping_list",
+    //     customer_id: wx.getStorageSync('customerId'),
+    //     offset: (that.data.offset - 1) * that.data.pageCount,
+    //     page: that.data.pageCount
+    //   };
+    //   that.getShoppingList(param);
+    // }
   },
 
   /**
@@ -70,9 +74,31 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
+    console.log('that.data.isBack');
+    console.log(that.data.isBack);
+    if (!that.data.isBack){  //判断返回键返回
+      that.setData({
+        items:[]
+      });
+    } else {   //判断直接点击进入
+      that.setData({
+        isBack: false  
+      });
+    }
+    if (wx.getStorageSync('customerId') && that.data.items.length <= 0) {
+      var param = {
+        page_code: 'p012',
+        type: "shopping_list",
+        customer_id: wx.getStorageSync('customerId'),
+        offset: (that.data.offset - 1) * that.data.pageCount,
+        page: that.data.pageCount
+      };
+      that.getShoppingList(param);
 
+      // that.getTicketList();
 
+    }
   },
 
   /**
@@ -166,7 +192,7 @@ Page({
     var id = e.currentTarget.dataset.id;
     if (items[id].product_count <= 1) {
       items[id].product_count = 1;
-      self.setData({
+      that.setData({
         items: items
       })
     } else {
@@ -257,6 +283,7 @@ Page({
       totalfee: fee
     })
   },
+  //进入结算页面
   goConfirm: function() {
     var products = '';
     for (var i = 0; i < that.data.items.length; i++) {
@@ -264,9 +291,16 @@ Page({
         products += that.data.items[i].product_id + "," + that.data.items[i].product_count + "--";
       }
     }
-    wx.navigateTo({
-      url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
-    })
+    if (products == ''){
+      wx.showToast({
+        icon: "none",
+        title: "请选择需要结算的商品"
+      });
+    }else{
+      wx.navigateTo({
+        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
+      })
+    }
   },
   // submitSettlementGenerateOrder: function(){  //提交结算，生成多商品同时结算的订单信息，
   //   var products = [];

@@ -144,11 +144,12 @@ Page({
       },
       success: function (res) {
         var datas = res.data.data;
-        console.log(datas);
-        console.log(datas.length);
+        // console.log(datas);
+        // console.log(datas.length);
         that.setData({
           items: that.data.items.concat(datas)
         });
+        console.log(that.data.items);
         if (datas.length <= 0 || datas.length < that.data.pageCount) {
           that.setData({
             isLast: true
@@ -189,7 +190,41 @@ Page({
   },
   orderdetail: function (e) {
     wx.navigateTo({
-      url: 'orderdetail/orderdetail?order_id='+e.currentTarget.dataset.id,
+      url: 'orderdetail/orderdetail?order_id=' + e.currentTarget.dataset.id+'&from_page=myorder',
     })
+  },
+  //取消订单
+  cancelOrder: function (e) {
+    var order_id = e.currentTarget.dataset.id;
+    var order_type = e.currentTarget.dataset.type;
+    wx.request({
+      url: app.globalData.domainUrl,
+      method: "POST",
+      data: {
+        page_code: 'p008',
+        type: 'cancel',
+        order_id: order_id,
+        order_type: order_type
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res);
+        var datas = res.data.data;
+        if (datas) {
+          wx.showToast({
+            title: res.data.message
+          });
+          that.onShow();
+        }
+      }
+    })
+  },
+  submitMessage:function(e){ //提醒发货
+
+  },
+  submitOk: function(e){ //确认收货
+
   },
 })

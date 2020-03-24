@@ -56,7 +56,7 @@
         <image class='icon58' src='../img/shopcat_false.png'></image>
       </view>
       <view class='bottom-operate button1' catchtap='joinShopping'>加入购物</view>
-      <view class='bottom-operate button' catchtap='joinOrder'>立即购买</view>
+      <view class='bottom-operate button' data-type="one" catchtap='goConfirm'>立即购买</view>
     </view>
   </view>
   <view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
@@ -112,7 +112,7 @@
           <image class='icon58' src='../img/shopcat_false.png'></image>
         </view>
         <view class='bottom-operate button1' catchtap='joinShopping'>加入购物</view>
-        <view class='bottom-operate button' catchtap='joinOrder'>立即购买</view>
+        <view class='bottom-operate button' data-type="more" catchtap='goConfirm'>立即购买</view>
       </view>
     </view>
 

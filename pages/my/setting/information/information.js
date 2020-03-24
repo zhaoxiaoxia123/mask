@@ -1,12 +1,15 @@
 // pages/my/setting/information/information.js
+var app = getApp();
+var that;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    check: true,
-    region: ['四川省', '成都市']
+    items: [],
+    // check: true,
+    // region: ['四川省', '成都市']
   },
 
   /**
@@ -14,6 +17,7 @@ Page({
    */
   onLoad: function (options) {
 
+    that = this;
   },
 
   /**
@@ -27,7 +31,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (wx.getStorageSync('customerId')) {
+      var param = {
+        page_code: 'p004',
+        type: "mainCustomer",
+        customer_id: wx.getStorageSync('customerId'),
+        // has_ticket_count: true,
+        // has_order_count: true
+      };
+      that.getUserDetail(param);
+    }
   },
 
   /**
@@ -63,5 +76,22 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+
+  //获取用户信息 ： 积分 卡券数量 等
+  getUserDetail: function (param) {
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: param,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        that.setData({
+          items: res.data.data
+        });
+      }
+    });
+  },
 })

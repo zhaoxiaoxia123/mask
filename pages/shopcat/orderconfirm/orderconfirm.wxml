@@ -61,7 +61,19 @@
         </view>
       </view>
     </view>
-    <view class='coupon' bindtap="coupon">
+    <view class='coupon' bindtap="coupon" wx:if="{{ticketList.length > 0}}">
+      <view class='coupon-wap'>
+        <view class='coupon-left'>
+          <text>请选择优惠券</text>
+        </view>
+        <view class='coupon-right'>
+          <text wx:if="{{isCheckTicket == 9999}}">不使用优惠券</text>
+          <text wx:if="{{isCheckTicket != 9999}}">减{{usingTicketAmount}}</text>
+          <image src='../../img/dv.png'></image>
+        </view>
+      </view>
+    </view>
+    <view class='coupon' wx:if="{{ticketList.length <= 0}}">
       <view class='coupon-wap'>
         <view class='coupon-left'>
           <text>请选择优惠券</text>
@@ -72,7 +84,6 @@
         </view>
       </view>
     </view>
-
     <view class='coupon'>
       <view class='coupon-wap'>
         <view class='coupon-left'>
@@ -82,7 +93,7 @@
         <view class='coupon-right' wx:if="{{customerInfo.point>=usingPoint && customerInfo.point!=0}}">
           <checkbox-group>
             <label class="checkbox">
-              <checkbox color='#333' catchtap="checkboxChange" data-type="isUsePoint" checked="{{isUsePoint == 1}}"/>
+              <checkbox color='#333' catchtap="checkboxChange" data-type="isUsePoint" checked="{{isUsePoint == 1}}" />
             </label>
           </checkbox-group>
         </view>
@@ -90,9 +101,7 @@
 
     </view>
 
-
     <view class='coupon'>
-
       <view class='coupon-wap'>
         <view class='coupon-left'>
           <text>电子发票</text>
@@ -102,17 +111,9 @@
           <image src='../../img/dv.png'></image>
         </view>
       </view>
-
     </view>
 
-    <view class='space'></view>
-    <text class='mk'>备注</text>
-    <view class='space'></view>
-
-
-
   </view>
-
 
   <view class="bottom">
 
@@ -120,10 +121,9 @@
       <view class="bottom-operate price">合计：
         <text style="color:#DAB866">￥{{payAmount}}</text>
       </view>
-
       <view class="bottom-operate button" catchtap='confirmPay' style='background-color:#DAB866;'>提交订单</view>
     </view>
-    </view>
+  </view>
   <!-- 配送方式 -->
   <view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
   <view class="just {{flexwindow==true?'': 'y'}}">
@@ -131,13 +131,10 @@
     <view class='lists'>
       <view class='list'>
         <view class='detail-center'>
-
           <view class='sales'>
             <view class='detail-sales'>配送方式</view>
-
             <image class='icon40' src='../../img/close@2x.png' bindtap='close'></image>
           </view>
-
         </view>
       </view>
 
@@ -149,49 +146,38 @@
               <checkbox color='#333' checked="checked" />
             </label>
           </checkbox-group>
-
         </view>
-
       </view>
     </view>
-
   </view>
 
-
-
   <!-- 优惠券 -->
-  <view class="just1 {{couponflexwindow==true?'': 'y'}}" bindtap='close1'></view>
+  <!-- <view class="just1 {{couponflexwindow==true?'': 'y'}}" bindtap='close1'></view> -->
   <view class="just {{couponflexwindow==true?'': 'y'}}">
     <!--bindtap绑定事件-->
     <view class='lists'>
       <view class='list'>
         <view class='detail-center'>
-
           <view class='sales'>
             <view class='detail-sales'>优惠活动</view>
-
             <image class='icon40' src='../../img/close@2x.png' bindtap='close1'></image>
           </view>
-
         </view>
       </view>
 
-      <view class='column'>
+      <view class='column' wx:if="{{ticketList.length <= 0}}">
         <view>您没有可用的优惠券</view>
-
       </view>
 
-      <view class='column'>
-        <view>满减活动：满1000省10元</view>
-
+      <view class='column' wx:for="{{ticketList}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
+        <view>{{item.ticket_name}}</view>
         <view class='item'>
           <checkbox-group>
             <label class="checkbox">
-              <checkbox color='#333' checked="" />
+              <checkbox color='#333' catchtap="checkboxChange" data-v="{{(index+1)}}" data-type="isCheckTicket" checked="{{isCheckTicket == (index+1)}}" />
             </label>
           </checkbox-group>
         </view>
-
       </view>
 
       <view class='column'>
@@ -199,16 +185,13 @@
         <view class='item'>
           <checkbox-group>
             <label class="checkbox">
-              <checkbox color='#333' checked="" />
+              <checkbox color='#333' catchtap="checkboxChange" data-v="9999" data-type="isCheckTicket" checked="{{isCheckTicket == 9999}}" />
             </label>
           </checkbox-group>
-
         </view>
       </view>
     </view>
 
   </view>
-
-
 
 </view>

@@ -1,110 +1,112 @@
-
 <view>
   <view class='lists size-titletwo col-content'>
-      <!--待付款时显示-->
-      <view class='wait col-title' >
-          <text class='wait-text'>等待买家付款</text>
-          <text class='wait-text'>请在30:00:00内支付</text>
-      </view>
-
-      <!--个人信息-->
-      <view class='block  bg-box'>
-            <view class='column1'>
-            <view class='name'>收货人：{{address.name}}</view>
-            <view class='phone'>{{address.phone}}</view>
-          </view>
-          <view class='column1'>
-            <view class='address'>{{address.province}} {{address.city}} {{address.area}} {{address.address}}</view>
-          </view>
-      </view>
-
-
-
-          
-
-     <view class='order'>
-           <text >订单</text>
-     </view>
- <!--bindtap绑定事件-->
-  <view class='list' wx:key="*this" wx:for="{{items.products}}">
- 
-    <view class='list-left'>
-       <image  src='{{item.product_image[0].img_url}}'></image>
+    <!--待付款时显示-->
+    <view class='wait col-title'>
+      <text class='wait-text'>等待买家付款</text>
+      <text class='wait-text'>请在30:00:00内支付</text>
     </view>
 
-    <view class='list-right'>
-      <view class='right-text'>{item.product_name}}</view>
-      <view class='sale'>￥{{item.product_amount}}</view>
-       <view  class='item'>
-      
-        <view class='abstract'>{{item.abstract}}</view>    
-         <view class='piece'>× 1</view>
-        
+    <!--个人信息-->
+    <view class='block  bg-box'>
+      <view class='column1'>
+        <view class='name'>收货人：{{items[0].address.name}}</view>
+        <view class='phone'>{{items[0].address.phone}}</view>
+      </view>
+      <view class='column1'>
+        <view class='address'>{{items[0].address.province}} {{items[0].address.city}} {{items[0].address.area}} {{items[0].address.address}}</view>
+      </view>
+    </view>
+
+    <view class='order'>
+      <text>订单</text>
+    </view>
+    <!--bindtap绑定事件-->
+    <view class='list' wx:key="*this" wx:for="{{items[0].products}}" wx:for-item="item">
+
+      <view class='list-left'>
+        <image src='{{item.product_image?item.product_image[0].img_url:""}}'></image>
+      </view>
+
+      <view class='list-right'>
+        <view class='right-text'>{{item.product_name}}</view>
+        <view class='sale'>￥{{item.product_amount}}</view>
+        <view class='item'>
+
+          <view class='abstract'>{{item.introduction}}</view>
+          <view class='piece'>× {{item.product_count}}</view>
+
         </view>
 
-     <view>
+        <view>
 
-        
-     </view>
-     
+
+        </view>
+
+      </view>
     </view>
-  </view>
 
-  
-  <view class='gift'>
-           <text >赠送礼盒× 1</text>
-  </view>
 
-  <view class='bg-box'>
+    <view class='gift'>
+      <text>赠送礼盒× 1</text>
+    </view>
+
+    <view class='bg-box'>
       <view class='block-pa space-between'>
-        <text >运费</text>
-          <text >￥0.00</text>
+        <text>运费</text>
+        <text>￥0.00</text>
       </view>
 
-     <view class='block-pa space-between'>
-        <text >优惠券</text>
-          <text >-￥5.00</text>
-     </view>
-     <view class='block-pa space-between'>
-        <text >积分抵扣</text>
-          <text >-￥5.00</text>
-     </view>
+      <view class='block-pa space-between'>
+        <text>优惠券</text>
+        <text>-￥{{items[0].ticket_amount?items[0].ticket_amount:0}}</text>
+      </view>
+      <view class='block-pa space-between'>
+        <text>积分抵扣</text>
+        <text>-￥{{items[0].point}}</text>
+      </view>
 
       <view class='block-pa space-between size-titleone'>
-        <text >商品金额（2件）</text>
-      <text class='col-main'>￥4321.00</text>
-     </view>
+        <text>商品金额（{{items[0].products_count}}件）</text>
+        <text class='col-main'>￥{{items[0].product_total_amount}}</text>
+      </view>
 
-     <view class='block-pa space-between size-titleone'>
-        <text >实付款（含运费）</text>
-          <text class='col-main'>￥4321.00</text>
-     </view>
-  </view>
-
- 
-
+      <view class='block-pa space-between size-titleone'>
+        <text>实付款（含运费）</text>
+        <text class='col-main'>￥{{items[0].order_amount}}</text>
+      </view>
+    </view>
 
     <!--下单信息-->
-    <view class='list1 bg-box'  style='margin-top:15rpx;'>
-        <view class='time'>订单号：<text class='time-text'>{{items.order_code}}</text><text class='time-copy'>复制</text></view>
-        <view class='time'>支付方式：<text class='time-text'>微信</text></view>
-        <view class='time'>下单时间：<text class='time-text'>{{items.created_at}}</text></view>
-        <view class='time'>发货时间：<text class='time-text'>2019/4/25 14:01:43</text></view>
-        <view class='time'>物流公司：<text class='time-text'>顺丰快递</text></view>
-        <view class='time'>快递单号：<text class='time-text'>78322760064991</text><text class='time-copy'>复制</text></view>
-     </view>
-
-
-
-
+    <view class='list1 bg-box' style='margin-top:15rpx;'>
+      <view class='time'>订单号：
+        <text class='time-text'>{{items[0].order_code}}</text>
+        <text class='time-copy' wx:if="{{items[0].order_code}}" data-code="{{items[0].order_code}}" bindtap="copyInfo">复制</text>
+      </view>
+      <view class='time'>支付方式：
+        <text class='time-text'>微信</text>
+      </view>
+      <view class='time'>下单时间：
+        <text class='time-text'>{{items[0].created_at}}</text>
+      </view>
+      <view class='time'>发货时间：
+        <text class='time-text'>{{items[0].send_time?items[0].send_time:""}}</text>
+      </view>
+      <view class='time'>物流公司：
+        <text class='time-text'>{{items[0].express_company?items[0].express_company:''}}</text>
+      </view>
+      <view class='time'>快递单号：
+        <text class='time-text'>{{items[0].express_code?items[0].express_code:''}}</text>
+        <text class='time-copy' wx:if="{{items[0].express_code}}" data-code="{{items[0].express_code}}" bindtap="copyInfo">复制</text>
+      </view>
+    </view>
     <view class="bottom-button">
-        <view class='push-button ma-button'>
+      <view class='push-button ma-button'>
         <!-- 针对显示 -->
-            <!-- <view class='push '>查看物流</view> -->
-            <view class='push '>取消订单</view>
-            <view class='push  push-active'>确认收货</view>
-            <view class='push  push-active'>付款</view>
-        </view>
+        <!-- <view class='push '>查看物流</view> -->
+        <view class='push' bindtap="cancelOrder" wx:if="{{items[0].order_type == 1 || items[0].order_type == 2}}">取消订单</view>
+        <view class='push push-active' bindtap="confirm" wx:if="{{items[0].order_type == 3}}">确认收货</view>
+        <view class='push push-active' bindtap="payOrder" wx:if="{{items[0].order_type == 1}}">付款</view>
+      </view>
     </view>
 
   </view>

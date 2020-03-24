@@ -25,24 +25,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // if (options.scene) {
-    //   var scene = decodeURIComponent(options.scene);
-    //   console.log("scene is ", scene);
-    //   var arrPara = scene.split("&");
-    //   var arr = [];
-    //   for (var i in arrPara) {
-    //     arr = arrPara[i].split("=");
-    //     wx.setStorageSync(arr[0], arr[1]);
-    //     console.log("setStorageSync:", arr[0], "=", arr[1]);
-    //     if (arr[0] == 'share_by') {
-    //       that.getShareCustomer(arr[1]);
-    //     }
-    //   }
-    // } else {
-    //   console.log("no scene");
-    // }
-
     that = this;
+    if (options.scene) {
+      var scene = decodeURIComponent(options.scene);
+      console.log("scene is ", scene);
+      var arrPara = scene.split("&");
+      var arr = [];
+      for (var i in arrPara) {
+        arr = arrPara[i].split("=");
+        wx.setStorageSync(arr[0], arr[1]);
+        console.log("setStorageSync:", arr[0], "=", arr[1]);
+        // if (arr[0] == 'shareBy') {
+        //   that.setData({
+        //     shareBy: arr[1]
+        //   });
+        // }
+      }
+    } else {
+      console.log("no scene");
+    }
+
     //商品列表
     var param_p = {
       page_code:"p005",
@@ -184,4 +186,16 @@ Page({
     })
   },
 
+  // //进入结算页面  加入订单，即立即购买
+  // goConfirm: function (e) {
+  //   console.log(e);
+  //   var product_id = e.currentTarget.dataset.id;
+  //   var product_count = e.currentTarget.dataset.count;
+  //   var products = product_id + "," + product_count + "--";
+  //   console.log('goConfirm:----');
+  //   console.log(products);
+  //   wx.navigateTo({
+  //     url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
+  //   })
+  // },
 })

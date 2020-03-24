@@ -309,54 +309,69 @@ sumValue:function(){
       })
     }
   },
-  //加入订单，即立即购买
-  joinOrder:function(){ //提交结算，生成结算的订单信息，
-      // var product_id = ","+that.data.items.product_id+",";
-      // var product_count = ",1,";
-      // var product_amount = "";
-      // if(wx.getStorageSync("memberNo")){
-      //   product_amount = that.data.items.discount_amount;
-      // }else{
-      //   product_amount = that.data.items.amount;
-      // }
-    var products = [];
-    var info = {
-      'product_id': that.data.items.product_id,
-      'product_count': 1,
-      'discount_amount': that.data.items.discount_amount
-    };
-    products.push(info);
-      wx.request({
-        url: app.globalData.domainUrl,
-        method: "POST",
-        data: {
-          page_code:'p008',
-          products:products,
-          // product_id: product_id,
-          // product_count: product_count,
-          // product_amount: ','+product_amount + ',',
-          ticket_id: 0,
-          order_type: 1,//购买订单
-          customer_id: wx.getStorageSync('customerId'),
-          // is_customer: wx.getStorageSync('memberNo') ? 1 : 2,
-          amount: product_amount,
-        },
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        success: function (res) {
-          console.log(res);
-          var datas = res.data.data;
-          //getApp().globalData.orderId = datas.order_id;
-          // var url = '/pages/shopcat/orderconfirm/orderconfirm';
-          // console.log(url);
-          // wx.navigateTo({
-          //   url: url
-          // });
-          wx.navigateTo({
-            url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas.order_id,
-          })
-        }
-      })
+
+  //进入结算页面  加入订单，即立即购买
+  goConfirm: function (e) {
+    var type = e.currentTarget.dataset.type;
+    var products = '';
+    if (type == "more"){
+      products = that.data.productId + "," + that.data.count + "--";
+    }else{
+      products = that.data.productId + ",1--";
+    }
+    wx.navigateTo({
+      url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
+    })
   },
+
+  // //加入订单，即立即购买
+  // joinOrder:function(){ //提交结算，生成结算的订单信息，
+  //     // var product_id = ","+that.data.items.product_id+",";
+  //     // var product_count = ",1,";
+  //     // var product_amount = "";
+  //     // if(wx.getStorageSync("memberNo")){
+  //     //   product_amount = that.data.items.discount_amount;
+  //     // }else{
+  //     //   product_amount = that.data.items.amount;
+  //     // }
+  //   var products = [];
+  //   var info = {
+  //     'product_id': that.data.items.product_id,
+  //     'product_count': 1,
+  //     'discount_amount': that.data.items.discount_amount
+  //   };
+  //   products.push(info);
+  //     wx.request({
+  //       url: app.globalData.domainUrl,
+  //       method: "POST",
+  //       data: {
+  //         page_code:'p008',
+  //         products:products,
+  //         // product_id: product_id,
+  //         // product_count: product_count,
+  //         // product_amount: ','+product_amount + ',',
+  //         ticket_id: 0,
+  //         order_type: 1,//购买订单
+  //         customer_id: wx.getStorageSync('customerId'),
+  //         // is_customer: wx.getStorageSync('memberNo') ? 1 : 2,
+  //         amount: product_amount,
+  //       },
+  //       header: {
+  //         "Content-Type": "application/x-www-form-urlencoded"
+  //       },
+  //       success: function (res) {
+  //         console.log(res);
+  //         var datas = res.data.data;
+  //         //getApp().globalData.orderId = datas.order_id;
+  //         // var url = '/pages/shopcat/orderconfirm/orderconfirm';
+  //         // console.log(url);
+  //         // wx.navigateTo({
+  //         //   url: url
+  //         // });
+  //         wx.navigateTo({
+  //           url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas.order_id,
+  //         })
+  //       }
+  //     })
+  // },
 })

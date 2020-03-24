@@ -10,10 +10,11 @@ Page({
   data: {
     show: false,
     items: [],
+    isLogin:false,
     canGetUserInfo: false,
     code:'',
-      animationData: {},
-      hidden: true,//关注默认显示
+    animationData: {},
+    hidden: true,//关注默认显示
   },
 
   /**
@@ -24,9 +25,6 @@ Page({
     that.setData({
       canGetUserInfo: app.globalData.canGetUserInfo
     });
-    if (wx.getStorageSync('memberNo')) {
-      that.writeCode();
-    }
   },
 
   /**
@@ -49,6 +47,19 @@ Page({
         // has_order_count: true
       };
       that.getUserDetail(param);
+      app.globalData.canGetUserInfo = false;
+      that.setData({
+        canGetUserInfo: app.globalData.canGetUserInfo,
+        isLogin: false
+      });
+    } else {
+      that.setData({
+        isLogin: true
+      });
+    }
+
+    if (wx.getStorageSync('memberNo')) {
+      that.writeCode();
     }
   },
 
@@ -86,6 +97,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //进入登录注册页面
+  goLogin: function () {
+    wx.navigateTo({
+      url: '/pages/my/login/login',
+    })
+  },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param) {
     wx.request({
@@ -109,6 +126,7 @@ Page({
         //获取openid，并更新到用户表
         that.updateUserInfo({
           page_code: 'p010',
+          type: 'wxLogin',
           code: app.globalData.code,  //获取openid的code码
           nickname: res.userInfo.nickName,
           avatarUrl: res.userInfo.avatarUrl,

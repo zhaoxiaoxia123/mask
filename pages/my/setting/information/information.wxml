@@ -1,27 +1,29 @@
 <view class='size-titletwo col-content'>
 
 <view class='sculpture'>
-
-    <image class="sculpture-img" src='../../../img/resume.png' ></image>
+<open-data class="sculpture-img" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
+    <!-- <image class="sculpture-img" src='../../../img/resume.png' ></image> -->
 </view>
 
-
-
+  <!-- <view class='column bg-box'>
+    <label>用户名</label> <open-data class='size-titleone col-title' type="userNickName"></open-data>
+    <input placeholder='请输入内容' bindinput="searchValue" bindconfirm="search" value='张三'></input> 
+  </view> -->
 
   <view class='column bg-box'>
-    <label>用户名</label> <input placeholder='请输入内容' bindinput="searchValue" bindconfirm="search" value='张三'></input>
+    <label>微信账号</label><open-data class='size-titleone col-title' type="userNickName"></open-data>
+    <!-- <input placeholder='请输入内容'value='小星星'></input> -->
   </view>
 
   <view class='column bg-box'>
-    <label>微信账号</label><input placeholder='请输入内容'value='小星星'></input>
+    <label>手机号码</label>
+    {{items.phone?items.phone:''}}
+    <!-- <input placeholder='请输入内容' value='1873921232'></input> -->
   </view>
 
-  <view class='column bg-box'>
-    <label>手机号码</label><input placeholder='请输入内容' value='1873921232'></input>
-  </view>
-
-   <view class='column bg-box'>
-    <label>地区</label><picker
+   <!-- <view class='column bg-box'>
+    <label>地区</label>
+    <picker
     mode="region"
     bindchange="bindRegionChange"
     value="{{region}}"
@@ -32,9 +34,6 @@
       {{region[0]}}，{{region[1]}}
     </view>
   </picker>
-  </view>
-
-
-
+  </view> -->
 </view>
 

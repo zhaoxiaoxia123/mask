@@ -30,8 +30,8 @@
           <view class='sale'>{{item.discount_amount}}</view>
           <view class='money'>{{item.amount}}</view>
         </view>
-
         <view class='list-button'>
+        <!-- <view class='list-button' data-id="{{item.product_id}}" data-count="1" bindtap="goConfirm"> -->
           <text>立即购买</text>
         </view>
       </view>

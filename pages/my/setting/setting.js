@@ -68,4 +68,25 @@ Page({
       url: 'information/information',
     })
   },
+
+//退出登录
+  logout:function(){
+    wx.showModal({
+      title: '提示',
+      content: '即将退出登录？',
+      showCancel: true,
+      success: function (res) {
+        if (res.cancel) {
+          //点击取消
+        } else {
+          //点击确定
+          wx.clearStorage();
+          wx.switchTab({
+            url: '/pages/home/home',
+          });
+        }
+      }
+    });
+  },
+
 })

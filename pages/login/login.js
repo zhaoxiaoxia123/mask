@@ -18,7 +18,7 @@ Page({
     verifyCode:'',
     isLogin:true,
     isInput:false,
-    isCheck:false,
+    isCheck:true,
     isSubmit:false,   //是否可以找回密码
     isBindWechat:false
   },
@@ -129,7 +129,6 @@ Page({
             title: ret.message
           });
         }else{
-
           wx.setStorageSync('customerId', datas.customer_id);
           wx.setStorageSync('openid', datas.openid);
           wx.setStorageSync('sessionKey', datas.session_id);
@@ -164,11 +163,6 @@ Page({
     } else {
       wx.checkSession({
         success: function (res) {
-      console.log(e);
-      console.log(e.detail.errMsg)
-      console.log(e.detail.iv)
-      console.log(e.detail.encryptedData)
-
           var ency = e.detail.encryptedData;
           var iv = e.detail.iv;
       if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
@@ -176,7 +170,7 @@ Page({
           title: '警告',
           content: '您点击了拒绝授权，部分功能无法使用!!!',
           showCancel: false,
-          confirmText: '返回授权',
+          confirmText: '确定',
           success: function (res) {
             // 用户没有授权成功，不需要改变 isHide 的值
             // if (res.confirm) {
@@ -462,5 +456,16 @@ Page({
     wx.navigateTo({
       url: '../register/register',
     });
-  }
+  },
+  closeModal:function(e){
+    if (e.target.dataset.type == 'isBindWechat'){
+      that.setData({
+        isBindWechat: false
+      });
+    } else if (e.target.dataset.type == 'showModal') {
+      that.setData({
+        showModal: false
+      });
+    }
+  },
 })

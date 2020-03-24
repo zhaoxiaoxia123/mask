@@ -139,6 +139,7 @@ Page({
   },
   //提交地址信息
   submitAddress: function(){
+    if (wx.getStorageSync('customerId')){
     var param = {
       page_code:'p002',
       type:"editAddress",
@@ -171,5 +172,12 @@ Page({
         }
       }
     })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '授权登录后再编辑信息。',
+        showCancel: false
+      });
+    }
   },
 })
