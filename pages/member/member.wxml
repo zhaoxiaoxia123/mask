@@ -43,7 +43,7 @@
         <view class='date'>
           <view class='branch-content'>
             <view class='branch-text'>
-              <text>{{items.validity?items.validity:''}}</text>
+              <text>{{items.validity?items.validity:'***'}}</text>
             </view>
 
             <view class='branch-text'>

@@ -102,6 +102,13 @@ Page({
       url: '/pages/my/login/login',
     })
   },
+  
+  //进入会员页面
+  goMember: function() {
+    wx.navigateTo({
+      url: '/pages/member/member',
+    })
+  },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param){
     wx.request({

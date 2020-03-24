@@ -319,5 +319,12 @@ Page({
         }
       });
     }
+  }, 
+  
+  closeModal: function () {
+    that.setData({
+      showModal: false
+    });
+    
   },
 })
