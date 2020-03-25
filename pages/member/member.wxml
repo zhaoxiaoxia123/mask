@@ -1,7 +1,7 @@
 <!--pages/member/member.wxml-->
 
 <!-- 会员中心 -->
-<view>
+<view >
 
   <view class='frozeno-logo page-pd'>
     <image class="icon-logo" src="../img/frozeno@2x.png"></image>
@@ -10,8 +10,8 @@
   <view class='member'>
     <view class='page-pd'>
 
-
-    <view class='parent-left ' wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
+    <view  class="login-rt" wx:if="{{isLogin}}" bindtap="goLogin">登录/注册  </view>
+    <!-- <view class='parent-left ' ></view> -->
       <!-- <view class='head' wx:if="{{canGetUserInfo}}">
         <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
       </view> -->
