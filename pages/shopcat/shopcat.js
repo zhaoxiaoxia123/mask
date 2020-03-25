@@ -79,7 +79,9 @@ Page({
     console.log(that.data.isBack);
     if (!that.data.isBack){  //判断返回键返回
       that.setData({
-        items:[]
+        items:[],
+        totalfee:0,
+        check:false
       });
     } else {   //判断直接点击进入
       that.setData({
@@ -156,15 +158,6 @@ Page({
   },
 
   //以下为自定义点击事件
-  returnFee: function(fee, product_count, discount_amount) {
-    // var discount = wx.getStorageSync('discount') ? wx.getStorageSync('discount'):0;
-    // if (discount){
-    // fee = fee + (product_count * discount_amount) * (discount/10);
-    // }else{
-    fee = fee + (product_count * discount_amount);
-    // }
-    return fee;
-  },
   getShoppingList: function(param) {
     wx.request({
       url: app.globalData.domainUrl,
@@ -192,11 +185,28 @@ Page({
     var id = e.currentTarget.dataset.id;
     if (items[id].product_count <= 1) {
       items[id].product_count = 1;
+
+      if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
+        items[id].is_enough = true;
+        items[id].selected = true;
+      } else {
+        items[id].is_enough = false;
+        items[id].selected = false;
+      }
+
       that.setData({
         items: items
       })
     } else {
       items[id].product_count = items[id].product_count - 1;
+
+      if (items[id].product_count <= items[id].stock){ //库存是否足够来显示单选按钮
+        items[id].is_enough = true;
+        items[id].selected = true;
+      }else{
+        items[id].is_enough = false;
+        items[id].selected = false;
+      }
       var fee = 0;
       for (var i = 0; i < items.length; i++) {
         if (items[i].selected) {
@@ -217,10 +227,18 @@ Page({
     var id = e.currentTarget.dataset.id; // 获得wxml的data-id的值 data-id与dataset.id对应
     items[id].product_count = parseInt(items[id].product_count) + 1;
     // let totalfee = this.data.totalfee;
+
+    if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
+      items[id].is_enough = true;
+      items[id].selected = true;
+    } else {
+      items[id].is_enough = false;
+      items[id].selected = false;
+    }
     var fee = 0;
     for (var i = 0; i < items.length; i++) {
       if (items[i].selected) {
-        fee = that.returnFee(fee, parseInt(items[id].product_count), items[i].discount_amount);
+        fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].discount_amount);
       }
     }
     that.setData({
@@ -260,7 +278,9 @@ Page({
     } else {
       check = true;
       for (var i = 0; i < items.length; i++) {
-        items[i].selected = true;
+        if (items[i].is_enough){
+          items[i].selected = true;
+        }
       }
     }
     var fee = 0;
@@ -275,12 +295,22 @@ Page({
     })
     that.setTotalFee(fee); //赋值合计金额
   },
+
+  returnFee: function (fee, product_count, discount_amount) {
+    // var discount = wx.getStorageSync('discount') ? wx.getStorageSync('discount'):0;
+    // if (discount){
+    // fee = fee + (product_count * discount_amount) * (discount/10);
+    // }else{
+    fee = fee + (product_count * discount_amount);
+    // }
+    return fee;
+  },
   //赋值合计金额
   setTotalFee: function(fee) {
     // var money = fee - that.data.ticketAmount;
     // money = (money <= 0) ? 0 : money;
     that.setData({
-      totalfee: fee
+      totalfee: fee.toFixed(2)
     })
   },
   //进入结算页面
@@ -301,6 +331,30 @@ Page({
         url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
       })
     }
+  },
+  //清除购物车商品
+  deleteShopping:function(e){
+    var shopping_id = e.currentTarget.dataset.id;
+    wx.request({
+      url: app.globalData.domainUrl,
+      method: "POST",
+      data: {
+        page_code: 'p012',
+        type: 'delete_shopping',
+        shopping_id: shopping_id,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res);
+        var datas = res.data.data;
+        wx.showToast({
+          title: res.data.message
+        });
+        that.onShow();
+      }
+    })
   },
   // submitSettlementGenerateOrder: function(){  //提交结算，生成多商品同时结算的订单信息，
   //   var products = [];

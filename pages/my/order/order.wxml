@@ -77,7 +77,7 @@
     <view class="{{currentTab == 1 ? 'show':'hidden'}}">
       <scroll-view>
         <!--没有相关订单时显示-->
-        <view class='search-no' wx:if="items.length <= 0">
+        <view class='search-no' wx:if="{{items.length <= 0}}">
           <view>
             <image class='scimg' src='../../img/wu.png'></image>
           </view>
@@ -135,7 +135,7 @@
     <view class="{{currentTab == 2 ? 'show':'hidden'}}">
       <scroll-view>
         <!--没有相关订单时显示-->
-        <view class='search-no' wx:if="items.length <= 0">
+        <view class='search-no' wx:if="{{items.length <= 0}}">
           <view>
             <image class='scimg' src='../../img/wu.png'></image>
           </view>
@@ -191,7 +191,7 @@
     <view class="{{currentTab == 3 ? 'show':'hidden'}}">
       <scroll-view>
         <!--没有相关订单时显示-->
-        <view class='search-no' wx:if="items.length <= 0">
+        <view class='search-no' wx:if="{{items.length <= 0}}">
           <view>
             <image class='scimg' src='../../img/wu.png'></image>
           </view>
@@ -270,8 +270,6 @@
               <text class='time-copy'>复制</text>
             </view>
           </view>
-
-
         </view>
 
         <view class='plc-title col-title size-titleone page-pd'>

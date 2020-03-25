@@ -5,32 +5,35 @@
   <view class='lists'>
     <!--bindtap绑定事件 bindtap='toDetail'-->
     <view class='list' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
-      <view class='radio-group'>
+      <view class='radio-group' wx:if="{{item.is_enough}}">
         <radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
+      </view>
+      <view class='radio-group' wx:if="{{!item.is_enough}}">
+        库存不足
       </view>
       <view class='list-left'>
         <image src="{{item.product_image[0].image_url}}"></image>
       </view>
       <view class='list-right'>
-      <view class='column'>
+        <view class='column'>
 
-       <view class='right-text'>{{item.product_name}}</view>
-      <image  class='icon40' src='../img/del.png'></image>
-      </view>
-      
+          <view class='right-text'>{{item.product_name}}</view>
+          <image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image>
+        </view>
+
         <!-- <view class='right-text'>{{item.product_name}}</view> -->
         <view>
-          <view class='total'>库存：100件</view>
+          <view class='total'>库存：{{item.stock}}件</view>
           <view class='column mt'>
             <view class='sale'>￥{{item.discount_amount}}</view>
-              <view class='column-number'>
-                  <view class='item-number'>
-                    <image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
-                  </view>
-                  <view class='item-number'>{{item.product_count}}</view>
-                  <view class='item-number'>
-                    <image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32' bind:tap="plusFn"></image>
-                  </view>                  
+            <view class='column-number'>
+              <view class='item-number'>
+                <image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
+              </view>
+              <view class='item-number'>{{item.product_count}}</view>
+              <view class='item-number'>
+                <image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32' bind:tap="plusFn"></image>
+              </view>
             </view>
 
           </view>
@@ -60,18 +63,18 @@
     </view>
   </view> -->
 
-  <view class="bottom">
-    <view class="bottom-operate">
-      <view class="bottom-left count">
-        <radio color='#262626' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选</view>
-      <view class="bottom-operate price">合计：
-        <text style="color:#DAB866">￥{{totalfee}}</text>
+    <view class="bottom">
+      <view class="bottom-operate">
+        <view class="bottom-left count">
+          <radio color='#262626' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选</view>
+        <view class="bottom-operate price">合计：
+          <text style="color:#DAB866">￥{{totalfee}}</text>
+        </view>
+        <view class="bottom-operate space"></view>
+        <view class="bottom-operate button" catchtap='goConfirm' style='background-color:#DAB866;'>结算</view>
       </view>
-      <view class="bottom-operate space"></view>
-      <view class="bottom-operate button" catchtap='goConfirm' style='background-color:#DAB866;'>结算</view>
     </view>
-  </view>
 
-</view>
+  </view>
 
 </view>
