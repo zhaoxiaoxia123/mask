@@ -4,10 +4,10 @@
     <view class="timg">
       <image class="" src="../../img/frozen.png"></image>
     </view>
-    <view class="login-button">
-      <button class="login-bt bcolor-golden" lang="zh_CN" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">手机号一键登录</button>
-      <button class="login-bt bcolor-white" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信一键登录 </button>
-      <button class="login-bt bcolor-white" bindtap="showModalView">手机验证码注册/登录 </button>
+    <view class="login-button" >
+      <button class="login-bt bcolor-golden" style="width: 100%;" lang="zh_CN" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">手机号一键登录</button>
+      <button class="login-bt bcolor-white" style="width: 100%;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信一键登录 </button>
+      <button class="login-bt bcolor-white" style="width: 100%;" bindtap="showModalView">手机验证码注册/登录 </button>
     </view>
 
   </view>
