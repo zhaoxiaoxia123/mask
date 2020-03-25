@@ -1,10 +1,13 @@
 /* pages/member/member.wxss */
-
+page{
+  background:#fff;
+}
 /* 会员中心 */
 .frozeno-logo{
   display: flex;
   justify-content: center;
-  margin-bottom:120rpx;
+  padding-bottom:120rpx;
+  background: #333;
 }
 .member{
   background-color: #fff;
@@ -112,6 +115,19 @@ align-items: center;
 line-height: 20px;
 margin-top: -10px;
 
+}
+
+/* 登录/注册 */
+.login-rt{
+  line-height: 1.5;
+  text-align: center;
+  font-size:40rpx;
+  padding:20rpx 0;
+  margin-top: -140rpx;
+  border-radius:10px;
+  background: #DAB866;
+  color:#333;
+  font-weight: bold;
 }
 
 
