@@ -179,7 +179,7 @@ Page({
   grade: function (e) {
     console.log(e)
     wx.navigateTo({
-      url: '../member/grade/grade',
+      url: '/pages/my/coupon/coupon',
     })
   },
   grow: function (e) {

@@ -1,6 +1,12 @@
 <!--pages/my/coupon/coupon.wxml-->
 <view class="coupon">
-
+<!--没有相关优惠券时显示-->
+  <view class='search-no' wx:if="{{ticketList.length <= 0}}">
+    <view>
+      <image class='scimg' src='../../img/wu.png'></image>
+    </view>
+    <text>您还没有优惠券~~</text>
+  </view>
   <view class="wrapper {{(index%2 == 0)?'colour-bg2':'colour-bg1'}}" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
     <view class="content">
         <view class="money">

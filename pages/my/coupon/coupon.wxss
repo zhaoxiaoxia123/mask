@@ -144,3 +144,21 @@ button:not([size='mini']) {
 .colour-text4{
   color:#666666;
 }
+
+
+
+/* 无 */
+.search-no {
+width: 100%;
+display: block;
+text-align: center;
+padding:100rpx 0;
+}
+.scimg {
+width: 300rpx;
+height: 350rpx;
+display: inline-block;
+background-size: 300rpx;
+padding-bottom:20rpx;
+
+}

@@ -31,13 +31,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var param = {
-      page_code: "p013",
-      customer_id: wx.getStorageSync('customerId'),
-      offset: (that.data.offset - 1) * that.data.pageCount,
-      page: that.data.pageCount
-    };
-    that.getTicketList(param);
+    if (wx.getStorageSync('customerId')) {
+      var param = {
+        page_code: "p013",
+        customer_id: wx.getStorageSync('customerId'),
+        offset: (that.data.offset - 1) * that.data.pageCount,
+        page: that.data.pageCount
+      };
+      that.getTicketList(param);
+    }
   },
 
   /**
@@ -60,17 +62,19 @@ Page({
 
   },
   onReachBottom: function () {
-    if (!that.data.isLast) {
-      that.setData({
-        offset: that.data.offset + 1
-      });
-      var param = {
-        page_code: "p013",
-        customer_id: wx.getStorageSync('customerId'),
-        offset: (that.data.offset - 1) * that.data.pageCount,
-        page: that.data.pageCount
-      };
-      that.getTicketList(param);
+    if (wx.getStorageSync('customerId')) {
+      if (!that.data.isLast) {
+        that.setData({
+          offset: that.data.offset + 1
+        });
+        var param = {
+          page_code: "p013",
+          customer_id: wx.getStorageSync('customerId'),
+          offset: (that.data.offset - 1) * that.data.pageCount,
+          page: that.data.pageCount
+        };
+        that.getTicketList(param);
+      }
     }
   },
   //以下为自定义点击事件

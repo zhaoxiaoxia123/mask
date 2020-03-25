@@ -253,6 +253,7 @@ Page({
     })
     }else{
       wx.showToast({
+        icon: "info",
         title: '无法邀请好友。'
       })
     }
