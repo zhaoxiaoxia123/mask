@@ -84,7 +84,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-  width:70%;
+  width:80%;
 }
 
 .column1{

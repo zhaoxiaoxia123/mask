@@ -105,7 +105,7 @@ Page({
     }else{
       wx.showToast({
         icon: "none",
-        title: "请清楚缓存重新登录"
+        title: "请清除缓存重新登录"
       });
     }
   },

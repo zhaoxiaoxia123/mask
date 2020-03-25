@@ -11,6 +11,7 @@ Page({
     code:'',
     verifyCode:'',
     showModal: false,
+    isSubmit:false
   },
 
   /**
@@ -94,7 +95,7 @@ Page({
     } else {
       wx.showToast({
         icon: "none",
-        title: "请清楚缓存重新登录"
+        title: "请清除缓存重新登录"
       });
     }
   },
@@ -237,12 +238,27 @@ Page({
     that.setData({
       code: e.detail.value
     })
+    that.setbuttonStatus();
   },
   setPhoneInput: function (e) {
     var value = e.detail.value;
     that.setData({
       phone: e.detail.value
     })
+    that.setbuttonStatus();
+  },
+  //返回按钮状态来 是否可以找回密码
+  setbuttonStatus: function () {
+    console.log('setbuttonStatus:----');
+    if (that.data.phone.length == 11 && that.data.verifyCode.length > 1 && that.data.code == that.data.verifyCode) {
+      that.setData({
+        isSubmit: true
+      })
+    } else {
+      that.setData({
+        isSubmit: false
+      })
+    }
   },
   sendCode: function () {  //发送手机验证码
     var phoneNum = that.data.phone;
@@ -327,4 +343,19 @@ Page({
     });
     
   },
+
+  goPage:function(e){
+    var type = e.currentTarget.dataset.type;
+    console.log(type);
+    if (type == 'agree'){
+      wx.navigateTo({
+        url: '/pages/my/agree/agree',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/my/privacy/privacy',
+      })
+      
+    }
+  }
 })
