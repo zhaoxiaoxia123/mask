@@ -26,6 +26,7 @@ Page({
     });
 
     if (that.data.addressId){
+      // var param = '/p002?customer_addr_id='+that.data.addressId;
       wx.request({
         url: app.globalData.domainUrl,
         data: {
@@ -134,7 +135,7 @@ Page({
     var is_default = that.data.is_default;
     that.setData({
       is_default: !that.data.is_default
-    })
+    });
     console.log(is_default);
   },
   //提交地址信息

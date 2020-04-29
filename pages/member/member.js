@@ -46,6 +46,7 @@ Page({
         has_ticket_count: true,
         // has_order_count: true
       };
+      // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId')+'&has_ticket_count=true';
       that.getUserDetail(param);
       app.globalData.canGetUserInfo = false;
       that.setData({
@@ -57,7 +58,6 @@ Page({
         isLogin: true
       });
     }
-
     if (wx.getStorageSync('memberNo')) {
       that.writeCode();
     }
@@ -95,7 +95,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
   },
   //进入登录注册页面
   goLogin: function () {
@@ -147,11 +146,12 @@ Page({
         //     delta: 1  //小程序关闭当前页面返回上一页面
         // })
         var datas = res.data.data;
-        wx.setStorageSync('customerId', datas.customer_id);
-        wx.setStorageSync('openid', datas.openid);
-        wx.setStorageSync('memberNo', datas.number);  //会员号
-        wx.setStorageSync('level', datas.level);  //等级
+        wx.setStorageSync('customerId', datas.c_id);
+        wx.setStorageSync('openid', datas.frozeno_openid);
+        wx.setStorageSync('memberNo', datas.c_number);  //会员号
+        wx.setStorageSync('level', datas.frozeno_level);  //等级
         wx.setStorageSync('discount', datas.discount);  //折扣
+        wx.setStorageSync('sessionKey', datas.session_id);
         app.globalData.canGetUserInfo = false;
         that.setData({
           canGetUserInfo: app.globalData.canGetUserInfo
@@ -160,7 +160,6 @@ Page({
       }
     })
   },
-
   writeCode: function () {  //在页面上打印条形码和二维码
     var code = wx.getStorageSync("memberNo");
     // var url_member_id = app.globalData.domainUrl + "?is_scan=1&customer_id=" + wx.getStorageSync('customerId');
@@ -168,7 +167,7 @@ Page({
     // wxbarcode.qrcode('qrcode', url_member_id, 420, 420);
     // const codeStr = code;//`${code.slice(0, 4)}****${code.slice(12)}`;
     that.setData({
-      code,
+      code
     //   codeStr
     });
   },
@@ -177,28 +176,28 @@ Page({
    * 点击进入各自页面
    * ***/
   grade: function (e) {
-    console.log(e)
+    console.log(e);
     wx.navigateTo({
-      url: '/pages/my/coupon/coupon',
+      url: '/pages/my/coupon/coupon'
     })
   },
   grow: function (e) {
-    console.log(e)
+    console.log(e);
     wx.navigateTo({
-      url: '../member/grow/grow',
+      url: '../member/grow/grow'
     })
   },
   integral: function (e) {
-    console.log(e)
+    console.log(e);
     wx.navigateTo({
-      url: '../member/integral/integral',
+      url: '../member/integral/integral'
     })
   },
   chanMask: function () {
     var isShow = that.data.show ? false : true;//如果显示就隐藏，隐藏就显示
     that.setData({
       show: isShow
-    })
+    });
     console.log(that.data.show);
     // setTimeout(function () {
     //   if (that.data.show){
@@ -207,8 +206,5 @@ Page({
     //     })
     //   }
     // }.bind(that), 1000)
-
   },
-
-
 })

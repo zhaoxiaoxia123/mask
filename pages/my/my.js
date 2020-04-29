@@ -46,9 +46,10 @@ Page({
         page_code:'p004',
         type:"mainCustomer",
         customer_id:wx.getStorageSync('customerId'),
-        has_ticket_count: true,
+        // has_ticket_count: true,
         has_order_count: true
       };
+      // var param = '/p004?type=mainCustomer&has_ticket_count=true&has_order_count=true&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
       app.globalData.canGetUserInfo = false;
       that.setData({
@@ -184,51 +185,38 @@ Page({
     }
   },
   info: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../my/invoice/invoice',
+      url: '../my/invoice/invoice'
     })
   },
   address: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../my/address/address',
+      url: '../my/address/address'
     })
   },
   news: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../my/news/news',
+      url: '../my/news/news'
     })
   },
   coupon: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../my/coupon/coupon',
+      url: '../my/coupon/coupon'
     })
   },
   service: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../my/service/service',
+      url: '../my/service/service'
     })
   },
   customer: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../my/customer/customer',
+      url: '../my/customer/customer'
     })
   },
   setting: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../my/setting/setting',
-    })
-  },
-  member: function (e) {
-    console.log(e)
-    wx.navigateTo({
-      url: '../my/member/member',
+      url: '../my/setting/setting'
     })
   },
   shareApp:function(e) {   //邀请好友
@@ -301,6 +289,7 @@ Page({
         share_by: code,
         customer_id: wx.getStorageSync("customerId")
       };
+      // var param = '/p015?share_by='+code+'&customer_id='+wx.getStorageSync("customerId");
       wx.request({
         url: app.globalData.domainUrl,
         data: param,

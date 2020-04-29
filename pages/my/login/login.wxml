@@ -9,9 +9,7 @@
       <button class="login-bt bcolor-white" style="width: 100%;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信一键登录 </button>
       <button class="login-bt bcolor-white" style="width: 100%;" bindtap="showModalView">手机验证码注册/登录 </button>
     </view>
-
   </view>
-
 
   <view>
     <view class="col-conten">

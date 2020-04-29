@@ -10,17 +10,17 @@
 
   <view class='page-pd'>
     <view class='money'>
-      <text>优惠价￥{{items.discount_amount}}</text>
+      <text>优惠价￥{{items.frozeno_discount_amount}}</text>
       <text class='text-size'>（</text>
-      <text class='decoration text-size'>￥{{items.amount}}</text>
+      <text class='decoration text-size'>￥{{items.frozeno_amount}}</text>
       <text class='text-size'> ）</text>
     </view>
-    <view class='money-title'>{{items.product_name}}</view>
+    <view class='money-title'>{{items.category_desc}}</view>
     <view class='money-text'>
       <text>成长值：{{growth}}</text>
       <text>积分：{{point}}</text>
     </view>
-    <text class='abstract'>{{items.introduction}}</text>
+    <text class='abstract'>{{items.frozeno_introduction}}</text>
     <view class='between'>
       <text class='num'>免邮</text>
       <text class='num'>销量：{{items.sale}}件</text>
@@ -40,7 +40,7 @@
         <image wx:if="{{item.type == 1}}" src="{{item.img_url?item.img_url:'../img/details2.jpg'}}"></image>
       </block>
     </view>
-    <text class='abstract'>{{items.description}}</text>
+    <text class='abstract'>{{items.category_tab}}</text>
   </view>
 
   <view class='bottom'>
@@ -50,7 +50,7 @@
       </view>
       <view class='bottom-left count' catchtap="shoppingList">
         <view class='number'>
-          <text>{{shopping_count}}</text>
+          <text>{{shoppingCount}}</text>
         </view>
         <image class='icon58' src='../img/shopcat_false.png'></image>
       </view>
@@ -69,13 +69,13 @@
         </view>
         <view class='detail-center'>
           <view class='sales'>
-            <view class='detail-sales'>{{items.product_name}}</view>
+            <view class='detail-sales'>{{items.category_desc}}</view>
 
             <image class='icon40' src='../img/close@2x.png' bindtap='close'></image>
           </view>
           <view class='sales-spec'>
-            <text>优惠价￥{{items.discount_amount}}（</text>
-            <text class='decoration'>￥{{items.amount}}</text>
+            <text>优惠价￥{{items.frozeno_discount_amount}}（</text>
+            <text class='decoration'>￥{{items.frozeno_amount}}</text>
             <text>）</text>
 
           </view>
@@ -87,11 +87,11 @@
         <view>购买数量</view>
         <view class='item'>
           <view class='item-number'>
-            <image class='' data-id='{{items.product_id}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
+            <image class='' data-id='{{items.category_id}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
           </view>
           <view class='item-number'>{{count}}</view>
           <view class='item-number'>
-            <image class='' data-id='{{items.product_id}}' src='../img/plus@2x.png' bind:tap="plusFn"></image>
+            <image class='' data-id='{{items.category_id}}' src='../img/plus@2x.png' bind:tap="plusFn"></image>
           </view>
 
         </view>
@@ -106,7 +106,7 @@
         </view>
         <view class='bottom-left count' catchtap="shoppingList">
           <view class='number'>
-            <text>{{shopping_count}}</text>
+            <text>{{shoppingCount}}</text>
           </view>
           <image class='icon58' src='../img/shopcat_false.png'></image>
         </view>

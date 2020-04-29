@@ -119,12 +119,12 @@ Page({
             title: ret.message
           });
         } else {
-          wx.setStorageSync('customerId', datas.customer_id);
-          wx.setStorageSync('openid', datas.openid);
-          wx.setStorageSync('sessionKey', datas.session_id);
-          wx.setStorageSync('memberNo', datas.number);  //会员号
-          wx.setStorageSync('level', datas.level);  //等级
+          wx.setStorageSync('customerId', datas.c_id);
+          wx.setStorageSync('openid', datas.frozeno_openid);
+          wx.setStorageSync('memberNo', datas.c_number);  //会员号
+          wx.setStorageSync('level', datas.frozeno_level);  //等级
           wx.setStorageSync('discount', datas.discount);  //折扣
+          wx.setStorageSync('sessionKey', datas.session_id);
           app.globalData.canGetUserInfo = false;
           // that.setData({
           //   canGetUserInfo: app.globalData.canGetUserInfo
@@ -176,9 +176,7 @@ Page({
               }
             })
           } else {
-
             //同意授权
-            var customerId = wx.getStorageSync('customerId');
             wx.request({
               url: app.globalData.domainUrl,
               method: "POST",
@@ -186,7 +184,7 @@ Page({
                 page_code: 'p010',
                 type: 'wxPhone',  //获取手机号
                 sessionid: wx.getStorageSync('sessionKey'),
-                customer_id: customerId,
+                code:app.globalData.code,
                 iv: iv,
                 encryptedData: ency
               },
@@ -194,26 +192,23 @@ Page({
                 "Content-Type": "application/x-www-form-urlencoded"
               },
               success: function (res) {
-                console.log(res);
+                let datas = res.data.data;
                 if (res.data.code != 200) {
                   wx.showToast({
                     icon: "none",
                     title: res.data.message,
                   })
                 } else {
+                  wx.setStorageSync('customerId', datas.c_id);
+                  wx.setStorageSync('openid', datas.frozeno_openid);
+                  wx.setStorageSync('memberNo', datas.c_number);  //会员号
+                  wx.setStorageSync('level', datas.frozeno_level);  //等级
+                  wx.setStorageSync('discount', datas.discount);  //折扣
+                  wx.setStorageSync('sessionKey', datas.session_id);
+
                   wx.switchTab({
                     url: '/pages/home/home',
                   });
-                }
-                if (res.data.data.error == 0) {
-                  console.log('success' + res.data.data);
-                  //用户已经进入新的版本，可以更新本地数据
-                  wx.setStorageSync('versions', '1');
-                  wx.setStorageSync('enws', '2');
-                } else {
-                  //用户保存手机号失败，下次进入继续授权手机号
-                  wx.setStorageSync('enws', '1');
-                  console.log('fail' + res.data.data);
                 }
               },
               fail: function (res) {
@@ -262,7 +257,7 @@ Page({
   },
   sendCode: function () {  //发送手机验证码
     var phoneNum = that.data.phone;
-    let str = /^1\d{10}$/
+    var str = /^1\d{10}$/;
     if (str.test(phoneNum)) {
       wx.request({
         url: app.globalData.domainUrl,
@@ -281,8 +276,8 @@ Page({
           console.log(datas);
           wx.showToast({
             icon: "none",
-            title: ret.message,
-          })
+            title: ret.message
+          });
           that.setData({
             verifyCode: datas.verify_code
           });
@@ -291,7 +286,7 @@ Page({
     } else {
       wx.showToast({
         icon: "none",
-        title: '手机号不正确',
+        title: '手机号不正确'
       })
     }
   },
@@ -323,12 +318,14 @@ Page({
             content: info.message,
             showCancel: false,
             success: function (res) {
-              wx.setStorageSync('customerId', datas.customer_id);
-              wx.setStorageSync('memberNo', datas.number);  //会员号
-              wx.setStorageSync('level', datas.level);  //等级
+              wx.setStorageSync('customerId', datas.c_id);
+              wx.setStorageSync('openid', datas.frozeno_openid);
+              wx.setStorageSync('memberNo', datas.c_number);  //会员号
+              wx.setStorageSync('level', datas.frozeno_level);  //等级
               wx.setStorageSync('discount', datas.discount);  //折扣
+              wx.setStorageSync('sessionKey', datas.session_id);
               wx.switchTab({
-                url: '/pages/home/home',
+                url: '/pages/home/home'
               });
             }
           });
@@ -341,7 +338,6 @@ Page({
     that.setData({
       showModal: false
     });
-    
   },
 
   goPage:function(e){
@@ -349,13 +345,12 @@ Page({
     console.log(type);
     if (type == 'agree'){
       wx.navigateTo({
-        url: '/pages/my/agree/agree',
+        url: '/pages/my/agree/agree'
       })
     } else {
       wx.navigateTo({
-        url: '/pages/my/privacy/privacy',
+        url: '/pages/my/privacy/privacy'
       })
-      
     }
   }
 })

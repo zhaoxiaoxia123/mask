@@ -7,9 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: [],
-    // check: true,
-    // region: ['四川省', '成都市']
+    items: []
   },
 
   /**
@@ -35,10 +33,11 @@ Page({
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
-        customer_id: wx.getStorageSync('customerId'),
+        customer_id: wx.getStorageSync('customerId')
         // has_ticket_count: true,
         // has_order_count: true
       };
+      // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
     }
   },
@@ -93,5 +92,5 @@ Page({
         });
       }
     });
-  },
+  }
 })

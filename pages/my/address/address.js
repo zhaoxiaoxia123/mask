@@ -15,6 +15,8 @@ Page({
     duration: 500,
     circular: true,
     items: [],
+    fromPage:'',   //orderconfirm 页面跳转此页面会带这个参数
+    checkId: 0,  //选中地址id  当从orderconfirm页面过来需要此变量
   },
 
   /**
@@ -23,6 +25,9 @@ Page({
   onLoad: function (options) {
     console.log("onLoad");
     that = this;
+    that.setData({
+      fromPage: options.come
+    });
   },
 
   /**
@@ -73,6 +78,8 @@ Page({
 
   },
   getAddressList: function(){
+    if (wx.getStorageSync('customerId')){
+    // var param = '/p002?customer_id='+wx.getStorageSync('customerId');
     wx.request({
       url: app.globalData.domainUrl,
       data: {
@@ -90,6 +97,13 @@ Page({
         });
       }
     })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请授权登录后再查看列表',
+        showCancel: false
+      });
+    }
   },
   addAddress: function (e) {
     console.log(e)
@@ -109,10 +123,9 @@ Page({
       var param = {
         page_code: "p002",
         type: type,
-        customer_addr_id: id,
+        customer_addr_id: id
         // is_default: false
       };
-      console.log(param);
       wx.request({
         url: app.globalData.domainUrl,
         method: "POST",
@@ -138,5 +151,86 @@ Page({
       }
     }
     return temArray;
-  }
+  },
+  /**
+   * 选择地址为发货地址
+   */
+  checkSendAddress: function (e) {
+    let index = e.currentTarget.dataset.index;
+    var items = that.data.items;
+    let check = items[index].checked;
+    items[index].checked = !items[index].checked;
+    if (items[index].checked){
+      wx.showModal({
+        title: '提示',
+        content: '确定将该地址默认为收货地址？',
+        success: function (res) {
+          if (res.confirm) {
+            that.checkAddress(e.currentTarget.dataset.value);
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+    that.setData({
+      items: items
+    });
+  },
+
+ //提交地址信息
+  checkAddress: function (address_id) {
+    if (wx.getStorageSync('customerId')) {
+      var param = {
+        page_code: 'p002',
+        type: "editAddress",
+        is_default: 1,
+        customer_id: wx.getStorageSync('customerId'),
+        customer_addr_id: address_id
+      };
+      console.log(param);
+      wx.request({
+        url: app.globalData.domainUrl,
+        method: "POST",
+        data: param,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        success: function (res) {
+          console.log(res);
+          var datas = res.data.data;
+          if (datas) {
+            wx.navigateBack({
+              delta: 1
+            });
+          }
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '授权登录后才能做此操作。',
+        showCancel: false
+      });
+    }
+  },
+
+  // checkOne: function (e) {
+  //   console.log('aa');
+  //   var items = that.data.items;
+  //   for (var i = 0; i < items.length; i++) {
+  //     if (items[i].customer_addr_id == this.data.checkId) {
+  //       for (var j = 0; j < items.length; j++) {
+  //         // console.log("items[j].checked = ", items[j].checked);
+  //         if (items[j].checked && j != i) {
+  //           items[j].checked = false;
+  //         }
+  //       }
+  //       items[i].checked = !(items[i].checked);
+  //     }
+  //   }
+  //   this.setData({
+  //     items: items
+  //   });
+  // },
 })

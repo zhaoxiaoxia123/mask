@@ -89,17 +89,16 @@ Page({
       });
     }
     if (wx.getStorageSync('customerId') && that.data.items.length <= 0) {
-      var param = {
+      var param_s = {
         page_code: 'p012',
         type: "shopping_list",
         customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-      that.getShoppingList(param);
-
+      // var param_s = '/p012?type=shopping_list&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
+      that.getShoppingList(param_s);
       // that.getTicketList();
-
     }
   },
 
@@ -134,15 +133,16 @@ Page({
       that.setData({
         offset: that.data.offset + 1
       });
-      //商品列表
-      var param_p = {
+      //列表
+      var param_s = {
         page_code: 'p012',
         type: "shopping_list",
         customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-      that.getShoppingList(param_p);
+        // var param_s = '/p012?type=shopping_list&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
+        that.getShoppingList(param_s);
     }
 
     // that.setData({
@@ -170,7 +170,7 @@ Page({
         var datas = res.data.data;
         that.setData({
           items: that.data.items.concat(datas)
-        })
+        });
         if (datas.length <= 0 || datas.length < that.data.pageCount) {
           that.setData({
             isLast: true
@@ -210,13 +210,13 @@ Page({
       var fee = 0;
       for (var i = 0; i < items.length; i++) {
         if (items[i].selected) {
-          fee = that.returnFee(fee, items[i].product_count, items[i].discount_amount);
+          fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
         }
       }
 
       that.setData({
-        items: items,
-      })
+        items: items
+      });
       that.setTotalFee(fee);
     }
   },
@@ -238,12 +238,12 @@ Page({
     var fee = 0;
     for (var i = 0; i < items.length; i++) {
       if (items[i].selected) {
-        fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].discount_amount);
+        fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
       }
     }
     that.setData({
-      items: items,
-    })
+      items: items
+    });
     that.setTotalFee(fee);
   },
 
@@ -259,12 +259,12 @@ Page({
     var fee = 0;
     for (var i = 0; i < items.length; i++) {
       if (items[i].selected) {
-        fee = that.returnFee(fee, items[i].product_count, items[i].discount_amount);
+        fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
       }
     }
     that.setData({
-      items: items,
-    })
+      items: items
+    });
     that.setTotalFee(fee);
   },
   all: function(e) {
@@ -277,31 +277,31 @@ Page({
       }
     } else {
       check = true;
-      for (var i = 0; i < items.length; i++) {
-        if (items[i].is_enough){
-          items[i].selected = true;
+      for (var a = 0; a < items.length; a++) {
+        if (items[a].is_enough){
+          items[a].selected = true;
         }
       }
     }
     var fee = 0;
     for (var i = 0; i < items.length; i++) {
       if (items[i].selected) {
-        fee = that.returnFee(fee, items[i].product_count, items[i].discount_amount);
+        fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
       }
     }
     that.setData({
       check: check,
       items: items
-    })
+    });
     that.setTotalFee(fee); //赋值合计金额
   },
 
-  returnFee: function (fee, product_count, discount_amount) {
+  returnFee: function (fee, product_count, frozeno_discount_amount) {
     // var discount = wx.getStorageSync('discount') ? wx.getStorageSync('discount'):0;
     // if (discount){
-    // fee = fee + (product_count * discount_amount) * (discount/10);
+    // fee = fee + (product_count * frozeno_discount_amount) * (discount/10);
     // }else{
-    fee = fee + (product_count * discount_amount);
+    fee = fee + (product_count * frozeno_discount_amount);
     // }
     return fee;
   },
@@ -502,6 +502,5 @@ Page({
   //       totalfee: that.data.totalfeeOld - that.data.ticketList[index].ticket_amount
   //     });
   //   }
-
   // },
 })

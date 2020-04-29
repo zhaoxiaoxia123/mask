@@ -25,8 +25,7 @@ Page({
     transform: [],
     point:0,
     growth:0,
-    shopping_count:0
-
+    shoppingCount:0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -41,6 +40,7 @@ Page({
       product_id: that.data.productId,
       // customer_id: wx.getStorageSync("customerId")
     };
+    // var param = '/p005?product_id='+that.data.productId;
     that.getProductDetail(param);
 
     setTimeout(function(){
@@ -49,16 +49,20 @@ Page({
         page_code: 'p017',
         code: ''
       };
+      // var transformParam = '/p017?code=';
       that.getTransform(transformParam);
     },1000);
 
-    //查询购物车个数
-    var shoppingParam = {
-      page_code: 'p012',
-      type: 'shopping_count',
-      customer_id: wx.getStorageSync("customerId")
-    };
-    that.getShoppingCount(shoppingParam);
+    if (wx.getStorageSync("customerId")){
+      //查询购物车个数
+      var shoppingParam = {
+        page_code: 'p012',
+        type: 'shopping_count',
+        customer_id: wx.getStorageSync("customerId")
+      };
+      // var shoppingParam = '/p012?type=shopping_count&customer_id='+wx.getStorageSync("customerId");
+      that.getShoppingCount(shoppingParam);
+    }
   },
 
   /**
@@ -107,7 +111,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
   },
 
   getTransform: function (param) {
@@ -123,28 +126,27 @@ Page({
           transform: datas
         });
         that.sumValue();
-
       }
     });
   },
 
-sumValue:function(){
-  let datas = that.data.transform;
-  if (datas) {
-    for (var i = 0; i < datas.length; i++) {
-      console.log(that.data.items);
-      if (datas[i].code == "jf01") {
-        that.setData({
-          point: parseInt(that.data.items.discount_amount / (datas[i].value_from / datas[i].value_to))
-        });
-      } else if (datas[i].code == "czz01") {
-        that.setData({
-          growth: parseFloat(that.data.items.discount_amount / (datas[i].value_from / datas[i].value_to)).toFixed(2)
-        });
+  sumValue:function(){
+    var datas = that.data.transform;
+    if (datas) {
+      for (var i = 0; i < datas.length; i++) {
+        console.log(that.data.items);
+        if (datas[i].code == "jf01") {
+          that.setData({
+            point: parseInt(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to))
+          });
+        } else if (datas[i].code == "czz01") {
+          that.setData({
+            growth: parseFloat(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to)).toFixed(2)
+          });
+        }
       }
     }
-  }
-},
+  },
 
   getShoppingCount: function (param){
     wx.request({
@@ -156,7 +158,7 @@ sumValue:function(){
       success: function (res) {
         var datas = res.data.data;
         that.setData({
-          shopping_count: datas.count
+          shoppingCount: datas.count
         });
       }
     });
@@ -168,8 +170,7 @@ sumValue:function(){
     var flexwindow;
     if (this.data.flexwindow==true){
       flexwindow=false;
-    }
-    else{
+    } else{
       flexwindow = true;
     }
     that.setData({
@@ -178,8 +179,8 @@ sumValue:function(){
   },
   // 减按钮控件
   jianFn: function (e) {
-    let self = this
-    let count = this.data.count;
+    var self = this
+    var count = this.data.count;
     if (count <= 1) {
       count = 1;
       self.setData({
@@ -206,10 +207,10 @@ sumValue:function(){
   },
   // 选中改变颜色
   selected: function (e) {
-    let self = this
-    let id = e.currentTarget.dataset.id;
+    var self = this
+    var id = e.currentTarget.dataset.id;
     
-    let border=self.data.border;
+    var border=self.data.border;
     border=!border;
     console.log("---", border)
       self.setData({
@@ -217,8 +218,8 @@ sumValue:function(){
       })
   },
   close: function (e) {
-    let self = this
-    let flexwindow=false;
+    var self = this
+    var flexwindow=false;
     
     self.setData({
       flexwindow: flexwindow
@@ -292,20 +293,29 @@ sumValue:function(){
             type: 'shopping_count',
             customer_id: wx.getStorageSync("customerId")
           };
-          that.getShoppingCount(shoppingParam);
+            // var shoppingParam = '/p012?type=shopping_count&customer_id='+wx.getStorageSync("customerId");
+            that.getShoppingCount(shoppingParam);
 
-          that.setData({
-            flexwindow: false
-          });
-          // wx.navigateBack({
-          //   delta:1
-          // })
+            that.setData({
+                flexwindow: false
+            });
+            // wx.navigateBack({
+            //   delta:1
+            // })
         }
       }
     })
     }else{
-      wx.switchTab({
-        url: '../my/my',
+      wx.showModal({
+        title: '提示',
+        content: '请先登录!',
+        showCancel: false,
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '../my/my',
+          });
+        }
       })
     }
   },

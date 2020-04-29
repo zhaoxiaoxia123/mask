@@ -24,16 +24,16 @@
       <open-data class="wx-image_SC1alK" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
       <view class='content'>
         <open-data class='size-titleone col-title' type="userNickName"></open-data>
-        <view class='phone'>{{items.phone?items.phone:''}}</view>
+        <view class='phone'>{{items.c_phone?items.c_phone:''}}</view>
       </view>
     </view>
 
     <view class='parent-right' bindtap="goMember" wx:if="{{!canGetUserInfo}}">
       <view class='money-grade'>
         <!-- 按会员等级进行显示(注册用户)不显示图标、（VIP）、（SVIP）、（钻卡） -->
-        <image class="icon32 pdr10" src="../img/drill_golden@2x.png" wx:if="{{items.level == 4}}"></image>
-        <image class="icon32 pdr10" src="../img/svip_golden@2x.png" wx:if="{{items.level == 3}}"></image>
-        <image class="icon32 pdr10" src="../img/vip_golden@2x.png" wx:if="{{items.level == 2}}"></image>
+        <image class="icon32 pdr10" src="../img/drill_golden@2x.png" wx:if="{{items.frozeno_level == 4}}"></image>
+        <image class="icon32 pdr10" src="../img/svip_golden@2x.png" wx:if="{{items.frozeno_level == 3}}"></image>
+        <image class="icon32 pdr10" src="../img/vip_golden@2x.png" wx:if="{{items.frozeno_level == 2}}"></image>
       </view>
       <view class='money-grade'>
         <text class='money-grade-text'>{{items.level_name}}</text>
