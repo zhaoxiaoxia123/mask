@@ -31,6 +31,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    that.setData({
+      ticketList: [],
+      isLast: false
+    });
     if (wx.getStorageSync('customerId')) {
       var param = {
         page_code: "p013",
@@ -38,6 +42,7 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
+      // var param = '/p013?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getTicketList(param);
     }
   },
@@ -73,6 +78,7 @@ Page({
           offset: (that.data.offset - 1) * that.data.pageCount,
           page: that.data.pageCount
         };
+        // var param = '/p013?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
         that.getTicketList(param);
       }
     }
@@ -86,9 +92,15 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        var datas = res.data.data;
         that.setData({
-          ticketList: res.data.data
-        })
+          ticketList: that.data.ticketList.concat(datas)
+        });
+        if (datas.length <= 0 || datas.length < that.data.pageCount) {
+          that.setData({
+            isLast: true
+          });
+        }
       }
     });
   },

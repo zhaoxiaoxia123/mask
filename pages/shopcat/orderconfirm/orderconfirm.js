@@ -18,7 +18,8 @@ Page({
     usingPoint: 0, //使用积分值
     usingTicketAmount: 0, //使用优惠券的抵扣值
     isUsePoint: false,
-    isCheckTicket: 9999 //存储选择卡券索引  9999为不用卡券
+    isCheckTicket: 9999, //存储选择卡券索引  9999为不用卡券
+    isCheckExpressCompany: 9999 //存储选择快递  9999为随机
   },
 
   /**
@@ -68,6 +69,7 @@ Page({
         type: "mainCustomer",
         customer_id: wx.getStorageSync('customerId')
       };
+      // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
     }
     //查询积分是否可抵用
@@ -75,15 +77,17 @@ Page({
       page_code: 'p017',
       code: 'jf01'
     };
+    // var transformParam = '/p017?code=jf01';
     that.getTransform(transformParam);
 
     //获取商品信息
-    var param = {
+    var param_p = {
       page_code: 'p005',
       type: "confirmProduct",
       products: that.data.products
     };
-    that.getProducts(param);
+    // var param_p = '/p005?type=confirmProduct&products='+that.data.products;
+    that.getProducts(param_p);
     that.getAddress(); //获取用户设置的默认地址
     that.getTicketList(); //获取卡券列表
   },
@@ -100,8 +104,8 @@ Page({
    */
   onUnload: function() {
     console.log('onUnload');
-    let pages = getCurrentPages();  // 当前页的数据，可以输出来看看有什么东西
-    let prevPage = pages[pages.length - 2];  // 上一页的数据，也可以输出来看看有什么东西
+    var pages = getCurrentPages();  // 当前页的数据，可以输出来看看有什么东西
+    var prevPage = pages[pages.length - 2];  // 上一页的数据，也可以输出来看看有什么东西
     /** 设置数据 这里面的 value 是上一页你想被携带过去的数据，后面是本方法里你得到的数据，我这里是detail.value，根据自己实际情况设置 */
     prevPage.setData({
       isBack: true,
@@ -134,21 +138,24 @@ Page({
     if (e.target.dataset.type == 'isUsePoint') {
       that.setData({
         isUsePoint: !that.data.isUsePoint
-      })
+      });
       that.sumUsingPoint(); //计算可用的积分数,并抵扣后获得实付款
     } else if (e.target.dataset.type == 'isCheckTicket') {
       that.setData({
         isCheckTicket: (e.target.dataset.v == that.data.isCheckTicket ? 9999 : e.target.dataset.v)
       })
+    } else if (e.target.dataset.type == 'isCheckExpressCompany') { //配送方式改变
+      that.setData({
+        isCheckExpressCompany: (e.target.dataset.v == that.data.isCheckExpressCompany ? 9999 : e.target.dataset.v)
+      })
     }
-
-
   },
 
   //添加默认收货地址
   goAddress: function() {
     wx.navigateTo({
-      url: '/pages/my/address/addressdetail/addressdetail' //?products=' + that.data.products,
+      // url: '/pages/my/address/addressdetail/addressdetail' //?products=' + that.data.products,
+      url: '/pages/my/address/address?come=order' //?products=' + that.data.products,
     })
   },
 
@@ -182,7 +189,6 @@ Page({
         })
       }
     });
-
   },
 
   getProducts: function(param) { //读取商品信息
@@ -200,29 +206,27 @@ Page({
         })
         setTimeout(function() {
           that.sumProductAmount(that.data.items, that.data.customerInfo);
-        }, 1000)
-
+        }, 1000);
       }
     });
   },
 
   //计算商品总价
   sumProductAmount: function(pInfo, cInfo) {
-    console.log('pInfo:----');
-    console.log(pInfo);
+    // console.log('pInfo:----');
+    // console.log(pInfo);
     var productAmount = 0;
     for (var i = 0; i < pInfo.length; i++) {
-      console.log('ii:----');
-      console.log((parseFloat(pInfo[i]['discount_amount']) * pInfo[i]['join_product_count']));
-      productAmount += (parseFloat(pInfo[i]['discount_amount']) * pInfo[i]['join_product_count']);
-      console.log('productAmount:----');
-      console.log(productAmount);
+      // console.log('ii:----');
+      // console.log((parseFloat(pInfo[i]['discount_amount']) * pInfo[i]['join_product_count']));
+      productAmount += (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+      // console.log('productAmount:----');
+      // console.log(productAmount);
     }
     //商品总价会员折扣后的价格
     var discountAmount = productAmount - (cInfo.discount != 0 ? (productAmount * (cInfo.discount / 100)).toFixed(2) : 0);
-
-    console.log('discountAmount:----');
-    console.log(discountAmount);
+    // console.log('discountAmount:----');
+    // console.log(discountAmount);
     //商品总价
     that.setData({
       productAmount: productAmount,
@@ -240,17 +244,17 @@ Page({
 
     var discountAmount = tPayAmount; //that.data.discountAmount;
     var productAmount = that.data.productAmount;
-    console.log(productAmount);
-    console.log(discountAmount);
+    // console.log(productAmount);
+    // console.log(discountAmount);
     var payAmount = 0; //实付款
-    console.log(cInfo.point);
-    console.log(tInfo.type == 2);
+    // console.log(cInfo.point);
+    // console.log(tInfo.type == 2);
     if (cInfo.point > 0 && that.data.isUsePoint) {
       if (tInfo.type == 2) { //若满减
-        console.log("若满减:----");
-        console.log(productAmount);
-        console.log(productAmount);
-        console.log(productAmount >= tInfo.satisfy_amount);
+        // console.log("若满减:----");
+        // console.log(productAmount);
+        // console.log(productAmount);
+        // console.log(productAmount >= tInfo.satisfy_amount);
         if (productAmount >= tInfo.satisfy_amount) { //商品总价是否大于等于满减金额设置
           that.sumAmount(cInfo.point, tInfo.rate, discountAmount);
         } else { //小于：则不可使用积分。
@@ -276,21 +280,27 @@ Page({
     var discountAmount = that.data.discountAmount; //商品会员折扣后的总价
     var tIndex = that.data.isCheckTicket - 1; //选中卡券索引
     var usingTicketAmount = 0;
-    console.log('tIndex:----');
-    console.log(tIndex);
+    // console.log('tIndex:----');
+    // console.log(tIndex);
     if (tIndex != 9998) { //上面索引减了个1
       var tList = that.data.ticketList; //卡券列表
       var payAmount = 0;
-      console.log('sumCheckTicket:----');
-      console.log(tList);
-      console.log(tIndex);
+      // console.log('sumCheckTicket:----');
+      // console.log(tList);
+      // console.log(tIndex);
       if (tList[tIndex]['ticket_type'] == 1) { //通用
         usingTicketAmount = tList[tIndex]['ticket_amount'];
         payAmount = discountAmount - tList[tIndex]['ticket_amount'];
+        if (payAmount < 0){
+          payAmount = 0;
+        }
       } else if (tList[tIndex]['ticket_type'] == 2) { //满减
         if (productAmount >= tList[tIndex]['satisfy_amount']) {
           usingTicketAmount = tList[tIndex]['ticket_amount'];
           payAmount = discountAmount - tList[tIndex]['ticket_amount'];
+          if (payAmount < 0) {
+            payAmount = 0;
+          }
         } else {
           payAmount = discountAmount;
         }
@@ -316,8 +326,8 @@ Page({
   sumAmount: function(point, rate, discountAmount) {
     //可抵用积分数
     var usingPoint = (discountAmount * (parseFloat(rate) / 100));
-    console.log('sumAmount:----------');
-    console.log(parseFloat(point) >= parseFloat(usingPoint));
+    // console.log('sumAmount:----------');
+    // console.log(parseFloat(point) >= parseFloat(usingPoint));
     if (parseFloat(point) >= parseFloat(usingPoint)) { //用户积分大于等于可抵用积分数
       that.setData({
         usingPoint: usingPoint,
@@ -330,11 +340,13 @@ Page({
       });
     }
 
-    console.log('payAmount:----------');
-    console.log(that.data.payAmount);
+    // console.log('payAmount:----------');
+    // console.log(that.data.payAmount);
   },
 
   getAddress: function() {
+    if (wx.getStorageSync('customerId')){
+    // var param = '/p002?is_default=1&customer_id='+wx.getStorageSync('customerId');
     wx.request({
       url: app.globalData.domainUrl,
       data: {
@@ -355,8 +367,10 @@ Page({
         }
       }
     })
+    }
   },
   getTicketList: function() { //获取有效卡券列表
+    if (wx.getStorageSync('customerId')){
     //获取卡券列表
     var param_t = {
       page_code: 'p013',
@@ -364,6 +378,7 @@ Page({
       offset: 0,
       page: 20
     };
+    // var param_t = '/p013?offset=0&page=20&customer_id='+wx.getStorageSync('customerId');
     wx.request({
       url: app.globalData.domainUrl,
       data: param_t,
@@ -377,11 +392,12 @@ Page({
         });
       }
     });
-
+    }
   },
 
 //提交订单
   confirmPay:function(){
+    if (wx.getStorageSync('customerId')){
     var ticket_id = that.data.isCheckTicket == 9999 ? 0 : that.data.ticketList[that.data.isCheckTicket - 1]['ticket_id'];
     wx.request({
       url: app.globalData.domainUrl,
@@ -391,9 +407,10 @@ Page({
         type:'shopping_by',
         products:that.data.products,//JSON.stringify(products),
         ticket_id: ticket_id,
+        express_company: that.data.isCheckExpressCompany,
         customer_addr_id: that.data.address.customer_addr_id,
         use_point: that.data.usingPoint,
-        order_type: 1,//购买订单
+        // order_type: 1,//购买订单
         customer_id: wx.getStorageSync('customerId'),
         amount: that.data.payAmount,
       },
@@ -415,6 +432,12 @@ Page({
         }
       }
     })
+    }else{
+      wx.showToast({
+        icon: "none",
+        title: "请先登录"
+      });
+    }
   },
 
 // submitSettlementGenerateOrder: function(){  //提交结算，生成多商品同时结算的订单信息，
@@ -502,7 +525,7 @@ Page({
   //选择优惠券
   coupon: function(e) {
     var couponflexwindow;
-    if (that.data.couponflexwindow == true) {
+    if(that.data.couponflexwindow) {
       couponflexwindow = false;
     } else {
       couponflexwindow = true;
@@ -512,7 +535,7 @@ Page({
     });
   },
   close: function(e) {
-    let flexwindow = false;
+    var flexwindow = false;
 
     that.setData({
       flexwindow: flexwindow
@@ -521,14 +544,12 @@ Page({
 
   //卡券弹框关闭
   close1: function(e) {
-    let couponflexwindow = false;
+    var couponflexwindow = false;
     that.setData({
       couponflexwindow: couponflexwindow
-    })
+    });
     //计算实付款
     that.sumUsingPoint();
   },
-
-
 
 })

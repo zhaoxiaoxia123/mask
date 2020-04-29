@@ -39,16 +39,18 @@ Page({
         type: "mainCustomer",
         customer_id: wx.getStorageSync('customerId'),
       };
+      // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
       
-      var param = {
+      var paramg = {
         page_code: 'p004',
         type: "growthList",
         customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-      that.getGrowthList(param);
+      // var paramg = '/p004?type=growthList&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
+      that.getGrowthList(paramg);
     }
   },
 
@@ -90,6 +92,7 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
+      // var param_p = '/p004?type=growthList&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getGrowthList(param_p);
     }
 
@@ -125,13 +128,10 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        var datas = res.data.data
+        var datas = res.data.data;
         that.setData({
           items: that.data.items.concat(datas)
-        })
-
-        console.log(that.data.items);
-        console.log(that.data.items.log);
+        });
         if (datas.length <= 0 || datas.length < that.data.pageCount) {
           that.setData({
             isLast: true

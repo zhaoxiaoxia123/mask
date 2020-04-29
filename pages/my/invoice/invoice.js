@@ -2,12 +2,10 @@
 var that;
 var app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-
     indicatorDots: true,
     indicatorColor: "#000000",
     indicatorActiveColor: "#b7aa00",
@@ -15,29 +13,13 @@ Page({
     interval: 3000,
     duration: 500,
     circular: true,
-    items: [
-      {
-        id: 0,
-        name: '发票名称1',
-        phone: '18739149555',
-        num: '3423432532523534',
-        checkbox: true,
-      },
-      {
-        id: 1,
-        name: '发票名称2',
-        phone: '18739149555',
-        num: '3423432532523539',
-        checkbox: false,
-      }
-    ],
+    items: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     that = this;
   },
 
@@ -52,7 +34,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
     that.getInvoiceList();
   },
 
@@ -91,7 +72,9 @@ Page({
   },
 
   getInvoiceList: function () {
-    wx.request({
+      // var param = '/p006?customer_id='+ wx.getStorageSync('customerId');
+    if (wx.getStorageSync('customerId')){
+      wx.request({
       url: app.globalData.domainUrl,
       data: {
         page_code: "p006",
@@ -108,6 +91,13 @@ Page({
         });
       }
     })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请授权登录后再查看列表',
+        showCancel: false
+      });
+    }
   },
   addInvoice: function (e) {
     console.log(e)
@@ -129,7 +119,6 @@ Page({
         type: type,
         invoice_id: id
       };
-      console.log(param);
       wx.request({
         url: app.globalData.domainUrl,
         method: "POST",

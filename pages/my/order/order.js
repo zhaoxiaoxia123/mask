@@ -49,17 +49,18 @@ Page({
       items: [],
       isLast: false
     });
-
+    if (wx.getStorageSync('customerId')){
     var param = {
       page_code: 'p008',
       type: "myOrder",
       customer_id: wx.getStorageSync('customerId'),
-      order_type: 1,//购买订单
       order_state: that.data.order_state,
       offset: (that.data.offset - 1) * that.data.pageCount,
       page: that.data.pageCount
     };
+    // var param = '/p008?type=myOrder&order_state='+that.data.order_state+'&customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
     that.getOrderList(param);
+    }
   },
 
   /**
@@ -95,11 +96,11 @@ Page({
         page_code: 'p008',
         type: "myOrder",
         customer_id: wx.getStorageSync('customerId'),
-        order_type: 1,//购买订单
         order_state: that.data.order_state,//默认访问待付款
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
+      // var param = '/p008?type=myOrder&order_state='+that.data.order_state+'&customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getOrderList(param);
     }
   },
@@ -126,10 +127,8 @@ Page({
     });
   },
   close: function (e) {
-    let self = this
-    let flexwindow = false;
-
-    self.setData({
+    var flexwindow = false;
+    that.setData({
       flexwindow: flexwindow
     })
   },
@@ -158,8 +157,6 @@ Page({
       }
     });
   },
-
-
   
   // tab切换
   clickTab: function (e) {
@@ -176,16 +173,18 @@ Page({
         isLast:false,
         items:[]
       })
+      if (wx.getStorageSync('customerId')){
       var param = {
         page_code: 'p008',
         type: "myOrder",
         customer_id: wx.getStorageSync('customerId'),
-        order_type: 1,//购买订单
         order_state: that.data.order_state,//默认访问待付款
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
+      // var param = '/p008?type=myOrder&order_state='+that.data.order_state+'&customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getOrderList(param);
+      }
     }
   },
   orderdetail: function (e) {
@@ -196,15 +195,13 @@ Page({
   //取消订单
   cancelOrder: function (e) {
     var order_id = e.currentTarget.dataset.id;
-    var order_type = e.currentTarget.dataset.type;
     wx.request({
       url: app.globalData.domainUrl,
       method: "POST",
       data: {
         page_code: 'p008',
         type: 'cancel',
-        order_id: order_id,
-        order_type: order_type
+        order_id: order_id
       },
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -225,6 +222,29 @@ Page({
 
   },
   submitOk: function(e){ //确认收货
-
+    var order_id = e.currentTarget.dataset.id;
+    wx.request({
+      url: app.globalData.domainUrl,
+      method: "POST",
+      data: {
+        page_code: 'p008',
+        type: 'receive',
+        order_id: order_id
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res);
+        var datas = res.data.data;
+        if (datas) {
+          wx.showToast({
+            title: res.data.message
+          });
+          that.onShow();
+        }
+      }
+    })
   },
 })
+

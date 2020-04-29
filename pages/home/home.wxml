@@ -4,7 +4,7 @@
     <!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名-->
     <block wx:for="{{swipers}}" wx:key="*this">
       <swiper-item>
-        <image src="{{item.image_url}}" class="slide-image" />
+        <image src="{{domainName}}{{item.b_image_url}}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
@@ -19,19 +19,19 @@
 
       <view class='list-right'>
         <view>
-          <view class='right-text'>{{item.product_name}}</view>
+          <view class='right-text'>{{item.category_desc}}</view>
         </view>
 
         <view>
-          <view class='abstract'>{{item.introduction?item.introduction:''}}</view>
+          <view class='abstract'>{{item.frozeno_introduction?item.frozeno_introduction:''}}</view>
         </view>
 
         <view class='column'>
-          <view class='sale'>{{item.discount_amount}}</view>
-          <view class='money'>{{item.amount}}</view>
+          <view class='sale'>{{item.frozeno_discount_amount}}</view>
+          <view class='money'>{{item.frozeno_amount}}</view>
         </view>
         <view class='list-button'>
-        <!-- <view class='list-button' data-id="{{item.product_id}}" data-count="1" bindtap="goConfirm"> -->
+        <!-- <view class='list-button' data-id="{{item.category_id}}" data-count="1" bindtap="goConfirm"> -->
           <text>立即购买</text>
         </view>
       </view>

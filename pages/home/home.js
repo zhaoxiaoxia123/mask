@@ -17,8 +17,12 @@ Page({
     circular: true,
     offset: 1,
     pageCount: 2,
+    categoryType: 50, //冻龄智美商品类型
+    isShowApp: 1,  //是否显示在商城
     isLast:false,
-    items: []
+    items: [],
+    type: 9,   // 9:广告
+    domainName: app.globalData.domainName
   },
 
   /**
@@ -48,9 +52,12 @@ Page({
     //商品列表
     var param_p = {
       page_code:"p005",
+      category_type: that.data.categoryType,
+      is_show_app: that.data.isShowApp,
       offset: (that.data.offset - 1) * that.data.pageCount,
       page: that.data.pageCount
     };
+    // var param_p = '?page_code=p005&offset='+(that.data.offset - 1) * that.data.pageCount+'&page='+that.data.pageCount;
     that.getProductList(param_p);
 
     //广告图片列表
@@ -109,9 +116,12 @@ Page({
       //商品列表
       var param_p = {
         page_code: "p005",
+        category_type: that.data.categoryType,
+        is_show_app: that.data.isShowApp,
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
+      // var param_p = '/p005?offset='+(that.data.offset - 1) * that.data.pageCount+'&page='+that.data.pageCount;
       that.getProductList(param_p);
     }
     
@@ -132,7 +142,8 @@ Page({
     wx.request({
       url: app.globalData.domainUrl,
       data: {
-        page_code:'p001'
+        page_code:'p001',
+        type:that.data.type
       },
       header: {
         'content-type': "application/json"
@@ -151,8 +162,7 @@ Page({
    * 点击进入详情页
    * ***/
   toDetail:function(e){
-    console.log(e)
-    var product_id = e.currentTarget.dataset.obj.product_id;
+    var product_id = e.currentTarget.dataset.obj.category_id;
     // console.log(product_id)
     // wx.navigateTo({
     //   url: '../detail/detail?product_id=' + product_id,

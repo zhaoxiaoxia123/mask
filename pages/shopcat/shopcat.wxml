@@ -16,16 +16,14 @@
       </view>
       <view class='list-right'>
         <view class='column'>
-
-          <view class='right-text'>{{item.product_name}}</view>
+          <view class='right-text'>{{item.category_desc}}</view>
           <image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image>
         </view>
-
         <!-- <view class='right-text'>{{item.product_name}}</view> -->
         <view>
           <view class='total'>库存：{{item.stock}}件</view>
           <view class='column mt'>
-            <view class='sale'>￥{{item.discount_amount}}</view>
+            <view class='sale'>￥{{item.frozeno_discount_amount}}</view>
             <view class='column-number'>
               <view class='item-number'>
                 <image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>

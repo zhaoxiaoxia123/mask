@@ -1,7 +1,7 @@
 <view>
   <view class='lists'>
 
-    <view class='goods'>
+    <view class='goods' bindtap="goAddress">
       <view class='goods-content'>
         <view class='goods-icon'>
           <image class='icon58' src='../../img/address.png'></image>
@@ -9,7 +9,7 @@
 
         <!-- 没有默认的收货地址时显示 -->
         <view class='goods-text' wx:if="{{address.length <= 0}}">
-          <view class='size-titletwo' bindtap="goAddress">请先添加收货地址</view>
+          <view class='size-titletwo'>请先添加收货地址</view>
         </view>
 
         <view class='goods-text'>
@@ -23,10 +23,7 @@
       <view class='goods-image'>
         <image src='../../img/dv.png'></image>
       </view>
-
     </view>
-
-
     <view class='order'>
       <text>订单</text>
     </view>
@@ -36,10 +33,10 @@
         <image src='{{item.product_image[0].image_url}}'></image>
       </view>
       <view class='list-right'>
-        <view class='right-text'>{{item.product_name}}</view>
-        <view class='sale'>￥{{item.discount_amount}}</view>
+        <view class='right-text'>{{item.category_desc}}</view>
+        <view class='sale'>￥{{item.frozeno_discount_amount}}</view>
         <view class='item'>
-          <view class='abstract'>{{item.introduction}}</view>
+          <view class='abstract'>{{item.frozeno_introduction}}</view>
           <view class='piece'>× {{item.join_product_count}}</view>
         </view>
         <view>
@@ -56,7 +53,7 @@
           <text>配送方式</text>
         </view>
         <view class='coupon-right'>
-          <text>快递 免邮</text>
+          <text>{{isCheckExpressCompany==1?'顺丰':'普通快递'}} 免邮</text>
           <image src='../../img/dv.png'></image>
         </view>
       </view>
@@ -87,10 +84,10 @@
     <view class='coupon'>
       <view class='coupon-wap'>
         <view class='coupon-left'>
-          <text wx:if="{{customerInfo.point>=usingPoint && customerInfo.point!=0}}">积分共{{customerInfo.point}},可用{{usingPoint}}，抵¥{{usingPoint}}</text>
-          <text wx:if="{{customerInfo.point==0 || product_amount < tInfo.satisfy_amount}}">不可用积分。</text>
+          <text wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">积分共{{customerInfo.frozeno_point}},可用{{usingPoint}}，抵¥{{usingPoint}}</text>
+          <text wx:if="{{customerInfo.frozeno_point==0 || product_amount < tInfo.satisfy_amount}}">不可用积分。</text>
         </view>
-        <view class='coupon-right' wx:if="{{customerInfo.point>=usingPoint && customerInfo.point!=0}}">
+        <view class='coupon-right' wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">
           <checkbox-group>
             <label class="checkbox">
               <checkbox color='#333' catchtap="checkboxChange" data-type="isUsePoint" checked="{{isUsePoint == 1}}" />
@@ -137,13 +134,32 @@
           </view>
         </view>
       </view>
-
-      <view class='column'>
+      <!-- <view class='column'>
         <view>快递 免邮</view>
         <view class='item'>
           <checkbox-group>
             <label class="checkbox">
-              <checkbox color='#333' checked="checked" />
+              <checkbox color='#333' checked="checked"/>
+            </label>
+          </checkbox-group>
+        </view>
+      </view> -->
+      <view class='column'>
+        <view>顺丰</view>
+        <view class='item'>
+          <checkbox-group>
+            <label class="checkbox">
+              <checkbox color='#333' catchtap="checkboxChange" data-v="1" data-type="isCheckExpressCompany" checked="{{isCheckExpressCompany == 1}}"/>
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class='column'>
+        <view>普通快递</view>
+        <view class='item'>
+          <checkbox-group>
+            <label class="checkbox">
+              <checkbox color='#333' catchtap="checkboxChange" data-v="2" data-type="isCheckExpressCompany" checked="{{isCheckExpressCompany == 2}}" />
             </label>
           </checkbox-group>
         </view>

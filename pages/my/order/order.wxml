@@ -31,10 +31,10 @@
           <!--bindtap绑定事件 待付款-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.order_code}}</view>
-              <view class='status' wx:if="{{item.order_state == 1}}">待付款</view>
+              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
             </view>
-            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.order_id}}" bindtap='orderdetail'>
+            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.o_id}}" bindtap='orderdetail'>
               <view class='list-left'>
                 <image src='{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
               </view>
@@ -42,7 +42,7 @@
               <view class='list-right size-titleone '>
 
                 <view class='column '>
-                  <view class='right-text'>{{item1.product_name}}</view>
+                  <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
 
                 <view class='column'>
@@ -51,7 +51,7 @@
 
                 <view class='column col-content'>
                   <view class='item'>
-                    <view class='abstract'>{{item1.introduction}}</view>
+                    <view class='abstract'>{{item1.frozeno_introduction}}</view>
                     <view class='piece'>× {{item1.product_count}}</view>
                   </view>
                 </view>
@@ -61,15 +61,14 @@
 
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.order_amount}}</text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
 
             <view class='push-button'>
-              <view class='push' data-id="{{item.order_id}}" data-type="1" bindtap='cancelOrder'>取消订单</view>
-              <view class='push push-active' data-id="{{item.order_id}}" bindtap='orderdetail'>付款</view>
+              <view class='push' data-id="{{item.o_id}}" bindtap='cancelOrder'>取消订单</view>
+              <view class='push push-active' data-id="{{item.o_id}}" bindtap='orderdetail'>付款</view>
             </view>
-
           </view>
         </view>
       </scroll-view>
@@ -88,8 +87,8 @@
           <!--bindtap绑定事件 待发货-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.order_code}}</view>
-              <view class='status' wx:if="{{item.order_state == 1}}">待付款</view>
+              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
               <view class='list-left'>
@@ -99,7 +98,7 @@
               <view class='list-right size-titleone '>
 
                 <view class='column '>
-                  <view class='right-text'>{{item1.product_name}}</view>
+                  <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
 
                 <view class='column'>
@@ -108,7 +107,7 @@
 
                 <view class='column col-content'>
                   <view class='item'>
-                    <view class='abstract'>{{item1.introduction}}</view>
+                    <view class='abstract'>{{item1.frozeno_introduction}}</view>
                     <view class='piece'>× {{item1.product_count}}</view>
                   </view>
                 </view>
@@ -118,13 +117,13 @@
 
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.order_amount}}</text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
 
             <view class='push-button'>
-              <view class='push' data-id="{{item.order_id}}" data-type="2" bindtap='cancelOrder'>取消订单</view>
-              <view class='push push-active' data-id="{{item.order_id}}" bindtap='submitMessage'>提醒发货</view>
+              <view class='push' data-id="{{item.o_id}}" data-type="2" bindtap='cancelOrder'>取消订单</view>
+              <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
             </view>
 
           </view>
@@ -146,8 +145,8 @@
           <!--bindtap绑定事件 待收货-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.order_code}}</view>
-              <view class='status' wx:if="{{item.order_state == 1}}">待付款</view>
+              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
               <view class='list-left'>
@@ -157,7 +156,7 @@
               <view class='list-right size-titleone '>
 
                 <view class='column '>
-                  <view class='right-text'>{{item1.product_name}}</view>
+                  <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
 
                 <view class='column'>
@@ -166,7 +165,7 @@
 
                 <view class='column col-content'>
                   <view class='item'>
-                    <view class='abstract'>{{item1.introduction}}</view>
+                    <view class='abstract'>{{item1.frozeno_introduction}}</view>
                     <view class='piece'>× {{item1.product_count}}</view>
                   </view>
                 </view>
@@ -176,12 +175,12 @@
 
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.order_amount}}</text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
             <view class='push-button'>
-              <view class='push' bindtap="logistics" data-id="{{item.order_id}}">查看物流</view>
-              <view class='push push-active' data-id="{{item.order_id}}" bindtap='submitOk'>确认收货</view>
+              <view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view>
+              <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk'>确认收货</view>
             </view>
 
           </view>
@@ -202,8 +201,8 @@
           <!--bindtap绑定事件 交易成功或失败-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.order_code}}</view>
-              <view class='status' wx:if="{{item.order_state == 1}}">待付款</view>
+              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
               <view class='list-left'>
@@ -213,7 +212,7 @@
               <view class='list-right size-titleone '>
 
                 <view class='column '>
-                  <view class='right-text'>{{item1.product_name}}</view>
+                  <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
 
                 <view class='column'>
@@ -222,7 +221,7 @@
 
                 <view class='column col-content'>
                   <view class='item'>
-                    <view class='abstract'>{{item1.introduction}}</view>
+                    <view class='abstract'>{{item1.frozeno_introduction}}</view>
                     <view class='piece'>× {{item1.product_count}}</view>
                   </view>
                 </view>
@@ -232,7 +231,7 @@
 
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.order_amount}}</text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
           </view>
@@ -356,26 +355,12 @@
                       <text>商品已经下单</text>
                     </view>
                   </view>
-
-
                 </view>
-
               </view>
-
             </view>
-
           </scroll-view>
-
-
         </view>
-
-
-
-
       </view>
     </view>
-
-
   </view>
-
 </view>

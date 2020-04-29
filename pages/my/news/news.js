@@ -11,7 +11,8 @@ Page({
     offset: 1,
     pageCount: 20,
     isLast: false,
-    msgList: []
+    msgList: [],
+    type: '6,7'  //6：系统消息 7：冻龄智美通知
   },
 
   /**
@@ -33,14 +34,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
-    var param = {
-      page_code:'p007',
-      customer_id: wx.getStorageSync('customerId'),
-      offset: (that.data.offset - 1) * that.data.pageCount,
-      page: that.data.pageCount
-    };
+    if (wx.getStorageSync('customerId')){
+      var param = {
+        page_code: 'p001',
+        type: that.data.type,
+        customer_id: wx.getStorageSync('customerId'),
+        offset: (that.data.offset - 1) * that.data.pageCount,
+        page: that.data.pageCount
+      };
+    // var param = '/p007?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
     that.getMsgList(param);
+    }
   },
 
   /**
@@ -81,6 +85,7 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
+      // var param = '/p007?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getMsgList(param);
     }
   },
@@ -112,7 +117,7 @@ Page({
       return false;
     } else {
       that.setData({
-        currentTab: e.target.dataset.current,
+        currentTab: e.target.dataset.current
       })
     }
   },

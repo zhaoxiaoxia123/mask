@@ -18,6 +18,7 @@ Page({
     var param = {
       page_code: "p016"
     };
+    // var param = '/p016';
     that.getAgreement(param);
   },
 
@@ -78,7 +79,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        var datas = res.data.data
+        var datas = res.data.data;
         that.setData({
           items: datas
         })

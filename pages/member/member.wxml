@@ -28,9 +28,9 @@
 
             <view class='money-grade' bindtap='grade'>
               <!-- 按会员等级进行显示(普通用户)不显示图标、（VIP）、（SVIP）、（钻卡） -->
-              <image wx:if="{{items.level == 2}}" class="icon32 pdr10" src="../img/drill_golden@2x.png"></image>
-              <image wx:if="{{items.level == 3}}" class="icon32 pdr10" src="../img/svip_golden@2x.png"></image>
-              <image wx:if="{{items.level == 4}}" class="icon32 pdr10" src="../img/vip_golden@2x.png"></image>
+              <image wx:if="{{items.frozeno_level == 2}}" class="icon32 pdr10" src="../img/drill_golden@2x.png"></image>
+              <image wx:if="{{items.frozeno_level == 3}}" class="icon32 pdr10" src="../img/svip_golden@2x.png"></image>
+              <image wx:if="{{items.frozeno_level == 4}}" class="icon32 pdr10" src="../img/vip_golden@2x.png"></image>
               <text class='money-grade-text'>{{items.level_name}}</text>
             </view>
           </view>
@@ -43,7 +43,7 @@
         <view class='date'>
           <view class='branch-content'>
             <view class='branch-text'>
-              <text>{{items.validity?items.validity:'***'}}</text>
+              <text>{{items.frozeno_validity?items.frozeno_validity:'***'}}</text>
             </view>
 
             <view class='branch-text'>
@@ -72,12 +72,12 @@
       </view>
       <view class='member-value'>
         <view class='center-box' bindtap='integral'>
-          <text class="box-text">{{items.point?items.point:0}}</text>
+          <text class="box-text">{{items.frozeno_point?items.frozeno_point:0}}</text>
           <text>积分</text>
         </view>
 
         <view class='center-box' bindtap='grow'>
-          <text class="box-text">{{items.growth?items.growth:0}}</text>
+          <text class="box-text">{{items.frozeno_growth?items.frozeno_growth:0}}</text>
           <text>成长值</text>
         </view>
 

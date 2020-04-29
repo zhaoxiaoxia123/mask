@@ -28,6 +28,7 @@ Page({
       invoiceId: id ? id : 0
     });
     if (that.data.invoiceId) {
+      // var param = '/p006?invoice_id='+that.data.invoiceId;
       wx.request({
         url: app.globalData.domainUrl,
         data: {
@@ -46,7 +47,7 @@ Page({
             taxNumber: datas.tax_number,
             address: datas.address,
             bank: datas.bank,
-            bankAccount: datas.bank_account,
+            bankAccount: datas.bank_account
           });
         }
       })

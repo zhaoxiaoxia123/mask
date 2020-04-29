@@ -40,6 +40,7 @@ Page({
         type: "mainCustomer",
         customer_id: wx.getStorageSync('customerId'),
       };
+      // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
 
       var param = {
@@ -49,7 +50,8 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-      that.getPointList(param);
+      // var param_p = '/p004?type=pointList&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
+      that.getPointList(param_p);
     }
   },
 
@@ -91,6 +93,7 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
+      // var param_p = '/p004?type=pointList&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getPointList(param_p);
     }
 
@@ -126,10 +129,10 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        var datas = res.data.data
+        var datas = res.data.data;
         that.setData({
           items: that.data.items.concat(datas)
-        })
+        });
         if (datas.length <= 0 || datas.length < that.data.pageCount) {
           that.setData({
             isLast: true

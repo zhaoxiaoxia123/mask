@@ -46,6 +46,7 @@ Page({
         type: "mainCustomer",
         customer_id: wx.getStorageSync('customerId')
       };
+      // var param = '/p004?type=mainCustomer&customer_id='+ wx.getStorageSync('customerId');
       that.getUserDetail(param);
     }
     //查询积分是否可抵用
@@ -53,16 +54,17 @@ Page({
       page_code: 'p017',
       code: 'jf01'
     };
+    // var transformParam = '/p017?code=jf01';
     that.getTransform(transformParam);
 
     //获取订单详情
-    var param = {
+    var param_o = {
       page_code: 'p008',
       has_address:1,   //查询该订单使用地址
       order_id: that.data.order_id
     };
-    that.getOrder(param);
-
+    // var param_o = '/p008?has_address=1&order_id='+that.data.order_id;
+    that.getOrder(param_o);
     // that.getAddress();
   },
 
@@ -94,8 +96,8 @@ Page({
     console.log('orderdetail onUnload:====');
     console.log(that.data.from_page);
     if (that.data.from_page == 'shopping'){
-      let pages = getCurrentPages();  // 当前页的数据，可以输出来看看有什么东西
-      let prevPage = pages[pages.length - 2];  // 上一页的数据，也可以输出来看看有什么东西
+      var pages = getCurrentPages();  // 当前页的数据，可以输出来看看有什么东西
+      var prevPage = pages[pages.length - 2];  // 上一页的数据，也可以输出来看看有什么东西
       /** 设置数据 这里面的 value 是上一页你想被携带过去的数据，后面是本方法里你得到的数据，我这里是detail.value，根据自己实际情况设置 */
       prevPage.setData({
         isBack: false,
@@ -167,16 +169,16 @@ Page({
         var datas = res.data.data;
         that.setData({
           items: datas
-        })
-        var order_amount = that.data.items[0].order_amount;
+        });
+        var order_amount = that.data.items[0].frozeno_order_amount;
 
         that.setData({
           orderAmount: order_amount,
           rateAmount: (order_amount * (that.data.transform.rate / 100))
         });
-        console.log('getOrder:----------');
-        console.log((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)));
-        console.log(that.data.transform.type);
+        // console.log('getOrder:----------');
+        // console.log((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)));
+        // console.log(that.data.transform.type);
         
         if ((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
           that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
@@ -190,8 +192,8 @@ Page({
     });
   },
   sumAmount: function (point, rateAmount, amount) {
-    console.log('sumAmount:----------');
-    console.log(parseFloat(point) >= parseFloat(rateAmount));
+    // console.log('sumAmount:----------');
+    // console.log(parseFloat(point) >= parseFloat(rateAmount));
     if (parseFloat(point) >= parseFloat(rateAmount)) {
     that.setData({
       usingPoint: rateAmount,
@@ -236,8 +238,8 @@ Page({
       data: {
         page_code: 'p008',
         type: 'cancel',
-        order_id: that.data.items[0].order_id,
-        order_type: that.data.items[0].order_type
+        order_id: that.data.items[0].o_id,
+        order_type: that.data.items[0].frozeno_order_state
       },
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -256,33 +258,98 @@ Page({
       }
     })
   },
-  //付款
+  //付款   商户在小程序中先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易后调起支付。
   payOrder:function(){
-    wx.request({
-      url: app.globalData.domainUrl,
-      method: "POST",
-      data: {
-        page_code: 'p008',
-        type: 'pay',
-        order_id: that.data.items[0].order_id
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        console.log(res);
-        var datas = res.data.data;
-        if (datas) {
-          console.log('付款成功。');
-          // that.setData({
-          //   shopping_count: parseInt(that.data.shopping_count) + 1
-          // });
-          wx.navigateBack({
-            delta: 1
-          })
-        }
+    if (wx.getStorageSync('customerId')){
+      if(that.data.items[0].frozeno_order_amount == 0){
+        that.payAfter();
+      }else{
+        wx.request({
+          url: app.globalData.domainUrl,
+          method: "POST",
+          data: {
+            page_code: 'p008',
+            type: 'unifiedorder',  
+            amount: that.data.items[0].frozeno_order_amount,
+            openid: wx.getStorageSync('openid')
+          },
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          success: function (res) {
+            console.log(res);
+            var datas = res.data;
+            if (datas) {
+              wx.requestPayment({
+                'timeStamp': datas.timeStamp,
+                'nonceStr': datas.nonceStr,
+                'package': datas.package,
+                'signType': 'MD5',
+                'paySign': datas.paySign,
+                'success': function (res) {
+                  console.log('success');
+                  wx.showToast({
+                    title: '支付成功',
+                    icon: 'success',
+                    duration: 3000
+                  });
+                  that.payAfter();
+                },
+                'fail': function (res) {
+                  console.log(res);
+                },
+                'complete': function (res) {
+                  console.log('complete');
+                }
+              });
+            }
+          }
+        })
       }
-    })
+    }else{
+      wx.showToast({
+        title: "请先登录"
+      });
+    }
+  },
+
+  //付款成功则修改订单状态。
+  payAfter: function () {
+    if (wx.getStorageSync('customerId')) {
+      wx.request({
+        url: app.globalData.domainUrl,
+        method: "POST",
+        data: {
+          page_code: 'p008',
+          type: 'pay',
+          order_id: that.data.items[0].o_id,
+          amount: that.data.items[0].frozeno_order_amount,
+          customer_id: wx.getStorageSync('customerId')
+        },
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        success: function (res) {
+          console.log(res);
+          var ret = res.data;
+          var datas = ret.data;
+          if (ret.code == 201) {
+            console.log(ret.message);
+            // that.setData({
+            //   shopping_count: parseInt(that.data.shopping_count) + 1
+            // });
+          }else{
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
+    } else {
+      wx.showToast({
+        title: "请先登录"
+      });
+    }
   },
   copyInfo:function(e){  //复制内容
     var code = e.target.dataset.code;
@@ -305,7 +372,7 @@ Page({
       data: {
         page_code: 'p008',
         type: 'receive',
-        order_id: that.data.items[0].order_id
+        order_id: that.data.items[0].o_id
       },
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
