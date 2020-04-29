@@ -55,7 +55,7 @@ page{
 
 .member-value{
   display: flex;
-  padding-top:40rpx;
+  padding-top:20rpx;
   margin-bottom:200rpx;
 }
 .center-box{
