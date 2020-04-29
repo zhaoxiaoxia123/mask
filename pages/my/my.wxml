@@ -45,32 +45,32 @@
   <!--订单-->
   <view class='payment bg-box col-content size-titletwo '>
 
-    <view class='payment-list'>
+    <view class='payment-list' data-id="1" bindtap='order'>
       <view class='payment-list-left size-titleone'>
         <text>我的订单</text>
       </view>
-      <view class='payment-list-right' data-id="1" bindtap='order'>
-        <!-- <text>全部订单</text> -->
+      <view class='payment-list-right' >
+        <text>全部订单</text>
         <image src='../img/dv.png'></image>
       </view>
     </view>
 
     <view class='payment-center'>
-      <view class='payment-1' data-id="1" bindtap='order'>
+      <view class='payment-1' data-id="2" bindtap='order'>
         <image class='icon58' src="../img/payment1.png"></image>
         <text>待付款({{items.order_count?items.order_count:0}})</text>
       </view>
-      <view class='payment-1' data-id="2" bindtap='order'>
+      <view class='payment-1' data-id="3" bindtap='order'>
         <image class='icon58' src="../img/send@2x.png"></image>
         <text>待发货</text>
       </view>
 
-      <view class='payment-1' data-id="3" bindtap='order'>
+      <view class='payment-1' data-id="4" bindtap='order'>
         <image class='icon58' src="../img/goods.png"></image>
         <text>待收货</text>
       </view>
 
-      <view class='payment-1' data-id="4" bindtap='order'>
+      <view class='payment-1' data-id="5" bindtap='order'>
         <image class='icon58' src="../img/complete.png"></image>
         <text>已完成</text>
       </view>

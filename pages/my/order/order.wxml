@@ -1,23 +1,88 @@
 <view>
   <view class="topbar">
     <view class="topbar-top">
-      <view class="topbar-text" bindtap="clickTab" data-current="0">
-        <view class="topbar-tab  {{currentTab=='0'?'active':''}} ">待付款</view>
+    <view class="topbar-text" bindtap="clickTab" data-current="0">
+        <view class="topbar-tab  {{currentTab=='0'?'active':''}} ">全部</view>
       </view>
       <view class="topbar-text" bindtap="clickTab" data-current="1">
-        <view class="topbar-tab  {{currentTab=='1'?'active':''}} ">待发货</view>
+        <view class="topbar-tab  {{currentTab=='1'?'active':''}} ">待付款</view>
       </view>
       <view class="topbar-text" bindtap="clickTab" data-current="2">
-        <view class="topbar-tab  {{currentTab=='2'?'active':''}} ">待收货</view>
+        <view class="topbar-tab  {{currentTab=='2'?'active':''}} ">待发货</view>
       </view>
       <view class="topbar-text" bindtap="clickTab" data-current="3">
-        <view class="topbar-tab  {{currentTab=='3'?'active':''}} ">交易完成</view>
+        <view class="topbar-tab  {{currentTab=='3'?'active':''}} ">待收货</view>
+      </view>
+      <view class="topbar-text" bindtap="clickTab" data-current="4">
+        <view class="topbar-tab  {{currentTab=='4'?'active':''}} ">交易完成</view>
       </view>
     </view>
   </view>
 
   <view class='content page-pd size-titletwo col-content'>
+
     <view class="{{currentTab == 0 ? 'show':'hidden'}}">
+      <scroll-view>
+        <!--没有相关订单时显示-->
+        <view class='search-no' wx:if="{{items.length <= 0}}">
+          <view>
+            <image class='scimg' src='../../img/wu.png'></image>
+          </view>
+          <text>您还没有相关订单~~</text>
+        </view>
+            <view class='lists'>
+                <!--bindtap绑定事件 待发货-->
+                <view class='list-order' >
+                    <view class='order-top'>
+                      <view class='ordernum'>订单号：12345674342354</view>
+                      <!-- 状态有——待付款、代发货、待收货、交易完成、交易失败、订单取消中、订单取消退款中、已退款-->
+                      <view class='status'>待付款</view>
+                    </view>
+                    <view class='list'  wx:key="*this"  wx:for="{{items}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}' bindtap='orderdetail'>
+                        <view class='list-left'>
+                            <image  src='{{items.imgUrl}}'></image>
+                        </view>
+                  
+                      <view class='list-right size-titleone '>
+
+                          <view class='column '>
+                          <view class='right-text'>{{item.title}}</view>
+                          </view>
+
+                          <view class='column'> 
+                              <view class='right-text'>￥800.00</view>
+                              <view class='piece'>× 1</view> 
+                          </view>
+
+                          <view class='column col-content'> 
+                            <view class='abstract'>{{item.abstract}}</view>    
+                            
+                          </view>
+                    
+                    </view>
+                    </view>
+
+                    <view class='order'>
+                      <view class='pay'>共1件商品 实付款：<text class=''>￥853</text></view>
+                    </view>
+
+                    <!-- 待付款——取消订单和付款、代发货——取消订单（需后台审核同意）和提醒发货、待收货——查看物流和确认发货（可人工确定或客户满多少天后系统自动改状态） -->
+
+                    <view class='push-button'>
+                        <view class='push'>取消订单</view>
+                        <view class='push push-active'>付款</view>
+                        <view class='push push-active'>提醒发货</view>
+                        <view class='push' bindtap="logistics">查看物流</view>
+                        <view class='push push-active'>确认收货</view>
+                    </view>
+
+        </view>
+      </view> 
+
+      </scroll-view>
+    
+    </view>
+    <view class="{{currentTab == 1 ? 'show':'hidden'}}">
       <scroll-view>
         <!--没有相关订单时显示-->
         <view class='search-no' wx:if="{{items.length <= 0}}">
@@ -46,14 +111,12 @@
                 </view>
 
                 <view class='column'>
-                  <view class='right-text'>{{item1.product_amount}}</view>
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <view class='piece'>× {{item1.product_count}}</view>
                 </view>
 
                 <view class='column col-content'>
-                  <view class='item'>
-                    <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                    <view class='piece'>× {{item1.product_count}}</view>
-                  </view>
+                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
                 </view>
 
               </view>
@@ -73,7 +136,7 @@
         </view>
       </scroll-view>
     </view>
-    <view class="{{currentTab == 1 ? 'show':'hidden'}}">
+    <view class="{{currentTab == 2 ? 'show':'hidden'}}">
       <scroll-view>
         <!--没有相关订单时显示-->
         <view class='search-no' wx:if="{{items.length <= 0}}">
@@ -103,13 +166,11 @@
 
                 <view class='column'>
                   <view class='right-text'>{{item1.product_amount}}</view>
+                  <view class='piece'>× {{item1.product_count}}</view>
                 </view>
 
                 <view class='column col-content'>
-                  <view class='item'>
-                    <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                    <view class='piece'>× {{item1.product_count}}</view>
-                  </view>
+                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
                 </view>
 
               </view>
@@ -131,7 +192,7 @@
 
       </scroll-view>
     </view>
-    <view class="{{currentTab == 2 ? 'show':'hidden'}}">
+    <view class="{{currentTab == 3 ? 'show':'hidden'}}">
       <scroll-view>
         <!--没有相关订单时显示-->
         <view class='search-no' wx:if="{{items.length <= 0}}">
@@ -160,14 +221,12 @@
                 </view>
 
                 <view class='column'>
-                  <view class='right-text'>{{item1.product_amount}}</view>
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <view class='piece'>× {{item1.product_count}}</view>
                 </view>
 
                 <view class='column col-content'>
-                  <view class='item'>
-                    <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                    <view class='piece'>× {{item1.product_count}}</view>
-                  </view>
+                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
                 </view>
 
               </view>
@@ -187,7 +246,7 @@
         </view>
       </scroll-view>
     </view>
-    <view class="{{currentTab == 3 ? 'show':'hidden'}}">
+    <view class="{{currentTab == 4 ? 'show':'hidden'}}">
       <scroll-view>
         <!--没有相关订单时显示-->
         <view class='search-no' wx:if="{{items.length <= 0}}">
@@ -216,14 +275,12 @@
                 </view>
 
                 <view class='column'>
-                  <view class='right-text'>{{item1.product_amount}}</view>
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <view class='piece'>× {{item1.product_count}}</view>
                 </view>
 
                 <view class='column col-content'>
-                  <view class='item'>
-                    <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                    <view class='piece'>× {{item1.product_count}}</view>
-                  </view>
+                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
                 </view>
 
               </view>
