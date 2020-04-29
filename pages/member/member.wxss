@@ -6,7 +6,7 @@ page{
 .frozeno-logo{
   display: flex;
   justify-content: center;
-  padding-bottom:120rpx;
+  padding-bottom:180rpx;
   background: #333;
 }
 .member{
@@ -27,9 +27,8 @@ page{
   display: flex;
 }
 .icon-logo{
-  width:300rpx;
-  height:84rpx;
-  padding:40rpx;
+  width:400rpx;
+  height:114rpx;
 }
 
 .money-name{
@@ -113,8 +112,9 @@ display: flex;
 flex-direction: column;
 align-items: center;
 line-height: 20px;
-margin-top: -10px;
-
+margin-top: -6px;
+letter-spacing: 1rem;
+font-size:0.8rem;
 }
 
 /* 登录/注册 */
@@ -135,12 +135,9 @@ margin-top: -10px;
 .mask-con{
   transition: 1s;
   width: 100%;
-  height: 270rpx;
   left: 0;
-  bottom: 530rpx;
   background-color: white;
   text-align: center;
-  line-height: 270rpx;
   /* z-index: -1; */
  /* box-shadow: 0 1px 10px #aaa;*/
   display: none;

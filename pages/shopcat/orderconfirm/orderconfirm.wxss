@@ -1,6 +1,7 @@
 
 .lists{
   box-sizing: border-box;
+  padding-bottom:120rpx;
 }
 .goods{
   display: flex;
