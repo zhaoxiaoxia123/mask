@@ -58,7 +58,10 @@
     <view class='payment-center'>
       <view class='payment-1' data-id="2" bindtap='order'>
         <image class='icon58' src="../img/payment1.png"></image>
-        <text>待付款({{items.order_count?items.order_count:0}})</text>
+        <text>待付款</text>
+        <view class='number'>
+            <text>{{items.order_count?items.order_count:0}}</text>
+       </view>
       </view>
       <view class='payment-1' data-id="3" bindtap='order'>
         <image class='icon58' src="../img/send@2x.png"></image>
