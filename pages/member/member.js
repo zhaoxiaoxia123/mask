@@ -118,48 +118,6 @@ Page({
     });
   },
 
-  bindGetUserInfo: function () {
-    console.log('userInfo');
-    wx.getUserInfo({
-      success: function (res) {
-        //获取openid，并更新到用户表
-        that.updateUserInfo({
-          page_code: 'p010',
-          type: 'wxLogin',
-          code: app.globalData.code,  //获取openid的code码
-          nickname: res.userInfo.nickName,
-          avatarUrl: res.userInfo.avatarUrl,
-        });
-      }
-    });
-  },
-  updateUserInfo: function (param) {  //更新用户信息
-    wx.request({
-      url: app.globalData.domainUrl,
-      method: "POST",
-      data: param,
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        // wx.navigateBack({
-        //     delta: 1  //小程序关闭当前页面返回上一页面
-        // })
-        var datas = res.data.data;
-        wx.setStorageSync('customerId', datas.c_id);
-        wx.setStorageSync('openid', datas.frozeno_openid);
-        wx.setStorageSync('memberNo', datas.c_number);  //会员号
-        wx.setStorageSync('level', datas.frozeno_level);  //等级
-        wx.setStorageSync('discount', datas.discount);  //折扣
-        wx.setStorageSync('sessionKey', datas.session_id);
-        app.globalData.canGetUserInfo = false;
-        that.setData({
-          canGetUserInfo: app.globalData.canGetUserInfo
-        });
-        that.onShow();
-      }
-    })
-  },
   writeCode: function () {  //在页面上打印条形码和二维码
     var code = wx.getStorageSync("memberNo");
     // var url_member_id = app.globalData.domainUrl + "?is_scan=1&customer_id=" + wx.getStorageSync('customerId');

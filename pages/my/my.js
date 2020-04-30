@@ -125,47 +125,7 @@ Page({
       }
     });
   },
-  bindGetUserInfo: function () {
-    console.log('userInfo');
-    wx.getUserInfo({
-      success: function (res) {
-          //获取openid，并更新到用户表
-          that.updateUserInfo({
-            page_code: 'p010',
-            type: 'wxLogin',
-            code: app.globalData.code,  //获取openid的code码
-            nickname: res.userInfo.nickName,
-            avatarUrl: res.userInfo.avatarUrl,
-          });
-      }
-    });
-  }, 
-  updateUserInfo: function (param) {  //更新用户信息
-    wx.request({
-      url: app.globalData.domainUrl,
-      method: "POST",
-      data: param,
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        // wx.navigateBack({
-        //     delta: 1  //小程序关闭当前页面返回上一页面
-        // })
-        var datas = res.data.data;
-        wx.setStorageSync('customerId', datas.customer_id);
-        wx.setStorageSync('openid', datas.openid);
-        wx.setStorageSync('memberNo', datas.number);  //会员号
-        wx.setStorageSync('level', datas.level);  //等级
-        wx.setStorageSync('discount', datas.discount);  //折扣
-        app.globalData.canGetUserInfo = false;
-        that.setData({
-          canGetUserInfo: app.globalData.canGetUserInfo
-        });
-        that.onShow();
-      }
-    })
-  },
+  
    /***
    * 点击进入各自页面
    * ***/

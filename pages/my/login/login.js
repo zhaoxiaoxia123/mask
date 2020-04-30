@@ -11,15 +11,22 @@ Page({
     code:'',
     verifyCode:'',
     showModal: false,
-    isSubmit:false
+    isSubmit:false,
+    isShareBy: false,   //是否通过邀请码注册
+    shareBy: ''   //邀请码
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     that = this;
+    if (options.shareBy) {
+      that.setData({
+        isShareBy:true,
+        shareBy: options.shareBy,
+      });
+    }
     if (wx.getStorageSync("openid") != '') {
       wx.switchTab({
         url: '/pages/home/home',
@@ -88,7 +95,8 @@ Page({
             code: app.globalData.code,  //获取openid的code码
             nickname: res.userInfo.nickName,
             avatarUrl: res.userInfo.avatarUrl,
-            customer_id: wx.getStorageSync('customerId') ? wx.getStorageSync('customerId') : 0,
+            share_by: res.userInfo.shareBy,
+            // customer_id: wx.getStorageSync('customerId') ? wx.getStorageSync('customerId') : 0,
           });
         }
       });
@@ -144,82 +152,74 @@ Page({
     })
   },
   getPhoneNumber: function (e) {
-    // if (wx.getStorageSync('openid') == '') {
-    //   wx.showToast({
-    //     icon: "none",
-    //     title: '请先点击获取用户信息',
-    //   })
-    //   return
-    // } else {
-      wx.checkSession({
-        success: function (res) {
-          var ency = e.detail.encryptedData;
-          var iv = e.detail.iv;
-          if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-            wx.showModal({
-              title: '警告',
-              content: '您点击了拒绝授权，部分功能无法使用!!!',
-              showCancel: false,
-              confirmText: '确定',
-              success: function (res) {
-                // 用户没有授权成功，不需要改变 isHide 的值
-                // if (res.confirm) {
-                //   wx.setStorageSync('enws', '1');
-                //   wx.switchTab({
-                //     url: "/wurui_house/pages/index/index"
-                //   })
-                //   console.log('用户点击了“返回授权”');
-                // };
+    wx.checkSession({
+      success: function (res) {
+        var ency = e.detail.encryptedData;
+        var iv = e.detail.iv;
+        if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+          wx.showModal({
+            title: '警告',
+            content: '您点击了拒绝授权，部分功能无法使用!!!',
+            showCancel: false,
+            confirmText: '确定',
+            success: function (res) {
+              // 用户没有授权成功，不需要改变 isHide 的值
+              // if (res.confirm) {
+              //   wx.setStorageSync('enws', '1');
+              //   wx.switchTab({
+              //     url: "/wurui_house/pages/index/index"
+              //   })
+              //   console.log('用户点击了“返回授权”');
+              // };
+              wx.switchTab({
+                url: '/pages/home/home',
+              });
+            }
+          })
+        } else {
+          //同意授权
+          wx.request({
+            url: app.globalData.domainUrl,
+            method: "POST",
+            data: {
+              page_code: 'p010',
+              type: 'wxPhone',  //获取手机号
+              sessionid: wx.getStorageSync('sessionKey'),
+              code:app.globalData.code,
+              iv: iv,
+              encryptedData: ency,
+              share_by:that.data.shareBy
+            },
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function (res) {
+              let datas = res.data.data;
+              if (res.data.code != 200) {
+                wx.showToast({
+                  icon: "none",
+                  title: res.data.message,
+                })
+              } else {
+                wx.setStorageSync('customerId', datas.c_id);
+                wx.setStorageSync('openid', datas.frozeno_openid);
+                wx.setStorageSync('memberNo', datas.c_number);  //会员号
+                wx.setStorageSync('level', datas.frozeno_level);  //等级
+                wx.setStorageSync('discount', datas.discount);  //折扣
+                wx.setStorageSync('sessionKey', datas.session_id);
+
                 wx.switchTab({
                   url: '/pages/home/home',
                 });
               }
-            })
-          } else {
-            //同意授权
-            wx.request({
-              url: app.globalData.domainUrl,
-              method: "POST",
-              data: {
-                page_code: 'p010',
-                type: 'wxPhone',  //获取手机号
-                sessionid: wx.getStorageSync('sessionKey'),
-                code:app.globalData.code,
-                iv: iv,
-                encryptedData: ency
-              },
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              success: function (res) {
-                let datas = res.data.data;
-                if (res.data.code != 200) {
-                  wx.showToast({
-                    icon: "none",
-                    title: res.data.message,
-                  })
-                } else {
-                  wx.setStorageSync('customerId', datas.c_id);
-                  wx.setStorageSync('openid', datas.frozeno_openid);
-                  wx.setStorageSync('memberNo', datas.c_number);  //会员号
-                  wx.setStorageSync('level', datas.frozeno_level);  //等级
-                  wx.setStorageSync('discount', datas.discount);  //折扣
-                  wx.setStorageSync('sessionKey', datas.session_id);
-
-                  wx.switchTab({
-                    url: '/pages/home/home',
-                  });
-                }
-              },
-              fail: function (res) {
-                console.log('fail' + res);
-              }
-            });
-          }
+            },
+            fail: function (res) {
+              console.log('fail' + res);
+            }
+          });
         }
-      });
-
-    // }
+      }
+    });
   },
   //手机验证码登录/注册
   showModalView: function () {
@@ -352,5 +352,20 @@ Page({
         url: '/pages/my/privacy/privacy'
       })
     }
-  }
+  },
+  /**
+   * 是否输入邀请码注册
+   */
+  checkboxChange:function(){
+    that.setData({
+      isShareBy:!that.data.isShareBy
+    });
+  },
+
+  setShareByInput: function (e) {
+    var value = e.detail.value;
+    that.setData({
+      shareBy: e.detail.value
+    })
+  },
 })

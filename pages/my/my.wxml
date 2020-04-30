@@ -1,7 +1,5 @@
 <!--pages/my/my.wxml-->
-
 <view class='page-pd '>
-
   <!-- 遮罩层 -->
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
   <!-- 弹出层 -->
@@ -14,12 +12,7 @@
   </view>
 
   <view class='parent size-titletwo col-content bg-box'>
-
     <view class='parent-left ' wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
-    <!-- <view class='head' wx:if="{{canGetUserInfo}}">
-      <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
-    </view> -->
-
     <view class='parent-left ' wx:if="{{!canGetUserInfo && !isLogin}}">
       <open-data class="wx-image_SC1alK" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
       <view class='content'>
@@ -39,12 +32,10 @@
         <text class='money-grade-text'>{{items.level_name}}</text>
       </view>
     </view>
-
   </view>
 
   <!--订单-->
   <view class='payment bg-box col-content size-titletwo '>
-
     <view class='payment-list'>
       <view class='payment-list-left size-titleone'>
         <text>我的订单</text>
@@ -79,7 +70,6 @@
   </view>
 
   <view class='lists bg-box col-content size-titletwo'>
-
     <view class='list-wap' bindtap='shareApp'>
       <view class='left'>
         <image class='icon40' src='../img/friend@2x.png'></image>
@@ -149,13 +139,5 @@
         <image src='../img/dv.png'></image>
       </view>
     </view>
-
   </view>
-
-
-
-  <!-- <view wx:if="isShare">
-<view bindtap='copyCode'>复制邀请码</view>
-<view bindtap='showShareQRCode'>邀请二维码</view>
-</view> -->
 </view>

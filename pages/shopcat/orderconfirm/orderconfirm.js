@@ -206,7 +206,7 @@ Page({
         })
         setTimeout(function() {
           that.sumProductAmount(that.data.items, that.data.customerInfo);
-        }, 1000);
+        }, 2000);
       }
     });
   },

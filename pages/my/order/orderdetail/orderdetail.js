@@ -278,8 +278,9 @@ Page({
           },
           success: function (res) {
             console.log(res);
-            var datas = res.data;
+            var datas = res.data.data;
             if (datas) {
+              console.log(datas);
               wx.requestPayment({
                 'timeStamp': datas.timeStamp,
                 'nonceStr': datas.nonceStr,
