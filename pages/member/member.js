@@ -175,16 +175,28 @@ Page({
 /***
    * 点击进入各自页面
    * ***/
-  grade: function (e) {
+  coupon: function (e) {
     console.log(e);
     wx.navigateTo({
       url: '/pages/my/coupon/coupon'
+    })
+  },
+  grade: function (e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '../member/grade/grade'
     })
   },
   grow: function (e) {
     console.log(e);
     wx.navigateTo({
       url: '../member/grow/grow'
+    })
+  },
+  integral: function (e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '../member/integral/integral'
     })
   },
   integral: function (e) {

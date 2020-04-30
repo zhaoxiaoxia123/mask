@@ -3,7 +3,7 @@
     <!--待付款时显示-->
     <view class='wait col-title'>
       <text class='wait-text'>等待买家付款</text>
-      <text class='wait-text'>请在30:00:00内支付</text>
+      <text class='wait-text'>请在23:59:59内支付</text>
     </view>
 
     <!--个人信息-->

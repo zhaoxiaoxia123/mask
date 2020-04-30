@@ -81,7 +81,7 @@
           <text>成长值</text>
         </view>
 
-        <view class='center-box ' bindtap='grade'>
+        <view class='center-box ' bindtap='coupon'>
           <text class="box-text">{{items.ticket_count?items.ticket_count:0}}</text>
           <text>优惠券</text>
         </view>

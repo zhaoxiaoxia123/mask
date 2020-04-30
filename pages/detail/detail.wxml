@@ -27,10 +27,10 @@
     </view>
   </view>
 
-  <view class='spec' bindtap="toggleDialog">
+  <!-- <view class='spec' bindtap="toggleDialog">
     <text>选择规格</text>
     <image src='../img/dv.png'></image>
-  </view>
+  </view> -->
 
   <view class='evaluate'>
 
@@ -108,7 +108,7 @@
           <view class='number'>
             <text>{{shoppingCount}}</text>
           </view>
-          <image class='icon58' src='../img/shopcat_false.png'></image>
+          <image class='icon58' src='../img/shopcat_false@2x.png'></image>
         </view>
         <view class='bottom-operate button1' catchtap='joinShopping'>加入购物</view>
         <view class='bottom-operate button' data-type="more" catchtap='goConfirm'>立即购买</view>

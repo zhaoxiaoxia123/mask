@@ -40,7 +40,12 @@
   </view>
 
 
-  <view class="added bottom bg-box size-titletwo col-title">
-    <view class="bottom-operate button" bindtap='addInvoice'>新增发票</view>
-  </view>
+
 </view>
+
+
+  <view class="ft-bottom ">
+    <view class="ft-bottom-box">
+        <view class="ft-bottom-operate ft-button" bindtap='addInvoice'>新增发票</view>
+    </view>   
+  </view>
