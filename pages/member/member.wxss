@@ -32,7 +32,7 @@ page{
 }
 
 .money-name{
-  font-size: 56rpx;
+  font-size: 1.5rem;
  color: #333;
  padding-right:20rpx;
 }
@@ -148,6 +148,5 @@ font-size:0.8rem;
   position: fixed; */
   /* position: absolute; */
   /* z-index: 1; */
-
   display: block;
 }
