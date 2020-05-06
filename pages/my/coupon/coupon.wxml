@@ -7,17 +7,32 @@
     </view>
     <text>您还没有优惠券~~</text>
   </view>
-  <view class="wrapper {{(index%2 == 0)?'colour-bg2':'colour-bg1'}}" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+
+   <view  class="wrapper {{(index%2 == 0)?'colour-bg2':'colour-bg1'}}" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+        <view class="money">
+          <view class="money-text"><text class="money-small">¥</text>{{item.ticket_amount}}</view>        
+        </view>
+      <view class="conditions" wx:if="{{item.ticket_type == 1}}">
+        全场通用
+      </view>
+      <view class="conditions" wx:if="{{item.ticket_type == 2}}">
+        满{{item.satisfy_amount}}可使用
+      </view>
+      <view class="title">
+         有效期：{{item.ticket_start_date}}-{{item.ticket_end_date}}
+        </view>
+
+  </view>
+
+
+  <!-- <view class="wrapper {{(index%2 == 0)?'colour-bg2':'colour-bg1'}}" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
     <view class="content">
         <view class="money">
           <text>¥</text>{{item.ticket_amount}}
         </view>
-      <view class='co'>
-        <!-- <view class='co_w'></view> -->
-        <view class="title">
+      <view class='co'>        <view class="title">
          {{item.ticket_start_date}}-{{item.ticket_end_date}}
         </view>
-        <!-- <view class='co_l'></view> -->
       </view>
     </view>
     <view class="split-line"></view>
@@ -32,6 +47,19 @@
       立即使用
       </button>
     </view>
-  </view>
+  </view> -->
+
+  
+   <!-- <view class="wrapper colour-bg2">
+        <view class="money">
+          <view class="money-text"><text class="money-small">¥</text>300</view>        
+        </view>
+      <view class="conditions">
+        满2000元使用
+      </view>
+      <view class="title">
+         有效期：2020.02.11-2020.03.11
+        </view>
+  </view> -->
 
 </view>
