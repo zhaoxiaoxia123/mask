@@ -1,47 +1,193 @@
 
 .coupon {
+  /* padding: 20rpx 40rpx; */
   padding: 20rpx;
 }
-.wrapper{
+
+
+
+
+.container {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+ 
+.title {
+  width: 100%;
+  height: 88rpx;
+  background: #404040;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+ 
+.title-sel {
+  color: #ccc;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ 
+.title-sel  .line-style{
+  background: #ccc;
+  /* height: 6rpx;
+  width: 90rpx; */
   position: relative;
-  padding: 20rpx 20rpx 20rpx 40rpx;
-  margin-bottom:20rpx;
+  margin-top: 10rpx;
 }
-.colour-bg1{
-  background: -o-linear-gradient(left, #565656, #404040);
-  background: -o-linear-gradient(right, #565656, #404040);
-  background: -moz-linear-gradient(right, #565656, #404040);
-  background: linear-gradient(to right, #565656, #404040);
-  color:#DAB866;
+ 
+.title-sel-selected{
+  color: #DAB866;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.colour-bg2{
-  background: -o-linear-gradient(left, #565656, #404040);
-  background: -o-linear-gradient(right, #565656, #404040);
-  background: -moz-linear-gradient(right, #565656, #404040);
-  background: linear-gradient(to right, #565656, #404040);
-  color:#8b8b8b ;
+.title-sel-selected .line-style{
+  background: #DAB866;
+  height: 6rpx;
+  width: 90rpx;
+  position: relative;
+  margin-top: 10rpx;
 }
-.wrapper:before {
-    content: ' ';
-    width: 0;
-    height: 100%;
-    position: absolute;
+ 
+.swiper {
+  flex: 1;
+  overflow: scroll;
+  margin: 0 auto;
+  height:1334rpx;
+}
+ 
+.record-item {
+  margin-top: 10rpx;
+  background-color: white;
+  padding-bottom: 5rpx;
+  padding-top: 5rpx;
+  font-size: 30rpx;
+}
+ 
+.name{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #eee;
+  padding: 2vh;
+  border-radius: 10rpx
+}
 
-    /* 小球形状 */
-    border-right: 12px dotted #333;
-    left: -6px;
-    top: 0px;
-}
-.wrappe:after{
-    content: ' ';
-    width: 0;
-    height: 100%;
-    position: absolute;
 
-    /* 小球形状 */
-    border-right: 12px dotted #333;
-    right: -6px;
-    top: 0px;
+
+
+/* 优惠券 */
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  border-radius: 10px;
+  margin-bottom:30rpx;
+  
+}
+.box-hd{
+  display: flex;
+  padding-bottom:10rpx;
+}
+.box-hd-text1{
+  background:#DAB866;
+  color: #fff;
+  padding:10rpx 20rpx;
+  border-radius: 10px 0 10px 0;
+}
+.box-hd-text2{
+  background:#646464;
+  color: #ccc;
+  padding:10rpx 20rpx;
+  border-radius: 10px 0 10px 0;
+}
+.box{
+  padding: 20rpx;
+  display: flex;
+}
+/*前半部分样式*/
+.content {
+  /* position: relative; */
+  flex: 1;
+}
+/*后半部分样式*/
+.tip {
+  /* position: relative;
+  padding:  50rpx 30rpx;
+  flex: 0 0 200rpx;
+  text-align: center; */
+  display: flex;
+  align-items: center;
+}
+/*中间竖直虚线样式*/
+.split-line {
+    position: relative;
+    flex: 0 0 0;
+    margin: 0 10rpx 0 6rpx;
+    border-left: 4rpx dashed #333;   
+}
+/*给虚线加两个伪类，基本样式如下*/
+.split-line:before, .split-line:after {
+    content: '';
+    position: absolute;
+    width: 32rpx;
+    height: 16rpx;
+    background: #333;
+    left: -18rpx;
+    z-index: 1;
+}
+/*给前半部分加两个伪类，基本样式如下*/
+/* .content:before, .content:after{
+    content: '';
+    position: absolute;
+    width: 32rpx;
+    height: 16rpx;
+    background: #333;
+    left: -16rpx;
+    z-index: 1;
+} */
+
+/*给前半部分加两个伪类，基本样式如下*/
+/* .tip:before, .tip:after{
+    content: '';
+    position: absolute;
+    width: 32rpx;
+    height: 16rpx;
+    background:#333;
+    right: -16rpx;
+    z-index: 1;
+} */
+/*几个伪类化成的圆弧的样式以及位置（置于顶部）我把它放在一起了*/
+.content:before, .tip:before, .split-line:before{
+    border-radius: 0 0 16rpx 16rpx;
+    top: 0;
+}
+
+/*几个伪类化成的圆弧的样式以及位置（置于底部）我把它放在一起了*/
+.content:after, .tip:after, .split-line:after{
+    border-radius: 16rpx 16rpx 0 0;
+    bottom: 0;
+}
+.img-coupon{
+  width:160rpx;
+  height:160rpx;
+  padding-left:10rpx;
+  opacity: 0.9;
+}
+.coupon-hd{
+  font-size:1.2rem;
+  padding-bottom:20rpx;
+}
+.conditions{
+  font-size:0.8rem;
+}
+.date{
+  font-size:0.8rem;
 }
 .money {
   font-size: 1.8rem;
@@ -53,11 +199,50 @@
 .money-text{
   display: flex;
   align-items: flex-star;
+  padding-top:10rpx;
 }
-.title{
-  padding-top:20rpx;
-  font-size:1rem;
+.useNow {
+  font-size: 28rpx;
+  border-radius: 50rpx;
+  border-style: none;
 }
+.co {
+  padding-left:40rpx;
+}
+.co .co_w {
+  width: 64rpx;
+  height: 1rpx;
+  background: #fff;
+  margin-left: 40rpx;
+  margin-bottom: -20rpx;
+}
+
+.co .co_l {
+  width: 64rpx;
+  height: 1rpx;
+  background: #fff;
+  margin-left: 240rpx;
+  margin-top: -15rpx;
+}
+button:not([size='mini']) {
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* .colour-bg1{
+   background:linear-gradient(-90deg,rgb(219, 147, 59),rgba(254,50,103,1));
+} */
+.colour-bg1{
+   background: linear-gradient(to right, #565656, #404040);
+   color:#fff;
+}
+.colour-bg2{
+   background: linear-gradient(to right, #565656, #404040);
+   color:#ccc;
+}
+
+
+
 
 /* 无 */
 .search-no {
@@ -74,3 +259,5 @@
   background-size: 300rpx;
   padding-bottom:20rpx;
 }
+
+

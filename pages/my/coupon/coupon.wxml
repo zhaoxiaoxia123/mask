@@ -1,5 +1,5 @@
 <!--pages/my/coupon/coupon.wxml-->
-<view class="coupon">
+<view class="">
 <!--没有相关优惠券时显示-->
   <view class='search-no' wx:if="{{ticketList.length <= 0}}">
     <view>
@@ -8,21 +8,154 @@
     <text>您还没有优惠券~~</text>
   </view>
 
-   <view  class="wrapper {{(index%2 == 0)?'colour-bg2':'colour-bg1'}}" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
-        <view class="money">
-          <view class="money-text"><text class="money-small">¥</text>{{item.ticket_amount}}</view>        
-        </view>
-      <view class="conditions" wx:if="{{item.ticket_type == 1}}">
-        全场通用
-      </view>
-      <view class="conditions" wx:if="{{item.ticket_type == 2}}">
-        满{{item.satisfy_amount}}可使用
-      </view>
-      <view class="title">
-         有效期：{{item.ticket_start_date}}-{{item.ticket_end_date}}
-        </view>
 
-  </view>
+  <view class='ticket-container'>
+    <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"
+      scroll-top="{{scrollTop}}">
+      <!--Tab布局-->
+      <view class='title'>
+        <view class="{{0 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='0'>
+          <text>未使用</text>
+          <hr class="line-style"/>
+        </view>
+        
+        <view class="{{1 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='1'>
+          <text>已使用</text>
+          <hr class="line-style"/>
+        </view>
+        <view class="{{2 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='2'>
+          <text>已过期</text>
+          <hr class="line-style" />
+        </view>
+      </view>
+ 
+      <!--内容布局-->
+      <swiper class='swiper coupon' bindchange='pagechange' current='{{currentIndex}}'>
+        <swiper-item class='swiper'>
+
+           <view class="wrapper colour-bg1">
+                <view class="content">
+
+                  <view class="box-hd">
+                      <view class="box-hd-text1">冻龄智美商城/门店通用</view>
+                  </view>
+
+                  <view class="box">
+                    <view class="money">
+                      <view class="money-text">
+                          <text class="money-small">¥</text>300
+                      </view>
+                    </view>
+                
+                    <view class='co'>
+                      <view class="coupon-hd">
+                        生日优惠券
+                      </view>
+                      <view class="conditions">
+                        满2000元使用
+                      </view>
+                      <view class="date">
+                      2020.02.11至2020.03.11
+                      </view>
+                    </view>
+                    
+                  </view>
+                </view>
+                <view class="split-line"></view>
+                <view class="tip">
+                  <view class="coupon-img">
+                      <image class='img-coupon' src='../../img/coupon/coupon1.png'></image> 
+                  </view>
+                </view>
+              </view>
+              
+
+        </swiper-item>
+        <swiper-item class='swiper coupon' class='swiper'>
+          <view class="wrapper colour-bg2">
+                <view class="content">
+
+                  <view class="box-hd">
+                      <view class="box-hd-text2">冻龄智美商城/门店通用</view>
+                  </view>
+
+                  <view class="box">
+                    <view class="money">
+                      <view class="money-text">
+                          <text class="money-small">¥</text>300
+                      </view>
+                    </view>
+                
+                    <view class='co'>
+                      <view class="coupon-hd">
+                        生日优惠券
+                      </view>
+                      <view class="conditions">
+                        满2000元使用
+                      </view>
+                      <view class="date">
+                      2020.02.11至2020.03.11
+                      </view>
+                    </view>
+                    
+                  </view>
+                </view>
+                <view class="split-line"></view>
+                <view class="tip">
+                  <view class="coupon-img">
+                      <image class='img-coupon' src='../../img/coupon/coupon3.png'></image> 
+                  </view>
+                </view>
+              </view>
+              
+
+        </swiper-item>
+        <swiper-item class='swiper coupon' class='swiper'>
+          <view class="wrapper colour-bg2">
+                <view class="content">
+
+                  <view class="box-hd">
+                      <view class="box-hd-text2">冻龄智美商城/门店通用</view>
+                  </view>
+
+                  <view class="box">
+                    <view class="money">
+                      <view class="money-text">
+                          <text class="money-small">¥</text>300
+                      </view>
+                    </view>
+                
+                    <view class='co'>
+                      <view class="coupon-hd">
+                        生日优惠券
+                      </view>
+                      <view class="conditions">
+                        满2000元使用
+                      </view>
+                      <view class="date">
+                      2020.02.11至2020.03.11
+                      </view>
+                    </view>
+                    
+                  </view>
+                </view>
+                <view class="split-line"></view>
+                <view class="tip">
+                  <view class="coupon-img">
+                      <image class='img-coupon' src='../../img/coupon/coupon2.png'></image> 
+                  </view>
+                </view>
+              </view>
+              
+        </swiper-item>
+      </swiper>
+    </scroll-view>
+</view>
+
+  
+
+
+
 
 
   <!-- <view class="wrapper {{(index%2 == 0)?'colour-bg2':'colour-bg1'}}" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
