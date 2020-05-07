@@ -187,7 +187,10 @@
           </view>
 
           <view class='column' wx:for="{{ticketList}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
-            <view>{{item.ticket_name}}</view>
+            <view>
+                <view class="coupon-hd">生日优惠券</view>
+                <view class="coupon-text">{{item.ticket_name}}</view>
+           </view>
             <view class='item'>
               <checkbox-group>
                 <label class="checkbox">
@@ -198,7 +201,7 @@
           </view>
 
           <view class='column'>
-            <view>不使用优惠</view>
+            <view class="coupon-hd">不使用优惠</view>
             <view class='item'>
               <checkbox-group>
                 <label class="checkbox">

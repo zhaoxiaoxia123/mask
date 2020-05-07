@@ -45,7 +45,7 @@ page{
   line-height: 1.5;
 }
 .size-text{
-  font-size:0.9ren;
+  font-size:0.9rem;
   line-height: 1.5;
 }
 .size-tagging{

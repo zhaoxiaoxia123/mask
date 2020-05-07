@@ -193,6 +193,15 @@ background: #404040;
   width:14rpx;
   height:24rpx;
 }
+.coupon-hd{
+  font-size:rem;
+  line-height:1.5;
+  color:#fff;
+}
+.coupon-text{
+  font-size:0.8rem;
+  line-height: 1.5;
+}
 
 
 /* 弹窗 */
@@ -281,8 +290,8 @@ display: none;
   justify-content: space-between;
 }
 .detail-sales{
-  font-size:40rpx;
-  color:#c6c6c6;
+  font-size:1.2rem;
+  color:#ffff;
   line-height: 2;
 }
 .decoration{
@@ -303,7 +312,7 @@ display: none;
    flex-direction: row;
   justify-content: space-between;
   color: #c6c6c6;
-  padding:20rpx;
+  padding:10rpx 20rpx;
 }
 .column .item{
   display: flex;

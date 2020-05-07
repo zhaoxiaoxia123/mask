@@ -9,6 +9,13 @@
     </block>
   </swiper>
 
+  <view class="ad-member">
+      <image class="member-img" src='../img/member/member@2x.png'></image>
+  </view>
+  <view class="ad-member">
+      <image class="member-img" src='../img/member/member1@2x.png'></image>
+  </view>
+
   <view class='lists  page-pd'>
     <!--bindtap绑定事件-->
     <view class="list" bindtap='toDetail' wx:key="*this" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
