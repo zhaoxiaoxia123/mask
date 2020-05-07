@@ -1,6 +1,7 @@
 
 .lists{
   box-sizing: border-box;
+  padding-bottom:120rpx;
 }
 .list{
    box-sizing: border-box;
@@ -12,20 +13,36 @@
   margin-bottom:10rpx;
   display: flex;
 }
+.address-left{
+  display: flex;
+  align-items: center;
+}
+.address-default{
+  background:#2b2b2b;
+  padding:2rpx 20rpx;
+  margin-right:10rpx;
+}
+.address-name{
+  color:#fff;
+  padding-right:20rpx;
+}
+.address-phone{
+  font-size:0.9rem;
+}
 .space-between{
   display: flex;
   justify-content:space-between;
   align-items: center;
 }
-.list-left{
-  width:40%;
-}
+
 .direction-row{
   display: flex;
    flex-direction: row;
 }
+.list-left{
+  padding-right:20rpx;
+}
 .list-right{
-  width:60%;
   display: flex;
   justify-content:flex-end;
   align-items: center;
@@ -61,7 +78,7 @@
 	justify-content: center;
 	flex-direction: row-reverse;
 	align-items: center;
-  background:#2b2b2b;
+  background:#DAB866;
   border:1px solid #4d4d4d;
   border-radius: 10px;
   margin:20rpx;

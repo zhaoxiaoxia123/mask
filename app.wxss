@@ -29,27 +29,27 @@ page{
   font-weight:bold;
 }
 .size-numberone{
-  font-size:58rpx;
+  font-size:1.5rem;
   line-height:1.5; 
 }
 .size-numbertwo{
-  font-size:48rpx;
+  font-size:1.3rem;
   line-height:1.5; 
 }
 .size-titleone{
-  font-size:40rpx;
+  font-size:1.2rem;
   line-height: 1.5;
 }
 .size-titletwo{
-  font-size:32rpx;
+  font-size:1rem;
   line-height: 1.5;
 }
 .size-text{
-  font-size:28rpx;
+  font-size:0.9ren;
   line-height: 1.5;
 }
 .size-tagging{
-   font-size:24rpx;
+   font-size:0.8rem;
    line-height: 1.5; 
 }
 

@@ -2,7 +2,7 @@
 .column{
   display: flex;
   flex-direction: row; 
-  text-align: end;
+  /* text-align: end; */
   justify-content: space-between;
   margin-bottom: 10rpx;
   padding: 30rpx 20rpx;
@@ -25,12 +25,16 @@ label{
   width: 200rpx;
   text-align: left;
 }
+input{
+  text-align:end;
+}
 .address{
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
   height: 50px;
+  text-align:end;
 }
 
 

@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/home/home",
     "pages/detail/detail",
     "pages/shopcat/shopcat",

@@ -15,6 +15,11 @@
   height:124rpx;
   border-radius:80rpx;
 }
+.head-img{
+  width:124rpx;
+  height:124rpx;
+  border-radius: 80rpx;
+}
 .content{
   display: flex;
   flex-direction: column;
@@ -87,7 +92,7 @@ margin: 0 auto;
   display:flex;
   justify-content:space-between;
   align-items: center;
-  padding-bottom:10rpx;
+  padding-bottom:40rpx;
 }
 .payment-list-right image{
   width:14rpx;
@@ -102,7 +107,6 @@ margin: 0 auto;
   display: flex;
   flex-direction:column;
   align-items: center;
-  padding: 10rpx 0;
 }
 .payment-1 image{
   padding-bottom:10rpx;
@@ -236,18 +240,17 @@ margin: 0 auto;
 /* 购物车数量 */
 .number{
     position: relative;
-    top: -70px;
-    left: 20px;
+    top: -140rpx;
+    left: 40rpx;
 }
 .number text{
     display: inline-block;
-    padding: .15em .4em;
-    min-width: 8px;
-    border-radius: 18px;
+    min-width: 8rpx;
+    border-radius: 80rem;
     background-color: #DAB866;
     color: #FFFFFF;
-    line-height: 1.2;
     text-align: center;
-    font-size: 12px;
+    font-size: 0.6rem;
     vertical-align: middle;
+    padding:4rpx 16rpx;
 }
