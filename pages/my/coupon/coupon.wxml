@@ -34,7 +34,7 @@
             <text>您还没有优惠券~~</text>
           </view>
 
-
+  <!-- 这里的优惠券金额不需要保留两位小数点 -->
            <view class="wrapper colour-bg1">
                 <view class="content">
 

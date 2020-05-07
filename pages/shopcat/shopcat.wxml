@@ -65,8 +65,9 @@
       <view class="bottom-operate">
         <view class="bottom-left count">
           <radio color='#262626' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选</view>
-        <view class="bottom-operate price">合计：
-          <text style="color:#DAB866">￥{{totalfee}}</text>
+        <view class="bottom-operate price">
+          <view >合计：</view>
+          <view style="color:#DAB866"><view>￥{{totalfee}}</view><view style="font-size: 0.6rem;">优惠金额见结算页面</view></view>
         </view>
         <view class="bottom-operate space"></view>
         <view class="bottom-operate button" catchtap='goConfirm' style='background-color:#DAB866;'>结算</view>
