@@ -79,13 +79,14 @@ margin: 0 auto;
 }
 
 .payment{
-  padding: 40rpx 20rpx;
+  padding:20rpx;
   margin-top:20rpx;
   border-radius: 10px;
 }
 .payment-list{
   display:flex;
   justify-content:space-between;
+  align-items: center;
   padding-bottom:10rpx;
 }
 .payment-list-right image{
@@ -230,4 +231,23 @@ margin: 0 auto;
   color: #666;
   width: 180px;
   margin-top: 10px;
+}
+
+/* 购物车数量 */
+.number{
+    position: relative;
+    top: -70px;
+    left: 20px;
+}
+.number text{
+    display: inline-block;
+    padding: .15em .4em;
+    min-width: 8px;
+    border-radius: 18px;
+    background-color: #DAB866;
+    color: #FFFFFF;
+    line-height: 1.2;
+    text-align: center;
+    font-size: 12px;
+    vertical-align: middle;
 }

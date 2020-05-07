@@ -213,20 +213,8 @@ Page({
         success: function (res) {
           console.log('copyCode:------');
           console.log(res);
-          // wx.showModal({
-          //   title: '提示',
-          //   content: '复制成功',
-          //   showCancel: false
-          // });
         }
       })
-      // wx.getClipboardData({
-      //   success: function (res) {
-      //     wx.showToast({
-      //       title: '复制成功'
-      //     })
-      //   }
-      // })
     } else {
       wx.showModal({
         title: '提示',
@@ -257,22 +245,13 @@ Page({
           'content-type': 'application/json'
         },
         success: function (res) {
+          console.log(res);
           that.setData({
             qrcode: res.data.data
           });
         }
       });
     }
-
-    // var code = wx.getStorageSync("memberNo");
-    // var url_member_id = app.globalData.domainUrl + "?is_scan=1&customer_id=" + wx.getStorageSync('customerId');
-    // wxbarcode.qrcode('qrcode', url_member_id, 420, 420);
-    // // const codeStr = code;//`${code.slice(0, 4)}****${code.slice(12)}`;
-    // that.setData({
-    //   code,
-    //   // codeStr
-    // });
-
     that.setData({
       showModal: true
     })

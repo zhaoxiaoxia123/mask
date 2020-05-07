@@ -172,6 +172,7 @@ transform:scale(0.7);
 .column1{
    display: flex;
    flex-direction: row;
+   padding:20rpx;
 }
 .column3{
    display: flex;
@@ -184,19 +185,9 @@ transform:scale(0.7);
    justify-content: space-between
 }
 
-.name{
-  padding-top: 20rpx;
-  padding-left: 20rpx;
-  display: flex;
-  align-items: center;
-  width: 100px;
-}
+
 .phone{
-    display: flex;
-  align-items: center;
-   padding-top: 20rpx;
-  width: 100px;
- 
+    padding-left:20rpx;
 }
 .postage{
    display: flex;
@@ -210,9 +201,7 @@ transform:scale(0.7);
   height: 35rpx;
 }
 .address{
-  padding-top: 20rpx;
-  padding-bottom: 40rpx;
-  padding-left: 20rpx; 
+  margin-top:-30rpx;
 }
 
 .list-left{

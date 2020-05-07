@@ -27,9 +27,18 @@
     <label style='width:100px;'>设为默认地址</label>
     <radio color='#262626' checked='{{is_default==true}}' bindtap='radiocon'></radio>
   </view>
+  <view class='column bg-box' data-type="del" data-index="{{index}}" data-id="{{item.customer_addr_id}}" bindtap='editAddress'>
+    <text class="address-delete">删除</text>
+  </view>
 </view>
-<view class='page-pd '>
+<!-- <view class='page-pd '>
   <view class="bottom bg-box size-titletwo col-title">
     <view class="bottom-operate button" bindtap="submitAddress">确认</view>
   </view>
-</view>
+</view> -->
+
+  <view class="ft-bottom ">
+    <view class="ft-bottom-box">
+        <view class="ft-bottom-operate ft-button" bindtap='submitAddress'>确认</view>
+    </view>   
+  </view>

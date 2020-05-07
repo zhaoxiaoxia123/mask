@@ -43,7 +43,7 @@ Page({
       // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
 
-      var param = {
+      var param_p = {
         page_code: 'p004',
         type: "pointList",
         customer_id: wx.getStorageSync('customerId'),

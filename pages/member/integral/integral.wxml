@@ -2,7 +2,7 @@
 <view class='page-pd'>
   <view class='integral'>
     <view class='integral-current'>
-      <text class='current1'>{{customer.point?customer.point:0}}</text>
+      <text class='current1'>{{customer.frozeno_point?customer.frozeno_point:0}}</text>
       <text>当前积分 </text>
     </view>
 
@@ -14,11 +14,11 @@
   <view class='integral-content'>
     <view class='integral-text' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
       <view class='integral-title'>
-        <text class='text-title'>{{item.order_name}}</text>
+        <text class='text-title'>{{item.frozeno_order_name}}</text>
         <text class='text-date'>{{item.created_at}} </text>
       </view>
       <view>
-        <text class='text-add'>{{item.value}}</text>
+        <text class='text-add'>{{item.frozeno_to_value}}</text>
       </view>
     </view>
   </view>

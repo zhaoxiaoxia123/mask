@@ -16,7 +16,8 @@ Page({
   onLoad: function (options) {
     that = this;
     var param = {
-      page_code: "p016"
+      page_code: "p001",
+      type:11
     };
     // var param = '/p016';
     that.getAgreement(param);
