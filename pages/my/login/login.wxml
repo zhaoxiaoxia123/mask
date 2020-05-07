@@ -4,23 +4,28 @@
     <view class="timg">
       <image class="" src="../../img/frozen.png"></image>
     </view>
-    <view class="login-button" >
+    <view>
+      <checkbox-group>
+        <label class="checkbox">
+          <checkbox color='#333' catchtap="checkboxChange" checked="{{isShareBy}}" />
+        </label>
+      </checkbox-group>
+      是否需要填写邀请码</view>
+    <view wx:if="{{isShareBy}}">邀请码为：<input class="use" placeholder='请输入邀请码' bindinput="setShareByInput" value='{{shareBy}}'></input></view>
+    <view class="login-button">
       <button class="login-bt bcolor-golden" style="width: 100%;" lang="zh_CN" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">手机号一键登录</button>
       <button class="login-bt bcolor-white" style="width: 100%;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信一键登录 </button>
       <button class="login-bt bcolor-white" style="width: 100%;" bindtap="showModalView">手机验证码注册/登录 </button>
     </view>
   </view>
-
   <view>
     <view class="col-conten">
       <text>注册/登录即代表同意</text>
       <text bindtap="goPage" data-type="agree">《智美mall服务协议》</text>
       <text>和</text>
       <text bindtap="goPage" data-type="privacy">《隐私政策》</text>
-
     </view>
   </view>
-
 
   <!-- 遮罩层 请求授权微信 -->
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
@@ -37,16 +42,11 @@
         <input class="use" placeholder='请输入验证码' bindinput="setCodeInput" bindconfirm="search" value='{{code}}'></input>
         <view class="bottom-operate button" bindtap='sendCode'>获取验证码</view>
       </view>
-
     </view>
-
     <view class="login-tail">
-      <!-- <view  class="bcolor-golden" bindtap="loginTo" >确定</view> -->
       <view bindtap="loginTo" class="bcolor-golden" wx:if="{{isSubmit}}">确定</view>
       <view class="login-bt disabled" wx:if="{{!isSubmit}}">确定</view>
     </view>
-
-
   </view>
-
 </view>
+

@@ -1,7 +1,5 @@
 <!--pages/my/my.wxml-->
-
 <view class='page-pd '>
-
   <!-- 遮罩层 -->
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
   <!-- 弹出层 -->
@@ -14,12 +12,7 @@
   </view>
 
   <view class='parent size-titletwo col-content bg-box'>
-
     <view class='parent-left ' wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
-    <!-- <view class='head' wx:if="{{canGetUserInfo}}">
-      <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
-    </view> -->
-
     <view class='parent-left ' wx:if="{{!canGetUserInfo && !isLogin}}">
       <view class="head-img">
           <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image> -->
@@ -43,17 +36,15 @@
         <text class='money-grade-text'>{{items.level_name}}</text>
       </view>
     </view>
-
   </view>
 
   <!--订单-->
   <view class='payment bg-box col-content size-titletwo '>
-
     <view class='payment-list' data-id="1" bindtap='order'>
       <view class='payment-list-left size-titleone'>
         <text>我的订单</text>
       </view>
-      <view class='payment-list-right' >
+      <view class='payment-list-right'>
         <text>全部订单</text>
         <image src='../img/dv.png'></image>
       </view>
@@ -64,29 +55,33 @@
         <image class='icon58' src="../img/payment1.png"></image>
         <text>待付款</text>
         <view class='number'>
-            <text>{{items.order_count?items.order_count:0}}</text>
-       </view>
+            <text>{{items.order_count1?items.order_count1:0}}</text>
+        </view>
       </view>
       <view class='payment-1' data-id="3" bindtap='order'>
         <image class='icon58' src="../img/send@2x.png"></image>
         <text>待发货</text>
+        <view class='number'>
+            <text>{{items.order_count2?items.order_count2:0}}</text>
+        </view>
       </view>
 
       <view class='payment-1' data-id="4" bindtap='order'>
         <image class='icon58' src="../img/goods.png"></image>
         <text>待收货</text>
+        <view class='number'>
+            <text>{{items.order_count3?items.order_count3:0}}</text>
+        </view>
       </view>
 
       <view class='payment-1' data-id="5" bindtap='order'>
         <image class='icon58' src="../img/complete.png"></image>
         <text>已完成</text>
       </view>
-
     </view>
   </view>
 
   <view class='lists bg-box col-content size-titletwo'>
-
     <view class='list-wap' bindtap='shareApp'>
       <view class='left'>
         <image class='icon40' src='../img/friend@2x.png'></image>
@@ -156,13 +151,5 @@
         <image src='../img/dv.png'></image>
       </view>
     </view>
-
   </view>
-
-
-
-  <!-- <view wx:if="isShare">
-<view bindtap='copyCode'>复制邀请码</view>
-<view bindtap='showShareQRCode'>邀请二维码</view>
-</view> -->
 </view>

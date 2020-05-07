@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    order_id: 0,
-    from_page:'',
+    orderId: 0,
+    fromPage:'',
     currentTab: '0',
     indicatorDots: true,
     indicatorColor: "#000000",
@@ -24,8 +24,10 @@ Page({
     rateAmount:0,
     customerInfo: [],
     finalSum: 0,   //使用积分后的实付款
-    usingPoint:0   //使用积分值
-
+    usingPoint:0,   //使用积分值
+    outTradeNo: '',    //此次支付的商户订单号
+    setInter: '',   //存储计时器
+    num: 30    //记录订单失效时间  30*60 30分钟失效
   },
 
   /**
@@ -36,8 +38,8 @@ Page({
     console.log('onload:----');
     console.log(options.order_id);
     that.setData({
-      order_id: options.order_id,
-      from_page: options.from_page
+      orderId: options.order_id,
+      fromPage: options.from_page
     });
 
     if (wx.getStorageSync('customerId')) {
@@ -61,12 +63,25 @@ Page({
     var param_o = {
       page_code: 'p008',
       has_address:1,   //查询该订单使用地址
-      order_id: that.data.order_id
+      order_id: that.data.orderId
     };
     // var param_o = '/p008?has_address=1&order_id='+that.data.order_id;
     that.getOrder(param_o);
     // that.getAddress();
+
+    //将计时器赋值给setInter
+    that.data.setInter = setInterval(
+      function () {
+        var numVal = that.data.num - 1;
+        that.setData({ num: numVal });
+        console.log('setInterval==' + that.data.num);
+        if(numVal <= 0){
+          clearInterval(that.data.setInter)
+        }
+      }, 1000*60);
+
   },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -94,8 +109,8 @@ Page({
    */
   onUnload: function () {
     console.log('orderdetail onUnload:====');
-    console.log(that.data.from_page);
-    if (that.data.from_page == 'shopping'){
+    console.log(that.data.fromPage);
+    if (that.data.fromPage == 'shopping'){
       var pages = getCurrentPages();  // 当前页的数据，可以输出来看看有什么东西
       var prevPage = pages[pages.length - 2];  // 上一页的数据，也可以输出来看看有什么东西
       /** 设置数据 这里面的 value 是上一页你想被携带过去的数据，后面是本方法里你得到的数据，我这里是detail.value，根据自己实际情况设置 */
@@ -103,6 +118,10 @@ Page({
         isBack: false,
       })
     }
+
+    //清除计时器  即清除setInter
+    clearInterval(that.data.setInter)
+
   },
 
   /**
@@ -167,27 +186,41 @@ Page({
       },
       success: function (res) {
         var datas = res.data.data;
-        that.setData({
-          items: datas
-        });
-        var order_amount = that.data.items[0].frozeno_order_amount;
+        console.log(datas);
+        if (datas == false) {
+          wx.showToast({
+            title: "该订单已失效。"
+          });
+          wx.navigateBack({
+            delta: 1
+          })
+        }else{
+          that.setData({
+            items: datas
+          });
+          if (that.data.items[0].minute){
+            that.setData({
+              items: datas
+            });
+          }
+          var order_amount = that.data.items[0].frozeno_order_amount;
 
-        that.setData({
-          orderAmount: order_amount,
-          rateAmount: (order_amount * (that.data.transform.rate / 100))
-        });
-        // console.log('getOrder:----------');
-        // console.log((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)));
-        // console.log(that.data.transform.type);
-        
-        if ((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
-          that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
-        } else if ((parseFloat(order_amount) < parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
-          that.sumAmount(0, that.data.rateAmount, that.data.orderAmount);
-        } else if (that.data.transform.type == 1) {
-          that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
+          that.setData({
+            orderAmount: order_amount,
+            rateAmount: (order_amount * (that.data.transform.rate / 100))
+          });
+          // console.log('getOrder:----------');
+          // console.log((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)));
+          // console.log(that.data.transform.type);
+          
+          if ((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
+            that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
+          } else if ((parseFloat(order_amount) < parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
+            that.sumAmount(0, that.data.rateAmount, that.data.orderAmount);
+          } else if (that.data.transform.type == 1) {
+            that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
+          }
         }
-
       }
     });
   },
@@ -278,8 +311,14 @@ Page({
           },
           success: function (res) {
             console.log(res);
-            var datas = res.data;
+            var datas = res.data.data;
+            that.setData({
+              outTradeNo: res.data.out_trade_no
+            });
             if (datas) {
+              console.log('datas:-----');
+              console.log(datas);
+              
               wx.requestPayment({
                 'timeStamp': datas.timeStamp,
                 'nonceStr': datas.nonceStr,
@@ -288,6 +327,7 @@ Page({
                 'paySign': datas.paySign,
                 'success': function (res) {
                   console.log('success');
+                  console.log(res);
                   wx.showToast({
                     title: '支付成功',
                     icon: 'success',
@@ -296,10 +336,12 @@ Page({
                   that.payAfter();
                 },
                 'fail': function (res) {
+                  console.log('fail');
                   console.log(res);
                 },
                 'complete': function (res) {
                   console.log('complete');
+                  console.log(res);
                 }
               });
             }
@@ -324,6 +366,7 @@ Page({
           type: 'pay',
           order_id: that.data.items[0].o_id,
           amount: that.data.items[0].frozeno_order_amount,
+          out_trade_no: that.data.outTradeNo,
           customer_id: wx.getStorageSync('customerId')
         },
         header: {

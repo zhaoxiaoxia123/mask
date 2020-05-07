@@ -30,8 +30,9 @@ Page({
     that = this;
     that.setData({
       currentTab: parseInt(options.id) - 1,
-      order_state:options.id
+      order_state: parseInt(options.id) - 1
     });
+    console.log(that.data.order_state);
   },
 
   /**
@@ -168,7 +169,7 @@ Page({
     } else {
       that.setData({
         currentTab: e.currentTarget.dataset.current,
-        order_state: parseInt(e.currentTarget.dataset.current)+1,
+        order_state: parseInt(e.currentTarget.dataset.current),
         offset:1,
         isLast:false,
         items:[]
@@ -195,13 +196,15 @@ Page({
   //取消订单
   cancelOrder: function (e) {
     var order_id = e.currentTarget.dataset.id;
+    var order_state = e.currentTarget.dataset.state;
     wx.request({
       url: app.globalData.domainUrl,
       method: "POST",
       data: {
         page_code: 'p008',
         type: 'cancel',
-        order_id: order_id
+        order_id: order_id,
+        order_state: order_state   //取消前的订单状态
       },
       header: {
         "Content-Type": "application/x-www-form-urlencoded"

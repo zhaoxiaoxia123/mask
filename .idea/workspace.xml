@@ -2,58 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="190413f9-7aba-4177-a74a-879d4f6bd676" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/kind/kind.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/kind/kind.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/kind/kind.wxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/kind/kind.wxss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/kind/search/search.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/kind/search/search.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/kind/search/search.wxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/kind/search/search.wxss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/login/login.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/login/login.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/login/login.wxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/login/login.wxss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/logs/logs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/logs/logs.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/logs/logs.wxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/logs/logs.wxss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/my/member/member.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/my/member/member.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/my/member/member.wxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pages/my/member/member.wxss" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.json" afterPath="$PROJECT_DIR$/app.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/detail/detail.js" afterPath="$PROJECT_DIR$/pages/detail/detail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/detail/detail.wxml" afterPath="$PROJECT_DIR$/pages/detail/detail.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/home/home.js" afterPath="$PROJECT_DIR$/pages/home/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/home/home.wxml" afterPath="$PROJECT_DIR$/pages/home/home.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/agreementone/agreementone.js" afterPath="$PROJECT_DIR$/pages/member/agreementone/agreementone.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grow/grow.js" afterPath="$PROJECT_DIR$/pages/member/grow/grow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/integral/integral.js" afterPath="$PROJECT_DIR$/pages/member/integral/integral.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/member.js" afterPath="$PROJECT_DIR$/pages/member/member.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/member.wxml" afterPath="$PROJECT_DIR$/pages/member/member.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/address/address.js" afterPath="$PROJECT_DIR$/pages/my/address/address.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/address/address.wxml" afterPath="$PROJECT_DIR$/pages/my/address/address.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/address/addressdetail/addressdetail.js" afterPath="$PROJECT_DIR$/pages/my/address/addressdetail/addressdetail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/address/addressdetail/addressdetail.wxml" afterPath="$PROJECT_DIR$/pages/my/address/addressdetail/addressdetail.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/coupon/coupon.js" afterPath="$PROJECT_DIR$/pages/my/coupon/coupon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/invoice/invoice.js" afterPath="$PROJECT_DIR$/pages/my/invoice/invoice.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/invoice/invoicedetail/invoicedetail.js" afterPath="$PROJECT_DIR$/pages/my/invoice/invoicedetail/invoicedetail.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/login/login.js" afterPath="$PROJECT_DIR$/pages/my/login/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/login/login.wxml" afterPath="$PROJECT_DIR$/pages/my/login/login.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/my.js" afterPath="$PROJECT_DIR$/pages/my/my.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/my.wxml" afterPath="$PROJECT_DIR$/pages/my/my.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/news/news.js" afterPath="$PROJECT_DIR$/pages/my/news/news.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/order.js" afterPath="$PROJECT_DIR$/pages/my/order/order.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/order.wxml" afterPath="$PROJECT_DIR$/pages/my/order/order.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js" afterPath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.wxml" afterPath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/setting/information/information.js" afterPath="$PROJECT_DIR$/pages/my/setting/information/information.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js" afterPath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.wxml" afterPath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/shopcat.js" afterPath="$PROJECT_DIR$/pages/shopcat/shopcat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/shopcat.wxml" afterPath="$PROJECT_DIR$/pages/shopcat/shopcat.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.config.json" afterPath="$PROJECT_DIR$/project.config.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,7 +25,7 @@
       <file leaf-file-name="app.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-390">
+            <state relative-caret-position="78">
               <caret line="2" column="22" lean-forward="false" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
               <folding />
             </state>
@@ -78,7 +35,7 @@
       <file leaf-file-name="setting.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/my/setting/setting.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-709">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -88,7 +45,7 @@
       <file leaf-file-name="setting.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/my/setting/setting.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2230">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -98,8 +55,8 @@
       <file leaf-file-name="information.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/my/setting/information/information.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3269">
-              <caret line="85" column="15" lean-forward="true" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
+            <state relative-caret-position="3315">
+              <caret line="85" column="15" lean-forward="false" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -118,26 +75,6 @@
       <file leaf-file-name="information.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/my/setting/information/information.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-220">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="customer.wxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/my/customer/customer.wxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="privacy.wxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/my/privacy/privacy.wxml">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
@@ -155,11 +92,48 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="news.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="news.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/my/news/news.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="121" column="5" lean-forward="true" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
+            <state relative-caret-position="482">
+              <caret line="122" column="4" lean-forward="false" selection-start-line="122" selection-start-column="4" selection-end-line="122" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="478">
+              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+              <folding>
+                <marker date="1588132238918" expanded="true" signature="23:3892" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="1776:3144" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="1806:3139" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="1837:3133" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="2069:3043" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="2145:3032" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="2182:2823" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="2251:2496" ph="{&quot;page_code&quot;: 'p010'...}" />
+                <marker date="1588132238918" expanded="true" signature="2610:2697" ph="//..." />
+                <marker date="1588132238918" expanded="true" signature="2744:2809" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="2837:3020" ph="//..." />
+                <marker date="1588132238918" expanded="true" signature="3049:3125" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="3181:3889" ph="{...}" />
+                <marker date="1588132238918" expanded="true" signature="3222:3884" ph="{&quot;method&quot;: &quot;POST&quot;...}" />
+                <marker date="1588132238918" expanded="true" signature="3367:3436" ph="{&quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;...}" />
+                <marker date="1588132238918" expanded="true" signature="3468:3878" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/my/login/login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="26" column="25" lean-forward="false" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -169,14 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>method</find>
-      <find>showToast</find>
-      <find>getCategoryList</find>
-      <find>multipart/form-data</find>
-      <find>form-data</find>
-      <find>multipart/</find>
-      <find>multipart</find>
-      <find>p005</find>
       <find>getShoppingCount</find>
       <find>getAddress</find>
       <find>domainUrl</find>
@@ -199,6 +165,14 @@
       <find>setting</find>
       <find>member/member</find>
       <find>logs/logs</find>
+      <find>appLogin</find>
+      <find>login</find>
+      <find>loginTo</find>
+      <find>loginByPhone</find>
+      <find>sendCode</find>
+      <find>bindPhone</find>
+      <find>bindCode</find>
+      <find>shareBy</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -229,15 +203,15 @@
         <option value="$PROJECT_DIR$/pages/my/coupon/coupon.js" />
         <option value="$PROJECT_DIR$/pages/my/invoice/invoice.js" />
         <option value="$PROJECT_DIR$/pages/my/invoice/invoicedetail/invoicedetail.js" />
-        <option value="$PROJECT_DIR$/pages/my/login/login.js" />
         <option value="$PROJECT_DIR$/pages/my/member/member.js" />
         <option value="$PROJECT_DIR$/pages/my/news/news.js" />
         <option value="$PROJECT_DIR$/pages/my/order/order.js" />
         <option value="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/pages/my/my.js" />
         <option value="$PROJECT_DIR$/app.json" />
         <option value="$PROJECT_DIR$/pages/my/setting/information/information.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/pages/my/login/login.js" />
       </list>
     </option>
   </component>
@@ -269,7 +243,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -419,11 +392,12 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../php/微信支付/adonis-wxpay_saoma-master" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -526,17 +500,18 @@
       <workItem from="1587016553452" duration="3335000" />
       <workItem from="1587095405379" duration="16000" />
       <workItem from="1587955679199" duration="478000" />
+      <workItem from="1588131803452" duration="2434000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16215000" />
+    <option name="totallyTimeSpent" value="18649000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22532189" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22854078" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -577,7 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -593,7 +567,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="741">
           <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-          <folding />
+          <folding>
+            <marker date="1588132238918" expanded="true" signature="23:3892" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="1776:3144" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="1806:3139" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="1837:3133" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2069:3043" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2145:3032" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2182:2823" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2251:2496" ph="{&quot;page_code&quot;: 'p010'...}" />
+            <marker date="1588132238918" expanded="true" signature="2610:2697" ph="//..." />
+            <marker date="1588132238918" expanded="true" signature="2744:2809" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2837:3020" ph="//..." />
+            <marker date="1588132238918" expanded="true" signature="3049:3125" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="3181:3889" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="3222:3884" ph="{&quot;method&quot;: &quot;POST&quot;...}" />
+            <marker date="1588132238918" expanded="true" signature="3367:3436" ph="{&quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;...}" />
+            <marker date="1588132238918" expanded="true" signature="3468:3878" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -618,28 +609,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/kind/kind.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="37" column="4" lean-forward="true" selection-start-line="37" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/kind/search/search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="108" column="35" lean-forward="false" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/login/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="285" column="37" lean-forward="false" selection-start-line="285" selection-start-column="28" selection-end-line="285" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/kind/kind.js" />
+    <entry file="file://$PROJECT_DIR$/pages/kind/search/search.js" />
+    <entry file="file://$PROJECT_DIR$/pages/login/login.js" />
     <entry file="file://$PROJECT_DIR$/pages/member/grade/grade.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-702">
@@ -779,7 +751,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="702">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -787,7 +758,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="15" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -799,63 +769,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1443">
-          <caret line="37" column="14" lean-forward="false" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/my/login/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4836">
-          <caret line="124" column="61" lean-forward="false" selection-start-line="124" selection-start-column="61" selection-end-line="124" selection-end-column="61" />
-          <folding>
-            <marker date="1587712977311" expanded="true" signature="62:8821" ph="{...}" />
-            <marker date="1587712977311" expanded="true" signature="903:1097" ph="{...}" />
-            <marker date="1587712977311" expanded="true" signature="934:1097" ph="{...}" />
-            <marker date="1587712977311" expanded="true" signature="988:1097" ph="{...}" />
-            <marker date="1587712977311" expanded="true" signature="1022:1097" ph="{...}" />
-            <marker date="1587712977311" expanded="true" signature="1083:1097" ph="{&quot;type&quot;: 'wxLogin'...}" />
-            <marker date="1587712977311" expanded="true" signature="8809:8815" ph="{...}" />
-            <marker date="1587712977311" expanded="true" signature="8809:8819" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/login/login.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/login/login.wxml" />
     <entry file="file://$PROJECT_DIR$/pages/my/my.wxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3428">
           <caret line="142" column="55" lean-forward="false" selection-start-line="142" selection-start-column="48" selection-end-line="142" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/my/member/member.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/my/member/member.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="132" column="18" lean-forward="true" selection-start-line="132" selection-start-column="18" selection-end-line="132" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/my/member/member.wxml" />
+    <entry file="file://$PROJECT_DIR$/pages/my/member/member.js" />
     <entry file="file://$PROJECT_DIR$/pages/my/my.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -880,25 +803,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/logs/logs.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/logs/logs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/logs/logs.wxml" />
+    <entry file="file://$PROJECT_DIR$/pages/logs/logs.js" />
     <entry file="file://$PROJECT_DIR$/app.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-390">
+        <state relative-caret-position="78">
           <caret line="2" column="22" lean-forward="false" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
           <folding />
         </state>
@@ -906,7 +815,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/setting/setting.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-709">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -914,7 +823,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/setting/setting.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2230">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -922,7 +831,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/setting/information/information.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-220">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -930,8 +839,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/setting/information/information.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3269">
-          <caret line="85" column="15" lean-forward="true" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
+        <state relative-caret-position="3315">
+          <caret line="85" column="15" lean-forward="false" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
           <folding />
         </state>
       </provider>
@@ -954,8 +863,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/news/news.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="121" column="5" lean-forward="true" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
+        <state relative-caret-position="482">
+          <caret line="122" column="4" lean-forward="false" selection-start-line="122" selection-start-column="4" selection-end-line="122" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding>
+            <marker date="1588132238918" expanded="true" signature="23:3892" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="1776:3144" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="1806:3139" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="1837:3133" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2069:3043" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2145:3032" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2182:2823" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2251:2496" ph="{&quot;page_code&quot;: 'p010'...}" />
+            <marker date="1588132238918" expanded="true" signature="2610:2697" ph="//..." />
+            <marker date="1588132238918" expanded="true" signature="2744:2809" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="2837:3020" ph="//..." />
+            <marker date="1588132238918" expanded="true" signature="3049:3125" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="3181:3889" ph="{...}" />
+            <marker date="1588132238918" expanded="true" signature="3222:3884" ph="{&quot;method&quot;: &quot;POST&quot;...}" />
+            <marker date="1588132238918" expanded="true" signature="3367:3436" ph="{&quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;...}" />
+            <marker date="1588132238918" expanded="true" signature="3468:3878" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/my/login/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="26" column="25" lean-forward="false" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
           <folding />
         </state>
       </provider>

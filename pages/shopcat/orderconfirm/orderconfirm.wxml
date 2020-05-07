@@ -85,7 +85,8 @@
       <view class='coupon-wap'>
         <view class='coupon-left'>
           <text wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">积分共{{customerInfo.frozeno_point}},可用{{usingPoint}}，抵¥{{usingPoint}}</text>
-          <text wx:if="{{customerInfo.frozeno_point==0 || product_amount < tInfo.satisfy_amount}}">不可用积分。</text>
+          <text wx:if="{{customerInfo.frozeno_point==0 }}">当前没有积分可以使用</text>
+          <text wx:if="{{product_amount < tInfo.satisfy_amount}}">不可用积分。</text>
         </view>
         <view class='coupon-right' wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">
           <checkbox-group>

@@ -30,25 +30,6 @@ Page({
     that.setData({
       products: options.products //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
     });
-    // console.log(options.products);
-    // var product_ids = '';
-    // var product_count = '';
-    // if (that.data.products.length >= 5) {
-    //   var pros = that.data.products.split("--");
-    //   for (var i = 0; i < pros.length; i++) {
-    //     if (pros[i]){
-    //       var p = pros[i].split(',');
-    //       product_ids += p[0] + ',';
-    //       product_count += p[1] + ',';
-    //     }
-    //   }
-    // }
-    // that.setData({
-    //   product_ids: product_ids,
-    //   product_count: product_count
-    // });
-    // console.log(product_ids);
-    // console.log(product_count);
 
   },
 
@@ -206,7 +187,7 @@ Page({
         })
         setTimeout(function() {
           that.sumProductAmount(that.data.items, that.data.customerInfo);
-        }, 1000);
+        }, 2000);
       }
     });
   },
@@ -223,8 +204,8 @@ Page({
       // console.log('productAmount:----');
       // console.log(productAmount);
     }
-    //商品总价会员折扣后的价格
-    var discountAmount = productAmount - (cInfo.discount != 0 ? (productAmount * (cInfo.discount / 100)).toFixed(2) : 0);
+    //商品总价会员折扣后的价格  productAmount
+    var discountAmount = (cInfo.discount != 0 ? (productAmount * (cInfo.discount / 100)).toFixed(2) : productAmount);
     // console.log('discountAmount:----');
     // console.log(discountAmount);
     //商品总价
@@ -244,19 +225,19 @@ Page({
 
     var discountAmount = tPayAmount; //that.data.discountAmount;
     var productAmount = that.data.productAmount;
-    // console.log(productAmount);
-    // console.log(discountAmount);
+    console.log(productAmount);
+    console.log(discountAmount);
     var payAmount = 0; //实付款
-    // console.log(cInfo.point);
-    // console.log(tInfo.type == 2);
-    if (cInfo.point > 0 && that.data.isUsePoint) {
+    console.log(cInfo.frozeno_point);
+    console.log(tInfo.type);
+    console.log(tInfo.type == 2);
+    if (cInfo.frozeno_point > 0 && that.data.isUsePoint) {
       if (tInfo.type == 2) { //若满减
         // console.log("若满减:----");
         // console.log(productAmount);
-        // console.log(productAmount);
         // console.log(productAmount >= tInfo.satisfy_amount);
         if (productAmount >= tInfo.satisfy_amount) { //商品总价是否大于等于满减金额设置
-          that.sumAmount(cInfo.point, tInfo.rate, discountAmount);
+          that.sumAmount(cInfo.frozeno_point, tInfo.rate, discountAmount);
         } else { //小于：则不可使用积分。
           that.setData({
             usingPoint: 0,
@@ -264,7 +245,7 @@ Page({
           });
         }
       } else if (tInfo.type == 1) {
-        that.sumAmount(cInfo.point, tInfo.rate, discountAmount);
+        that.sumAmount(cInfo.frozeno_point, tInfo.rate, discountAmount);
       }
     } else {
       that.setData({
@@ -280,14 +261,15 @@ Page({
     var discountAmount = that.data.discountAmount; //商品会员折扣后的总价
     var tIndex = that.data.isCheckTicket - 1; //选中卡券索引
     var usingTicketAmount = 0;
-    // console.log('tIndex:----');
-    // console.log(tIndex);
+    console.log('tIndex:----');
+    console.log(tIndex);
+    console.log(discountAmount);
     if (tIndex != 9998) { //上面索引减了个1
       var tList = that.data.ticketList; //卡券列表
       var payAmount = 0;
-      // console.log('sumCheckTicket:----');
-      // console.log(tList);
-      // console.log(tIndex);
+      console.log('sumCheckTicket:----');
+      console.log(tList);
+      console.log(tIndex);
       if (tList[tIndex]['ticket_type'] == 1) { //通用
         usingTicketAmount = tList[tIndex]['ticket_amount'];
         payAmount = discountAmount - tList[tIndex]['ticket_amount'];
@@ -326,8 +308,11 @@ Page({
   sumAmount: function(point, rate, discountAmount) {
     //可抵用积分数
     var usingPoint = (discountAmount * (parseFloat(rate) / 100));
-    // console.log('sumAmount:----------');
-    // console.log(parseFloat(point) >= parseFloat(usingPoint));
+    console.log('sumAmount:----------');
+    console.log(parseFloat(point) >= parseFloat(usingPoint));
+    console.log(parseFloat(discountAmount));
+    console.log(parseFloat(usingPoint));
+    console.log(parseFloat(discountAmount) - parseFloat(usingPoint));
     if (parseFloat(point) >= parseFloat(usingPoint)) { //用户积分大于等于可抵用积分数
       that.setData({
         usingPoint: usingPoint,
