@@ -1,12 +1,5 @@
 <!--pages/my/coupon/coupon.wxml-->
 <view class="">
-<!--没有相关优惠券时显示-->
-  <view class='search-no' wx:if="{{ticketList.length <= 0}}">
-    <view>
-      <image class='scimg' src='../../img/wu.png'></image>
-    </view>
-    <text>您还没有优惠券~~</text>
-  </view>
 
 
   <view class='ticket-container'>
@@ -32,6 +25,15 @@
       <!--内容布局-->
       <swiper class='swiper coupon' bindchange='pagechange' current='{{currentIndex}}'>
         <swiper-item class='swiper'>
+
+          <!--没有相关优惠券时显示-->
+          <view class='search-no' wx:if="{{ticketList.length <= 0}}">
+            <view>
+              <image class='scimg' src='../../img/wu.png'></image>
+            </view>
+            <text>您还没有优惠券~~</text>
+          </view>
+
 
            <view class="wrapper colour-bg1">
                 <view class="content">
@@ -72,6 +74,13 @@
 
         </swiper-item>
         <swiper-item class='swiper coupon' class='swiper'>
+          <!--没有相关优惠券时显示-->
+          <view class='search-no' wx:if="{{ticketList.length <= 0}}">
+            <view>
+              <image class='scimg' src='../../img/wu.png'></image>
+            </view>
+            <text>您还没有优惠券~~</text>
+          </view>
           <view class="wrapper colour-bg2">
                 <view class="content">
 
@@ -111,6 +120,15 @@
 
         </swiper-item>
         <swiper-item class='swiper coupon' class='swiper'>
+
+          <!--没有相关优惠券时显示-->
+          <view class='search-no' wx:if="{{ticketList.length <= 0}}">
+            <view>
+              <image class='scimg' src='../../img/wu.png'></image>
+            </view>
+            <text>您还没有优惠券~~</text>
+          </view>
+
           <view class="wrapper colour-bg2">
                 <view class="content">
 

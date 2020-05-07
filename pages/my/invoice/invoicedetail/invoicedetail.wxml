@@ -23,12 +23,22 @@
   <view class='column bg-box'>
     <label>银行账户</label><input placeholder='请输入银行账户' bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}'></input>
   </view>
-  
 
-  <view class='page-pd '>
-    <view class="bottom bg-box size-titletwo col-title" >
-    <view class="bottom-operate button" bindtap="submitInvoice">确认</view>
-    </view>
+  <view class='column bg-box'>
+    <label style='width:100px;'>设为默认地址</label>
+    <radio color='#262626' ></radio>
   </view>
 
+  <view class='column bg-box' data-type="delete" data-index="{{index}}" data-id="{{item.invoice_id}}" bindtap='editInvoice'>
+    <text class="address-delete">删除</text>
+  </view>
+  
+
 </view>
+
+
+  <view class="ft-bottom ">
+    <view class="ft-bottom-box">
+        <view class="ft-bottom-operate ft-button" bindtap='submitInvoice'>确认</view>
+    </view>   
+  </view>

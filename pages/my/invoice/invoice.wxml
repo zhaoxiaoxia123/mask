@@ -11,29 +11,35 @@
     <!--bindtap绑定事件-->
     <view class='list  bg-box col-content size-titletwo' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
       <view class='column space-between'>
-        <view class='name'>{{item.username}}</view>
-        <view class='phone'>{{item.phone}}</view>
+        <view class="address-left">
+            <view class='address-name'>{{item.username}}</view>
+            <view class='address-phone'>{{item.phone}}</view>    
+        </view>
+        <view class="address-right">
+            <view class='edit' data-type="edit" data-id="{{item.invoice_id}}" bindtap='editInvoice'>
+            <image class='list-right-img' src='../../img/edit.png'></image>编辑</view>      
+        </view>
+
       </view>
 
       <view class='column'>
         <view class='address'>税号：{{item.tax_number}}</view>
       </view>
 
-      <view class='downline'></view>
-
+      <!-- <view class='downline'></view> -->
+<!-- 
       <view class='column direction-row'>
 
         <view class='list-left'>
-          <!-- <checkbox class='checkbox' disabled="disabled" value=''>默认地址</checkbox> -->
+          <checkbox class='checkbox' disabled="disabled" value=''>默认地址</checkbox>
         </view>
         <view class='list-right'>
-          <view class='edit' data-type="edit" data-id="{{item.invoice_id}}" bindtap='editInvoice'>
-            <image class='list-right-img' src='../../img/edit.png'></image>编辑</view>
+
           <view class='del' data-type="delete" data-index="{{index}}" data-id="{{item.invoice_id}}" bindtap='editInvoice'>
             <image class='list-right-img' src='../../img/del.png'></image>删除</view>
         </view>
 
-      </view>
+      </view> -->
 
     </view>
 
