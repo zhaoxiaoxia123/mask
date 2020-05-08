@@ -138,6 +138,52 @@ Page({
     });
     console.log(is_default);
   },
+  //删除地址信息
+  deleteAddress: function () {
+    if (wx.getStorageSync('customerId')) {
+      wx.showModal({
+        title: '提示',
+        content: '你确定要删除该地址信息？',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定');
+            var param = {
+              page_code: 'p002',
+              type: "del",
+              customer_addr_id: that.data.addressId
+            };
+            wx.request({
+              url: app.globalData.domainUrl,
+              method: "POST",
+              data: param,
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              success: function (res) {
+                console.log(res);
+                var datas = res.data.data;
+                if (datas) {
+                  wx.navigateBack({
+                    delta: 1
+                  });
+                }
+              }
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '授权登录后再编辑信息。',
+        showCancel: false
+      });
+    }
+  },
+
   //提交地址信息
   submitAddress: function(){
     if (wx.getStorageSync('customerId')){

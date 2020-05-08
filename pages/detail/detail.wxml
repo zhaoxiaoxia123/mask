@@ -7,7 +7,6 @@
       </swiper-item>
     </block>
   </swiper>
-
   <view class='page-pd'>
     <view class='money'>
       <text>优惠价￥{{items.frozeno_discount_amount}}</text>
@@ -26,14 +25,11 @@
       <text class='num'>销量：{{items.sale}}件</text>
     </view>
   </view>
-
   <!-- <view class='spec' bindtap="toggleDialog">
     <text>选择规格</text>
     <image src='../img/dv.png'></image>
   </view> -->
-
   <view class='evaluate'>
-
     <view class='detail'> 商品详情 </view>
     <view class='img'>
       <block wx:for="{{swipers}}" wx:key="*this">
@@ -46,10 +42,11 @@
   <view class='bottom'>
     <view class='bottom-operate'>
       <view class='bottom-left count'>
-        <image class='icon58' src='../img/service.png'></image>
+        <contact-button type="default-light" size="20" session-from="weapp"></contact-button>
+        <!-- <image class='icon58' src='../img/service.png'></image> -->
       </view>
       <view class='bottom-left count' catchtap="shoppingList">
-        <view class='number'>
+        <view class='number' wx:if="{{shoppingCount}}">
           <text>{{shoppingCount}}</text>
         </view>
         <image class='icon58' src='../img/shopcat_false.png'></image>
@@ -63,26 +60,22 @@
     <!--bindtap绑定事件-->
     <view class='lists'>
       <view class='list'>
-
         <view class='detail-img'>
           <image src='{{swipers[0].img_url}}'></image>
         </view>
         <view class='detail-center'>
           <view class='sales'>
             <view class='detail-sales'>{{items.category_desc}}</view>
-
             <image class='icon40' src='../img/close@2x.png' bindtap='close'></image>
           </view>
           <view class='sales-spec'>
             <text>优惠价￥{{items.frozeno_discount_amount}}（</text>
             <text class='decoration'>￥{{items.frozeno_amount}}</text>
             <text>）</text>
-
           </view>
           <view class='text-size'>库存：{{items.stock}}</view>
         </view>
       </view>
-
       <view class='column'>
         <view>购买数量</view>
         <view class='item'>
@@ -93,19 +86,18 @@
           <view class='item-number'>
             <image class='' data-id='{{items.category_id}}' src='../img/plus@2x.png' bind:tap="plusFn"></image>
           </view>
-
         </view>
-
       </view>
     </view>
 
     <view class='bottom'>
       <view class='bottom-operate'>
-        <view class='bottom-left count'>
-          <image class='icon58' src='../img/service.png'></image>
+      <view class='bottom-left count'>
+        <contact-button type="default-light" size="20" session-from="weapp"></contact-button>
+          <!-- <image class='icon58' src='../img/service.png'></image> -->
         </view>
         <view class='bottom-left count' catchtap="shoppingList">
-          <view class='number'>
+          <view class='number' wx:if="{{shoppingCount}}">
             <text>{{shoppingCount}}</text>
           </view>
           <image class='icon58' src='../img/shopcat_false@2x.png'></image>

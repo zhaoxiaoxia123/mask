@@ -12,8 +12,8 @@
   </view>
 
   <view class='parent size-titletwo col-content bg-box'>
-    <view class='parent-left ' wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
-    <view class='parent-left ' wx:if="{{!canGetUserInfo && !isLogin}}">
+    <view class='parent-left' wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
+    <view class='parent-left' wx:if="{{!canGetUserInfo && !isLogin}}">
       <view class="head-img">
           <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image> -->
           <open-data class="wx-image_SC1alK" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
@@ -54,14 +54,14 @@
       <view class='payment-1' data-id="2" bindtap='order'>
         <image class='icon58' src="../img/payment1.png"></image>
         <text>待付款</text>
-        <view class='number'>
+        <view class='number' wx:if="{{items.order_count1 > 0}}">
             <text>{{items.order_count1?items.order_count1:0}}</text>
         </view>
       </view>
       <view class='payment-1' data-id="3" bindtap='order'>
         <image class='icon58' src="../img/send@2x.png"></image>
         <text>待发货</text>
-        <view class='number'>
+        <view class='number' wx:if="{{items.order_count2 > 0}}">
             <text>{{items.order_count2?items.order_count2:0}}</text>
         </view>
       </view>
@@ -69,7 +69,7 @@
       <view class='payment-1' data-id="4" bindtap='order'>
         <image class='icon58' src="../img/goods.png"></image>
         <text>待收货</text>
-        <view class='number'>
+        <view class='number' wx:if="{{items.order_count3 > 0}}">
             <text>{{items.order_count3?items.order_count3:0}}</text>
         </view>
       </view>
@@ -121,14 +121,17 @@
         <image class='icon40' src='../img/dv.png'></image>
       </view>
     </view>
-
-    <view class='list-wap' bindtap='customer'>
+ <!-- bindtap='customer' -->
+    <view class='list-wap'>
       <view class='left'>
         <image class='icon40' src='../img/service.png'></image>
         <text>在线客服</text>
       </view>
       <view class='right'>
-        <image src='../img/dv.png'></image>
+      <view class="contact_view">
+        <contact-button type="default-light" size="20" session-from="weapp"></contact-button>
+      </view>
+        <!-- <image src='../img/dv.png'></image> -->
       </view>
     </view>
 

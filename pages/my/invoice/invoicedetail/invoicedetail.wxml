@@ -1,44 +1,40 @@
-
 <view class='size-titletwo col-content'>
   <view class='column bg-box'>
-    <label>名称</label> <input placeholder='请输入名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}'></input>
+    <label>名称</label>
+    <input placeholder='请输入名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}'></input>
   </view>
 
   <view class='column bg-box'>
-    <label>税号</label><input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}'></input>
+    <label>税号</label>
+    <input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}'></input>
   </view>
 
   <view class='column bg-box'>
-    <label>单位地址</label><input placeholder='请输入地址' bindinput="setAddressInput" bindconfirm="search" value='{{address}}'></input>
+    <label>单位地址</label>
+    <input placeholder='请输入地址' bindinput="setAddressInput" bindconfirm="search" value='{{address}}'></input>
   </view>
 
   <view class='column bg-box'>
-    <label>电话号码</label><input placeholder='请输入电话号码' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}'></input>
+    <label>电话号码</label>
+    <input placeholder='请输入电话号码' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}'></input>
   </view>
 
   <view class='column bg-box'>
-    <label>开户银行</label><input placeholder='请输入开户银行' bindinput="setBankInput" bindconfirm="search" value='{{bank}}'></input>
+    <label>开户银行</label>
+    <input placeholder='请输入开户银行' bindinput="setBankInput" bindconfirm="search" value='{{bank}}'></input>
   </view>
 
   <view class='column bg-box'>
-    <label>银行账户</label><input placeholder='请输入银行账户' bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}'></input>
+    <label>银行账户</label>
+    <input placeholder='请输入银行账户' bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}'></input>
   </view>
 
-  <view class='column bg-box'>
-    <label style='width:100px;'>设为默认地址</label>
-    <radio color='#262626' ></radio>
-  </view>
-
-  <view class='column bg-box' data-type="delete" data-index="{{index}}" data-id="{{item.invoice_id}}" bindtap='editInvoice'>
+  <view class='column bg-box' wx:if="{{invoiceId != 0}}" data-type="delete" data-index="{{index}}" data-id="{{item.invoice_id}}" bindtap='deleteInvoice'>
     <text class="address-delete">删除</text>
   </view>
-  
-
 </view>
-
-
-  <view class="ft-bottom ">
-    <view class="ft-bottom-box">
-        <view class="ft-bottom-operate ft-button" bindtap='submitInvoice'>确认</view>
-    </view>   
+<view class="ft-bottom ">
+  <view class="ft-bottom-box">
+    <view class="ft-bottom-operate ft-button" bindtap='submitInvoice'>确认</view>
   </view>
+</view>

@@ -134,7 +134,6 @@ Page({
     var datas = that.data.transform;
     if (datas) {
       for (var i = 0; i < datas.length; i++) {
-        console.log(that.data.items);
         if (datas[i].code == "jf01") {
           that.setData({
             point: parseInt(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to))

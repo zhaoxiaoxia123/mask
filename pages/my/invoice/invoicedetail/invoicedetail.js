@@ -140,7 +140,53 @@ Page({
       bankAccount: e.detail.value
     })
   },
-  //提交地址信息
+  //删除发票信息
+  deleteInvoice:function(){
+    if (wx.getStorageSync('customerId')) {
+      wx.showModal({
+        title: '提示',
+        content: '你确定要删除该发票信息？',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定');
+            var param = {
+              page_code: "p006",
+              type: "delete",
+              invoice_id: that.data.invoiceId
+            };
+            console.log(param);
+            wx.request({
+              url: app.globalData.domainUrl,
+              method: "POST",
+              data: param,
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              success: function (res) {
+                console.log(res);
+                var datas = res.data.data;
+                if (datas) {
+                  wx.navigateBack({
+                    delta: 1
+                  });
+                }
+              }
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+      
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '授权登录后再编辑信息。',
+        showCancel: false
+      });
+    }
+  },
+  //提交发票信息
   submitInvoice: function () {
     if (wx.getStorageSync('customerId')){
     var param = {

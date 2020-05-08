@@ -27,7 +27,7 @@
     <label style='width:100px;'>设为默认地址</label>
     <radio color='#262626' checked='{{is_default==true}}' bindtap='radiocon'></radio>
   </view>
-  <view class='column bg-box' data-type="del" data-index="{{index}}" data-id="{{item.customer_addr_id}}" bindtap='editAddress'>
+  <view class='column bg-box' wx:if="{{addressId != 0}}" data-type="del" data-index="{{index}}" data-id="{{item.customer_addr_id}}" bindtap='deleteAddress'>
     <text class="address-delete">删除</text>
   </view>
 </view>

@@ -169,11 +169,11 @@ Page({
       url: '../my/service/service'
     })
   },
-  customer: function (e) {
-    wx.navigateTo({
-      url: '../my/customer/customer'
-    })
-  },
+  // customer: function (e) {
+    // wx.navigateTo({
+    //   url: '../my/customer/customer'
+    // })
+  // },
   setting: function (e) {
     wx.navigateTo({
       url: '../my/setting/setting'

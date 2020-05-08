@@ -14,24 +14,6 @@ Page({
     ticketList: []
   },
 
-  //swiper切换时会调用
-  pagechange: function (e) {
-    if ("touch" === e.detail.source) {
-      let currentPageIndex = this.data.currentIndex
-      currentPageIndex = (currentPageIndex + 1) % 3
-      this.setData({
-        currentIndex: currentPageIndex
-      })
-    }
-  },
-  //用户点击tab时调用
-  titleClick: function (e) {
-    let currentPageIndex =
-      this.setData({
-        //拿到当前索引并动态改变
-        currentIndex: e.currentTarget.dataset.idx
-      })
-  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -59,6 +41,7 @@ Page({
       var param = {
         page_code: "p013",
         customer_id: wx.getStorageSync('customerId'),
+        ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -95,6 +78,44 @@ Page({
         var param = {
           page_code: "p013",
           customer_id: wx.getStorageSync('customerId'),
+          ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
+          offset: (that.data.offset - 1) * that.data.pageCount,
+          page: that.data.pageCount
+        };
+        // var param = '/p013?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
+        that.getTicketList(param);
+      }
+    }
+  },
+
+  //swiper切换时会调用
+  pagechange: function (e) {
+    if ("touch" === e.detail.source) {
+      let currentPageIndex = that.data.currentIndex
+      currentPageIndex = (currentPageIndex + 1) % 3
+      that.setData({
+        currentIndex: currentPageIndex
+      })
+    }
+  },
+  //用户点击tab时调用
+  titleClick: function (e) {
+    if (that.data.currentIndex == e.currentTarget.dataset.idx) {
+      return false;
+    } else {
+      let currentPageIndex =
+        that.setData({
+          //拿到当前索引并动态改变
+          currentIndex: e.currentTarget.dataset.idx,
+          offset: 1,
+          isLast: false,
+          ticketList: []
+        })
+      if (wx.getStorageSync('customerId')) {
+        var param = {
+          page_code: "p013",
+          customer_id: wx.getStorageSync('customerId'),
+          ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
           offset: (that.data.offset - 1) * that.data.pageCount,
           page: that.data.pageCount
         };
