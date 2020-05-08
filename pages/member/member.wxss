@@ -6,7 +6,7 @@ page{
 .frozeno-logo{
   display: flex;
   justify-content: center;
-  padding-bottom:180rpx;
+  padding-bottom:150rpx;
   background: #333;
 }
 .member{
@@ -27,8 +27,8 @@ page{
   display: flex;
 }
 .icon-logo{
-  width:400rpx;
-  height:114rpx;
+  width:600rpx;
+  height:201rpx;
 }
 
 .money-name{

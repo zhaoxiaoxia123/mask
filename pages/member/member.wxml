@@ -4,7 +4,7 @@
 <view >
 
   <view class='frozeno-logo page-pd'>
-    <image class="icon-logo" src="../img/frozeno@2x.png"></image>
+    <image class="icon-logo" src="../img/frozen.png"></image>
   </view>
 
   <view class='member'>
