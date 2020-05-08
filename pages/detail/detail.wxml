@@ -31,9 +31,9 @@
   </view> -->
   <view class='evaluate'>
     <view class='detail'> 商品详情 </view>
-    <view class='img'>
+    <view class='detail-image'>
       <block wx:for="{{swipers}}" wx:key="*this">
-        <image wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}"></image>
+        <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}"></image>
       </block>
     </view>
     <text class='abstract'>{{items.category_tab}}</text>
