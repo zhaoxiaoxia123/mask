@@ -3,7 +3,7 @@
   <swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:600rpx;background:#fff'>
     <block wx:for="{{swipers}}" wx:key="*this">
       <swiper-item wx:if="{{item.type == 1}}">
-        <image src="{{item.img_url}}" class="slide-image" />
+        <image src="{{domainName}}{{item.img_url}}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
@@ -33,7 +33,7 @@
     <view class='detail'> 商品详情 </view>
     <view class='img'>
       <block wx:for="{{swipers}}" wx:key="*this">
-        <image wx:if="{{item.type == 1}}" src="{{item.img_url?item.img_url:'../img/details2.jpg'}}"></image>
+        <image wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}"></image>
       </block>
     </view>
     <text class='abstract'>{{items.category_tab}}</text>

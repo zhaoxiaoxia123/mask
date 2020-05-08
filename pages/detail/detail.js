@@ -25,7 +25,8 @@ Page({
     transform: [],
     point:0,
     growth:0,
-    shoppingCount:0
+    shoppingCount: 0,
+    domainName: app.globalData.domainName
   },
   /**
    * 生命周期函数--监听页面加载
