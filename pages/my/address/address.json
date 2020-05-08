@@ -1,5 +1,4 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "地址管理",
-  "enablePullDownRefresh": true
+  "navigationBarTitleText": "地址管理"
 }

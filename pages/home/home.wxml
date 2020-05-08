@@ -22,7 +22,7 @@
 
       <view class='list-left'>
       <!-- ?item.image_url[0]:"../img/banner.jpg -->
-        <image src='{{domainName}}{{item.image_url[0]}}'></image>
+        <image src='{{domainName}}{{item.image_url[0]}}' lazy-load></image>
       </view>
 
       <view class='list-right'>

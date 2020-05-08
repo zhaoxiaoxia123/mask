@@ -27,7 +27,8 @@ Page({
     usingPoint:0,   //使用积分值
     outTradeNo: '',    //此次支付的商户订单号
     setInter: '',   //存储计时器
-    num: 30    //记录订单失效时间  30*60 30分钟失效
+    num: 30,   //记录订单失效时间  30*60 30分钟失效
+    domainName: app.globalData.domainName
   },
 
   /**

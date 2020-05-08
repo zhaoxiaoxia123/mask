@@ -21,6 +21,7 @@ Page({
     order_state: 1,
     memberNo: wx.getStorageSync('memberNo'),
     items: [],
+    domainName: app.globalData.domainName
   },
 
   /**

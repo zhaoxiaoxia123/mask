@@ -23,7 +23,7 @@
     <!--bindtap绑定事件-->
     <view class='list' wx:key="*this" wx:for="{{items[0].products}}" wx:for-item="item">
       <view class='list-left'>
-        <image src='{{item.product_image?item.product_image[0].img_url:""}}'></image>
+        <image src='{{domainName}}{{item.product_image?item.product_image[0].image_url:""}}'></image>
       </view>
       <view class='list-right'>
         <view class='right-text'>{{item.category_desc}}</view>

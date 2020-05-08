@@ -47,7 +47,7 @@
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.o_id}}" bindtap='orderdetail'>
               <view class='list-left'>
-                <image src='{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
+                <image src='{{domainName}}{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
               </view>
 
               <view class='list-right size-titleone '>
@@ -115,7 +115,7 @@
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.o_id}}" bindtap='orderdetail'>
               <view class='list-left'>
-                <image src='{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
+                <image src='{{domainName}}{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
               </view>
 
               <view class='list-right size-titleone '>
@@ -169,7 +169,7 @@
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
               <view class='list-left'>
-                <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
+                <image src='{{domainName}}{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
               </view>
 
               <view class='list-right size-titleone '>
@@ -219,7 +219,7 @@
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
               <view class='list-left'>
-                <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
+                <image src='{{domainName}}{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
               </view>
 
               <view class='list-right size-titleone '>
@@ -276,7 +276,7 @@
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
               <view class='list-left'>
-                <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
+                <image src='{{domainName}}{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
               </view>
 
               <view class='list-right size-titleone '>

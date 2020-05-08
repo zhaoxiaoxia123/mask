@@ -15,7 +15,9 @@ Page({
     pageCount: 20,
     isLast: false,
     items: [],
-    isBack:false
+    isBack: false,
+    domainName: app.globalData.domainName
+
     // ticketList: [],
     // selectedTicketType: 1,  //卡券类型 1：通用 2：满减
     // selectedSatisfyAmount: 0,   //卡券满足金额  即可使用该券

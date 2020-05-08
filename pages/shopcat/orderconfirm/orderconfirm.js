@@ -19,7 +19,8 @@ Page({
     usingTicketAmount: 0, //使用优惠券的抵扣值
     isUsePoint: false,
     isCheckTicket: 9999, //存储选择卡券索引  9999为不用卡券
-    isCheckExpressCompany: 9999 //存储选择快递  9999为随机
+    isCheckExpressCompany: 9999, //存储选择快递  9999为随机
+    domainName: app.globalData.domainName
   },
 
   /**

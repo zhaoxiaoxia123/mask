@@ -10,7 +10,7 @@
         库存不足
       </view>
       <view class='list-left'>
-        <image src="{{item.product_image[0].image_url}}"></image>
+        <image src="{{domainName}}{{item.product_image[0].image_url}}" lazy-load></image>
       </view>
       <view class='list-right'>
         <view class='column'>

@@ -334,6 +334,8 @@ Page({
     })
   },
 
+
+
   // //加入订单，即立即购买
   // joinOrder:function(){ //提交结算，生成结算的订单信息，
   //     // var product_id = ","+that.data.items.product_id+",";
