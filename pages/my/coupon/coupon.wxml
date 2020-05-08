@@ -32,7 +32,7 @@
           <view class="wrapper colour-bg1" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
             <view class="content">
               <view class="box-hd">
-                <view class="box-hd-text1">冻龄智美商城/门店通用</view>
+                <view class="box-hd-text1">在线商城/门店通用</view>
               </view>
               <view class="box">
                 <view class="money">
@@ -75,7 +75,7 @@
           <view class="wrapper colour-bg2" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
             <view class="content">
               <view class="box-hd">
-                <view class="box-hd-text2">冻龄智美商城/门店通用</view>
+                <view class="box-hd-text2">在线商城/门店通用</view>
               </view>
               <!-- <view class="box">
                 <view class="money">
@@ -141,7 +141,7 @@
             <view class="content">
 
               <view class="box-hd">
-                <view class="box-hd-text2">冻龄智美商城/门店通用</view>
+                <view class="box-hd-text2">在线商城/门店通用</view>
               </view>
 
               <!-- <view class="box">

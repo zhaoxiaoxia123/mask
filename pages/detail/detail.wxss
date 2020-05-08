@@ -1,7 +1,8 @@
 /* pages/detail/detail.wxss */
 
 .slide-image {
-  height: 100%;
+  width:100%;
+  height:100%;
 }
 
 .money {
@@ -125,6 +126,14 @@
   font-size:1rem;
   line-height:1.5;
   padding:20rpx 0;
+}
+.detail-image{
+  width:100%;
+  height:100%;
+}
+.detail-image image{
+  width:100%;
+  display:block;
 }
 .list{
    padding: 30rpx 10rpx;
