@@ -106,8 +106,8 @@ Page({
   
   //进入会员页面
   goMember: function() {
-    wx.navigateTo({
-      url: 'pages/member/member',
+    wx.switchTab({
+      url: '/pages/member/member',
     })
   },
   //获取用户信息 ： 积分 卡券数量 等
