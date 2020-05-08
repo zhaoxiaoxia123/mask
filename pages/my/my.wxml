@@ -41,7 +41,7 @@
   <!--订单-->
   <view class='payment bg-box col-content size-titletwo '>
     <view class='payment-list' data-id="1" bindtap='order'>
-      <view class='payment-list-left size-titleone'>
+      <view class='payment-list-left'>
         <text>我的订单</text>
       </view>
       <view class='payment-list-right'>
