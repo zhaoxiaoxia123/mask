@@ -75,7 +75,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
   },
 
   /**
@@ -91,6 +96,7 @@ Page({
   onUnload: function () {
 
   },
+
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -136,6 +142,29 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  // 跳转规格弹窗
+  ftservice: function (e) {
+    var that = this;
+    var ftserviceflexwindow;
+    if (this.data.ftserviceflexwindow == true) {
+      ftserviceflexwindow = false;
+    }
+    else {
+      ftserviceflexwindow = true;
+    }
+    that.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    });
+  },
+  ftserviceq: function (e) {
+    let self = this
+    let ftserviceflexwindow = false;
+
+    self.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    })
   },
   //广告
   getAdList: function(){

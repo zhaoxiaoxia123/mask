@@ -134,3 +134,106 @@
   color:#FFF;
 }
 
+/* 无 */
+.search-no {
+width: 100%;
+display: block;
+text-align: center;
+padding:100rpx 0;
+}
+.scimg {
+width: 486rpx;
+height: 496rpx;
+display: inline-block;
+padding-bottom:20rpx;
+
+}
+
+/*底部客服*/
+.ftservice{
+  position: fixed;
+	bottom: 120rpx;
+  right:20rpx;
+	display: block;
+}
+.ftservice-bt{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #DAB866;
+  width:80rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  border-radius: 50%;
+
+}
+.ftservice-text{
+  font-size:0.6rpx;
+  color:#fff;
+}
+.cs_ftservice{
+  background-color: #DAB866;
+  margin:0;
+  padding:20rpx;
+  /* width:58rpx;
+  height:58rpx;
+  line-height: 58rpx; */
+  border-radius: 50%;
+}
+
+
+/* 弹窗 */
+.frame{
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 64%;
+  align-items: center;
+  background: #4d4d4d;
+  border-radius: 6rpx;
+  justify-content: center;
+  z-index: 99999;
+}
+.frame1{
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0%;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 6rpx;
+  justify-content: center;
+  z-index: 999;
+}
+
+.zy{
+display: none;
+}
+.ftservice-item{
+  width:100%;
+  margin-bottom:2px;
+}
+.ftservice-button{
+  width:100%;
+  background: #595959;
+  color:#fff;
+  font-weight: 10;
+  font-size:1rem;
+  padding:20rpx;
+  border-radius: 0;
+}
+.ftservice-number{
+  padding-bottom:10rpx;
+}
+.ftservice-text{
+  width:100%;
+  margin-top:10rpx;
+  padding:20rpx;
+  text-align: center;
+  font-size:1rem;
+  background: #595959;
+}

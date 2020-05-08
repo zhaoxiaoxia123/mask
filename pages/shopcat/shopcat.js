@@ -77,6 +77,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 2
+      })
+    }
     console.log('that.data.isBack');
     console.log(that.data.isBack);
     if (!that.data.isBack){  //判断返回键返回
@@ -157,6 +163,35 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  // 跳转规格弹窗
+  ftservice: function (e) {
+    var that = this;
+    var ftserviceflexwindow;
+    if (this.data.ftserviceflexwindow == true) {
+      ftserviceflexwindow = false;
+    }
+    else {
+      ftserviceflexwindow = true;
+    }
+    that.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    });
+  },
+  ftserviceq: function (e) {
+    let self = this
+    let ftserviceflexwindow = false;
+
+    self.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    })
+  },
+
+  //进入首页页面
+  gohome: function () {
+    wx.switchTab({
+      url: '/pages/home/home',
+    })
   },
 
   //以下为自定义点击事件

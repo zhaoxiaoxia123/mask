@@ -122,18 +122,21 @@
       </view>
     </view>
  <!-- bindtap='customer' -->
-    <view class='list-wap'>
+
+    <!-- <view class='list-wap'>
+      <button class="cs_button"  type="default-light" open-type="contact" session-from="weapp">
+        
+      </button> 
       <view class='left'>
-        <image class='icon40' src='../img/service.png'></image>
+        <image class="icon40" src="../img/service@2x.png"></image>
         <text>在线客服</text>
       </view>
       <view class='right'>
       <view class="contact_view">
         <contact-button type="default-light" size="20" session-from="weapp"></contact-button>
       </view>
-        <!-- <image src='../img/dv.png'></image> -->
       </view>
-    </view>
+    </view> -->
 
     <view class='list-wap' bindtap='news'>
       <view class='left'>
@@ -156,3 +159,35 @@
     </view>
   </view>
 </view>
+
+
+<!-- 客服图标 -->
+<view class="ftservice">
+    <view class="ftservice-bt" bindtap="ftservice">
+        <image class="icon40" src="../img/service@2x.png"></image> 
+    </view>
+</view>
+<!-- 客服 -->
+ <view class="frame1 {{ftserviceflexwindow==true?'': 'zy'}}" bindtap='ftserviceq'></view>
+  <view class="frame {{ftserviceflexwindow==true?'': 'zy'}}">
+    <!--bindtap绑定事件-->
+    <view class="ftservice-list">
+
+      <view class="ftservice-item"> 
+        <button class="ftservice-button" style="width:100%" type="default-light" open-type="contact" session-from="weapp">
+            <view class="ftservice-number">在线客服</view>
+            <view>（周一至周日10:00-21:00）</view>
+        </button> 
+      </view>
+         <view class="ftservice-item" > 
+            <button class="ftservice-button" style="width:100%" bindtap='tel'>
+                <view class="ftservice-number">400 002 8767</view>
+                <view>（周一至周日10:00-21:00）</view>
+            </button> 
+      </view>
+        <view class="ftservice-item" bindtap='ftserviceq'> 
+          <view class="ftservice-text">取消</view>
+        </view>
+    </view>
+
+  </view>
