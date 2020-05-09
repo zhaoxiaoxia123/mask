@@ -11,20 +11,16 @@
 
     <!--bindtap绑定事件-->
     <view class='list bg-box col-content size-titletwo' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
-    
       <view class='column' wx:if="{{fromPage == 'order'}}">
-        <!-- <radio-group bindchange="checkSendAddress">
-          <radio value="{{item.customer_addr_id}}" bindtap="checkOne" checked="{{item.checked}}">选择</radio>
-        </radio-group> -->
-        <checkbox class='checkbox' data-index="{{index}}" data-value="{{item.customer_addr_id}}" bindtap="checkSendAddress" checked="{{item.checked}}" >选择</checkbox>
+        <checkbox class='checkbox' data-index="{{index}}" data-value="{{item.customer_addr_id}}" bindtap="checkSendAddress" checked="{{item.checked}}">选择</checkbox>
       </view>
       <view class='column space-between' data-obj='{{item}}'>
         <view class="address-left">
-            <view class='address-name'>姓名：{{item.name}}</view>
-            <view class='address-phone'>{{item.phone}}</view>
+          <view class='address-name'>姓名：{{item.name}}</view>
+          <view class='address-phone'>{{item.phone}}</view>
         </view>
         <view class="address-right">
-            <view class='edit' data-type="edit" data-id="{{item.customer_addr_id}}" bindtap='editAddress'>
+          <view class='edit' data-type="edit" data-id="{{item.customer_addr_id}}" bindtap='editAddress'>
             <image class='list-right-img' src='../../img/edit.png'></image>编辑</view>
         </view>
 
@@ -32,7 +28,7 @@
 
       <view class='column'>
         <view class='address'>
-            <text class="address-default">默认</text>{{item.province}}{{item.city}}{{item.area}}{{item.address}}
+          <text class="address-default">默认</text>{{item.province}}{{item.city}}{{item.area}}{{item.address}}
         </view>
       </view>
       <!-- <view class='column direction-row'>
@@ -53,8 +49,8 @@
 </view>
 
 
-  <view class="ft-bottom ">
-    <view class="ft-bottom-box">
-        <view class="ft-bottom-operate ft-button" bindtap='addAddress'>新增地址</view>
-    </view>   
+<view class="ft-bottom ">
+  <view class="ft-bottom-box">
+    <view class="ft-bottom-operate ft-button" bindtap='addAddress'>新增地址</view>
   </view>
+</view>

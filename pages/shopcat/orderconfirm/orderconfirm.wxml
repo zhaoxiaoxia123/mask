@@ -47,7 +47,6 @@
       <text>赠送礼盒× 1</text>
     </view>
     <view class='coupon'>
-
       <view class='coupon-wap' bindtap="delivery">
         <view class='coupon-left'>
           <text>配送方式</text>
@@ -76,7 +75,7 @@
           <text>请选择优惠券</text>
         </view>
         <view class='coupon-right'>
-          <text>您没有何用的券</text>
+          <text>您没有可用的券</text>
           <image src='../../img/dv.png'></image>
         </view>
       </view>
@@ -110,11 +109,9 @@
         </view>
       </view>
     </view>
-
   </view>
 
   <view class="bottom">
-
     <view class="bottom-operate">
       <view class="bottom-operate price">合计：
         <text style="color:#DAB866">￥{{payAmount}}</text>
@@ -189,8 +186,13 @@
 
           <view class='column' wx:for="{{ticketList}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
             <view>
-                <view class="coupon-hd">生日优惠券</view>
-                <view class="coupon-text">{{item.ticket_name}}</view>
+                <view class="coupon-hd">{{item.ticket_name}}</view>
+                <view class="coupon-text" wx:if="{{item.ticket_type == 1}}">
+                  全场通用
+                </view>
+                <view class="coupon-text" wx:if="{{item.ticket_type == 2}}">
+                  满{{item.satisfy_amount}}元使用
+                </view>
            </view>
             <view class='item'>
               <checkbox-group>

@@ -36,8 +36,8 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    console.log('onload:----');
-    console.log(options.order_id);
+    // console.log('onload:----');
+    // console.log(options.order_id);
     that.setData({
       orderId: options.order_id,
       fromPage: options.from_page
@@ -68,14 +68,13 @@ Page({
     };
     // var param_o = '/p008?has_address=1&order_id='+that.data.order_id;
     that.getOrder(param_o);
-    // that.getAddress();
 
     //将计时器赋值给setInter
     that.data.setInter = setInterval(
       function () {
         var numVal = that.data.num - 1;
         that.setData({ num: numVal });
-        console.log('setInterval==' + that.data.num);
+        // console.log('setInterval==' + that.data.num);
         if(numVal <= 0){
           clearInterval(that.data.setInter)
         }
@@ -109,8 +108,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log('orderdetail onUnload:====');
-    console.log(that.data.fromPage);
+    // console.log('orderdetail onUnload:====');
+    // console.log(that.data.fromPage);
     if (that.data.fromPage == 'shopping'){
       var pages = getCurrentPages();  // 当前页的数据，可以输出来看看有什么东西
       var prevPage = pages[pages.length - 2];  // 上一页的数据，也可以输出来看看有什么东西
@@ -187,7 +186,7 @@ Page({
       },
       success: function (res) {
         var datas = res.data.data;
-        console.log(datas);
+        // console.log(datas);
         if (datas == false) {
           wx.showToast({
             title: "该订单已失效。"
@@ -210,10 +209,6 @@ Page({
             orderAmount: order_amount,
             rateAmount: (order_amount * (that.data.transform.rate / 100))
           });
-          // console.log('getOrder:----------');
-          // console.log((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)));
-          // console.log(that.data.transform.type);
-          
           if ((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
             that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
           } else if ((parseFloat(order_amount) < parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
@@ -226,8 +221,6 @@ Page({
     });
   },
   sumAmount: function (point, rateAmount, amount) {
-    // console.log('sumAmount:----------');
-    // console.log(parseFloat(point) >= parseFloat(rateAmount));
     if (parseFloat(point) >= parseFloat(rateAmount)) {
     that.setData({
       usingPoint: rateAmount,
@@ -239,8 +232,8 @@ Page({
       finalSum: parseFloat(amount) - parseFloat(point)
     });
     }
-    console.log('finalSum:----------');
-    console.log(that.data.finalSum);
+    // console.log('finalSum:----------');
+    // console.log(that.data.finalSum);
 },
 
 // getAddress: function(){
@@ -279,7 +272,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         var datas = res.data.data;
         if (datas) {
           wx.showToast({
@@ -311,15 +304,14 @@ Page({
             "Content-Type": "application/x-www-form-urlencoded"
           },
           success: function (res) {
-            console.log(res);
+            // console.log(res);
             var datas = res.data.data;
             that.setData({
               outTradeNo: res.data.out_trade_no
             });
             if (datas) {
-              console.log('datas:-----');
-              console.log(datas);
-              
+              // console.log('datas:-----');
+              // console.log(datas);
               wx.requestPayment({
                 'timeStamp': datas.timeStamp,
                 'nonceStr': datas.nonceStr,
@@ -328,7 +320,7 @@ Page({
                 'paySign': datas.paySign,
                 'success': function (res) {
                   console.log('success');
-                  console.log(res);
+                  // console.log(res);
                   wx.showToast({
                     title: '支付成功',
                     icon: 'success',
@@ -338,11 +330,11 @@ Page({
                 },
                 'fail': function (res) {
                   console.log('fail');
-                  console.log(res);
+                  // console.log(res);
                 },
                 'complete': function (res) {
                   console.log('complete');
-                  console.log(res);
+                  // console.log(res);
                 }
               });
             }
@@ -374,11 +366,11 @@ Page({
           "Content-Type": "application/x-www-form-urlencoded"
         },
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           var ret = res.data;
           var datas = ret.data;
           if (ret.code == 201) {
-            console.log(ret.message);
+            // console.log(ret.message);
             // that.setData({
             //   shopping_count: parseInt(that.data.shopping_count) + 1
             // });
@@ -400,8 +392,8 @@ Page({
     wx.setClipboardData({
       data: code,
       success: function (res) {
-        console.log('copyCode:------');
-        console.log(res);
+        // console.log('copyCode:------');
+        // console.log(res);
         wx.showToast({
           title: "复制成功"
         });
@@ -422,7 +414,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         var datas = res.data.data;
         if (datas) {
           wx.showToast({

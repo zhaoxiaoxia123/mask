@@ -1,4 +1,5 @@
 <!--pages/my/coupon/coupon.wxml-->
+<wxs module="filter" src="../../../utils/share.wxs"></wxs>
 <view class="">
   <view class='ticket-container'>
     <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
@@ -17,7 +18,6 @@
           <hr class="line-style" />
         </view>
       </view>
-
       <!--内容布局-->
       <swiper class='swiper coupon' bindchange='pagechange' current='{{currentIndex}}'>
         <swiper-item class='swiper'>
@@ -51,7 +51,7 @@
                     满{{item.satisfy_amount}}元使用
                   </view>
                   <view class="date">
-                    {{item.ticket_start_date}}至{{item.ticket_end_date}}
+                    {{filter.dateFormat(item.ticket_start_date)}}至{{filter.dateFormat(item.ticket_end_date)}}
                   </view>
                 </view>
               </view>
@@ -77,26 +77,6 @@
               <view class="box-hd">
                 <view class="box-hd-text2">在线商城/门店通用</view>
               </view>
-              <!-- <view class="box">
-                <view class="money">
-                  <view class="money-text">
-                    <text class="money-small">¥</text>300
-                  </view>
-                </view>
-
-                <view class='co'>
-                  <view class="coupon-hd">
-                    生日优惠券
-                  </view>
-                  <view class="conditions">
-                    满2000元使用
-                  </view>
-                  <view class="date">
-                    2020.02.11至2020.03.11
-                  </view>
-                </view>
-
-              </view> -->
               <view class="box">
                 <view class="money">
                   <view class="money-text">
@@ -114,7 +94,7 @@
                     满{{item.satisfy_amount}}元使用
                   </view>
                   <view class="date">
-                    {{item.ticket_start_date}}至{{item.ticket_end_date}}
+                    {{filter.dateFormat(item.ticket_start_date)}}至{{filter.dateFormat(item.ticket_end_date)}}
                   </view>
                 </view>
                 </view>
@@ -128,7 +108,6 @@
           </view>
         </swiper-item>
         <swiper-item class='swiper coupon' class='swiper'>
-
           <!--没有相关优惠券时显示-->
           <view class='search-no' wx:if="{{ticketList.length <= 0}}">
             <view>
@@ -136,34 +115,11 @@
             </view>
             <text>您还没有优惠券~~</text>
           </view>
-
           <view class="wrapper colour-bg2" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
             <view class="content">
-
               <view class="box-hd">
                 <view class="box-hd-text2">在线商城/门店通用</view>
               </view>
-
-              <!-- <view class="box">
-                <view class="money">
-                  <view class="money-text">
-                    <text class="money-small">¥</text>300
-                  </view>
-                </view>
-
-                <view class='co'>
-                  <view class="coupon-hd">
-                    生日优惠券
-                  </view>
-                  <view class="conditions">
-                    满2000元使用
-                  </view>
-                  <view class="date">
-                    2020.02.11至2020.03.11
-                  </view>
-                </view>
-
-              </view> -->
               <view class="box">
                 <view class="money">
                   <view class="money-text">
@@ -181,7 +137,7 @@
                     满{{item.satisfy_amount}}元使用
                   </view>
                   <view class="date">
-                    {{item.ticket_start_date}}至{{item.ticket_end_date}}
+                    {{filter.dateFormat(item.ticket_start_date)}}至{{filter.dateFormat(item.ticket_end_date)}}
                   </view>
                 </view>
                 </view>
@@ -193,7 +149,6 @@
               </view>
             </view>
           </view>
-
         </swiper-item>
       </swiper>
     </scroll-view>

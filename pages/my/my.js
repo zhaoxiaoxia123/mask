@@ -13,10 +13,8 @@ Page({
     items:[],
     isLogin:false,
     canGetUserInfo: false,
-    // isShare:false    
     showModal: false,
     qrcode:''
-    // code:''
   },
 
   /**
@@ -180,15 +178,12 @@ Page({
     })
   },
   shareApp:function(e) {   //邀请好友
-    // that.setData({
-    //   isShare:true
-    // });
     if(wx.getStorageSync('level') > 1){
     wx.showActionSheet({
       itemList: ['复制邀请码', '邀请二维码'],
       success: function (res) {
-        console.log('showActionSheet:------');
-        console.log(res.tapIndex);
+        // console.log('showActionSheet:------');
+        // console.log(res.tapIndex);
         if(res.tapIndex == 0) {
           that.copyCode();
         } else if (res.tapIndex == 1) {
@@ -245,7 +240,7 @@ Page({
           'content-type': 'application/json'
         },
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           that.setData({
             qrcode: res.data.data
           });

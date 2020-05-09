@@ -8,7 +8,6 @@ Page({
   data: {
     icons: ["../img/plus_pink.png", "../img/jian_pink.png"],
     check: false,
-    // totalfeeOld: 0,
     totalfee: 0,
     memberNo: wx.getStorageSync('memberNo'),
     offset: 1,
@@ -17,15 +16,6 @@ Page({
     items: [],
     isBack: false,
     domainName: app.globalData.domainName
-
-    // ticketList: [],
-    // selectedTicketType: 1,  //卡券类型 1：通用 2：满减
-    // selectedSatisfyAmount: 0,   //卡券满足金额  即可使用该券
-    // ticketAmount:0,   //卡券金额
-    // selectedTicketName: "",
-    // selectedTicketId: 0,
-    // queryTicketId: 0,
-    // showTicket: "display:none"  //是否展示卡券列表
   },
 
   /**
@@ -33,37 +23,9 @@ Page({
    */
   onLoad: function(options) {
     that = this;
-    console.log("onLoad:--~~~--");
     that.setData({
       isBack: false
     });
-    // var id = app.globalData.ticketId;
-    // that.setData({
-    //   queryTicketId: id
-    // });
-
-    // that.setData({
-    //   items: [],
-    //   isLast: false,
-    //   // ticketList: [],
-    //   // ticketAmount: 0,   //卡券金额
-    //   // selectedTicketType: 1,  //卡券类型 1：通用 2：满减
-    //   // selectedSatisfyAmount: 0,   //卡券满足金额  即可使用该券
-    //   // selectedTicketName: "",
-    //   // selectedTicketId: 0,
-    //   showTicket: "display:none"
-    // })
-    // console.log("onShow:----");
-    // if (wx.getStorageSync('customerId') && that.data.items.length <= 0) {
-    //   var param = {
-    //     page_code: 'p012',
-    //     type: "shopping_list",
-    //     customer_id: wx.getStorageSync('customerId'),
-    //     offset: (that.data.offset - 1) * that.data.pageCount,
-    //     page: that.data.pageCount
-    //   };
-    //   that.getShoppingList(param);
-    // }
   },
 
   /**
@@ -77,8 +39,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('that.data.isBack');
-    console.log(that.data.isBack);
     if (!that.data.isBack){  //判断返回键返回
       that.setData({
         items:[],
@@ -100,7 +60,6 @@ Page({
       };
       // var param_s = '/p012?type=shopping_list&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getShoppingList(param_s);
-      // that.getTicketList();
     }
   },
 
@@ -129,8 +88,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    console.log(that.data.offset);
-    console.log(that.data.isLast);
     if (!that.data.isLast) {
       that.setData({
         offset: that.data.offset + 1
@@ -146,11 +103,6 @@ Page({
         // var param_s = '/p012?type=shopping_list&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
         that.getShoppingList(param_s);
     }
-
-    // that.setData({
-    //   items: that.data.items.concat(arr)
-    // })
-    // console.log(that.data.items)
   },
   /**
    * 用户点击右上角分享
@@ -168,7 +120,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function(res) {
-        console.log(res);
+        // console.log(res);
         var datas = res.data.data;
         that.setData({
           items: that.data.items.concat(datas)
@@ -187,7 +139,6 @@ Page({
     var id = e.currentTarget.dataset.id;
     if (items[id].product_count <= 1) {
       items[id].product_count = 1;
-
       if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
         items[id].is_enough = true;
         items[id].selected = true;
@@ -195,13 +146,11 @@ Page({
         items[id].is_enough = false;
         items[id].selected = false;
       }
-
       that.setData({
         items: items
       })
     } else {
       items[id].product_count = items[id].product_count - 1;
-
       if (items[id].product_count <= items[id].stock){ //库存是否足够来显示单选按钮
         items[id].is_enough = true;
         items[id].selected = true;
@@ -215,7 +164,6 @@ Page({
           fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
         }
       }
-
       that.setData({
         items: items
       });
@@ -299,18 +247,11 @@ Page({
   },
 
   returnFee: function (fee, product_count, frozeno_discount_amount) {
-    // var discount = wx.getStorageSync('discount') ? wx.getStorageSync('discount'):0;
-    // if (discount){
-    // fee = fee + (product_count * frozeno_discount_amount) * (discount/10);
-    // }else{
     fee = fee + (product_count * frozeno_discount_amount);
-    // }
     return fee;
   },
   //赋值合计金额
   setTotalFee: function(fee) {
-    // var money = fee - that.data.ticketAmount;
-    // money = (money <= 0) ? 0 : money;
     that.setData({
       totalfee: fee.toFixed(2)
     })
@@ -349,7 +290,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         var datas = res.data.data;
         wx.showToast({
           title: res.data.message
@@ -358,151 +299,4 @@ Page({
       }
     })
   },
-  // submitSettlementGenerateOrder: function(){  //提交结算，生成多商品同时结算的订单信息，
-  //   var products = [];
-  //   // var product_id = ",";
-  //   // var product_count = ",";
-  //   // var product_amount = ",";
-  //   for (var i = 0; i < that.data.items.length; i++) {
-  //     if (that.data.items[i].selected == true) {
-  //       var info = {
-  //         'product_id': that.data.items[i].product_id, 
-  //         'product_count': that.data.items[i].product_count,
-  //         'discount_amount': that.data.items[i].discount_amount
-  //         };
-  //       // product_id += that.data.items[i].product_id+',';
-  //       // product_count += that.data.items[i].product_count + ',';
-  //       // if(that.data.memberNo){
-  //       //   product_amount += that.data.items[i].discount_amount + ',';
-  //       // } else {
-  //       //   product_amount += that.data.items[i].amount + ',';
-  //       // }
-  //       products.push(info);
-  //     }
-  //   }
-  //   if (products.length > 0){
-  //   wx.request({
-  //     url: app.globalData.domainUrl,
-  //     method: "POST",
-  //     data: {
-  //       page_code: 'p008',
-  //       type:'shopping_by',
-  //       products:JSON.stringify(products),
-  //       // product_id: product_id,
-  //       // product_count: product_count,
-  //       // product_amount: product_amount,
-  //       // ticket_id: that.data.selectedTicketId,
-  //       order_type: 1,//购买订单
-  //       customer_id: wx.getStorageSync('customerId'),
-  //       // is_customer: wx.getStorageSync('memberNo') ? 1 : 2,
-  //       amount: that.data.totalfee,
-  //     },
-  //     header: {
-  //       "Content-Type": "application/x-www-form-urlencoded"
-  //     },
-  //     success: function (res) {
-  //       console.log(res);
-  //       var datas = res.data.data;
-  //      // getApp().globalData.orderId = datas.order_id;
-  //       // var url = '/pages/shopcat/orderconfirm/orderconfirm';
-  //       // console.log(url);
-  //       // wx.navigateTo({
-  //       //   url: url
-  //       // });
-  //       wx.showToast({
-  //         icon: "none",
-  //         title: res.data.message
-  //       });
-  //       wx.navigateTo({
-  //         // url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas,
-  //         url: '/pages/shopcat/orderconfirm/orderconfirm?order_id=' + datas,
-  //       })
-  //     }
-  //   })
-  //   }else{
-  //     wx.showToast({
-  //       icon: "none",
-  //       title: "请选择结算的商品"
-  //     });
-  //   }
-  // },
-
-  // getTicketList: function () {   //获取有效卡券列表
-  //   console.log(that.data.ticketList);
-  //   console.log(that.data.ticketList.length);
-  //   if (that.data.ticketList.length <= 0){
-  //     //获取卡券列表
-  //     var param_t = {
-  //       page_code: 'p013',
-  //       customer_id: wx.getStorageSync('customerId'),
-  //       offset: 0,
-  //       page: 20
-  //     };
-  //     wx.request({
-  //       url: app.globalData.domainUrl,
-  //       data: param_t,
-  //       header: {
-  //         'content-type': 'application/json'
-  //       },
-  //       success: function (res) {
-  //         var datas = res.data.data;
-  //         that.setData({
-  //           ticketList: datas
-  //         });
-  //         if (that.data.queryTicketId){
-  //           for (var ei = 0; ei < datas.length; ++ei) {
-  //             if (datas[ei]['ticket_id'] == that.data.queryTicketId) {
-  //               that.setData({
-  //                 selectedTicketId: datas[ei]['ticket_id'],
-  //                 selectedTicketName: datas[ei]['ticket_name'],
-  //                 ticketAmount: datas[ei]['ticket_amount'],
-  //                 selectedTicketType: datas[ei]['ticket_type'],
-  //                 selectedSatisfyAmount: datas[ei]['satisfy_amount'],
-  //               });
-  //             }
-  //           }
-  //         }
-  //         that.setData({
-  //           queryTicketId: 0
-  //         });
-  //         app.globalData.ticketId = 0;  //还原全局变量
-  //       }
-  //     });
-  //   }else{
-  //     that.setData({
-  //       showTicket: that.data.showTicket == "display:flex" ? "display:none" : "display:flex"
-  //     });
-  //   }
-  // },
-
-  // checkTicket: function (e) {
-  //   console.log('------');
-
-  //   const index = e.currentTarget.dataset.id;
-  //   console.log(index);
-  //   // that.setData({
-  //   //   selectedTicketName: that.data.ticketList[index].ticket_name,
-  //   //   selectedTicketId: that.data.ticketList[index].ticket_id,
-  //   //   ticketAmount: that.data.ticketList[index].ticket_amount,
-  //   //   selectedTicketType: that.data.ticketList[index].ticket_type,  //卡券类型 1：通用 2：满减
-  //   //   selectedSatisfyAmount: that.data.ticketList[index].satisfy_amount,   //卡券满足金额  即可使用该券
-  //   //   showTicket: "display:none",
-  //   //   totalfee: that.data.totalfeeOld - that.data.ticketList[index].ticket_amount
-  //   // });
-  //   console.log(that.data.ticketList[index].ticket_type);
-  //   console.log(that.data.totalfeeOld);
-  //   console.log(that.data.ticketList[index].satisfy_amount);
-  //   console.log(that.data.ticketList[index].ticket_type == 1 || (that.data.ticketList[index].ticket_type == 2 && that.data.totalfeeOld >= that.data.ticketList[index].satisfy_amount));
-  //   if (that.data.ticketList[index].ticket_type == 1 || (that.data.ticketList[index].ticket_type == 2 && that.data.totalfeeOld >= that.data.ticketList[index].satisfy_amount)){
-  //     that.setData({
-  //       selectedTicketName: that.data.ticketList[index].ticket_name,
-  //       selectedTicketId: that.data.ticketList[index].ticket_id,
-  //       ticketAmount: that.data.ticketList[index].ticket_amount,
-  //       selectedTicketType: that.data.ticketList[index].ticket_type,  //卡券类型 1：通用 2：满减
-  //       selectedSatisfyAmount: that.data.ticketList[index].satisfy_amount,   //卡券满足金额  即可使用该券
-  //       showTicket: "display:none",
-  //       totalfee: that.data.totalfeeOld - that.data.ticketList[index].ticket_amount
-  //     });
-  //   }
-  // },
 })

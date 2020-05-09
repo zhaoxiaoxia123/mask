@@ -157,7 +157,7 @@ Page({
    */
   checkSendAddress: function (e) {
     let index = e.currentTarget.dataset.index;
-    var items = that.data.items;
+    let items = that.data.items;
     let check = items[index].checked;
     items[index].checked = !items[index].checked;
     if (items[index].checked){
@@ -180,57 +180,12 @@ Page({
 
  //提交地址信息
   checkAddress: function (address_id) {
-    if (wx.getStorageSync('customerId')) {
-      var param = {
-        page_code: 'p002',
-        type: "editAddress",
-        is_default: 1,
-        customer_id: wx.getStorageSync('customerId'),
-        customer_addr_id: address_id
-      };
-      console.log(param);
-      wx.request({
-        url: app.globalData.domainUrl,
-        method: "POST",
-        data: param,
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        success: function (res) {
-          console.log(res);
-          var datas = res.data.data;
-          if (datas) {
-            wx.navigateBack({
-              delta: 1
-            });
-          }
-        }
-      })
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '授权登录后才能做此操作。',
-        showCancel: false
-      });
-    }
+    var pagesArr = getCurrentPages();
+    pagesArr[pagesArr.length - 2].setData({
+      addressId: address_id,
+    });
+    wx.navigateBack({
+      delta: 1,
+    });
   },
-
-  // checkOne: function (e) {
-  //   console.log('aa');
-  //   var items = that.data.items;
-  //   for (var i = 0; i < items.length; i++) {
-  //     if (items[i].customer_addr_id == this.data.checkId) {
-  //       for (var j = 0; j < items.length; j++) {
-  //         // console.log("items[j].checked = ", items[j].checked);
-  //         if (items[j].checked && j != i) {
-  //           items[j].checked = false;
-  //         }
-  //       }
-  //       items[i].checked = !(items[i].checked);
-  //     }
-  //   }
-  //   this.setData({
-  //     items: items
-  //   });
-  // },
 })

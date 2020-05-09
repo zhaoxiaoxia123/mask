@@ -33,7 +33,7 @@ Page({
       currentTab: parseInt(options.id) - 1,
       order_state: parseInt(options.id) - 1
     });
-    console.log(that.data.order_state);
+    // console.log(that.data.order_state);
   },
 
   /**
@@ -89,7 +89,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
     if (!that.data.isLast) {
       that.setData({
         offset: that.data.offset + 1
@@ -145,12 +144,9 @@ Page({
       },
       success: function (res) {
         var datas = res.data.data;
-        // console.log(datas);
-        // console.log(datas.length);
         that.setData({
           items: that.data.items.concat(datas)
         });
-        console.log(that.data.items);
         if (datas.length <= 0 || datas.length < that.data.pageCount) {
           that.setData({
             isLast: true
@@ -163,8 +159,8 @@ Page({
   // tab切换
   clickTab: function (e) {
     var that = this;
-    console.log("-1", this.data.currentTab)
-    console.log("-2", e.currentTarget.dataset.current)
+    // console.log("-1", this.data.currentTab)
+    // console.log("-2", e.currentTarget.dataset.current)
     if (this.data.currentTab == e.currentTarget.dataset.current) {
       return false;
     } else {
@@ -211,7 +207,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         var datas = res.data.data;
         if (datas) {
           wx.showToast({
@@ -239,7 +235,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         var datas = res.data.data;
         if (datas) {
           wx.showToast({

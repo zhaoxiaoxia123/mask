@@ -1,4 +1,4 @@
-var share = {
+var filter = {
   getDateDiff: function (dateTime) {
     var dateTimeStamp = getDate(dateTime).getTime();
     var result = '';
@@ -35,11 +35,19 @@ var share = {
       result = "刚刚";
     }
     return result;
+  },
+
+  dateFormat: function (str) {
+    console.log(str);
+    var reg = getRegExp("-", "g")
+    var re = str.replace(reg, ".");
+    console.log(re);
+    return re;
   }
 }
 
-
 module.exports = {
-  getDateDiff: share.getDateDiff
+  getDateDiff: filter.getDateDiff,
+  dateFormat: filter.dateFormat
 }
 

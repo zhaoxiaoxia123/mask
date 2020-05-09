@@ -19,8 +19,9 @@ Page({
     usingTicketAmount: 0, //使用优惠券的抵扣值
     isUsePoint: false,
     isCheckTicket: 9999, //存储选择卡券索引  9999为不用卡券
-    isCheckExpressCompany: 9999, //存储选择快递  9999为随机
-    domainName: app.globalData.domainName
+    isCheckExpressCompany: 2, //存储选择快递  9999为随机
+    domainName: app.globalData.domainName,
+    addressId:0
   },
 
   /**
@@ -45,6 +46,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    let pages = getCurrentPages();
+    let currPage = pages[pages.length - 1];
+    that.setData({
+      addressId:currPage.data.addressId
+    });
+
     if (wx.getStorageSync('customerId')) {
       var param = {
         page_code: 'p004',
@@ -78,14 +85,12 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-    console.log('onhide');
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    console.log('onUnload');
     var pages = getCurrentPages();  // 当前页的数据，可以输出来看看有什么东西
     var prevPage = pages[pages.length - 2];  // 上一页的数据，也可以输出来看看有什么东西
     /** 设置数据 这里面的 value 是上一页你想被携带过去的数据，后面是本方法里你得到的数据，我这里是detail.value，根据自己实际情况设置 */
@@ -116,7 +121,7 @@ Page({
   },
 
   checkboxChange: function(e) {
-    console.log('checkbox发生change事件，携带value值为：', e.target.dataset.type)
+    // console.log('checkbox发生change事件，携带value值为：', e.target.dataset.type)
     if (e.target.dataset.type == 'isUsePoint') {
       that.setData({
         isUsePoint: !that.data.isUsePoint
@@ -136,8 +141,7 @@ Page({
   //添加默认收货地址
   goAddress: function() {
     wx.navigateTo({
-      // url: '/pages/my/address/addressdetail/addressdetail' //?products=' + that.data.products,
-      url: '/pages/my/address/address?come=order' //?products=' + that.data.products,
+      url: '/pages/my/address/address?come=order'
     })
   },
 
@@ -195,20 +199,12 @@ Page({
 
   //计算商品总价
   sumProductAmount: function(pInfo, cInfo) {
-    // console.log('pInfo:----');
-    // console.log(pInfo);
     var productAmount = 0;
     for (var i = 0; i < pInfo.length; i++) {
-      // console.log('ii:----');
-      // console.log((parseFloat(pInfo[i]['discount_amount']) * pInfo[i]['join_product_count']));
       productAmount += (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
-      // console.log('productAmount:----');
-      // console.log(productAmount);
     }
     //商品总价会员折扣后的价格  productAmount
     var discountAmount = (cInfo.discount != 0 ? (productAmount * (cInfo.discount / 100)).toFixed(2) : productAmount);
-    // console.log('discountAmount:----');
-    // console.log(discountAmount);
     //商品总价
     that.setData({
       productAmount: productAmount,
@@ -223,20 +219,11 @@ Page({
     var pInfo = that.data.items;
     that.sumProductAmount(pInfo, cInfo); //获取商品总价
     var tPayAmount = that.sumCheckTicket(); //减卡券价值后的总价
-
     var discountAmount = tPayAmount; //that.data.discountAmount;
     var productAmount = that.data.productAmount;
-    console.log(productAmount);
-    console.log(discountAmount);
     var payAmount = 0; //实付款
-    console.log(cInfo.frozeno_point);
-    console.log(tInfo.type);
-    console.log(tInfo.type == 2);
     if (cInfo.frozeno_point > 0 && that.data.isUsePoint) {
       if (tInfo.type == 2) { //若满减
-        // console.log("若满减:----");
-        // console.log(productAmount);
-        // console.log(productAmount >= tInfo.satisfy_amount);
         if (productAmount >= tInfo.satisfy_amount) { //商品总价是否大于等于满减金额设置
           that.sumAmount(cInfo.frozeno_point, tInfo.rate, discountAmount);
         } else { //小于：则不可使用积分。
@@ -262,15 +249,9 @@ Page({
     var discountAmount = that.data.discountAmount; //商品会员折扣后的总价
     var tIndex = that.data.isCheckTicket - 1; //选中卡券索引
     var usingTicketAmount = 0;
-    console.log('tIndex:----');
-    console.log(tIndex);
-    console.log(discountAmount);
     if (tIndex != 9998) { //上面索引减了个1
       var tList = that.data.ticketList; //卡券列表
       var payAmount = 0;
-      console.log('sumCheckTicket:----');
-      console.log(tList);
-      console.log(tIndex);
       if (tList[tIndex]['ticket_type'] == 1) { //通用
         usingTicketAmount = tList[tIndex]['ticket_amount'];
         payAmount = discountAmount - tList[tIndex]['ticket_amount'];
@@ -309,11 +290,7 @@ Page({
   sumAmount: function(point, rate, discountAmount) {
     //可抵用积分数
     var usingPoint = (discountAmount * (parseFloat(rate) / 100));
-    console.log('sumAmount:----------');
-    console.log(parseFloat(point) >= parseFloat(usingPoint));
-    console.log(parseFloat(discountAmount));
-    console.log(parseFloat(usingPoint));
-    console.log(parseFloat(discountAmount) - parseFloat(usingPoint));
+    usingPoint = usingPoint.toFixed(2);
     if (parseFloat(point) >= parseFloat(usingPoint)) { //用户积分大于等于可抵用积分数
       that.setData({
         usingPoint: usingPoint,
@@ -325,31 +302,42 @@ Page({
         payAmount: parseFloat(discountAmount) - parseFloat(point)
       });
     }
-
-    // console.log('payAmount:----------');
-    // console.log(that.data.payAmount);
   },
 
-  getAddress: function() {
+  getAddress: function () {
+    console.log('that.data.addressId:----');
+    console.log(that.data.addressId);
     if (wx.getStorageSync('customerId')){
     // var param = '/p002?is_default=1&customer_id='+wx.getStorageSync('customerId');
-    wx.request({
-      url: app.globalData.domainUrl,
-      data: {
+      var param = {
         page_code: 'p002',
         customer_id: wx.getStorageSync('customerId'),
         is_default: 1
-      },
+      };
+    if(that.data.addressId > 0){
+      param = {
+        page_code: 'p002',
+        customer_addr_id: that.data.addressId
+      };
+    }
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: param,
       header: {
         'content-type': "application/json"
       },
       success: function(res) {
-        console.log(res);
         var datas = res.data.data;
-        if (datas.length > 0) {
-          that.setData({
-            address: datas[0]
-          });
+        if (datas) {
+          if (that.data.addressId > 0) {
+            that.setData({
+              address: datas
+            });
+          }else{
+            that.setData({
+              address: datas[0]
+            });
+          }
         }
       }
     })
@@ -361,6 +349,7 @@ Page({
     var param_t = {
       page_code: 'p013',
       customer_id: wx.getStorageSync('customerId'),
+      ticket_state:1,
       offset: 0,
       page: 20
     };
