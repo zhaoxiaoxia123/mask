@@ -110,6 +110,35 @@ Page({
   onShareAppMessage: function() {
 
   },
+  // 跳转规格弹窗
+  ftservice: function (e) {
+    var that = this;
+    var ftserviceflexwindow;
+    if (this.data.ftserviceflexwindow == true) {
+      ftserviceflexwindow = false;
+    }
+    else {
+      ftserviceflexwindow = true;
+    }
+    that.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    });
+  },
+  ftserviceq: function (e) {
+    let self = this
+    let ftserviceflexwindow = false;
+
+    self.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    })
+  },
+
+  //进入首页页面
+  gohome: function () {
+    wx.switchTab({
+      url: '/pages/home/home',
+    })
+  },
 
   //以下为自定义点击事件
   getShoppingList: function(param) {

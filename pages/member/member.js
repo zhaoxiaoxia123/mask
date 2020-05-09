@@ -38,6 +38,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1
+      })
+    }
     if (wx.getStorageSync('customerId')) {
       var param = {
         page_code: 'p004',
@@ -95,6 +101,29 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+  },
+
+  // 跳转规格弹窗
+  ftservice: function (e) {
+    var that = this;
+    var ftserviceflexwindow;
+    if (this.data.ftserviceflexwindow == true) {
+      ftserviceflexwindow = false;
+    }
+    else {
+      ftserviceflexwindow = true;
+    }
+    that.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    });
+  },
+  ftserviceq: function (e) {
+    let self = this
+    let ftserviceflexwindow = false;
+
+    self.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    })
   },
   //进入登录注册页面
   goLogin: function () {
