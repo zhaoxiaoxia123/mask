@@ -36,7 +36,7 @@
           <!--bindtap绑定事件 待付款-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='ordernum'>订单编号：{{item.o_order}}</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 2}}">待发货</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 3}}">待收货</view>
@@ -110,7 +110,7 @@
           <!--bindtap绑定事件 待付款-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='ordernum'>订单编号：{{item.o_order}}</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.o_id}}" bindtap='orderdetail'>
@@ -164,7 +164,7 @@
           <!--bindtap绑定事件 待发货-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='ordernum'>订单编号：{{item.o_order}}</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
@@ -214,7 +214,7 @@
           <!--bindtap绑定事件 待收货-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='ordernum'>订单编号：{{item.o_order}}</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
@@ -268,7 +268,7 @@
           <!--bindtap绑定事件 交易成功或失败-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
             <view class='order-top'>
-              <view class='ordernum'>订单号：{{item.o_order}}</view>
+              <view class='ordernum'>订单编号：{{item.o_order}}</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 4}}">交易完成</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 5}}">已取消</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 6}}">取消订单中</view>

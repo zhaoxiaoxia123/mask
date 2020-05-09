@@ -1,0 +1,35 @@
+<!--template.wxml-->
+<template name="service">
+
+  <!-- 客服图标 -->
+  <view class="ftservice">
+    <view class="ftservice-bt" bindtap="ftservice" data-item="{{ftserviceflexwindow}}">
+      <image class="icon40" src="../img/service@2x.png"></image>
+    </view>
+  </view>
+  <!-- 客服 -->
+  <view class="frame1 {{ftserviceflexwindow==true?'': 'zy'}}" bindtap='ftserviceq'>
+  </view>
+  <view class="frame {{ftserviceflexwindow==true?'': 'zy'}}">
+    <!--bindtap绑定事件-->
+    <view class="ftservice-list">
+
+      <view class="ftservice-item">
+        <button class="ftservice-button" style="width:100%" type="default-light" open-type="contact" session-from="weapp">
+          <view class="ftservice-number">在线客服</view>
+          <view>（周一至周日10:00-21:00）</view>
+        </button>
+      </view>
+      <view class="ftservice-item">
+        <button class="ftservice-button" style="width:100%" bindtap='calling'>
+          <view class="ftservice-number">400 002 8767</view>
+          <view>（周一至周日10:00-21:00）</view>
+        </button>
+      </view>
+      <view class="ftservice-item" bindtap='ftserviceq'>
+        <view class="ftservice-text">取消</view>
+      </view>
+    </view>
+
+  </view>
+</template>

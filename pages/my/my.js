@@ -1,6 +1,6 @@
 // pages/my/my.js
 var app = getApp();
-// var wxbarcode = require('../../utils/index.js');
+import tmpObj from '../template/template.js'
 var that;
 Page({
   
@@ -14,7 +14,8 @@ Page({
     isLogin:false,
     canGetUserInfo: false,
     showModal: false,
-    qrcode:''
+    qrcode: '',
+    ftserviceflexwindow: false
   },
 
   /**
@@ -95,29 +96,21 @@ Page({
 
   },
 
-  // 跳转规格弹窗
   ftservice: function (e) {
-    var that = this;
-    var ftserviceflexwindow;
-    if (this.data.ftserviceflexwindow == true) {
-      ftserviceflexwindow = false;
-    }
-    else {
-      ftserviceflexwindow = true;
-    }
+    let ret = tmpObj.ftservice(e);
     that.setData({
-      ftserviceflexwindow: ftserviceflexwindow
+      ftserviceflexwindow: ret
     });
   },
   ftserviceq: function (e) {
-    let self = this
-    let ftserviceflexwindow = false;
-
-    self.setData({
-      ftserviceflexwindow: ftserviceflexwindow
+    let ret = tmpObj.ftserviceq(e);
+    that.setData({
+      ftserviceflexwindow: ret
     })
   },
-
+  calling: function (e) {
+    tmpObj.calling(e);
+  },
   /**
    * 用户点击右上角分享
    */

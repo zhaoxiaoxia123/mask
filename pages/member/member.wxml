@@ -38,7 +38,7 @@
         <view class='date'>
           <view class='branch-content'>
             <view class='branch-text'>
-              <text>{{items.frozeno_validity?items.frozeno_validity:'***'}}</text>
+              <text>{{items.frozeno_validity?items.frozeno_validity:'长期'}}</text>
             </view>
 
             <view class='branch-text'>
@@ -85,35 +85,9 @@
   </view>
 </view>
 
-
-
-<!-- 客服图标 -->
-<view class="ftservice">
-    <view class="ftservice-bt" bindtap="ftservice">
-        <image class="icon40" src="../img/service@2x.png"></image> 
-    </view>
+<!-- 声明需要使用的模板文件 -->
+<import src ="../template/template.wxml"/>
+<view class='item' bindtap='ftservice' data-item='{{ftserviceflexwindow}}'>
+  <template is="service" data="{{ftserviceflexwindow}}"/>
 </view>
-<!-- 客服 -->
- <view class="frame1 {{ftserviceflexwindow==true?'': 'zy'}}" bindtap='ftserviceq'></view>
-  <view class="frame {{ftserviceflexwindow==true?'': 'zy'}}">
-    <!--bindtap绑定事件-->
-    <view class="ftservice-list">
 
-      <view class="ftservice-item"> 
-        <button class="ftservice-button" style="width:100%" type="default-light" open-type="contact" session-from="weapp">
-            <view class="ftservice-number">在线客服</view>
-            <view>（周一至周日10:00-21:00）</view>
-        </button> 
-      </view>
-         <view class="ftservice-item" > 
-            <button class="ftservice-button" style="width:100%" bindtap='tel'>
-                <view class="ftservice-number">400 002 8767</view>
-                <view>（周一至周日10:00-21:00）</view>
-            </button> 
-      </view>
-        <view class="ftservice-item" bindtap='ftserviceq'> 
-          <view class="ftservice-text">取消</view>
-        </view>
-    </view>
-
-  </view>

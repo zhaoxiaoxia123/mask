@@ -1,6 +1,7 @@
 // pages/info/info.js
 var that;
 var app = getApp();
+import tmpObj from '../template/template.js'
 Page({
   /**
    * 页面的初始数据
@@ -15,7 +16,8 @@ Page({
     isLast: false,
     items: [],
     isBack: false,
-    domainName: app.globalData.domainName
+    domainName: app.globalData.domainName,
+    ftserviceflexwindow: false
   },
 
   /**
@@ -110,29 +112,22 @@ Page({
   onShareAppMessage: function() {
 
   },
-  // 跳转规格弹窗
+
   ftservice: function (e) {
-    var that = this;
-    var ftserviceflexwindow;
-    if (this.data.ftserviceflexwindow == true) {
-      ftserviceflexwindow = false;
-    }
-    else {
-      ftserviceflexwindow = true;
-    }
+    let ret = tmpObj.ftservice(e);
     that.setData({
-      ftserviceflexwindow: ftserviceflexwindow
+      ftserviceflexwindow: ret
     });
   },
   ftserviceq: function (e) {
-    let self = this
-    let ftserviceflexwindow = false;
-
-    self.setData({
-      ftserviceflexwindow: ftserviceflexwindow
+    let ret = tmpObj.ftserviceq(e);
+    that.setData({
+      ftserviceflexwindow: ret
     })
   },
-
+  calling: function (e) {
+    tmpObj.calling(e);
+  },
   //进入首页页面
   gohome: function () {
     wx.switchTab({

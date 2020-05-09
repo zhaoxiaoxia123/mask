@@ -219,7 +219,28 @@ Page({
     })
   },
   submitMessage:function(e){ //提醒发货
-
+    var order_id = e.currentTarget.dataset.id;
+    wx.request({
+      url: app.globalData.domainUrl,
+      method: "POST",
+      data: {
+        page_code: 'p008',
+        type: 'sendMessage',
+        order_id: order_id
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        // console.log(res);
+        var datas = res.data.data;
+        if (datas) {
+          wx.showToast({
+            title: res.data.message
+          });
+        }
+      }
+    })
   },
   submitOk: function(e){ //确认收货
     var order_id = e.currentTarget.dataset.id;

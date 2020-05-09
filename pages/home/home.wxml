@@ -1,81 +1,78 @@
 <view>
-  <!--滑块容器相关配置，以下为参数-->
-  <swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
-    <!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名-->
-    <block wx:for="{{swipers}}" wx:key="*this">
-      <swiper-item>
-        <image src="{{domainName}}{{item.b_image_url}}" class="slide-image" />
+  <!--滑块容器相关配置，以下为参数  广告 interval="{{interval}}" duration="{{duration}}"-->
+  <swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{false}}">
+    <!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名   mode="widthFix"-->
+    <block wx:for="{{swipers}}" wx:key="*this" wx:for-item="item1">
+      <swiper-item wx:if="{{item1.type == 9}}">
+        <image src="{{domainName}}{{item1.b_image_url}}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
-
-  <view class="ad-member">
-      <image class="member-img" src='../img/member/member@2x.png'></image>
+  <!--滑块容器相关配置，以下为参数   其他广告-->
+  <!-- <swiper class="slide-bolk" indicator-dots="true" indicator-color="#999" indicator-active-color="#333" autoplay="{{false}}">
+    <block wx:for="{{swipers}}" wx:key="*this">
+      <swiper-item wx:if="{{item.type == 12}}">
+        <image src="{{domainName}}{{item.b_image_url}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper> -->
+  
+  <view class="detail-image">
+    <block wx:for="{{swipers}}" wx:key="*this" >
+      <image wx:if="{{item.type == 12}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image" bindtap='toPost' data-obj='{{item.post_id}}' />
+    </block>
+  </view>
+  <view class="detail-image">
+    <block wx:for="{{items}}" wx:key="*this" wx:for-index="index" wx:for-item="item">
+      <image mode="widthFix" src="{{domainName}}{{item.image_url[0]}}" lazy-load bindtap='toDetail' data-obj='{{item}}'/>
+    </block>
+  </view>
+  <!-- <view class="ad-member">
+    <image class="member-img" src='../img/member/member@2x.png'></image>
   </view>
   <view class="ad-member">
-      <image class="member-img" src='../img/member/member1@2x.png'></image>
+    <image class="member-img" src='../img/member/member1@2x.png'></image>
   </view>
-
   <view class='lists  page-pd'>
-    <!--bindtap绑定事件-->
     <view class="list" bindtap='toDetail' wx:key="*this" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
-
       <view class='list-left'>
-      <!-- ?item.image_url[0]:"../img/banner.jpg -->
         <image src='{{domainName}}{{item.image_url[0]}}' lazy-load></image>
       </view>
-
       <view class='list-right'>
         <view>
           <view class='right-text'>{{item.category_desc}}</view>
         </view>
-
         <view>
           <view class='abstract'>{{item.frozeno_introduction?item.frozeno_introduction:''}}</view>
         </view>
-
         <view class='column'>
           <view class='sale'>{{item.frozeno_discount_amount}}</view>
           <view class='money'>{{item.frozeno_amount}}</view>
         </view>
         <view class='list-button'>
-        <!-- <view class='list-button' data-id="{{item.category_id}}" data-count="1" bindtap="goConfirm"> -->
           <text>立即购买</text>
         </view>
       </view>
     </view>
-  </view>
+  </view> -->
 
 </view>
-
-<!-- 客服图标 -->
-<view class="ftservice">
-    <view class="ftservice-bt" bindtap="ftservice">
-        <image class="icon40" src="../img/service@2x.png"></image> 
-    </view>
-</view>
-<!-- 客服 -->
- <view class="frame1 {{ftserviceflexwindow==true?'': 'zy'}}" bindtap='ftserviceq'></view>
-  <view class="frame {{ftserviceflexwindow==true?'': 'zy'}}">
-    <!--bindtap绑定事件-->
-    <view class="ftservice-list">
-
-      <view class="ftservice-item"> 
-        <button class="ftservice-button" style="width:100%" type="default-light" open-type="contact" session-from="weapp">
-            <view class="ftservice-number">在线客服</view>
-            <view>（周一至周日10:00-21:00）</view>
-        </button> 
-      </view>
-         <view class="ftservice-item" > 
-            <button class="ftservice-button" style="width:100%" bindtap='tel'>
-                <view class="ftservice-number">400 002 8767</view>
-                <view>（周一至周日10:00-21:00）</view>
-            </button> 
-      </view>
-        <view class="ftservice-item" bindtap='ftserviceq'> 
-          <view class="ftservice-text">取消</view>
-        </view>
-    </view>
-
+<!--滑块容器相关配置，以下为参数   关于我们广告-->
+ <!-- <swiper class="slide-bolk" indicator-dots="true" indicator-color="#999" indicator-active-color="#333" autoplay="{{false}}">
+    <block wx:for="{{swipers}}" wx:key="*this">
+      <swiper-item wx:if="{{item.type == 13}}">
+        <image src="{{domainName}}{{item.b_image_url}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper> -->
+  
+  <view class="detail-image">
+    <block wx:for="{{swipers}}" wx:key="*this" >
+      <image wx:if="{{item.type == 13}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image" bindtap='toPost' data-obj='{{item.post_id}}' />
+    </block>
   </view>
-
+<!-- 声明需要使用的模板文件 -->
+<import src="../template/template.wxml" />
+<view class='item' bindtap='ftservice' data-item='{{ftserviceflexwindow}}'>
+  <template is="service" data="{{ftserviceflexwindow}}" />
+</view>
