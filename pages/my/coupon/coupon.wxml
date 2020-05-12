@@ -42,7 +42,7 @@
                 </view>
                 <view class='co'>
                   <view class="coupon-hd">
-                   {{item.ticket_name}}
+                    {{item.ticket_name}}
                   </view>
                   <view class="conditions" wx:if="{{item.ticket_type == 1}}">
                     全场通用
@@ -85,7 +85,7 @@
                 </view>
                 <view class='co'>
                   <view class="coupon-hd">
-                   {{item.ticket_name}}
+                    {{item.ticket_name}}
                   </view>
                   <view class="conditions" wx:if="{{item.ticket_type == 1}}">
                     全场通用
@@ -97,7 +97,7 @@
                     {{filter.dateFormat(item.ticket_start_date)}}至{{filter.dateFormat(item.ticket_end_date)}}
                   </view>
                 </view>
-                </view>
+              </view>
             </view>
             <view class="split-line"></view>
             <view class="tip">
@@ -128,7 +128,7 @@
                 </view>
                 <view class='co'>
                   <view class="coupon-hd">
-                   {{item.ticket_name}}
+                    {{item.ticket_name}}
                   </view>
                   <view class="conditions" wx:if="{{item.ticket_type == 1}}">
                     全场通用
@@ -140,7 +140,7 @@
                     {{filter.dateFormat(item.ticket_start_date)}}至{{filter.dateFormat(item.ticket_end_date)}}
                   </view>
                 </view>
-                </view>
+              </view>
             </view>
             <view class="split-line"></view>
             <view class="tip">

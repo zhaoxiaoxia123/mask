@@ -1,6 +1,6 @@
 // pages/my/my.js
-var app = getApp();
 import tmpObj from '../template/template.js'
+var app = getApp();
 var that;
 Page({
   
@@ -15,7 +15,8 @@ Page({
     canGetUserInfo: false,
     showModal: false,
     qrcode: '',
-    ftserviceflexwindow: false
+    ftserviceflexwindow: false,
+    domainName: app.globalData.domainName,
   },
 
   /**
@@ -262,10 +263,10 @@ Page({
           'content-type': 'application/json'
         },
         success: function (res) {
-          // console.log(res);
           that.setData({
             qrcode: res.data.data
           });
+          console.log(that.data.qrcode);
         }
       });
     }

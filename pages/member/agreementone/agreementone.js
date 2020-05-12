@@ -1,6 +1,7 @@
 // pages/member/agreementone/agreementone.js
 var that;
 var app = getApp();
+var WxParse = require('../../../wxParse/wxParse.js')
 Page({
 
   /**
@@ -83,7 +84,14 @@ Page({
         var datas = res.data.data;
         that.setData({
           items: datas
-        })
+        });
+
+        //修改顶部标题栏信息
+        wx.setNavigationBarTitle({
+          title: datas[0].title
+        });
+        var infos = datas[0].description;
+        WxParse.wxParse('infos', 'html', infos, that);
       }
     });
   },

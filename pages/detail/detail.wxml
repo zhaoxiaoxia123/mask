@@ -1,6 +1,6 @@
 <!--pages/detail/detail.wxml-->
 <view>
-  <swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:600rpx;background:#fff'>
+  <swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:720rpx;background:#fff'>
     <block wx:for="{{swipers}}" wx:key="*this">
       <swiper-item wx:if="{{item.type == 1}}">
         <image src="{{domainName}}{{item.img_url}}" class="slide-image" />
@@ -9,10 +9,10 @@
   </swiper>
   <view class='page-pd'>
     <view class='money'>
-      <text>优惠价￥{{items.frozeno_discount_amount}}</text>
-      <text class='text-size'>（</text>
+      <text>￥{{items.frozeno_discount_amount}}</text>
+      <!-- <text class='text-size'>（</text>
       <text class='decoration text-size'>￥{{items.frozeno_amount}}</text>
-      <text class='text-size'> ）</text>
+      <text class='text-size'> ）</text> -->
     </view>
     <view class='money-title'>{{items.category_desc}}</view>
     <view class='money-text'>
@@ -72,8 +72,8 @@
             <image class='icon40' src='../img/close@2x.png' bindtap='close'></image>
           </view>
           <view class='sales-spec'>
-            <text>优惠价￥{{items.frozeno_discount_amount}}（</text>
-            <text class='decoration'>￥{{items.frozeno_amount}}</text>
+            <text>￥{{items.frozeno_discount_amount}}（</text>
+            <!-- <text class='decoration'>￥{{items.frozeno_amount}}</text> -->
             <text>）</text>
           </view>
           <view class='text-size'>库存：{{items.stock}}</view>

@@ -45,7 +45,8 @@ Page({
 
       var param_p = {
         page_code: 'p004',
-        type: "pointList",
+        type: "logList",//"pointList",
+          event:1,
         customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
@@ -86,7 +87,8 @@ Page({
       //商品列表
       var param_p = {
         page_code: 'p004',
-        type: "pointList",
+        type: "logList",//"pointList",
+          event:1,
         customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount

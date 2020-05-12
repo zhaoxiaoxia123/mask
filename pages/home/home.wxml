@@ -17,11 +17,11 @@
     </block>
   </swiper> -->
   
-  <view class="detail-image">
+  <!-- <view class="detail-image">
     <block wx:for="{{swipers}}" wx:key="*this" >
       <image wx:if="{{item.type == 12}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image" bindtap='toPost' data-obj='{{item.post_id}}' />
     </block>
-  </view>
+  </view> -->
   <view class="detail-image">
     <block wx:for="{{items}}" wx:key="*this" wx:for-index="index" wx:for-item="item">
       <image mode="widthFix" src="{{domainName}}{{item.image_url[0]}}" lazy-load bindtap='toDetail' data-obj='{{item}}'/>
@@ -65,12 +65,13 @@
       </swiper-item>
     </block>
   </swiper> -->
-  
-  <view class="detail-image">
+  <!-- <view class="detail-image">
     <block wx:for="{{swipers}}" wx:key="*this" >
       <image wx:if="{{item.type == 13}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image" bindtap='toPost' data-obj='{{item.post_id}}' />
     </block>
-  </view>
+  </view> -->
+
+  <!-- <button bindtap="goWx">go mp weixin</button> -->
 <!-- 声明需要使用的模板文件 -->
 <import src="../template/template.wxml" />
 <view class='item' bindtap='ftservice' data-item='{{ftserviceflexwindow}}'>

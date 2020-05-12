@@ -209,4 +209,12 @@ Page({
       }
     })
   },
+
+
+  // goWx:function(){
+  //   wx.navigateTo({
+  //     url: '/pages/my/service/service',
+  //   })
+  // },
+
 })
