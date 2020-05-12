@@ -9,7 +9,8 @@ Page({
    */
   data: {
     postId:0,
-    type:0
+    type: 0,
+    href: ''
   },
 
   /**
@@ -19,20 +20,24 @@ Page({
     that = this;
     that.setData({
       postId: options.id,
-      type: options.type
+      type: options.type,
+      href:options.href
     });
     if (that.data.type){
       var param = {
         page_code: "p001",
         type: that.data.type
       };
+      that.getPost(param);
     } else if (that.data.postId) {
       var param = {
         page_code: "p001",
         post_id: that.data.postId
       };
+      that.getPost(param);
+    } else if (that.data.href) {
+      
     }
-    that.getPost(param);
   },
 
   /**
