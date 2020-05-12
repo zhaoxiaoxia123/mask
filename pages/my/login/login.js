@@ -345,11 +345,11 @@ Page({
     console.log(type);
     if (type == 'agree'){
       wx.navigateTo({
-        url: '/pages/my/agree/agree'
+        url: '/pages/post/post?type=14'
       })
     } else {
       wx.navigateTo({
-        url: '/pages/my/privacy/privacy'
+        url: '/pages/post/post?type=15'
       })
     }
   },

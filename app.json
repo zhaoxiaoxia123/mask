@@ -18,13 +18,10 @@
     "pages/my/customer/customer",
     "pages/my/setting/setting",
     "pages/my/setting/information/information",
-    "pages/my/agree/agree",
-    "pages/my/privacy/privacy",
     "pages/member/member",
     "pages/member/integral/integral",
     "pages/member/grade/grade",
     "pages/member/grow/grow",
-    "pages/member/agreementone/agreementone",
     "pages/post/post"
   ],
   "window": {

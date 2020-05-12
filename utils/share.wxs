@@ -38,10 +38,10 @@ var filter = {
   },
 
   dateFormat: function (str) {
-    console.log(str);
+    // console.log(str);
     var reg = getRegExp("-", "g")
     var re = str.replace(reg, ".");
-    console.log(re);
+    // console.log(re);
     return re;
   }
 }

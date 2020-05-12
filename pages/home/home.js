@@ -209,4 +209,26 @@ Page({
       }
     })
   },
+  goPost: function (e) {
+    console.log(e);
+    let post_id = e.currentTarget.dataset.id;
+    let href = e.currentTarget.dataset.href;
+    console.log(href);
+    if(href){
+      wx.navigateTo({
+        url: '../post/post?href=' + href,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../post/post?id=' + post_id,
+      })
+    }
+  },
+
+  // goWx:function(){
+  //   wx.navigateTo({
+  //     url: '/pages/my/service/service',
+  //   })
+  // },
+
 })

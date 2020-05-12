@@ -4,7 +4,8 @@
     <!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名   mode="widthFix"-->
     <block wx:for="{{swipers}}" wx:key="*this" wx:for-item="item1">
       <swiper-item wx:if="{{item1.type == 9}}">
-        <image src="{{domainName}}{{item1.b_image_url}}" class="slide-image" />
+        <image src="{{domainName}}{{item1.b_image_url}}" class="slide-image" bindtap="goPost" data-id="{{item1.post_id}}" data-href="{{item1.href}}" wx:if="{{item1.is_href == 1}}"/>
+        <image src="{{domainName}}{{item1.b_image_url}}" class="slide-image" wx:if="{{item1.is_href == 2}}"/>
       </swiper-item>
     </block>
   </swiper>
@@ -17,11 +18,11 @@
     </block>
   </swiper> -->
   
-  <view class="detail-image">
+  <!-- <view class="detail-image">
     <block wx:for="{{swipers}}" wx:key="*this" >
       <image wx:if="{{item.type == 12}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image" bindtap='toPost' data-obj='{{item.post_id}}' />
     </block>
-  </view>
+  </view> -->
   <view class="detail-image">
     <block wx:for="{{items}}" wx:key="*this" wx:for-index="index" wx:for-item="item">
       <image mode="widthFix" src="{{domainName}}{{item.image_url[0]}}" lazy-load bindtap='toDetail' data-obj='{{item}}'/>
@@ -65,12 +66,13 @@
       </swiper-item>
     </block>
   </swiper> -->
-  
-  <view class="detail-image">
+  <!-- <view class="detail-image">
     <block wx:for="{{swipers}}" wx:key="*this" >
       <image wx:if="{{item.type == 13}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image" bindtap='toPost' data-obj='{{item.post_id}}' />
     </block>
-  </view>
+  </view> -->
+
+  <!-- <button bindtap="goWx">go mp weixin</button> -->
 <!-- 声明需要使用的模板文件 -->
 <import src="../template/template.wxml" />
 <view class='item' bindtap='ftservice' data-item='{{ftserviceflexwindow}}'>

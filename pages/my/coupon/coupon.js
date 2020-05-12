@@ -95,8 +95,22 @@ Page({
       let currentPageIndex = that.data.currentIndex
       currentPageIndex = (currentPageIndex + 1) % 3
       that.setData({
-        currentIndex: currentPageIndex
-      })
+        currentIndex: currentPageIndex,
+        offset: 1,
+        isLast: false,
+        ticketList: []
+      });
+      if (wx.getStorageSync('customerId')) {
+        var param = {
+          page_code: "p013",
+          customer_id: wx.getStorageSync('customerId'),
+          ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
+          offset: (that.data.offset - 1) * that.data.pageCount,
+          page: that.data.pageCount
+        };
+        // var param = '/p013?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
+        that.getTicketList(param);
+      }
     }
   },
   //用户点击tab时调用

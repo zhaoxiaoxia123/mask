@@ -1,18 +1,19 @@
 // pages/my/service/service.js
+let that;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    ftserviceflexwindow: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    that = this;
   },
 
   /**
@@ -62,5 +63,33 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  ftservice: function (e) {
+    var ftserviceflexwindow = e.currentTarget.dataset.item;
+    if (ftserviceflexwindow) {
+      ftserviceflexwindow = false;
+    } else {
+      ftserviceflexwindow = true;
+    }
+    that.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    } );
+  },
+  ftserviceq: function (e) {
+    let ftserviceflexwindow = false;
+    that.setData({
+      ftserviceflexwindow: ftserviceflexwindow
+    });
+  },
+  calling: function (e) {
+    wx.makePhoneCall({
+      phoneNumber: '10000',
+      success: function () {
+        console.log("拨打电话成功！")
+      },
+      fail: function () {
+        console.log("拨打电话失败！")
+      }
+    })
+  },
 })

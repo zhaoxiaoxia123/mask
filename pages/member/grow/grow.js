@@ -44,7 +44,8 @@ Page({
       
       var paramg = {
         page_code: 'p004',
-        type: "growthList",
+        type: "logList",  //growthList
+          event:2,
         customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
@@ -85,7 +86,8 @@ Page({
       //商品列表
       var param_p = {
         page_code: 'p004',
-        type: "growthList",
+        type: "logList",//"growthList",
+          event:2,
         customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
