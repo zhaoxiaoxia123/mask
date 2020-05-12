@@ -1,8 +1,6 @@
 <!--pages/member/member.wxml-->
-
 <!-- 会员中心 -->
-<view >
-
+<view>
   <view class='frozeno-logo page-pd'>
     <image class="icon-logo" src="../img/frozen.png"></image>
   </view>

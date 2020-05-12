@@ -27,7 +27,7 @@
   <view>
     <view class="col-conten">
       <text>注册/登录即代表同意</text>
-      <text bindtap="goPage" data-type="agree">《智美mall服务协议》</text>
+      <text bindtap="goPage" data-type="agree">《冻龄智美服务协议》</text>
       <text>和</text>
       <text bindtap="goPage" data-type="privacy">《隐私政策》</text>
     </view>

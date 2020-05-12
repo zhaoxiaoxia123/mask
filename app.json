@@ -18,13 +18,11 @@
     "pages/my/customer/customer",
     "pages/my/setting/setting",
     "pages/my/setting/information/information",
-    "pages/my/agree/agree",
-    "pages/my/privacy/privacy",
     "pages/member/member",
     "pages/member/integral/integral",
     "pages/member/grade/grade",
     "pages/member/grow/grow",
-    "pages/member/agreementone/agreementone"
+    "pages/post/post"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,7 +30,7 @@
     "navigationBarTitleText": "智美Mall",
     "navigationBarBackgroundColor": "#333",
     "backgroundColor": "#f5f5f5",
-    "enablePullDownRefresh": false    
+    "enablePullDownRefresh": false
   },
   "tabBar": {
     "color": "#999",
@@ -42,21 +40,25 @@
     "list": [
       {
         "pagePath": "pages/home/home",
+        "text": "首页",
         "selectedIconPath": "pages/img/home_true@2x.png",
         "iconPath": "pages/img/home_false@2x.png"
       },
       {
         "pagePath": "pages/member/member",
+        "text": "会员",
         "selectedIconPath": "pages/img/member_true@2x.png",
         "iconPath": "pages/img/member_false@2x.png"
       },
       {
         "pagePath": "pages/shopcat/shopcat",
+        "text": "购物车",
         "selectedIconPath": "pages/img/shopcat_true@2x.png",
         "iconPath": "pages/img/shopcat_false@2x.png"
       },
       {
         "pagePath": "pages/my/my",
+        "text": "我的",
         "selectedIconPath": "pages/img/person_true@2x.png",
         "iconPath": "pages/img/person_false@2x.png"
       }

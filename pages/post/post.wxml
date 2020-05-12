@@ -1,0 +1,9 @@
+<!--pages/post/post.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+<view class='page-pd'>
+  <view class='agreement'>
+    <view class='content'>
+        <template is="wxParse" data="{{wxParseData:infos.nodes}}" />
+    </view>
+  </view>
+</view>

@@ -1,0 +1,10 @@
+/* pages/post/post.wxss */
+.agreement{
+  font-size:24rpx;
+  line-height: 2;
+  color:#c6c6c6;
+}
+.agreement .content .a{
+  text-decoration:underline;
+  font-weight: bold;
+}

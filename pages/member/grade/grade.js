@@ -67,9 +67,8 @@ Page({
    * 点击进入各自页面
    * ***/
   agreementone: function (e) {
-    console.log(e)
     wx.navigateTo({
-      url: '../../member/agreementone/agreementone',
+      url: '../../post/post?type=11',
     })
   }
 })
