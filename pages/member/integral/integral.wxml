@@ -6,10 +6,11 @@
       <text>当前积分 </text>
     </view>
 
-    <!-- <view class='integral-current1'>
-        <image class="icon32 pdr10" src="../../img/mark@2x.png" ></image>
-        <text class='' >截止到2021年12月32日，合计200积分将失效 </text>
-      </view> -->
+    <view class='integral-current1'>
+        <!-- <image class="icon32 pdr10" src="../../img/mark@2x.png" ></image> -->
+        <text class='' >历史总积分： </text>
+        <text class="current1-text" >800 </text>
+      </view>
   </view>
   <view class='integral-content'>
     <view class='integral-text' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>

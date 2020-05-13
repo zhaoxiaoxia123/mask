@@ -11,7 +11,7 @@
             <view class="progress-right">差8.00成长值升级为VIP</view>
         </view>
         <view class="progress-box">
-            <progress percent="60" color="#DAB866" active stroke-width="3" active stroke-width="3" />
+            <progress percent="20" color="#DAB866" active stroke-width="3" active stroke-width="3" />
         </view>
     </view>
     <view class='integral-current1'>
@@ -79,7 +79,7 @@
     </view>
   </view>
   <view class='footer'>
-    <text class=''>仅展示近两年的成长值</text>
+    <text class=''>仅展示近六个月的成长值</text>
   </view>
 </view>
 

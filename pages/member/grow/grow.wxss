@@ -35,7 +35,7 @@
   background: #404040;
   margin-top: 20rpx;
   padding: 20rpx;
-  font-size: 32rpx;
+  font-size: 1rem;
 }
 .integral-title{
   display:flex;
