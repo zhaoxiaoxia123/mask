@@ -9,7 +9,7 @@
   <view class='agreement' bindtap='agreementone'>
         <text>查看</text>
         <text class='agreement-a'>《</text>
-        <text class='agreement-a decoration'>单创会员服务协议</text>
+        <text class='agreement-a decoration'>冻龄智美会员协议</text>
         <text class='agreement-a'>》</text>
   </view>
 
