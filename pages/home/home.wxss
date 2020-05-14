@@ -319,7 +319,7 @@ display: none;
 
 /* 尾部链接 */
 .detail-ft{
-  margin-top:-880rpx;
+  margin-top:-840rpx;
 }
 .detail-ft-item{
   display: flex;
