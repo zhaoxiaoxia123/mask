@@ -3,7 +3,7 @@
 
     <!--加载失败的时候显示
      -->
-  <view class='search-no' >
+  <view class='search-no' wx:if="{{ ! item}}" >
     <view bindtap="gohome">
       <image class='scimg' src='../img/loading.png'></image>
     </view>

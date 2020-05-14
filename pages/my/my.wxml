@@ -24,7 +24,7 @@
       </view>
     </view>
 
-    <view class='parent-right' bindtap="goMember" wx:if="{{!canGetUserInfo}}">
+    <view class='parent-right' bindtap="goMember" wx:if="{{!canGetUserInfo && !isLogin}}">
       <view class='money-grade'>
         <!-- 按会员等级进行显示(注册用户)不显示图标、（VIP）、（SVIP）、（钻卡） -->
         <image class="icon32 pdr10" src="../img/drill_golden@2x.png" wx:if="{{items.frozeno_level == 4}}"></image>
@@ -81,10 +81,12 @@
   </view>
 
   <view class='lists bg-box col-content size-titletwo'>
-    <view class='list-wap' bindtap='shareApp'>
+   <!-- bindtap='shareApp' -->
+    <view class='list-wap'>
       <view class='left'>
         <image class='icon40' src='../img/friend@2x.png'></image>
-        <text>邀请好友</text>
+        <!-- <text>邀请好友</text> -->
+        <button class="button-share" open-type="share">邀请好友</button>
       </view>
       <view class='right'>
         <image src='../img/dv.png'></image>

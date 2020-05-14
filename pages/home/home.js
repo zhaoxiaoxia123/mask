@@ -224,12 +224,6 @@ Page({
       })
     }
   },
-  //进入登录注册页面
-  goLogin: function () {
-    wx.navigateTo({
-      url: '/pages/my/login/login',
-    })
-  },
   //进入设置生日
   information: function (e) {
     wx.navigateTo({
@@ -248,12 +242,18 @@ Page({
       url: '/pages/member/member',
     })
   },
-  toast1Tap: function () {
-    wx.showToast({
-      title: "您已经是会员了"
+  //进入登录注册页面
+  goLogin: function () {
+    if( ! wx.getStorageSync('customerId')){
+    wx.navigateTo({
+      url: '/pages/my/login/login',
     })
+    }else{
+      wx.showToast({
+        title: "您已经是会员了"
+      })
+    }
   },
-
   // goWx:function(){
   //   wx.navigateTo({
   //     url: '/pages/my/service/service',

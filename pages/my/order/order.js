@@ -144,13 +144,15 @@ Page({
       },
       success: function (res) {
         var datas = res.data.data;
-        that.setData({
-          items: that.data.items.concat(datas)
-        });
-        if (datas.length <= 0 || datas.length < that.data.pageCount) {
+        if (datas){
           that.setData({
-            isLast: true
+            items: that.data.items.concat(datas)
           });
+          if (datas.length <= 0 || datas.length < that.data.pageCount) {
+            that.setData({
+              isLast: true
+            });
+          }
         }
       }
     });

@@ -328,5 +328,4 @@ display: none;
 .ft-item{
   width:48%;
   height:400rpx;
-  border:1px solid #DAB866
 }

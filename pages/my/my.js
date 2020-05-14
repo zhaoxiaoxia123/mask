@@ -116,7 +116,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '邀请好友成为会员',
+      path: 'pages/my/login/login?shareBy=' + wx.getStorageSync('memberNo'), // 好友点击分享之后跳转到的小程序的页面
+      // desc: '描述',  // 看你需要不需要，不需要不加
+      // imageUrl: '分享的图片路径'
+    }
   },
   //进入登录注册页面
   goLogin:function(){

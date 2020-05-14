@@ -84,28 +84,49 @@ Page({
   },
 
   bindGetUserInfo: function () {
-    if (app.globalData.code) {
-      console.log('userInfo');
-      wx.getUserInfo({
-        success: function (res) {
-          //获取openid，并更新到用户表
-          that.updateUserInfo({
-            page_code: 'p010',
-            type: 'wxLogin',
-            code: app.globalData.code,  //获取openid的code码
-            nickname: res.userInfo.nickName,
-            avatarUrl: res.userInfo.avatarUrl,
-            share_by: res.userInfo.shareBy,
-            // customer_id: wx.getStorageSync('customerId') ? wx.getStorageSync('customerId') : 0,
-          });
+    console.log('userInfo');
+    if (!app.globalData.code) {
+      wx.login({
+        success: r => {
+          app.globalData.code = r.code;  //无权，显示向用户获取权限
+          that.wxGetUserInfo();
         }
-      });
-    } else {
-      wx.showToast({
-        icon: "none",
-        title: "请清除缓存重新登录"
-      });
+      })
+    }else{
+      that.wxGetUserInfo();
     }
+    // } else {
+    //   wx.showToast({
+    //     icon: "none",
+    //     title: "请清除缓存重新登录"
+    //   });
+    // }
+  },
+  wxGetUserInfo:function(){
+    // let param = {
+    //   page_code: 'p010',
+    //   type: 'workbenchLogin',
+    //   code: app.globalData.code,  //获取openid的code码
+    // };
+    // that.updateUserInfo(param);
+
+    wx.getUserInfo({
+      success: function (res) {
+        console.log("getUserInfo:-----");
+        console.log(res);
+        //获取openid，并更新到用户表
+        that.updateUserInfo({
+          page_code: 'p010',
+          type: 'wxLogin',
+          code: app.globalData.code,  //获取openid的code码
+          nickname: res.userInfo.nickName,
+          avatarUrl: res.userInfo.avatarUrl,
+          // encryptedData:res.encryptedData, 
+          // iv:res.iv,
+          share_by: that.data.shareBy,
+        });
+      }
+    });
   },
   updateUserInfo: function (param) {  //更新用户信息
     wx.request({
@@ -119,6 +140,7 @@ Page({
         // wx.navigateBack({
         //     delta: 1  //小程序关闭当前页面返回上一页面
         // })
+        console.log(res);
         var ret = res.data;
         var datas = ret.data;
         if (ret.code != 200) {

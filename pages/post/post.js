@@ -10,7 +10,8 @@ Page({
   data: {
     postId:0,
     type: 0,
-    href: ''
+    href: '',
+    item:[]
   },
 
   /**
@@ -100,6 +101,9 @@ Page({
         var datas = res.data.data;
         console.log(datas.length);
         if (datas.length > 0){
+          that.setData({
+            item: datas
+          });
           //修改顶部标题栏信息
           wx.setNavigationBarTitle({
             title: datas[0].title

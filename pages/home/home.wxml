@@ -29,16 +29,10 @@
     </block>
   </view>
 
-    <view class="detail-image">
-    <block >
-      <image mode="widthFix" src="../img/s.jpg" />
-    </block>
-  </view>
-
   <view class="detail-ft">
       <view class="detail-ft-item">
       <!-- 需要判断是否是会员，是否下发了优惠券 -->
-          <view class="ft-item" bindtap="goLogin" bindtap="toast1Tap"></view>
+          <view class="ft-item" bindtap="goLogin"></view>
           <view class="ft-item" bindtap="information"></view>
       </view>
       <view class="detail-ft-item">

@@ -1,26 +1,38 @@
 <!--pages/member/grow/grow.wxml-->
 
 <view class='page-pd'>
+<!-- 遮罩层 -->
+  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <!-- 弹出层 -->
+  <view class="modalDlg" wx:if="{{showModal}}">
+    <!-- 二维码或其他图片 -->
+    <image src='{{domainName}}{{qrcode}}'></image>
+    <text class="text">可扫码进入小程序注册页</text>
+    <view bindtap="ok" class="ok">确定</view>
+  </view>
+
   <view class='integral'>
     <view class='integral-current'>
       <text class='current1'>注册会员</text>
     </view>
     <view class="integral-box">
         <view class="progress-text">
-            <view class="progress-left">成长值 2.00<image  class="progress-img" src='../../img/dv.png'></image></view>
-            <view class="progress-right">差8.00成长值升级为VIP</view>
+            <view class="progress-left">成长值 {{customer.frozeno_growth?customer.frozeno_growth:0}}<image  class="progress-img" src='../../img/dv.png'></image></view>
+            <view class="progress-right">差{{customer.level_distance}}成长值升级为
+            <block wx:if="{{customer.frozeno_level == 1}}">VIP</block>
+            <block wx:if="{{customer.frozeno_level == 2}}">SVIP</block>
+            <block wx:if="{{customer.frozeno_level == 3}}">钻卡</block>
+            </view>
         </view>
         <view class="progress-box">
-            <progress percent="20" color="#DAB866" active stroke-width="3"  />
+            <progress percent="{{customer.level_percentage}}" color="#DAB866" active stroke-width="3"/>
         </view>
     </view>
     <view class='integral-current1'>
       <image class="icon32 pdr10" src="../../img/mark@2x.png"></image>
-      <text class="current1-text">截止到{{customer.validity?customer.validity:''}}，合计{{customer.growth?customer.growth:0}}成长值将失效 </text>
+      <text class="current1-text">截止到{{customer.frozeno_validity?customer.frozeno_validity:''}}，合计{{customer.growth?customer.growth:0}}成长值将失效 </text>
     </view>
   </view>
-
-
 <!-- 
   <view class='integral'>
     <view class='integral-current'>
@@ -33,9 +45,7 @@
     </view>
   </view> -->
  <view class='member-branch radius'>
-
     <view  class='branch-content'>
-
       <view class='branch-text branch-hd'>
         <text>我要赚成长值</text>
       </view>
@@ -44,30 +54,27 @@
       </view> 
     </view>
     <!-- 邀请好友成为会员（VIP、SVIP、钻卡）才显示，注册用户不显示； -->
-    <view  class='branch-content'>
-      <view class='branch-text '>
-      <image class="icon58 pdr10" src="../../img/vip_bg@2x.png" ></image>
+    <view class='branch-content' wx:if="{{customer.frozeno_level > 1}}">
+      <view class='branch-text'>
+      <image class="icon58 pdr10" src="../../img/vip_bg@2x.png"></image>
         <text>邀请好友成为会员</text>
       </view>
-       <view class='branch-text' >
+      <view class='branch-text' bindtap='shareApp'>
         <button>去邀请</button>
-      </view>  
+        <!-- <button class="button-share" open-type="share">去邀请</button> -->
+      </view>
     </view>
-
     <view  class='branch-content'>
-      <view class='branch-text '>
-      <image class="icon58 pdr10" src="../../img/shopcat@2x.png" ></image>
+      <view class='branch-text'>
+      <image class="icon58 pdr10" src="../../img/shopcat@2x.png"></image>
         <text>购物赚成长值</text>
       </view>
-       <view class='branch-text'  bindtap="gohome">
+       <view class='branch-text' bindtap="gohome">
         <button>去购物</button>
       </view>  
-    </view> 
-  
+    </view>
   </view>
-
   <view class='integral-content'>
-
     <view class='integral-text' wx:for="{{items}}" wx:for-item="item" wx:key="*this">
       <view class='integral-title'>
         <text class='text-title'>{{item.order_name?item.order_name:''}}</text>

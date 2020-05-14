@@ -1,18 +1,23 @@
 // pages/member/grade/grade.js
+var app = getApp();
+var that;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    item:[],
+    type: 16,
+    domainName: app.globalData.domainName,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    that = this;
+    that.getPost();
   },
 
   /**
@@ -70,5 +75,25 @@ Page({
     wx.navigateTo({
       url: '../../post/post?type=11',
     })
-  }
+  },
+  
+  getPost: function (param) {
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: {
+        page_code: 'p001',
+        type: that.data.type
+      },
+      header: {
+        'content-type': "application/json"
+      },
+      success: function (res) {
+        var datas = res.data;
+        console.log(datas);
+        that.setData({
+          item: datas.data
+        });
+      }
+    })
+  },
 })

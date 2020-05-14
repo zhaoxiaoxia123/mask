@@ -1,11 +1,15 @@
 // pages/my/service/service.js
-let that;
+var app = getApp();
+var that;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    item: [],
+    type: 17,
+    domainName: app.globalData.domainName,
     ftserviceflexwindow: false,
   },
 
@@ -14,6 +18,7 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    that.getPost();
   },
 
   /**
@@ -89,6 +94,26 @@ Page({
       },
       fail: function () {
         console.log("拨打电话失败！")
+      }
+    })
+  },
+  getPost: function (param) {
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: {
+        page_code: 'p001',
+        type: that.data.type
+      },
+      header: {
+        'content-type': "application/json"
+      },
+      success: function (res) {
+        var datas = res.data;
+        console.log(datas);
+        console.log(datas.length);
+        that.setData({
+          item: datas.data
+        });
       }
     })
   },
