@@ -24,7 +24,7 @@
       </view>
     </view>
 
-    <view class='parent-right' bindtap="goMember" wx:if="{{!canGetUserInfo}}">
+    <view class='parent-right' bindtap="goMember" wx:if="{{!canGetUserInfo && !isLogin}}">
       <view class='money-grade'>
         <!-- 按会员等级进行显示(注册用户)不显示图标、（VIP）、（SVIP）、（钻卡） -->
         <image class="icon32 pdr10" src="../img/drill_golden@2x.png" wx:if="{{items.frozeno_level == 4}}"></image>

@@ -187,6 +187,21 @@ Page({
   //提交地址信息
   submitAddress: function(){
     if (wx.getStorageSync('customerId')){
+      if (!that.data.name){
+        wx.showModal({
+          title: '提示',
+          content: '请填写收件人.',
+          showCancel: false
+        });
+        return false;
+      } else if (!that.data.phone){
+        wx.showModal({
+          title: '提示',
+          content: '请填写收件人手机号.',
+          showCancel: false
+        });
+        return false;
+      }
     var param = {
       page_code:'p002',
       type:"editAddress",

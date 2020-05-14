@@ -37,12 +37,13 @@
 
   <view class="detail-ft">
       <view class="detail-ft-item">
-          <view class="ft-item"></view>
-          <view class="ft-item"></view>
+      <!-- 需要判断是否是会员，是否下发了优惠券 -->
+          <view class="ft-item" bindtap="goLogin"></view>
+          <view class="ft-item" bindtap="information"></view>
       </view>
       <view class="detail-ft-item">
-          <view class="ft-item"></view>
-          <view class="ft-item"></view>
+          <view class="ft-item" bindtap="grade"></view>
+          <view class="ft-item" bindtap="goMember"></view>
       </view>
   </view>
   <!-- <view class="ad-member">

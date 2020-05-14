@@ -1,7 +1,10 @@
 
 <!-- <web-view src="https://mp.weixin.qq.com/s/HV4FFdBJ01zPtfKxe1QZIQ"></web-view> -->
 <view>
-     <button type="primary" bindtap="ftservice" data-item="{{ftserviceflexwindow}}">联系我们</button>
+  <view class='grade' wx:if="{{item[0].s_image_url}}">
+    <image class="grade-img" mode="widthFix" src="{{domainName}}{{item[0].s_image_url}}"></image>
+  </view>
+  <button type="primary" bindtap="ftservice" data-item="{{ftserviceflexwindow}}">联系我们</button>
 </view>
 <!-- 客服 -->
 <view class="frame1 {{ftserviceflexwindow==true?'': 'zy'}}" bindtap='ftserviceq'>
