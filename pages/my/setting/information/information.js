@@ -7,7 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    date: '1991年09月26日',
     items: []
+  },
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
   },
 
   /**

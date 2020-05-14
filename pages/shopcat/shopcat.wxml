@@ -15,9 +15,6 @@
       <view class='radio-group' wx:if="{{item.is_enough}}">
         <radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
       </view>
-      <view class='radio-group' wx:if="{{!item.is_enough}}">
-        库存不足
-      </view>
       <view class='list-left'>
         <image src="{{domainName}}{{item.product_image[0].image_url}}" lazy-load></image>
       </view>
@@ -41,6 +38,9 @@
               </view>
             </view>
           </view>
+          <view class="stock-no" wx:if="{{!item.is_enough}}">
+        库存不足
+      </view>
         </view>
       </view>
     </view>

@@ -21,6 +21,14 @@
     <!-- <input placeholder='请输入内容' value='1873921232'></input> -->
   </view>
 
+  <view class='column bg-box'>
+    <label>生日</label>
+    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+      <view class="weui-input">{{date}}</view>
+    </picker>
+    
+  </view>
+
    <!-- <view class='column bg-box'>
     <label>地区</label>
     <picker

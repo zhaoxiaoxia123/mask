@@ -81,6 +81,9 @@
   width:24rpx;
   height:24rpx;
 }
+.stock-no{
+  color:#dd2525;
+}
 
 /*底部操作栏*/
 .bottom{
