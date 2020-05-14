@@ -4,10 +4,8 @@
   <view class='frozeno-logo page-pd'>
     <image class="icon-logo" src="../img/frozen.png"></image>
   </view>
-
   <view class='member'>
     <view class='page-pd'>
-
     <view  class="login-rt" wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
       <view class='member-card' wx:if="{{!canGetUserInfo && !isLogin}}">
         <view class='content'>
@@ -18,7 +16,6 @@
                 <open-data type="userNickName"></open-data>
               </view>
             </view>
-
             <view class='money-grade' bindtap='grade'>
               <!-- 按会员等级进行显示(普通用户)不显示图标、（VIP）、（SVIP）、（钻卡） -->
               <image wx:if="{{items.frozeno_level == 2}}" class="icon32 pdr10" src="../img/drill_golden@2x.png"></image>
@@ -27,23 +24,19 @@
               <text class='money-grade-text'>{{items.level_name}}</text>
             </view>
           </view>
-
           <view class='money-image' bindtap="chanMask">
             <image class="icon40" src="../img/one_code@2x.png"></image>
           </view>
         </view>
-
         <view class='date'>
           <view class='branch-content'>
             <view class='branch-text'>
               <text>{{items.frozeno_validity?items.frozeno_validity:'长期'}}</text>
             </view>
-
             <view class='branch-text'>
               <text>{{items.register_data?items.register_data:''}}</text>
             </view>
           </view>
-
           <view class='branch-content'>
             <view class='branch-text'>
               <text>会员有效期至</text>
@@ -54,7 +47,6 @@
           </view>
         </view>
       </view>
-
       <view class="card-bg">
         <view class=" mask-con {{show ? 'mask-con-show' : ''}}">
           <canvas class='one' canvas-id="barcode" />
@@ -70,10 +62,9 @@
         </view>
         <!-- 会员页面不需要保留两位小数点 -->
         <view class='center-box' bindtap='grow'>
-          <text class="box-text">{{items.frozeno_growth?items.frozeno_growth:0}}</text>
+          <text class="box-text">{{items.growth?items.growth:0}}</text>
           <text>成长值</text>
         </view>
-
         <view class='center-box ' bindtap='coupon'>
           <text class="box-text">{{items.ticket_count?items.ticket_count:0}}</text>
           <text>优惠券</text>

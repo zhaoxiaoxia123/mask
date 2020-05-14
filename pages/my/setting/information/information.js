@@ -7,22 +7,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date: '1991年09月26日',
+    birthday:'',
+    endDate: '',
     items: []
-  },
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
-    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     that = this;
+    let nowDate = new Date();
+    that.setData({
+      endDate: nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1) + '-' + nowDate.getDate()
+    });
+    console.log(that.data.endDate);
   },
 
   /**
@@ -41,10 +40,7 @@ Page({
         page_code: 'p004',
         type: "mainCustomer",
         customer_id: wx.getStorageSync('customerId')
-        // has_ticket_count: true,
-        // has_order_count: true
       };
-      // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
     }
   },
@@ -84,7 +80,42 @@ Page({
 
   },
 
-
+  bindDateChange: function (e) {
+    
+    if (wx.getStorageSync('customerId')) {
+    let value = e.detail.value;
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    let param = {
+      page_code: 'p004',
+      type:'updateCustomer',
+      birthday: value,
+      customer_id: wx.getStorageSync('customerId')
+    };
+    wx.request({
+      url: app.globalData.domainUrl,
+      method: "POST",
+      data: param,
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res);
+        var ret = res.data;
+        var datas = ret.data;
+        if (ret.code == 200) {
+          that.setData({
+            birthday: value
+          });
+        }
+      }
+    })
+    }else{
+      wx.showToast({
+        icon: "none",
+        title: '请授权登录后再修改生日',
+      })
+    }
+  },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param) {
     wx.request({
@@ -95,7 +126,8 @@ Page({
       },
       success: function (res) {
         that.setData({
-          items: res.data.data
+          items: res.data.data,
+          birthday:res.data.data.c_user_info
         });
       }
     });

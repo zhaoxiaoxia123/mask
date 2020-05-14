@@ -81,10 +81,12 @@
   </view>
 
   <view class='lists bg-box col-content size-titletwo'>
-    <view class='list-wap' bindtap='shareApp'>
+   <!-- bindtap='shareApp' -->
+    <view class='list-wap'>
       <view class='left'>
         <image class='icon40' src='../img/friend@2x.png'></image>
-        <text>邀请好友</text>
+        <!-- <text>邀请好友</text> -->
+        <button class="button-share" open-type="share">邀请好友</button>
       </view>
       <view class='right'>
         <image src='../img/dv.png'></image>
