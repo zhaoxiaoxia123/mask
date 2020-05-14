@@ -14,6 +14,10 @@ padding-bottom:20rpx;
 
 }
 
+/* 联系我们 */
+.service-but{
+  background:#DAB866;
+}
 /*底部客服*/
 .ftservice{
   position: fixed;
