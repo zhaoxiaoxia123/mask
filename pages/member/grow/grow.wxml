@@ -39,7 +39,7 @@
       <view class='branch-text branch-hd'>
         <text>我要赚成长值</text>
       </view>
-       <view class='branch-text'>
+       <view class='branch-text' bindtap="grade">
         <text  class='branch-text1'>成长值说明？</text>
       </view> 
     </view>
@@ -49,7 +49,7 @@
       <image class="icon58 pdr10" src="../../img/vip_bg@2x.png" ></image>
         <text>邀请好友成为会员</text>
       </view>
-       <view class='branch-text' bindtap='order'>
+       <view class='branch-text' >
         <button>去邀请</button>
       </view>  
     </view>
@@ -59,7 +59,7 @@
       <image class="icon58 pdr10" src="../../img/shopcat@2x.png" ></image>
         <text>购物赚成长值</text>
       </view>
-       <view class='branch-text' bindtap='order'>
+       <view class='branch-text'  bindtap="gohome">
         <button>去购物</button>
       </view>  
     </view> 

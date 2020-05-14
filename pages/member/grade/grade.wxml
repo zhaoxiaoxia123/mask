@@ -1,8 +1,9 @@
 <!--pages/member/grade/grade.wxml-->
 
-<view class='page-pd'>
+<view class=''>
   <view class='grade'>
-     <view class='head'><text>如何赚成长值</text></view>
+    <image class="grade-img" mode="widthFix" src="../../img/member/grade.jpg"></image>
+     <!-- <view class='head'><text>如何赚成长值</text></view>
      <view class='content'>
            <view class='content-head'><text>★ 购物金额累计</text></view>
            <view class='content-text'><text>在冻龄之谜平台购物，每累计支付满1000元（包含运费和税费）即可获得1个成长值（直升礼包除外）。</text></view>
@@ -20,7 +21,7 @@
 
 
 
-     <view class='explain'><text>特别说明：成长值与消费金额的比例是1:1000，即每消费1000元可以积1分，保留小数点后1位，也可以算成每次积分/10。每年清零。成长值已近365天计算，超过365天的成长值会失效，但是不会影响当前等级的会员权利。</text></view>
+     <view class='explain'><text>特别说明：成长值与消费金额的比例是1:1000，即每消费1000元可以积1分，保留小数点后1位，也可以算成每次积分/10。每年清零。成长值已近365天计算，超过365天的成长值会失效，但是不会影响当前等级的会员权利。</text></view> -->
 
   
   </view>
