@@ -68,7 +68,7 @@
           <text class="box-text">{{items.frozeno_point?items.frozeno_point:0}}</text>
           <text>积分</text>
         </view>
-
+        <!-- 会员页面不需要保留两位小数点 -->
         <view class='center-box' bindtap='grow'>
           <text class="box-text">{{items.frozeno_growth?items.frozeno_growth:0}}</text>
           <text>成长值</text>

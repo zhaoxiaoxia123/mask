@@ -28,6 +28,23 @@
       <image mode="widthFix" src="{{domainName}}{{item.image_url[0]}}" lazy-load bindtap='toDetail' data-obj='{{item}}'/>
     </block>
   </view>
+
+    <view class="detail-image">
+    <block >
+      <image mode="widthFix" src="../img/s.jpg" />
+    </block>
+  </view>
+
+  <view class="detail-ft">
+      <view class="detail-ft-item">
+          <view class="ft-item"></view>
+          <view class="ft-item"></view>
+      </view>
+      <view class="detail-ft-item">
+          <view class="ft-item"></view>
+          <view class="ft-item"></view>
+      </view>
+  </view>
   <!-- <view class="ad-member">
     <image class="member-img" src='../img/member/member@2x.png'></image>
   </view>

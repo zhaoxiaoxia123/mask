@@ -317,3 +317,16 @@ display: none;
 }
 
 
+/* 尾部链接 */
+.detail-ft{
+  margin-top:-880rpx;
+}
+.detail-ft-item{
+  display: flex;
+  justify-content: center;
+}
+.ft-item{
+  width:48%;
+  height:400rpx;
+  border:1px solid #DAB866
+}
