@@ -286,6 +286,7 @@ margin: 0 auto;
 	bottom: 100rpx;
   right:20rpx;
 	display: block;
+  opacity: 0.9;
 }
 .ftservice-bt{
   display: flex;
