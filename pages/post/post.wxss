@@ -20,3 +20,18 @@
       font-weight: bold;
       padding:20px 0;
   }
+
+  /* 无 */
+.search-no {
+width: 100%;
+display: block;
+text-align: center;
+padding:200rpx 0;
+}
+.scimg {
+width: 351rpx;
+height: 358rpx;
+display: inline-block;
+padding-bottom:20rpx;
+
+}

@@ -1,5 +1,14 @@
 <!--pages/post/post.wxml-->
 <import src="../../wxParse/wxParse.wxml"/>
+
+    <!--加载失败的时候显示
+     -->
+  <view class='search-no' >
+    <view bindtap="gohome">
+      <image class='scimg' src='../img/loading.png'></image>
+    </view>
+  </view>
+
 <view class='page-pd' wx:if="{{!href}}">
   <view class='agreement'>
     <view class='content'>
