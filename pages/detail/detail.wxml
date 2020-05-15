@@ -45,15 +45,21 @@
         <button class="cs_button"  type="default-light" open-type="contact" session-from="weapp">
           <image class="icon40" src="../img/service@2x.png"></image>
         </button> 
-        <!-- <contact-button type="default-light" size="20" session-from="weapp"></contact-button> -->
-        <!-- <image class='icon58' src='../img/service.png'></image> -->
       </view>
       <view class='bottom-left count' catchtap="shoppingList">
         <view class='number' wx:if="{{shoppingCount}}">
           <text>{{shoppingCount}}</text>
         </view>
-        <image class='icon40' src='../img/shopcat_false.png'></image>
+        <button class="cs_button"  >
+          <image class="icon40" src="../img/shopcat_false.png"></image>
+        </button> 
       </view>
+      <!-- <view class='bottom-left count' catchtap="shoppingList">
+        <view class='number' wx:if="{{shoppingCount}}">
+          <text>{{shoppingCount}}</text>
+        </view>
+        <image class='icon40' src='../img/shopcat_false.png'></image>
+      </view> -->
       <view class='bottom-operate button1' catchtap='joinShopping'>加入购物</view>
       <view class='bottom-operate button' data-type="one" catchtap='goConfirm'>立即购买</view>
     </view>
@@ -103,12 +109,14 @@
         <!-- <contact-button type="default-light" size="20" session-from="weapp"></contact-button> -->
       
         </view>
-        <view class='bottom-left count' catchtap="shoppingList">
-          <view class='number' wx:if="{{shoppingCount}}">
-            <text>{{shoppingCount}}</text>
-          </view>
-          <image class='icon40' src='../img/shopcat1_false@2x.png'></image>
+      <view class='bottom-left count' catchtap="shoppingList">
+        <view class='number' wx:if="{{shoppingCount}}">
+          <text>{{shoppingCount}}</text>
         </view>
+        <button class="cs_button"  >
+          <image class="icon40" src="../img/shopcat_false.png"></image>
+        </button> 
+      </view>
         <view class='bottom-operate button1' catchtap='joinShopping'>加入购物</view>
         <view class='bottom-operate button' data-type="more" catchtap='goConfirm'>立即购买</view>
       </view>
