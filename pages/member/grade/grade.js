@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    item:[],
+    items:[],
     type: 16,
     domainName: app.globalData.domainName,
   },
@@ -91,7 +91,7 @@ Page({
         var datas = res.data;
         console.log(datas);
         that.setData({
-          item: datas.data
+          items: datas.data
         });
       }
     })

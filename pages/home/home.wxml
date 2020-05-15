@@ -29,17 +29,7 @@
     </block>
   </view>
 
-  <view class="detail-ft">
-      <view class="detail-ft-item">
-      <!-- 需要判断是否是会员，是否下发了优惠券 -->
-          <view class="ft-item" bindtap="goLogin"></view>
-          <view class="ft-item" bindtap="information"></view>
-      </view>
-      <view class="detail-ft-item">
-          <view class="ft-item" bindtap="grade"></view>
-          <view class="ft-item" bindtap="goMember"></view>
-      </view>
-  </view>
+  
   <!-- <view class="ad-member">
     <image class="member-img" src='../img/member/member@2x.png'></image>
   </view>
@@ -68,6 +58,24 @@
       </view>
     </view>
   </view> -->
+  
+  <view class="detail-image">
+    <block wx:for="{{swipers}}" wx:key="*this" >
+      <image wx:if="{{item.type == 13}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image"/>
+    </block>
+  </view>
+  <view class="detail-ft">
+      <view class="detail-ft-item">
+      <!-- 需要判断是否是会员，是否下发了优惠券 -->
+          <view class="ft-item" bindtap="goLogin"></view>
+          <view class="ft-item" bindtap="information"></view>
+      </view>
+      <view class="detail-ft-item">
+          <view class="ft-item" bindtap="grade"></view>
+          <view class="ft-item" bindtap="goMember"></view>
+      </view>
+  </view>
+
 
 </view>
 <!--滑块容器相关配置，以下为参数   关于我们广告-->
@@ -78,11 +86,6 @@
       </swiper-item>
     </block>
   </swiper> -->
-  <!-- <view class="detail-image">
-    <block wx:for="{{swipers}}" wx:key="*this" >
-      <image wx:if="{{item.type == 13}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image" bindtap='toPost' data-obj='{{item.post_id}}' />
-    </block>
-  </view> -->
 
   <!-- <button bindtap="goWx">go mp weixin</button> -->
 <!-- 声明需要使用的模板文件 -->

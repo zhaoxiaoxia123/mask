@@ -52,6 +52,9 @@ Page({
         isBack: false  
       });
     }
+    that.setData({
+      items:[]
+    });
     if (wx.getStorageSync('customerId') && that.data.items.length <= 0) {
       var param_s = {
         page_code: 'p012',

@@ -1,14 +1,13 @@
 <!--pages/my/my.wxml-->
 <view class='page-pd '>
   <!-- 遮罩层 -->
-  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-  <!-- 弹出层 -->
-  <view class="modalDlg" wx:if="{{showModal}}">
     <!-- 二维码或其他图片 -->
+  <!-- <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modalDlg" wx:if="{{showModal}}">
     <image src='{{domainName}}{{qrcode}}'></image>
     <text class="text">可扫码进入小程序注册页</text>
     <view bindtap="ok" class="ok">确定</view>
-  </view>
+  </view> -->
 
   <view class='parent size-titletwo col-content bg-box'>
     <view class='parent-left' wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
@@ -163,6 +162,6 @@
 
 <!-- 声明需要使用的模板文件 -->
 <import src ="../template/template.wxml"/>
-<view class='item' bindtap='ftservice' data-item='{{ftserviceflexwindow}}'>
+<view class='item' bindtap='ftservice' data-item="{{ftserviceflexwindow}}">
   <template is="service" data="{{ftserviceflexwindow}}"/>
 </view>

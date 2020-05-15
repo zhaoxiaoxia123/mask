@@ -11,7 +11,7 @@ Page({
     offset: 1,
     pageCount: 20,
     isLast: false,
-    showModal: false,
+    // showModal: false,
     qrcode: '',
     items: [],
     domainName: app.globalData.domainName,
@@ -56,6 +56,36 @@ Page({
       };
       // var paramg = '/p004?type=growthList&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getGrowthList(paramg);
+      
+      var code = wx.getStorageSync("memberNo");
+      if (code) {
+        var param = {
+          page_code: 'p015',
+          share_by: code,
+          customer_id: wx.getStorageSync("customerId")
+        };
+        // var param = '/p015?share_by='+code+'&customer_id='+wx.getStorageSync("customerId");
+        wx.request({
+          url: app.globalData.domainUrl,
+          data: param,
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            let qr = res.data.data;
+            if (qr.indexOf("http") >= 0) {
+              that.setData({
+                qrcode: res.data.data
+              });
+            } else {
+              that.setData({
+                qrcode: that.data.domainName + res.data.data
+              });
+            }
+            console.log(that.data.qrcode);
+          }
+        });
+    }
     }
   },
 
@@ -104,12 +134,22 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    return {
-      title: '邀请好友成为会员',
-      path: 'pages/my/login/login?shareBy=' + wx.getStorageSync('memberNo'), // 好友点击分享之后跳转到的小程序的页面
-      // desc: '描述',  // 看你需要不需要，不需要不加
-      imageUrl: '分享的图片路径'
+  onShareAppMessage: function (res) {
+    wx.showToast({ title: res, icon: 'success', duration: 2000 });
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      return {
+        title: '邀请好友成为会员',
+        path: 'pages/my/login/login?shareBy=' + wx.getStorageSync('memberNo'), // 好友点击分享之后跳转到的小程序的页面
+        // desc: '描述',  // 看你需要不需要，不需要不加
+        imageUrl: that.data.qrcode,
+        success: (res) => {
+          wx.showToast({ title: res, icon: 'success', duration: 2000 })
+        },
+        fail: (res) => {
+          wx.showToast({ title: res, icon: 'success', duration: 2000 })
+        }
+      }
     }
   },
   //进入会员体系介绍
@@ -161,85 +201,5 @@ Page({
       }
     });
   },
-  shareApp: function (e) {   //邀请好友
-    if (wx.getStorageSync('level') > 1) {
-      wx.showActionSheet({
-        itemList: ['复制邀请码', '邀请二维码'],
-        success: function (res) {
-          // console.log('showActionSheet:------');
-          // console.log(res.tapIndex);
-          if (res.tapIndex == 0) {
-            that.copyCode();
-          } else if (res.tapIndex == 1) {
-            that.showShareQRCode();
-          }
-        },
-        fail: function (res) {
-          console.log(res.errMsg)
-        }
-      })
-    } else {
-      wx.showToast({
-        icon: "info",
-        title: '无法邀请好友。'
-      })
-    }
-  }, 
-  copyCode: function () {  //复制邀请码
-    if (wx.getStorageSync("level") > 1) {
-      wx.setClipboardData({
-        data: wx.getStorageSync("memberNo"),
-        success: function (res) {
-          console.log('copyCode:------');
-          console.log(res);
-        }
-      })
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '该用户无法分享邀请码',
-        success: function (res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
-      })
-    }
-  },
-  showShareQRCode: function () {   //邀请二维码
-    var code = wx.getStorageSync("memberNo");
-    if (wx.getStorageSync("customerId") && code) {
-      var param = {
-        page_code: 'p015',
-        share_by: code,
-        customer_id: wx.getStorageSync("customerId")
-      };
-      // var param = '/p015?share_by='+code+'&customer_id='+wx.getStorageSync("customerId");
-      wx.request({
-        url: "https://www.frozeno.cn/api/v1/uploadFileToAliyunOss",//app.globalData.domainUrl,
-        data: param,
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          that.setData({
-            qrcode: res.data.data
-          });
-          console.log(that.data.qrcode);
-        }
-      });
-    }
-    that.setData({
-      showModal: true
-    })
-  },
-  // 弹出层里面的弹窗
-  ok: function () {
-    this.setData({
-      showModal: false
-    })
-  }
 
 })

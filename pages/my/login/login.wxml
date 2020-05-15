@@ -19,8 +19,10 @@
     </view>
 
     <view class="login-button">
-      <button class="login-bt bcolor-golden" style="width: 100%;" lang="zh_CN" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">手机号一键登录</button>
-      <button class="login-bt bcolor-white" style="width: 100%;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信一键登录 </button>
+      <button class="login-bt bcolor-golden" style="width: 100%;" lang="zh_CN" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:if="{{isClick}}">手机号一键登录</button>
+      <button class="login-bt bcolor-golden" style="width: 100%;" lang="zh_CN" wx:if="{{!isClick}}">手机号一键登录</button>
+      <button class="login-bt bcolor-white" style="width: 100%;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if="{{isClick}}">微信一键登录 </button>
+      <button class="login-bt bcolor-white" style="width: 100%;" wx:if="{{!isClick}}">微信一键登录 </button>
       <button class="login-bt bcolor-white" style="width: 100%;" bindtap="showModalView">手机验证码注册/登录 </button>
     </view>
   </view>

@@ -5,6 +5,7 @@
   <view class="ftservice">
     <view class="ftservice-bt" bindtap="ftservice" data-item="{{ftserviceflexwindow}}">
       <image class="icon40" src="../img/service@2x.png"></image>
+      <!-- <image class="icon40" src="../../img/service@2x.png"></image> -->
     </view>
   </view>
   <!-- 客服 -->
