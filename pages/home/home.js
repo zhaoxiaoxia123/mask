@@ -25,6 +25,7 @@ Page({
     type: '9,12,13' , // 9:广告   12:app商城其他广告   13:app商城关于我们广告
     domainName: app.globalData.domainName,
     ftserviceflexwindow: false,
+
   },
 
   /**
@@ -63,7 +64,7 @@ Page({
     // var param_p = '?page_code=p005&offset='+(that.data.offset - 1) * that.data.pageCount+'&page='+that.data.pageCount;
     that.getProductList(param_p);
 
-    //广告图片列表
+    //广告图片列表---------
     that.getAdList();
   },
 

@@ -373,6 +373,12 @@ Page({
 //提交订单
   confirmPay:function(){
     if (wx.getStorageSync('customerId')){
+      if (! that.data.address){
+        wx.showToast({
+          icon: "none",
+          title: "请选择收货地址。"
+        });
+      }else{
     var ticket_id = that.data.isCheckTicket == 9999 ? 0 : that.data.ticketList[that.data.isCheckTicket - 1]['ticket_id'];
     wx.request({
       url: app.globalData.domainUrl,
@@ -407,6 +413,7 @@ Page({
         }
       }
     })
+      }
     }else{
       wx.showToast({
         icon: "none",

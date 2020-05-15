@@ -1,4 +1,5 @@
 // pages/my/service/service.js
+import tmpObj from '../../template/template.js'
 var app = getApp();
 var that;
 Page({
@@ -69,33 +70,21 @@ Page({
   onShareAppMessage: function () {
 
   },
+
   ftservice: function (e) {
-    var ftserviceflexwindow = e.currentTarget.dataset.item;
-    if (ftserviceflexwindow) {
-      ftserviceflexwindow = false;
-    } else {
-      ftserviceflexwindow = true;
-    }
+    let ret = tmpObj.ftservice(e);
     that.setData({
-      ftserviceflexwindow: ftserviceflexwindow
-    } );
-  },
-  ftserviceq: function (e) {
-    let ftserviceflexwindow = false;
-    that.setData({
-      ftserviceflexwindow: ftserviceflexwindow
+      ftserviceflexwindow: ret
     });
   },
-  calling: function (e) {
-    wx.makePhoneCall({
-      phoneNumber: '10000',
-      success: function () {
-        console.log("拨打电话成功！")
-      },
-      fail: function () {
-        console.log("拨打电话失败！")
-      }
+  ftserviceq: function (e) {
+    let ret = tmpObj.ftserviceq(e);
+    that.setData({
+      ftserviceflexwindow: ret
     })
+  },
+  calling: function (e) {
+    tmpObj.calling(e);
   },
   getPost: function (param) {
     wx.request({

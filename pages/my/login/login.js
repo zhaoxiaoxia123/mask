@@ -13,7 +13,8 @@ Page({
     showModal: false,
     isSubmit:false,
     isShareBy: false,   //是否通过邀请码注册
-    shareBy: ''   //邀请码
+    shareBy: '',   //邀请码
+    isClick:true
   },
 
   /**
@@ -84,6 +85,9 @@ Page({
   },
 
   bindGetUserInfo: function () {
+    that.setData({
+      isClick: false
+    });
     console.log('userInfo');
     if (!app.globalData.code) {
       wx.login({
@@ -143,6 +147,7 @@ Page({
         console.log(res);
         var ret = res.data;
         var datas = ret.data;
+ 
         if (ret.code != 200) {
           wx.showToast({
             icon: "none",

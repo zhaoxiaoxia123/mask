@@ -28,11 +28,11 @@
 
       <view class='column'>
         <view class='address'>
-          <text class="address-default">默认</text>{{item.province}}{{item.city}}{{item.area}}{{item.address}}
+          <text class="address-default" wx:if="{{item.is_default == 1}}">默认</text>
+          {{item.province}}{{item.city}}{{item.area}}{{item.address}}
         </view>
       </view>
       <!-- <view class='column direction-row'>
-
         <view class='list-left' wx:if="{{fromPage != 'order'}}">
           <checkbox class='checkbox'  color='#262626' checked="{{item.is_default == 1}}" >默认地址</checkbox>
         </view>

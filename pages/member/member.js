@@ -46,6 +46,9 @@ Page({
         selected: 1
       })
     }
+    that.setData({
+      items:[]
+    });
     if (wx.getStorageSync('customerId')) {
       var param = {
         page_code: 'p004',
@@ -56,6 +59,7 @@ Page({
       };
       // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId')+'&has_ticket_count=true';
       that.getUserDetail(param);
+
       app.globalData.canGetUserInfo = false;
       that.setData({
         canGetUserInfo: app.globalData.canGetUserInfo,

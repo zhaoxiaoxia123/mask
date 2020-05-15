@@ -1,12 +1,12 @@
 <!--pages/member/grade/grade.wxml-->
-<view class=''>
-  <view class='grade' wx:if="{{item[0].s_image_url}}">
-    <image class="grade-img" mode="widthFix" src="{{domainName}}{{item[0].s_image_url}}"></image>
-  </view>
+<view class=''>  
+    <block class='grade' wx:for="{{items}}" wx:key="*this" >
+      <image class="grade-img" mode="widthFix" src="{{domainName}}{{item.s_image_url}}"/>
+    </block>
   <view class='agreement' bindtap='agreementone'>
-        <text>查看</text>
-        <text class='agreement-a'>《</text>
-        <text class='agreement-a decoration'>冻龄智美会员协议</text>
-        <text class='agreement-a'>》</text>
+    <text>查看</text>
+    <text class='agreement-a'>《</text>
+    <text class='agreement-a decoration'>冻龄智美会员协议</text>
+    <text class='agreement-a'>》</text>
   </view>
 </view>

@@ -429,45 +429,45 @@ Page({
   },
   
 
-  // //测试付款成功则修改订单状态。
-  // testPayAfter: function () {
-  //   if (wx.getStorageSync('customerId')) {
-  //     wx.request({
-  //       url: app.globalData.domainUrl,
-  //       method: "POST",
-  //       data: {
-  //         page_code: 'p008',
-  //         type: 'pay',
-  //         order_id: 48,
-  //         amount: 3000,
-  //         out_trade_no: '123456789',
-  //         customer_id: wx.getStorageSync('customerId')
-  //       },
-  //       header: {
-  //         "Content-Type": "application/x-www-form-urlencoded"
-  //       },
-  //       success: function (res) {
-  //         console.log(res);
-  //         var ret = res.data;
-  //         var datas = ret.data;
-  //         console.log(ret);
-  //         if (ret.code == 201) {
-  //           // console.log(ret.message);
-  //           // that.setData({
-  //           //   shopping_count: parseInt(that.data.shopping_count) + 1
-  //           // });
-  //         } else {
-  //           wx.navigateBack({
-  //             delta: 1
-  //           })
-  //         }
-  //       }
-  //     })
-  //   } else {
-  //     wx.showToast({
-  //       title: "请先登录"
-  //     });
-  //   }
-  // },
+  //测试付款成功则修改订单状态。
+  testPayAfter: function () {
+    if (wx.getStorageSync('customerId')) {
+      wx.request({
+        url: app.globalData.domainUrl,
+        method: "POST",
+        data: {
+          page_code: 'p008',
+          type: 'pay',
+          order_id: 48,
+          amount: 3000,
+          out_trade_no: '123456789',
+          customer_id: wx.getStorageSync('customerId')
+        },
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        success: function (res) {
+          console.log(res);
+          var ret = res.data;
+          var datas = ret.data;
+          console.log(ret);
+          if (ret.code == 201) {
+            // console.log(ret.message);
+            // that.setData({
+            //   shopping_count: parseInt(that.data.shopping_count) + 1
+            // });
+          } else {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
+    } else {
+      wx.showToast({
+        title: "请先登录"
+      });
+    }
+  },
 
 })

@@ -21,8 +21,8 @@
 
   <view class='column bg-box'>
     <label>生日</label>
-    <picker mode="date" value="{{birthday?birthday:'X年X月X日'}}" start="1950-01-01" end="{{endDate}}" bindchange="bindDateChange" bindsure="btnOk">
-      <view class="weui-input">{{birthday?birthday:'X年X月X日'}}</view>
+    <picker mode="date" value="{{birthday?birthday:' 年 月 日'}}" start="1950-01-01" end="{{endDate}}" bindchange="bindDateChange" bindsure="btnOk">
+      <view class="weui-input">{{birthday?birthday:' 年 月 日'}}</view>
     </picker>
   </view>
 
