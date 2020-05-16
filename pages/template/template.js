@@ -14,7 +14,7 @@ var temp = {
   },
   calling: function (e) {
     wx.makePhoneCall({
-      phoneNumber: '10000',
+      phoneNumber: '400 002 8767',
       success: function () {
         console.log("拨打电话成功！")
       },
