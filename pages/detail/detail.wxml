@@ -10,7 +10,9 @@
   <view class='page-pd'>
     <view class='money' wx:if="{{items.customer_amount > 0}}">
       <text>￥{{items.customer_amount}}</text>
-      <text>[￥{{items.frozeno_discount_amount}}]</text>
+      <text class='text-size'>[</text>
+      <text class='decoration text-size'>￥{{items.frozeno_discount_amount}}</text>
+      <text class='text-size'>]</text>
     </view>
     <view class='money' wx:if="{{items.customer_amount <= 0}}">
       <text>￥{{items.frozeno_discount_amount}}</text>
