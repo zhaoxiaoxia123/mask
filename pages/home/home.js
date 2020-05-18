@@ -134,6 +134,28 @@ Page({
       that.getProductList(param_p);
     }
   },
+  // 适用门店
+  store: function (e) {
+    var that = this;
+    var storeflexwindow;
+    if (this.data.storeflexwindow == true) {
+      storeflexwindow = false;
+    }
+    else {
+      storeflexwindow = true;
+    }
+    that.setData({
+      storeflexwindow: storeflexwindow
+    });
+  },
+  close3: function (e) {
+    let self = this
+    let storeflexwindow = false;
+
+    self.setData({
+      storeflexwindow: storeflexwindow
+    })
+  },
 
   /**
    * 用户点击右上角分享
