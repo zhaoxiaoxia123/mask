@@ -1,6 +1,6 @@
 <view>
 
-  <view bindtap="store">引导页</view>
+  <!-- <view bindtap="store">引导页</view> -->
   <!--滑块容器相关配置，以下为参数  广告 interval="{{interval}}" duration="{{duration}}"-->
   <swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{false}}">
     <!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名   mode="widthFix"-->
