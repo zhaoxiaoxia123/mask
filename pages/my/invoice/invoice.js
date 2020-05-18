@@ -13,6 +13,7 @@ Page({
     interval: 3000,
     duration: 500,
     circular: true,
+    fromPage: '',   //orderconfirm 页面跳转此页面会带这个参数
     items: [],
   },
 
@@ -21,6 +22,9 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    that.setData({
+      fromPage: options.come
+    });
   },
 
   /**
@@ -144,7 +148,43 @@ Page({
       }
     }
     return temArray;
-  }
+  },
+  /**
+   * 选择为发票为订单发票
+   */
+  checkSendInvoice: function (e) {
+    let index = e.currentTarget.dataset.index;
+    let items = that.data.items;
+    let check = items[index].checked;
+    items[index].checked = !items[index].checked;
+    if (items[index].checked) {
+      wx.showModal({
+        title: '提示',
+        content: '确定使用该发票信息？',
+        success: function (res) {
+          if (res.confirm) {
+            that.checkInvoice(e.currentTarget.dataset.value);
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+    that.setData({
+      items: items
+    });
+  },
+
+  //提交信息
+  checkInvoice: function (invoice_id) {
+    var pagesArr = getCurrentPages();
+    pagesArr[pagesArr.length - 2].setData({
+      invoiceId: invoice_id,
+    });
+    wx.navigateBack({
+      delta: 1,
+    });
+  },
 
 })
 

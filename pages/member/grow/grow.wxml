@@ -11,16 +11,21 @@
 
   <view class='integral'>
     <view class='integral-current'>
-      <text class='current1'>注册会员</text>
+      <text class='current1' wx:if="{{customer.frozeno_level == 1}}">注册会员</text>
+      <text class='current1' wx:if="{{customer.frozeno_level == 2}}">VIP</text>
+      <text class='current1' wx:if="{{customer.frozeno_level == 3}}">SVIP</text>
+      <text class='current1' wx:if="{{customer.frozeno_level == 4}}">钻卡</text>
+      <text class='current1' wx:if="{{customer.frozeno_level == 5}}">一级渠道商</text>
+      <text class='current1' wx:if="{{customer.frozeno_level == 6}}">二级渠道商</text>
     </view>
     <view class="integral-box">
         <view class="progress-text">
-            <view class="progress-left">成长值 {{customer.frozeno_growth?customer.frozeno_growth:0}}<image  class="progress-img" src='../../img/dv.png'></image></view>
-            <view class="progress-right">差{{customer.level_distance}}成长值升级为
+          <view class="progress-left">成长值 {{customer.frozeno_growth?customer.frozeno_growth:0}}<image  class="progress-img" src='../../img/dv.png'></image></view>
+          <view class="progress-right" wx:if="{{customer.frozeno_level < 4}}">差{{customer.level_distance}}成长值升级为
             <block wx:if="{{customer.frozeno_level == 1}}">VIP</block>
             <block wx:if="{{customer.frozeno_level == 2}}">SVIP</block>
             <block wx:if="{{customer.frozeno_level == 3}}">钻卡</block>
-            </view>
+          </view>
         </view>
         <view class="progress-box">
           <progress percent="{{customer.level_percentage}}" color="#DAB866" active stroke-width="3"/>

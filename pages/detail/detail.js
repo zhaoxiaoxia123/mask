@@ -39,7 +39,8 @@ Page({
     var param = {
       page_code: 'p005',
       product_id: that.data.productId,
-      // customer_id: wx.getStorageSync("customerId")
+      // customer_id: wx.getStorageSync("customerId"),
+      level: wx.getStorageSync("level")
     };
     // var param = '/p005?product_id='+that.data.productId;
     that.getProductDetail(param);
@@ -136,13 +137,25 @@ Page({
     if (datas) {
       for (var i = 0; i < datas.length; i++) {
         if (datas[i].code == "jf01") {
+          if (that.data.items.customer_amount) {
+            that.setData({
+              point: parseInt(that.data.items.customer_amount / (datas[i].value_from / datas[i].value_to))
+            });
+          } else {
           that.setData({
             point: parseInt(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to))
-          });
+            });
+          }
         } else if (datas[i].code == "czz01") {
-          that.setData({
-            growth: parseFloat(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to)).toFixed(2)
-          });
+          if (that.data.items.customer_amount){
+            that.setData({
+              growth: parseFloat(that.data.items.customer_amount / (datas[i].value_from / datas[i].value_to)).toFixed(1)
+            });
+          }else{
+            that.setData({
+              growth: parseFloat(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to)).toFixed(1)
+            });
+          }
         }
       }
     }
@@ -322,19 +335,31 @@ Page({
 
   //进入结算页面  加入订单，即立即购买
   goConfirm: function (e) {
-    var type = e.currentTarget.dataset.type;
-    var products = '';
-    if (type == "more"){
-      products = that.data.productId + "," + that.data.count + "--";
-    }else{
-      products = that.data.productId + ",1--";
+    if (wx.getStorageSync('customerId')) {
+      var type = e.currentTarget.dataset.type;
+      var products = '';
+      if (type == "more"){
+        products = that.data.productId + "," + that.data.count + "--";
+      }else{
+        products = that.data.productId + ",1--";
+      }
+      wx.navigateTo({
+        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录!',
+        showCancel: false,
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/my/login/login',
+          });
+        }
+      })
     }
-    wx.navigateTo({
-      url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
-    })
   },
-
-
 
   // //加入订单，即立即购买
   // joinOrder:function(){ //提交结算，生成结算的订单信息，

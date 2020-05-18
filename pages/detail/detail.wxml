@@ -3,12 +3,16 @@
   <swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
     <block wx:for="{{swipers}}" wx:key="*this">
       <swiper-item wx:if="{{item.type == 1}}">
-        <image mode="widthFix" src="{{domainName}}{{item.img_url}}" class="slide-image" />
+        <image mode="widthFix" src="{{domainName}}{{item.image_url}}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
   <view class='page-pd'>
-    <view class='money'>
+    <view class='money' wx:if="{{items.customer_amount > 0}}">
+      <text>￥{{items.customer_amount}}</text>
+      <text>[￥{{items.frozeno_discount_amount}}]</text>
+    </view>
+    <view class='money' wx:if="{{items.customer_amount <= 0}}">
       <text>￥{{items.frozeno_discount_amount}}</text>
       <!-- <text class='text-size'>（</text>
       <text class='decoration text-size'>￥{{items.frozeno_amount}}</text>
@@ -33,7 +37,7 @@
     <view class='detail'> 商品详情 </view>
     <view class='detail-image'>
       <block wx:for="{{swipers}}" wx:key="*this">
-        <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+        <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.image_url}}" lazy-load></image>
       </block>
     </view>
     <text class='abstract'>{{items.category_tab}}</text>
@@ -70,7 +74,7 @@
     <view class='lists'>
       <view class='list'>
         <view class='detail-img'>
-          <image src='{{swipers[0].img_url}}'></image>
+          <image src='{{swipers[0].image_url}}'></image>
         </view>
         <view class='detail-center'>
           <view class='sales'>
