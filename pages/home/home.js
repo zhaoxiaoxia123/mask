@@ -219,12 +219,12 @@ Page({
       },
       success: function(res) {
         var datas = res.data.data;
-        console.log(datas);
-        console.log(datas.length);
+        // console.log(datas);
+        // console.log(datas.length);
         that.setData({
           items: that.data.items.concat(datas)
         });
-        if (datas.length <= 0 || datas.length < that.data.pageCount) {
+        if (datas && (datas.length <= 0 || datas.length < that.data.pageCount)) {
           that.setData({
             isLast: true
           });

@@ -11,7 +11,6 @@
         <view class='goods-text' wx:if="{{address.length <= 0}}">
           <view class='size-titletwo'>请先添加收货地址</view>
         </view>
-
         <view class='goods-text'>
           <view class='goods-name'>
             <text class='name'>{{address.name}}</text>
@@ -83,8 +82,8 @@
     <view class='coupon'>
       <view class='coupon-wap'>
         <view class='coupon-left'>
-          <text wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">积分共{{customerInfo.frozeno_point}},可用{{usingPoint}}，抵¥{{usingPoint}}</text>
-          <text wx:if="{{customerInfo.frozeno_point==0 }}">当前没有积分可以使用</text>
+          <text wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">积分可用共{{customerInfo.frozeno_point}},可用{{usingPoint}}，可抵扣¥{{usingPoint}}</text>
+          <text wx:if="{{customerInfo.frozeno_point<=0}}">当前没有积分可以使用</text>
           <text wx:if="{{product_amount < tInfo.satisfy_amount}}">不可用积分。</text>
         </view>
         <view class='coupon-right' wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">
@@ -95,7 +94,6 @@
           </checkbox-group>
         </view>
       </view>
-
     </view>
 
     <view class='coupon'>
@@ -103,8 +101,14 @@
         <view class='coupon-left'>
           <text>电子发票</text>
         </view>
-        <view class='coupon-right'>
+        <view class='coupon-right' bindtap="goInvoice" wx:if="{{!invoice.username}}">
           <text>不需要发票</text>
+          <image src='../../img/dv.png'></image>
+        </view>
+
+        <view class='coupon-right' bindtap="goInvoice" wx:if="{{invoice.username}}">
+          <text>{{invoice.username}}</text>
+          <text>{{invoice.tax_number}}</text>
           <image src='../../img/dv.png'></image>
         </view>
       </view>
@@ -147,7 +151,7 @@
         <view class='item'>
           <checkbox-group>
             <label class="checkbox">
-              <checkbox color='#333' catchtap="checkboxChange" data-v="1" data-type="isCheckExpressCompany" checked="{{isCheckExpressCompany == 1}}"/>
+              <checkbox color='#333' catchtap="checkboxChange" data-v="1" data-type="isCheckExpressCompany" checked="{{isCheckExpressCompany == 1}}" />
             </label>
           </checkbox-group>
         </view>
@@ -179,47 +183,47 @@
         </view>
       </view>
 
-      <scroll-view scroll-y="true" style="height: 650rpx;" >
-          <view class='column' wx:if="{{ticketList.length <= 0}}">
-            <view>您没有可用的优惠券</view>
-          </view>
+      <scroll-view scroll-y="true" style="height: 650rpx;">
+        <view class='column' wx:if="{{ticketList.length <= 0}}">
+          <view>您没有可用的优惠券</view>
+        </view>
 
-          <view class='column' wx:for="{{ticketList}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
-            <view>
-                <view class="coupon-hd">{{item.ticket_name}}</view>
-                <view class="coupon-text" wx:if="{{item.ticket_type == 1}}">
-                  全场通用
-                </view>
-                <view class="coupon-text" wx:if="{{item.ticket_type == 2}}">
-                  满{{item.satisfy_amount}}元使用
-                </view>
-           </view>
-            <view class='item'>
-              <checkbox-group>
-                <label class="checkbox">
-                  <checkbox color='#333' catchtap="checkboxChange" data-v="{{(index+1)}}" data-type="isCheckTicket" checked="{{isCheckTicket == (index+1)}}" />
-                </label>
-              </checkbox-group>
+        <view class='column' wx:for="{{ticketList}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
+          <view>
+            <view class="coupon-hd">{{item.ticket_name}}(￥{{item.ticket_amount}})</view>
+            <view class="coupon-text" wx:if="{{item.ticket_type == 1}}">
+              全场通用
+            </view>
+            <view class="coupon-text" wx:if="{{item.ticket_type == 2}}">
+              满{{item.satisfy_amount}}元使用
             </view>
           </view>
-
-          <view class='column'>
-            <view class="coupon-hd">不使用优惠</view>
-            <view class='item'>
-              <checkbox-group>
-                <label class="checkbox">
-                  <checkbox color='#333' catchtap="checkboxChange" data-v="9999" data-type="isCheckTicket" checked="{{isCheckTicket == 9999}}" />
-                </label>
-              </checkbox-group>
-            </view>
+          <view class='item'>
+            <checkbox-group>
+              <label class="checkbox">
+                <checkbox color='#333' catchtap="checkboxChange" data-v="{{(index+1)}}" data-type="isCheckTicket" checked="{{isCheckTicket == (index+1)}}" />
+              </label>
+            </checkbox-group>
           </view>
+        </view>
+
+        <view class='column'>
+          <view class="coupon-hd">不使用优惠</view>
+          <view class='item'>
+            <checkbox-group>
+              <label class="checkbox">
+                <checkbox color='#333' catchtap="checkboxChange" data-v="9999" data-type="isCheckTicket" checked="{{isCheckTicket == 9999}}" />
+              </label>
+            </checkbox-group>
+          </view>
+        </view>
       </scroll-view>
 
 
-     
 
 
-        </view>
+
+    </view>
 
   </view>
 
