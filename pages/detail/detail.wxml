@@ -36,13 +36,54 @@
     <image src='../img/dv.png'></image>
   </view> -->
   <view class='evaluate'>
-    <view class='detail'> 商品详情 </view>
-    <view class='detail-image'>
-      <block wx:for="{{swipers}}" wx:key="*this">
-        <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
-      </block>
+     <!-- 默认是商品详情 -->
+    <view class="topbar">
+      <view class="topbar-top">
+          <view class="topbar-text" bindtap="clickTab"  data-current="0" >
+              <view class="topbar-tab  {{currentTab=='0'?'active':''}} " >商品详情</view>
+          </view>
+            <view class="topbar-text" bindtap="clickTab"  data-current="1">
+              <view class="topbar-tab  {{currentTab=='1'?'active':''}} " >产品认证</view>
+            </view>
+            <view class="topbar-text" bindtap="clickTab"  data-current="2">
+              <view class="topbar-tab  {{currentTab=='2'?'active':''}} " >关于我们</view>
+            </view>
+        </view>
     </view>
-    <text class='abstract'>{{items.category_tab}}</text>
+
+    <view class="content">
+        <view class="{{currentTab == 0 ? 'show':'hidden'}}" >
+            <scroll-view>
+              <view class='detail-image'>
+                  <block wx:for="{{swipers}}" wx:key="*this">
+                    <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+                  </block>
+              </view>
+              <text class='abstract'>{{items.category_tab}}</text>         
+            </scroll-view>
+        </view>
+        <view class="{{currentTab == 1 ? 'show':'hidden'}}" >
+            <scroll-view>
+              <view class='detail-image'>
+                  <block wx:for="{{swipers}}" wx:key="*this">
+                    <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+                  </block>
+              </view>
+            
+            </scroll-view>
+        </view>
+        <view class="{{currentTab == 2 ? 'show':'hidden'}}" >
+            <scroll-view>
+              <view class='detail-image'>
+                  <block wx:for="{{swipers}}" wx:key="*this">
+                    <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+                  </block>
+              </view> 
+            </scroll-view>
+        </view>
+
+    </view>
+
   </view>
 
   <view class='bottom'>

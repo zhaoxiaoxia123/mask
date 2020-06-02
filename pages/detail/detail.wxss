@@ -398,3 +398,44 @@ display: none;
   padding:20rpx;
 }
 
+
+/* tab切换 */
+.topbar{
+	width: 100%;
+  background-color:#404040;
+  border-bottom:1px solid #2b2b2b; 
+}
+.topbar-top {
+  display: flex;
+  align-items: center;
+  color:#c6c6c6;
+  
+}
+.topbar-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:20rpx;
+}
+.topbar-tab{
+  width: auto;
+  padding: 20rpx;
+}
+
+.active {
+  color:#DAB866;
+  font-weight: bold;
+}
+.show {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.content{
+  height:2000rpx;
+  padding:20rpx;
+}

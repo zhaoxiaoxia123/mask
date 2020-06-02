@@ -78,7 +78,7 @@
   </view>
 
   <view class='lists bg-box col-content size-titletwo'>
-    <view class='list-wap' wx:if="{{level > 1}}">
+    <view class='list-wap' wx:if="{{level > 1}}" >
       <view class='left'>
         <image class='icon40' src='../img/friend@2x.png'></image>
         <!-- <text>邀请好友</text> -->
