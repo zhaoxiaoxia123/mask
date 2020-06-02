@@ -22,8 +22,10 @@ Page({
     isCheckExpressCompany: 2, //存储选择快递  9999为随机
     domainName: app.globalData.domainName,
     addressId:0,
-    invoiceId:0,
-    invoice:[]
+    invoiceId: 0,
+    dry: 998,  //导入仪价格
+    invoice:[],
+    discount:0
   },
 
   /**
@@ -32,9 +34,12 @@ Page({
   onLoad: function(options) {
     that = this;
     that.setData({
-      products: options.products //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
+      products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
+      discount: parseFloat(wx.getStorageSync('discount'))
     });
 
+    console.log('discount:-----------');
+    console.log(that.data.discount);
   },
 
   /**
@@ -58,7 +63,7 @@ Page({
     console.log("onShow:-----");
     console.log(that.data.addressId);
     console.log(that.data.invoiceId);
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
@@ -79,19 +84,26 @@ Page({
     var param_p = {
       page_code: 'p005',
       type: "confirmProduct",
-      products: that.data.products
+      products: that.data.products,
+      customer_id: wx.getStorageSync("customerId"),
+      level: wx.getStorageSync("level")
     };
     // var param_p = '/p005?type=confirmProduct&products='+that.data.products;
     that.getProducts(param_p);
     that.getAddress(); //获取用户设置的默认地址
-
-    // that.getTicketList(); //获取卡券列表
     
     console.log('that.data.invoiceId:----');
     console.log(that.data.invoiceId);
     if(that.data.invoiceId){
       that.getInvoice(); //获取用户设置的发票信息
     }
+
+    // //使用新人券页面。选择电子发票或收货地址需要计算一次减去800
+    // if (currPage.data.addressId || currPage.data.invoiceId){
+    //   setTimeout(function () {
+    //     that.sumProductAmount(that.data.items.products, that.data.customerInfo);
+    //   }, 2000);
+    // }
   },
 
   /**
@@ -134,7 +146,6 @@ Page({
   },
 
   checkboxChange: function(e) {
-    // console.log('checkbox发生change事件，携带value值为：', e.target.dataset.type)
     if (e.target.dataset.type == 'isUsePoint') {
       that.setData({
         isUsePoint: !that.data.isUsePoint
@@ -208,9 +219,11 @@ Page({
         console.log(datas);
         that.setData({
           items: datas
-        })
+        });
         setTimeout(function() {
-          that.sumProductAmount(that.data.items, that.data.customerInfo);
+          //计算实付款
+          that.sumUsingPoint();
+          // that.sumProductAmount(that.data.items.products, that.data.customerInfo);
         }, 2000);
       }
     });
@@ -219,10 +232,15 @@ Page({
   //计算商品总价
   sumProductAmount: function(pInfo, cInfo) {
     var productAmount = 0;
+    var dryCount = 0;
     var dryAmount = 0;   //导入仪不参加任何折扣
     for (var i = 0; i < pInfo.length; i++) {
+      console.log(pInfo[i]['frozeno_is_discount']);
       if (pInfo[i]['frozeno_is_discount'] == 1){
       productAmount += (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        if (pInfo[i]['frozeno_is_sub_dry'] == 1) {
+          dryCount += pInfo[i]['join_product_count'];
+        }
       }else{
         dryAmount += (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
       }
@@ -230,29 +248,38 @@ Page({
     //商品总价会员折扣后的价格  productAmount
     var discountAmount = 0;
     if (productAmount != 0){
-      discountAmount = (cInfo.discount != 0 ? (productAmount * (cInfo.discount / 100)).toFixed(2) : productAmount);
+      discountAmount = (cInfo.discount != 0 ? ((productAmount - (that.data.dry * dryCount)) * (cInfo.discount / 100) + (that.data.dry * dryCount)).toFixed(2) : productAmount);
     }
     productAmount = parseFloat(productAmount);
     discountAmount = parseFloat(discountAmount);
     dryAmount = parseFloat(dryAmount);
     var productAmounts = productAmount + dryAmount;
     var discountAmounts = discountAmount + dryAmount;
+
     //商品总价
     that.setData({
       productAmount: productAmounts,
       discountAmount: discountAmounts,
       payAmount: discountAmounts
     });
-
-    if (that.data.payAmount) {
+    if (that.data.payAmount && !that.data.items.is_have_new_ticket) {
       that.getTicketList(); //获取卡券列表
+    }else{
+      if (that.data.items.sub_amount != 0){
+        //新人使用新人卡券商品总价计算
+        that.setData({
+          productAmount: productAmounts,
+          discountAmount: (discountAmounts - parseFloat(that.data.items.sub_amount)),
+          payAmount: (discountAmounts - parseFloat(that.data.items.sub_amount))
+        });
+      }
     }
   },
   //计算可用的积分数,并抵扣后获得实付款
   sumUsingPoint: function() {
     var cInfo = that.data.customerInfo;
     var tInfo = that.data.transform;
-    var pInfo = that.data.items;
+    var pInfo = that.data.items.products;
     that.sumProductAmount(pInfo, cInfo); //获取商品总价
     var tPayAmount = that.sumCheckTicket(); //减卡券价值后的总价
     var discountAmount = tPayAmount; //that.data.discountAmount;
@@ -286,7 +313,7 @@ Page({
     var tIndex = that.data.isCheckTicket - 1; //选中卡券索引
     var usingTicketAmount = 0;
     if (tIndex != 9998) { //上面索引减了个1
-      var tList = that.data.ticketList; //卡券列表
+      var tList = that.data.ticketList.ticket; //卡券列表
       var payAmount = 0;
       if (tList[tIndex]['ticket_type'] == 1) { //通用
         usingTicketAmount = tList[tIndex]['ticket_amount'];
@@ -343,7 +370,7 @@ Page({
   getAddress: function () {
     console.log('that.data.addressId:----');
     console.log(that.data.addressId);
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     // var param = '/p002?is_default=1&customer_id='+wx.getStorageSync('customerId');
       var param = {
         page_code: 'p002',
@@ -404,12 +431,13 @@ Page({
     }
   },
   getTicketList: function() { //获取有效卡券列表
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     //获取卡券列表
     var param_t = {
       page_code: 'p013',
       customer_id: wx.getStorageSync('customerId'),
       amount: that.data.payAmount,
+      is_show_amount:0,  //是否展示新会员卡券
       ticket_state:1,
       offset: 0,
       page: 20
@@ -433,14 +461,17 @@ Page({
 
 //提交订单
   confirmPay:function(){
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       if (! that.data.address){
         wx.showToast({
           icon: "none",
           title: "请选择收货地址。"
         });
       }else{
-    var ticket_id = that.data.isCheckTicket == 9999 ? 0 : that.data.ticketList[that.data.isCheckTicket - 1]['ticket_id'];
+    var ticket_id = that.data.isCheckTicket == 9999 ? 0 : that.data.ticketList.ticket[that.data.isCheckTicket - 1]['ticket_id'];
+    if (that.data.items.ticket.ticket_id && ticket_id == 0){  //使用新人卡券时候存在的值
+      ticket_id = that.data.items.ticket.ticket_id;
+    }
     wx.request({
       url: app.globalData.domainUrl,
       method: "POST",
@@ -451,11 +482,13 @@ Page({
         ticket_id: ticket_id,
         express_company: that.data.isCheckExpressCompany,
         customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
-        invoice_id: that.data.invoice.invoice_id,
+        invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
         use_point: that.data.usingPoint,
         // order_type: 1,//购买订单
         customer_id: wx.getStorageSync('customerId'),
         amount: that.data.payAmount,
+        is_have_new_ticket: that.data.items.is_have_new_ticket,  //是否使用的是新会员卡券
+        sub_amount: that.data.items.sub_amount,  //新会员卡券抵扣金额
       },
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -479,7 +512,7 @@ Page({
     }else{
       wx.showToast({
         icon: "none",
-        title: "请先登录"
+        title: "请完成授权并登录"
       });
     }
   },

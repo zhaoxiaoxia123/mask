@@ -51,7 +51,7 @@ Page({
       items: [],
       isLast: false
     });
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     var param = {
       page_code: 'p008',
       type: "myOrder",
@@ -173,7 +173,7 @@ Page({
         isLast:false,
         items:[]
       })
-      if (wx.getStorageSync('customerId')){
+      if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
         page_code: 'p008',
         type: "myOrder",

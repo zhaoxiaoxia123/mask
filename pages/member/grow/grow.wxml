@@ -1,5 +1,6 @@
 <!--pages/member/grow/grow.wxml-->
 
+<wxs module="filter" src="../../../utils/share.wxs"></wxs>
 <view class='page-pd'>
 <!-- 遮罩层 -->
   <!-- <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
@@ -15,7 +16,7 @@
       <text class='current1' wx:if="{{customer.frozeno_level == 2}}">VIP</text>
       <text class='current1' wx:if="{{customer.frozeno_level == 3}}">SVIP</text>
       <text class='current1' wx:if="{{customer.frozeno_level == 4}}">钻卡</text>
-      <text class='current1' wx:if="{{customer.frozeno_level == 5}}">一级渠道商</text>
+      <text class='current1' wx:if="{{customer.frozeno_level == 5}}">执行董事</text>
       <text class='current1' wx:if="{{customer.frozeno_level == 6}}">二级渠道商</text>
     </view>
     <view class="integral-box">
@@ -85,9 +86,10 @@
         <text class='text-date'>{{item.created_at}}</text>
       </view>
       <view>
-        <text class='text-add'>{{item.value}} </text>
+        <text class='text-add'>{{filter.toFix(item.value)}} </text>
       </view>
     </view>
+    
   </view>
   <view class='footer'>
     <text class=''>仅展示近六个月的成长值</text>

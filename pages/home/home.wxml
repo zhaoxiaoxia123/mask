@@ -78,8 +78,8 @@
       </view>
   </view>
 
-
 </view>
+
 <!--滑块容器相关配置，以下为参数   关于我们广告-->
  <!-- <swiper class="slide-bolk" indicator-dots="true" indicator-color="#999" indicator-active-color="#333" autoplay="{{false}}">
     <block wx:for="{{swipers}}" wx:key="*this">
@@ -96,8 +96,9 @@
   <template is="service" data="{{ftserviceflexwindow}}" />
 </view>
 
-
 <!-- 引导页 -->
  <view class="just1 {{storeflexwindow==true?'': 'y'}}" bindtap='close3'>
-    <view  class="guide"><image class="guide-img" mode="widthFix"   src="../img/guide1.png"></image></view>
- </view>
+  <view class="guide">
+    <image class="guide-img" mode="widthFix" src="../img/guide1.png"></image>
+  </view>
+</view>

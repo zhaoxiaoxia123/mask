@@ -43,7 +43,7 @@ Page({
       fromPage: options.from_page
     });
 
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
@@ -287,7 +287,7 @@ Page({
   },
   //付款   商户在小程序中先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易后调起支付。
   payOrder:function(){
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       if(that.data.items[0].frozeno_order_amount == 0){
         that.payAfter();
       }else{
@@ -343,14 +343,14 @@ Page({
       }
     }else{
       wx.showToast({
-        title: "请先登录"
+        title: "请先完成授权并登录！"
       });
     }
   },
 
   //付款成功则修改订单状态。
   payAfter: function () {
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       wx.request({
         url: app.globalData.domainUrl,
         method: "POST",
@@ -383,7 +383,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: "请先登录"
+        title: "请先完成授权并登录"
       });
     }
   },
@@ -431,14 +431,14 @@ Page({
 
   //测试付款成功则修改订单状态。
   testPayAfter: function () {
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       wx.request({
         url: app.globalData.domainUrl,
         method: "POST",
         data: {
           page_code: 'p008',
           type: 'pay',
-          order_id: 48,
+          order_id: 1,
           amount: 3000,
           out_trade_no: '123456789',
           customer_id: wx.getStorageSync('customerId')
@@ -465,7 +465,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: "请先登录"
+        title: "请先完成授权并登录"
       });
     }
   },

@@ -25,7 +25,7 @@ Page({
     type: '9,12,13' , // 9:广告   12:app商城其他广告   13:app商城关于我们广告
     domainName: app.globalData.domainName,
     ftserviceflexwindow: false,
-
+    storeflexwindow:false,
   },
 
   /**
@@ -33,6 +33,19 @@ Page({
    */
   onLoad: function(options) {
     that = this;
+    if (options.shareBy) {
+      wx.setStorageSync('shareBy', options.shareBy);
+    }
+    console.log(wx.getStorageSync('shareBy'));
+    if (wx.getStorageSync("isFirst")){
+      that.setData({
+        storeflexwindow: false
+      });
+    }else{
+      that.setData({
+        storeflexwindow: true
+      });
+    }
     if (options.scene) {
       var scene = decodeURIComponent(options.scene);
       console.log("scene is ", scene);
@@ -134,33 +147,44 @@ Page({
       that.getProductList(param_p);
     }
   },
-  // 适用门店
-  store: function (e) {
-    var that = this;
-    var storeflexwindow;
-    if (this.data.storeflexwindow == true) {
-      storeflexwindow = false;
-    }
-    else {
-      storeflexwindow = true;
-    }
-    that.setData({
-      storeflexwindow: storeflexwindow
-    });
-  },
-  close3: function (e) {
-    let self = this
-    let storeflexwindow = false;
-
-    self.setData({
-      storeflexwindow: storeflexwindow
-    })
-  },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {},
+  onShareAppMessage: function() {
+    // 来自页面内转发按钮
+    return {
+      title: '冻龄智美商城首页',
+      path: 'pages/home/home?shareBy=' + wx.getStorageSync('memberNo'),
+      success: (res) => {
+        wx.showToast({ title: res, icon: 'success', duration: 2000 })
+      },
+      fail: (res) => {
+        wx.showToast({ title: res, icon: 'success', duration: 2000 })
+      }
+    }
+  },
+
+  // 适用门店
+  // store: function (e) {
+  //   var storeflexwindow;
+  //   if (that.data.storeflexwindow == true) {
+  //     storeflexwindow = false;
+  //   }
+  //   else {
+  //     storeflexwindow = true;
+  //   }
+  //   that.setData({
+  //     storeflexwindow: storeflexwindow
+  //   });
+  // },
+  close3: function (e) {
+    let storeflexwindow = false;
+    that.setData({
+      storeflexwindow: storeflexwindow
+    })
+  },
+
   ftservice: function(e) {
     let ret = tmpObj.ftservice(e);
     that.setData({
@@ -204,10 +228,10 @@ Page({
    * ***/
   toDetail: function(e) {
     var product_id = e.currentTarget.dataset.obj.category_id;
-    app.globalData.productId = product_id;
+    // app.globalData.productId = product_id;
     console.log(product_id)
     wx.navigateTo({
-      url: '../detail/detail',
+      url: '../detail/detail?id='+product_id,
     })
   },
   getProductList: function(param) { //获取商品列表

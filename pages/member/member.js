@@ -12,7 +12,7 @@ Page({
     show: false,
     items: [],
     isLogin:false,
-    canGetUserInfo: false,
+    // canGetUserInfo: false,
     code:'',
     animationData: {},
     hidden: true,//关注默认显示
@@ -24,9 +24,9 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    that.setData({
-      canGetUserInfo: app.globalData.canGetUserInfo
-    });
+    // that.setData({
+    //   canGetUserInfo: app.globalData.canGetUserInfo
+    // });
   },
 
   /**
@@ -49,7 +49,7 @@ Page({
     that.setData({
       items:[]
     });
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
@@ -60,9 +60,9 @@ Page({
       // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId')+'&has_ticket_count=true';
       that.getUserDetail(param);
 
-      app.globalData.canGetUserInfo = false;
+      // app.globalData.canGetUserInfo = false;
       that.setData({
-        canGetUserInfo: app.globalData.canGetUserInfo,
+        // canGetUserInfo: app.globalData.canGetUserInfo,
         isLogin: false
       });
     } else {

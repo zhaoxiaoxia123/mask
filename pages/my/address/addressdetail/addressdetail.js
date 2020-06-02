@@ -140,7 +140,7 @@ Page({
   },
   //删除地址信息
   deleteAddress: function () {
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       wx.showModal({
         title: '提示',
         content: '你确定要删除该地址信息？',
@@ -178,7 +178,7 @@ Page({
     } else {
       wx.showModal({
         title: '提示',
-        content: '授权登录后再编辑信息。',
+        content: '请完成授权后再编辑信息。',
         showCancel: false
       });
     }
@@ -186,7 +186,7 @@ Page({
 
   //提交地址信息
   submitAddress: function(){
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       if (!that.data.name){
         wx.showModal({
           title: '提示',
@@ -237,7 +237,7 @@ Page({
     }else{
       wx.showModal({
         title: '提示',
-        content: '授权登录后再编辑信息。',
+        content: '请完成授权后再编辑信息。',
         showCancel: false
       });
     }

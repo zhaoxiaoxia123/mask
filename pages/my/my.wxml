@@ -8,10 +8,10 @@
     <text class="text">可扫码进入小程序注册页</text>
     <view bindtap="ok" class="ok">确定</view>
   </view> -->
-
+  <!-- <official-account>23233</official-account> -->
   <view class='parent size-titletwo col-content bg-box'>
     <view class='parent-left' wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
-    <view class='parent-left' wx:if="{{!canGetUserInfo && !isLogin}}">
+    <view class='parent-left' wx:if="{{!isLogin}}">
       <view class="head-img">
           <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image> -->
           <open-data class="wx-image_SC1alK" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
@@ -23,7 +23,7 @@
       </view>
     </view>
 
-    <view class='parent-right' bindtap="goMember" wx:if="{{!canGetUserInfo && !isLogin}}">
+    <view class='parent-right' bindtap="goMember" wx:if="{{!isLogin}}">
       <view class='money-grade'>
         <!-- 按会员等级进行显示(注册用户)不显示图标、（VIP）、（SVIP）、（钻卡） -->
         <image class="icon32 pdr10" src="../img/drill_golden@2x.png" wx:if="{{items.frozeno_level == 4}}"></image>
@@ -63,7 +63,6 @@
             <text>{{items.order_count2?items.order_count2:0}}</text>
         </view>
       </view>
-
       <view class='payment-1' data-id="4" bindtap='order'>
         <image class='icon58' src="../img/goods.png"></image>
         <text>待收货</text>
@@ -71,7 +70,6 @@
             <text>{{items.order_count3?items.order_count3:0}}</text>
         </view>
       </view>
-
       <view class='payment-1' data-id="5" bindtap='order'>
         <image class='icon58' src="../img/complete.png"></image>
         <text>已完成</text>
@@ -80,12 +78,23 @@
   </view>
 
   <view class='lists bg-box col-content size-titletwo'>
-   <!-- bindtap='shareApp' -->
-    <view class='list-wap'>
+    <view class='list-wap' wx:if="{{level > 1}}">
       <view class='left'>
         <image class='icon40' src='../img/friend@2x.png'></image>
         <!-- <text>邀请好友</text> -->
-        <button class="button-share" open-type="share">邀请好友</button>
+        <text wx:if="{{level <= 1}}" bindtap="shareApp">邀请好友</text>
+        <button class="button-share" open-type="share" wx:if="{{level > 1}}">邀请好友</button>
+      </view>
+      <view class='right'>
+        <image src='../img/dv.png'></image>
+      </view>
+    </view>
+
+
+    <view class='list-wap' bindtap='goWorkBench' wx:if="{{level > 1}}">
+      <view class='left'>
+        <image class='icon40' src='../img/ftwork.png'></image>
+        <text>前往工作台</text>
       </view>
       <view class='right'>
         <image src='../img/dv.png'></image>

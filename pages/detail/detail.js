@@ -22,38 +22,36 @@ Page({
     circular: true,
     items: [],
     productId:0,
-    transform: [],
-    point:0,
-    growth:0,
+    // transform: [],
+    // point:0,
+    // growth:0,
     shoppingCount: 0,
-    domainName: app.globalData.domainName
+    domainName: app.globalData.domainName,
+    level:0
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     that = this; 
+    if (options.shareBy) {
+      wx.setStorageSync('shareBy', options.shareBy);
+    }
+    console.log(wx.getStorageSync('shareBy'));
+    console.log('detail onLoad');
     that.setData({
-      productId: getApp().globalData.productId
+      productId: options.id,
+      // productId: getApp().globalData.productId,
+      level: wx.getStorageSync("level")
     });
     var param = {
       page_code: 'p005',
       product_id: that.data.productId,
-      // customer_id: wx.getStorageSync("customerId"),
+      customer_id: wx.getStorageSync("customerId"),
       level: wx.getStorageSync("level")
     };
     // var param = '/p005?product_id='+that.data.productId;
     that.getProductDetail(param);
-
-    setTimeout(function(){
-      //查询积分，成长值兑换设置
-      var transformParam = {
-        page_code: 'p017',
-        code: ''
-      };
-      // var transformParam = '/p017?code=';
-      that.getTransform(transformParam);
-    },1000);
 
     if (wx.getStorageSync("customerId")){
       //查询购物车个数
@@ -65,6 +63,16 @@ Page({
       // var shoppingParam = '/p012?type=shopping_count&customer_id='+wx.getStorageSync("customerId");
       that.getShoppingCount(shoppingParam);
     }
+    
+    // setTimeout(function(){
+    //   //查询积分，成长值兑换设置
+    //   var transformParam = {
+    //     page_code: 'p017',
+    //     code: ''
+    //   };
+    //   // var transformParam = '/p017?code=';
+    //   that.getTransform(transformParam);
+    // },1000);
   },
 
   /**
@@ -72,6 +80,7 @@ Page({
    */
   onReady: function () {
 
+    console.log('detail onReady');
   },
 
   /**
@@ -79,6 +88,7 @@ Page({
    */
   onShow: function () {
 
+        console.log('detail onshow');
   },
 
   /**
@@ -113,53 +123,65 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  },
-
-  getTransform: function (param) {
-    wx.request({
-      url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
+    // 来自页面内转发按钮
+    return {
+      title: '冻龄智美商品详情页',
+      path: 'pages/detail/detail?shareBy=' + wx.getStorageSync('memberNo'), // 好友点击分享之后跳转到的小程序的页面
+      // desc: '描述',  // 看你需要不需要，不需要不加
+      // imageUrl: that.data.qrcode,
+      success: (res) => {
+        wx.showToast({ title: res, icon: 'success', duration: 2000 })
       },
-      success: function (res) {
-        var datas = res.data.data;
-        that.setData({
-          transform: datas
-        });
-        that.sumValue();
-      }
-    });
-  },
-
-  sumValue:function(){
-    var datas = that.data.transform;
-    if (datas) {
-      for (var i = 0; i < datas.length; i++) {
-        if (datas[i].code == "jf01") {
-          if (that.data.items.customer_amount) {
-            that.setData({
-              point: parseInt(that.data.items.customer_amount / (datas[i].value_from / datas[i].value_to))
-            });
-          } else {
-          that.setData({
-            point: parseInt(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to))
-            });
-          }
-        } else if (datas[i].code == "czz01") {
-          if (that.data.items.customer_amount){
-            that.setData({
-              growth: parseFloat(that.data.items.customer_amount / (datas[i].value_from / datas[i].value_to)).toFixed(1)
-            });
-          }else{
-            that.setData({
-              growth: parseFloat(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to)).toFixed(1)
-            });
-          }
-        }
+      fail: (res) => {
+        wx.showToast({ title: res, icon: 'success', duration: 2000 })
       }
     }
   },
+
+  // getTransform: function (param) {
+  //   wx.request({
+  //     url: app.globalData.domainUrl,
+  //     data: param,
+  //     header: {
+  //       'content-type': 'application/json'
+  //     },
+  //     success: function (res) {
+  //       var datas = res.data.data;
+  //       that.setData({
+  //         transform: datas
+  //       });
+  //       that.sumValue();
+  //     }
+  //   });
+  // },
+  // sumValue:function(){
+  //   var datas = that.data.transform;
+  //   if (datas) {
+  //     for (var i = 0; i < datas.length; i++) {
+  //       if (datas[i].code == "jf01") {
+  //         if (that.data.items.customer_amount) {
+  //           that.setData({
+  //             point: parseInt(that.data.items.customer_amount / (datas[i].value_from / datas[i].value_to))
+  //           });
+  //         } else {
+  //         that.setData({
+  //           point: parseInt(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to))
+  //           });
+  //         }
+  //       } else if (datas[i].code == "czz01") {
+  //         if (that.data.items.customer_amount){
+  //           that.setData({
+  //             growth: parseFloat(that.data.items.customer_amount / (datas[i].value_from / datas[i].value_to)).toFixed(1)
+  //           });
+  //         }else{
+  //           that.setData({
+  //             growth: parseFloat(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to)).toFixed(1)
+  //           });
+  //         }
+  //       }
+  //     }
+  //   }
+  // },
 
   getShoppingCount: function (param){
     wx.request({
@@ -262,10 +284,13 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        that.setData({
-          items: res.data.data,
-          swipers: res.data.data.product_image
-        });
+        if(res.data.data){
+          that.setData({
+            items: res.data.data,
+            swipers: res.data.data.product_image
+          });
+        }
+        
         // console.log("getProductDetail:----");
         // console.log(that.data.items);
       }
@@ -279,7 +304,7 @@ Page({
   },
   joinShopping: function(){
     // var productId = event.target.dataset.id;
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     wx.request({
       url: app.globalData.domainUrl,
       method: "POST",
@@ -321,7 +346,7 @@ Page({
     }else{
       wx.showModal({
         title: '提示',
-        content: '请先登录!',
+        content: '请先完成授权!',
         showCancel: false,
         confirmText: '确定',
         success: function (res) {
@@ -335,7 +360,7 @@ Page({
 
   //进入结算页面  加入订单，即立即购买
   goConfirm: function (e) {
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       var type = e.currentTarget.dataset.type;
       var products = '';
       if (type == "more"){
@@ -349,7 +374,7 @@ Page({
     } else {
       wx.showModal({
         title: '提示',
-        content: '请先登录!',
+        content: '请先完成授权!',
         showCancel: false,
         confirmText: '确定',
         success: function (res) {

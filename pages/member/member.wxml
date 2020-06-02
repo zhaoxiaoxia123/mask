@@ -7,11 +7,10 @@
   <view class='member'>
     <view class='page-pd'>
     <view  class="login-rt" wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
-      <view class='member-card' wx:if="{{!canGetUserInfo && !isLogin}}">
+      <view class='member-card' wx:if="{{!isLogin}}">
         <view class='content'>
           <view class='money-head'>
             <view class='money-name'>
-              <!-- <text>张骁 </text> -->
               <view class='name'>
                 <open-data type="userNickName"></open-data>
               </view>

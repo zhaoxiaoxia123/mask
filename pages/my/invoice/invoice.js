@@ -77,7 +77,7 @@ Page({
 
   getInvoiceList: function () {
       // var param = '/p006?customer_id='+ wx.getStorageSync('customerId');
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.request({
       url: app.globalData.domainUrl,
       data: {
@@ -98,7 +98,7 @@ Page({
     }else{
       wx.showModal({
         title: '提示',
-        content: '请授权登录后再查看列表',
+        content: '请完成授权后再查看列表',
         showCancel: false
       });
     }

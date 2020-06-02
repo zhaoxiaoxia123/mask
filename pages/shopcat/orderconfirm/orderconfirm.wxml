@@ -6,7 +6,6 @@
         <view class='goods-icon'>
           <image class='icon58' src='../../img/address.png'></image>
         </view>
-
         <!-- 没有默认的收货地址时显示 -->
         <view class='goods-text' wx:if="{{address.length <= 0}}">
           <view class='size-titletwo'>请先添加收货地址</view>
@@ -27,7 +26,7 @@
       <text>订单</text>
     </view>
     <!--bindtap绑定事件-->
-    <view class='list' bindtap='toDetail' wx:key="*this" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
+    <view class='list' bindtap='toDetail' wx:key="*this" wx:for="{{items.products}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
       <view class='list-left'>
         <image src='{{domainName}}{{item.product_image[0].image_url}}'></image>
       </view>
@@ -56,19 +55,28 @@
         </view>
       </view>
     </view>
-    <view class='coupon' bindtap="coupon" wx:if="{{ticketList.length > 0}}">
+    <view class='coupon'>
+      <view class='coupon-wap'>
+        <view class='coupon-left'>
+          <text>会员折扣</text>
+        </view>
+        <view class='coupon-right'>
+          <text>{{discount > 0 ? '享'+discount+'折':'没有会员折扣'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='coupon' wx:if="{{items.ticket.ticket_name}}">
       <view class='coupon-wap'>
         <view class='coupon-left'>
           <text>请选择优惠券</text>
         </view>
         <view class='coupon-right'>
-          <text wx:if="{{isCheckTicket == 9999}}">不使用优惠券</text>
-          <text wx:if="{{isCheckTicket != 9999}}">减{{usingTicketAmount}}</text>
+          <text>使用新人卡券,减{{items.sub_amount}}</text>
           <image src='../../img/dv.png'></image>
         </view>
       </view>
     </view>
-    <view class='coupon' wx:if="{{ticketList.length <= 0}}">
+    <!-- <view class='coupon' wx:if="{{ticketList.ticket.length <= 0 && !items.ticket.ticket_name}}">
       <view class='coupon-wap'>
         <view class='coupon-left'>
           <text>请选择优惠券</text>
@@ -78,8 +86,22 @@
           <image src='../../img/dv.png'></image>
         </view>
       </view>
+    </view> -->
+    <!-- <view class='coupon' bindtap="coupon" wx:if="{{ticketList.ticket.length > 0 && !items.ticket.ticket_name}}"> -->
+    <view class='coupon' bindtap="coupon" wx:if="{{!items.ticket.ticket_name}}">
+      <view class='coupon-wap'>
+        <view class='coupon-left'>
+          <text>请选择优惠券</text>
+        </view>
+        <view class='coupon-right'>
+          <text wx:if="{{ticketList.ticket.length <= 0}}">您没有可用的券</text>
+          <text wx:if="{{isCheckTicket == 9999 && ticketList.ticket.length > 0}}">不使用优惠券</text>
+          <text wx:if="{{isCheckTicket != 9999}}">减{{usingTicketAmount}}</text>
+          <image src='../../img/dv.png'></image>
+        </view>
+      </view>
     </view>
-    <view class='coupon'>
+    <view class='coupon' wx:if="{{customerInfo.frozeno_point}}">
       <view class='coupon-wap'>
         <view class='coupon-left'>
           <text wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">积分可用共{{customerInfo.frozeno_point}},可用{{usingPoint}}，可抵扣¥{{usingPoint}}</text>
@@ -118,9 +140,10 @@
   <view class="bottom">
     <view class="bottom-operate">
       <view class="bottom-operate price">合计：
-        <text style="color:#DAB866">￥{{payAmount}}</text>
+        <text style="color:#DAB866">￥{{payAmount?payAmount:'0.00'}}</text>
       </view>
-      <view class="bottom-operate button" catchtap='confirmPay' style='background-color:#DAB866;'>提交订单</view>
+      <view wx:if="{{items.products}}" class="bottom-operate button" catchtap='confirmPay' style='background-color:#DAB866;'>提交订单</view>
+      <view wx:if="{{!items.products}}" class="bottom-operate button" style='background-color:#ccc;'>提交订单</view>
     </view>
   </view>
   <!-- 配送方式 -->
@@ -184,11 +207,11 @@
       </view>
 
       <scroll-view scroll-y="true" style="height: 650rpx;">
-        <view class='column' wx:if="{{ticketList.length <= 0}}">
-          <view>您没有可用的优惠券</view>
+        <view class='column' wx:if="{{ticketList.ticket.length <= 0}}">
+          <view>您还没有可用的优惠券</view>
         </view>
 
-        <view class='column' wx:for="{{ticketList}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
+        <view class='column' wx:for="{{ticketList.ticket}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
           <view>
             <view class="coupon-hd">{{item.ticket_name}}(￥{{item.ticket_amount}})</view>
             <view class="coupon-text" wx:if="{{item.ticket_type == 1}}">
@@ -218,11 +241,6 @@
           </view>
         </view>
       </scroll-view>
-
-
-
-
-
     </view>
 
   </view>

@@ -34,7 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
         page_code: 'p001',
         type: that.data.type,

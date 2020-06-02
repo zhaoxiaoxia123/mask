@@ -14,7 +14,8 @@ Page({
     isSubmit:false,
     isShareBy: false,   //是否通过邀请码注册
     shareBy: '',   //邀请码
-    isClick:true
+    get_user_info:false,   //是否继续获取用户信息
+    get_phone_info:false,  //是否继续获取手机信息
   },
 
   /**
@@ -22,13 +23,13 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    if (options.shareBy) {
+    if (options.shareBy || wx.getStorageSync("shareBy") != '') {
       that.setData({
         isShareBy:true,
-        shareBy: options.shareBy,
+        shareBy: options.shareBy?options.shareBy: wx.getStorageSync("shareBy"),
       });
     }
-    if (wx.getStorageSync("openid") != '') {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.switchTab({
         url: '/pages/home/home',
       });
@@ -46,7 +47,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    that.setData({
+      get_user_info : (wx.getStorageSync("get_user_info")==="" || wx.getStorageSync("get_user_info")===true)?true:false, //是否继续获取用户信息
+      get_phone_info : (wx.getStorageSync("get_phone_info")==="" || wx.getStorageSync("get_phone_info")===true)?true:false   //是否继续获取手机信息
+    });
+    wx.login({
+      success: r => {
+        app.globalData.code = r.code;
+        // that.phoneLogin(ency, iv);
+      }
+    })
   },
 
   /**
@@ -84,53 +94,60 @@ Page({
 
   },
 
+  // bindGetUserInfo: function () {
+  //   console.log('userInfo');
+  //   if (!app.globalData.code) {
+  //     wx.login({
+  //       success: r => {
+  //         app.globalData.code = r.code;  //无权，显示向用户获取权限
+  //         that.wxGetUserInfo();
+  //       }
+  //     })
+  //   }else{
+  //     that.wxGetUserInfo();
+  //   }
+  //   // } else {
+  //   //   wx.showToast({
+  //   //     icon: "none",
+  //   //     title: "请清除缓存重新登录"
+  //   //   });
+  //   // }
+  // },
+  // wxGetUserInfo:function(){
+    
   bindGetUserInfo: function () {
-    that.setData({
-      isClick: false
-    });
-    console.log('userInfo');
-    if (!app.globalData.code) {
-      wx.login({
-        success: r => {
-          app.globalData.code = r.code;  //无权，显示向用户获取权限
-          that.wxGetUserInfo();
-        }
-      })
-    }else{
-      that.wxGetUserInfo();
-    }
-    // } else {
-    //   wx.showToast({
-    //     icon: "none",
-    //     title: "请清除缓存重新登录"
-    //   });
-    // }
-  },
-  wxGetUserInfo:function(){
-    // let param = {
-    //   page_code: 'p010',
-    //   type: 'workbenchLogin',
-    //   code: app.globalData.code,  //获取openid的code码
-    // };
-    // that.updateUserInfo(param);
+    wx.login({
+      success: r => {
+        app.globalData.code = r.code;  //无权，显示向用户获取权限
+        // that.wxGetUserInfo();
 
-    wx.getUserInfo({
-      success: function (res) {
-        console.log("getUserInfo:-----");
-        console.log(res);
-        //获取openid，并更新到用户表
-        that.updateUserInfo({
-          page_code: 'p010',
-          type: 'wxLogin',
-          code: app.globalData.code,  //获取openid的code码
-          nickname: res.userInfo.nickName,
-          avatarUrl: res.userInfo.avatarUrl,
-          // encryptedData:res.encryptedData, 
-          // iv:res.iv,
-          share_by: that.data.shareBy,
-        });
-      }
-    });
+      wx.getUserInfo({
+        success: function (res) {
+          console.log("getUserInfo:-----");
+          console.log(res);
+
+          wx.setStorageSync('username', res.userInfo.nickName);
+          wx.setStorageSync('avatar', res.userInfo.avatarUrl);
+
+          //获取openid，并更新到用户表
+          that.updateUserInfo({
+            page_code: 'p010',
+            type: 'wxLogin',
+            code: app.globalData.code,  //获取openid的code码
+            nickname: res.userInfo.nickName,
+            avatarUrl: res.userInfo.avatarUrl,
+            phone:wx.getStorageSync('phone')?wx.getStorageSync('phone'):'',
+            openid:wx.getStorageSync('openid')?wx.getStorageSync('openid'):'',
+            unionid:wx.getStorageSync('unionid')?wx.getStorageSync('unionid'):'',
+            sessionid:wx.getStorageSync('sessionKey')?wx.getStorageSync('sessionKey'):'',
+            // encryptedData:res.encryptedData, 
+            // iv:res.iv,
+            share_by: that.data.shareBy,
+          });
+        }
+      });
+    }
+  })
   },
   updateUserInfo: function (param) {  //更新用户信息
     wx.request({
@@ -147,20 +164,20 @@ Page({
         console.log(res);
         var ret = res.data;
         var datas = ret.data;
- 
         if (ret.code != 200) {
           wx.showToast({
             icon: "none",
             title: ret.message
           });
         } else {
-          wx.setStorageSync('customerId', datas.c_id);
-          wx.setStorageSync('openid', datas.frozeno_openid);
-          wx.setStorageSync('memberNo', datas.c_number);  //会员号
-          wx.setStorageSync('level', datas.frozeno_level);  //等级
-          wx.setStorageSync('discount', datas.discount);  //折扣
-          wx.setStorageSync('sessionKey', datas.session_id);
-          app.globalData.canGetUserInfo = false;
+          // app.globalData.canGetUserInfo = false;
+          that.addStorage(datas);
+          // wx.setStorageSync('customerId', datas.c_id);
+          // wx.setStorageSync('openid', datas.frozeno_openid);
+          // wx.setStorageSync('memberNo', datas.c_number);  //会员号
+          // wx.setStorageSync('level', datas.frozeno_level);  //等级
+          // wx.setStorageSync('discount', datas.discount);  //折扣
+          // wx.setStorageSync('sessionKey', datas.session_id);
           // that.setData({
           //   canGetUserInfo: app.globalData.canGetUserInfo
           // });
@@ -170,19 +187,19 @@ Page({
           //     title: '请继续点击手机号授权',
           //   })
           // } else {
-            wx.switchTab({
-              url: '/pages/home/home',
-            });
+            // wx.switchTab({
+            //   url: '/pages/home/home',
+            // });
           // }
         }
       }
     })
   },
   getPhoneNumber: function (e) {
+    var ency = e.detail.encryptedData;
+    var iv = e.detail.iv;
     wx.checkSession({
       success: function (res) {
-        var ency = e.detail.encryptedData;
-        var iv = e.detail.iv;
         if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
           wx.showModal({
             title: '警告',
@@ -204,50 +221,96 @@ Page({
             }
           })
         } else {
-          //同意授权
-          wx.request({
-            url: app.globalData.domainUrl,
-            method: "POST",
-            data: {
-              page_code: 'p010',
-              type: 'wxPhone',  //获取手机号
-              sessionid: wx.getStorageSync('sessionKey'),
-              code:app.globalData.code,
-              iv: iv,
-              encryptedData: ency,
-              share_by:that.data.shareBy
-            },
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            success: function (res) {
-              let datas = res.data.data;
-              if (res.data.code != 200) {
-                wx.showToast({
-                  icon: "none",
-                  title: res.data.message,
-                })
-              } else {
-                wx.setStorageSync('customerId', datas.c_id);
-                wx.setStorageSync('openid', datas.frozeno_openid);
-                wx.setStorageSync('memberNo', datas.c_number);  //会员号
-                wx.setStorageSync('level', datas.frozeno_level);  //等级
-                wx.setStorageSync('discount', datas.discount);  //折扣
-                wx.setStorageSync('sessionKey', datas.session_id);
-
-                wx.switchTab({
-                  url: '/pages/home/home',
-                });
-              }
-            },
-            fail: function (res) {
-              console.log('fail' + res);
+          if(ency != undefined && iv != undefined){
+            if (app.globalData.code == ''){
+              wx.login({
+                success: r => {
+                  app.globalData.code = r.code;
+                  that.phoneLogin(ency, iv);
+                }
+              })
+            }else{
+              that.phoneLogin(ency, iv);
             }
-          });
+          }
         }
+      },
+      fail:function(){
+        wx.login({
+          success: r => {
+            app.globalData.code = r.code;
+            that.phoneLogin(ency, iv);
+          }
+        })
+      },
+    });
+  },
+  phoneLogin: function (ency, iv){
+    //同意授权
+    wx.request({
+      url: app.globalData.domainUrl,
+      method: "POST",
+      data: {
+        page_code: 'p010',
+        type: 'wxPhone',  //获取手机号
+        sessionid: wx.getStorageSync('sessionKey'),
+        code: app.globalData.code,
+        iv: iv,
+        encryptedData: ency,
+        username:wx.getStorageSync('username')?wx.getStorageSync('username'):'',
+        avatar:wx.getStorageSync('avatar')?wx.getStorageSync('avatar'):'',
+        openid:wx.getStorageSync('openid')?wx.getStorageSync('openid'):'',
+        unionid:wx.getStorageSync('unionid')?wx.getStorageSync('unionid'):'',
+        share_by: that.data.shareBy
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        let datas = res.data.data;
+        if (res.data.code != 200) {
+          wx.showToast({
+            icon: "none",
+            title: res.data.message,
+          })
+        } else {
+          that.addStorage(datas);
+        }
+      },
+      fail: function (res) {
+        console.log('fail' + res);
       }
     });
   },
+
+
+  addStorage: function(datas){
+    wx.setStorageSync('get_user_info', datas.get_user_info);//是否需要继续授权获取用户信息
+    wx.setStorageSync('get_phone_info', datas.get_phone_info);//是否需要继续授权获取手机信息
+    wx.setStorageSync('customerId', datas.c_id);
+    wx.setStorageSync('sessionKey', datas.session_id);
+    wx.setStorageSync('phone', datas.c_phone);
+    wx.setStorageSync('username', datas.c_name?datas.c_name:'');  //用户名
+    wx.setStorageSync('avatar', datas.frozeno_avatar);  //用户名
+    wx.setStorageSync('openid', datas.frozeno_openid);
+    wx.setStorageSync('unionid', datas.frozeno_unionid);
+    if(datas.c_number){
+      wx.setStorageSync('memberNo', datas.c_number);  //会员号
+      wx.setStorageSync('level', datas.frozeno_level);  //等级
+      wx.setStorageSync('discount', datas.discount);  //折扣
+    }
+    
+    that.setData({
+      get_user_info : wx.getStorageSync("get_user_info"), //是否继续获取用户信息
+      get_phone_info : wx.getStorageSync('get_phone_info'),    //是否继续获取手机信息
+    });
+    if(!wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.switchTab({
+        url: '/pages/home/home',
+      });
+    }
+  },
+
   //手机验证码登录/注册
   showModalView: function () {
     that.setData({
@@ -301,13 +364,17 @@ Page({
           var ret = res.data;
           var datas = ret.data;
           console.log(datas);
-          wx.showToast({
-            icon: "none",
-            title: ret.message
-          });
-          that.setData({
-            verifyCode: datas.verify_code
-          });
+          
+          if (ret.code == 200){
+            that.setData({
+              verifyCode: datas.verify_code
+            });
+          }else{
+            wx.showToast({
+              icon: "none",
+              title: '出错了。'
+            });
+          }
         }
       })
     } else {
@@ -328,7 +395,8 @@ Page({
       var param = {
         page_code: "p010",
         type: 'loginByPhone',
-        phone: that.data.phone
+        phone: that.data.phone,
+        share_by:wx.getStorageSync('shareBy')?wx.getStorageSync('shareBy'):'',
       };
       wx.request({
         url: app.globalData.domainUrl,
@@ -345,15 +413,16 @@ Page({
             content: info.message,
             showCancel: false,
             success: function (res) {
-              wx.setStorageSync('customerId', datas.c_id);
-              wx.setStorageSync('openid', datas.frozeno_openid);
-              wx.setStorageSync('memberNo', datas.c_number);  //会员号
-              wx.setStorageSync('level', datas.frozeno_level);  //等级
-              wx.setStorageSync('discount', datas.discount);  //折扣
-              wx.setStorageSync('sessionKey', datas.session_id);
-              wx.switchTab({
-                url: '/pages/home/home'
-              });
+              // wx.setStorageSync('customerId', datas.c_id);
+              // wx.setStorageSync('openid', datas.frozeno_openid);
+              // wx.setStorageSync('memberNo', datas.c_number);  //会员号
+              // wx.setStorageSync('level', datas.frozeno_level);  //等级
+              // wx.setStorageSync('discount', datas.discount);  //折扣
+              // wx.setStorageSync('sessionKey', datas.session_id);
+              // wx.switchTab({
+              //   url: '/pages/home/home'
+              // });
+              that.addStorage(datas);
             }
           });
         }

@@ -3,26 +3,26 @@
 <view class='page-pd size-titletwo col-content'>
 
 
-<view class='search-no' wx:if="{{!msgList}}">
-      <view> 
-        <image class='scimg' src='../../img/wu.png'></image>
-      </view>
-       <text>暂时没有消息~~</text>
-  </view>
+	<view class='search-no' wx:if="{{msgList.length <= 0}}">
+		<view>
+			<image class='scimg' src='../../img/wu.png'></image>
+		</view>
+		<text>暂时没有消息~~</text>
+	</view>
 
-  <view class='content'>
-    <view class="{{currentTab == 0 ? 'show':'hidden'}}">
-      <scroll-view>
-        <view class='news' wx:for="{{msgList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
-          <text>{{item.description}}</text>
-          <view class='bottom'>
-            <text wx:if="{{item.type == 1}}">系統消息</text>
-            <text wx:if="{{item.type == 2}}">其他消息</text>
-            <text>{{share.getDateDiff(item.created_at)}}</text>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
+	<view class='content'>
+		<view class="{{currentTab == 0 ? 'show':'hidden'}}">
+			<scroll-view>
+				<view class='news' wx:for="{{msgList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+					<text>{{item.description}}</text>
+					<view class='bottom'>
+						<text wx:if="{{item.type == 1}}">系統消息</text>
+						<text wx:if="{{item.type == 2}}">其他消息</text>
+						<text>{{share.getDateDiff(item.created_at)}}</text>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
 
-  </view>
+	</view>
 </view>

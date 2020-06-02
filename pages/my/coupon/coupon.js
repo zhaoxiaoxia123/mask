@@ -12,7 +12,8 @@ Page({
     offset: 1,
     pageCount: 20,
     isLast: false,
-    ticketList: []
+    ticketList: [],
+    show_amount: '' //需展示的新会员卡券兑换金额
   },
 
 
@@ -36,12 +37,14 @@ Page({
   onShow: function () {
     that.setData({
       ticketList: [],
+      show_amount:'',
       isLast: false
     });
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       var param = {
         page_code: "p013",
         customer_id: wx.getStorageSync('customerId'),
+        is_show_amount: 1,  //是否展示新会员卡券
         ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
@@ -71,7 +74,7 @@ Page({
 
   },
   onReachBottom: function () {
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       if (!that.data.isLast) {
         that.setData({
           offset: that.data.offset + 1
@@ -79,6 +82,7 @@ Page({
         var param = {
           page_code: "p013",
           customer_id: wx.getStorageSync('customerId'),
+          is_show_amount: 1,  //是否展示新会员卡券
           ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
           offset: (that.data.offset - 1) * that.data.pageCount,
           page: that.data.pageCount
@@ -98,12 +102,14 @@ Page({
         currentIndex: currentPageIndex,
         offset: 1,
         isLast: false,
-        ticketList: []
+        ticketList: [],
+      show_amount: '',
       });
-      if (wx.getStorageSync('customerId')) {
+      if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
         var param = {
           page_code: "p013",
           customer_id: wx.getStorageSync('customerId'),
+          is_show_amount: 1,  //是否展示新会员卡券
           ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
           offset: (that.data.offset - 1) * that.data.pageCount,
           page: that.data.pageCount
@@ -124,12 +130,14 @@ Page({
           currentIndex: e.currentTarget.dataset.idx,
           offset: 1,
           isLast: false,
-          ticketList: []
+          ticketList: [],
+          show_amount:'',
         })
-      if (wx.getStorageSync('customerId')) {
+      if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
         var param = {
           page_code: "p013",
           customer_id: wx.getStorageSync('customerId'),
+          is_show_amount: 1,  //是否展示新会员卡券
           ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
           offset: (that.data.offset - 1) * that.data.pageCount,
           page: that.data.pageCount
@@ -150,9 +158,10 @@ Page({
       success: function (res) {
         var datas = res.data.data;
         that.setData({
-          ticketList: that.data.ticketList.concat(datas)
+          ticketList: that.data.ticketList.concat(datas.ticket),
+          show_amount: datas.show_amount
         });
-        if (datas.length <= 0 || datas.length < that.data.pageCount) {
+        if (datas.ticket.length <= 0 || datas.ticket.length < that.data.pageCount) {
           that.setData({
             isLast: true
           });
@@ -161,9 +170,9 @@ Page({
     });
   },
   goOrder: function(e) {  //去购物车使用卡券
-    var ticketId = e.currentTarget.dataset.id;
+    // var ticketId = e.currentTarget.dataset.id;
     // console.log(ticketId);
-    app.globalData.ticketId = ticketId;
+    // app.globalData.ticketId = ticketId;
     wx.switchTab({
       url: '/pages/shopcat/shopcat',
     })

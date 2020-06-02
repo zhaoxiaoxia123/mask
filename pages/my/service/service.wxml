@@ -3,7 +3,7 @@
     <image class="grade-img" mode="widthFix" src="{{domainName}}{{item[0].s_image_url}}"></image>
   </view>
 </view>
-<web-view src="https://mp.weixin.qq.com/s/1eHAl1mx6-MPsTdtQTuCEw"></web-view>
+<!-- <web-view src="https://mp.weixin.qq.com/s/1eHAl1mx6-MPsTdtQTuCEw"></web-view> -->
 <!-- 声明需要使用的模板文件 -->
 <import src ="../../template/template.wxml"/>
 <view class='item' bindtap='ftservice' data-item='{{ftserviceflexwindow}}'>

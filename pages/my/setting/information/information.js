@@ -35,7 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
@@ -82,7 +82,7 @@ Page({
 
   bindDateChange: function (e) {
     
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
     let value = e.detail.value;
     console.log('picker发送选择改变，携带值为', e.detail.value)
     let param = {
@@ -112,7 +112,7 @@ Page({
     }else{
       wx.showToast({
         icon: "none",
-        title: '请授权登录后再修改生日',
+        title: '请完成授权后再修改生日',
       })
     }
   },

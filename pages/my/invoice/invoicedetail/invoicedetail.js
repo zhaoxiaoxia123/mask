@@ -142,7 +142,7 @@ Page({
   },
   //删除发票信息
   deleteInvoice:function(){
-    if (wx.getStorageSync('customerId')) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       wx.showModal({
         title: '提示',
         content: '你确定要删除该发票信息？',
@@ -181,14 +181,14 @@ Page({
     } else {
       wx.showModal({
         title: '提示',
-        content: '授权登录后再编辑信息。',
+        content: '请完成授权后再编辑信息。',
         showCancel: false
       });
     }
   },
   //提交发票信息
   submitInvoice: function () {
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     var param = {
       page_code: "p006",
       type: "edit",
@@ -223,7 +223,7 @@ Page({
     } else {
       wx.showModal({
         title: '提示',
-        content: '授权登录后再编辑信息。',
+        content: '请完成授权后再编辑信息。',
         showCancel: false
       });
     }

@@ -43,11 +43,15 @@ var filter = {
     var re = str.replace(reg, ".");
     // console.log(re);
     return re;
+  },
+  toFix: function (value) {
+    return value.toFixed(1) // 此处2为保留两位小数，保留几位小数，这里写几
   }
 }
 
 module.exports = {
   getDateDiff: filter.getDateDiff,
-  dateFormat: filter.dateFormat
+  dateFormat: filter.dateFormat,
+  toFix: filter.toFix
 }
 

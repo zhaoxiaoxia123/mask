@@ -78,7 +78,7 @@ Page({
 
   },
   getAddressList: function(){
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     // var param = '/p002?customer_id='+wx.getStorageSync('customerId');
     wx.request({
       url: app.globalData.domainUrl,
@@ -100,7 +100,7 @@ Page({
     }else{
       wx.showModal({
         title: '提示',
-        content: '请授权登录后再查看列表',
+        content: '请完成授权后再查看列表',
         showCancel: false
       });
     }

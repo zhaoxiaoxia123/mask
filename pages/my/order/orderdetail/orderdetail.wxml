@@ -93,8 +93,8 @@
         <!-- <view class='push '>查看物流</view> -->
         <view class='push' bindtap="cancelOrder" wx:if="{{items[0].frozeno_order_state == 1 || items[0].frozeno_order_state == 2}}">取消订单</view>
         <view class='push push-active' bindtap="confirm" wx:if="{{items[0].frozeno_order_state == 3}}">确认收货</view>
-        <view class='push push-active' bindtap="payOrder" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view>
-        <!-- <view class='push push-active' bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view> -->
+        <!-- <view class='push push-active' bindtap="payOrder" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view> -->
+        <view class='push push-active' bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view>
         
       </view>
     </view>

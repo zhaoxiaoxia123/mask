@@ -31,7 +31,6 @@
           <text>您还没有相关订单~~</text>
         </view>
 
-
         <view class='lists'>
           <!--bindtap绑定事件 待付款-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
@@ -49,7 +48,6 @@
               <view class='list-left'>
                 <image src='{{domainName}}{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
               </view>
-
               <view class='list-right size-titleone '>
                 <view class='column '>
                   <view class='right-text'>{{item1.category_desc}}</view>

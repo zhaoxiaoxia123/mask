@@ -12,16 +12,10 @@ Page({
     business_id1: 0,
     items:[],
     isLogin:false,
-    canGetUserInfo: false,
-    // showModal: false,
     qrcode: '',
-    // pageData: {
-    //   ftserviceflexwindow: false,
-    //   imgService: "option"
-    // }
     ftserviceflexwindow: false,
-    // imgService: '../img/service@2x.png',
     domainName: app.globalData.domainName,
+    level:0
   },
 
   /**
@@ -30,7 +24,7 @@ Page({
   onLoad: function (options) {
     that = this;
     that.setData({
-      canGetUserInfo:app.globalData.canGetUserInfo
+      level:wx.getStorageSync('level')
     });
     
   },
@@ -52,7 +46,7 @@ Page({
         selected: 3
       })
     }
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
         page_code:'p004',
         type:"mainCustomer",
@@ -62,12 +56,11 @@ Page({
       };
       // var param = '/p004?type=mainCustomer&has_ticket_count=true&has_order_count=true&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
-      app.globalData.canGetUserInfo = false;
+
       that.setData({
-        canGetUserInfo: app.globalData.canGetUserInfo,
         isLogin: false
       });
-    }else{
+    } else{
       that.setData({
         isLogin: true
       });
@@ -89,7 +82,7 @@ Page({
         },
         success: function (res) {
           let qr = res.data.data;
-          if (qr.indexOf("http") >= 0) {
+          if (qr && qr.indexOf("http") >= 0) {
             that.setData({
               qrcode: res.data.data
             });
@@ -204,7 +197,7 @@ Page({
    * ***/
   order: function (e) {
     console.log(e)
-    if (wx.getStorageSync('customerId')){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var orderId = e.currentTarget.dataset.id;
       wx.navigateTo({
         url: '../my/order/order?id=' + orderId,
@@ -212,7 +205,7 @@ Page({
     }else{
       wx.showModal({
         title: '提示',
-        content: '请授权登录后再查看订单列表',
+        content: '请完成授权后再查看订单列表',
         showCancel: false
       });
     }
@@ -250,6 +243,27 @@ Page({
   setting: function (e) {
     wx.navigateTo({
       url: '../my/setting/setting'
+    })
+  },
+  shareApp: function (e) {   //邀请好友
+    if (wx.getStorageSync('level') <= 1) {
+      wx.showToast({
+        icon: "info",
+        title: '无法邀请好友。'
+      })
+    }
+  },
+  //前往工作台
+  goWorkBench:function(){
+    wx.navigateToMiniProgram({
+      appId: 'wx11bfdef5fa29322d',
+      path: 'pages/home/home',
+      envVersion: 'release',// 打开正式版
+      success(res) {
+      },
+      fail: function (err) {
+        console.log(err);
+      }
     })
   },
   // shareApp:function(e) {   //邀请好友

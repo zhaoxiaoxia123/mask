@@ -37,7 +37,7 @@
               <view class="box">
                 <view class="money">
                   <view class="money-text">
-                    <text class="money-small">¥</text>{{item.ticket_amount}}
+                    <text class="money-small">¥</text>{{item.ticket_amount > 0?item.ticket_amount:'400/800'}}
                   </view>
                 </view>
                 <view class='co'>

@@ -55,7 +55,7 @@ Page({
     that.setData({
       items:[]
     });
-    if (wx.getStorageSync('customerId') && that.data.items.length <= 0) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info') && that.data.items.length <= 0) {
       var param_s = {
         page_code: 'p012',
         type: "shopping_list",
