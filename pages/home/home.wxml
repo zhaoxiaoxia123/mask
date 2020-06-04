@@ -96,9 +96,23 @@
   <template is="service" data="{{ftserviceflexwindow}}" />
 </view>
 
-<!-- 引导页 -->
- <view class="just1 {{storeflexwindow==true?'': 'y'}}" bindtap='close3'>
-  <view class="guide">
-    <image class="guide-img" mode="widthFix" src="../img/guide1.png"></image>
+<!-- 引导页分两步 -->
+ <view class="just1 {{storeflexwindow==true?'': 'y'}}" >
+  <!-- <view class="guide">
+    <view class="guide-item" style="padding-top:20rpx;padding:20rpx;">
+      <image class="guide-img" mode="widthFix" src="../img/guide-t@2x.png"></image>
+    </view>
+    <view class="guide-ft">
+        <view class="guide-btn" bindtap='close3'>下一步 1/2</view>
+    </view>
+  </view> -->
+  <view class="guide ">
+    <view class="guide-item guide-s" >
+      <image class="guide-simg" mode="widthFix" src="../img/guide-s@2x.png"></image>
+    </view>
+    <view class="guide-ft guide-sft">
+        <view class="guide-btn" bindtap='close3'>知道啦 2/2</view>
+    </view>
   </view>
+    
 </view>

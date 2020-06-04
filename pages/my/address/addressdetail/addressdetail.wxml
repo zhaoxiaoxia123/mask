@@ -1,44 +1,79 @@
-<view class='size-titletwo col-content'>
-  <view class='column bg-box'>
-    <label>姓名</label>
-    <input placeholder='请输入姓名' bindinput="setNameInput" bindconfirm="search" value='{{name}}'></input>
+<view class="size-titletwo col-content">
+  <view class="bg-box column">
+    <view class="column-form">
+      <label>姓名</label>
+      <input placeholder='请输入姓名' bindinput="setNameInput" bindconfirm="search" value='{{name}}'></input>
+    </view>
+    <view class="column-text">
+        收货人姓名长度需要在2-25个字符之间，不能包含非法字符
+    </view>
+    
   </view>
   <view class='column bg-box'>
-    <label>手机号</label>
-    <input placeholder='请输入十一位手机号码' type="number" bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}' maxlength="11"></input>
+    <view class="column-form">
+      <label>手机号码</label>
+      <input placeholder='请输入手机号码' type="number" bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}' maxlength="11"></input>
+    </view>
+    <view class="column-text">
+        手机号码为十一位，格式不对，请重新输入
+    </view>
+    
   </view>
   <view class='column bg-box'>
-    <label>所在地区</label>
-    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-      <view class="picker">
-        {{region[0]}}，{{region[1]}}，{{region[2]}}
-      </view>
+     <view class="column-form">
+        <label>所在地区</label>
+        <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+          <view class="picker">
+            选择地址{{region[0]}}，{{region[1]}}，{{region[2]}}
+          </view>
     </picker>
+    </view>
+    <view class="column-text">
+        请选择所在地区
+    </view>
   </view>
   <view class='column bg-box'>
-    <label>邮编</label>
-    <input placeholder='请输入邮编' type="number" bindinput="setZipInput" value='{{zip}}'></input>
+    <view class="column-form">
+      <label>邮编</label>
+      <input placeholder='请输入邮编' type="number" bindinput="setZipInput" value='{{zip}}'></input>
+    </view>
   </view>
   <view class='column bg-box'>
-    <label>地址</label>
-    <textarea class='address' placeholder='请输入地址' bindinput="setAddressInput" value='{{address}}'></textarea>
+    <view class="column-form">
+      <label>详细地址</label>
+      <textarea class='address' placeholder='请输入地址' bindinput="setAddressInput" value='{{address}}'></textarea>
+    </view>
+    <view class="column-text">
+        详细地址长度需要在5-120个字符之间，不能包含非法字符
+    </view>
+   
   </view>
   <view class='column bg-box'>
-    <label style='width:100px;'>设为默认地址</label>
-    <radio color='#262626' checked='{{is_default==true}}' bindtap='radiocon'></radio>
+      <view class="column-form">
+        <label style='width:100px;'>设为默认地址</label>
+        <radio color='#262626' checked='{{is_default==true}}' bindtap='radiocon'></radio>
+      </view>
   </view>
   <view class='column bg-box' wx:if="{{addressId != 0}}" data-type="del" data-index="{{index}}" data-id="{{item.customer_addr_id}}" bindtap='deleteAddress'>
-    <text class="address-delete">删除</text>
+    <view class="column-form">
+      <text class="address-delete">删除</text>
+    </view>
   </view>
 </view>
-<!-- <view class='page-pd '>
-  <view class="bottom bg-box size-titletwo col-title">
-    <view class="bottom-operate button" bindtap="submitAddress">确认</view>
-  </view>
-</view> -->
+  <!-- 提示消息
+  姓名：收货人姓名长度需要在2-25个字符之间，不能包含非法字符
+  手机号码：手机号码为十一位，格式不对，请重新输入
+  所在地区：请选择所在地区
+  详细地址：详细地址长度需要在5-120个字符之间，不能包含非法字符
+ 保存成功 -->
   <view class="ft-bottom ">
     <view class="ft-bottom-box">
-      <view class="ft-bottom-operate ft-button" bindtap='submitAddress' wx:if="{{isClick}}">确认</view>
-      <view class="ft-bottom-operate ft-button" wx:if="{{!isClick}}">确认</view>
+      <view class="ft-bottom-operate ft-button"   bindtap="toast3Tap">保存</view>
     </view>   
   </view>
+  <!-- <view class="ft-bottom ">
+    <view class="ft-bottom-box">
+      <view class="ft-bottom-operate ft-button"  bindtap='submitAddress' wx:if="{{isClick}}">保存</view>
+      <view class="ft-bottom-operate ft-button" wx:if="{{!isClick}}">保存</view>
+    </view>   
+  </view> -->
