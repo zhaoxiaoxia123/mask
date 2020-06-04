@@ -9,7 +9,6 @@ Page({
   data: {
     phone:'',
     code:'',
-    verifyCode:'',
     showModal: false,
     isSubmit:false,
     isShareBy: false,   //是否通过邀请码注册
@@ -20,7 +19,8 @@ Page({
     isPhoneClick:true, // 手机授权按钮是否可点击
     isUserInfoClick:true, // 获取用户信息按钮是否可点击
     timer: '',//定时器名字
-    countNum: '10'  //倒计时初始值
+    countNum: '10',  //倒计时初始值
+    sessId:'',  //存储手机验证码的sessionid
   },
 
   /**
@@ -336,6 +336,7 @@ Page({
       get_user_info : wx.getStorageSync("get_user_info"), //是否继续获取用户信息
       get_phone_info : wx.getStorageSync('get_phone_info'),    //是否继续获取手机信息
     });
+    
     if(!wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.switchTab({
         url: '/pages/home/home',
@@ -351,23 +352,28 @@ Page({
   },
 
   setCodeInput: function (e) {
-    var value = e.detail.value;
+    let value = that.validateNumber(e.detail.value)
+    console.log(value);
     that.setData({
-      code: e.detail.value
+      code:value
     })
     that.setbuttonStatus();
   },
   setPhoneInput: function (e) {
-    var value = e.detail.value;
+    let value = that.validateNumber(e.detail.value)
+    console.log(value);
     that.setData({
-      phone: e.detail.value
+      phone:value
     })
     that.setbuttonStatus();
+  },
+  validateNumber(val) {
+    return val.replace(/\D/g, '')
   },
   //返回按钮状态来 是否可以找回密码
   setbuttonStatus: function () {
     console.log('setbuttonStatus:----');
-    if (that.data.phone.length == 11 && that.data.verifyCode.length > 1 && that.data.code == that.data.verifyCode) {
+    if (that.data.phone.length == 11 && that.data.code.length == 4 ) {
       that.setData({
         isSubmit: true
       })
@@ -400,7 +406,7 @@ Page({
           console.log(datas);
           if (ret.code == 200){
             that.setData({
-              verifyCode: datas.verify_code
+              sessId:datas.sess_id
             });
           }else{
             wx.showToast({
@@ -448,6 +454,8 @@ Page({
         page_code: "p010",
         type: 'loginByPhone',
         phone: that.data.phone,
+        code: that.data.code,
+        sess_id: that.data.sessId,
         share_by:wx.getStorageSync('shareBy')?wx.getStorageSync('shareBy'):'',
       };
       wx.request({
@@ -465,16 +473,9 @@ Page({
             content: info.message,
             showCancel: false,
             success: function (res) {
-              // wx.setStorageSync('customerId', datas.c_id);
-              // wx.setStorageSync('openid', datas.frozeno_openid);
-              // wx.setStorageSync('memberNo', datas.c_number);  //会员号
-              // wx.setStorageSync('level', datas.frozeno_level);  //等级
-              // wx.setStorageSync('discount', datas.discount);  //折扣
-              // wx.setStorageSync('sessionKey', datas.session_id);
-              // wx.switchTab({
-              //   url: '/pages/home/home'
-              // });
-              that.addStorage(datas);
+              if (info.code == 200){
+                that.addStorage(datas);
+              }
             }
           });
         }

@@ -41,10 +41,10 @@
     </view>
     <view class="mod-content col-content">
       <view class="t1">
-        <input class="use" placeholder='请输入手机号' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}'></input>
+        <input class="use" placeholder='请输入手机号' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}' maxlength="11"></input>
       </view>
       <view class="t1 space-between">
-        <input class="use" placeholder='请输入验证码' bindinput="setCodeInput" bindconfirm="search" value='{{code}}'></input>
+        <input class="use" placeholder='请输入验证码' bindinput="setCodeInput" bindconfirm="search" value='{{code}}' maxlength="4"></input>
         <view class="bottom-operate button" bindtap='sendCode' wx:if="{{isVerifyClick}}">获取验证码</view>
         <view class="bottom-operate button" wx:if="{{!isVerifyClick}}">倒计时<text style='color:red'>{{countNum}}</text>s</view>
       </view>

@@ -124,9 +124,9 @@ Page({
     that.hasClick();
   },
   setZipInput: function (e) {
-    let value = this.validateNumber(e.detail.value)
+    let value = that.validateNumber(e.detail.value)
     console.log(value);
-    this.setData({
+    that.setData({
       zip:value
     })
     that.hasClick();
@@ -228,39 +228,39 @@ Page({
         });
         return false;
       }
-    var param = {
-      page_code:'p002',
-      type:"editAddress",
-      name: that.data.name,
-      phone: that.data.phone,
-      zip: that.data.zip,
-      province: that.data.region[0],
-      city: that.data.region[1],
-      area: that.data.region[2],
-      address: that.data.address,
-      is_default: that.data.is_default?1:0,
-      customer_id:wx.getStorageSync('customerId'),
-      customer_addr_id: that.data.addressId
-    };
-    console.log(param);
-    wx.request({
-      url: app.globalData.domainUrl,
-      method: "POST",
-      data: param,
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        console.log(res);
-        var datas = res.data.data;
-        that.setClickState(true);
-        if (datas){
-          wx.navigateBack({
-            delta:1
-          });
+      var param = {
+        page_code:'p002',
+        type:"editAddress",
+        name: that.data.name,
+        phone: that.data.phone,
+        zip: that.data.zip,
+        province: that.data.region[0],
+        city: that.data.region[1],
+        area: that.data.region[2],
+        address: that.data.address,
+        is_default: that.data.is_default?1:0,
+        customer_id:wx.getStorageSync('customerId'),
+        customer_addr_id: that.data.addressId
+      };
+      console.log(param);
+      wx.request({
+        url: app.globalData.domainUrl,
+        method: "POST",
+        data: param,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        success: function (res) {
+          console.log(res);
+          var datas = res.data.data;
+          that.setClickState(true);
+          if (datas){
+            wx.navigateBack({
+              delta:1
+            });
+          }
         }
-      }
-    })
+      })
     }else{
       wx.showModal({
         title: '提示',
