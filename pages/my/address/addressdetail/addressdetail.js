@@ -207,8 +207,19 @@ Page({
       });
     }
   },
-
-
+  // 提示消息
+  // 姓名：收货人姓名长度需要在2-25个字符之间，不能包含非法字符
+  // 手机号码：手机号码为十一位，格式不对，请重新输入
+  // 所在地区：请选择所在地区
+  // 详细地址：详细地址长度需要在5-120个字符之间，不能包含非法字符
+  // 保存成功
+  toast3Tap: function () {
+    wx.showToast({
+      title: "收货人姓名长度需要在2-25个字符之间，不能包含非法字符",
+      icon: "none",
+      duration: 5000
+    })
+  },
   //提交地址信息
   submitAddress: function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
@@ -216,14 +227,14 @@ Page({
       if (!that.data.name){
         wx.showModal({
           title: '提示',
-          content: '请填写收件人.',
+          content: '收货人姓名长度需要在2-25个字符之间，不能包含非法字符.',
           showCancel: false
         });
         return false;
       } else if (!that.data.phone){
         wx.showModal({
           title: '提示',
-          content: '请填写收件人手机号.',
+          content: '手机号码为十一位，格式不对，请重新输入.',
           showCancel: false
         });
         return false;

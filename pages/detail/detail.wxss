@@ -416,11 +416,11 @@ display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding:20rpx;
+  padding:10rpx;
 }
 .topbar-tab{
   width: auto;
-  padding: 20rpx;
+  padding: 10rpx;
 }
 
 .active {

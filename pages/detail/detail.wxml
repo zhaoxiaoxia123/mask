@@ -40,13 +40,16 @@
     <view class="topbar">
       <view class="topbar-top">
         <view class="topbar-text" bindtap="clickTab"  data-current="0" >
-          <view class="topbar-tab  {{currentTab=='0'?'active':''}} " >商品详情</view>
+          <view class="topbar-tab  {{currentTab=='0'?'active':''}} " >商品</view>
         </view>
         <view class="topbar-text" bindtap="clickTab"  data-current="1">
-          <view class="topbar-tab  {{currentTab=='1'?'active':''}} " >产品认证</view>
+          <view class="topbar-tab  {{currentTab=='1'?'active':''}} " >详情</view>
         </view>
         <view class="topbar-text" bindtap="clickTab"  data-current="2">
-          <view class="topbar-tab  {{currentTab=='2'?'active':''}} " >关于我们</view>
+          <view class="topbar-tab  {{currentTab=='2'?'active':''}} " >认证</view>
+        </view>
+        <view class="topbar-text" bindtap="clickTab"  data-current="3">
+          <view class="topbar-tab  {{currentTab=='2'?'active':''}} " >关于</view>
         </view>
       </view>
     </view>

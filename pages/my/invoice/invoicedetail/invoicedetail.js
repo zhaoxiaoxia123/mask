@@ -160,8 +160,17 @@ setClickState:function(value){
 validateNumber(val) {
   return val.replace(/\D/g, '')
 },
-
-  //删除发票信息
+//  提示消息
+//  单位名称：请输入单位名称
+//  税号：纳税人识别号错误，请检查重新输入
+//  保存成功
+  toast3Tap: function () {
+    wx.showToast({
+      title: "请输入单位名称",
+      icon: "none",
+      duration: 5000
+    })
+  },  //删除发票信息
   deleteInvoice:function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       wx.showModal({

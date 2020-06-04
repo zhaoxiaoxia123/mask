@@ -357,3 +357,34 @@ display: none;
 .guide-img{
   width:100%;
 }
+.guide-ft{
+  display: flex;
+  justify-content: center;
+}
+.guide-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:200rpx;
+  border-radius: 10rpx;
+  border:2px solid #fff;
+  color:#fff;
+  padding:20rpx;
+}
+.guide-s{
+  position:fixed;
+  bottom:90rpx;
+  right:20rpx;
+  display: block;
+}
+.guide-sft{
+  position:fixed;
+  bottom:20rpx;
+  margin:auto;
+  left:0;
+  right:0;
+}
+.guide-simg{
+  width:700rpx;
+  height:830rpx;
+}

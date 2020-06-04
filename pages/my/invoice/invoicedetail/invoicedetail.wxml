@@ -1,41 +1,75 @@
 <view class='size-titletwo col-content'>
+<!-- 必填项：单位名称、税号
+单位名称规则：字符5-120个字符之间 -->
   <view class='column bg-box'>
-    <label>名称</label>
-    <input placeholder='请输入名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}'></input>
+    <view class="column-form">
+      <label>单位名称</label>
+      <input placeholder='请输入单位名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}'></input>
+    </view>
+    <view class="column-text">
+        请输入单位名称
+    </view>
+
+  </view>
+<!-- 税号规则：15位、18或者20位码（字符型）组成 -->
+  <view class='column bg-box'>
+    <view class="column-form">
+      <label>税号</label>
+      <input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}'></input>
+    </view>
+    <view class="column-text">
+        纳税人识别号错误，请检查重新输入
+    </view>
   </view>
 
   <view class='column bg-box'>
-    <label>税号</label>
-    <input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}'></input>
+    <view class="column-form">
+      <label>单位地址</label>
+      <input placeholder='请输入地址' bindinput="setAddressInput" bindconfirm="search" value='{{address}}'></input>
+    </view>
   </view>
 
   <view class='column bg-box'>
-    <label>单位地址</label>
-    <input placeholder='请输入地址' bindinput="setAddressInput" bindconfirm="search" value='{{address}}'></input>
+    <view class="column-form">
+        <label>电话号码</label>
+      <input placeholder='请输入手机号码' type="number" bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}' maxlength="11"></input>  
+    </view>
+
   </view>
 
   <view class='column bg-box'>
-    <label>电话号码</label>
-    <input placeholder='请输入十一位手机号码' type="number" bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}' maxlength="11"></input>
+    <view class="column-form">
+        <label>开户银行</label>
+      <input placeholder='请输入开户银行' bindinput="setBankInput" bindconfirm="search" value='{{bank}}'></input>  
+    </view>
   </view>
 
   <view class='column bg-box'>
-    <label>开户银行</label>
-    <input placeholder='请输入开户银行' bindinput="setBankInput" bindconfirm="search" value='{{bank}}'></input>
-  </view>
+    <view class="column-form">
+      <label>银行账户</label>
+      <input placeholder='请输入银行账户' type="number" bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}' maxlength="19"></input>
+    </view>
 
-  <view class='column bg-box'>
-    <label>银行账户</label>
-    <input placeholder='请输入银行账户' type="number" bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}' maxlength="19"></input>
   </view>
 
   <view class='column bg-box' wx:if="{{invoiceId != 0}}" data-type="delete" data-index="{{index}}" data-id="{{item.invoice_id}}" bindtap='deleteInvoice'>
-    <text class="address-delete">删除</text>
+    <view class="column-form">
+      <text class="address-delete">删除</text>
+    </view>
   </view>
 </view>
-<view class="ft-bottom ">
+  <!-- 提示消息
+ 单位名称：请输入单位名称
+  税号：纳税人识别号错误，请检查重新输入
+ 保存成功 -->
+   <view class="ft-bottom ">
+    <view class="ft-bottom-box">
+      <view class="ft-bottom-operate ft-button"   bindtap="toast3Tap">保存</view>
+    </view>   
+  </view>
+<!-- <view class="ft-bottom ">
   <view class="ft-bottom-box">
     <view class="ft-bottom-operate ft-button" bindtap='submitInvoice' wx:if="{{isClick}}">确认</view>
     <view class="ft-bottom-operate ft-button" wx:if="{{!isClick}}">确认</view>
   </view>
-</view>
+</view> -->

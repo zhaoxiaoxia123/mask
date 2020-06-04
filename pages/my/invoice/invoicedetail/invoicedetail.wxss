@@ -1,11 +1,17 @@
 
 .column{
+  margin-bottom: 10rpx;
+  padding: 30rpx 20rpx;
+}
+.column-form{
   display: flex;
   flex-direction: row; 
   /* text-align: end; */
   justify-content: space-between;
-  margin-bottom: 10rpx;
-  padding: 30rpx 20rpx;
+}
+.column-text{
+  color:#dd2525;
+  font-size:0.8rem;
 }
 .end{
    display: flex;
@@ -65,5 +71,8 @@ input{
   margin:20rpx;
   color:#fff;
   font-size: 1rem;
+}
+.ft-bottom-operate:hover{
+  background:#d5ae51;
 }
 
