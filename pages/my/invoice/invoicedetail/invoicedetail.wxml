@@ -16,7 +16,7 @@
 
   <view class='column bg-box'>
     <label>电话号码</label>
-    <input placeholder='请输入电话号码' bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}'></input>
+    <input placeholder='请输入十一位手机号码' type="number" bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}' maxlength="11"></input>
   </view>
 
   <view class='column bg-box'>
@@ -26,7 +26,7 @@
 
   <view class='column bg-box'>
     <label>银行账户</label>
-    <input placeholder='请输入银行账户' bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}'></input>
+    <input placeholder='请输入银行账户' type="number" bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}' maxlength="19"></input>
   </view>
 
   <view class='column bg-box' wx:if="{{invoiceId != 0}}" data-type="delete" data-index="{{index}}" data-id="{{item.invoice_id}}" bindtap='deleteInvoice'>
@@ -35,6 +35,7 @@
 </view>
 <view class="ft-bottom ">
   <view class="ft-bottom-box">
-    <view class="ft-bottom-operate ft-button" bindtap='submitInvoice'>确认</view>
+    <view class="ft-bottom-operate ft-button" bindtap='submitInvoice' wx:if="{{isClick}}">确认</view>
+    <view class="ft-bottom-operate ft-button" wx:if="{{!isClick}}">确认</view>
   </view>
 </view>

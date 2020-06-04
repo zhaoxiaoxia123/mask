@@ -14,6 +14,7 @@ Page({
     address: '',
     bank: '',
     bankccount: '',
+    isClick:false
   },
 
   /**
@@ -103,43 +104,63 @@ Page({
 
   },
   setUsernameInput: function (e) {
-    var value = e.detail.value;
     that.setData({
       username: e.detail.value
     })
+    that.hasClick();
   },
-  setPhoneInput: function (e) {
-    var value = e.detail.value;
-    that.setData({
-      phone: e.detail.value
+  setPhoneInput: function (e) { 
+    let value = this.validateNumber(e.detail.value)
+    console.log(value);
+    this.setData({
+      phone:value
     })
+    that.hasClick();
   },
   setAddressInput: function (e) {
-    var value = e.detail.value;
     that.setData({
       address: e.detail.value
     })
+    that.hasClick();
   },
   setTaxNumberInput: function (e) {
-    var value = e.detail.value;
     that.setData({
       taxNumber: e.detail.value
     })
+    that.hasClick();
   },
-
   setBankInput: function (e) {
-    var value = e.detail.value;
     that.setData({
       bank: e.detail.value
     })
+    that.hasClick();
   },
-
   setBankAccountInput: function (e) {
-    var value = e.detail.value;
-    that.setData({
-      bankAccount: e.detail.value
+    let value = this.validateNumber(e.detail.value)
+    console.log(value);
+    this.setData({
+      bankAccount:value
     })
+    that.hasClick();
   },
+//所有值存在才让确认按钮可点击
+hasClick:function(){
+  if(that.data.name && that.data.phone && that.data.address && that.data.zip && that.data.region){
+    that.setClickState(true);
+  }else {
+    that.setClickState(false);
+  }
+},
+//是否让确认按钮可点击
+setClickState:function(value){
+  that.setData({
+    isClick:value
+  });
+},
+validateNumber(val) {
+  return val.replace(/\D/g, '')
+},
+
   //删除发票信息
   deleteInvoice:function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
@@ -189,6 +210,7 @@ Page({
   //提交发票信息
   submitInvoice: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      that.setClickState(false);
     var param = {
       page_code: "p006",
       type: "edit",
@@ -212,6 +234,7 @@ Page({
       success: function (res) {
         console.log(res);
         var datas = res.data.data;
+        that.setClickState(true);
         if (datas) {
           wx.navigateBack({
             delta: 1

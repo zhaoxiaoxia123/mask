@@ -16,6 +16,11 @@ Page({
     shareBy: '',   //邀请码
     get_user_info:false,   //是否继续获取用户信息
     get_phone_info:false,  //是否继续获取手机信息
+    isVerifyClick:true, // 获取验证码按钮是否可点击
+    isPhoneClick:true, // 手机授权按钮是否可点击
+    isUserInfoClick:true, // 获取用户信息按钮是否可点击
+    timer: '',//定时器名字
+    countNum: '10'  //倒计时初始值
   },
 
   /**
@@ -63,14 +68,16 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log('onHide');
+    clearInterval(that.data.timer);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    console.log('unload');
+    clearInterval(that.data.timer);
   },
 
   /**
@@ -94,6 +101,24 @@ Page({
 
   },
 
+  //获取验证码按钮是否可点击
+  setVerifyClickState:function(value){
+    that.setData({
+      isVerifyClick:value
+    });
+  },
+  //手机授权按钮是否可点击
+  setPhoneClickState:function(value){
+    that.setData({
+      isPhoneClick:value
+    });
+  },
+  // 获取用户信息按钮是否可点击
+  setUserInfoClickState:function(value){
+    that.setData({
+      isUserInfoClick:value
+    });
+  },
   // bindGetUserInfo: function () {
   //   console.log('userInfo');
   //   if (!app.globalData.code) {
@@ -116,12 +141,13 @@ Page({
   // wxGetUserInfo:function(){
     
   bindGetUserInfo: function () {
+    // wx.checkSession({
+    //   success: function (res) {
     wx.login({
       success: r => {
         app.globalData.code = r.code;  //无权，显示向用户获取权限
-        // that.wxGetUserInfo();
-
       wx.getUserInfo({
+        withCredentials:true,
         success: function (res) {
           console.log("getUserInfo:-----");
           console.log(res);
@@ -140,12 +166,19 @@ Page({
             openid:wx.getStorageSync('openid')?wx.getStorageSync('openid'):'',
             unionid:wx.getStorageSync('unionid')?wx.getStorageSync('unionid'):'',
             sessionid:wx.getStorageSync('sessionKey')?wx.getStorageSync('sessionKey'):'',
-            // encryptedData:res.encryptedData, 
-            // iv:res.iv,
+            encryptedData:res.encryptedData, 
+            iv:res.iv,
             share_by: that.data.shareBy,
           });
         }
       });
+    // },fail:function(){
+      // wx.login({
+      //   success: r => {
+      //     app.globalData.code = r.code;  //无权，显示向用户获取权限
+      //     that.bindGetUserInfo();
+      //   }
+      // });
     }
   })
   },
@@ -283,7 +316,6 @@ Page({
     });
   },
 
-
   addStorage: function(datas){
     wx.setStorageSync('get_user_info', datas.get_user_info);//是否需要继续授权获取用户信息
     wx.setStorageSync('get_phone_info', datas.get_phone_info);//是否需要继续授权获取手机信息
@@ -349,6 +381,8 @@ Page({
     var phoneNum = that.data.phone;
     var str = /^1\d{10}$/;
     if (str.test(phoneNum)) {
+      that.setVerifyClickState(false);
+      that.intervalTimer();//开始倒计时
       wx.request({
         url: app.globalData.domainUrl,
         method: "POST",
@@ -364,7 +398,6 @@ Page({
           var ret = res.data;
           var datas = ret.data;
           console.log(datas);
-          
           if (ret.code == 200){
             that.setData({
               verifyCode: datas.verify_code
@@ -383,6 +416,25 @@ Page({
         title: '手机号不正确'
       })
     }
+  },
+
+  intervalTimer: function () {
+    let countNum = that.data.countNum;
+    that.setData({
+      timer: setInterval(function () {
+        countNum--;
+        that.setData({
+          countNum: countNum
+        })
+        if (countNum == 0) {
+          clearInterval(that.data.timer);
+          that.setVerifyClickState(true);
+          that.setData({
+            countNum: 10
+          })
+        }
+      }, 1000)
+    })
   },
 
   loginTo: function () {
@@ -434,6 +486,8 @@ Page({
     that.setData({
       showModal: false
     });
+    clearInterval(that.data.timer);
+    that.setVerifyClickState(true);
   },
 
   goPage:function(e){

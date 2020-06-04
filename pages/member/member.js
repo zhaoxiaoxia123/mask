@@ -143,6 +143,10 @@ Page({
         that.setData({
           items: res.data.data
         });
+        if(that.data.items && res.data.code == 200){
+          wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
+          wx.setStorageSync('discount', that.data.items.discount);  //折扣
+        }
       }
     });
   },

@@ -12,7 +12,8 @@ Page({
     zip: '',
     address: '',
     is_default: false,
-    region: ['四川省', '成都市', '成华区']
+    region: ['四川省', '成都市', '锦江区'],
+    isClick:false
   },
 
   /**
@@ -103,33 +104,38 @@ Page({
 
   },
   setNameInput: function(e) {
-    var value = e.detail.value;
     that.setData({
       name: e.detail.value
     })
+    that.hasClick();
   },
   setPhoneInput: function (e) {
-    var value = e.detail.value;
-    that.setData({
-      phone: e.detail.value
-    })
+    let value = this.validateNumber(e.detail.value)
+    console.log(value);
+      this.setData({
+        phone:value
+      })
+    that.hasClick();
   },
   setAddressInput: function (e) {
-    var value = e.detail.value;
     that.setData({
       address: e.detail.value
     })
+    that.hasClick();
   },
   setZipInput: function (e) {
-    var value = e.detail.value;
-    that.setData({
-      zip: e.detail.value
+    let value = this.validateNumber(e.detail.value)
+    console.log(value);
+    this.setData({
+      zip:value
     })
+    that.hasClick();
   },
   bindRegionChange: function(e) {
     that.setData({
       region: e.detail.value
     })
+    that.hasClick();
   },
   radiocon: function (e) {
     var is_default = that.data.is_default;
@@ -137,6 +143,24 @@ Page({
       is_default: !that.data.is_default
     });
     console.log(is_default);
+  },
+  //所有值存在才让确认按钮可点击
+  hasClick:function(){
+    if(that.data.name && that.data.phone && that.data.address && that.data.zip && that.data.region){
+      that.setClickState(true);
+    }else {
+      that.setClickState(false);
+    }
+  },
+  
+  //是否让确认按钮可点击
+  setClickState:function(value){
+    that.setData({
+      isClick:value
+    });
+  },
+  validateNumber(val) {
+    return val.replace(/\D/g, '')
   },
   //删除地址信息
   deleteAddress: function () {
@@ -184,9 +208,11 @@ Page({
     }
   },
 
+
   //提交地址信息
   submitAddress: function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+        that.setClickState(false);
       if (!that.data.name){
         wx.showModal({
           title: '提示',
@@ -227,6 +253,7 @@ Page({
       success: function (res) {
         console.log(res);
         var datas = res.data.data;
+        that.setClickState(true);
         if (datas){
           wx.navigateBack({
             delta:1

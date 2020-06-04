@@ -28,7 +28,8 @@ Page({
     outTradeNo: '',    //此次支付的商户订单号
     setInter: '',   //存储计时器
     num: 30,   //记录订单失效时间  30*60 30分钟失效
-    domainName: app.globalData.domainName
+    domainName: app.globalData.domainName,
+    isClick:true   //是否可以点击付款按钮
   },
 
   /**
@@ -94,7 +95,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
@@ -285,9 +285,17 @@ Page({
       }
     })
   },
+  
+  //是否让确认按钮可点击
+  setClickState:function(value){
+    that.setData({
+      isClick:value
+    });
+  },
   //付款   商户在小程序中先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易后调起支付。
   payOrder:function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      that.setClickState(false);
       if(that.data.items[0].frozeno_order_amount == 0){
         that.payAfter();
       }else{
@@ -331,10 +339,12 @@ Page({
                 'fail': function (res) {
                   console.log('fail');
                   // console.log(res);
+                  that.setClickState(true);
                 },
                 'complete': function (res) {
                   console.log('complete');
                   // console.log(res);
+                  that.setClickState(true);
                 }
               });
             }
@@ -368,7 +378,8 @@ Page({
         success: function (res) {
           // console.log(res);
           var ret = res.data;
-          var datas = ret.data;
+          // var datas = ret.data;
+          that.setClickState(true);
           if (ret.code == 201) {
             // console.log(ret.message);
             // that.setData({

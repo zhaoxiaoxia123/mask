@@ -23,10 +23,7 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    that.setData({
-      level:wx.getStorageSync('level')
-    });
-    
+    that.setLevel();
   },
 
   /**
@@ -188,7 +185,18 @@ Page({
         that.setData({
           items: res.data.data
         });
+        if(that.data.items && res.data.code == 200){
+          wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
+          wx.setStorageSync('discount', that.data.items.discount);  //折扣
+          that.setLevel();
+        }
       }
+    });
+  },
+
+  setLevel:function(){
+    that.setData({
+      level:wx.getStorageSync('level')
     });
   },
   
