@@ -28,7 +28,17 @@ Page({
     shoppingCount: 0,
     domainName: app.globalData.domainName,
     level:0,
-    isClick:true
+    isClick:true,
+    
+    winHeight:'100%',
+    nowstatus:'product',
+    toview:'',
+    productTop: 0,
+    detailTop: 0,
+    verifyTop: 0,
+    aboutTop: 0,
+    isShowTopBar:false,
+    scrollStop:false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -62,21 +72,24 @@ Page({
       // var shoppingParam = '/p012?type=shopping_count&customer_id='+wx.getStorageSync("customerId");
       that.getShoppingCount(shoppingParam);
     }
-    // setTimeout(function(){
-    //   //查询积分，成长值兑换设置
-    //   var transformParam = {
-    //     page_code: 'p017',
-    //     code: ''
-    //   };
-    //   // var transformParam = '/p017?code=';
-    //   that.getTransform(transformParam);
-    // },1000);
+
+    wx.getSystemInfo({
+      success: function(res) {
+        that.setData({
+          winHeight: res.windowHeight - (res.windowWidth * 90 / 750) + 'px'
+        })
+        console.log('winHeight::===');
+        console.log(that.data.winHeight);
+      },
+    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    
   },
 
   /**
@@ -131,7 +144,63 @@ Page({
       }
     }
   },
-  
+  touchStart(e){
+    console.log('滚起来', e);
+    that.setData({
+      scrollStop: true
+    })
+  },
+  touchEnd(e){
+   console.log('停下来', e);
+   that.setData({
+      scrollStop: false
+    })
+  },
+  scroll: function (e) {
+    console.log(e)
+    if(that.data.scrollStop){
+      return ;
+    }
+    let st = e.scrollTop ? e.scrollTop : e.detail.scrollTop;
+    console.log(st)
+    console.log(that.data.productTop)
+    console.log(that.data.detailTop)
+    console.log(that.data.verifyTop)
+    console.log(that.data.aboutTop)
+
+    if(st >= that.data.productTop-60){
+      that.setData({
+        isShowTopBar: true
+      })
+    }else{
+      that.setData({
+        isShowTopBar: false,
+        toview:''
+      })
+    }
+    if (st <= that.data.productTop - 80 || st < that.data.detailTop ){
+      that.setData({
+        nowstatus: 'product'
+      })
+    }
+    if (st > that.data.detailTop && st < that.data.verifyTop){
+      that.setData({
+        nowstatus:'detail'
+      })
+    }
+    if (st > that.data.verifyTop  && st < that.data.aboutTop-120){
+      console.log("true")
+      that.setData({
+        nowstatus: 'verify'
+      })
+    }
+    if (st >= that.data.aboutTop - 120){
+      console.log("true")
+      that.setData({
+        nowstatus: 'about'
+      })
+    }
+  },
   //是否让确认按钮可点击
   setClickState:function(value){
     that.setData({
@@ -140,62 +209,16 @@ Page({
   },
   // tab切换
   clickTab: function (e) {
-    var that = this;
-    console.log("-1", this.data.currentTab)
-    console.log("-2", e.currentTarget.dataset.current)
-    if (this.data.currentTab == e.currentTarget.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.currentTarget.dataset.current,
-      })
-    }
+    console.log('clickTab:-------')
+    console.log(e)
+    let status = e.target.dataset.hash?e.target.dataset.hash:e.detail.dash;
+    that.setData({
+      nowstatus:status,
+      toview:status
+    })
+    console.log(that.data.nowstatus)
   },
-  // getTransform: function (param) {
-  //   wx.request({
-  //     url: app.globalData.domainUrl,
-  //     data: param,
-  //     header: {
-  //       'content-type': 'application/json'
-  //     },
-  //     success: function (res) {
-  //       var datas = res.data.data;
-  //       that.setData({
-  //         transform: datas
-  //       });
-  //       that.sumValue();
-  //     }
-  //   });
-  // },
-  // sumValue:function(){
-  //   var datas = that.data.transform;
-  //   if (datas) {
-  //     for (var i = 0; i < datas.length; i++) {
-  //       if (datas[i].code == "jf01") {
-  //         if (that.data.items.customer_amount) {
-  //           that.setData({
-  //             point: parseInt(that.data.items.customer_amount / (datas[i].value_from / datas[i].value_to))
-  //           });
-  //         } else {
-  //         that.setData({
-  //           point: parseInt(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to))
-  //           });
-  //         }
-  //       } else if (datas[i].code == "czz01") {
-  //         if (that.data.items.customer_amount){
-  //           that.setData({
-  //             growth: parseFloat(that.data.items.customer_amount / (datas[i].value_from / datas[i].value_to)).toFixed(1)
-  //           });
-  //         }else{
-  //           that.setData({
-  //             growth: parseFloat(that.data.items.frozeno_discount_amount / (datas[i].value_from / datas[i].value_to)).toFixed(1)
-  //           });
-  //         }
-  //       }
-  //     }
-  //   }
-  // },
-
+  
   getShoppingCount: function (param){
     wx.request({
       url: app.globalData.domainUrl,
@@ -214,9 +237,8 @@ Page({
 
   // 跳转规格弹窗
   toggleDialog:function(){
-    var that = this;
     var flexwindow;
-    if (this.data.flexwindow==true){
+    if (that.data.flexwindow==true){
       flexwindow=false;
     } else{
       flexwindow = true;
@@ -227,49 +249,39 @@ Page({
   },
   // 减按钮控件
   jianFn: function (e) {
-    var self = this
-    var count = this.data.count;
+    var count = that.data.count;
     if (count <= 1) {
       count = 1;
-      self.setData({
+      that.setData({
         count: count
       })
     } else {
       count = count - 1;
-
-      self.setData({
+      that.setData({
         count: count
       })
     }
   },
   // 加按钮控件
   plusFn: function (e) {
-    var self = this
-    var items = [];
-    var count = this.data.count;   //获得items数组
+    var count = that.data.count;   //获得items数组
     count = count + 1;
-    
-    self.setData({
+    that.setData({
       count: count
     })
   },
   // 选中改变颜色
   selected: function (e) {
-    var self = this
-    var id = e.currentTarget.dataset.id;
-    
-    var border=self.data.border;
+    var border=that.data.border;
     border=!border;
     console.log("---", border)
-      self.setData({
+      that.setData({
         border: border
       })
   },
   close: function (e) {
-    var self = this
     var flexwindow=false;
-    
-    self.setData({
+    that.setData({
       flexwindow: flexwindow
     })
   },
@@ -289,6 +301,39 @@ Page({
       collectUrl: collectUrl
     });
   }, 
+
+  getTop:function(){
+
+    let query = wx.createSelectorQuery();
+    query.select('#product').boundingClientRect(res => { //获取detail距离页面顶部高度
+      console.log('product:---');
+      console.log(res);
+      that.setData({
+        productTop: res.top
+      })
+    }).exec()
+    query.select('#detail').boundingClientRect(res => { //获取detail距离页面顶部高度
+      console.log('detail:---');
+      console.log(res);
+      that.setData({
+        detailTop: res.top
+      })
+    }).exec()
+    query.select('#verify').boundingClientRect(res => { //获取verify部分距离页面顶部高度
+      console.log('verify:---');
+      console.log(res);
+      that.setData({
+        verifyTop: res.top
+      })
+    }).exec()
+    query.select('#about').boundingClientRect(res => { //about
+      console.log('about:---');
+      console.log(res);
+      that.setData({
+        aboutTop: res.top
+      })
+    }).exec()
+  },
   getProductDetail: function (param) {
     wx.request({
       url: app.globalData.domainUrl,
@@ -302,11 +347,9 @@ Page({
             items: res.data.data,
             swipers: res.data.data.product_image
           });
-        }
-        
-        // console.log("getProductDetail:----");
-        // console.log(that.data.items);
+          that.getTop();
       }
+    }
     });
   },
   shoppingList:function(){

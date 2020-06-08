@@ -1,5 +1,29 @@
 /* pages/detail/detail.wxss */
 
+
+
+page{
+  height:100%;
+}
+
+.menu{
+  display: flex;
+  background:#fff;
+  padding:40rpx 0 10rpx 20%;
+}
+.menu .item{
+  width:20%;
+  line-height: 80rpx;
+  /* color:#333; */
+  text-align: center;
+}
+.menu .item.on{
+  color:red;
+  border-bottom:2px solid red;
+}
+
+
+
 .slide-image {
   width:100%;
 }

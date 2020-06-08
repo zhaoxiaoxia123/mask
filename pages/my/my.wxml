@@ -1,22 +1,14 @@
 <!--pages/my/my.wxml-->
 <view class='page-pd '>
-  <!-- 遮罩层 -->
-    <!-- 二维码或其他图片 -->
-  <!-- <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-  <view class="modalDlg" wx:if="{{showModal}}">
-    <image src='{{domainName}}{{qrcode}}'></image>
-    <text class="text">可扫码进入小程序注册页</text>
-    <view bindtap="ok" class="ok">确定</view>
-  </view> -->
   <!-- <official-account>23233</official-account> -->
-  <view class='parent size-titletwo col-content bg-box'>
-    <view class='parent-left' wx:if="{{isLogin}}" bindtap="goLogin">登录/注册</view>
-    <view class='parent-left' wx:if="{{!isLogin}}">
+  <view class='parent size-titletwo col-content bg-box' wx:if="{{isLogin}}" bindtap="goLogin">
+    <view class='parent-left'>登录/注册</view>
+  </view>
+  <view class='parent size-titletwo col-content bg-box' wx:if="{{!isLogin}}">
+    <view class='parent-left'>
       <view class="head-img">
-          <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image> -->
-          <open-data class="wx-image_SC1alK" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
+        <open-data class="wx-image_SC1alK" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
       </view>
-    
       <view class='content'>
         <open-data class='size-titleone col-title' type="userNickName"></open-data>
         <view class='phone'>{{items.c_phone?items.c_phone:''}}</view>
@@ -130,23 +122,6 @@
         <image class='icon40' src='../img/dv.png'></image>
       </view>
     </view>
- <!-- bindtap='customer' -->
-
-    <!-- <view class='list-wap'>
-      <button class="cs_button"  type="default-light" open-type="contact" session-from="weapp">
-        
-      </button> 
-      <view class='left'>
-        <image class="icon40" src="../img/service@2x.png"></image>
-        <text>在线客服</text>
-      </view>
-      <view class='right'>
-      <view class="contact_view">
-        <contact-button type="default-light" size="20" session-from="weapp"></contact-button>
-      </view>
-      </view>
-    </view> -->
-
     <view class='list-wap' bindtap='news'>
       <view class='left'>
         <image class='icon40' src='../img/news.png'></image>

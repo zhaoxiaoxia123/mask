@@ -6,7 +6,7 @@
       <label>单位名称</label>
       <input placeholder='请输入单位名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}'></input>
     </view>
-    <view class="column-text">
+    <view class="column-text" wx:if="{{isShowNameTip}}">
         请输入单位名称
     </view>
 
@@ -17,7 +17,7 @@
       <label>税号</label>
       <input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}'></input>
     </view>
-    <view class="column-text">
+    <view class="column-text" wx:if="{{isShowTaxNumberTip}}">
         纳税人识别号错误，请检查重新输入
     </view>
   </view>
@@ -64,12 +64,6 @@
  保存成功 -->
    <view class="ft-bottom ">
     <view class="ft-bottom-box">
-      <view class="ft-bottom-operate ft-button"   bindtap="toast3Tap">保存</view>
+      <view class="ft-bottom-operate ft-button" bindtap='submitInvoice'>保存</view>
     </view>   
   </view>
-<!-- <view class="ft-bottom ">
-  <view class="ft-bottom-box">
-    <view class="ft-bottom-operate ft-button" bindtap='submitInvoice' wx:if="{{isClick}}">确认</view>
-    <view class="ft-bottom-operate ft-button" wx:if="{{!isClick}}">确认</view>
-  </view>
-</view> -->

@@ -12,8 +12,13 @@ Page({
     zip: '',
     address: '',
     is_default: false,
-    region: ['四川省', '成都市', '锦江区'],
-    isClick:false
+    region: ['', '', ''],
+    isClick:false,
+    isHasSubmit:false,//判断是否提交过一次
+    isShowNameTip:false,
+    isShowPhoneTip:false,
+    isShowRegionTip:false,
+    isShowAddressTip:false,
   },
 
   /**
@@ -107,7 +112,7 @@ Page({
     that.setData({
       name: e.detail.value
     })
-    that.hasClick();
+    that.isShowTip('name');
   },
   setPhoneInput: function (e) {
     let value = this.validateNumber(e.detail.value)
@@ -115,13 +120,7 @@ Page({
       this.setData({
         phone:value
       })
-    that.hasClick();
-  },
-  setAddressInput: function (e) {
-    that.setData({
-      address: e.detail.value
-    })
-    that.hasClick();
+    that.isShowTip('phone');
   },
   setZipInput: function (e) {
     let value = that.validateNumber(e.detail.value)
@@ -129,35 +128,58 @@ Page({
     that.setData({
       zip:value
     })
-    that.hasClick();
   },
   bindRegionChange: function(e) {
     that.setData({
       region: e.detail.value
     })
-    that.hasClick();
+    that.isShowTip('region');
+  },
+  setAddressInput: function (e) {
+    that.setData({
+      address: e.detail.value
+    })
+    that.isShowTip('address');
   },
   radiocon: function (e) {
     var is_default = that.data.is_default;
     that.setData({
       is_default: !that.data.is_default
     });
-    console.log(is_default);
-  },
-  //所有值存在才让确认按钮可点击
-  hasClick:function(){
-    if(that.data.name && that.data.phone && that.data.address && that.data.zip && that.data.region){
-      that.setClickState(true);
-    }else {
-      that.setClickState(false);
-    }
   },
   
-  //是否让确认按钮可点击
-  setClickState:function(value){
-    that.setData({
-      isClick:value
-    });
+  //是否显示提示
+  isShowTip:function(type,value=0){
+    if(type == 'name'){
+      if((that.data.name.length < 2 || that.data.name.length > 25) && that.data.isHasSubmit){
+        that.setData({isShowNameTip:true});
+      }else{
+        that.setData({isShowNameTip:false});
+      }
+    }else if(type == 'phone'){
+      var myreg = /^1(3|4|5|7|8)\d{9}$/;///^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+      if(((!myreg.test(that.data.phone)) || that.data.phone.length < 11) && that.data.isHasSubmit){
+        that.setData({isShowPhoneTip:true});
+      }else{
+        that.setData({isShowPhoneTip:false});
+      }
+    }else if(type == 'region'){
+      if((that.data.region[0] == '' || that.data.region[1] == '' || that.data.region[2] == '') && that.data.isHasSubmit){
+        that.setData({isShowRegionTip:true});
+      }else{
+        that.setData({isShowRegionTip:false});
+      }
+    }else if(type == 'address'){
+      if((that.data.address.length < 5 || that.data.address.length > 120) && that.data.isHasSubmit){
+        that.setData({isShowAddressTip:true});
+      }else{
+        that.setData({isShowAddressTip:false});
+      }
+    }else if(type == 'submit'){
+      that.setData({
+        isHasSubmit:value
+      });
+    }
   },
   validateNumber(val) {
     return val.replace(/\D/g, '')
@@ -213,28 +235,36 @@ Page({
   // 所在地区：请选择所在地区
   // 详细地址：详细地址长度需要在5-120个字符之间，不能包含非法字符
   // 保存成功
-  toast3Tap: function () {
-    wx.showToast({
-      title: "收货人姓名长度需要在2-25个字符之间，不能包含非法字符",
-      icon: "none",
-      duration: 5000
-    })
-  },
   //提交地址信息
   submitAddress: function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-        that.setClickState(false);
-      if (!that.data.name){
+        that.isShowTip('submit',true);
+      var myreg = /^1(3|4|5|7|8)\d{9}$/;
+      if (that.data.name.length < 2 || that.data.name.length > 25){
         wx.showModal({
           title: '提示',
           content: '收货人姓名长度需要在2-25个字符之间，不能包含非法字符.',
           showCancel: false
         });
         return false;
-      } else if (!that.data.phone){
+      } else if ((!myreg.test(that.data.phone)) || that.data.phone.length < 11){
         wx.showModal({
           title: '提示',
           content: '手机号码为十一位，格式不对，请重新输入.',
+          showCancel: false
+        });
+        return false;
+      } else if (that.data.region[0] == '' || that.data.region[1] == '' || that.data.region[2] == ''){
+        wx.showModal({
+          title: '提示',
+          content: '请选择所在地区.',
+          showCancel: false
+        });
+        return false;
+      } else if (that.data.address.length < 5 || that.data.address.length > 120){
+        wx.showModal({
+          title: '提示',
+          content: '详细地址长度需要在5-120个字符之间，不能包含非法字符.',
           showCancel: false
         });
         return false;
@@ -264,7 +294,6 @@ Page({
         success: function (res) {
           console.log(res);
           var datas = res.data.data;
-          that.setClickState(true);
           if (datas){
             wx.navigateBack({
               delta:1

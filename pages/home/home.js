@@ -26,6 +26,7 @@ Page({
     domainName: app.globalData.domainName,
     ftserviceflexwindow: false,
     storeflexwindow:false,
+    step:0,
   },
 
   /**
@@ -43,6 +44,7 @@ Page({
       });
     }else{
       that.setData({
+        step:1,
         storeflexwindow: true
       });
     }
@@ -118,12 +120,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {},
-  //监听页面滑动距离判断搜索栏的背景色
-  onPageScroll: function(e) {
-    that.setData({
-      scrollTop: e.scrollTop
-    })
-  },
+
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -165,24 +162,19 @@ Page({
     }
   },
 
-  // 适用门店
-  // store: function (e) {
-  //   var storeflexwindow;
-  //   if (that.data.storeflexwindow == true) {
-  //     storeflexwindow = false;
-  //   }
-  //   else {
-  //     storeflexwindow = true;
-  //   }
-  //   that.setData({
-  //     storeflexwindow: storeflexwindow
-  //   });
-  // },
   close3: function (e) {
-    let storeflexwindow = false;
-    that.setData({
-      storeflexwindow: storeflexwindow
-    })
+    let step = e.currentTarget.dataset.step;
+    if(step == 2){
+      that.setData({
+        step:step,
+        storeflexwindow : true
+      })
+    }else if(step == 3){
+      let storeflexwindow = false;
+      that.setData({
+        storeflexwindow: storeflexwindow
+      })
+    }
   },
 
   ftservice: function(e) {

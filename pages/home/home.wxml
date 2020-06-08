@@ -1,6 +1,5 @@
-<view>
 
-  <!-- <view bindtap="store">引导页</view> -->
+  <view>
   <!--滑块容器相关配置，以下为参数  广告 interval="{{interval}}" duration="{{duration}}"-->
   <swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{false}}">
     <!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名   mode="widthFix"-->
@@ -25,12 +24,6 @@
       <image wx:if="{{item.type == 12}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image" bindtap='toPost' data-obj='{{item.post_id}}' />
     </block>
   </view> -->
-  <view class="detail-image">
-    <block wx:for="{{items}}" wx:key="*this" wx:for-index="index" wx:for-item="item">
-      <image mode="widthFix" src="{{domainName}}{{item.image_url[0]}}" lazy-load bindtap='toDetail' data-obj='{{item}}'/>
-    </block>
-  </view>
-
   
   <!-- <view class="ad-member">
     <image class="member-img" src='../img/member/member@2x.png'></image>
@@ -62,22 +55,27 @@
   </view> -->
   
   <view class="detail-image">
+    <block wx:for="{{items}}" wx:key="*this" wx:for-index="index" wx:for-item="item">
+      <image mode="widthFix" src="{{domainName}}{{item.image_url[0]}}" lazy-load bindtap='toDetail' data-obj='{{item}}'/>
+    </block>
+  </view>
+
+  <view class="detail-image">
     <block wx:for="{{swipers}}" wx:key="*this" >
       <image wx:if="{{item.type == 13}}" mode="widthFix" src="{{domainName}}{{item.b_image_url}}" class="slide-image"/>
     </block>
   </view>
   <view class="detail-ft">
-      <view class="detail-ft-item">
-      <!-- 需要判断是否是会员，是否下发了优惠券 -->
-          <view class="ft-item" bindtap="goLogin"></view>
-          <view class="ft-item" bindtap="information"></view>
-      </view>
-      <view class="detail-ft-item">
-          <view class="ft-item" bindtap="grade"></view>
-          <view class="ft-item" bindtap="goMember"></view>
-      </view>
+    <view class="detail-ft-item">
+    <!-- 需要判断是否是会员，是否下发了优惠券 -->
+        <view class="ft-item" bindtap="goLogin"></view>
+        <view class="ft-item" bindtap="information"></view>
+    </view>
+    <view class="detail-ft-item">
+        <view class="ft-item" bindtap="grade"></view>
+        <view class="ft-item" bindtap="goMember"></view>
+    </view>
   </view>
-
 </view>
 
 <!--滑块容器相关配置，以下为参数   关于我们广告-->
@@ -98,20 +96,20 @@
 
 <!-- 引导页分两步 -->
  <view class="just1 {{storeflexwindow==true?'': 'y'}}" >
-  <!-- <view class="guide">
+  <view class="guide {{step == 1?'':'zy'}}">
     <view class="guide-item" style="padding-top:20rpx;padding:20rpx;">
       <image class="guide-img" mode="widthFix" src="../img/guide-t@2x.png"></image>
     </view>
     <view class="guide-ft">
-        <view class="guide-btn" bindtap='close3'>下一步 1/2</view>
+        <view class="guide-btn" data-step='2' bindtap='close3'>下一步 1/2</view>
     </view>
-  </view> -->
-  <view class="guide ">
+  </view>
+  <view class="guide {{step == 2?'':'zy'}}">
     <view class="guide-item guide-s" >
       <image class="guide-simg" mode="widthFix" src="../img/guide-s@2x.png"></image>
     </view>
     <view class="guide-ft guide-sft">
-        <view class="guide-btn" bindtap='close3'>知道啦 2/2</view>
+        <view class="guide-btn" data-step='3' bindtap='close3'>知道啦 2/2</view>
     </view>
   </view>
     

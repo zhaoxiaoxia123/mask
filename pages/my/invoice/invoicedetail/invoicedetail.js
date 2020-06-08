@@ -14,16 +14,16 @@ Page({
     address: '',
     bank: '',
     bankccount: '',
-    isClick:false
+    isHasSubmit:false,//判断是否提交过一次
+    isShowNameTip:false,
+    isShowTaxNumberTip:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("onLoad");
     that = this;
-
     var id = options.id;
     that.setData({
       invoiceId: id ? id : 0
@@ -107,70 +107,61 @@ Page({
     that.setData({
       username: e.detail.value
     })
-    that.hasClick();
-  },
-  setPhoneInput: function (e) { 
-    let value = this.validateNumber(e.detail.value)
-    console.log(value);
-    this.setData({
-      phone:value
-    })
-    that.hasClick();
-  },
-  setAddressInput: function (e) {
-    that.setData({
-      address: e.detail.value
-    })
-    that.hasClick();
+    that.isShowTip('name');
   },
   setTaxNumberInput: function (e) {
     that.setData({
       taxNumber: e.detail.value
     })
-    that.hasClick();
+    that.isShowTip('taxNumber');
+  },
+  setPhoneInput: function (e) { 
+    let value = this.validateNumber(e.detail.value)
+    this.setData({
+      phone:value
+    })
+  },
+  setAddressInput: function (e) {
+    that.setData({
+      address: e.detail.value
+    })
   },
   setBankInput: function (e) {
     that.setData({
       bank: e.detail.value
     })
-    that.hasClick();
   },
   setBankAccountInput: function (e) {
     let value = this.validateNumber(e.detail.value)
-    console.log(value);
     this.setData({
       bankAccount:value
     })
-    that.hasClick();
   },
-//所有值存在才让确认按钮可点击
-hasClick:function(){
-  if(that.data.name && that.data.phone && that.data.address && that.data.zip && that.data.region){
-    that.setClickState(true);
-  }else {
-    that.setClickState(false);
-  }
-},
-//是否让确认按钮可点击
-setClickState:function(value){
-  that.setData({
-    isClick:value
-  });
-},
-validateNumber(val) {
-  return val.replace(/\D/g, '')
-},
-//  提示消息
-//  单位名称：请输入单位名称
-//  税号：纳税人识别号错误，请检查重新输入
-//  保存成功
-  toast3Tap: function () {
-    wx.showToast({
-      title: "请输入单位名称",
-      icon: "none",
-      duration: 5000
-    })
-  },  //删除发票信息
+  validateNumber(val) {
+    return val.replace(/\D/g, '')
+  },
+  
+  //是否显示提示
+  isShowTip:function(type,value=0){
+    if(type == 'name'){
+      if(that.data.username.length == 0 && that.data.isHasSubmit){
+        that.setData({isShowNameTip:true});
+      }else{
+        that.setData({isShowNameTip:false});
+      }
+    }else if(type == 'taxNumber'){
+      if(that.data.taxNumber.length == 0 && that.data.isHasSubmit){
+        that.setData({isShowTaxNumberTip:true});
+      }else{
+        that.setData({isShowTaxNumberTip:false});
+      }
+    }else if(type == 'submit'){
+      that.setData({
+        isHasSubmit:value
+      });
+    }
+  },
+    //删除发票信息
   deleteInvoice:function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       wx.showModal({
@@ -216,10 +207,28 @@ validateNumber(val) {
       });
     }
   },
+  //  提示消息
+  //  单位名称：请输入单位名称
+  //  税号：纳税人识别号错误，请检查重新输入
   //提交发票信息
   submitInvoice: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-      that.setClickState(false);
+      that.isShowTip('submit',true);
+      if (that.data.username.length  == 0){
+        wx.showModal({
+          title: '提示',
+          content: '请输入单位名称',
+          showCancel: false
+        });
+        return false;
+      } else if (that.data.taxNumber.length == 0){
+        wx.showModal({
+          title: '提示',
+          content: '请输入纳税人识别号',
+          showCancel: false
+        });
+        return false;
+      }
     var param = {
       page_code: "p006",
       type: "edit",
@@ -243,7 +252,6 @@ validateNumber(val) {
       success: function (res) {
         console.log(res);
         var datas = res.data.data;
-        that.setClickState(true);
         if (datas) {
           wx.navigateBack({
             delta: 1

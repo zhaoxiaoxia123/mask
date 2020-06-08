@@ -1,177 +1,166 @@
 <!--pages/detail/detail.wxml-->
-<view>
-  <swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
-    <block wx:for="{{swipers}}" wx:key="*this">
-      <swiper-item wx:if="{{item.type == 1}}">
-        <image mode="widthFix" src="{{domainName}}{{item.img_url}}" class="slide-image" />
-      </swiper-item>
-    </block>
-  </swiper>
-  <view class='page-pd'>
-    <view class='money' wx:if="{{items.customer_amount > 0 && level != 1}}">
-      <text>￥{{items.customer_amount}}</text>
-      <text class='text-size'>[</text>
-      <text class='decoration text-size'>￥{{items.frozeno_discount_amount}}</text>
-      <text class='text-size'>]</text>
-    </view>
-    <view class='money' wx:if="{{items.customer_amount <= 0 || level == 1}}">
-      <text>￥{{items.frozeno_discount_amount}}</text>
-      <!-- <text class='text-size'>（</text>
+<view class='view-page'>
+	<navbar selectTab="{{nowstatus}}" tabCount="4" wx:if="{{isShowTopBar}}" bind:icre="clickTab"></navbar>
+	<navbar page-name="详情页" tabCount="1" wx:if="{{!isShowTopBar}}"></navbar>
+	<!-- <view class='page-content'> -->
+	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
+		<swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
+			<block wx:for="{{swipers}}" wx:key="*this">
+				<swiper-item wx:if="{{item.type == 1}}">
+					<image mode="widthFix" src="{{domainName}}{{item.img_url}}" class="slide-image" />
+				</swiper-item>
+			</block>
+		</swiper>
+		<view class='page-pd'>
+			<view class='money' wx:if="{{items.customer_amount > 0 && level != 1}}">
+				<text>￥{{items.customer_amount}}</text>
+				<text class='text-size'>[</text>
+				<text class='decoration text-size'>￥{{items.frozeno_discount_amount}}</text>
+				<text class='text-size'>]</text>
+			</view>
+			<view class='money' wx:if="{{items.customer_amount <= 0 || level == 1}}">
+				<text>￥{{items.frozeno_discount_amount}}</text>
+				<!-- <text class='text-size'>（</text>
       <text class='decoration text-size'>￥{{items.frozeno_amount}}</text>
       <text class='text-size'> ）</text> -->
-    </view>
-    <view class='money-title'>{{items.category_desc}}</view>
-    <view class='money-text'>
-      <text>成长值：{{items.growth}}</text>
-      <text>积分：{{items.point}}</text>
-    </view>
-    <text class='abstract'>{{items.frozeno_introduction}}</text>
-    <view class='between'>
-      <text class='num'>免邮</text>
-      <text class='num'>销量：{{items.sale}}件</text>
-    </view>
-  </view>
-  <!-- <view class='spec' bindtap="toggleDialog">
+			</view>
+			<view class='money-title'>{{items.category_desc}}</view>
+			<view class='money-text'>
+				<text>成长值：{{items.growth}}</text>
+				<text>积分：{{items.point}}</text>
+			</view>
+			<text class='abstract'>{{items.frozeno_introduction}}</text>
+			<view class='between'>
+				<text class='num'>免邮</text>
+				<text class='num'>销量：{{items.sale}}件</text>
+			</view>
+		</view>
+		<!-- <view class='spec' bindtap="toggleDialog">
     <text>选择规格</text>
     <image src='../img/dv.png'></image>
   </view> -->
-  <view class='evaluate'>
-     <!-- 默认是商品详情 -->
-    <view class="topbar">
-      <view class="topbar-top">
-        <view class="topbar-text" bindtap="clickTab"  data-current="0" >
-          <view class="topbar-tab  {{currentTab=='0'?'active':''}} " >商品</view>
-        </view>
-        <view class="topbar-text" bindtap="clickTab"  data-current="1">
-          <view class="topbar-tab  {{currentTab=='1'?'active':''}} " >详情</view>
-        </view>
-        <view class="topbar-text" bindtap="clickTab"  data-current="2">
-          <view class="topbar-tab  {{currentTab=='2'?'active':''}} " >认证</view>
-        </view>
-        <view class="topbar-text" bindtap="clickTab"  data-current="3">
-          <view class="topbar-tab  {{currentTab=='2'?'active':''}} " >关于</view>
-        </view>
-      </view>
-    </view>
-    <view class="content">
-      <view class="{{currentTab == 0 ? 'show':'hidden'}}">
-        <scroll-view>
-          <view class='detail-image'>
-            <block wx:for="{{swipers}}" wx:key="*this">
-              <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
-            </block>
-          </view>
-          <text class='abstract'>{{items.category_tab}}</text>         
-        </scroll-view>
-      </view>
-      <view class="{{currentTab == 1 ? 'show':'hidden'}}" >
-        <scroll-view>
-          <view class='detail-image'>
-            <block wx:for="{{swipers}}" wx:key="*this">
-              <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
-            </block>
-          </view>
-        
-        </scroll-view>
-      </view>
-      <view class="{{currentTab == 2 ? 'show':'hidden'}}" >
-        <scroll-view>
-          <view class='detail-image'>
-              <block wx:for="{{swipers}}" wx:key="*this">
-                <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
-              </block>
-          </view> 
-        </scroll-view>
-      </view>
+		<view class='evaluate'>
+			<!-- 默认是商品详情 -->
+			<!-- <view class="topbar" id="topbar" wx:if="{{!isShowTopBar}}">
+				<view class="menu">
+					<view class='item {{nowstatus == "product" ? "on" : ""}}' bindtap="clickTab" data-hash="product">商品</view>
+					<view class='item {{nowstatus == "detail" ? "on" : ""}}' bindtap="clickTab" data-hash="detail">详情</view>
+					<view class='item {{nowstatus == "verify" ? "on" : ""}}' bindtap="clickTab" data-hash="verify">认证</view>
+					<view class='item {{nowstatus == "about" ? "on" : ""}}' bindtap="clickTab" data-hash="about">关于</view>
+				</view>
+			</view> -->
+			<view class="content">
+				<view id="product">
+					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
+            <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+          </block>
+				</view>
+				<view id="detail">
+					<block wx:for="{{swipers}}" wx:key="*this">
+            <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+          </block>
+				</view>
+				<view id="verify">
+					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
+            <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 3}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+          </block>
+				</view>
+				<view id="about">
+					<block wx:for="{{swipers}}" wx:key="*this">
+            <image mode="widthFix" wx:if="{{item.type == 1}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+          </block>
+				</view>
+				<!-- <view class='detail-image'>
+          <block wx:for="{{swipers}}" wx:key="*this">
+            <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+          </block>
+        </view>-->
+			</view>
 
-    </view>
+		</view>
 
-  </view>
-
-  <view class='bottom'>
-    <view class='bottom-operate'>
-      <view class='bottom-left count'>
-        <button class="cs_button"  type="default-light" open-type="contact" session-from="weapp">
-          <image class="icon40" src="../img/service@2x.png"></image>
-        </button> 
-      </view>
-      <view class='bottom-left count' catchtap="shoppingList">
-        <view class='number' wx:if="{{shoppingCount}}">
-          <text>{{shoppingCount}}</text>
-        </view>
-        <button class="cs_button"  >
-          <image class="icon40" src="../img/shopcat1_false@2x.png"></image>
-        </button> 
-      </view>
-      <!-- <view class='bottom-left count' catchtap="shoppingList">
+		<view class='bottom'>
+			<view class='bottom-operate'>
+				<view class='bottom-left count'>
+					<button class="cs_button" type="default-light" open-type="contact" session-from="weapp">
+						<image class="icon40" src="../img/service@2x.png"></image>
+					</button>
+				</view>
+				<view class='bottom-left count' catchtap="shoppingList">
+					<view class='number' wx:if="{{shoppingCount}}">
+						<text>{{shoppingCount}}</text>
+					</view>
+					<button class="cs_button">
+						<image class="icon40" src="../img/shopcat1_false@2x.png"></image>
+					</button>
+				</view>
+				<!-- <view class='bottom-left count' catchtap="shoppingList">
         <view class='number' wx:if="{{shoppingCount}}">
           <text>{{shoppingCount}}</text>
         </view>
         <image class='icon40' src='../img/shopcat_false.png'></image>
       </view> -->
-        <view class='bottom-operate button1' catchtap='joinShopping' wx:if="{{isClick}}">加入购物</view>
-        <view class='bottom-operate button1' wx:if="{{!isClick}}">加入购物</view>
-      <view class='bottom-operate button' data-type="one" catchtap='goConfirm'>立即购买</view>
-    </view>
-  </view>
-  <view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
-  <view class="just {{flexwindow==true?'': 'y'}}">
-    <!--bindtap绑定事件-->
-    <view class='lists'>
-      <view class='list'>
-        <view class='detail-img'>
-          <image src='{{swipers[0].img_url}}'></image>
-        </view>
-        <view class='detail-center'>
-          <view class='sales'>
-            <view class='detail-sales'>{{items.category_desc}}</view>
-            <image class='icon40' src='../img/close@2x.png' bindtap='close'></image>
-          </view>
-          <view class='sales-spec'>
-            <text>￥{{items.frozeno_discount_amount}}（</text>
-            <!-- <text class='decoration'>￥{{items.frozeno_amount}}</text> -->
-            <text>）</text>
-          </view>
-          <view class='text-size'>库存：{{items.stock}}</view>
-        </view>
-      </view>
-      <view class='column'>
-        <view>购买数量</view>
-        <view class='item'>
-          <view class='item-number'>
-            <image class='' data-id='{{items.category_id}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
-          </view>
-          <view class='item-number'>{{count}}</view>
-          <view class='item-number'>
-            <image class='' data-id='{{items.category_id}}' src='../img/plus@2x.png' bind:tap="plusFn"></image>
-          </view>
-        </view>
-      </view>
-    </view>
+				<view class='bottom-operate button1' catchtap='joinShopping' wx:if="{{isClick}}">加入购物</view>
+				<view class='bottom-operate button1' wx:if="{{!isClick}}">加入购物</view>
+				<view class='bottom-operate button' data-type="one" catchtap='goConfirm'>立即购买</view>
+			</view>
+		</view>
+		<view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
+		<view class="just {{flexwindow==true?'': 'y'}}">
+			<!--bindtap绑定事件-->
+			<view class='lists'>
+				<view class='list'>
+					<view class='detail-img'>
+						<image src='{{swipers[0].img_url}}'></image>
+					</view>
+					<view class='detail-center'>
+						<view class='sales'>
+							<view class='detail-sales'>{{items.category_desc}}</view>
+							<image class='icon40' src='../img/close@2x.png' bindtap='close'></image>
+						</view>
+						<view class='sales-spec'>
+							<text>￥{{items.frozeno_discount_amount}}（</text>
+							<!-- <text class='decoration'>￥{{items.frozeno_amount}}</text> -->
+							<text>）</text>
+						</view>
+						<view class='text-size'>库存：{{items.stock}}</view>
+					</view>
+				</view>
+				<view class='column'>
+					<view>购买数量</view>
+					<view class='item'>
+						<view class='item-number'>
+							<image class='' data-id='{{items.category_id}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
+						</view>
+						<view class='item-number'>{{count}}</view>
+						<view class='item-number'>
+							<image class='' data-id='{{items.category_id}}' src='../img/plus@2x.png' bind:tap="plusFn"></image>
+						</view>
+					</view>
+				</view>
+			</view>
 
-    <view class='bottom'>
-      <view class='bottom-operate'>
-      <view class='bottom-left count'>
-      
-        <button class="cs_button"  type="default-light" open-type="contact" session-from="weapp">
-          <image class="icon40" src="../img/service@2x.png"></image>
-        </button> 
-        <!-- <contact-button type="default-light" size="20" session-from="weapp"></contact-button> -->
-      
-        </view>
-      <view class='bottom-left count' catchtap="shoppingList">
-        <view class='number' wx:if="{{shoppingCount}}">
-          <text>{{shoppingCount}}</text>
-        </view>
-        <button class="cs_button"  >
-          <image class="icon40" src="../img/shopcat1_false@2x.png"></image>
-        </button> 
-      </view>
-        <view class='bottom-operate button1' catchtap='joinShopping' wx:if="{{isClick}}">加入购物</view>
-        <view class='bottom-operate button1' wx:if="{{!isClick}}">加入购物</view>
-        <view class='bottom-operate button' data-type="more" catchtap='goConfirm'>立即购买</view>
-      </view>
-    </view>
-
-  </view>
+			<view class='bottom'>
+				<view class='bottom-operate'>
+					<view class='bottom-left count'>
+						<button class="cs_button" type="default-light" open-type="contact" session-from="weapp">
+							<image class="icon40" src="../img/service@2x.png"></image>
+						</button>
+						<!-- <contact-button type="default-light" size="20" session-from="weapp"></contact-button> -->
+					</view>
+					<view class='bottom-left count' catchtap="shoppingList">
+						<view class='number' wx:if="{{shoppingCount}}">
+							<text>{{shoppingCount}}</text>
+						</view>
+						<button class="cs_button">
+							<image class="icon40" src="../img/shopcat1_false@2x.png"></image>
+						</button>
+					</view>
+					<view class='bottom-operate button1' catchtap='joinShopping' wx:if="{{isClick}}">加入购物</view>
+					<view class='bottom-operate button1' wx:if="{{!isClick}}">加入购物</view>
+					<view class='bottom-operate button' data-type="more" catchtap='goConfirm'>立即购买</view>
+				</view>
+			</view>
+		</view>
+  </scroll-view>
 </view>
