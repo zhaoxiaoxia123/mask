@@ -147,7 +147,6 @@ page{
   color:#fff;
   font-size:1rem;
   line-height:1.5;
-  padding:20rpx 0;
 }
 .detail-image{
   width:100%;
