@@ -13,16 +13,13 @@
 .navbar-title {
   width: 100%;
   box-sizing: border-box;
-  padding-left: 60px;
-  padding-right: 75px;
-  height: 45px;
-  line-height: 45x;
-  text-align: center;
+  padding-left: 36px;
+  padding-right: 88px;
   position: absolute;
   left: 0;
   z-index: 10;
-  color: #333;
-  font-size: 14px;
+  color: #fff;
+  font-size: 1rem;
   font-weight: bold;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -45,20 +42,13 @@
 }
 
 .navbar-action-group {
-  border: 1px solid #f0f0f0;
-  border-radius: 20px;
   overflow: hidden;
 }
 
 .navbar-action_item {
   padding: 3px 0;
-  color: #333;
 }
 
-.navbar-action-group .navbar-action_item {
-  border-right: 1px solid #f0f0f0;
-  padding: 3px 14px;
-}
 
 .navbar-action-group .last {
   border-right: none;
@@ -66,15 +56,14 @@
 
 .menu1{
   display: flex;
-  background:#fff;
+  justify-content: center;
+  align-items: center;
 }
 .menu1 .item{
-  width:20%;
-  line-height: 80rpx;
-  color:#333;
-  text-align: center;
+  line-height: 1.5;
+  padding:10rpx 16rpx;
 }
 .menu1 .item.on{
-  color:red;
-  border-bottom:2px solid red;
+  color:#DAB866;
+  border-bottom:2px solid #DAB866;
 }

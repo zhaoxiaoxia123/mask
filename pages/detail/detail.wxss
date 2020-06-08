@@ -18,8 +18,8 @@ page{
   text-align: center;
 }
 .menu .item.on{
-  color:red;
-  border-bottom:2px solid red;
+  color:#DAB866;
+  border-bottom:2px solid #DAB866;
 }
 
 
@@ -461,5 +461,4 @@ display: none;
 
 .content{
   height:2000rpx;
-  padding:20rpx;
 }

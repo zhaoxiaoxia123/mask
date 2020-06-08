@@ -97,7 +97,7 @@
 <!-- 引导页分两步 -->
  <view class="just1 {{storeflexwindow==true?'': 'y'}}" >
   <view class="guide {{step == 1?'':'zy'}}">
-    <view class="guide-item" style="padding-top:20rpx;padding:20rpx;">
+    <view class="guide-item" style="padding-top:20rpx;padding:20rpx;margin-top:80px;">
       <image class="guide-img" mode="widthFix" src="../img/guide-t@2x.png"></image>
     </view>
     <view class="guide-ft">

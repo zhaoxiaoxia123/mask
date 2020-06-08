@@ -49,23 +49,23 @@
 					<view class='item {{nowstatus == "about" ? "on" : ""}}' bindtap="clickTab" data-hash="about">关于</view>
 				</view>
 			</view> -->
-			<view class="content">
-				<view id="product">
+			<view class="content detail">
+				<view class='detail-image' id="product">
 					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
             <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
           </block>
 				</view>
-				<view id="detail">
+				<view class='detail-image' id="detail">
 					<block wx:for="{{swipers}}" wx:key="*this">
             <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
           </block>
 				</view>
-				<view id="verify">
+				<view class='detail-image' id="verify">
 					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
             <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 3}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
           </block>
 				</view>
-				<view id="about">
+				<view class='detail-image' id="about">
 					<block wx:for="{{swipers}}" wx:key="*this">
             <image mode="widthFix" wx:if="{{item.type == 1}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
           </block>

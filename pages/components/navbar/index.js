@@ -19,11 +19,11 @@ Component({
     },
     bgColor:{
       type: String,
-      value: '#fff'
+      value: '#333'
     },
     iconColor:{
       type: String,
-      value: '#000'
+      value: '#fff'
     }
   },
 
