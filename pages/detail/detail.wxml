@@ -2,7 +2,6 @@
 <view class='view-page'>
 	<navbar selectTab="{{nowstatus}}" tabCount="4" wx:if="{{isShowTopBar}}" bind:icre="clickTab"></navbar>
 	<navbar page-name="详情页" tabCount="1" wx:if="{{!isShowTopBar}}"></navbar>
-	<!-- <view class='page-content'> -->
 	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
 		<swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
 			<block wx:for="{{swipers}}" wx:key="*this">
@@ -40,15 +39,6 @@
     <image src='../img/dv.png'></image>
   </view> -->
 		<view class='evaluate'>
-			<!-- 默认是商品详情 -->
-			<!-- <view class="topbar" id="topbar" wx:if="{{!isShowTopBar}}">
-				<view class="menu">
-					<view class='item {{nowstatus == "product" ? "on" : ""}}' bindtap="clickTab" data-hash="product">商品</view>
-					<view class='item {{nowstatus == "detail" ? "on" : ""}}' bindtap="clickTab" data-hash="detail">详情</view>
-					<view class='item {{nowstatus == "verify" ? "on" : ""}}' bindtap="clickTab" data-hash="verify">认证</view>
-					<view class='item {{nowstatus == "about" ? "on" : ""}}' bindtap="clickTab" data-hash="about">关于</view>
-				</view>
-			</view> -->
 			<view class="content detail">
 				<view class='detail-image' id="product">
 					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
@@ -60,21 +50,11 @@
             <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
           </block>
 				</view>
-				<view class='detail-image' id="verify">
+				<view class='detail-image' id="about">
 					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
             <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 3}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
           </block>
 				</view>
-				<view class='detail-image' id="about">
-					<block wx:for="{{swipers}}" wx:key="*this">
-            <image mode="widthFix" wx:if="{{item.type == 1}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
-          </block>
-				</view>
-				<!-- <view class='detail-image'>
-          <block wx:for="{{swipers}}" wx:key="*this">
-            <image mode="widthFix" wx:if="{{item.type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
-          </block>
-        </view>-->
 			</view>
 
 		</view>

@@ -29,13 +29,11 @@ Page({
     domainName: app.globalData.domainName,
     level:0,
     isClick:true,
-    
     winHeight:'100%',
     nowstatus:'product',
     toview:'',
     productTop: 0,
     detailTop: 0,
-    verifyTop: 0,
     aboutTop: 0,
     isShowTopBar:false,
     scrollStop:false,
@@ -158,16 +156,15 @@ Page({
   },
   scroll: function (e) {
     console.log(e)
-    if(that.data.scrollStop){
+    if(!that.data.scrollStop){
       return ;
     }
     let st = e.scrollTop ? e.scrollTop : e.detail.scrollTop;
     console.log(st)
     console.log(that.data.productTop)
     console.log(that.data.detailTop)
-    console.log(that.data.verifyTop)
     console.log(that.data.aboutTop)
-
+    st = (st+80) ;
     if(st >= that.data.productTop-60){
       that.setData({
         isShowTopBar: true
@@ -178,23 +175,17 @@ Page({
         toview:''
       })
     }
-    if (st <= that.data.productTop - 80 || st < that.data.detailTop ){
+    if (st <= that.data.productTop - 60 || st < that.data.detailTop ){
       that.setData({
         nowstatus: 'product'
       })
     }
-    if (st > that.data.detailTop && st < that.data.verifyTop){
+    if (st >= that.data.detailTop && st < that.data.aboutTop){
       that.setData({
         nowstatus:'detail'
       })
     }
-    if (st > that.data.verifyTop  && st < that.data.aboutTop-120){
-      console.log("true")
-      that.setData({
-        nowstatus: 'verify'
-      })
-    }
-    if (st >= that.data.aboutTop - 120){
+    if (st >= that.data.aboutTop){
       console.log("true")
       that.setData({
         nowstatus: 'about'
@@ -303,7 +294,6 @@ Page({
   }, 
 
   getTop:function(){
-
     let query = wx.createSelectorQuery();
     query.select('#product').boundingClientRect(res => { //获取detail距离页面顶部高度
       console.log('product:---');
@@ -317,13 +307,6 @@ Page({
       console.log(res);
       that.setData({
         detailTop: res.top
-      })
-    }).exec()
-    query.select('#verify').boundingClientRect(res => { //获取verify部分距离页面顶部高度
-      console.log('verify:---');
-      console.log(res);
-      that.setData({
-        verifyTop: res.top
       })
     }).exec()
     query.select('#about').boundingClientRect(res => { //about
@@ -348,8 +331,8 @@ Page({
             swipers: res.data.data.product_image
           });
           that.getTop();
+        }
       }
-    }
     });
   },
   shoppingList:function(){

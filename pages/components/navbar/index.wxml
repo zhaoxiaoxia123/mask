@@ -9,7 +9,6 @@
 			<view class="menu1">
 				<view class='item {{selectTab == "product" ? "on" : ""}}' bindtap="clickTab" data-hash="product">商品</view>
 				<view class='item {{selectTab == "detail" ? "on" : ""}}' bindtap="clickTab" data-hash="detail">详情</view>
-				<view class='item {{selectTab == "verify" ? "on" : ""}}' bindtap="clickTab" data-hash="verify">认证</view>
 				<view class='item {{selectTab == "about" ? "on" : ""}}' bindtap="clickTab" data-hash="about">关于</view>
 			</view>
 		</block>

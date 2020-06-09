@@ -27,6 +27,7 @@ Page({
     ftserviceflexwindow: false,
     storeflexwindow:false,
     step:0,
+    materialList:[],
   },
 
   /**
@@ -81,6 +82,13 @@ Page({
 
     //广告图片列表---------
     that.getAdList();
+    
+    //获取公众号素材列表
+    var param_m = {
+      page_code: "p020",
+      type: "list"
+    };
+    that.getMaterialList(param_m);
   },
 
   /**
@@ -194,6 +202,26 @@ Page({
   calling: function(e) {
     tmpObj.calling(e);
   },
+
+  
+  //获取公众号的素材列表
+  getMaterialList: function(param) {
+    wx.request({
+      url: app.globalData.domainUrl,
+      data: param,
+      header: {
+        'content-type': "application/json"
+      },
+      success: function(res) {
+        var datas = res.data;
+        console.log(datas);
+        that.setData({
+          materialList: datas.data
+        });
+      }
+    })
+  },
+
   //广告
   getAdList: function() {
     wx.request({
@@ -253,9 +281,10 @@ Page({
     let post_id = e.currentTarget.dataset.id;
     let href = e.currentTarget.dataset.href;
     console.log(href);
+    console.log(encodeURIComponent(href));
     if(href){
       wx.navigateTo({
-        url: '../post/post?href=' + href,
+        url: '../post/post?href=' + encodeURIComponent(href),
       })
     }else{
       wx.navigateTo({

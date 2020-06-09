@@ -61,7 +61,7 @@
 }
 .menu1 .item{
   line-height: 1.5;
-  padding:10rpx 16rpx;
+  padding:10rpx 20rpx;
 }
 .menu1 .item.on{
   color:#DAB866;

@@ -22,8 +22,11 @@ Page({
     that.setData({
       postId: options.id,
       type: options.type,
-      href:options.href
+      href:decodeURIComponent(options.href)
     });
+    console.log(that.data.type);
+    console.log(that.data.postId);
+    console.log(that.data.href);
     if (that.data.type){
       var param = {
         page_code: "p001",
