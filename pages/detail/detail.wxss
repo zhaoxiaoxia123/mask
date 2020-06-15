@@ -148,6 +148,7 @@ page{
   color:#fff;
   font-size:1rem;
   line-height:1.5;
+  min-height:2000rpx;
 }
 .detail-image{
   width:100%;
@@ -459,6 +460,3 @@ display: none;
   display: none;
 }
 
-.content{
-  height:2000rpx;
-}
