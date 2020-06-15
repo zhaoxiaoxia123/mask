@@ -5,7 +5,9 @@
 page{
   height:100%;
 }
-
+.page-content{
+  white-space:nowrap;
+}
 .menu{
   display: flex;
   background:#fff;

@@ -1,7 +1,7 @@
 // pages/my/coupon/coupon.js
 var that;
 var app = getApp();
-
+var base = require('../../../utils/base.js');
 Page({
 
   /**
@@ -43,7 +43,7 @@ Page({
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       var param = {
         page_code: "p013",
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         is_show_amount: 1,  //是否展示新会员卡券
         ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
         offset: (that.data.offset - 1) * that.data.pageCount,
@@ -81,7 +81,7 @@ Page({
         });
         var param = {
           page_code: "p013",
-          customer_id: wx.getStorageSync('customerId'),
+          // customer_id: wx.getStorageSync('customerId'),
           is_show_amount: 1,  //是否展示新会员卡券
           ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
           offset: (that.data.offset - 1) * that.data.pageCount,
@@ -108,7 +108,7 @@ Page({
       if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
         var param = {
           page_code: "p013",
-          customer_id: wx.getStorageSync('customerId'),
+          // customer_id: wx.getStorageSync('customerId'),
           is_show_amount: 1,  //是否展示新会员卡券
           ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
           offset: (that.data.offset - 1) * that.data.pageCount,
@@ -124,38 +124,54 @@ Page({
     if (that.data.currentIndex == e.currentTarget.dataset.idx) {
       return false;
     } else {
-      let currentPageIndex =
-        that.setData({
-          //拿到当前索引并动态改变
-          currentIndex: e.currentTarget.dataset.idx,
-          offset: 1,
-          isLast: false,
-          ticketList: [],
-          show_amount:'',
-        })
+      that.setData({
+        //拿到当前索引并动态改变
+        currentIndex: e.currentTarget.dataset.idx,
+        offset: 1,
+        isLast: false,
+        ticketList: [],
+        show_amount:'',
+      })
       if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
         var param = {
           page_code: "p013",
-          customer_id: wx.getStorageSync('customerId'),
+          // customer_id: wx.getStorageSync('customerId'),
           is_show_amount: 1,  //是否展示新会员卡券
           ticket_state: (parseInt(that.data.currentIndex) + 1),  //记录当前显示的列表状态
           offset: (that.data.offset - 1) * that.data.pageCount,
           page: that.data.pageCount
         };
-        // var param = '/p013?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
         that.getTicketList(param);
       }
     }
   },
   //以下为自定义点击事件
   getTicketList: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       ticketList: that.data.ticketList.concat(datas.ticket),
+    //       show_amount: datas.show_amount
+    //     });
+    //     if (datas.ticket.length <= 0 || datas.ticket.length < that.data.pageCount) {
+    //       that.setData({
+    //         isLast: true
+    //       });
+    //     }
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
           ticketList: that.data.ticketList.concat(datas.ticket),
@@ -167,7 +183,9 @@ Page({
           });
         }
       }
-    });
+    };
+    base.httpRequest(params);
+
   },
   goOrder: function(e) {  //去购物车使用卡券
     // var ticketId = e.currentTarget.dataset.id;

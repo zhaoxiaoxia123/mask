@@ -4,18 +4,17 @@
   <view class='column bg-box'>
     <view class="column-form">
       <label>单位名称</label>
-      <input placeholder='请输入单位名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}'></input>
+      <input placeholder='请输入单位名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}' maxlength="30"></input>
     </view>
     <view class="column-text" wx:if="{{isShowNameTip}}">
         请输入单位名称
     </view>
-
   </view>
 <!-- 税号规则：15位、18或者20位码（字符型）组成 -->
   <view class='column bg-box'>
     <view class="column-form">
       <label>税号</label>
-      <input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}'></input>
+      <input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}' maxlength="20"></input>
     </view>
     <view class="column-text" wx:if="{{isShowTaxNumberTip}}">
         纳税人识别号错误，请检查重新输入

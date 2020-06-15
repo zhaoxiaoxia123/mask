@@ -1,5 +1,5 @@
 <!--pages/post/post.wxml-->
-<import src="../../wxParse/wxParse.wxml"/>
+<import src="../../wxParse/wxParse.wxml" wx:if="{{!href}}"/>
 
     <!--加载失败的时候显示
      -->

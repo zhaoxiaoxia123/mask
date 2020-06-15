@@ -30,7 +30,6 @@
     "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "#333",
     "backgroundColor": "#f5f5f5",
-    "enablePullDownRefresh": false,
     "navigationStyle":"default"
   },
   "tabBar": {

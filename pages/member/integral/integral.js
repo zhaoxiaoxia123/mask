@@ -1,6 +1,7 @@
 // pages/member/integral/integral.js
 var that;
 var app = getApp();
+var base = require('../../../utils/base.js');
 Page({
 
   /**
@@ -38,7 +39,7 @@ Page({
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
       };
       // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
@@ -46,8 +47,8 @@ Page({
       var param_p = {
         page_code: 'p004',
         type: "logList",//"pointList",
-          event:1,
-        customer_id: wx.getStorageSync('customerId'),
+        event:1,
+        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -88,8 +89,8 @@ Page({
       var param_p = {
         page_code: 'p004',
         type: "logList",//"pointList",
-          event:1,
-        customer_id: wx.getStorageSync('customerId'),
+        event:1,
+        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -107,28 +108,58 @@ Page({
 
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     that.setData({
+    //       customer: res.data.data
+    //     });
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         that.setData({
           customer: res.data.data
         });
       }
-    });
+    };
+    base.httpRequest(params);
+
   },
   //获取用户信息 ： 积分列表
   getPointList: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       items: that.data.items.concat(datas)
+    //     });
+    //     if (datas.length <= 0 || datas.length < that.data.pageCount) {
+    //       that.setData({
+    //         isLast: true
+    //       });
+    //     }
+    //   }
+    // });
+    
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
           items: that.data.items.concat(datas)
@@ -139,7 +170,8 @@ Page({
           });
         }
       }
-    });
+    };
+    base.httpRequest(params);
   },
 
 })

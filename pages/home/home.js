@@ -1,7 +1,8 @@
 // pages/home/home.js
 var that;
 var app = getApp();
-import tmpObj from '../template/template.js'
+import tmpObj from '../template/template.js';
+var base = require('../../utils/base.js');
 
 Page({
 
@@ -24,9 +25,12 @@ Page({
     items: [],
     type: '9,12,13' , // 9:广告   12:app商城其他广告   13:app商城关于我们广告
     domainName: app.globalData.domainName,
+    // domainName1: app.globalData.domainName1,
     ftserviceflexwindow: false,
     storeflexwindow:false,
     step:0,
+    materialType:20,// 20:公众号发文对应 
+    // materialList:[],
   },
 
   /**
@@ -81,6 +85,13 @@ Page({
 
     //广告图片列表---------
     that.getAdList();
+    
+    //获取公众号素材列表
+    // var param_m = {
+    //   page_code: "p001",
+    //   type: that.data.materialType
+    // };
+    // that.getMaterialList(param_m);
   },
 
   /**
@@ -194,18 +205,48 @@ Page({
   calling: function(e) {
     tmpObj.calling(e);
   },
+
+  
+  //获取公众号的素材列表
+  getMaterialList: function(param) {
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': "application/json"
+    //   },
+    //   success: function(res) {
+    //     var datas = res.data;
+    //     console.log(datas);
+    //     that.setData({
+    //       materialList: datas.data
+    //     });
+    //   }
+    // })
+
+    var params = {
+      url: app.globalData.domainUrl,
+      data:param,
+      sCallback: function (res) {
+        var datas = res.data;
+        console.log(datas);
+        that.setData({
+          materialList: datas.data
+        });
+      }
+    };
+    base.httpRequest(params);
+  },
   //广告
   getAdList: function() {
-    wx.request({
+    let param = {
+      page_code: 'p001',
+      type: that.data.type
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      data: {
-        page_code: 'p001',
-        type: that.data.type
-      },
-      header: {
-        'content-type': "application/json"
-      },
-      success: function(res) {
+      data:param,
+      sCallback: function (res) {
         var datas = res.data;
         console.log(datas);
         console.log(datas.length);
@@ -213,7 +254,28 @@ Page({
           swipers: datas.data
         });
       }
-    })
+    };
+    base.httpRequest(params);
+
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: {
+    //     page_code: 'p001',
+    //     type: that.data.type
+    //   },
+    //   header: {
+    //     'content-type': "application/json",
+    //     // 'Authorization':'Bearer ' + wx.getStorageSync('token')
+    //   },
+    //   success: function(res) {
+    //     var datas = res.data;
+    //     console.log(datas);
+    //     console.log(datas.length);
+    //     that.setData({
+    //       swipers: datas.data
+    //     });
+    //   }
+    // })
   },
   /***
    * 点击进入详情页
@@ -227,13 +289,11 @@ Page({
     })
   },
   getProductList: function(param) { //获取商品列表
-    wx.request({
+    
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': "application/json"
-      },
-      success: function(res) {
+      data:param,
+      sCallback: function (res) {
         var datas = res.data.data;
         // console.log(datas);
         // console.log(datas.length);
@@ -246,16 +306,39 @@ Page({
           });
         }
       }
-    })
+    };
+    base.httpRequest(params);
+
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': "application/json"
+    //   },
+    //   success: function(res) {
+    //     var datas = res.data.data;
+    //     // console.log(datas);
+    //     // console.log(datas.length);
+    //     that.setData({
+    //       items: that.data.items.concat(datas)
+    //     });
+    //     if (datas && (datas.length <= 0 || datas.length < that.data.pageCount)) {
+    //       that.setData({
+    //         isLast: true
+    //       });
+    //     }
+    //   }
+    // })
   },
   goPost: function (e) {
     console.log(e);
     let post_id = e.currentTarget.dataset.id;
     let href = e.currentTarget.dataset.href;
     console.log(href);
+    console.log(encodeURIComponent(href));
     if(href){
       wx.navigateTo({
-        url: '../post/post?href=' + href,
+        url: '../post/post?href=' + encodeURIComponent(href),
       })
     }else{
       wx.navigateTo({
@@ -299,4 +382,24 @@ Page({
   //   })
   // },
 
+  // test: function() {
+  //   wx.request({
+  //     url: app.globalData.domainUrl,
+  //     data: {
+  //       page_code: 'p020'
+  //     },
+  //     header:  {
+  //       'content-type': "application/json",
+  //       'Authorization':'Bearer ' + wx.getStorageSync('token')
+  //     },
+  //     success: function(res) {
+  //       var datas = res.data;
+  //       console.log(datas);
+  //       // console.log(datas.length);
+  //       // that.setData({
+  //       //   swipers: datas.data
+  //       // });
+  //     }
+  //   })
+  // },
 })

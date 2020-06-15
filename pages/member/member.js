@@ -2,6 +2,7 @@
 var that;
 var app = getApp();
 var wxbarcode = require('../../utils/index.js');
+var base = require('../../utils/base.js');
 import tmpObj from '../template/template.js'
 Page({
 
@@ -53,16 +54,12 @@ Page({
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         has_ticket_count: true,
-        // has_order_count: true
       };
-      // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId')+'&has_ticket_count=true';
       that.getUserDetail(param);
 
-      // app.globalData.canGetUserInfo = false;
       that.setData({
-        // canGetUserInfo: app.globalData.canGetUserInfo,
         isLogin: false
       });
     } else {
@@ -133,13 +130,13 @@ Page({
   },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param) {
-    wx.request({
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'get',
+      sCallback: function (res) {
+        // callback && callback(data);
+        console.log(res);
         that.setData({
           items: res.data.data
         });
@@ -148,7 +145,25 @@ Page({
           wx.setStorageSync('discount', that.data.items.discount);  //折扣
         }
       }
-    });
+    };
+    base.httpRequest(params);
+
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     that.setData({
+    //       items: res.data.data
+    //     });
+    //     if(that.data.items && res.data.code == 200){
+    //       wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
+    //       wx.setStorageSync('discount', that.data.items.discount);  //折扣
+    //     }
+    //   }
+    // });
   },
 
   writeCode: function () {  //在页面上打印条形码和二维码
