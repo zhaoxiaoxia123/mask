@@ -1,5 +1,6 @@
 // pages/home/home.js
 var that;
+var base = require('../../../../utils/base.js');
 var app = getApp();
 Page({
 
@@ -146,45 +147,108 @@ Page({
 
   //获取用户信息 ：积分 等
   getUserDetail: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     that.setData({
+    //       customerInfo: res.data.data
+    //     });
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         that.setData({
           customerInfo: res.data.data
         });
       }
-    });
+    };
+    base.httpRequest(params);
   },
 
   getTransform: function(param){
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       transform: datas[0]
+    //     })
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
           transform: datas[0]
         })
       }
-    });
-
+    };
+    base.httpRequest(params);
   },
 
   getOrder: function (param) {  //读取订单
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data.data;
+    //     // console.log(datas);
+    //     if (datas == false) {
+    //       wx.showToast({
+    //         title: "该订单已失效。"
+    //       });
+    //       wx.navigateBack({
+    //         delta: 1
+    //       })
+    //     }else{
+    //       that.setData({
+    //         items: datas
+    //       });
+    //       if (that.data.items[0].minute){
+    //         that.setData({
+    //           items: datas
+    //         });
+    //       }
+    //       var order_amount = that.data.items[0].frozeno_order_amount;
+
+    //       that.setData({
+    //         orderAmount: order_amount,
+    //         rateAmount: (order_amount * (that.data.transform.rate / 100))
+    //       });
+    //       if ((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
+    //         that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
+    //       } else if ((parseFloat(order_amount) < parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
+    //         that.sumAmount(0, that.data.rateAmount, that.data.orderAmount);
+    //       } else if (that.data.transform.type == 1) {
+    //         that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
+    //       }
+    //     }
+    //   }
+    // });
+    
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         // console.log(datas);
         if (datas == false) {
@@ -218,7 +282,8 @@ Page({
           }
         }
       }
-    });
+    };
+    base.httpRequest(params);
   },
   sumAmount: function (point, rateAmount, amount) {
     if (parseFloat(point) >= parseFloat(rateAmount)) {
@@ -259,20 +324,43 @@ Page({
 // },
 //取消订单
   cancelOrder: function(){
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: {
+    //     page_code: 'p008',
+    //     type: 'cancel',
+    //     order_id: that.data.items[0].o_id,
+    //     order_type: that.data.items[0].frozeno_order_state
+    //   },
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     // console.log(res);
+    //     var datas = res.data.data;
+    //     if (datas) {
+    //       wx.showToast({
+    //         title: res.data.message
+    //       });
+    //       wx.navigateBack({
+    //         delta: 1
+    //       })
+    //     }
+    //   }
+    // })
+
+    let param = {
+      page_code: 'p008',
+      type: 'cancel',
+      order_id: that.data.items[0].o_id,
+      order_type: that.data.items[0].frozeno_order_state
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      method: "POST",
-      data: {
-        page_code: 'p008',
-        type: 'cancel',
-        order_id: that.data.items[0].o_id,
-        order_type: that.data.items[0].frozeno_order_state
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        // console.log(res);
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
         var datas = res.data.data;
         if (datas) {
           wx.showToast({
@@ -283,7 +371,9 @@ Page({
           })
         }
       }
-    })
+    };
+    base.httpRequest(params);
+
   },
   
   //是否让确认按钮可点击
@@ -299,20 +389,70 @@ Page({
       if(that.data.items[0].frozeno_order_amount == 0){
         that.payAfter();
       }else{
-        wx.request({
+        // wx.request({
+        //   url: app.globalData.domainUrl,
+        //   method: "POST",
+        //   data: {
+        //     page_code: 'p008',
+        //     type: 'unifiedorder',  
+        //     amount: that.data.items[0].frozeno_order_amount,
+        //     openid: wx.getStorageSync('openid')
+        //   },
+        //   header: {
+        //     "Content-Type": "application/x-www-form-urlencoded"
+        //   },
+        //   success: function (res) {
+        //     // console.log(res);
+        //     var datas = res.data.data;
+        //     that.setData({
+        //       outTradeNo: res.data.out_trade_no
+        //     });
+        //     if (datas) {
+        //       // console.log('datas:-----');
+        //       // console.log(datas);
+        //       wx.requestPayment({
+        //         'timeStamp': datas.timeStamp,
+        //         'nonceStr': datas.nonceStr,
+        //         'package': datas.package,
+        //         'signType': 'MD5',
+        //         'paySign': datas.paySign,
+        //         'success': function (res) {
+        //           console.log('success');
+        //           // console.log(res);
+        //           wx.showToast({
+        //             title: '支付成功',
+        //             icon: 'success',
+        //             duration: 3000
+        //           });
+        //           that.payAfter();
+        //         },
+        //         'fail': function (res) {
+        //           console.log('fail');
+        //           // console.log(res);
+        //           that.setClickState(true);
+        //         },
+        //         'complete': function (res) {
+        //           console.log('complete');
+        //           // console.log(res);
+        //           that.setClickState(true);
+        //         }
+        //       });
+        //     }
+        //   }
+        // })
+
+
+        let param = {
+          page_code: 'p008',
+          type: 'unifiedorder',  
+          amount: that.data.items[0].frozeno_order_amount,
+          openid: wx.getStorageSync('openid')
+        };
+        var params = {
           url: app.globalData.domainUrl,
-          method: "POST",
-          data: {
-            page_code: 'p008',
-            type: 'unifiedorder',  
-            amount: that.data.items[0].frozeno_order_amount,
-            openid: wx.getStorageSync('openid')
-          },
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          success: function (res) {
-            // console.log(res);
+          data:param,
+          method:'POST',
+          sCallback: function (res) {
             var datas = res.data.data;
             that.setData({
               outTradeNo: res.data.out_trade_no
@@ -349,7 +489,9 @@ Page({
               });
             }
           }
-        })
+        };
+        base.httpRequest(params);
+
       }
     }else{
       wx.showToast({
@@ -361,22 +503,51 @@ Page({
   //付款成功则修改订单状态。
   payAfter: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-      wx.request({
-        url: app.globalData.domainUrl,
-        method: "POST",
-        data: {
+      // wx.request({
+      //   url: app.globalData.domainUrl,
+      //   method: "POST",
+      //   data: {
+      //     page_code: 'p008',
+      //     type: 'pay',
+      //     order_id: that.data.items[0].o_id,
+      //     amount: that.data.items[0].frozeno_order_amount,
+      //     out_trade_no: that.data.outTradeNo,
+      //     customer_id: wx.getStorageSync('customerId')
+      //   },
+      //   header: {
+      //     "Content-Type": "application/x-www-form-urlencoded"
+      //   },
+      //   success: function (res) {
+      //     // console.log(res);
+      //     var ret = res.data;
+      //     // var datas = ret.data;
+      //     that.setClickState(true);
+      //     if (ret.code == 201) {
+      //       // console.log(ret.message);
+      //       // that.setData({
+      //       //   shopping_count: parseInt(that.data.shopping_count) + 1
+      //       // });
+      //     }else{
+      //       wx.navigateBack({
+      //         delta: 1
+      //       })
+      //     }
+      //   }
+      // })
+
+      let param = {
           page_code: 'p008',
           type: 'pay',
           order_id: that.data.items[0].o_id,
           amount: that.data.items[0].frozeno_order_amount,
           out_trade_no: that.data.outTradeNo,
-          customer_id: wx.getStorageSync('customerId')
-        },
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        success: function (res) {
-          // console.log(res);
+          // customer_id: wx.getStorageSync('customerId')
+        };
+      var params = {
+        url: app.globalData.domainUrl,
+        data:param,
+        method:'POST',
+        sCallback: function (res) {
           var ret = res.data;
           // var datas = ret.data;
           that.setClickState(true);
@@ -391,7 +562,9 @@ Page({
             })
           }
         }
-      })
+      };
+      base.httpRequest(params);
+
     } else {
       wx.showToast({
         title: "请先完成授权并登录"
@@ -413,52 +586,77 @@ Page({
   },
   //确认收货
   confirm:function(){
-    wx.request({
-      url: app.globalData.domainUrl,
-      method: "POST",
-      data: {
-        page_code: 'p008',
-        type: 'receive',
-        order_id: that.data.items[0].o_id
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        // console.log(res);
-        var datas = res.data.data;
-        if (datas) {
-          wx.showToast({
-            title: res.data.message
-          });
-          wx.navigateBack({
-            delta: 1
-          })
-        }
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: {
+    //     page_code: 'p008',
+    //     type: 'receive',
+    //     order_id: that.data.items[0].o_id
+    //   },
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     // console.log(res);
+    //     var datas = res.data.data;
+    //     if (datas) {
+    //       wx.showToast({
+    //         title: res.data.message
+    //       });
+    //       wx.navigateBack({
+    //         delta: 1
+    //       })
+    //     }
+    //   }
+    // })
+
+
+    let param = {
+      page_code: 'p008',
+      type: 'receive',
+      order_id: that.data.items[0].o_id
+    };
+  var params = {
+    url: app.globalData.domainUrl,
+    data:param,
+    method:'POST',
+    sCallback: function (res) {
+      var datas = res.data.data;
+      if (datas) {
+        wx.showToast({
+          title: res.data.message
+        });
+        wx.navigateBack({
+          delta: 1
+        })
       }
-    })
+    }
+  };
+  base.httpRequest(params);
+
+
   },
   
 
   //测试付款成功则修改订单状态。
   testPayAfter: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-      wx.request({
-        url: app.globalData.domainUrl,
-        method: "POST",
-        data: {
-          page_code: 'p008',
-          type: 'pay',
-          order_id: 1,
-          amount: 3000,
-          out_trade_no: '123456789',
-          customer_id: wx.getStorageSync('customerId')
-        },
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        success: function (res) {
-          console.log(res);
+
+      let param = {
+        page_code: 'p008',
+        type: 'pay',
+        order_id: 1,
+        amount: 3000,
+        out_trade_no: '123456789',
+        // customer_id: wx.getStorageSync('customerId')
+      };
+    var params = {
+      url: app.globalData.domainUrl,
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
+        console.log(res);
           var ret = res.data;
           var datas = ret.data;
           console.log(ret);
@@ -472,8 +670,41 @@ Page({
               delta: 1
             })
           }
-        }
-      })
+      }
+    };
+    base.httpRequest(params);
+
+      // wx.request({
+      //   url: app.globalData.domainUrl,
+      //   method: "POST",
+      //   data: {
+      //     page_code: 'p008',
+      //     type: 'pay',
+      //     order_id: 1,
+      //     amount: 3000,
+      //     out_trade_no: '123456789',
+      //     customer_id: wx.getStorageSync('customerId')
+      //   },
+      //   header: {
+      //     "Content-Type": "application/x-www-form-urlencoded"
+      //   },
+      //   success: function (res) {
+      //     console.log(res);
+      //     var ret = res.data;
+      //     var datas = ret.data;
+      //     console.log(ret);
+      //     if (ret.code == 201) {
+      //       // console.log(ret.message);
+      //       // that.setData({
+      //       //   shopping_count: parseInt(that.data.shopping_count) + 1
+      //       // });
+      //     } else {
+      //       wx.navigateBack({
+      //         delta: 1
+      //       })
+      //     }
+      //   }
+      // })
     } else {
       wx.showToast({
         title: "请先完成授权并登录"

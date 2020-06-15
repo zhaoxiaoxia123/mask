@@ -1,5 +1,6 @@
 // pages/my/my.js
 import tmpObj from '../template/template.js'
+var base = require('../../utils/base.js');
 var app = getApp();
 var that;
 Page({
@@ -43,15 +44,14 @@ Page({
         selected: 3
       })
     }
+    
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
         page_code:'p004',
         type:"mainCustomer",
-        customer_id:wx.getStorageSync('customerId'),
-        // has_ticket_count: true,
+        // customer_id:wx.getStorageSync('customerId'),
         has_order_count: true
       };
-      // var param = '/p004?type=mainCustomer&has_ticket_count=true&has_order_count=true&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
 
       that.setData({
@@ -63,35 +63,37 @@ Page({
       });
     }
 
-    var code = wx.getStorageSync("memberNo");
-    if (code) {
-      var param = {
-        page_code: 'p015',
-        share_by: code,
-        customer_id: wx.getStorageSync("customerId")
-      };
-      // var param = '/p015?share_by='+code+'&customer_id='+wx.getStorageSync("customerId");
-      wx.request({
-        url: app.globalData.domainUrl,
-        data: param,
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          let qr = res.data.data;
-          if (qr && qr.indexOf("http") >= 0) {
-            that.setData({
-              qrcode: res.data.data
-            });
-          } else {
-            that.setData({
-              qrcode: that.data.domainName + res.data.data
-            });
-          }
-          console.log(that.data.qrcode);
-        }
-      });
-    }
+    //生成邀请码  二维码图片
+    that.getShareByQrCode();
+    // var code = wx.getStorageSync("memberNo");
+    // if (code) {
+    //   var param = {
+    //     page_code: 'p015',
+    //     share_by: code,
+    //     customer_id: wx.getStorageSync("customerId")
+    //   };
+    //   // var param = '/p015?share_by='+code+'&customer_id='+wx.getStorageSync("customerId");
+    //   wx.request({
+    //     url: app.globalData.domainUrl,
+    //     data: param,
+    //     header: {
+    //       'content-type': 'application/json'
+    //     },
+    //     success: function (res) {
+    //       let qr = res.data.data;
+    //       if (qr && qr.indexOf("http") >= 0) {
+    //         that.setData({
+    //           qrcode: res.data.data
+    //         });
+    //       } else {
+    //         that.setData({
+    //           qrcode: that.data.domainName + res.data.data
+    //         });
+    //       }
+    //       console.log(that.data.qrcode);
+    //     }
+    //   });
+    // }
 
   },
 
@@ -145,6 +147,38 @@ Page({
     }
   },
 
+
+ //生成用户二维码  邀请码
+ getShareByQrCode: function () {
+  var code = wx.getStorageSync("memberNo");
+  if (code) {
+    var param = {
+      page_code: 'p015',
+      share_by: code,
+      // customer_id: wx.getStorageSync("customerId")
+    };
+    var params = {
+      url: app.globalData.domainUrl,
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
+        let qr = res.data.data;
+        if (qr && qr.indexOf("http") >= 0) {
+          that.setData({
+            qrcode: res.data.data
+          });
+        } else {
+          that.setData({
+            qrcode: that.data.domainName + res.data.data
+          });
+        }
+        console.log(that.data.qrcode);
+      }
+    };
+    base.httpRequest(params);
+  }
+},
+
   ftservice: function (e) {
     let ret = tmpObj.ftservice(e);
     that.setData({
@@ -175,13 +209,29 @@ Page({
   },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param){
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     that.setData({
+    //       items: res.data.data
+    //     });
+    //     if(that.data.items && res.data.code == 200){
+    //       wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
+    //       wx.setStorageSync('discount', that.data.items.discount);  //折扣
+    //       that.setLevel();
+    //     }
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         that.setData({
           items: res.data.data
         });
@@ -191,7 +241,9 @@ Page({
           that.setLevel();
         }
       }
-    });
+    };
+    base.httpRequest(params);
+
   },
 
   setLevel:function(){

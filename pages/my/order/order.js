@@ -1,5 +1,6 @@
 // pages/home/home.js
 var that;
+var base = require('../../../utils/base.js');
 var app = getApp();
 Page({
 
@@ -55,7 +56,7 @@ Page({
     var param = {
       page_code: 'p008',
       type: "myOrder",
-      customer_id: wx.getStorageSync('customerId'),
+      // customer_id: wx.getStorageSync('customerId'),
       order_state: that.data.order_state,
       offset: (that.data.offset - 1) * that.data.pageCount,
       page: that.data.pageCount
@@ -96,7 +97,7 @@ Page({
       var param = {
         page_code: 'p008',
         type: "myOrder",
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         order_state: that.data.order_state,//默认访问待付款
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
@@ -136,13 +137,32 @@ Page({
 
   //以下为自定义点击事件
   getOrderList: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data.data;
+    //     if (datas){
+    //       that.setData({
+    //         items: that.data.items.concat(datas)
+    //       });
+    //       if (datas.length <= 0 || datas.length < that.data.pageCount) {
+    //         that.setData({
+    //           isLast: true
+    //         });
+    //       }
+    //     }
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         if (datas){
           that.setData({
@@ -155,7 +175,9 @@ Page({
           }
         }
       }
-    });
+    };
+    base.httpRequest(params);
+
   },
   
   // tab切换
@@ -177,7 +199,7 @@ Page({
       var param = {
         page_code: 'p008',
         type: "myOrder",
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         order_state: that.data.order_state,//默认访问待付款
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
@@ -196,20 +218,40 @@ Page({
   cancelOrder: function (e) {
     var order_id = e.currentTarget.dataset.id;
     var order_state = e.currentTarget.dataset.state;
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: {
+    //     page_code: 'p008',
+    //     type: 'cancel',
+    //     order_id: order_id,
+    //     order_state: order_state   //取消前的订单状态
+    //   },
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     // console.log(res);
+    //     var datas = res.data.data;
+    //     if (datas) {
+    //       wx.showToast({
+    //         title: res.data.message
+    //       });
+    //       that.onShow();
+    //     }
+    //   }
+    // })
+    let param = {
+      page_code: 'p008',
+      type: 'cancel',
+      order_id: order_id,
+      order_state: order_state   //取消前的订单状态
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      method: "POST",
-      data: {
-        page_code: 'p008',
-        type: 'cancel',
-        order_id: order_id,
-        order_state: order_state   //取消前的订单状态
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        // console.log(res);
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
         var datas = res.data.data;
         if (datas) {
           wx.showToast({
@@ -218,23 +260,44 @@ Page({
           that.onShow();
         }
       }
-    })
+    };
+    base.httpRequest(params);
+
   },
   submitMessage:function(e){ //提醒发货
     var order_id = e.currentTarget.dataset.id;
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: {
+    //     page_code: 'p008',
+    //     type: 'sendMessage',
+    //     order_id: order_id
+    //   },
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     // console.log(res);
+    //     var datas = res.data.data;
+    //     if (datas) {
+    //       wx.showToast({
+    //         title: res.data.message
+    //       });
+    //     }
+    //   }
+    // })
+    
+    let param = {
+      page_code: 'p008',
+      type: 'sendMessage',
+      order_id: order_id
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      method: "POST",
-      data: {
-        page_code: 'p008',
-        type: 'sendMessage',
-        order_id: order_id
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        // console.log(res);
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
         var datas = res.data.data;
         if (datas) {
           wx.showToast({
@@ -242,23 +305,45 @@ Page({
           });
         }
       }
-    })
+    };
+    base.httpRequest(params);
+
   },
   submitOk: function(e){ //确认收货
     var order_id = e.currentTarget.dataset.id;
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: {
+    //     page_code: 'p008',
+    //     type: 'receive',
+    //     order_id: order_id
+    //   },
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     // console.log(res);
+    //     var datas = res.data.data;
+    //     if (datas) {
+    //       wx.showToast({
+    //         title: res.data.message
+    //       });
+    //       that.onShow();
+    //     }
+    //   }
+    // })
+
+    let param = {
+      page_code: 'p008',
+      type: 'receive',
+      order_id: order_id
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      method: "POST",
-      data: {
-        page_code: 'p008',
-        type: 'receive',
-        order_id: order_id
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        // console.log(res);
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
         var datas = res.data.data;
         if (datas) {
           wx.showToast({
@@ -267,7 +352,9 @@ Page({
           that.onShow();
         }
       }
-    })
+    };
+    base.httpRequest(params);
+
   },
 })
 

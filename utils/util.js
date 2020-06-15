@@ -16,6 +16,15 @@
 //   return n
 // }
 
+// function errorWarn(error){
+//   wx.showToast({
+//   // image: '/image/errorIcon.png',
+//   duration: 2000,
+//   title: error,
+//   mask: true
+//   })
+//  }
+ 
 module.exports = {
   // formatTime: formatTime,
 }

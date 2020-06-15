@@ -1,6 +1,7 @@
 // pages/news/news.js
 var that;
 var app = getApp();
+var base = require('../../../utils/base.js');
 Page({
 
   /**
@@ -38,7 +39,7 @@ Page({
       var param = {
         page_code: 'p001',
         type: that.data.type,
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -81,7 +82,7 @@ Page({
       });
       var param = {
         page_code: 'p007',
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -91,13 +92,29 @@ Page({
   },
   //以下为自定义点击事件
   getMsgList: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       msgList: that.data.msgList.concat(datas)
+    //     });
+    //     if (datas.length <= 0 || datas.length < that.data.pageCount) {
+    //       that.setData({
+    //         isLast: true
+    //       });
+    //     }
+    //   }
+    // });
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
           msgList: that.data.msgList.concat(datas)
@@ -108,7 +125,8 @@ Page({
           });
         }
       }
-    });
+    };
+    base.httpRequest(params);
   },
   // tab切换
   clickTab: function(e) {

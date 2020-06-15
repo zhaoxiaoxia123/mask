@@ -326,12 +326,12 @@ Page({
     wx.setStorageSync('avatar', datas.frozeno_avatar);  //用户名
     wx.setStorageSync('openid', datas.frozeno_openid);
     wx.setStorageSync('unionid', datas.frozeno_unionid);
+    wx.setStorageSync('token', datas.token);
     if(datas.c_number){
       wx.setStorageSync('memberNo', datas.c_number);  //会员号
       wx.setStorageSync('level', datas.frozeno_level);  //等级
       wx.setStorageSync('discount', datas.discount);  //折扣
     }
-    
     that.setData({
       get_user_info : wx.getStorageSync("get_user_info"), //是否继续获取用户信息
       get_phone_info : wx.getStorageSync('get_phone_info'),    //是否继续获取手机信息

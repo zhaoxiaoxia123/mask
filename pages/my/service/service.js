@@ -1,5 +1,6 @@
 // pages/my/service/service.js
 import tmpObj from '../../template/template.js'
+var base = require('../../../utils/base.js');
 var app = getApp();
 var that;
 Page({
@@ -86,17 +87,34 @@ Page({
   calling: function (e) {
     tmpObj.calling(e);
   },
-  getPost: function (param) {
-    wx.request({
+  getPost: function () {
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: {
+    //     page_code: 'p001',
+    //     type: that.data.type
+    //   },
+    //   header: {
+    //     'content-type': "application/json"
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data;
+    //     console.log(datas);
+    //     console.log(datas.length);
+    //     that.setData({
+    //       item: datas.data
+    //     });
+    //   }
+    // })
+
+    let param = {
+      page_code: 'p001',
+      type: that.data.type
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      data: {
-        page_code: 'p001',
-        type: that.data.type
-      },
-      header: {
-        'content-type': "application/json"
-      },
-      success: function (res) {
+      data:param,
+      sCallback: function (res) {
         var datas = res.data;
         console.log(datas);
         console.log(datas.length);
@@ -104,6 +122,8 @@ Page({
           item: datas.data
         });
       }
-    })
+    };
+    base.httpRequest(params);
+
   },
 })

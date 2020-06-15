@@ -1,5 +1,6 @@
 // pages/home/home.js
 var that;
+var base = require('../../../utils/base.js');
 var app = getApp();
 Page({
   /**
@@ -78,23 +79,42 @@ Page({
   getInvoiceList: function () {
       // var param = '/p006?customer_id='+ wx.getStorageSync('customerId');
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-      wx.request({
+    //   wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: {
+    //     page_code: "p006",
+    //     customer_id: wx.getStorageSync('customerId')
+    //   },
+    //   header: {
+    //     'content-type': "application/json"
+    //   },
+    //   success: function (res) {
+    //     console.log(res);
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       items: datas
+    //     });
+    //   }
+    // })
+    
+    let param = {
+      page_code: "p006",
+      // customer_id: wx.getStorageSync('customerId')
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      data: {
-        page_code: "p006",
-        customer_id: wx.getStorageSync('customerId')
-      },
-      header: {
-        'content-type': "application/json"
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         console.log(res);
         var datas = res.data.data;
         that.setData({
           items: datas
         });
       }
-    })
+    };
+    base.httpRequest(params);
+
     }else{
       wx.showModal({
         title: '提示',
@@ -123,21 +143,35 @@ Page({
         type: type,
         invoice_id: id
       };
-      wx.request({
+      var params = {
         url: app.globalData.domainUrl,
-        method: "POST",
-        data: param,
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        success: function (res) {
+        data:param,
+        method:'POST',
+        sCallback: function (res) {
           console.log(res);
-          var datas = res.data.data;
+          // var datas = res.data.data;
           that.setData({
             items: that.deleteItem(that.data.items, index)
           });
         }
-      })
+      };
+      base.httpRequest(params);
+
+      // wx.request({
+      //   url: app.globalData.domainUrl,
+      //   method: "POST",
+      //   data: param,
+      //   header: {
+      //     "Content-Type": "application/x-www-form-urlencoded"
+      //   },
+      //   success: function (res) {
+      //     console.log(res);
+      //     var datas = res.data.data;
+      //     that.setData({
+      //       items: that.deleteItem(that.data.items, index)
+      //     });
+      //   }
+      // })
     }
   },
   deleteItem: function (data, delIndex) {
@@ -155,7 +189,7 @@ Page({
   checkSendInvoice: function (e) {
     let index = e.currentTarget.dataset.index;
     let items = that.data.items;
-    let check = items[index].checked;
+    // let check = items[index].checked;
     items[index].checked = !items[index].checked;
     if (items[index].checked) {
       wx.showModal({

@@ -1,6 +1,7 @@
 // pages/member/grade/grade.js
 var app = getApp();
 var that;
+var base = require('../../../utils/base.js');
 Page({
 
   /**
@@ -77,23 +78,40 @@ Page({
     })
   },
   
-  getPost: function (param) {
-    wx.request({
+  getPost: function () {
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: {
+    //     page_code: 'p001',
+    //     type: that.data.type
+    //   },
+    //   header: {
+    //     'content-type': "application/json"
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data;
+    //     console.log(datas);
+    //     that.setData({
+    //       items: datas.data
+    //     });
+    //   }
+    // })
+    let param =  {
+      page_code: 'p001',
+      type: that.data.type
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      data: {
-        page_code: 'p001',
-        type: that.data.type
-      },
-      header: {
-        'content-type': "application/json"
-      },
-      success: function (res) {
+      data:param,
+      sCallback: function (res) {
         var datas = res.data;
         console.log(datas);
         that.setData({
           items: datas.data
         });
       }
-    })
+    };
+    base.httpRequest(params);
+
   },
 })

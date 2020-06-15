@@ -2,6 +2,7 @@
 var that;
 var app = getApp();
 import tmpObj from '../template/template.js'
+var base = require('../../utils/base.js');
 Page({
   /**
    * 页面的初始数据
@@ -59,7 +60,7 @@ Page({
       var param_s = {
         page_code: 'p012',
         type: "shopping_list",
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -101,7 +102,7 @@ Page({
       var param_s = {
         page_code: 'p012',
         type: "shopping_list",
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -140,14 +141,32 @@ Page({
 
   //以下为自定义点击事件
   getShoppingList: function(param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function(res) {
+    //     // console.log(res);
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       items: that.data.items.concat(datas)
+    //     });
+    //     if (datas.length <= 0 || datas.length < that.data.pageCount) {
+    //       that.setData({
+    //         isLast: true
+    //       });
+    //     }
+    //   }
+    // });
+
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function(res) {
-        // console.log(res);
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
           items: that.data.items.concat(datas)
@@ -158,7 +177,9 @@ Page({
           });
         }
       }
-    });
+    };
+    base.httpRequest(params);
+
   },
   // 减按钮控件
   jianFn: function(e) {
@@ -305,25 +326,45 @@ Page({
   //清除购物车商品
   deleteShopping:function(e){
     var shopping_id = e.currentTarget.dataset.id;
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: {
+    //     page_code: 'p012',
+    //     type: 'delete_shopping',
+    //     shopping_id: shopping_id,
+    //   },
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     // console.log(res);
+    //     var datas = res.data.data;
+    //     wx.showToast({
+    //       title: res.data.message
+    //     });
+    //     that.onShow();
+    //   }
+    // })
+
+    let param = {
+      page_code: 'p012',
+      type: 'delete_shopping',
+      shopping_id: shopping_id,
+    };
+    var params = {
       url: app.globalData.domainUrl,
-      method: "POST",
-      data: {
-        page_code: 'p012',
-        type: 'delete_shopping',
-        shopping_id: shopping_id,
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        // console.log(res);
-        var datas = res.data.data;
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
+        // var datas = res.data.data;
         wx.showToast({
           title: res.data.message
         });
         that.onShow();
       }
-    })
+    };
+    base.httpRequest(params);
+
   },
 })

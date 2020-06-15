@@ -1,6 +1,7 @@
 // pages/info/info.js
 var that;
 var app = getApp();
+var base = require('../../../../utils/base.js');
 Page({
   /**
    * 页面的初始数据
@@ -33,16 +34,40 @@ Page({
 
     if (that.data.addressId){
       // var param = '/p002?customer_addr_id='+that.data.addressId;
-      wx.request({
+      // wx.request({
+      //   url: app.globalData.domainUrl,
+      //   data: {
+      //     page_code: "p002",
+      //     customer_addr_id: that.data.addressId
+      //   },
+      //   header: {
+      //     'content-type': "application/json"
+      //   },
+      //   success: function (res) {
+      //     console.log(res);
+      //     var datas = res.data.data;
+      //     that.setData({
+      //       name: datas.name,
+      //       phone: datas.phone,
+      //       zip: datas.zip,
+      //       address: datas.address,
+      //       is_default: datas.is_default==1?true:false,
+      //       region:[datas.province,datas.city,datas.area]
+      //     });
+      //     console.log('that.data.is_default');
+      //     console.log(that.data.is_default);
+      //   }
+      // })
+
+      let param = {
+        page_code: "p002",
+        customer_addr_id: that.data.addressId
+      };
+      var params = {
         url: app.globalData.domainUrl,
-        data: {
-          page_code: "p002",
-          customer_addr_id: that.data.addressId
-        },
-        header: {
-          'content-type': "application/json"
-        },
-        success: function (res) {
+        data:param,
+        method:'GET',
+        sCallback: function (res) {
           console.log(res);
           var datas = res.data.data;
           that.setData({
@@ -56,7 +81,9 @@ Page({
           console.log('that.data.is_default');
           console.log(that.data.is_default);
         }
-      })
+      };
+      base.httpRequest(params);
+
     }
   },
 
@@ -142,7 +169,7 @@ Page({
     that.isShowTip('address');
   },
   radiocon: function (e) {
-    var is_default = that.data.is_default;
+    // var is_default = that.data.is_default;
     that.setData({
       is_default: !that.data.is_default
     });
@@ -198,14 +225,29 @@ Page({
               type: "del",
               customer_addr_id: that.data.addressId
             };
-            wx.request({
+            // wx.request({
+            //   url: app.globalData.domainUrl,
+            //   method: "POST",
+            //   data: param,
+            //   header: {
+            //     "Content-Type": "application/x-www-form-urlencoded"
+            //   },
+            //   success: function (res) {
+            //     console.log(res);
+            //     var datas = res.data.data;
+            //     if (datas) {
+            //       wx.navigateBack({
+            //         delta: 1
+            //       });
+            //     }
+            //   }
+            // })
+
+            var params = {
               url: app.globalData.domainUrl,
-              method: "POST",
-              data: param,
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              success: function (res) {
+              data:param,
+              method:'GET',
+              sCallback: function (res) {
                 console.log(res);
                 var datas = res.data.data;
                 if (datas) {
@@ -214,7 +256,10 @@ Page({
                   });
                 }
               }
-            })
+            };
+            base.httpRequest(params);
+      
+
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
@@ -280,18 +325,14 @@ Page({
         area: that.data.region[2],
         address: that.data.address,
         is_default: that.data.is_default?1:0,
-        customer_id:wx.getStorageSync('customerId'),
+        // customer_id:wx.getStorageSync('customerId'),
         customer_addr_id: that.data.addressId
       };
-      console.log(param);
-      wx.request({
+      var params = {
         url: app.globalData.domainUrl,
-        method: "POST",
-        data: param,
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        success: function (res) {
+        data:param,
+        method:'POST',
+        sCallback: function (res) {
           console.log(res);
           var datas = res.data.data;
           if (datas){
@@ -300,7 +341,26 @@ Page({
             });
           }
         }
-      })
+      };
+      base.httpRequest(params);
+      // console.log(param);
+      // wx.request({
+      //   url: app.globalData.domainUrl,
+      //   method: "POST",
+      //   data: param,
+      //   header: {
+      //     "Content-Type": "application/x-www-form-urlencoded"
+      //   },
+      //   success: function (res) {
+      //     console.log(res);
+      //     var datas = res.data.data;
+      //     if (datas){
+      //       wx.navigateBack({
+      //         delta:1
+      //       });
+      //     }
+      //   }
+      // })
     }else{
       wx.showModal({
         title: '提示',

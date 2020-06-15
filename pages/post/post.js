@@ -2,6 +2,7 @@
 var that;
 var app = getApp();
 var WxParse = require('../../wxParse/wxParse.js')
+var base = require('../../utils/base.js');
 Page({
 
   /**
@@ -24,9 +25,6 @@ Page({
       type: options.type,
       href:decodeURIComponent(options.href)
     });
-    console.log(that.data.type);
-    console.log(that.data.postId);
-    console.log(that.data.href);
     if (that.data.type){
       var param = {
         page_code: "p001",
@@ -39,9 +37,9 @@ Page({
         post_id: that.data.postId
       };
       that.getPost(param);
-    } else if (that.data.href) {
-      
     }
+    //  else if (that.data.href) {
+    // }
   },
 
   /**
@@ -94,13 +92,33 @@ Page({
   },
   //读取文章页面
   getPost: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data.data;
+    //     console.log(datas.length);
+    //     if (datas.length > 0){
+    //       that.setData({
+    //         item: datas
+    //       });
+    //       //修改顶部标题栏信息
+    //       wx.setNavigationBarTitle({
+    //         title: datas[0].title
+    //       });
+    //       var infos = datas[0].description;
+    //       WxParse.wxParse('infos', 'html', infos, that);
+    //     }
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      sCallback: function (res) {
         var datas = res.data.data;
         console.log(datas.length);
         if (datas.length > 0){
@@ -115,6 +133,8 @@ Page({
           WxParse.wxParse('infos', 'html', infos, that);
         }
       }
-    });
+    };
+    base.httpRequest(params);
+
   },
 })

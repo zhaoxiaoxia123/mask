@@ -1,5 +1,6 @@
 // pages/info/info.js
 var that;
+var base = require('../../../../utils/base.js');
 var app = getApp();
 Page({
   /**
@@ -30,16 +31,38 @@ Page({
     });
     if (that.data.invoiceId) {
       // var param = '/p006?invoice_id='+that.data.invoiceId;
-      wx.request({
+      // wx.request({
+      //   url: app.globalData.domainUrl,
+      //   data: {
+      //     page_code: "p006",
+      //     invoice_id: that.data.invoiceId
+      //   },
+      //   header: {
+      //     'content-type': "application/json"
+      //   },
+      //   success: function (res) {
+      //     console.log(res);
+      //     var datas = res.data.data;
+      //     that.setData({
+      //       username: datas.username,
+      //       phone: datas.phone,
+      //       taxNumber: datas.tax_number,
+      //       address: datas.address,
+      //       bank: datas.bank,
+      //       bankAccount: datas.bank_account
+      //     });
+      //   }
+      // })
+
+      let param =  {
+        page_code: "p006",
+        invoice_id: that.data.invoiceId
+      };
+      var params = {
         url: app.globalData.domainUrl,
-        data: {
-          page_code: "p006",
-          invoice_id: that.data.invoiceId
-        },
-        header: {
-          'content-type': "application/json"
-        },
-        success: function (res) {
+        data:param,
+        method:'GET',
+        sCallback: function (res) {
           console.log(res);
           var datas = res.data.data;
           that.setData({
@@ -51,7 +74,9 @@ Page({
             bankAccount: datas.bank_account
           });
         }
-      })
+      };
+      base.httpRequest(params);
+
     }
 
   },
@@ -116,8 +141,8 @@ Page({
     that.isShowTip('taxNumber');
   },
   setPhoneInput: function (e) { 
-    let value = this.validateNumber(e.detail.value)
-    this.setData({
+    let value = that.validateNumber(e.detail.value)
+    that.setData({
       phone:value
     })
   },
@@ -176,14 +201,11 @@ Page({
               invoice_id: that.data.invoiceId
             };
             console.log(param);
-            wx.request({
+            var params = {
               url: app.globalData.domainUrl,
-              method: "POST",
-              data: param,
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              success: function (res) {
+              data:param,
+              method:'POST',
+              sCallback: function (res) {
                 console.log(res);
                 var datas = res.data.data;
                 if (datas) {
@@ -192,7 +214,26 @@ Page({
                   });
                 }
               }
-            })
+            };
+            base.httpRequest(params);
+      
+            // wx.request({
+            //   url: app.globalData.domainUrl,
+            //   method: "POST",
+            //   data: param,
+            //   header: {
+            //     "Content-Type": "application/x-www-form-urlencoded"
+            //   },
+            //   success: function (res) {
+            //     console.log(res);
+            //     var datas = res.data.data;
+            //     if (datas) {
+            //       wx.navigateBack({
+            //         delta: 1
+            //       });
+            //     }
+            //   }
+            // })
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
@@ -214,7 +255,7 @@ Page({
   submitInvoice: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       that.isShowTip('submit',true);
-      if (that.data.username.length  == 0){
+      if (that.data.username.length <= 5){
         wx.showModal({
           title: '提示',
           content: '请输入单位名称',
@@ -228,6 +269,13 @@ Page({
           showCancel: false
         });
         return false;
+      } else if (that.data.taxNumber.length != 15 && that.data.taxNumber.length != 18 && that.data.taxNumber.length != 20){
+        wx.showModal({
+          title: '提示',
+          content: '请输入正确位数的纳税人识别号',
+          showCancel: false
+        });
+        return false;
       }
     var param = {
       page_code: "p006",
@@ -237,19 +285,17 @@ Page({
       tax_number: that.data.taxNumber,
       address: that.data.address,
       bank: that.data.bank,
-      bank_account: that.data.bankAccount,
-      customer_id: wx.getStorageSync('customerId'),
+      bank_account: that.data.bankAccount?that.data.bankAccount:'',
+      // customer_id: wx.getStorageSync('customerId'),
       invoice_id: that.data.invoiceId
     };
     console.log(param);
-    wx.request({
+
+    var params = {
       url: app.globalData.domainUrl,
-      method: "POST",
-      data: param,
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
         console.log(res);
         var datas = res.data.data;
         if (datas) {
@@ -258,7 +304,25 @@ Page({
           });
         }
       }
-    })
+    };
+    base.httpRequest(params);
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: param,
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     console.log(res);
+    //     var datas = res.data.data;
+    //     if (datas) {
+    //       wx.navigateBack({
+    //         delta: 1
+    //       });
+    //     }
+    //   }
+    // })
 
     } else {
       wx.showModal({
@@ -269,3 +333,4 @@ Page({
     }
   },
 })
+

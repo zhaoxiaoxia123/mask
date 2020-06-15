@@ -7,15 +7,15 @@
       <view class='title'>
         <view class="{{0 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='0'>
           <text>未使用</text>
-          <hr class="line-style" />
+          <hr class="line-style"/>
         </view>
         <view class="{{1 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='1'>
           <text>已使用</text>
-          <hr class="line-style" />
+          <hr class="line-style"/>
         </view>
         <view class="{{2 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='2'>
           <text>已过期</text>
-          <hr class="line-style" />
+          <hr class="line-style"/>
         </view>
       </view>
       <!--内容布局-->

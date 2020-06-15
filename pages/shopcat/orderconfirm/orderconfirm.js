@@ -1,6 +1,7 @@
 // pages/info/info.js
 var that;
 var app = getApp();
+var base = require('../../../utils/base.js');
 Page({
   /**
    * 页面的初始数据
@@ -71,7 +72,7 @@ Page({
       };
       // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
-    }
+    
     //查询积分是否可抵用
     var transformParam = {
       page_code: 'p017',
@@ -85,7 +86,7 @@ Page({
       page_code: 'p005',
       type: "confirmProduct",
       products: that.data.products,
-      customer_id: wx.getStorageSync("customerId"),
+      // customer_id: wx.getStorageSync("customerId"),
       level: wx.getStorageSync("level")
     };
     // var param_p = '/p005?type=confirmProduct&products='+that.data.products;
@@ -97,7 +98,7 @@ Page({
     if(that.data.invoiceId){
       that.getInvoice(); //获取用户设置的发票信息
     }
-
+  }
     // //使用新人券页面。选择电子发票或收货地址需要计算一次减去800
     // if (currPage.data.addressId || currPage.data.invoiceId){
     //   setTimeout(function () {
@@ -177,44 +178,88 @@ Page({
 
   //获取用户信息 ：积分 等
   getUserDetail: function(param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function(res) {
+    //     that.setData({
+    //       customerInfo: res.data.data
+    //     });
+    //   }
+    // });
+    
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function(res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         that.setData({
           customerInfo: res.data.data
         });
       }
-    });
+    };
+    base.httpRequest(params);
+
   },
 
   getTransform: function(param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function(res) {
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       transform: datas[0]
+    //     })
+    //   }
+    // });
+    
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function(res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
           transform: datas[0]
         })
       }
-    });
+    };
+    base.httpRequest(params);
   },
 
   getProducts: function(param) { //读取商品信息
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function(res) {
+    //     var datas = res.data.data;
+    //     console.log(datas);
+    //     that.setData({
+    //       items: datas
+    //     });
+    //     setTimeout(function() {
+    //       //计算实付款
+    //       that.sumUsingPoint();
+    //       // that.sumProductAmount(that.data.items.products, that.data.customerInfo);
+    //     }, 2000);
+    //   }
+    // });
+    
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function(res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         console.log(datas);
         that.setData({
@@ -226,7 +271,8 @@ Page({
           // that.sumProductAmount(that.data.items.products, that.data.customerInfo);
         }, 2000);
       }
-    });
+    };
+    base.httpRequest(params);
   },
 
   //计算商品总价
@@ -374,7 +420,7 @@ Page({
     // var param = '/p002?is_default=1&customer_id='+wx.getStorageSync('customerId');
       var param = {
         page_code: 'p002',
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         is_default: 1
       };
     if(that.data.addressId > 0){
@@ -383,13 +429,34 @@ Page({
         customer_addr_id: that.data.addressId
       };
     }
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': "application/json"
+    //   },
+    //   success: function(res) {
+    //     var datas = res.data.data;
+    //     if (datas) {
+    //       if (that.data.addressId > 0) {
+    //         that.setData({
+    //           address: datas
+    //         });
+    //       }else{
+    //         that.setData({
+    //           address: datas[0]
+    //         });
+    //       }
+    //     }
+    //   }
+    // })
+
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': "application/json"
-      },
-      success: function(res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         if (datas) {
           if (that.data.addressId > 0) {
@@ -403,7 +470,10 @@ Page({
           }
         }
       }
-    })
+    };
+    base.httpRequest(params);
+
+
     }
   },
   getInvoice:function(){
@@ -413,13 +483,27 @@ Page({
         page_code: 'p006',
         invoice_id: that.data.invoiceId
       };
-      wx.request({
+      // wx.request({
+      //   url: app.globalData.domainUrl,
+      //   data: param,
+      //   header: {
+      //     'content-type': "application/json"
+      //   },
+      //   success: function (res) {
+      //     var datas = res.data.data;
+      //     if (datas) {
+      //       that.setData({
+      //         invoice: datas
+      //       });
+      //     }
+      //   }
+      // })
+
+      var params = {
         url: app.globalData.domainUrl,
-        data: param,
-        header: {
-          'content-type': "application/json"
-        },
-        success: function (res) {
+        data:param,
+        method:'GET',
+        sCallback: function (res) {
           var datas = res.data.data;
           if (datas) {
             that.setData({
@@ -427,15 +511,17 @@ Page({
             });
           }
         }
-      })
+      };
+      base.httpRequest(params);
+
     }
   },
   getTicketList: function() { //获取有效卡券列表
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     //获取卡券列表
-    var param_t = {
+    var param = {
       page_code: 'p013',
-      customer_id: wx.getStorageSync('customerId'),
+      // customer_id: wx.getStorageSync('customerId'),
       amount: that.data.payAmount,
       is_show_amount:0,  //是否展示新会员卡券
       ticket_state:1,
@@ -443,19 +529,33 @@ Page({
       page: 20
     };
     // var param_t = '/p013?offset=0&page=20&customer_id='+wx.getStorageSync('customerId');
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param_t,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function(res) {
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       ticketList: datas
+    //     });
+    //   }
+    // });
+    
+    var params = {
       url: app.globalData.domainUrl,
-      data: param_t,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function(res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
           ticketList: datas
         });
       }
-    });
+    };
+    base.httpRequest(params);
+
     }
   },
 
@@ -472,28 +572,68 @@ Page({
     if (that.data.items.ticket.ticket_id && ticket_id == 0){  //使用新人卡券时候存在的值
       ticket_id = that.data.items.ticket.ticket_id;
     }
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: {
+    //     page_code: 'p008',
+    //     type:'shopping_by',
+    //     products:that.data.products,//JSON.stringify(products),
+    //     ticket_id: ticket_id,
+    //     express_company: that.data.isCheckExpressCompany,
+    //     customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
+    //     invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
+    //     use_point: that.data.usingPoint,
+    //     // order_type: 1,//购买订单
+    //     customer_id: wx.getStorageSync('customerId'),
+    //     amount: that.data.payAmount,
+    //     is_have_new_ticket: that.data.items.is_have_new_ticket,  //是否使用的是新会员卡券
+    //     sub_amount: that.data.items.sub_amount,  //新会员卡券抵扣金额
+    //   },
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     console.log(res);
+    //     var datas = res.data.data;
+    //     wx.showToast({
+    //       // icon: "none",
+    //       title: res.data.message
+    //     });
+    //     //此处跳出来支付。调用微信支付
+    //     if(res.data.code == 200){
+    //       wx.redirectTo({
+    //         url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas +'&from_page=shopping',
+    //       })
+    //     }
+    //   }
+    // })
+
+
+    let param = {
+      page_code: 'p008',
+      type:'shopping_by',
+      products:that.data.products,//JSON.stringify(products),
+      ticket_id: ticket_id,
+      express_company: that.data.isCheckExpressCompany,
+      customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
+      invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
+      use_point: that.data.usingPoint,
+      amount: that.data.payAmount,
+      // order_type: 1,//购买订单
+      // customer_id: wx.getStorageSync('customerId'),
+      // is_have_new_ticket: that.data.items.is_have_new_ticket,  //是否使用的是新会员卡券
+      // sub_amount: that.data.items.sub_amount,  //新会员卡券抵扣金额
+    };
+    if(that.data.items.is_have_new_ticket){
+      param['is_have_new_ticket'] = that.data.items.is_have_new_ticket; //是否使用的是新会员卡券
+      param['sub_amount'] = that.data.items.sub_amount; //新会员卡券抵扣金额
+    }
+    var params = {
       url: app.globalData.domainUrl,
-      method: "POST",
-      data: {
-        page_code: 'p008',
-        type:'shopping_by',
-        products:that.data.products,//JSON.stringify(products),
-        ticket_id: ticket_id,
-        express_company: that.data.isCheckExpressCompany,
-        customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
-        invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
-        use_point: that.data.usingPoint,
-        // order_type: 1,//购买订单
-        customer_id: wx.getStorageSync('customerId'),
-        amount: that.data.payAmount,
-        is_have_new_ticket: that.data.items.is_have_new_ticket,  //是否使用的是新会员卡券
-        sub_amount: that.data.items.sub_amount,  //新会员卡券抵扣金额
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
         console.log(res);
         var datas = res.data.data;
         wx.showToast({
@@ -507,7 +647,10 @@ Page({
           })
         }
       }
-    })
+    };
+    base.httpRequest(params);
+
+
       }
     }else{
       wx.showToast({
@@ -516,76 +659,6 @@ Page({
       });
     }
   },
-
-// submitSettlementGenerateOrder: function(){  //提交结算，生成多商品同时结算的订单信息，
-  //   var products = [];
-  //   // var product_id = ",";
-  //   // var product_count = ",";
-  //   // var product_amount = ",";
-  //   for (var i = 0; i < that.data.items.length; i++) {
-  //     if (that.data.items[i].selected == true) {
-  //       var info = {
-  //         'product_id': that.data.items[i].product_id, 
-  //         'product_count': that.data.items[i].product_count,
-  //         'discount_amount': that.data.items[i].discount_amount
-  //         };
-  //       // product_id += that.data.items[i].product_id+',';
-  //       // product_count += that.data.items[i].product_count + ',';
-  //       // if(that.data.memberNo){
-  //       //   product_amount += that.data.items[i].discount_amount + ',';
-  //       // } else {
-  //       //   product_amount += that.data.items[i].amount + ',';
-  //       // }
-  //       products.push(info);
-  //     }
-  //   }
-  //   if (products.length > 0){
-  //   wx.request({
-  //     url: app.globalData.domainUrl,
-  //     method: "POST",
-  //     data: {
-  //       page_code: 'p008',
-  //       type:'shopping_by',
-  //       products:JSON.stringify(products),
-  //       // product_id: product_id,
-  //       // product_count: product_count,
-  //       // product_amount: product_amount,
-  //       // ticket_id: that.data.selectedTicketId,
-  //       order_type: 1,//购买订单
-  //       customer_id: wx.getStorageSync('customerId'),
-  //       // is_customer: wx.getStorageSync('memberNo') ? 1 : 2,
-  //       amount: that.data.totalfee,
-  //     },
-  //     header: {
-  //       "Content-Type": "application/x-www-form-urlencoded"
-  //     },
-  //     success: function (res) {
-  //       console.log(res);
-  //       var datas = res.data.data;
-  //      // getApp().globalData.orderId = datas.order_id;
-  //       // var url = '/pages/shopcat/orderconfirm/orderconfirm';
-  //       // console.log(url);
-  //       // wx.navigateTo({
-  //       //   url: url
-  //       // });
-  //       wx.showToast({
-  //         icon: "none",
-  //         title: res.data.message
-  //       });
-  //       wx.navigateTo({
-  //         // url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas,
-  //         url: '/pages/shopcat/orderconfirm/orderconfirm?order_id=' + datas,
-  //       })
-  //     }
-  //   })
-  //   }else{
-  //     wx.showToast({
-  //       icon: "none",
-  //       title: "请选择结算的商品"
-  //     });
-  //   }
-  // },
-
 
   // 配送方式
   delivery: function(e) {

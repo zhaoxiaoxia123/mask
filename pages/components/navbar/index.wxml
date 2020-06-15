@@ -7,9 +7,9 @@
 	<view class='navbar-title' style='top:{{navTop}}px'>
 		<block wx:if="{{tabCount > 2}}">
 			<view class="menu1">
-				<view class='item {{selectTab == "product" ? "on" : ""}}' bindtap="clickTab" data-hash="product">商品</view>
+				<view class='item {{selectTab == "product" ? "on" : ""}}' bindtap="clickTab" data-hash="product">产品</view>
 				<view class='item {{selectTab == "detail" ? "on" : ""}}' bindtap="clickTab" data-hash="detail">详情</view>
-				<view class='item {{selectTab == "about" ? "on" : ""}}' bindtap="clickTab" data-hash="about">关于</view>
+				<view class='item {{selectTab == "about" ? "on" : ""}}' bindtap="clickTab" data-hash="about">科技</view>
 			</view>
 		</block>
 		<!-- <block wx:if="{{tabCount == 1}}">

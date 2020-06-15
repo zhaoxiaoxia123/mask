@@ -1,5 +1,6 @@
 // pages/my/setting/information/information.js
 var app = getApp();
+var base = require('../../../../utils/base.js');
 var that;
 Page({
 
@@ -39,7 +40,7 @@ Page({
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
-        customer_id: wx.getStorageSync('customerId')
+        // customer_id: wx.getStorageSync('customerId')
       };
       that.getUserDetail(param);
     }
@@ -89,26 +90,44 @@ Page({
       page_code: 'p004',
       type:'updateCustomer',
       birthday: value,
-      customer_id: wx.getStorageSync('customerId')
+      // customer_id: wx.getStorageSync('customerId')
     };
-    wx.request({
-      url: app.globalData.domainUrl,
-      method: "POST",
-      data: param,
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        console.log(res);
-        var ret = res.data;
-        var datas = ret.data;
-        if (ret.code == 200) {
-          that.setData({
-            birthday: value
-          });
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   method: "POST",
+    //   data: param,
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   success: function (res) {
+    //     console.log(res);
+    //     var ret = res.data;
+    //     var datas = ret.data;
+    //     if (ret.code == 200) {
+    //       that.setData({
+    //         birthday: value
+    //       });
+    //     }
+    //   }
+    // })
+
+      var params = {
+        url: app.globalData.domainUrl,
+        data:param,
+        method:'POST',
+        sCallback: function (res) {
+          console.log(res);
+          var ret = res.data;
+          var datas = ret.data;
+          if (ret.code == 200) {
+            that.setData({
+              birthday: value
+            });
+          }
         }
-      }
-    })
+      };
+      base.httpRequest(params);
+
     }else{
       wx.showToast({
         icon: "none",
@@ -118,18 +137,32 @@ Page({
   },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     that.setData({
+    //       items: res.data.data,
+    //       birthday:res.data.data.c_user_info
+    //     });
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         that.setData({
           items: res.data.data,
           birthday:res.data.data.c_user_info
         });
       }
-    });
+    };
+    base.httpRequest(params);
+
   }
 })

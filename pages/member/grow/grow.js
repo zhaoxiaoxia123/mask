@@ -1,6 +1,7 @@
 // pages/member/grow/grow.js
 var that;
 var app = getApp();
+var base = require('../../../utils/base.js');
 Page({
 
   /**
@@ -40,7 +41,7 @@ Page({
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         has_level:true
       };
       // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
@@ -50,42 +51,14 @@ Page({
         page_code: 'p004',
         type: "logList",  //growthList
         event:2,
-        customer_id: wx.getStorageSync('customerId'),
+        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
       // var paramg = '/p004?type=growthList&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getGrowthList(paramg);
       
-      var code = wx.getStorageSync("memberNo");
-      if (code) {
-        var param = {
-          page_code: 'p015',
-          share_by: code,
-          customer_id: wx.getStorageSync("customerId")
-        };
-        // var param = '/p015?share_by='+code+'&customer_id='+wx.getStorageSync("customerId");
-        wx.request({
-          url: app.globalData.domainUrl,
-          data: param,
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            let qr = res.data.data;
-            if (qr.indexOf("http") >= 0) {
-              that.setData({
-                qrcode: res.data.data
-              });
-            } else {
-              that.setData({
-                qrcode: that.data.domainName + res.data.data
-              });
-            }
-            console.log(that.data.qrcode);
-          }
-        });
-    }
+      that.getShareByQrCode();
     }
   },
 
@@ -121,8 +94,8 @@ Page({
       var param_p = {
         page_code: 'p004',
         type: "logList",//"growthList",
-          event:2,
-        customer_id: wx.getStorageSync('customerId'),
+        event:2,
+        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -166,29 +139,58 @@ Page({
   },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     that.setData({
+    //       customer: res.data.data
+    //     });
+    //   }
+    // });
+
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         that.setData({
           customer: res.data.data
         });
       }
-    });
+    };
+    base.httpRequest(params);
   },
 
   //获取用户信息 ： 成长值列表
   getGrowthList: function (param) {
-    wx.request({
+    // wx.request({
+    //   url: app.globalData.domainUrl,
+    //   data: param,
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     var datas = res.data.data;
+    //     that.setData({
+    //       items: that.data.items.concat(datas)
+    //     });
+    //     if (datas.length <= 0 || datas.length < that.data.pageCount) {
+    //       that.setData({
+    //         isLast: true
+    //       });
+    //     }
+    //   }
+    // });
+    
+    var params = {
       url: app.globalData.domainUrl,
-      data: param,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
           items: that.data.items.concat(datas)
@@ -199,7 +201,38 @@ Page({
           });
         }
       }
-    });
+    };
+    base.httpRequest(params);
   },
+ //生成用户二维码  邀请码
+ getShareByQrCode: function () {
+  var code = wx.getStorageSync("memberNo");
+  if (code) {
+    var param = {
+      page_code: 'p015',
+      share_by: code,
+      // customer_id: wx.getStorageSync("customerId")
+    };
+    var params = {
+      url: app.globalData.domainUrl,
+      data:param,
+      method:'GET',
+      sCallback: function (res) {
+        let qr = res.data.data;
+        if (qr.indexOf("http") >= 0) {
+          that.setData({
+            qrcode: res.data.data
+          });
+        } else {
+          that.setData({
+            qrcode: that.data.domainName + res.data.data
+          });
+        }
+        console.log(that.data.qrcode);
+      }
+    };
+    base.httpRequest(params);
+  }
+},
 
 })
