@@ -42,7 +42,7 @@
     <image src='../img/dv.png'></image>
   </view> -->
 		<view class='evaluate'>
-			<view class="content detail">
+			<view class="detail">
 				<!-- <view class='detail-image' id="product">
 					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
             <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
