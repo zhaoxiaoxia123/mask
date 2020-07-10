@@ -50,9 +50,14 @@
   color:#c6c6c6;
 }
 .text-add{
+  display: flex;
+  align-items: center;
   color:#DAB866;
-  font-size:1.2rem;
+  font-size:1.3rem;
   line-height:1.5;
+}
+.text-add-left{
+  padding-right:10rpx;
 }
 .footer{
   text-align:center;

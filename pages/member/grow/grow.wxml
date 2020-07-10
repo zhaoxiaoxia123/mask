@@ -77,8 +77,12 @@
         <text class='text-title'>{{item.log_title?item.log_title:''}}</text>
         <text class='text-date'>{{item.created_at}}</text>
       </view>
-      <view>
-        <text class='text-add'>{{filter.toFix(item.value)}} </text>
+      <view  class='text-add'>
+        <view class="text-add-left">
+              <text >+</text>
+              <text>-</text>
+          </view>
+        <view>{{filter.toFix(item.value)}} </view>
       </view>
     </view>
     
