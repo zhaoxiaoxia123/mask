@@ -33,6 +33,15 @@ Page({
         isShareBy:true,
         shareBy: options.shareBy?options.shareBy: wx.getStorageSync("shareBy"),
       });
+    }else{
+      const scene = decodeURIComponent(options.scene);
+      if(scene){
+        that.setData({
+          isShareBy:true,
+          shareBy: scene,
+        });
+        wx.setStorageSync("shareBy",scene);
+      }
     }
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.switchTab({

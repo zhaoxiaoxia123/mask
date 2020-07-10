@@ -137,12 +137,20 @@ Page({
       sCallback: function (res) {
         // callback && callback(data);
         console.log(res);
-        that.setData({
-          items: res.data.data
-        });
-        if(that.data.items && res.data.code == 200){
-          wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
-          wx.setStorageSync('discount', that.data.items.discount);  //折扣
+        
+        if(res.data.code == 404){
+          that.setData({
+            items: [],
+            isLogin:true
+          });
+        }else{
+          that.setData({
+            items: res.data.data
+          });
+          if(that.data.items && res.data.code == 200){
+            wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
+            wx.setStorageSync('discount', that.data.items.discount);  //折扣
+          }
         }
       }
     };

@@ -33,32 +33,6 @@ Page({
     });
 
     if (that.data.addressId){
-      // var param = '/p002?customer_addr_id='+that.data.addressId;
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   data: {
-      //     page_code: "p002",
-      //     customer_addr_id: that.data.addressId
-      //   },
-      //   header: {
-      //     'content-type': "application/json"
-      //   },
-      //   success: function (res) {
-      //     console.log(res);
-      //     var datas = res.data.data;
-      //     that.setData({
-      //       name: datas.name,
-      //       phone: datas.phone,
-      //       zip: datas.zip,
-      //       address: datas.address,
-      //       is_default: datas.is_default==1?true:false,
-      //       region:[datas.province,datas.city,datas.area]
-      //     });
-      //     console.log('that.data.is_default');
-      //     console.log(that.data.is_default);
-      //   }
-      // })
-
       let param = {
         page_code: "p002",
         customer_addr_id: that.data.addressId
@@ -225,24 +199,7 @@ Page({
               type: "del",
               customer_addr_id: that.data.addressId
             };
-            // wx.request({
-            //   url: app.globalData.domainUrl,
-            //   method: "POST",
-            //   data: param,
-            //   header: {
-            //     "Content-Type": "application/x-www-form-urlencoded"
-            //   },
-            //   success: function (res) {
-            //     console.log(res);
-            //     var datas = res.data.data;
-            //     if (datas) {
-            //       wx.navigateBack({
-            //         delta: 1
-            //       });
-            //     }
-            //   }
-            // })
-
+          
             var params = {
               url: app.globalData.domainUrl,
               data:param,
@@ -258,8 +215,6 @@ Page({
               }
             };
             base.httpRequest(params);
-      
-
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
@@ -288,7 +243,7 @@ Page({
       if (that.data.name.length < 2 || that.data.name.length > 25){
         wx.showModal({
           title: '提示',
-          content: '收货人姓名长度需要在2-25个字符之间，不能包含非法字符.',
+          content: '请输入姓名长度在2-25位之间，不能包含非法字符.',
           showCancel: false
         });
         return false;
@@ -309,7 +264,7 @@ Page({
       } else if (that.data.address.length < 5 || that.data.address.length > 120){
         wx.showModal({
           title: '提示',
-          content: '详细地址长度需要在5-120个字符之间，不能包含非法字符.',
+          content: '请输入详细地址长度在5-120位之间，不能包含非法字符.',
           showCancel: false
         });
         return false;
@@ -343,24 +298,6 @@ Page({
         }
       };
       base.httpRequest(params);
-      // console.log(param);
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   method: "POST",
-      //   data: param,
-      //   header: {
-      //     "Content-Type": "application/x-www-form-urlencoded"
-      //   },
-      //   success: function (res) {
-      //     console.log(res);
-      //     var datas = res.data.data;
-      //     if (datas){
-      //       wx.navigateBack({
-      //         delta:1
-      //       });
-      //     }
-      //   }
-      // })
     }else{
       wx.showModal({
         title: '提示',

@@ -34,13 +34,11 @@
 </template>
 
 <!--入口模版-->
-
 <template name="wxParse">
-    <block wx:for="{{wxParseData}}" wx:key="">
+    <block wx:for="{{wxParseData}}" wx:key="item">
         <template is="wxParse0" data="{{item}}"/>
     </block>
 </template>
-
 
 <!--循环模版-->
 <template name="wxParse0">

@@ -160,7 +160,7 @@ Page({
       data:param,
       method:'GET',
       sCallback: function (res) {
-        var datas = res.data.data;
+        var datas = res.data.data.pointList;
         that.setData({
           items: that.data.items.concat(datas)
         });

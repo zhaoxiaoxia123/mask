@@ -21,7 +21,6 @@ Page({
     isUsePoint: false,
     isCheckTicket: 9999, //存储选择卡券索引  9999为不用卡券
     isCheckExpressCompany: 2, //存储选择快递  9999为随机
-    domainName: app.globalData.domainName,
     addressId:0,
     invoiceId: 0,
     dry: 998,  //导入仪价格
@@ -178,19 +177,7 @@ Page({
 
   //获取用户信息 ：积分 等
   getUserDetail: function(param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function(res) {
-    //     that.setData({
-    //       customerInfo: res.data.data
-    //     });
-    //   }
-    // });
-    
+
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -206,20 +193,6 @@ Page({
   },
 
   getTransform: function(param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function(res) {
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       transform: datas[0]
-    //     })
-    //   }
-    // });
-    
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -235,26 +208,7 @@ Page({
   },
 
   getProducts: function(param) { //读取商品信息
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function(res) {
-    //     var datas = res.data.data;
-    //     console.log(datas);
-    //     that.setData({
-    //       items: datas
-    //     });
-    //     setTimeout(function() {
-    //       //计算实付款
-    //       that.sumUsingPoint();
-    //       // that.sumProductAmount(that.data.items.products, that.data.customerInfo);
-    //     }, 2000);
-    //   }
-    // });
-    
+
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -285,7 +239,7 @@ Page({
       if (pInfo[i]['frozeno_is_discount'] == 1){
       productAmount += (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
         if (pInfo[i]['frozeno_is_sub_dry'] == 1) {
-          dryCount += pInfo[i]['join_product_count'];
+          dryCount += parseInt(pInfo[i]['join_product_count']);
         }
       }else{
         dryAmount += (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
@@ -330,7 +284,7 @@ Page({
     var tPayAmount = that.sumCheckTicket(); //减卡券价值后的总价
     var discountAmount = tPayAmount; //that.data.discountAmount;
     var productAmount = that.data.productAmount;
-    var payAmount = 0; //实付款
+    // var payAmount = 0; //实付款
     if (cInfo.frozeno_point > 0 && that.data.isUsePoint) {
       if (tInfo.type == 2) { //若满减
         if (productAmount >= tInfo.satisfy_amount) { //商品总价是否大于等于满减金额设置
@@ -417,10 +371,8 @@ Page({
     console.log('that.data.addressId:----');
     console.log(that.data.addressId);
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-    // var param = '/p002?is_default=1&customer_id='+wx.getStorageSync('customerId');
       var param = {
         page_code: 'p002',
-        // customer_id: wx.getStorageSync('customerId'),
         is_default: 1
       };
     if(that.data.addressId > 0){
@@ -429,28 +381,6 @@ Page({
         customer_addr_id: that.data.addressId
       };
     }
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': "application/json"
-    //   },
-    //   success: function(res) {
-    //     var datas = res.data.data;
-    //     if (datas) {
-    //       if (that.data.addressId > 0) {
-    //         that.setData({
-    //           address: datas
-    //         });
-    //       }else{
-    //         that.setData({
-    //           address: datas[0]
-    //         });
-    //       }
-    //     }
-    //   }
-    // })
-
 
     var params = {
       url: app.globalData.domainUrl,
@@ -472,8 +402,6 @@ Page({
       }
     };
     base.httpRequest(params);
-
-
     }
   },
   getInvoice:function(){
@@ -483,21 +411,6 @@ Page({
         page_code: 'p006',
         invoice_id: that.data.invoiceId
       };
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   data: param,
-      //   header: {
-      //     'content-type': "application/json"
-      //   },
-      //   success: function (res) {
-      //     var datas = res.data.data;
-      //     if (datas) {
-      //       that.setData({
-      //         invoice: datas
-      //       });
-      //     }
-      //   }
-      // })
 
       var params = {
         url: app.globalData.domainUrl,
@@ -513,7 +426,6 @@ Page({
         }
       };
       base.httpRequest(params);
-
     }
   },
   getTicketList: function() { //获取有效卡券列表
@@ -528,21 +440,7 @@ Page({
       offset: 0,
       page: 20
     };
-    // var param_t = '/p013?offset=0&page=20&customer_id='+wx.getStorageSync('customerId');
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param_t,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function(res) {
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       ticketList: datas
-    //     });
-    //   }
-    // });
-    
+        
     var params = {
       url: app.globalData.domainUrl,
       data:param,

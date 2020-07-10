@@ -9,8 +9,7 @@ Page({
    */
   data: {
     items:[],
-    type: 16,
-    domainName: app.globalData.domainName,
+    type: 16
   },
 
   /**
@@ -79,23 +78,6 @@ Page({
   },
   
   getPost: function () {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: {
-    //     page_code: 'p001',
-    //     type: that.data.type
-    //   },
-    //   header: {
-    //     'content-type': "application/json"
-    //   },
-    //   success: function (res) {
-    //     var datas = res.data;
-    //     console.log(datas);
-    //     that.setData({
-    //       items: datas.data
-    //     });
-    //   }
-    // })
     let param =  {
       page_code: 'p001',
       type: that.data.type

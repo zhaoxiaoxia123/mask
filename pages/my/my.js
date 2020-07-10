@@ -13,9 +13,8 @@ Page({
     business_id1: 0,
     items:[],
     isLogin:false,
-    qrcode: '',
+    // qrcode: '',
     ftserviceflexwindow: false,
-    domainName: app.globalData.domainName,
     level:0
   },
 
@@ -64,36 +63,7 @@ Page({
     }
 
     //生成邀请码  二维码图片
-    that.getShareByQrCode();
-    // var code = wx.getStorageSync("memberNo");
-    // if (code) {
-    //   var param = {
-    //     page_code: 'p015',
-    //     share_by: code,
-    //     customer_id: wx.getStorageSync("customerId")
-    //   };
-    //   // var param = '/p015?share_by='+code+'&customer_id='+wx.getStorageSync("customerId");
-    //   wx.request({
-    //     url: app.globalData.domainUrl,
-    //     data: param,
-    //     header: {
-    //       'content-type': 'application/json'
-    //     },
-    //     success: function (res) {
-    //       let qr = res.data.data;
-    //       if (qr && qr.indexOf("http") >= 0) {
-    //         that.setData({
-    //           qrcode: res.data.data
-    //         });
-    //       } else {
-    //         that.setData({
-    //           qrcode: that.data.domainName + res.data.data
-    //         });
-    //       }
-    //       console.log(that.data.qrcode);
-    //     }
-    //   });
-    // }
+    // that.getShareByQrCode();
 
   },
 
@@ -136,7 +106,7 @@ Page({
         title: '邀请好友成为会员',
         path: 'pages/my/login/login?shareBy=' + wx.getStorageSync('memberNo'), // 好友点击分享之后跳转到的小程序的页面
         // desc: '描述',  // 看你需要不需要，不需要不加
-        imageUrl: that.data.qrcode,
+        imageUrl: app.globalData.shareImg,
         success: (res) => {
           wx.showToast({ title: res, icon: 'success', duration: 2000 })
         },
@@ -146,38 +116,6 @@ Page({
       }
     }
   },
-
-
- //生成用户二维码  邀请码
- getShareByQrCode: function () {
-  var code = wx.getStorageSync("memberNo");
-  if (code) {
-    var param = {
-      page_code: 'p015',
-      share_by: code,
-      // customer_id: wx.getStorageSync("customerId")
-    };
-    var params = {
-      url: app.globalData.domainUrl,
-      data:param,
-      method:'GET',
-      sCallback: function (res) {
-        let qr = res.data.data;
-        if (qr && qr.indexOf("http") >= 0) {
-          that.setData({
-            qrcode: res.data.data
-          });
-        } else {
-          that.setData({
-            qrcode: that.data.domainName + res.data.data
-          });
-        }
-        console.log(that.data.qrcode);
-      }
-    };
-    base.httpRequest(params);
-  }
-},
 
   ftservice: function (e) {
     let ret = tmpObj.ftservice(e);
@@ -232,13 +170,20 @@ Page({
       data:param,
       method:'GET',
       sCallback: function (res) {
-        that.setData({
-          items: res.data.data
-        });
-        if(that.data.items && res.data.code == 200){
-          wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
-          wx.setStorageSync('discount', that.data.items.discount);  //折扣
-          that.setLevel();
+        if(res.data.code == 404){
+          that.setData({
+            items: [],
+            isLogin:true
+          });
+        }else{
+          that.setData({
+            items: res.data.data
+          });
+          if(that.data.items && res.data.code == 200){
+            wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
+            wx.setStorageSync('discount', that.data.items.discount);  //折扣
+            that.setLevel();
+          }
         }
       }
     };
@@ -326,84 +271,4 @@ Page({
       }
     })
   },
-  // shareApp:function(e) {   //邀请好友
-  //   if(wx.getStorageSync('level') > 1){
-  //   wx.showActionSheet({
-  //     itemList: ['复制邀请码', '邀请二维码'],
-  //     success: function (res) {
-  //       // console.log('showActionSheet:------');
-  //       // console.log(res.tapIndex);
-  //       if(res.tapIndex == 0) {
-  //         that.copyCode();
-  //       } else if (res.tapIndex == 1) {
-  //         that.showShareQRCode();
-  //       }
-  //     },
-  //     fail: function (res) {
-  //       console.log(res.errMsg)
-  //     }
-  //   })
-  //   }else{
-  //     wx.showToast({
-  //       icon: "info",
-  //       title: '无法邀请好友。'
-  //     })
-  //   }
-  // },
-  // copyCode: function () {  //复制邀请码
-  //   if (wx.getStorageSync("level") > 1) {
-  //     wx.setClipboardData({
-  //       data: wx.getStorageSync("memberNo"),
-  //       success: function (res) {
-  //         console.log('copyCode:------');
-  //         console.log(res);
-  //       }
-  //     })
-  //   } else {
-  //     wx.showModal({
-  //       title: '提示',
-  //       content: '该用户无法分享邀请码',
-  //       success: function (res) {
-  //         if (res.confirm) {
-  //           console.log('用户点击确定')
-  //         } else if (res.cancel) {
-  //           console.log('用户点击取消')
-  //         }
-  //       }
-  //     })
-  //   }
-  // },
-  // showShareQRCode: function () {   //邀请二维码
-  //   var code = wx.getStorageSync("memberNo");
-  //   if (wx.getStorageSync("customerId") && code) {
-  //     var param = {
-  //       page_code:'p015',
-  //       share_by: code,
-  //       customer_id: wx.getStorageSync("customerId")
-  //     };
-  //     // var param = '/p015?share_by='+code+'&customer_id='+wx.getStorageSync("customerId");
-  //     wx.request({
-  //       url: app.globalData.domainUrl,
-  //       data: param,
-  //       header: {
-  //         'content-type': 'application/json'
-  //       },
-  //       success: function (res) {
-  //         that.setData({
-  //           qrcode: res.data.data
-  //         });
-  //         console.log(that.data.qrcode);
-  //       }
-  //     });
-  //   }
-  //   that.setData({
-  //     showModal: true
-  //   })
-  // },
-  // // 弹出层里面的弹窗
-  // ok: function () {
-  //   this.setData({
-  //     showModal: false
-  //   })
-  // }
 })

@@ -16,7 +16,7 @@
         <radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
       </view>
       <view class='list-left'>
-        <image src="{{domainName}}{{item.product_image[0].image_url}}" lazy-load></image>
+        <image src="{{item.product_image[0].image_url}}" lazy-load></image>
       </view>
       <view class='list-right'>
         <view class='column'>

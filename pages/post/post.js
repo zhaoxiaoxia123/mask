@@ -22,9 +22,16 @@ Page({
     that = this;
     that.setData({
       postId: options.id,
-      type: options.type,
-      href:decodeURIComponent(options.href)
+      type: options.type
     });
+    if(options.href){
+      that.setData({
+        href:decodeURIComponent(options.href)
+      });
+    }
+    
+    console.log('href');
+    console.log(that.data.href);
     if (that.data.type){
       var param = {
         page_code: "p001",

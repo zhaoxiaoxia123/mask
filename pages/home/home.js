@@ -14,9 +14,6 @@ Page({
     indicatorDots: true,
     indicatorColor: "#999",
     indicatorActiveColor: "#333",
-    // interval: 6000,
-    // duration: 500,
-    // circular: true,
     offset: 1,
     pageCount: 5,
     categoryType: 50, //冻龄智美商品类型
@@ -24,8 +21,6 @@ Page({
     isLast: false,
     items: [],
     type: '9,12,13' , // 9:广告   12:app商城其他广告   13:app商城关于我们广告
-    domainName: app.globalData.domainName,
-    // domainName1: app.globalData.domainName1,
     ftserviceflexwindow: false,
     storeflexwindow:false,
     step:0,
@@ -151,7 +146,6 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-      // var param_p = '/p005?offset='+(that.data.offset - 1) * that.data.pageCount+'&page='+that.data.pageCount;
       that.getProductList(param_p);
     }
   },
@@ -205,25 +199,9 @@ Page({
   calling: function(e) {
     tmpObj.calling(e);
   },
-
   
   //获取公众号的素材列表
   getMaterialList: function(param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': "application/json"
-    //   },
-    //   success: function(res) {
-    //     var datas = res.data;
-    //     console.log(datas);
-    //     that.setData({
-    //       materialList: datas.data
-    //     });
-    //   }
-    // })
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -248,34 +226,12 @@ Page({
       data:param,
       sCallback: function (res) {
         var datas = res.data;
-        console.log(datas);
-        console.log(datas.length);
         that.setData({
           swipers: datas.data
         });
       }
     };
     base.httpRequest(params);
-
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: {
-    //     page_code: 'p001',
-    //     type: that.data.type
-    //   },
-    //   header: {
-    //     'content-type': "application/json",
-    //     // 'Authorization':'Bearer ' + wx.getStorageSync('token')
-    //   },
-    //   success: function(res) {
-    //     var datas = res.data;
-    //     console.log(datas);
-    //     console.log(datas.length);
-    //     that.setData({
-    //       swipers: datas.data
-    //     });
-    //   }
-    // })
   },
   /***
    * 点击进入详情页
@@ -376,30 +332,5 @@ Page({
       })
     }
   },
-  // goWx:function(){
-  //   wx.navigateTo({
-  //     url: '/pages/my/service/service',
-  //   })
-  // },
 
-  // test: function() {
-  //   wx.request({
-  //     url: app.globalData.domainUrl,
-  //     data: {
-  //       page_code: 'p020'
-  //     },
-  //     header:  {
-  //       'content-type': "application/json",
-  //       'Authorization':'Bearer ' + wx.getStorageSync('token')
-  //     },
-  //     success: function(res) {
-  //       var datas = res.data;
-  //       console.log(datas);
-  //       // console.log(datas.length);
-  //       // that.setData({
-  //       //   swipers: datas.data
-  //       // });
-  //     }
-  //   })
-  // },
 })

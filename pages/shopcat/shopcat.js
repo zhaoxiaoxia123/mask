@@ -17,7 +17,6 @@ Page({
     isLast: false,
     items: [],
     isBack: false,
-    domainName: app.globalData.domainName,
     ftserviceflexwindow: false
   },
 
@@ -141,33 +140,15 @@ Page({
 
   //以下为自定义点击事件
   getShoppingList: function(param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function(res) {
-    //     // console.log(res);
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       items: that.data.items.concat(datas)
-    //     });
-    //     if (datas.length <= 0 || datas.length < that.data.pageCount) {
-    //       that.setData({
-    //         isLast: true
-    //       });
-    //     }
-    //   }
-    // });
-
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,
       method:'GET',
       sCallback: function (res) {
         var datas = res.data.data;
+        that.setData({  //解决佳总手机返回不刷新
+          items:[]
+        }); 
         that.setData({
           items: that.data.items.concat(datas)
         });
@@ -189,7 +170,7 @@ Page({
       items[id].product_count = 1;
       if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
         items[id].is_enough = true;
-        items[id].selected = true;
+        // items[id].selected = true;  //true  为1时点减号也会被选中
       } else {
         items[id].is_enough = false;
         items[id].selected = false;
@@ -326,27 +307,6 @@ Page({
   //清除购物车商品
   deleteShopping:function(e){
     var shopping_id = e.currentTarget.dataset.id;
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: {
-    //     page_code: 'p012',
-    //     type: 'delete_shopping',
-    //     shopping_id: shopping_id,
-    //   },
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     // console.log(res);
-    //     var datas = res.data.data;
-    //     wx.showToast({
-    //       title: res.data.message
-    //     });
-    //     that.onShow();
-    //   }
-    // })
-
     let param = {
       page_code: 'p012',
       type: 'delete_shopping',

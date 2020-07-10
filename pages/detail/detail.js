@@ -27,7 +27,6 @@ Page({
     // point:0,
     // growth:0,
     shoppingCount: 0,
-    domainName: app.globalData.domainName,
     level:0,
     isClick:true,
     winHeight:'100%',
@@ -36,7 +35,7 @@ Page({
     productTop: 0,
     detailTop: 0,
     aboutTop: 0,
-    isShowTopBar:false,
+    // isShowTopBar:false,
     scrollStop:false,
   },
   /**
@@ -58,7 +57,6 @@ Page({
       // customer_id: wx.getStorageSync("customerId"),
       level: wx.getStorageSync("level")
     };
-    // var param = '/p005?product_id='+that.data.productId;
     that.getProductDetail(param);
 
     if (wx.getStorageSync("customerId")){
@@ -163,27 +161,25 @@ Page({
     let st = e.scrollTop ? e.scrollTop : e.detail.scrollTop;
     // st = (st+80) ;
     // if(st >= that.data.productTop-60){
-    if(st >= that.data.productTop){
-      that.setData({
-        isShowTopBar: true
-      })
-    }else{
-      that.setData({
-        isShowTopBar: false,
-        toview:''
-      })
-    }
+    // if(st >= that.data.productTop){
+    //   that.setData({
+    //     isShowTopBar: true
+    //   })
+    // }else{
+    //   that.setData({
+    //     isShowTopBar: false,
+    //     toview:''
+    //   })
+    // }
     if (st <= that.data.productTop || st < that.data.detailTop ){
       that.setData({
         nowstatus: 'product'
       })
-    }
-    if (st >= that.data.detailTop && st < that.data.aboutTop){
+    }else if (st >= that.data.detailTop && st < that.data.aboutTop){
       that.setData({
         nowstatus:'detail'
       })
-    }
-    if (st >= that.data.aboutTop){
+    }else if (st >= that.data.aboutTop){
       console.log("true")
       that.setData({
         nowstatus: 'about'
@@ -327,23 +323,6 @@ Page({
     }).exec()
   },
   getProductDetail: function (param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     if(res.data.data){
-    //       that.setData({
-    //         items: res.data.data,
-    //         swipers: res.data.data.product_image
-    //       });
-    //       that.getTop();
-    //     }
-    //   }
-    // });
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,

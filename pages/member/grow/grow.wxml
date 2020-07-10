@@ -2,14 +2,6 @@
 
 <wxs module="filter" src="../../../utils/share.wxs"></wxs>
 <view class='page-pd'>
-<!-- 遮罩层 -->
-  <!-- <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-  <view class="modalDlg" wx:if="{{showModal}}">
-    <image src='{{qrcode}}'></image>
-    <text class="text">可扫码进入小程序注册页</text>
-    <view bindtap="ok" class="ok">确定</view>
-  </view> -->
-
   <view class='integral'>
     <view class='integral-current'>
       <text class='current1' wx:if="{{customer.frozeno_level == 1}}">注册会员</text>

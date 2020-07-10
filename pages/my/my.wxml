@@ -75,7 +75,7 @@
         <image class='icon40' src='../img/friend@2x.png'></image>
         <!-- <text>邀请好友</text> -->
         <!-- <text wx:if="{{level <= 1}}" bindtap="shareApp">邀请好友</text> -->
-        <button class="button-share" open-type="share">邀请好友</button>
+        <button class="button-share" style="width:260px" open-type="share">邀请好友</button>
       </view>
       <view class='right'>
         <image src='../img/dv.png'></image>
