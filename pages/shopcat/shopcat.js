@@ -52,9 +52,9 @@ Page({
         isBack: false  
       });
     }
-    that.setData({
-      items:[]
-    });
+    // that.setData({  //解决佳总手机返回不刷新 ，移动到getShoppingList方法内
+    //   items:[]
+    // });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info') && that.data.items.length <= 0) {
       var param_s = {
         page_code: 'p012',

@@ -80,25 +80,7 @@ Page({
   },
   getAddressList: function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-    // var param = '/p002?customer_id='+wx.getStorageSync('customerId');
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: {
-    //     page_code: "p002",
-    //     customer_id: wx.getStorageSync('customerId')
-    //   },
-    //   header: {
-    //     'content-type': "application/json"
-    //   },
-    //   success: function (res) {
-    //     console.log(res);
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       items: datas
-    //     });
-    //   }
-    // })
-
+    
     let param = {
       page_code: "p002",
       // customer_id: wx.getStorageSync('customerId')
@@ -146,22 +128,6 @@ Page({
         customer_addr_id: id
         // is_default: false
       };
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   method: "POST",
-      //   data: param,
-      //   header: {
-      //     "Content-Type": "application/x-www-form-urlencoded"
-      //   },
-      //   success: function (res) {
-      //     console.log(res);
-      //     var datas = res.data.data;
-      //     that.setData({
-      //       items: that.deleteItem(that.data.items, index)
-      //     });
-      //   }
-      // })
-
       var params = {
         url: app.globalData.domainUrl,
         data:param,
@@ -197,7 +163,7 @@ Page({
     if (items[index].checked){
       wx.showModal({
         title: '提示',
-        content: '确定将该地址默认为收货地址？',
+        content: '是否将该地址设为收货地址？',
         success: function (res) {
           if (res.confirm) {
             that.checkAddress(e.currentTarget.dataset.value);

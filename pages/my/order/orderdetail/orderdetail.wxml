@@ -1,7 +1,7 @@
 <view>
   <view class='lists size-titletwo col-content'>
     <!--待付款时显示-->
-    <view class='wait col-title'>
+    <view class='wait col-title' wx:if="{{num <= 30 && items[0].frozeno_order_state == 1}}">
       <text class='wait-text'>等待买家付款</text>
       <text class='wait-text'>请在{{num}}分钟内支付</text>
     </view>
@@ -21,7 +21,7 @@
       <text>订单</text>
     </view>
     <!--bindtap绑定事件-->
-    <view class='list' wx:key="*this" wx:for="{{items[0].products}}" wx:for-item="item">
+    <view class='list' wx:key="*this" wx:for="{{items[0].products}}" wx:for-item="item" data-id="{{item.category_id}}" bindtap="productDetail">
       <view class='list-left'>
         <image src='{{item.product_image?item.product_image[0].image_url:""}}'></image>
       </view>

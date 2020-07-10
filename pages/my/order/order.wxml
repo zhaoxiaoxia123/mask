@@ -61,13 +61,11 @@
                 </view>
               </view>
             </view>
-
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
                 <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
-
           <!-- 待付款——取消订单和付款、代发货——取消订单（需后台审核同意）和提醒发货、待收货——查看物流和确认发货（可人工确定或客户满多少天后系统自动改状态） -->
             <view class='push-button' wx:if="{{item.frozeno_order_state == 1}}">
               <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
@@ -165,11 +163,10 @@
               <view class='ordernum'>订单编号：{{item.o_order}}</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
             </view>
-            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
+            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1"  data-id="{{item.o_id}}" bindtap='orderdetail'>
               <view class='list-left'>
                 <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
               </view>
-
               <view class='list-right size-titleone '>
                 <view class='column '>
                   <view class='right-text'>{{item1.category_desc}}</view>
@@ -183,13 +180,11 @@
                 </view>
               </view>
             </view>
-
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
                 <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
-
             <view class='push-button'>
               <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
               <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
@@ -210,7 +205,7 @@
 
         <view class='lists'>
           <!--bindtap绑定事件 待收货-->
-          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
+          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item"  data-id="{{item.o_id}}" bindtap='orderdetail'>
             <view class='order-top'>
               <view class='ordernum'>订单编号：{{item.o_order}}</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
@@ -219,13 +214,10 @@
               <view class='list-left'>
                 <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
               </view>
-
               <view class='list-right size-titleone '>
-
                 <view class='column '>
                   <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
-
                 <view class='column'>
                   <view class='right-text'>￥{{item1.product_amount}}</view>
                   <view class='piece'>× {{item1.product_count}}</view>
@@ -260,7 +252,7 @@
 
         <view class='lists'>
           <!--bindtap绑定事件 交易成功或失败-->
-          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
+          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item"  data-id="{{item.o_id}}" bindtap='orderdetail'>
             <view class='order-top'>
               <view class='ordernum'>订单编号：{{item.o_order}}</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 4}}">交易完成</view>

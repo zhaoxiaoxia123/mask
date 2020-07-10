@@ -18,7 +18,10 @@
         <text class='text-date'>{{item.created_at}} </text>
       </view>
       <view>
-        <text class='text-add'>{{item.frozeno_to_value}}</text>
+        <text class='text-add'>
+        <block wx:if="{{item.frozeno_event_trend == 1}}">+</block>
+        <block wx:if="{{item.frozeno_event_trend == 2}}">-</block>
+        {{item.frozeno_event_trend_value}}</text>
       </view>
     </view>
   </view>

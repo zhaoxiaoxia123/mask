@@ -199,12 +199,10 @@ Page({
           //   });
           // }
           console.log(that.data.items[0].minute);
+          that.setData({
+            num: that.data.items[0].minute
+          });
           if (that.data.items[0].minute > 0 && that.data.items[0].minute <= 30){
-            that.setData({
-              num: that.data.items[0].minute
-            });
-          }
-          console.log(that.data.items);
           //将计时器赋值给setInter
           that.data.setInter = setInterval(
             function () {
@@ -215,7 +213,7 @@ Page({
                 clearInterval(that.data.setInter)
               }
             }, 1000*60);
-
+          }
           var order_amount = that.data.items[0].frozeno_order_amount;
           that.setData({
             orderAmount: order_amount,
@@ -249,55 +247,8 @@ Page({
     // console.log(that.data.finalSum);
 },
 
-// getAddress: function(){
-//   wx.request({
-//     url: app.globalData.domainUrl,
-//     data: {
-//       page_code: 'p002',
-//       customer_id: wx.getStorageSync('customerId')
-//     },
-//     header: {
-//       'content-type': "application/json"
-//     },
-//     success: function (res) {
-//       console.log(res);
-//       var datas = res.data.data;
-//       if (datas.length > 0){
-//         that.setData({
-//           address: datas[0]
-//         });
-//       }
-//     }
-//   })
-// },
 //取消订单
   cancelOrder: function(){
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: {
-    //     page_code: 'p008',
-    //     type: 'cancel',
-    //     order_id: that.data.items[0].o_id,
-    //     order_type: that.data.items[0].frozeno_order_state
-    //   },
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     // console.log(res);
-    //     var datas = res.data.data;
-    //     if (datas) {
-    //       wx.showToast({
-    //         title: res.data.message
-    //       });
-    //       wx.navigateBack({
-    //         delta: 1
-    //       })
-    //     }
-    //   }
-    // })
-
     let param = {
       page_code: 'p008',
       type: 'cancel',
@@ -337,59 +288,7 @@ Page({
       if(that.data.items[0].frozeno_order_amount == 0){
         that.payAfter();
       }else{
-        // wx.request({
-        //   url: app.globalData.domainUrl,
-        //   method: "POST",
-        //   data: {
-        //     page_code: 'p008',
-        //     type: 'unifiedorder',  
-        //     amount: that.data.items[0].frozeno_order_amount,
-        //     openid: wx.getStorageSync('openid')
-        //   },
-        //   header: {
-        //     "Content-Type": "application/x-www-form-urlencoded"
-        //   },
-        //   success: function (res) {
-        //     // console.log(res);
-        //     var datas = res.data.data;
-        //     that.setData({
-        //       outTradeNo: res.data.out_trade_no
-        //     });
-        //     if (datas) {
-        //       // console.log('datas:-----');
-        //       // console.log(datas);
-        //       wx.requestPayment({
-        //         'timeStamp': datas.timeStamp,
-        //         'nonceStr': datas.nonceStr,
-        //         'package': datas.package,
-        //         'signType': 'MD5',
-        //         'paySign': datas.paySign,
-        //         'success': function (res) {
-        //           console.log('success');
-        //           // console.log(res);
-        //           wx.showToast({
-        //             title: '支付成功',
-        //             icon: 'success',
-        //             duration: 3000
-        //           });
-        //           that.payAfter();
-        //         },
-        //         'fail': function (res) {
-        //           console.log('fail');
-        //           // console.log(res);
-        //           that.setClickState(true);
-        //         },
-        //         'complete': function (res) {
-        //           console.log('complete');
-        //           // console.log(res);
-        //           that.setClickState(true);
-        //         }
-        //       });
-        //     }
-        //   }
-        // })
-
-
+        
         let param = {
           page_code: 'p008',
           type: 'unifiedorder',  
@@ -451,38 +350,6 @@ Page({
   //付款成功则修改订单状态。
   payAfter: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   method: "POST",
-      //   data: {
-      //     page_code: 'p008',
-      //     type: 'pay',
-      //     order_id: that.data.items[0].o_id,
-      //     amount: that.data.items[0].frozeno_order_amount,
-      //     out_trade_no: that.data.outTradeNo,
-      //     customer_id: wx.getStorageSync('customerId')
-      //   },
-      //   header: {
-      //     "Content-Type": "application/x-www-form-urlencoded"
-      //   },
-      //   success: function (res) {
-      //     // console.log(res);
-      //     var ret = res.data;
-      //     // var datas = ret.data;
-      //     that.setClickState(true);
-      //     if (ret.code == 201) {
-      //       // console.log(ret.message);
-      //       // that.setData({
-      //       //   shopping_count: parseInt(that.data.shopping_count) + 1
-      //       // });
-      //     }else{
-      //       wx.navigateBack({
-      //         delta: 1
-      //       })
-      //     }
-      //   }
-      // })
-
       let param = {
           page_code: 'p008',
           type: 'pay',
@@ -534,32 +401,6 @@ Page({
   },
   //确认收货
   confirm:function(){
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: {
-    //     page_code: 'p008',
-    //     type: 'receive',
-    //     order_id: that.data.items[0].o_id
-    //   },
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     // console.log(res);
-    //     var datas = res.data.data;
-    //     if (datas) {
-    //       wx.showToast({
-    //         title: res.data.message
-    //       });
-    //       wx.navigateBack({
-    //         delta: 1
-    //       })
-    //     }
-    //   }
-    // })
-
-
     let param = {
       page_code: 'p008',
       type: 'receive',
@@ -582,10 +423,14 @@ Page({
     }
   };
   base.httpRequest(params);
-
-
   },
   
+  productDetail: function(e){
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/detail/detail?id='+id,
+    })
+  },
 
   //测试付款成功则修改订单状态。
   testPayAfter: function (e) {
