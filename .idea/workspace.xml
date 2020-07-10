@@ -2,28 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="190413f9-7aba-4177-a74a-879d4f6bd676" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.json" afterPath="$PROJECT_DIR$/app.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/detail/detail.js" afterPath="$PROJECT_DIR$/pages/detail/detail.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/detail/detail.wxml" afterPath="$PROJECT_DIR$/pages/detail/detail.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/home/home.js" afterPath="$PROJECT_DIR$/pages/home/home.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/home/home.wxml" afterPath="$PROJECT_DIR$/pages/home/home.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grade/grade.js" afterPath="$PROJECT_DIR$/pages/member/grade/grade.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grade/grade.wxml" afterPath="$PROJECT_DIR$/pages/member/grade/grade.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grow/grow.js" afterPath="$PROJECT_DIR$/pages/member/grow/grow.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grow/grow.wxml" afterPath="$PROJECT_DIR$/pages/member/grow/grow.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/member.wxml" afterPath="$PROJECT_DIR$/pages/member/member.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/coupon/coupon.js" afterPath="$PROJECT_DIR$/pages/my/coupon/coupon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/coupon/coupon.wxml" afterPath="$PROJECT_DIR$/pages/my/coupon/coupon.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/member.js" afterPath="$PROJECT_DIR$/pages/member/member.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/login/login.js" afterPath="$PROJECT_DIR$/pages/my/login/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/login/login.wxml" afterPath="$PROJECT_DIR$/pages/my/login/login.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/my.js" afterPath="$PROJECT_DIR$/pages/my/my.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/my.wxml" afterPath="$PROJECT_DIR$/pages/my/my.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/order.js" afterPath="$PROJECT_DIR$/pages/my/order/order.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/order.wxml" afterPath="$PROJECT_DIR$/pages/my/order/order.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js" afterPath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.wxml" afterPath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/service/service.js" afterPath="$PROJECT_DIR$/pages/my/service/service.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/service/service.wxml" afterPath="$PROJECT_DIR$/pages/my/service/service.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js" afterPath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.wxml" afterPath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/shopcat.js" afterPath="$PROJECT_DIR$/pages/shopcat/shopcat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/shopcat.wxml" afterPath="$PROJECT_DIR$/pages/shopcat/shopcat.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.config.json" afterPath="$PROJECT_DIR$/project.config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/share.wxs" afterPath="$PROJECT_DIR$/utils/share.wxs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/base.js" afterPath="$PROJECT_DIR$/utils/base.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,7 +41,7 @@
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+              <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -48,9 +50,14 @@
       <file leaf-file-name="orderdetail.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="351">
+              <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+              <folding>
+                <marker date="1592879287156" expanded="true" signature="19087:19098" ph="{&quot;title&quot;: &quot;请先登录&quot;...}" />
+                <marker date="1592879287156" expanded="true" signature="19087:19106" ph="{...}" />
+                <marker date="1592879287156" expanded="true" signature="19087:19110" ph="{...}" />
+                <marker date="1592879287156" expanded="true" signature="19087:19114" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,8 +95,8 @@
       <file leaf-file-name="orderconfirm.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="251" column="5" lean-forward="true" selection-start-line="251" selection-start-column="5" selection-end-line="251" selection-end-column="5" />
+            <state relative-caret-position="11544">
+              <caret line="296" column="5" lean-forward="false" selection-start-line="296" selection-start-column="5" selection-end-line="296" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -98,9 +105,12 @@
       <file leaf-file-name="home.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/home/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="390">
+              <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+              <folding>
+                <marker date="1592893517010" expanded="true" signature="7368:7371" ph="//..." />
+                <marker date="1592893517010" expanded="true" signature="7368:7374" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,8 +118,8 @@
       <file leaf-file-name="home.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/home/home.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="7" column="46" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="46" />
+            <state relative-caret-position="741">
+              <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -118,8 +128,8 @@
       <file leaf-file-name="grow.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/member/grow/grow.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="17" column="78" lean-forward="true" selection-start-line="17" selection-start-column="78" selection-end-line="18" selection-end-column="80" />
+            <state relative-caret-position="351">
+              <caret line="9" column="78" lean-forward="false" selection-start-line="9" selection-start-column="78" selection-end-line="10" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -128,9 +138,11 @@
       <file leaf-file-name="grow.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/member/grow/grow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="351">
+              <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+              <folding>
+                <marker date="1592882652343" expanded="true" signature="3617:3627" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -139,7 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>share_by</find>
       <find>share_b</find>
       <find>share_</find>
       <find>kind/kind</find>
@@ -169,6 +180,7 @@
       <find>ogList</find>
       <find>products</find>
       <find>domainName</find>
+      <find>frozeno_rate_amount</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -184,7 +196,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pages/detail/detail.js" />
-        <option value="$PROJECT_DIR$/pages/home/home.js" />
         <option value="$PROJECT_DIR$/pages/kind/kind.js" />
         <option value="$PROJECT_DIR$/pages/kind/search/search.js" />
         <option value="$PROJECT_DIR$/pages/login/login.js" />
@@ -210,6 +221,7 @@
         <option value="$PROJECT_DIR$/pages/my/order/order.wxml" />
         <option value="$PROJECT_DIR$/pages/member/member.wxml" />
         <option value="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js" />
+        <option value="$PROJECT_DIR$/pages/home/home.js" />
       </list>
     </option>
   </component>
@@ -241,6 +253,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -301,7 +314,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -415,20 +427,22 @@
       <workItem from="1590372297453" duration="14167000" />
       <workItem from="1590549546880" duration="610000" />
       <workItem from="1590557578538" duration="428000" />
+      <workItem from="1593743985976" duration="17000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36752000" />
+    <option name="totallyTimeSpent" value="36769000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2414163" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2446352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -440,7 +454,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -632,12 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1053">
           <caret line="27" column="25" lean-forward="false" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
-          <folding>
-            <marker date="1590112880480" expanded="true" signature="98:239" ph="{&quot;phone&quot;: ''...}" />
-            <marker date="1590112880480" expanded="true" signature="9412:9421" ph="{&quot;url&quot;: '/pages/my/privacy/privacy'...}" />
-            <marker date="1590112880480" expanded="true" signature="9412:9428" ph="{...}" />
-            <marker date="1590112880480" expanded="true" signature="9412:9432" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -666,7 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1326">
           <caret line="34" column="66" lean-forward="true" selection-start-line="34" selection-start-column="66" selection-end-line="34" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -674,15 +680,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7839">
           <caret line="201" column="13" lean-forward="false" selection-start-line="201" selection-start-column="13" selection-end-line="201" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="351">
+          <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+          <folding>
+            <marker date="1592879287156" expanded="true" signature="19087:19098" ph="{&quot;title&quot;: &quot;请先登录&quot;...}" />
+            <marker date="1592879287156" expanded="true" signature="19087:19106" ph="{...}" />
+            <marker date="1592879287156" expanded="true" signature="19087:19110" ph="{...}" />
+            <marker date="1592879287156" expanded="true" signature="19087:19114" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -704,16 +714,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/member/grow/grow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="351">
+          <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+          <folding>
+            <marker date="1592882652343" expanded="true" signature="3617:3627" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/member/grow/grow.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="17" column="78" lean-forward="true" selection-start-line="17" selection-start-column="78" selection-end-line="18" selection-end-column="80" />
+        <state relative-caret-position="351">
+          <caret line="9" column="78" lean-forward="false" selection-start-line="9" selection-start-column="78" selection-end-line="10" selection-end-column="80" />
           <folding />
         </state>
       </provider>
@@ -728,16 +740,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="251" column="5" lean-forward="true" selection-start-line="251" selection-start-column="5" selection-end-line="251" selection-end-column="5" />
+        <state relative-caret-position="11544">
+          <caret line="296" column="5" lean-forward="false" selection-start-line="296" selection-start-column="5" selection-end-line="296" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/home/home.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="7" column="46" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="46" />
+        <state relative-caret-position="741">
+          <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -745,16 +757,19 @@
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/home/home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="390">
+          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding>
+            <marker date="1592893517010" expanded="true" signature="7368:7371" ph="//..." />
+            <marker date="1592893517010" expanded="true" signature="7368:7374" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

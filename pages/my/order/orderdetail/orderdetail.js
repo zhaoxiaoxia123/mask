@@ -29,7 +29,6 @@ Page({
     outTradeNo: '',    //此次支付的商户订单号
     setInter: '',   //存储计时器
     num: 30,   //记录订单失效时间  30*60 30分钟失效
-    domainName: app.globalData.domainName,
     isClick:true   //是否可以点击付款按钮
   },
 
@@ -71,17 +70,16 @@ Page({
     // var param_o = '/p008?has_address=1&order_id='+that.data.order_id;
     that.getOrder(param_o);
 
-    //将计时器赋值给setInter
-    that.data.setInter = setInterval(
-      function () {
-        var numVal = that.data.num - 1;
-        that.setData({ num: numVal });
-        // console.log('setInterval==' + that.data.num);
-        if(numVal <= 0){
-          clearInterval(that.data.setInter)
-        }
-      }, 1000*60);
-
+    // //将计时器赋值给setInter
+    // that.data.setInter = setInterval(
+    //   function () {
+    //     var numVal = that.data.num - 1;
+    //     that.setData({ num: numVal });
+    //     // console.log('setInterval==' + that.data.num);
+    //     if(numVal <= 0){
+    //       clearInterval(that.data.setInter)
+    //     }
+    //   }, 1000*60);
   },
   
 
@@ -147,19 +145,6 @@ Page({
 
   //获取用户信息 ：积分 等
   getUserDetail: function (param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       customerInfo: res.data.data
-    //     });
-    //   }
-    // });
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -174,20 +159,6 @@ Page({
   },
 
   getTransform: function(param){
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       transform: datas[0]
-    //     })
-    //   }
-    // });
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -202,48 +173,6 @@ Page({
   },
 
   getOrder: function (param) {  //读取订单
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     var datas = res.data.data;
-    //     // console.log(datas);
-    //     if (datas == false) {
-    //       wx.showToast({
-    //         title: "该订单已失效。"
-    //       });
-    //       wx.navigateBack({
-    //         delta: 1
-    //       })
-    //     }else{
-    //       that.setData({
-    //         items: datas
-    //       });
-    //       if (that.data.items[0].minute){
-    //         that.setData({
-    //           items: datas
-    //         });
-    //       }
-    //       var order_amount = that.data.items[0].frozeno_order_amount;
-
-    //       that.setData({
-    //         orderAmount: order_amount,
-    //         rateAmount: (order_amount * (that.data.transform.rate / 100))
-    //       });
-    //       if ((parseFloat(order_amount) >= parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
-    //         that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
-    //       } else if ((parseFloat(order_amount) < parseFloat(that.data.transform.satisfy_amount)) && that.data.transform.type == 2) {
-    //         that.sumAmount(0, that.data.rateAmount, that.data.orderAmount);
-    //       } else if (that.data.transform.type == 1) {
-    //         that.sumAmount(that.data.customerInfo.point, that.data.rateAmount, that.data.orderAmount);
-    //       }
-    //     }
-    //   }
-    // });
-    
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -262,13 +191,32 @@ Page({
           that.setData({
             items: datas
           });
-          if (that.data.items[0].minute){
+          console.log('that.data.items:----');
+          console.log(that.data.items[0].minute);
+          // if (that.data.items[0].minute){
+          //   that.setData({
+          //     items: datas
+          //   });
+          // }
+          console.log(that.data.items[0].minute);
+          if (that.data.items[0].minute > 0 && that.data.items[0].minute <= 30){
             that.setData({
-              items: datas
+              num: that.data.items[0].minute
             });
           }
-          var order_amount = that.data.items[0].frozeno_order_amount;
+          console.log(that.data.items);
+          //将计时器赋值给setInter
+          that.data.setInter = setInterval(
+            function () {
+              var numVal = that.data.num - 1;
+              that.setData({ num: numVal });
+              // console.log('setInterval==' + that.data.num);
+              if(numVal <= 0){
+                clearInterval(that.data.setInter)
+              }
+            }, 1000*60);
 
+          var order_amount = that.data.items[0].frozeno_order_amount;
           that.setData({
             orderAmount: order_amount,
             rateAmount: (order_amount * (that.data.transform.rate / 100))
@@ -640,14 +588,14 @@ Page({
   
 
   //测试付款成功则修改订单状态。
-  testPayAfter: function () {
+  testPayAfter: function (e) {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
 
       let param = {
         page_code: 'p008',
         type: 'pay',
-        order_id: 1,
-        amount: 3000,
+        order_id: e.currentTarget.dataset.id,
+        amount: e.currentTarget.dataset.amount,
         out_trade_no: '123456789',
         // customer_id: wx.getStorageSync('customerId')
       };

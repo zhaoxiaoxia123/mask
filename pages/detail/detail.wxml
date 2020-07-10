@@ -1,41 +1,41 @@
 <!--pages/detail/detail.wxml-->
 <view class='view-page'>
- <!-- wx:if="{{isShowTopBar}}" -->
+	<!-- wx:if="{{isShowTopBar}}" -->
 	<navbar selectTab="{{nowstatus}}" tabCount="4" bind:icre="clickTab"></navbar>
 	<!-- <navbar page-name="详情页" tabCount="1" wx:if="{{!isShowTopBar}}"></navbar> -->
 	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
-	<view id="product">
-		<swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
-			<block wx:for="{{swipers}}" wx:key="*this">
-				<swiper-item wx:if="{{item.type == 1}}">
-					<image mode="widthFix" src="{{domainName}}{{item.img_url}}" class="slide-image" />
-				</swiper-item>
-			</block>
-		</swiper>
-		<view class='page-pd'>
-			<view class='money' wx:if="{{items.customer_amount > 0 && level != 1}}">
-				<text>￥{{items.customer_amount}}</text>
-				<text class='text-size'>[</text>
-				<text class='decoration text-size'>￥{{items.frozeno_discount_amount}}</text>
-				<text class='text-size'>]</text>
-			</view>
-			<view class='money' wx:if="{{items.customer_amount <= 0 || level == 1}}">
-				<text>￥{{items.frozeno_discount_amount}}</text>
-				<!-- <text class='text-size'>（</text>
+		<view id="product">
+			<swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
+				<block wx:for="{{swipers}}" wx:key="*this">
+					<swiper-item wx:if="{{item.type == 1}}">
+						<image mode="widthFix" src="{{item.image_url}}" class="slide-image" />
+					</swiper-item>
+				</block>
+			</swiper>
+			<view class='page-pd'>
+				<view class='money' wx:if="{{items.customer_amount > 0 && level != 1}}">
+					<text>￥{{items.customer_amount}}</text>
+					<text class='text-size'>[</text>
+					<text class='decoration text-size'>￥{{items.frozeno_discount_amount}}</text>
+					<text class='text-size'>]</text>
+				</view>
+				<view class='money' wx:if="{{items.customer_amount <= 0 || level == 1}}">
+					<text>￥{{items.frozeno_discount_amount}}</text>
+					<!-- <text class='text-size'>（</text>
       <text class='decoration text-size'>￥{{items.frozeno_amount}}</text>
       <text class='text-size'> ）</text> -->
+				</view>
+				<view class='money-title'>{{items.category_desc}}</view>
+				<view class='money-text'>
+					<text>成长值：{{items.growth}}</text>
+					<text>积分：{{items.point}}</text>
+				</view>
+				<text class='abstract'>{{items.frozeno_introduction}}</text>
+				<view class='between'>
+					<text class='num'>免邮</text>
+					<text class='num'>销量：{{items.sale}}件</text>
+				</view>
 			</view>
-			<view class='money-title'>{{items.category_desc}}</view>
-			<view class='money-text'>
-				<text>成长值：{{items.growth}}</text>
-				<text>积分：{{items.point}}</text>
-			</view>
-			<text class='abstract'>{{items.frozeno_introduction}}</text>
-			<view class='between'>
-				<text class='num'>免邮</text>
-				<text class='num'>销量：{{items.sale}}件</text>
-			</view>
-		</view>
 		</view>
 		<!-- <view class='spec' bindtap="toggleDialog">
     <text>选择规格</text>
@@ -45,18 +45,18 @@
 			<view class="detail">
 				<!-- <view class='detail-image' id="product">
 					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
-            <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
+            <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{item.image_url}}" lazy-load></image>
           </block>
 				</view> -->
 				<view class='detail-image' id="detail">
 					<block wx:for="{{swipers}}" wx:key="*this">
-            <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
-          </block>
+						<image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{item.image_url}}" lazy-load></image>
+					</block>
 				</view>
 				<view class='detail-image' id="about">
 					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
-            <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 2}}" src="{{domainName}}{{item.img_url}}" lazy-load></image>
-          </block>
+						<image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 2}}" src="{{item.image_url}}" lazy-load></image>
+					</block>
 				</view>
 			</view>
 
@@ -94,7 +94,7 @@
 			<view class='lists'>
 				<view class='list'>
 					<view class='detail-img'>
-						<image src='{{swipers[0].img_url}}'></image>
+						<image src='{{swipers[0].image_url}}'></image>
 					</view>
 					<view class='detail-center'>
 						<view class='sales'>
@@ -145,5 +145,5 @@
 				</view>
 			</view>
 		</view>
-  </scroll-view>
+	</scroll-view>
 </view>

@@ -1,5 +1,5 @@
 <!--pages/post/post.wxml-->
-<import src="../../wxParse/wxParse.wxml" wx:if="{{!href}}"/>
+<import src="../../wxParse/wxParse.wxml"/>
 
     <!--加载失败的时候显示
      -->
@@ -17,4 +17,4 @@
   </view>
 </view>
 
-<web-view src="{{href}}" wx:if="{{href}}"></web-view>
+<web-view src="{{href}}" wx:if="{{href != ''}}"></web-view>

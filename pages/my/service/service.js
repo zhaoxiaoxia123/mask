@@ -9,9 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    item: [],
+    items: [],
     type: 17,
-    domainName: app.globalData.domainName,
     ftserviceflexwindow: false,
   },
 
@@ -88,25 +87,6 @@ Page({
     tmpObj.calling(e);
   },
   getPost: function () {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: {
-    //     page_code: 'p001',
-    //     type: that.data.type
-    //   },
-    //   header: {
-    //     'content-type': "application/json"
-    //   },
-    //   success: function (res) {
-    //     var datas = res.data;
-    //     console.log(datas);
-    //     console.log(datas.length);
-    //     that.setData({
-    //       item: datas.data
-    //     });
-    //   }
-    // })
-
     let param = {
       page_code: 'p001',
       type: that.data.type
@@ -119,7 +99,7 @@ Page({
         console.log(datas);
         console.log(datas.length);
         that.setData({
-          item: datas.data
+          items: datas.data
         });
       }
     };

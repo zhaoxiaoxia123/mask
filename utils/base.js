@@ -35,14 +35,24 @@ function httpRequest(params, noRefetch) {
       if (startChar == '2') {
         params.sCallback && params.sCallback(res);
       } else {
-        wx.showToast({
-          title: res.data.message
-        })
+        if (code == '404' || code == '400') {
+          wx.clearStorage();
+          wx.clearStorageSync();
+          if(code == '400'){
+            wx.navigateTo({
+              url: "/pages/my/login/login",
+            })
+          }
+        }
         //AOP
         if (code == '401') {
           if (!noRefetch) {
             _refetch(params);
           }
+        }else{
+          wx.showToast({
+            title: res.data.message
+          })
         }
         if (noRefetch) {
           params.eCallback && params.eCallback(res);
@@ -69,23 +79,31 @@ function getTokenFromServer(params,callBack) {
     success: function (res) {
       // 既然时一个工具类，就应该存粹一点，不要用 base.js 里的 request(params) 方法发起网络请求了
       // 这一点很重要
-      wx.request({
-        url: params.url,
-        method: 'POST',
-        data: {
-          page_code:'p010',
-          code: res.code,
-          type:'refresh',
-          share_by:wx.getStorageSync('shareBy')?wx.getStorageSync('shareBy'):''
-        },
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
+      wx.getUserInfo({
+        withCredentials:true,
         success: function (res) {
-          // wx.setStorageSync('token', res.data.data.token);
-          callBack && callBack(res.data.data.token);
+          wx.request({
+            url: params.url,
+            method: 'POST',
+            data: {
+              page_code:'p010',
+              code: r.code,
+              type:'refresh',
+              encryptedData:res.encryptedData, 
+              iv:res.iv,
+              share_by:wx.getStorageSync('shareBy')?wx.getStorageSync('shareBy'):''
+            },
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function (res) {
+              // wx.setStorageSync('token', res.data.data.token);
+              callBack && callBack(res.data.data.token);
+            }
+          });
         }
-      })
+      });
+      
     }
   });
 }
