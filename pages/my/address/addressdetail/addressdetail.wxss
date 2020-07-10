@@ -1,13 +1,21 @@
 
 .column{
   margin-bottom: 10rpx;
-  padding: 30rpx 20rpx;
+  padding: 20rpx;
 }
-.column-form{
+.column-control{
   display: flex;
   flex-direction: row; 
-  /* text-align: end; */
+  min-height:2rem;
   justify-content: space-between;
+}
+.opacity-ash{
+  opacity: 0.5;
+}
+.column-form{
+  width:100%;
+  /* text-align: end; */
+  
 }
 .column-text{
   color:#dd2525;
@@ -27,20 +35,22 @@
   margin-top:20rpx;
   border-radius:10rpx;
 }
+.input {
+  height:2rem;
+  min-height:2rem;
+}
 label{
   width: 200rpx;
   text-align: left;
 }
-input{
-  text-align:end;
-}
-.address{
+.form-textarea{
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  height: 50px;
-  text-align:end;
+  width:100%;
+  height: 100rpx;
+  min-height:100rpx;
 }
 
 

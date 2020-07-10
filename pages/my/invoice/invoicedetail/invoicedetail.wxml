@@ -3,8 +3,7 @@
 单位名称规则：字符5-120个字符之间 -->
   <view class='column bg-box'>
     <view class="column-form">
-      <label>单位名称</label>
-      <input placeholder='请输入单位名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}' maxlength="30"></input>
+      <input placeholder='单位名称' bindinput="setUsernameInput" bindconfirm="search" value='{{username}}' maxlength="30"></input>
     </view>
     <view class="column-text" wx:if="{{isShowNameTip}}">
         请输入单位名称
@@ -13,8 +12,7 @@
 <!-- 税号规则：15位、18或者20位码（字符型）组成 -->
   <view class='column bg-box'>
     <view class="column-form">
-      <label>税号</label>
-      <input placeholder='请输入税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}' maxlength="20"></input>
+      <input placeholder='税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}' maxlength="20"></input>
     </view>
     <view class="column-text" wx:if="{{isShowTaxNumberTip}}">
         纳税人识别号错误，请检查重新输入
@@ -23,30 +21,26 @@
 
   <view class='column bg-box'>
     <view class="column-form">
-      <label>单位地址</label>
-      <input placeholder='请输入地址' bindinput="setAddressInput" bindconfirm="search" value='{{address}}'></input>
+      <input placeholder='单位地址' bindinput="setAddressInput" bindconfirm="search" value='{{address}}'></input>
     </view>
   </view>
 
   <view class='column bg-box'>
     <view class="column-form">
-        <label>电话号码</label>
-      <input placeholder='请输入手机号码' type="number" bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}' maxlength="11"></input>  
+      <input placeholder='电话号码' type="number" bindinput="setPhoneInput" bindconfirm="search" value='{{phone}}' maxlength="11"></input>  
     </view>
 
   </view>
 
   <view class='column bg-box'>
     <view class="column-form">
-        <label>开户银行</label>
-      <input placeholder='请输入开户银行' bindinput="setBankInput" bindconfirm="search" value='{{bank}}'></input>  
+      <input placeholder='开户银行' bindinput="setBankInput" bindconfirm="search" value='{{bank}}'></input>  
     </view>
   </view>
 
   <view class='column bg-box'>
     <view class="column-form">
-      <label>银行账户</label>
-      <input placeholder='请输入银行账户' type="number" bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}' maxlength="19"></input>
+      <input placeholder='银行账户' type="number" bindinput="setBankAccountInput" bindconfirm="search" value='{{bankAccount}}' maxlength="19"></input>
     </view>
 
   </view>
