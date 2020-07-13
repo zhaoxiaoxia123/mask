@@ -470,43 +470,6 @@ Page({
     if (that.data.items.ticket.ticket_id && ticket_id == 0){  //使用新人卡券时候存在的值
       ticket_id = that.data.items.ticket.ticket_id;
     }
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: {
-    //     page_code: 'p008',
-    //     type:'shopping_by',
-    //     products:that.data.products,//JSON.stringify(products),
-    //     ticket_id: ticket_id,
-    //     express_company: that.data.isCheckExpressCompany,
-    //     customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
-    //     invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
-    //     use_point: that.data.usingPoint,
-    //     // order_type: 1,//购买订单
-    //     customer_id: wx.getStorageSync('customerId'),
-    //     amount: that.data.payAmount,
-    //     is_have_new_ticket: that.data.items.is_have_new_ticket,  //是否使用的是新会员卡券
-    //     sub_amount: that.data.items.sub_amount,  //新会员卡券抵扣金额
-    //   },
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     console.log(res);
-    //     var datas = res.data.data;
-    //     wx.showToast({
-    //       // icon: "none",
-    //       title: res.data.message
-    //     });
-    //     //此处跳出来支付。调用微信支付
-    //     if(res.data.code == 200){
-    //       wx.redirectTo({
-    //         url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas +'&from_page=shopping',
-    //       })
-    //     }
-    //   }
-    // })
-
 
     let param = {
       page_code: 'p008',
@@ -519,9 +482,6 @@ Page({
       use_point: that.data.usingPoint,
       amount: that.data.payAmount,
       // order_type: 1,//购买订单
-      // customer_id: wx.getStorageSync('customerId'),
-      // is_have_new_ticket: that.data.items.is_have_new_ticket,  //是否使用的是新会员卡券
-      // sub_amount: that.data.items.sub_amount,  //新会员卡券抵扣金额
     };
     if(that.data.items.is_have_new_ticket){
       param['is_have_new_ticket'] = that.data.items.is_have_new_ticket; //是否使用的是新会员卡券

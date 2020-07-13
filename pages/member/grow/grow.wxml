@@ -77,15 +77,14 @@
         <text class='text-title'>{{item.log_title?item.log_title:''}}</text>
         <text class='text-date'>{{item.created_at}}</text>
       </view>
-      <view  class='text-add'>
+      <view class='text-add'>
         <view class="text-add-left">
-              <text >+</text>
-              <text>-</text>
-          </view>
+            <text wx:if="{{item.frozeno_event_trend == 1}}">+</text>
+            <text wx:if="{{item.frozeno_event_trend == 2}}">-</text>
+        </view>
         <view>{{filter.toFix(item.value)}} </view>
       </view>
     </view>
-    
   </view>
   <view class='footer'>
     <text class=''>仅展示近六个月的成长值</text>

@@ -180,6 +180,14 @@ Page({
       sCallback: function (res) {
         var datas = res.data.data;
         // console.log(datas);
+        if(res.data.code == 201){
+          wx.showToast({
+            title: res.data.message
+          });
+          wx.navigateBack({
+            delta: 1
+          })
+        }
         if (datas == false) {
           wx.showToast({
             title: "该订单已失效。"
@@ -282,17 +290,18 @@ Page({
     });
   },
   //付款   商户在小程序中先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易后调起支付。
-  payOrder:function(){
+  payOrder:function(e){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       that.setClickState(false);
       if(that.data.items[0].frozeno_order_amount == 0){
         that.payAfter();
       }else{
-        
+        let o_id = e.currentTarget.dataset.id;
         let param = {
           page_code: 'p008',
           type: 'unifiedorder',  
           amount: that.data.items[0].frozeno_order_amount,
+          order_id:o_id,
           openid: wx.getStorageSync('openid')
         };
         var params = {

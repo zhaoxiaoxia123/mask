@@ -60,7 +60,6 @@ Page({
       offset: (that.data.offset - 1) * that.data.pageCount,
       page: that.data.pageCount
     };
-    // var param = '/p008?type=myOrder&order_state='+that.data.order_state+'&customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
     that.getOrderList(param);
     }
   },
@@ -101,7 +100,6 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-      // var param = '/p008?type=myOrder&order_state='+that.data.order_state+'&customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getOrderList(param);
     }
   },
@@ -136,27 +134,6 @@ Page({
 
   //以下为自定义点击事件
   getOrderList: function (param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     var datas = res.data.data;
-    //     if (datas){
-    //       that.setData({
-    //         items: that.data.items.concat(datas)
-    //       });
-    //       if (datas.length <= 0 || datas.length < that.data.pageCount) {
-    //         that.setData({
-    //           isLast: true
-    //         });
-    //       }
-    //     }
-    //   }
-    // });
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -176,15 +153,11 @@ Page({
       }
     };
     base.httpRequest(params);
-
   },
   
   // tab切换
   clickTab: function (e) {
-    var that = this;
-    // console.log("-1", this.data.currentTab)
-    // console.log("-2", e.currentTarget.dataset.current)
-    if (this.data.currentTab == e.currentTarget.dataset.current) {
+    if (that.data.currentTab == e.currentTarget.dataset.current) {
       return false;
     } else {
       that.setData({
@@ -203,7 +176,6 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-      // var param = '/p008?type=myOrder&order_state='+that.data.order_state+'&customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getOrderList(param);
       }
     }
@@ -217,29 +189,6 @@ Page({
   cancelOrder: function (e) {
     var order_id = e.currentTarget.dataset.id;
     var order_state = e.currentTarget.dataset.state;
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: {
-    //     page_code: 'p008',
-    //     type: 'cancel',
-    //     order_id: order_id,
-    //     order_state: order_state   //取消前的订单状态
-    //   },
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     // console.log(res);
-    //     var datas = res.data.data;
-    //     if (datas) {
-    //       wx.showToast({
-    //         title: res.data.message
-    //       });
-    //       that.onShow();
-    //     }
-    //   }
-    // })
     let param = {
       page_code: 'p008',
       type: 'cancel',
@@ -261,32 +210,9 @@ Page({
       }
     };
     base.httpRequest(params);
-
   },
   submitMessage:function(e){ //提醒发货
     var order_id = e.currentTarget.dataset.id;
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: {
-    //     page_code: 'p008',
-    //     type: 'sendMessage',
-    //     order_id: order_id
-    //   },
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     // console.log(res);
-    //     var datas = res.data.data;
-    //     if (datas) {
-    //       wx.showToast({
-    //         title: res.data.message
-    //       });
-    //     }
-    //   }
-    // })
-    
     let param = {
       page_code: 'p008',
       type: 'sendMessage',
@@ -310,29 +236,6 @@ Page({
   },
   submitOk: function(e){ //确认收货
     var order_id = e.currentTarget.dataset.id;
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: {
-    //     page_code: 'p008',
-    //     type: 'receive',
-    //     order_id: order_id
-    //   },
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     // console.log(res);
-    //     var datas = res.data.data;
-    //     if (datas) {
-    //       wx.showToast({
-    //         title: res.data.message
-    //       });
-    //       that.onShow();
-    //     }
-    //   }
-    // })
-
     let param = {
       page_code: 'p008',
       type: 'receive',
@@ -353,7 +256,6 @@ Page({
       }
     };
     base.httpRequest(params);
-
   },
 })
 
