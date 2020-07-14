@@ -128,9 +128,12 @@
           <image src='../../img/dv.png'></image>
         </view>
 
-        <view class='coupon-right' bindtap="goInvoice" wx:if="{{invoice.username}}">
-          <text>{{invoice.username}}</text>
+        <view class='coupon-right invoice-item' bindtap="goInvoice" wx:if="{{invoice.username}}">
+          <view class="invoice-text">
+           <text>{{invoice.username}}</text>
           <text>{{invoice.tax_number}}</text>
+          </view>
+        
           <image src='../../img/dv.png'></image>
         </view>
       </view>

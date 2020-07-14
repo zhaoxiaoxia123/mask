@@ -1,7 +1,7 @@
 
 .lists{
   box-sizing: border-box;
-  padding-bottom:120rpx;
+  padding-bottom:220rpx;
 }
 .goods{
   display: flex;
@@ -192,6 +192,14 @@ background: #404040;
 .coupon-right image{
   width:14rpx;
   height:24rpx;
+}
+.invoice-item{
+  display: flex;
+  align-items: center;
+}
+.invoice-text{
+  display: flex;
+  flex-direction: column;
 }
 .coupon-hd{
   font-size:rem;
