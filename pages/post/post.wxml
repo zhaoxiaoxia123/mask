@@ -1,20 +1,20 @@
 <!--pages/post/post.wxml-->
-<import src="../../wxParse/wxParse.wxml"/>
+<import src="../../wxParse/wxParse.wxml" />
 
-    <!--加载失败的时候显示
-     -->
-  <view class='search-no' wx:if="{{ ! item}}" >
-    <view bindtap="gohome">
-      <image class='scimg' src='../img/loading.png'></image>
-    </view>
-  </view>
+<!--加载失败的时候显示-->
+<view class='search-no' wx:if="{{ ! item}}">
+	<view bindtap="gohome">
+		<image class='scimg' src='../img/loading.png'></image>
+	</view>
+</view>
 
 <view class='page-pd' wx:if="{{!href}}">
-  <view class='agreement'>
-    <view class='content'>
-        <template is="wxParse" data="{{wxParseData:infos.nodes}}" />
-    </view>
-  </view>
+	<view class='agreement'>
+		<view class='content'>
+			<template is="wxParse" data="{{wxParseData:infos.nodes}}"/>
+		</view>
+	</view>
 </view>
 
 <web-view src="{{href}}" wx:if="{{href != ''}}"></web-view>
+<!-- <web-view src="https://mp.weixin.qq.com/s/1eHAl1mx6-MPsTdtQTuCEw"></web-view> -->

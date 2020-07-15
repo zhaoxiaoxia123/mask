@@ -257,30 +257,39 @@ Page({
 
 //取消订单
   cancelOrder: function(){
-    let param = {
-      page_code: 'p008',
-      type: 'cancel',
-      order_id: that.data.items[0].o_id,
-      order_type: that.data.items[0].frozeno_order_state
-    };
-    var params = {
-      url: app.globalData.domainUrl,
-      data:param,
-      method:'POST',
-      sCallback: function (res) {
-        var datas = res.data.data;
-        if (datas) {
-          wx.showToast({
-            title: res.data.message
-          });
-          wx.navigateBack({
-            delta: 1
-          })
+    wx.showModal({
+      title: '提示',
+      content: '你确定要取消该订单？',
+      success: function (res) {
+        if (res.confirm) {
+          let param = {
+            page_code: 'p008',
+            type: 'cancel',
+            order_id: that.data.items[0].o_id,
+            order_type: that.data.items[0].frozeno_order_state
+          };
+          var params = {
+            url: app.globalData.domainUrl,
+            data:param,
+            method:'POST',
+            sCallback: function (res) {
+              var datas = res.data.data;
+              if (datas) {
+                wx.showToast({
+                  title: res.data.message
+                });
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            }
+          };
+          base.httpRequest(params);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
       }
-    };
-    base.httpRequest(params);
-
+    })
   },
   
   //是否让确认按钮可点击
@@ -459,19 +468,19 @@ Page({
       method:'POST',
       sCallback: function (res) {
         console.log(res);
-          var ret = res.data;
-          var datas = ret.data;
-          console.log(ret);
-          if (ret.code == 201) {
-            // console.log(ret.message);
-            // that.setData({
-            //   shopping_count: parseInt(that.data.shopping_count) + 1
-            // });
-          } else {
-            wx.navigateBack({
-              delta: 1
-            })
-          }
+        var ret = res.data;
+        var datas = ret.data;
+        console.log(ret);
+        if (ret.code == 201) {
+          // console.log(ret.message);
+          // that.setData({
+          //   shopping_count: parseInt(that.data.shopping_count) + 1
+          // });
+        } else {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
       }
     };
     base.httpRequest(params);

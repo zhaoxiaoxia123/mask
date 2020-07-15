@@ -187,29 +187,39 @@ Page({
   },
   //取消订单
   cancelOrder: function (e) {
-    var order_id = e.currentTarget.dataset.id;
-    var order_state = e.currentTarget.dataset.state;
-    let param = {
-      page_code: 'p008',
-      type: 'cancel',
-      order_id: order_id,
-      order_state: order_state   //取消前的订单状态
-    };
-    var params = {
-      url: app.globalData.domainUrl,
-      data:param,
-      method:'POST',
-      sCallback: function (res) {
-        var datas = res.data.data;
-        if (datas) {
-          wx.showToast({
-            title: res.data.message
-          });
-          that.onShow();
+    wx.showModal({
+      title: '提示',
+      content: '你确定要取消该订单？',
+      success: function (res) {
+        if (res.confirm) {
+          var order_id = e.currentTarget.dataset.id;
+          var order_state = e.currentTarget.dataset.state;
+          let param = {
+            page_code: 'p008',
+            type: 'cancel',
+            order_id: order_id,
+            order_state: order_state   //取消前的订单状态
+          };
+          var params = {
+            url: app.globalData.domainUrl,
+            data:param,
+            method:'POST',
+            sCallback: function (res) {
+              var datas = res.data.data;
+              if (datas) {
+                wx.showToast({
+                  title: res.data.message
+                });
+                that.onShow();
+              }
+            }
+          };
+          base.httpRequest(params);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
       }
-    };
-    base.httpRequest(params);
+    })
   },
   submitMessage:function(e){ //提醒发货
     var order_id = e.currentTarget.dataset.id;
