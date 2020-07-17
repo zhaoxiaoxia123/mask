@@ -6,6 +6,18 @@
 	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
 		<view id="product">
 			<swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
+			<swiper-item>
+          <video
+            class="swiper-item"
+            show-play-btn="{{true}}"
+            controls="{{true}}"
+            objectFit="cover" 
+            loop='{{false}}'
+            show-mute-btn='{{true}}'
+            vslide-gesture-in-fullscreen='{{true}}'
+            src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/promotion.mp4" 
+          ></video>
+          </swiper-item>
 				<block wx:for="{{swipers}}" wx:key="*this">
 					<swiper-item wx:if="{{item.type == 1}}">
 						<image mode="widthFix" src="{{item.image_url}}" class="slide-image" />

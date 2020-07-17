@@ -17,7 +17,7 @@ Page({
     indicatorDots: true,
     indicatorColor: "#000000",
     indicatorActiveColor: "#b7aa00",
-    autoplay: true,
+    autoplay: false,
     interval: 3000,
     duration: 500,
     circular: true,
@@ -64,9 +64,7 @@ Page({
       var shoppingParam = {
         page_code: 'p012',
         type: 'shopping_count',
-        // customer_id: wx.getStorageSync("customerId")
       };
-      // var shoppingParam = '/p012?type=shopping_count&customer_id='+wx.getStorageSync("customerId");
       that.getShoppingCount(shoppingParam);
     }
 
@@ -159,18 +157,6 @@ Page({
       return ;
     }
     let st = e.scrollTop ? e.scrollTop : e.detail.scrollTop;
-    // st = (st+80) ;
-    // if(st >= that.data.productTop-60){
-    // if(st >= that.data.productTop){
-    //   that.setData({
-    //     isShowTopBar: true
-    //   })
-    // }else{
-    //   that.setData({
-    //     isShowTopBar: false,
-    //     toview:''
-    //   })
-    // }
     if (st <= that.data.productTop || st < that.data.detailTop ){
       that.setData({
         nowstatus: 'product'
@@ -202,20 +188,6 @@ Page({
   },
   
   getShoppingCount: function (param){
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       shoppingCount: datas.count
-    //     });
-    //   }
-    // });
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -349,41 +321,6 @@ Page({
     // var productId = event.target.dataset.id;
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       that.setClickState(false);
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   method: "POST",
-      //   data: {
-      //     page_code:'p012',
-      //     type: 'insert',
-      //     product_id: that.data.productId,
-      //     product_count: that.data.count,  //商品个数
-      //     customer_id: wx.getStorageSync('customerId')
-      //   },
-      //   header: {
-      //     "Content-Type": "application/x-www-form-urlencoded"
-      //   },
-      //   success: function (res) {
-      //     console.log(res);
-      //     var datas = res.data.data;
-      //     if (datas) {
-      //       wx.showToast({
-      //         title: "加入购物车成功。"
-      //       });
-      //       that.setClickState(true);
-      //       //查询购物车个数
-      //       var shoppingParam = {
-      //         page_code: 'p012',
-      //         type: 'shopping_count',
-      //         customer_id: wx.getStorageSync("customerId")
-      //       };
-      //       that.getShoppingCount(shoppingParam);
-      //       that.setData({
-      //           flexwindow: false
-      //       });
-      //     }
-      //   }
-      // })
-
       let param = {
         page_code:'p012',
         type: 'insert',
