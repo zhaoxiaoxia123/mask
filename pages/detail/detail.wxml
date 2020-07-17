@@ -12,6 +12,9 @@
 					</swiper-item>
 				</block>
 			</swiper>
+      <view>
+        <image mode="widthFix" src='../img/member/p002-V004.jpg' style="width:100%;"></image>
+      </view>
 			<view class='page-pd'>
 				<view class='money' wx:if="{{items.customer_amount > 0 && level != 1}}">
 					<text>￥{{items.customer_amount}}</text>
