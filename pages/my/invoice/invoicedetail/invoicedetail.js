@@ -265,11 +265,12 @@ Page({
       } else if (that.data.taxNumber.length == 0){
         wx.showModal({
           title: '提示',
-          content: '请输入纳税人识别号',
+          content: '请输入统一社会信用代码',
           showCancel: false
         });
         return false;
-      } else if (that.data.taxNumber.length != 15 && that.data.taxNumber.length != 18 && that.data.taxNumber.length != 20){
+      // } else if (that.data.taxNumber.length != 15 && that.data.taxNumber.length != 18 && that.data.taxNumber.length != 20){
+      } else if (that.data.taxNumber.length != 18){
         wx.showModal({
           title: '提示',
           content: '请输入正确位数的纳税人识别号',

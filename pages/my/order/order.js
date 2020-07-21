@@ -22,6 +22,8 @@ Page({
     order_state: 1,
     memberNo: wx.getStorageSync('memberNo'),
     items: [],
+    imgLoad:'../../img/loading.gif',//'../../img/wu.png',
+    message:'正在努力加载中',
   },
 
   /**
@@ -52,6 +54,7 @@ Page({
       isLast: false
     });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      
     var param = {
       page_code: 'p008',
       type: "myOrder",
@@ -142,7 +145,9 @@ Page({
         var datas = res.data.data;
         if (datas){
           that.setData({
-            items: that.data.items.concat(datas)
+            items: that.data.items.concat(datas),
+            message:'您还没有相关订单',
+            imgLoad:'../../img/wu.png',
           });
           if (datas.length <= 0 || datas.length < that.data.pageCount) {
             that.setData({

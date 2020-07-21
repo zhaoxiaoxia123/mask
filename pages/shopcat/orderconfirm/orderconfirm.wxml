@@ -32,7 +32,8 @@
       </view>
       <view class='list-right'>
         <view class='right-text'>{{item.category_desc}}</view>
-        <view class='sale'>￥{{item.frozeno_discount_amount}}</view>
+        <view class='sale'>￥{{item.customer_amount}}</view>
+        <text class='decoration' wx:if="{{customerInfo.frozeno_level > 1}}">[￥{{item.frozeno_discount_amount}}]</text>
         <view class='item'>
           <view class='abstract'>{{item.frozeno_introduction}}</view>
           <view class='piece'>× {{item.join_product_count}}</view>

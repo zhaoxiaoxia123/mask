@@ -12,10 +12,10 @@
 <!-- 税号规则：15位、18或者20位码（字符型）组成 -->
   <view class='column bg-box'>
     <view class="column-form">
-      <input placeholder='税号' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}' maxlength="20"></input>
+      <input placeholder='统一社会信用代码' bindinput="setTaxNumberInput" bindconfirm="search" value='{{taxNumber}}' maxlength="18"></input>
     </view>
     <view class="column-text" wx:if="{{isShowTaxNumberTip}}">
-        纳税人识别号错误，请检查重新输入
+        统一社会信用代码错误，请检查重新输入
     </view>
   </view>
 

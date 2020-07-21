@@ -190,7 +190,8 @@ Page({
       var fee = 0;
       for (var i = 0; i < items.length; i++) {
         if (items[i].selected) {
-          fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+          // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+          fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
         }
       }
       that.setData({
@@ -217,7 +218,8 @@ Page({
     var fee = 0;
     for (var i = 0; i < items.length; i++) {
       if (items[i].selected) {
-        fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
+        // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
+        fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].customer_amount);
       }
     }
     that.setData({
@@ -238,7 +240,9 @@ Page({
     var fee = 0;
     for (var i = 0; i < items.length; i++) {
       if (items[i].selected) {
-        fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+        // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+        fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
+     
       }
     }
     that.setData({
@@ -265,7 +269,8 @@ Page({
     var fee = 0;
     for (var i = 0; i < items.length; i++) {
       if (items[i].selected) {
-        fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+        // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+        fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
       }
     }
     that.setData({

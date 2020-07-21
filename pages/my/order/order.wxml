@@ -26,9 +26,9 @@
         <!--没有相关订单时显示-->
         <view class='search-no' wx:if="{{items.length <= 0}}">
           <view>
-            <image class='scimg' src='../../img/wu.png'></image>
+            <image class='scimg' src='{{imgLoad}}'></image>
           </view>
-          <text>您还没有相关订单~~</text>
+          <text>{{message}}~~</text>
         </view>
 
         <view class='lists'>
@@ -54,6 +54,7 @@
                 </view>
                 <view class='column'>
                   <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
                 <view class='column col-content'>
@@ -97,9 +98,9 @@
         <!--没有相关订单时显示-->
         <view class='search-no' wx:if="{{items.length <= 0}}">
           <view>
-            <image class='scimg' src='../../img/wu.png'></image>
+            <image class='scimg' src='{{imgLoad}}'></image>
           </view>
-          <text>您还没有相关订单~~</text>
+          <text>{{message}}~~</text>
         </view>
 
         <view class='lists'>
@@ -122,6 +123,7 @@
 
                 <view class='column'>
                   <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
 
@@ -148,12 +150,12 @@
     </view>
     <view class="{{currentTab == 2 ? 'show':'hidden'}}">
       <scroll-view>
-        <!--没有相关订单时显示-->
+        <!--没有相关订单时显示 -->
         <view class='search-no' wx:if="{{items.length <= 0}}">
           <view>
-            <image class='scimg' src='../../img/wu.png'></image>
+            <image class='scimg' src='{{imgLoad}}'></image>
           </view>
-          <text>您还没有相关订单~~</text>
+          <text>{{message}}~~</text>
         </view>
 
         <view class='lists'>
@@ -172,7 +174,8 @@
                   <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
                 <view class='column'>
-                  <view class='right-text'>{{item1.product_amount}}</view>
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
                 <view class='column col-content'>
@@ -198,9 +201,9 @@
         <!--没有相关订单时显示-->
         <view class='search-no' wx:if="{{items.length <= 0}}">
           <view>
-            <image class='scimg' src='../../img/wu.png'></image>
+            <image class='scimg' src='{{imgLoad}}'></image>
           </view>
-          <text>您还没有相关订单~~</text>
+          <text>{{message}}~~</text>
         </view>
 
         <view class='lists'>
@@ -220,6 +223,7 @@
                 </view>
                 <view class='column'>
                   <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
                 <view class='column col-content'>
@@ -245,11 +249,10 @@
         <!--没有相关订单时显示-->
         <view class='search-no' wx:if="{{items.length <= 0}}">
           <view>
-            <image class='scimg' src='../../img/wu.png'></image>
+            <image class='scimg' src='{{imgLoad}}'></image>
           </view>
-          <text>您还没有相关订单~~</text>
+          <text>{{message}}~~</text>
         </view>
-
         <view class='lists'>
           <!--bindtap绑定事件 交易成功或失败-->
           <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item"  data-id="{{item.o_id}}" bindtap='orderdetail'>
@@ -272,6 +275,7 @@
 
                 <view class='column'>
                   <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
 

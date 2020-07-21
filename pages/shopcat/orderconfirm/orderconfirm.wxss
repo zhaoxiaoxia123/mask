@@ -338,3 +338,7 @@ display: none;
 .lists{
   box-sizing: border-box;
 }
+
+.decoration{
+  text-decoration: line-through;
+}

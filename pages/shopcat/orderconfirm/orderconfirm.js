@@ -25,7 +25,8 @@ Page({
     invoiceId: 0,
     dry: 998,  //导入仪价格
     invoice:[],
-    discount:0
+    discount:0,
+    experience:0
   },
 
   /**
@@ -35,7 +36,8 @@ Page({
     that = this;
     that.setData({
       products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
-      discount: parseFloat(wx.getStorageSync('discount'))
+      discount: parseFloat(wx.getStorageSync('discount')),
+      experience : app.globalData.experience_amount
     });
 
     console.log('discount:-----------');
@@ -59,51 +61,36 @@ Page({
       addressId: currPage.data.addressId,
       invoiceId: currPage.data.invoiceId
     });
-
-    console.log("onShow:-----");
-    console.log(that.data.addressId);
-    console.log(that.data.invoiceId);
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
-        customer_id: wx.getStorageSync('customerId')
+        // customer_id: wx.getStorageSync('customerId')
       };
-      // var param = '/p004?type=mainCustomer&customer_id='+wx.getStorageSync('customerId');
       that.getUserDetail(param);
     
-    //查询积分是否可抵用
-    var transformParam = {
-      page_code: 'p017',
-      code: 'jf01'
-    };
-    // var transformParam = '/p017?code=jf01';
-    that.getTransform(transformParam);
+      //查询积分是否可抵用
+      var transformParam = {
+        page_code: 'p017',
+        code: 'jf01'
+      };
+      that.getTransform(transformParam);
 
-    //获取商品信息
-    var param_p = {
-      page_code: 'p005',
-      type: "confirmProduct",
-      products: that.data.products,
-      // customer_id: wx.getStorageSync("customerId"),
-      level: wx.getStorageSync("level")
-    };
-    // var param_p = '/p005?type=confirmProduct&products='+that.data.products;
-    that.getProducts(param_p);
-    that.getAddress(); //获取用户设置的默认地址
-    
-    console.log('that.data.invoiceId:----');
-    console.log(that.data.invoiceId);
-    if(that.data.invoiceId){
-      that.getInvoice(); //获取用户设置的发票信息
+      //获取商品信息
+      var param_p = {
+        page_code: 'p005',
+        type: "confirmProduct",
+        products: that.data.products,
+        // customer_id: wx.getStorageSync("customerId"),
+        level: wx.getStorageSync("level")
+      };
+      that.getProducts(param_p);
+      that.getAddress(); //获取用户设置的默认地址
+      
+      if(that.data.invoiceId){
+        that.getInvoice(); //获取用户设置的发票信息
+      }
     }
-  }
-    // //使用新人券页面。选择电子发票或收货地址需要计算一次减去800
-    // if (currPage.data.addressId || currPage.data.invoiceId){
-    //   setTimeout(function () {
-    //     that.sumProductAmount(that.data.items.products, that.data.customerInfo);
-    //   }, 2000);
-    // }
   },
 
   /**
@@ -177,19 +164,20 @@ Page({
 
   //获取用户信息 ：积分 等
   getUserDetail: function(param) {
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,
       method:'GET',
       sCallback: function (res) {
+        let datas = res.data.data;
         that.setData({
-          customerInfo: res.data.data
+          customerInfo: datas,
+          discount:datas['discount']
         });
+        wx.setStorageSync('discount', datas['discount'])
       }
     };
     base.httpRequest(params);
-
   },
 
   getTransform: function(param) {
@@ -208,7 +196,6 @@ Page({
   },
 
   getProducts: function(param) { //读取商品信息
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -222,7 +209,6 @@ Page({
         setTimeout(function() {
           //计算实付款
           that.sumUsingPoint();
-          // that.sumProductAmount(that.data.items.products, that.data.customerInfo);
         }, 2000);
       }
     };
@@ -231,30 +217,35 @@ Page({
 
   //计算商品总价
   sumProductAmount: function(pInfo, cInfo) {
+    var productAmount488 = 0;
     var productAmount = 0;
     var dryCount = 0;
     var dryAmount = 0;   //导入仪不参加任何折扣
     for (var i = 0; i < pInfo.length; i++) {
-      console.log(pInfo[i]['frozeno_is_discount']);
-      if (pInfo[i]['frozeno_is_discount'] == 1){
-      productAmount += (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
-        if (pInfo[i]['frozeno_is_sub_dry'] == 1) {
-          dryCount += parseInt(pInfo[i]['join_product_count']);
-        }
+      var ret = that.returnProductAmountAndDRYCount(pInfo,i);
+      if(pInfo[i]['category_id'] == that.data.experience && parseInt(pInfo[i]['sale']) < parseInt(pInfo[i]['frozeno_promotion_count'])){
+        productAmount488 += ret['productAmount'];
       }else{
-        dryAmount += (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        productAmount += ret['productAmount'];
       }
+      if((pInfo[i]['category_id'] == that.data.experience && parseInt(pInfo[i]['sale']) >= parseInt(pInfo[i]['frozeno_promotion_count'])) || pInfo[i]['category_id'] != that.data.experience){
+        dryCount += ret['dryCount'];
+      }else{
+        dryCount += 0;
+      }
+      dryAmount += ret['dryAmount'];
     }
     //商品总价会员折扣后的价格  productAmount
     var discountAmount = 0;
     if (productAmount != 0){
       discountAmount = (cInfo.discount != 0 ? ((productAmount - (that.data.dry * dryCount)) * (cInfo.discount / 100) + (that.data.dry * dryCount)).toFixed(2) : productAmount);
     }
+    
     productAmount = parseFloat(productAmount);
     discountAmount = parseFloat(discountAmount);
     dryAmount = parseFloat(dryAmount);
-    var productAmounts = productAmount + dryAmount;
-    var discountAmounts = discountAmount + dryAmount;
+    var productAmounts = productAmount + dryAmount+productAmount488;
+    var discountAmounts = discountAmount + dryAmount+productAmount488;
 
     //商品总价
     that.setData({
@@ -275,6 +266,27 @@ Page({
       }
     }
   },
+
+  returnProductAmountAndDRYCount: function(pInfo,i){
+    console.log(pInfo[i]['frozeno_is_discount']);
+    var productAmount = 0;
+    var dryCount = 0;
+    var dryAmount = 0;
+    var ret = {};
+      if (pInfo[i]['frozeno_is_discount'] == 1){
+      productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        if (pInfo[i]['frozeno_is_sub_dry'] == 1){
+          dryCount = parseInt(pInfo[i]['join_product_count']);
+        }
+      }else{
+        dryAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+      }
+      ret['productAmount'] = productAmount;
+      ret['dryCount'] = dryCount;
+      ret['dryAmount'] = dryAmount;
+      return ret;
+  },
+
   //计算可用的积分数,并抵扣后获得实付款
   sumUsingPoint: function() {
     var cInfo = that.data.customerInfo;
@@ -368,8 +380,6 @@ Page({
   },
 
   getAddress: function () {
-    console.log('that.data.addressId:----');
-    console.log(that.data.addressId);
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
         page_code: 'p002',
@@ -411,7 +421,6 @@ Page({
         page_code: 'p006',
         invoice_id: that.data.invoiceId
       };
-
       var params = {
         url: app.globalData.domainUrl,
         data:param,
@@ -453,7 +462,6 @@ Page({
       }
     };
     base.httpRequest(params);
-
     }
   },
 
@@ -466,49 +474,47 @@ Page({
           title: "请选择收货地址。"
         });
       }else{
-    var ticket_id = that.data.isCheckTicket == 9999 ? 0 : that.data.ticketList.ticket[that.data.isCheckTicket - 1]['ticket_id'];
-    if (that.data.items.ticket.ticket_id && ticket_id == 0){  //使用新人卡券时候存在的值
-      ticket_id = that.data.items.ticket.ticket_id;
-    }
-
-    let param = {
-      page_code: 'p008',
-      type:'shopping_by',
-      products:that.data.products,//JSON.stringify(products),
-      ticket_id: ticket_id,
-      express_company: that.data.isCheckExpressCompany,
-      customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
-      invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
-      use_point: that.data.usingPoint,
-      amount: that.data.payAmount,
-      // order_type: 1,//购买订单
-    };
-    if(that.data.items.is_have_new_ticket){
-      param['is_have_new_ticket'] = that.data.items.is_have_new_ticket; //是否使用的是新会员卡券
-      param['sub_amount'] = that.data.items.sub_amount; //新会员卡券抵扣金额
-    }
-    var params = {
-      url: app.globalData.domainUrl,
-      data:param,
-      method:'POST',
-      sCallback: function (res) {
-        console.log(res);
-        var datas = res.data.data;
-        wx.showToast({
-          // icon: "none",
-          title: res.data.message
-        });
-        //此处跳出来支付。调用微信支付
-        if(res.data.code == 200){
-          wx.redirectTo({
-            url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas +'&from_page=shopping',
-          })
+        var ticket_id = that.data.isCheckTicket == 9999 ? 0 : that.data.ticketList.ticket[that.data.isCheckTicket - 1]['ticket_id'];
+        if (that.data.items.ticket.ticket_id && ticket_id == 0){  //使用新人卡券时候存在的值
+          ticket_id = that.data.items.ticket.ticket_id;
         }
-      }
-    };
-    base.httpRequest(params);
 
-
+        let param = {
+          page_code: 'p008',
+          type:'shopping_by',
+          products:that.data.products,//JSON.stringify(products),
+          ticket_id: ticket_id,
+          express_company: that.data.isCheckExpressCompany,
+          customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
+          invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
+          use_point: that.data.usingPoint,
+          amount: that.data.payAmount,
+          // order_type: 1,//购买订单
+        };
+        if(that.data.items.is_have_new_ticket){
+          param['is_have_new_ticket'] = that.data.items.is_have_new_ticket; //是否使用的是新会员卡券
+          param['sub_amount'] = that.data.items.sub_amount; //新会员卡券抵扣金额
+        }
+        var params = {
+          url: app.globalData.domainUrl,
+          data:param,
+          method:'POST',
+          sCallback: function (res) {
+            console.log(res);
+            var datas = res.data.data;
+            wx.showToast({
+              // icon: "none",
+              title: res.data.message
+            });
+            //此处跳出来支付。调用微信支付
+            if(res.data.code == 200){
+              wx.redirectTo({
+                url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas +'&from_page=shopping',
+              })
+            }
+          }
+        };
+        base.httpRequest(params);
       }
     }else{
       wx.showToast({

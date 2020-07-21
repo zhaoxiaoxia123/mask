@@ -273,22 +273,16 @@ Page({
   getTop:function(){
     let query = wx.createSelectorQuery();
     query.select('#product').boundingClientRect(res => { //获取detail距离页面顶部高度
-      console.log('product:---');
-      console.log(res);
       that.setData({
         productTop: res.top
       })
     }).exec()
     query.select('#detail').boundingClientRect(res => { //获取detail距离页面顶部高度
-      console.log('detail:---');
-      console.log(res);
       that.setData({
         detailTop: res.top
       })
     }).exec()
     query.select('#about').boundingClientRect(res => { //about
-      console.log('about:---');
-      console.log(res);
       that.setData({
         aboutTop: res.top
       })
@@ -312,13 +306,11 @@ Page({
     base.httpRequest(params);
   },
   shoppingList:function(){
-    // var productId = event.currentTarget.dataset.id;
     wx.switchTab({
       url: '../shopcat/shopcat',
     });
   },
   joinShopping: function(){
-    // var productId = event.target.dataset.id;
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       that.setClickState(false);
       let param = {
@@ -354,7 +346,6 @@ Page({
         }
       };
       base.httpRequest(params);
-
     }else{
       wx.showModal({
         title: '提示',

@@ -48,7 +48,7 @@ Page({
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
-        customer_id: wx.getStorageSync('customerId')
+        // customer_id: wx.getStorageSync('customerId')
       };
       // var param = '/p004?type=mainCustomer&customer_id='+ wx.getStorageSync('customerId');
       that.getUserDetail(param);
@@ -462,60 +462,28 @@ Page({
         out_trade_no: '123456789',
         // customer_id: wx.getStorageSync('customerId')
       };
-    var params = {
-      url: app.globalData.domainUrl,
-      data:param,
-      method:'POST',
-      sCallback: function (res) {
-        console.log(res);
-        var ret = res.data;
-        var datas = ret.data;
-        console.log(ret);
-        if (ret.code == 201) {
-          // console.log(ret.message);
-          // that.setData({
-          //   shopping_count: parseInt(that.data.shopping_count) + 1
-          // });
-        } else {
-          wx.navigateBack({
-            delta: 1
-          })
+      var params = {
+        url: app.globalData.domainUrl,
+        data:param,
+        method:'POST',
+        sCallback: function (res) {
+          console.log(res);
+          var ret = res.data;
+          var datas = ret.data;
+          console.log(ret);
+          if (ret.code == 201) {
+            // console.log(ret.message);
+            // that.setData({
+            //   shopping_count: parseInt(that.data.shopping_count) + 1
+            // });
+          } else {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
         }
-      }
-    };
-    base.httpRequest(params);
-
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   method: "POST",
-      //   data: {
-      //     page_code: 'p008',
-      //     type: 'pay',
-      //     order_id: 1,
-      //     amount: 3000,
-      //     out_trade_no: '123456789',
-      //     customer_id: wx.getStorageSync('customerId')
-      //   },
-      //   header: {
-      //     "Content-Type": "application/x-www-form-urlencoded"
-      //   },
-      //   success: function (res) {
-      //     console.log(res);
-      //     var ret = res.data;
-      //     var datas = ret.data;
-      //     console.log(ret);
-      //     if (ret.code == 201) {
-      //       // console.log(ret.message);
-      //       // that.setData({
-      //       //   shopping_count: parseInt(that.data.shopping_count) + 1
-      //       // });
-      //     } else {
-      //       wx.navigateBack({
-      //         delta: 1
-      //       })
-      //     }
-      //   }
-      // })
+      };
+      base.httpRequest(params);
     } else {
       wx.showToast({
         title: "请先完成授权并登录"
