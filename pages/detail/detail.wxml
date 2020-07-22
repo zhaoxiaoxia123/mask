@@ -24,15 +24,44 @@
 					</swiper-item>
 				</block>
 			</swiper>
-      <view>
-        <image mode="widthFix" src='../img/member/p002-V004.jpg' style="width:100%;"></image>
+      <view class="activity">
+         <!-- 活动图片 -->
+        <image mode="widthFix" src='../img/member/V000.jpg' style="width:100%;"></image>
+        <!-- 活动结束显示图片 -->
+        <image mode="widthFix" src='../img/member/V001.jpg' style="width:100%;"></image>
+        <view class="activity-box">
+
+            <view class="activity-item ">
+              <view class="activity-item-left">
+                 <!-- 新人第一次购买显示内容： -->
+                <view class=""> 新用户尝鲜价（每人限购1件）</view>
+                <view class="" >
+                  <text>￥ </text>
+                  <text class="size-money">99 </text>
+                  <text >( 日常价：</text>
+                  <text class="decoration">￥398</text>
+                  <text >)</text>
+                </view>
+             
+              </view>
+              <view class="activity-item-right">
+                 <view style="margin-bottom:8rpx;">
+                    <view class="activity-border size-tagging">每天10点开始</view>
+                 </view>
+                 <view>
+                    <view class="activity-border size-tagging">剩余：10件</view>
+                 </view>
+              </view>
+            </view>
+
+        </view>
       </view>
 			<view class='page-pd'>
 				<view class='money' wx:if="{{items.customer_amount > 0 && level != 1}}">
-					<text>￥{{items.customer_amount}}</text>
-					<text class='text-size'>[</text>
+					<text>￥{{items.customer_amount}} </text>
+					<text class='text-size'>(</text>
 					<text class='decoration text-size'>￥{{items.frozeno_discount_amount}}</text>
-					<text class='text-size'>]</text>
+					<text class='text-size'>)</text>
 				</view>
 				<view class='money' wx:if="{{items.customer_amount <= 0 || level == 1}}">
 					<text>￥{{items.frozeno_discount_amount}}</text>

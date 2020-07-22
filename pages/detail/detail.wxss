@@ -464,3 +464,40 @@ display: none;
   width: 100%;
   height: 100%;
 }
+
+
+/* 活动 */
+/* .activity{
+  width:100%;
+  background: linear-gradient(to right, #565656, #404040);
+} */
+.activity-box{
+  padding:20rpx 10rpx;
+  margin-top:-150rpx;
+}
+.activity-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color:#fff;
+  font-size:1rem;
+}
+.activity-item-left{
+  padding-left:80rpx;
+}
+.progress-box{
+  display: flex;
+  height: 50rpx;
+  margin-bottom: 60rpx;
+}
+.progress-cancel{
+  margin-left: 40rpx;
+}
+.activity-border{
+  padding:4rpx 6rpx;
+  border:1px solid #fff;
+  border-radius: 4rpx;
+}
+.activity-item-right{
+  padding-right:16rpx;
+}
