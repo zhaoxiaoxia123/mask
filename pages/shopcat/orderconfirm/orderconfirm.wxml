@@ -38,13 +38,22 @@
           <view class='abstract'>{{item.frozeno_introduction}}</view>
           <view class='piece'>× {{item.join_product_count}}</view>
         </view>
-        <view>
-        </view>
+        
+				<view class='money-text' wx:for="{{item.gift}}" wx:key="*this" wx:for-item="g">
+					<view class='radio-group' wx:if="{{g.category_id == items.dryInfos.dry_category_id}}">
+						<radio color='#262626' data-amount="{{items.dryInfos.dry_amount}}" data-id="{{g.category_id}}" checked='{{isCheckDry == 1}}' disabled="true"></radio>
+						<text>{{g.category_desc}}:{{items.dryInfos.dry_amount}}</text>
+					</view>
+					<view class='radio-group' wx:if="{{g.category_id != items.dryInfos.dry_category_id}}">
+						<text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
+					</view>
+				</view>
+
       </view>
     </view>
-    <view class='gift'>
+    <!-- <view class='gift'>
       <text>赠送礼盒× 1</text>
-    </view>
+    </view> -->
     <view class='coupon'>
       <view class='coupon-wap' bindtap="delivery">
         <view class='coupon-left'>

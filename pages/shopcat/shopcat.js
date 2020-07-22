@@ -17,7 +17,9 @@ Page({
     isLast: false,
     items: [],
     isBack: false,
-    ftserviceflexwindow: false
+    ftserviceflexwindow: false,
+    dryInfos:[],
+    dryAmount:0
   },
 
   /**
@@ -150,9 +152,10 @@ Page({
           items:[]
         }); 
         that.setData({
-          items: that.data.items.concat(datas)
+          items: that.data.items.concat(datas.shopping),
+          dryInfos:datas.dryInfos
         });
-        if (datas.length <= 0 || datas.length < that.data.pageCount) {
+        if (datas.shopping.length <= 0 || datas.shopping.length < that.data.pageCount) {
           that.setData({
             isLast: true
           });
@@ -206,7 +209,6 @@ Page({
     items = that.data.items; //获得items数组
     var id = e.currentTarget.dataset.id; // 获得wxml的data-id的值 data-id与dataset.id对应
     items[id].product_count = parseInt(items[id].product_count) + 1;
-    // let totalfee = this.data.totalfee;
 
     if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
       items[id].is_enough = true;
@@ -228,6 +230,39 @@ Page({
     that.setTotalFee(fee);
   },
 
+  /**
+   * 是否选中导入仪
+   */
+  checkDry: function(e) {
+    var amount = e.currentTarget.dataset.amount;
+    var items = that.data.items;
+    var dryInfos = that.data.dryInfos;
+    if (dryInfos.is_check_dry == 1) {
+      dryInfos.is_check_dry = 2;
+      that.setData({
+        dryAmount:0
+      });
+    } else {
+      dryInfos.is_check_dry = 1;
+      that.setData({
+        dryAmount:amount
+      });
+    }
+    that.setData({
+      dryInfos: dryInfos
+    });
+    
+    var fee = 0;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].selected) {
+        // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
+        fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].customer_amount);
+      }
+    }
+    that.setTotalFee(fee);
+    console.log('that.data.dryInfos.is_check_dry:-------');
+    console.log(that.data.dryInfos.is_check_dry);
+  },
   radiocon: function(e) {
     var id = e.currentTarget.dataset.id;
     var items = that.data.items;
@@ -242,7 +277,6 @@ Page({
       if (items[i].selected) {
         // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
         fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
-     
       }
     }
     that.setData({
@@ -281,13 +315,18 @@ Page({
   },
 
   returnFee: function (fee, product_count, frozeno_discount_amount) {
-    fee = fee + (product_count * frozeno_discount_amount);
+
+    fee = fee + (product_count * frozeno_discount_amount); 
     return fee;
   },
   //赋值合计金额
   setTotalFee: function(fee) {
+    var dryAm = 0;
+    if(that.data.dryInfos.is_check_dry == 1){
+      dryAm = that.data.dryAmount;
+    }
     that.setData({
-      totalfee: fee.toFixed(2)
+      totalfee: (parseFloat(fee)+ parseInt(dryAm)).toFixed(2) //加入导入仪金额
     })
   },
   //进入结算页面
@@ -305,7 +344,7 @@ Page({
       });
     }else{
       wx.navigateTo({
-        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
+        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products+'&isCheckDry='+that.data.dryInfos.is_check_dry,
       })
     }
   },

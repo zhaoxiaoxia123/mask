@@ -49,7 +49,8 @@ Page({
         page_code:'p004',
         type:"mainCustomer",
         // customer_id:wx.getStorageSync('customerId'),
-        has_order_count: true
+        has_order_count: true,
+        has_deposit:true
       };
       that.getUserDetail(param);
 
@@ -147,24 +148,6 @@ Page({
   },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param){
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       items: res.data.data
-    //     });
-    //     if(that.data.items && res.data.code == 200){
-    //       wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
-    //       wx.setStorageSync('discount', that.data.items.discount);  //折扣
-    //       that.setLevel();
-    //     }
-    //   }
-    // });
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,

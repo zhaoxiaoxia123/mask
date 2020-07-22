@@ -26,7 +26,8 @@ Page({
     dry: 998,  //导入仪价格
     invoice:[],
     discount:0,
-    experience:0
+    experience:0,
+    isCheckDry:2, //2：未选中 1：选中导入仪
   },
 
   /**
@@ -36,9 +37,12 @@ Page({
     that = this;
     that.setData({
       products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
+      isCheckDry:options.isCheckDry,
       // discount: parseFloat(wx.getStorageSync('discount')),
       experience : app.globalData.experience_amount
     });
+    console.log('that.data.isCheckDry:----');
+    console.log(that.data.isCheckDry);
   },
 
   /**
@@ -294,6 +298,12 @@ Page({
     var discountAmount = tPayAmount; //that.data.discountAmount;
     var productAmount = that.data.productAmount;
     // var payAmount = 0; //实付款
+    console.log("sumUsingPoint:------");
+    console.log(cInfo.frozeno_point > 0 && that.data.isUsePoint);
+    var dryAm = 0;
+    if(that.data.isCheckDry == 1){
+      dryAm = that.data.items.dryInfos.dry_amount;
+    }
     if (cInfo.frozeno_point > 0 && that.data.isUsePoint) {
       if (tInfo.type == 2) { //若满减
         if (productAmount >= tInfo.satisfy_amount) { //商品总价是否大于等于满减金额设置
@@ -301,7 +311,7 @@ Page({
         } else { //小于：则不可使用积分。
           that.setData({
             usingPoint: 0,
-            payAmount: parseFloat(discountAmount)
+            payAmount: parseFloat(discountAmount) + parseInt(dryAm)
           });
         }
       } else if (tInfo.type == 1) {
@@ -310,9 +320,12 @@ Page({
     } else {
       that.setData({
         usingPoint: 0,
-        payAmount: parseFloat(discountAmount)
+        payAmount: parseFloat(discountAmount) + parseInt(dryAm)
       });
     }
+    
+    console.log('payAmount:----');
+    console.log(that.data.payAmount);
   },
 
   //计算使用卡券后的付款金额
@@ -364,14 +377,18 @@ Page({
     var usingPoint = (discountAmount * (parseFloat(rate) / 100));
     usingPoint = parseInt(usingPoint);// .toFixed(2);
     if (parseFloat(point) >= parseFloat(usingPoint)) { //用户积分大于等于可抵用积分数
+      var dryAm = 0;
+      if(that.data.isCheckDry == 1){
+        dryAm = that.data.items.dryInfos.dry_amount;
+      }
       that.setData({
         usingPoint: usingPoint,
-        payAmount: parseFloat(discountAmount) - parseFloat(usingPoint)
+        payAmount: parseFloat(discountAmount) - parseFloat(usingPoint) + parseInt(dryAm)
       });
     } else {
       that.setData({
         usingPoint: point, //可用积分为用户积分值
-        payAmount: parseFloat(discountAmount) - parseFloat(point)
+        payAmount: parseFloat(discountAmount) - parseFloat(point) + parseInt(dryAm)
       });
     }
   },
@@ -486,6 +503,7 @@ Page({
           invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
           use_point: that.data.usingPoint,
           amount: that.data.payAmount,
+          is_check_dry: that.data.isCheckDry,
           // order_type: 1,//购买订单
         };
         if(that.data.items.is_have_new_ticket){

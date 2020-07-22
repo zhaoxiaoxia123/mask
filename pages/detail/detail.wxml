@@ -35,21 +35,24 @@
               <view class="activity-item-left">
                  <!-- 新人第一次购买显示内容： -->
                 <view class=""> 新用户尝鲜价（每人限购1件）</view>
-                <view class="" >
+                <view class="" wx:if="{{items.customer_amount > 0 && level != 1}}">
                   <text>￥ </text>
-                  <text class="size-money">99 </text>
+                  <text class="size-money">{{items.customer_amount}} </text>
                   <text >( 日常价：</text>
-                  <text class="decoration">￥398</text>
+                  <text class="decoration">￥{{items.frozeno_discount_amount}}</text>
                   <text >)</text>
                 </view>
-             
+								<view class="" wx:if="{{items.customer_amount <= 0 || level == 1}}">
+                  <text>￥ </text>
+                  <text class="size-money">{{items.frozeno_discount_amount}} </text>
+                </view>
               </view>
               <view class="activity-item-right">
                  <view style="margin-bottom:8rpx;">
-                    <view class="activity-border size-tagging">每天10点开始</view>
+                    <view class="activity-border size-tagging">每天{{items.frozeno_start_date}}点开始</view>
                  </view>
                  <view>
-                    <view class="activity-border size-tagging">剩余：10件</view>
+                    <view class="activity-border size-tagging">剩余：{{(items.frozeno_promotion_count - items.sale) > 0 ?(items.frozeno_promotion_count - items.sale) : 0 }}件</view>
                  </view>
               </view>
             </view>
@@ -57,18 +60,6 @@
         </view>
       </view>
 			<view class='page-pd'>
-				<view class='money' wx:if="{{items.customer_amount > 0 && level != 1}}">
-					<text>￥{{items.customer_amount}} </text>
-					<text class='text-size'>(</text>
-					<text class='decoration text-size'>￥{{items.frozeno_discount_amount}}</text>
-					<text class='text-size'>)</text>
-				</view>
-				<view class='money' wx:if="{{items.customer_amount <= 0 || level == 1}}">
-					<text>￥{{items.frozeno_discount_amount}}</text>
-					<!-- <text class='text-size'>（</text>
-      <text class='decoration text-size'>￥{{items.frozeno_amount}}</text>
-      <text class='text-size'> ）</text> -->
-				</view>
 				<view class='money-title'>{{items.category_desc}}</view>
 				<view class='money-text'>
 					<text>成长值：{{items.growth}}</text>
@@ -78,6 +69,15 @@
 				<view class='between'>
 					<text class='num'>免邮</text>
 					<text class='num'>销量：{{items.sale}}件</text>
+				</view>
+				<view class='money-text' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
+					<view class='radio-group' wx:if="{{g.category_id == items.dry_category_id}}">
+						<radio color='#262626' data-amount="{{items.dry_amount}}" data-id="{{g.category_id}}" bindtap='checkDry' checked='{{items.is_check_dry == 1}}'></radio>
+						<text>{{g.category_desc}}:{{items.dry_amount}}</text>
+					</view>
+					<view class='radio-group' wx:if="{{g.category_id != items.dry_category_id}}">
+						<text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
+					</view>
 				</view>
 			</view>
 		</view>

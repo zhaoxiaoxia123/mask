@@ -37,6 +37,7 @@ Page({
     aboutTop: 0,
     // isShowTopBar:false,
     scrollStop:false,
+    dryAmount:0,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -203,6 +204,29 @@ Page({
 
   },
 
+  /**
+   * 是否选中导入仪
+   */
+  checkDry: function(e) {
+    var amount = e.currentTarget.dataset.amount;
+    var items = that.data.items;
+    if (items.is_check_dry == 1) {
+      items.is_check_dry = 2;
+      that.setData({
+        dryAmount:0
+      });
+    } else {
+      items.is_check_dry = 1;
+      that.setData({
+        dryAmount:amount
+      });
+    }
+    that.setData({
+      items: items
+    });
+    console.log('that.data.items.is_check_dry:-------');
+    console.log(that.data.items.is_check_dry);
+  },
   // 跳转规格弹窗
   toggleDialog:function(){
     var flexwindow;
@@ -372,7 +396,7 @@ Page({
         products = that.data.productId + ",1--";
       }
       wx.navigateTo({
-        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
+        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products+'&isCheckDry='+that.data.items.is_check_dry,
       })
     } else {
       wx.showModal({

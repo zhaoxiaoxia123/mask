@@ -1,69 +1,84 @@
 <!--pages/home/home.wxml-->
 <view>
-    <!--购物车空时显示
+	<!--购物车空时显示
     同时底部金额结算按钮不显示
      -->
-  <view class='search-no' wx:if="{{items.length <= 0}}">
-    <view bindtap="gohome">
-      <image class='scimg' src='../img/shopcatwu@2x.png'></image>
-    </view>
-  </view>
+	<view class='search-no' wx:if="{{items.length <= 0}}">
+		<view bindtap="gohome">
+			<image class='scimg' src='../img/shopcatwu@2x.png'></image>
+		</view>
+	</view>
 
-  <view class='lists' wx:if="{{items.length > 0}}">
-    <!--bindtap绑定事件 bindtap='toDetail'-->
-    <view class='list' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
-      <view class='radio-group' wx:if="{{item.is_enough}}">
-        <radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
-      </view>
-      <view class='list-left'>
-        <image src="{{item.product_image[0].image_url}}" lazy-load></image>
-      </view>
-      <view class='list-right'>
-        <view class='column'>
-          <view class='right-text'>{{item.category_desc}}</view>
-          <image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image>
+	<view class='lists' wx:if="{{items.length > 0}}">
+		<!--bindtap绑定事件 bindtap='toDetail'-->
+		<view class='list' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
+			<view class='radio-group' wx:if="{{item.is_enough}}">
+				<radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
+			</view>
+			<view class='list-left'>
+				<image src="{{item.product_image[0].image_url}}" lazy-load></image>
+			</view>
+			<view class='list-right'>
+				<view class='column'>
+					<view class='right-text'>{{item.category_desc}}</view>
+					<image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image>
+				</view>
+				<!-- <view class='right-text'>{{item.product_name}}</view> -->
+				<view>
+					<view class='total'>库存：{{item.stock}}件</view>
+					<view class='column mt'>
+						<view class='sale'>￥{{item.customer_amount}}</view>
+						<view class='sale'>[￥{{item.frozeno_discount_amount}}]</view>
+						<view class='column-number'>
+							<view class='item-number'>
+								<image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
+							</view>
+							<view class='item-number'>{{item.product_count}}</view>
+							<view class='item-number'>
+								<image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32' bind:tap="plusFn"></image>
+							</view>
+						</view>
+					</view>
+					<view class="stock-no" wx:if="{{!item.is_enough}}">
+						库存不足
+					</view>
+          
+      <view class='money-text' wx:for="{{item.gift}}" wx:key="*this" wx:for-item="g">
+        <view class='radio-group' wx:if="{{g.category_id == dryInfos.dry_category_id}}">
+          <radio color='#262626' data-amount="{{dryInfos.dry_amount}}" bindtap='checkDry' checked='{{dryInfos.is_check_dry == 1}}'></radio>
+          <text>{{g.category_desc}}:{{dryInfos.dry_amount}}</text>
         </view>
-        <!-- <view class='right-text'>{{item.product_name}}</view> -->
-        <view>
-          <view class='total'>库存：{{item.stock}}件</view>
-          <view class='column mt'>
-            <view class='sale'>￥{{item.customer_amount}}</view>
-            <view class='sale'>[￥{{item.frozeno_discount_amount}}]</view>
-            <view class='column-number'>
-              <view class='item-number'>
-                <image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
-              </view>
-              <view class='item-number'>{{item.product_count}}</view>
-              <view class='item-number'>
-                <image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32' bind:tap="plusFn"></image>
-              </view>
-            </view>
-          </view>
-          <view class="stock-no" wx:if="{{!item.is_enough}}">
-        库存不足
-      </view>
+        <view class='radio-group' wx:if="{{g.category_id != dryInfos.dry_category_id}}">
+          <text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
         </view>
       </view>
-    </view>
-    <view class="bottom">
-      <view class="bottom-operate">
-        <view class="bottom-left count">
-          <radio color='#262626' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选</view>
-        <view class="bottom-operate price">
-          <view >合计：</view>
-          <view style="color:#DAB866"><view>￥{{totalfee}}</view>
-          <view style="font-size: 0.6rem;" wx:if="{{totalfee && totalfee != '0.00'}}">优惠金额见结算页面</view></view>
-        </view>
-        <view class="bottom-operate space"></view>
-        <view class="bottom-operate button" catchtap='goConfirm' style='background-color:#DAB866;'>结算</view>
-      </view>
-    </view>
-  </view>
+				</view>
+			</view>
+
+
+		</view>
+		<view class="bottom">
+			<view class="bottom-operate">
+				<view class="bottom-left count">
+					<radio color='#262626' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选
+				</view>
+				<view class="bottom-operate price">
+					<view>合计：</view>
+					<view style="color:#DAB866">
+						<view>￥{{totalfee}}</view>
+						<view style="font-size: 0.6rem;" wx:if="{{totalfee && totalfee != '0.00'}}">优惠金额见结算页面</view>
+					</view>
+				</view>
+				<view class="bottom-operate space"></view>
+				<view class="bottom-operate button" catchtap='goConfirm' style='background-color:#DAB866;'>结算</view>
+			</view>
+		</view>
+	</view>
 </view>
 
 
 <!-- 声明需要使用的模板文件 -->
-<import src ="../template/template.wxml"/>
+<import src="../template/template.wxml" />
 <view class='item' bindtap='ftservice' data-item='{{ftserviceflexwindow}}'>
-  <template is="service" data="{{ftserviceflexwindow}}"/>
+	<template is="service" data="{{ftserviceflexwindow}}" />
 </view>

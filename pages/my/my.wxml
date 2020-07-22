@@ -1,164 +1,163 @@
 <!--pages/my/my.wxml-->
 <view class='page-pd '>
-  <!-- <official-account>23233</official-account> -->
-  <view class='parent size-titletwo col-content bg-box' wx:if="{{isLogin}}" bindtap="goLogin">
-    <view class='parent-left'>登录/注册</view>
-  </view>
-  <view class='parent size-titletwo col-content bg-box' wx:if="{{!isLogin}}">
-    <view class='parent-left'>
-      <view class="head-img">
-        <open-data class="wx-image_SC1alK" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
-      </view>
-      <view class='content'>
-        <open-data class='size-titleone col-title' type="userNickName"></open-data>
-        <view class='phone'>{{items.c_phone?items.c_phone:''}}</view>
-      </view>
-    </view>
+	<!-- <official-account>23233</official-account> -->
+	<view class='parent size-titletwo col-content bg-box' wx:if="{{isLogin}}" bindtap="goLogin">
+		<view class='parent-left'>登录/注册</view>
+	</view>
+	<view class='parent size-titletwo col-content bg-box' wx:if="{{!isLogin}}">
+		<view class='parent-left'>
+			<view class="head-img">
+				<open-data class="wx-image_SC1alK" style="background-size: cover; background-position: center center; background-repeat: no-repeat;" type="userAvatarUrl"></open-data>
+			</view>
+			<view class='content'>
+				<open-data class='size-titleone col-title' type="userNickName"></open-data>
+				<view class='phone'>{{items.c_phone?items.c_phone:''}}</view>
+			</view>
+		</view>
 
-    <view class='parent-right' bindtap="goMember" wx:if="{{!isLogin}}">
-      <view class='money-grade'>
-        <!-- 按会员等级进行显示(注册用户)不显示图标、（VIP）、（SVIP）、（钻卡） -->
-        <image class="icon32 pdr10" src="../img/drill_golden@2x.png" wx:if="{{items.frozeno_level == 4}}"></image>
-        <image class="icon32 pdr10" src="../img/svip_golden@2x.png" wx:if="{{items.frozeno_level == 3}}"></image>
-        <image class="icon32 pdr10" src="../img/vip_golden@2x.png" wx:if="{{items.frozeno_level == 2}}"></image>
-      </view>
-      <view class='money-grade'>
-        <text class='money-grade-text'>{{items.level_name}}</text>
-      </view>
-    </view>
-  </view>
+		<view class='parent-right' bindtap="goMember" wx:if="{{!isLogin}}">
+			<view class='money-grade'>
+				<!-- 按会员等级进行显示(注册用户)不显示图标、（VIP）、（SVIP）、（钻卡） -->
+				<image class="icon32 pdr10" src="../img/drill_golden@2x.png" wx:if="{{items.frozeno_level == 4}}"></image>
+				<image class="icon32 pdr10" src="../img/svip_golden@2x.png" wx:if="{{items.frozeno_level == 3}}"></image>
+				<image class="icon32 pdr10" src="../img/vip_golden@2x.png" wx:if="{{items.frozeno_level == 2}}"></image>
+			</view>
+			<view class='money-grade'>
+				<text class='money-grade-text'>{{items.level_name}}</text>
+			</view>
+		</view>
+	</view>
 
-  <!-- 智美币和押金 -->
+	<!-- 智美币和押金 -->
+	<view class="bg-box col-content size-titletwo deposit-box">
+		<view class="deposit-item deposit-line">
+			<view class="deposit-text">{{items.frozeno_rebate_amount?items.frozeno_rebate_amount:'0.00'}}</view>
+			<view>智美币</view>
+		</view>
+		<view class="deposit-item">
+			<view class="deposit-text">{{items.dry_deposit?items.dry_deposit:'0.00'}}</view>
+			<view>押金</view>
+		</view>
+	</view>
 
-  <view class="bg-box col-content size-titletwo deposit-box" >
-      <view class="deposit-item deposit-line">
-          <view class="deposit-text">0.00</view>
-          <view>智美币</view>
-      </view>
-      <view class="deposit-item">
-          <view class="deposit-text">389.00</view>
-          <view>押金</view>
-      </view>
-  </view>
+	<!--订单-->
+	<view class='payment bg-box col-content size-titletwo '>
+		<view class='payment-list' data-id="1" bindtap='order'>
+			<view class='payment-list-left'>
+				<text>我的订单</text>
+			</view>
+			<view class='payment-list-right'>
+				<text>全部订单</text>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
 
-  <!--订单-->
-  <view class='payment bg-box col-content size-titletwo '>
-    <view class='payment-list' data-id="1" bindtap='order'>
-      <view class='payment-list-left'>
-        <text>我的订单</text>
-      </view>
-      <view class='payment-list-right'>
-        <text>全部订单</text>
-        <image src='../img/dv.png'></image>
-      </view>
-    </view>
+		<view class='payment-center'>
+			<view class='payment-1' data-id="2" bindtap='order'>
+				<image class='icon58' src="../img/payment1.png"></image>
+				<text>待付款</text>
+				<view class='number' wx:if="{{items.order_count1 > 0}}">
+					<text>{{items.order_count1?items.order_count1:0}}</text>
+				</view>
+			</view>
+			<view class='payment-1' data-id="3" bindtap='order'>
+				<image class='icon58' src="../img/send@2x.png"></image>
+				<text>待发货</text>
+				<view class='number' wx:if="{{items.order_count2 > 0}}">
+					<text>{{items.order_count2?items.order_count2:0}}</text>
+				</view>
+			</view>
+			<view class='payment-1' data-id="4" bindtap='order'>
+				<image class='icon58' src="../img/goods.png"></image>
+				<text>待收货</text>
+				<view class='number' wx:if="{{items.order_count3 > 0}}">
+					<text>{{items.order_count3?items.order_count3:0}}</text>
+				</view>
+			</view>
+			<view class='payment-1' data-id="5" bindtap='order'>
+				<image class='icon58' src="../img/complete.png"></image>
+				<text>已完成</text>
+			</view>
+		</view>
+	</view>
 
-    <view class='payment-center'>
-      <view class='payment-1' data-id="2" bindtap='order'>
-        <image class='icon58' src="../img/payment1.png"></image>
-        <text>待付款</text>
-        <view class='number' wx:if="{{items.order_count1 > 0}}">
-            <text>{{items.order_count1?items.order_count1:0}}</text>
-        </view>
-      </view>
-      <view class='payment-1' data-id="3" bindtap='order'>
-        <image class='icon58' src="../img/send@2x.png"></image>
-        <text>待发货</text>
-        <view class='number' wx:if="{{items.order_count2 > 0}}">
-            <text>{{items.order_count2?items.order_count2:0}}</text>
-        </view>
-      </view>
-      <view class='payment-1' data-id="4" bindtap='order'>
-        <image class='icon58' src="../img/goods.png"></image>
-        <text>待收货</text>
-        <view class='number' wx:if="{{items.order_count3 > 0}}">
-            <text>{{items.order_count3?items.order_count3:0}}</text>
-        </view>
-      </view>
-      <view class='payment-1' data-id="5" bindtap='order'>
-        <image class='icon58' src="../img/complete.png"></image>
-        <text>已完成</text>
-      </view>
-    </view>
-  </view>
-
-  <view class='lists bg-box col-content size-titletwo'>
-    <view class='list-wap' wx:if="{{level > 1}}" >
-      <view class='left'>
-        <image class='icon40' src='../img/friend@2x.png'></image>
-        <!-- <text>邀请好友</text> -->
-        <!-- <text wx:if="{{level <= 1}}" bindtap="shareApp">邀请好友</text> -->
-        <button class="button-share" style="width:260px" open-type="share">邀请好友</button>
-      </view>
-      <view class='right'>
-        <image src='../img/dv.png'></image>
-      </view>
-    </view>
+	<view class='lists bg-box col-content size-titletwo'>
+		<view class='list-wap' wx:if="{{level > 1}}">
+			<view class='left'>
+				<image class='icon40' src='../img/friend@2x.png'></image>
+				<!-- <text>邀请好友</text> -->
+				<!-- <text wx:if="{{level <= 1}}" bindtap="shareApp">邀请好友</text> -->
+				<button class="button-share" style="width:260px" open-type="share">邀请好友</button>
+			</view>
+			<view class='right'>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
 
 
-    <view class='list-wap' bindtap='goWorkBench' wx:if="{{level > 1}}">
-      <view class='left'>
-        <image class='icon40' src='../img/ftwork.png'></image>
-        <text>前往工作台</text>
-      </view>
-      <view class='right'>
-        <image src='../img/dv.png'></image>
-      </view>
-    </view>
+		<view class='list-wap' bindtap='goWorkBench' wx:if="{{level > 1}}">
+			<view class='left'>
+				<image class='icon40' src='../img/ftwork.png'></image>
+				<text>前往工作台</text>
+			</view>
+			<view class='right'>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
 
-    <view class='list-wap' bindtap='service'>
-      <view class='left'>
-        <image class='icon40' src='../img/refund.png'></image>
-        <text>售后</text>
-      </view>
-      <view class='right'>
-        <image src='../img/dv.png'></image>
-      </view>
-    </view>
+		<view class='list-wap' bindtap='service'>
+			<view class='left'>
+				<image class='icon40' src='../img/refund.png'></image>
+				<text>售后</text>
+			</view>
+			<view class='right'>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
 
-    <view class='list-wap' bindtap='address'>
-      <view class='left'>
-        <image class='icon40' src='../img/address.png'></image>
-        <text>我的地址</text>
-      </view>
-      <view class='right'>
-        <image src='../img/dv.png'></image>
-      </view>
-    </view>
+		<view class='list-wap' bindtap='address'>
+			<view class='left'>
+				<image class='icon40' src='../img/address.png'></image>
+				<text>我的地址</text>
+			</view>
+			<view class='right'>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
 
-    <view class='list-wap' bindtap='info'>
-      <view class='left'>
-        <image class='icon40' src='../img/invoice.png'></image>
-        <text>我的发票</text>
-      </view>
-      <view class='right'>
-        <image class='icon40' src='../img/dv.png'></image>
-      </view>
-    </view>
-    <view class='list-wap' bindtap='news'>
-      <view class='left'>
-        <image class='icon40' src='../img/news.png'></image>
-        <text>我的消息</text>
-      </view>
-      <view class='right'>
-        <image src='../img/dv.png'></image>
-      </view>
-    </view>
+		<view class='list-wap' bindtap='info'>
+			<view class='left'>
+				<image class='icon40' src='../img/invoice.png'></image>
+				<text>我的发票</text>
+			</view>
+			<view class='right'>
+				<image class='icon40' src='../img/dv.png'></image>
+			</view>
+		</view>
+		<view class='list-wap' bindtap='news'>
+			<view class='left'>
+				<image class='icon40' src='../img/news.png'></image>
+				<text>我的消息</text>
+			</view>
+			<view class='right'>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
 
-    <view class='list-wap border-none' bindtap='setting'>
-      <view class='left'>
-        <image class='icon40' src='../img/set@2x.png'></image>
-        <text>设置</text>
-      </view>
-      <view class='right'>
-        <image src='../img/dv.png'></image>
-      </view>
-    </view>
-  </view>
+		<view class='list-wap border-none' bindtap='setting'>
+			<view class='left'>
+				<image class='icon40' src='../img/set@2x.png'></image>
+				<text>设置</text>
+			</view>
+			<view class='right'>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
+	</view>
 </view>
 
 <!-- 声明需要使用的模板文件 -->
-<import src ="../template/template.wxml"/>
+<import src="../template/template.wxml" />
 <view class='item' bindtap='ftservice' data-item="{{ftserviceflexwindow}}">
-  <template is="service" data="{{ftserviceflexwindow}}"/>
+	<template is="service" data="{{ftserviceflexwindow}}" />
 </view>
