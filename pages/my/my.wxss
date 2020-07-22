@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-content: center;
   padding:40rpx 20rpx;
-  border-radius:10px;
+  border-radius:10px 10px 0 0;
 }
 .parent-left{
   display: flex;
@@ -379,4 +379,25 @@ display: none;
   padding:0;
   font-size:1rem;
   padding-left:20rpx;
+}
+
+/* 智美币和押金 */
+.deposit-box{
+  display: flex;
+  align-items: center;
+  padding:20rpx;
+  margin-top:0;
+  border-radius: 0 0 10px 10px;
+  border-top:1px solid #4d4d4d;
+}
+.deposit-item{
+  width:48%;
+  text-align:center;
+}
+.deposit-line{
+  border-right:1px solid #4d4d4d;
+}
+.deposit-text{
+  color:#fff;
+  font-size:1.2rem;
 }

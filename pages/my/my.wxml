@@ -28,6 +28,19 @@
     </view>
   </view>
 
+  <!-- 智美币和押金 -->
+
+  <view class="bg-box col-content size-titletwo deposit-box" >
+      <view class="deposit-item deposit-line">
+          <view class="deposit-text">0.00</view>
+          <view>智美币</view>
+      </view>
+      <view class="deposit-item">
+          <view class="deposit-text">389.00</view>
+          <view>押金</view>
+      </view>
+  </view>
+
   <!--订单-->
   <view class='payment bg-box col-content size-titletwo '>
     <view class='payment-list' data-id="1" bindtap='order'>
