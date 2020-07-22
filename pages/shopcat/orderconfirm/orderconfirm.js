@@ -36,12 +36,9 @@ Page({
     that = this;
     that.setData({
       products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
-      discount: parseFloat(wx.getStorageSync('discount')),
+      // discount: parseFloat(wx.getStorageSync('discount')),
       experience : app.globalData.experience_amount
     });
-
-    console.log('discount:-----------');
-    console.log(that.data.discount);
   },
 
   /**

@@ -15,7 +15,7 @@
             loop='{{false}}'
             show-mute-btn='{{true}}'
             vslide-gesture-in-fullscreen='{{true}}'
-            src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/promotion.mp4" 
+            src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/402ce54f699ba9acf8d70c08e0515057.mp4" 
           ></video>
           </swiper-item>
 				<block wx:for="{{swipers}}" wx:key="*this">
