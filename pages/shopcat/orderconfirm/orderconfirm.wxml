@@ -44,7 +44,7 @@
 						<radio color='#262626' data-amount="{{items.dryInfos.dry_amount}}" data-id="{{g.category_id}}" checked='{{isCheckDry == 1}}' disabled="true"></radio>
 						<text>{{g.category_desc}}:{{items.dryInfos.dry_amount}}</text>
 					</view>
-					<view class='radio-group' wx:if="{{g.category_id != items.dryInfos.dry_category_id}}">
+					<view class='radio-group' wx:if="{{g.category_id != items.dryInfos.dry_category_id && isCheckDry == 1}}">
 						<text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
 					</view>
 				</view>
