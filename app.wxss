@@ -29,6 +29,10 @@ page{
 .wei{
   font-weight:bold;
 }
+.size-money{
+  font-size:2rem;
+  line-height:1.5; 
+}
 .size-numberone{
   font-size:1.5rem;
   line-height:1.5; 
