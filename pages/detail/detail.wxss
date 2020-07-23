@@ -538,10 +538,7 @@ display: none;
 .detail-item-money-price{
   padding-left:10rpx;
 }
-.set-meal-money-left{
-  display: flex;
-  align-items: center;
-}
+
 .set-meal-ft-title{
   font-size:1rem;
 }
@@ -555,5 +552,10 @@ display: none;
 .detail-item-box{
   display: flex;
   align-items: center;
+}
+.set-meal-rent{
+  color:#fff;
+  font-size:1rem;
+  padding-left:10rpx;
 }
 
