@@ -26,17 +26,16 @@
    padding-right:10rpx
 }
 .list-left{
-  width:30%;
+  width:180rpx;
 }
 .list-left image{
   border: 1px solid #4d4d4d;
-  width:180rpx;
-  height:180rpx;
+  width:160rpx;
+  height:160rpx;
   border-radius:10px;
 }
 .list-right{
-  width:60%;
-  height:100%;
+  width:400rpx;
   display: flex;
   flex-direction: column;
 }
@@ -241,9 +240,25 @@ display: none;
   font-size:1rem;
   background: #595959;
 }
+
 .gift{
   background:#404040;
   color:#DAB866;
   font-size:0.8rem;
   padding:6rpx;
+}
+.detail-item-box{
+  display: flex;
+  align-items: center;
+}
+.set-meal-rent{
+  color:#fff;
+  font-size:1rem;
+  padding-left:10rpx;
+}
+.decoration{
+  text-decoration: line-through;
+}
+.detail-item-money-price{
+  padding-left:10rpx;
 }

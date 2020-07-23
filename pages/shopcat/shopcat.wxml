@@ -1,5 +1,5 @@
 <!--pages/home/home.wxml-->
-<view>
+<view class="size-text col-content">
 	<!--购物车空时显示
     同时底部金额结算按钮不显示
      -->
@@ -24,11 +24,20 @@
 					<image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image>
 				</view>
 				<!-- <view class='right-text'>{{item.product_name}}</view> -->
-				<view>
-					<view class='total'>库存：{{item.stock}}件</view>
+        <view class="detail-item-box">
+            <view class="detail-item-money wei">
+              <text>￥</text>
+              <text class="size-money ">{{item.customer_amount}}</text>
+              <text >.00</text>
+            </view>
+            <view class="detail-item-money-price">
+              <text class="decoration">￥{{item.frozeno_discount_amount}}</text>
+            </view>
+        </view>
+          <!-- <view class='total'>库存：{{item.stock}}件</view> -->
 					<view class='column mt'>
-						<view class='sale'>￥{{item.customer_amount}}</view>
-						<view class='sale'>(￥{{item.frozeno_discount_amount}})</view>
+						<!-- <view class='sale'>￥{{item.customer_amount}}</view>
+						<view class='sale'>(￥{{item.frozeno_discount_amount}})</view> -->
 						<view class='column-number'>
 							<view class='item-number'>
 								<image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
@@ -41,7 +50,8 @@
 					</view>
 					<view class="stock-no" wx:if="{{!item.is_enough}}">
 						库存不足
-					</view>
+					</view>        
+				<view>
           
 					<view class='money-text' wx:for="{{item.gift}}" wx:key="*this" wx:for-item="g">
 						<view class='radio-group' wx:if="{{g.category_id == dryInfos.dry_category_id}}">
