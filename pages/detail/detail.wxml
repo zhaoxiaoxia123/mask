@@ -75,18 +75,18 @@
 
       <view class="detail-item page-pd">
 
-      <view class="detail-item-box" wx:if="{{items.customer_amount > 0 && level != 1}}">
-          <view class="detail-item-money wei">
-            <text>￥</text>
-            <text class="size-money ">{{items.customer_amount}}</text>
-            <text >.00</text>
-          </view>
-          <view class="detail-item-money-price">
-             <text class="decoration">( 市场价：</text>
-            <text class="decoration">￥{{items.frozeno_discount_amount}}</text>
-            <text class="decoration">)</text>
-          </view>
-      </view>
+        <view class="detail-item-box" wx:if="{{items.customer_amount > 0 && level != 1}}">
+            <view class="detail-item-money wei">
+              <text>￥</text>
+              <text class="size-money ">{{items.customer_amount}}</text>
+              <text >.00</text>
+            </view>
+            <view class="detail-item-money-price">
+              <text class="decoration">( 市场价：</text>
+              <text class="decoration">￥{{items.frozeno_discount_amount}}</text>
+              <text class="decoration">)</text>
+            </view>
+        </view>
 
         <view class="money-title">{{items.category_desc}}</view>
 
