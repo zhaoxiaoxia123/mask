@@ -46,7 +46,7 @@
                   <text  class="activity-state activity-state-active">活动中</text>
                   <text  class="activity-state">活动已结束</text>
                 </view>
-                <!-- <view class="detail-item-box">
+                <view class="detail-item-box">
                     <view class=" wei" >
                       <text>￥</text>
                       <text class="size-money ">{{items.customer_amount}}</text>
@@ -55,7 +55,7 @@
                     <view class="detail-item-money-price" >
                       <text class="decoration">￥{{items.frozeno_discount_amount}}</text>
                     </view>
-                </view> -->
+                </view>
               </view>
               <view class="activity-item-right">
                   <!-- 活动结束显示 -->
