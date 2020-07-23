@@ -39,7 +39,7 @@
                   <text>￥ </text>
                   <text class="size-money">{{items.customer_amount}} </text>
                   <text >( 日常价：</text>
-                  <text class="decoration">￥{{items.frozeno_discount_amount}}</text>
+                  <text class="decoration">￥{{items.frozeno_amount}}</text>
                   <text >)</text>
                 </view>
 								<view class="" wx:if="{{items.customer_amount <= 0 || level == 1}}">
@@ -52,7 +52,8 @@
                     <view class="activity-border size-tagging">每天{{items.frozeno_start_date}}点开始</view>
                  </view>
                  <view>
-                    <view class="activity-border size-tagging">剩余：{{(items.frozeno_promotion_count - items.sale) > 0 ?(items.frozeno_promotion_count - items.sale) : 0 }}件</view>
+                    <!-- <view class="activity-border size-tagging">剩余：{{(items.frozeno_promotion_count - items.sale) > 0 ?(items.frozeno_promotion_count - items.sale) : 0 }}件</view> -->
+                    <view class="activity-border size-tagging">剩余：{{items.frozeno_promotion_count - items.sale}}件</view>
                  </view>
               </view>
             </view>
