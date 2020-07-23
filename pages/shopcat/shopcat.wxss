@@ -241,3 +241,9 @@ display: none;
   font-size:1rem;
   background: #595959;
 }
+.gift{
+  background:#404040;
+  color:#DAB866;
+  font-size:0.8rem;
+  padding:6rpx;
+}

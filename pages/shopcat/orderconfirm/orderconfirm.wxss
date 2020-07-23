@@ -37,6 +37,7 @@
 .name{
   color:#fff;
   font-size:32rpx;
+  padding-right:10px;
 }
 .goods-text{
   padding-left: 40rpx;
