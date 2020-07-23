@@ -30,8 +30,9 @@ page{
   font-weight:bold;
 }
 .size-money{
-  font-size:2rem;
+  font-size:1.5rem;
   line-height:1.5; 
+  font-weight: bold;
 }
 .size-numberone{
   font-size:1.5rem;
@@ -50,11 +51,11 @@ page{
   line-height: 1.5;
 }
 .size-text{
-  font-size:0.9rem;
+  font-size:0.8rem;
   line-height: 1.5;
 }
 .size-tagging{
-   font-size:0.8rem;
+   font-size:0.6rem;
    line-height: 1.5; 
 }
 

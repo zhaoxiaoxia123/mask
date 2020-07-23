@@ -28,7 +28,7 @@
 					<view class='total'>库存：{{item.stock}}件</view>
 					<view class='column mt'>
 						<view class='sale'>￥{{item.customer_amount}}</view>
-						<view class='sale'>[￥{{item.frozeno_discount_amount}}]</view>
+						<view class='sale'>(￥{{item.frozeno_discount_amount}})</view>
 						<view class='column-number'>
 							<view class='item-number'>
 								<image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
