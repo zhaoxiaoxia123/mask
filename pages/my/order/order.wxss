@@ -426,3 +426,9 @@ display: none;
 .plc-active .plc-text{
   color:#DAB866;
 }
+.load-scing{
+  width:360rpx;
+  height:360rpx;
+  display:inline-block;
+  padding-bottom:20rpx;
+}
