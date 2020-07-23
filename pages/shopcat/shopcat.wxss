@@ -4,14 +4,17 @@
   padding: 10px;
   box-sizing: border-box;
 }
-.list{
+.list-item{
    padding:40rpx 20rpx;
    background: #404040;
    box-sizing: border-box;
+    margin-bottom: 20rpx;
+   border-radius: 10px;
+}
+.list-box{
    display: flex;
    flex-direction: row;
-   margin-bottom: 20rpx;
-   border-radius: 10px;
+
 }
 .column{
    display: flex;
@@ -48,17 +51,9 @@
   font-size:1rem;
 }
 
-.sale{
-  color:#DAB866;
-  font-size:1.2rem;
-}
 
-.spec{
-  font-size: 10px;
-  color:#c6c6c6 ;
-}
 .total{
-  font-size: 24rpx;
+  font-size: 0.8rpx;
   line-height:1.5;
   color:#c6c6c6 ;
 }
@@ -102,7 +97,6 @@
 	justify-content: center;
 	flex-direction: row;
 	align-items: center;
-  font-size: 32rpx;
   background-color: #333;
   color: #c6c6c6 ;
 }
@@ -113,7 +107,6 @@
 	justify-content: left;
 	flex-direction: row;
 	align-items: center;
-  font-size: 32rpx;
   color: #c6c6c6 ;
   border-right: 2px solid #404040;
   padding:0 20rpx;
@@ -123,7 +116,7 @@
 	height: 100%;
 }
 .bottom-operate .price{
-	width: 52%;
+	width: 58%;
 	height: 100%;
 }
 .bottom-operate .space{
@@ -131,7 +124,8 @@
 	height: 100%;
 }
 .bottom-operate .button{
-	width: 40%;
+  font-size:1.2rem;
+	width: 32%;
 	height: 100%;
   color:#FFF;
 }
@@ -171,7 +165,6 @@ padding-bottom:20rpx;
 
 }
 .ftservice-text{
-  font-size:0.6rpx;
   color:#fff;
 }
 .cs_ftservice{
@@ -225,7 +218,6 @@ display: none;
   background: #595959;
   color:#fff;
   font-weight: 10;
-  font-size:1rem;
   padding:20rpx;
   border-radius: 0;
 }
@@ -237,7 +229,6 @@ display: none;
   margin-top:10rpx;
   padding:20rpx;
   text-align: center;
-  font-size:1rem;
   background: #595959;
 }
 
@@ -253,7 +244,6 @@ display: none;
 }
 .set-meal-rent{
   color:#fff;
-  font-size:1rem;
   padding-left:10rpx;
 }
 .decoration{
@@ -261,4 +251,11 @@ display: none;
 }
 .detail-item-money-price{
   padding-left:10rpx;
+}
+.column-number-end{
+  display: flex;
+  justify-content: flex-end;
+}
+.detail-item-money {
+  color:#DAB866;
 }
