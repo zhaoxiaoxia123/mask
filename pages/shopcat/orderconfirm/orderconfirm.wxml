@@ -33,12 +33,28 @@
       <view class='list-right'>
         <view class='right-text'>{{item.category_desc}}</view>
         <view class='sale'>￥{{item.customer_amount}}</view>
-        <text class='decoration' wx:if="{{customerInfo.frozeno_level > 1}}">￥{{item.frozeno_discount_amount}}</text>
+         <!-- wx:if="{{customerInfo.frozeno_level > 1}}" -->
+        <text class='decoration'>￥{{item.frozeno_amount}}</text>
         <view class='item'>
           <view class='abstract'>{{item.frozeno_introduction}}</view>
           <view class='piece'>× {{item.join_product_count}}</view>
         </view>
-        
+      </view>
+    </view>
+
+<view class='list' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
+    <block wx:if="{{g.category_id == items.dryInfos.dry_category_id}}">
+      <view class='list-left'>
+        <image src='{{g.product_image[0].image_url}}'></image>
+      </view>
+      <view class='list-right'>
+        <view class='right-text'>{{g.category_desc}}</view>
+        <view class='sale'>￥{{items.dryInfos.dry_amount}}</view>
+        <text class='decoration' wx:if="{{customerInfo.frozeno_level > 1}}">￥{{g.frozeno_amount}}</text>
+        <view class='item'>
+          <view class='abstract'></view>
+          <view class='piece'>× 1</view>
+        </view>
 				<!-- <view class='money-text' wx:for="{{item.gift}}" wx:key="*this" wx:for-item="g">
 					<view class='radio-group' wx:if="{{g.category_id == items.dryInfos.dry_category_id}}">
 						<radio color='#262626' data-amount="{{items.dryInfos.dry_amount}}" data-id="{{g.category_id}}" checked='{{isCheckDry == 1}}' disabled="true"></radio>
@@ -48,12 +64,14 @@
 						<text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
 					</view>
 				</view> -->
-
+      </view>
+      </block>
+      <view class='gift' wx:if="{{g.category_id != items.dryInfos.dry_category_id}}">
+        <text>{{g.category_desc}}× 1</text>
       </view>
     </view>
-    <!-- <view class='gift'>
-      <text>赠送礼盒× 1</text>
-    </view> -->
+
+    
     <view class='coupon'>
       <view class='coupon-wap' bindtap="delivery">
         <view class='coupon-left'>

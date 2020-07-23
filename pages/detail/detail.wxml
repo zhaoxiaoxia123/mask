@@ -53,7 +53,7 @@
                       <text >.00</text>
                     </view>
                     <view class="detail-item-money-price" >
-                      <text class="decoration">￥{{items.frozeno_discount_amount}}</text>
+                      <text class="decoration">￥{{items.frozeno_amount}}</text>
                     </view>
                 </view>
               </view>
@@ -76,7 +76,7 @@
 
       <view class="detail-item page-pd">
         <!-- 活动结束显示 -->
-        <view class="detail-item-box" wx:if="{{items.customer_amount > 0 && level != 1}}">
+        <!-- <view class="detail-item-box" wx:if="{{items.customer_amount > 0 && level != 1}}">
             <view class="detail-item-money wei">
               <text>￥</text>
               <text class="size-money ">{{items.customer_amount}}</text>
@@ -87,7 +87,7 @@
               <text class="decoration">￥{{items.frozeno_discount_amount}}</text>
               <text class="decoration">)</text>
             </view>
-        </view>
+        </view> -->
 
         <view class="money-title">{{items.category_desc}}</view>
 
@@ -106,42 +106,41 @@
 
       <view  class="page-pd set-meal">
           <view class="money-title">搭配商品</view>
-          <view class="set-meal-box">
-              <view class="set-meal-item">
+          <view class="set-meal-box" wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
+              <view class="set-meal-item" wx:if="{{g.category_id == items.dry_category_id}}">
                   <view class="set-meal-bar">
                       <view class="radio-group" >
-                        <radio color='#262626' checked="true"></radio>
+												<radio color='#262626' data-amount="{{items.dry_amount}}" data-id="{{g.category_id}}" bindtap='checkDry' checked='{{items.is_check_dry == 1}}'></radio>
                       </view>
                       <view class="set-meal-left">
                         <image src="../img/main2.jpg" ></image>
                       </view>
                       <view class="set-meal-right">
-                        <view  class="set-meal-title">冻龄智美钛金属导入仪</view>
+                        <view  class="set-meal-title">{{g.category_desc}}</view>
                       <view class="set-meal-money">
                             <view class="set-meal-money-left">
-                              <view class="detail-item-money wei">
+                              <view class="detail-item-money wei" wx:if="{{items.dry_amount == 389}}">
                                 <text>￥</text>
-                                <text class="size-money ">389</text>
+                                <text class="size-money ">{{items.dry_amount}}</text>
                                 <text >.00</text>
                                 <text class="set-meal-rent">(押金)</text>
                               </view>
+															<view class="detail-item-money wei" wx:if="{{items.dry_amount != 389}}">
+                                <text>￥</text>
+                                <text class="size-money ">{{items.dry_amount}}</text>
+                                <text >.00</text>
+                              </view>
                               <view class="detail-item-money-price">
-                                <text class="decoration">市场价￥998.00</text>
+                                <text class="decoration">市场价￥{{g.frozeno_amount}}</text>
                               </view>
                           </view>
                           <view class="set-meal-money-right" style="font-size:1.2rem;">×1</view>
                       </view>
                     </view>
-
                   </view>
               </view>
-
-              <view class="gift">
-                <text>赠送USB补水仪× 1</text>
-              </view>
-
-               <view class="gift">
-                <text>赠送美容硅胶刷× 1</text>
+              <view class="gift" wx:if="{{g.category_id != items.dry_category_id}}">
+                <text>{{g.category_desc}}× 1</text>
               </view>
 
           </view>

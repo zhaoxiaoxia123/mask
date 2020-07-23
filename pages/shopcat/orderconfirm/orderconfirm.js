@@ -39,7 +39,8 @@ Page({
       products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
       isCheckDry:options.isCheckDry,
       // discount: parseFloat(wx.getStorageSync('discount')),
-      experience : app.globalData.experience_amount
+      experience : app.globalData.experience_id
+      // experience_amount: app.globalData.experience_amount
     });
     console.log('that.data.isCheckDry:----');
     console.log(that.data.isCheckDry);
@@ -269,13 +270,21 @@ Page({
   },
 
   returnProductAmountAndDRYCount: function(pInfo,i){
-    console.log(pInfo[i]['frozeno_is_discount']);
     var productAmount = 0;
     var dryCount = 0;
     var dryAmount = 0;
     var ret = {};
+    console.log('frozeno_is_discount:=====');
+    console.log(pInfo[i]['frozeno_is_discount']);
       if (pInfo[i]['frozeno_is_discount'] == 1){
-      productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        
+        console.log('customer_amount:=====');
+        console.log(pInfo[i]['customer_amount']);
+        // if(app.globalData.experience_amount == pInfo[i]['customer_amount']){
+          productAmount = (parseFloat(pInfo[i]['customer_amount']) * pInfo[i]['join_product_count']);
+        // }else{
+        //   productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        // }
         if (pInfo[i]['frozeno_is_sub_dry'] == 1){
           dryCount = parseInt(pInfo[i]['join_product_count']);
         }
