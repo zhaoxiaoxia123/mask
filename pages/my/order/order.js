@@ -173,15 +173,20 @@ Page({
         items:[]
       })
       if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-      var param = {
-        page_code: 'p008',
-        type: "myOrder",
-        // customer_id: wx.getStorageSync('customerId'),
-        order_state: that.data.order_state,//默认访问待付款
-        offset: (that.data.offset - 1) * that.data.pageCount,
-        page: that.data.pageCount
-      };
-      that.getOrderList(param);
+        
+        that.setData({
+          imgLoad:'../../img/loading.gif',
+          message:'正在努力加载中',
+        });
+        var param = {
+          page_code: 'p008',
+          type: "myOrder",
+          // customer_id: wx.getStorageSync('customerId'),
+          order_state: that.data.order_state,//默认访问待付款
+          offset: (that.data.offset - 1) * that.data.pageCount,
+          page: that.data.pageCount
+        };
+        that.getOrderList(param);
       }
     }
   },

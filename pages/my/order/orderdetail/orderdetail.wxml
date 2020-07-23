@@ -28,16 +28,13 @@
       <view class='list-right'>
         <view class='right-text'>{{item.category_desc}}</view>
         <view class='sale'>￥{{item.product_amount}}</view>
+        <text class='decoration'>[￥{{item.product_before_amount}}]</text>
         <view class='item'>
           <view class='abstract'>{{item.frozeno_introduction}}</view>
           <view class='piece'>× {{item.product_count}}</view>
         </view>
       </view>
     </view>
-    <view class='gift'>
-      <text>赠送礼盒× 1</text>
-    </view>
-
     <view class='bg-box'>
       <view class='block-pa space-between'>
         <text>运费</text>
