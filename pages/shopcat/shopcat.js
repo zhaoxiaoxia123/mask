@@ -19,7 +19,9 @@ Page({
     isBack: false,
     ftserviceflexwindow: false,
     dryInfos:[],
-    dryAmount:0
+    gift:[],
+    dryAmount:0,
+    experience_amount:0
   },
 
   /**
@@ -28,7 +30,8 @@ Page({
   onLoad: function(options) {
     that = this;
     that.setData({
-      isBack: false
+      isBack: false,
+      experience_amount:app.globalData.experience_amount
     });
   },
 
@@ -153,7 +156,8 @@ Page({
         }); 
         that.setData({
           items: that.data.items.concat(datas.shopping),
-          dryInfos:datas.dryInfos
+          dryInfos:datas.dryInfos,
+          gift:datas.gift
         });
         if (datas.shopping.length <= 0 || datas.shopping.length < that.data.pageCount) {
           that.setData({
