@@ -6,145 +6,128 @@
 	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
 		<view id="product">
 			<swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
-			<swiper-item>
-          <video
-            class="swiper-item"
-            show-play-btn="{{true}}"
-            controls="{{true}}"
-            objectFit="cover" 
-            loop='{{false}}'
-            show-mute-btn='{{true}}'
-            vslide-gesture-in-fullscreen='{{true}}'
-            src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/402ce54f699ba9acf8d70c08e0515057.mp4" 
-          ></video>
-          </swiper-item>
+				<swiper-item>
+					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/402ce54f699ba9acf8d70c08e0515057.mp4"></video>
+				</swiper-item>
 				<block wx:for="{{swipers}}" wx:key="*this">
 					<swiper-item wx:if="{{item.type == 1}}">
 						<image mode="widthFix" src="{{item.image_url}}" class="slide-image" />
 					</swiper-item>
 				</block>
 			</swiper>
-      <view class="activity">
-      <!-- 活动结束显示图片 -->
-        <!-- <image mode="widthFix" src='../img/member/V001.jpg' style="width:100%;"></image> -->
-         <!-- 活动图片 -->
-        <image mode="widthFix" src='../img/member/V000.jpg' style="width:100%;"></image>
-        
-        <view class="activity-box">
-          <!-- 活动中增加：activity-item-active -->
-            <view class="activity-item activity-item-active">
-              <view class="activity-item-left">
-                <view class="">
-                  <!-- 显示内容：
-                  新人：新人首单价
-                  VIP： VIP抢购价
-                  SVIP： SVIP抢购价 
-                  以此类推
-                  -->
-                  <text>新人首单价</text> 
-                  <!-- 二选一 -->
-                  <text  class="activity-state activity-state-active">活动中</text>
-                  <!-- <text  class="activity-state">活动已结束</text> -->
-                </view>
-                <view class="detail-item-box">
-                    <view class=" wei" >
-                      <text>￥</text>
-                      <text class="size-money ">{{items.customer_amount_before}}</text>
-                      <text >.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
-                    </view>
-                    <view class="detail-item-money-price" >
-                      <text class="decoration">￥{{items.frozeno_amount}}</text>
-                    </view>
-                </view>
+			<view class="activity">
+				<image mode="widthFix" src="{{promotionPicture}}" style="width:100%;"></image>
+				<view class="activity-box">
+					<view class="activity-item activity-item-active">
+						<view class="activity-item-left">
+							<view class="">
+								<text wx:if="{{level == 1 || level == 0}}">新人首单价</text>
+								<text wx:if="{{level == 2}}">VIP抢购价</text>
+								<text wx:if="{{level == 3}}">SVIP抢购价</text>
+								<text wx:if="{{level == 4}}">钻石抢购价</text>
+								<text wx:if="{{level == 5}}">执行董事抢购价</text>
+								<text wx:if="{{level == 6}}">高级董事抢购价</text>
+								<text wx:if="{{level == 7}}">城市合伙人抢购价</text>
+								<text class="activity-state {{showPromotionClass}}">{{showPromotionTip}}</text>
+							</view>
+							<view class="detail-item-box">
+								<view class=" wei" wx:if="{{level != 0}}">
+									<text>￥</text>
+									<text class="size-money ">{{items.customer_amount_before}}</text>
+									<text>.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
+								</view>
+								<view class=" wei" wx:if="{{level == 0}}">
+									<text>￥</text>
+									<text class="size-money " wx:if="{{items.category_id == experience_id}}">{{experience_amount}}</text>
+									<text class="size-money " wx:if="{{items.category_id != experience_id}}">{{items.frozeno_discount_amount}}</text>
+									<text>.00</text>
+								</view>
+								<view class="detail-item-money-price">
+									<text class="decoration">￥{{items.frozeno_amount}}</text>
+								</view>
+							</view>
+						</view>
+						<view class="activity-item-right">
+							<!-- 活动结束显示 -->
+							<view wx:if="{{isOver}}">
+                <view class="activity-border size-tagging">每天{{items.frozeno_start_date}}点开抢</view>
               </view>
-              <view class="activity-item-right">
-                  <!-- 活动结束显示 -->
-                 <!-- <view >
-                    <view class="activity-border size-tagging">每天{{items.frozeno_start_date}}点开抢</view>
-                 </view> -->
-                 <!-- 活动中显示 ：剩余数量为0，表示已结束。切换为灰色-->
-                 <view>
-                    <!-- <view class="activity-border size-tagging">剩余：{{(items.frozeno_promotion_count - items.sale) > 0 ?(items.frozeno_promotion_count - items.sale) : 0 }}件</view> -->
-                    <view class="activity-border size-tagging">剩余：{{items.frozeno_promotion_count - items.sale}}件</view>
-                 </view>
-              </view>
-            </view>
+							<view wx:if="{{ ! isOver}}">
+								<view class="activity-border size-tagging">剩余：{{surplusSale}}件</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
 
+			<view class="detail-item page-pd">
+				<!-- 活动结束显示 -->
+				<view class="detail-item-box" wx:if="{{isOver}}">
+          <view class="detail-item-money wei">
+            <text>￥</text>
+            <text class="size-money ">{{items.frozeno_discount_amount}}</text>
+            <text >.00</text>
+          </view>
+          <view class="detail-item-money-price">
+            <text class="decoration">( 市场价：</text>
+            <text class="decoration">￥{{items.frozeno_amount}}</text>
+            <text class="decoration">)</text>
+          </view>
         </view>
-      </view>
-
-
-      <view class="detail-item page-pd">
-        <!-- 活动结束显示 -->
-        <!-- <view class="detail-item-box" wx:if="{{items.customer_amount > 0 && level != 1}}">
-            <view class="detail-item-money wei">
-              <text>￥</text>
-              <text class="size-money ">{{items.customer_amount}}</text>
-              <text >.00</text>
-            </view>
-            <view class="detail-item-money-price">
-              <text class="decoration">( 市场价：</text>
-              <text class="decoration">￥{{items.frozeno_discount_amount}}</text>
-              <text class="decoration">)</text>
-            </view>
-        </view> -->
-
-        <view class="money-title">{{items.category_desc}}</view>
-
-        <view class='money-text'>
+				<view class="money-title">{{items.category_desc}}</view>
+				<view class='money-text'>
 					<text>成长值：{{items.growth}}</text>
 					<text>积分：{{items.point}}</text>
 				</view>
 
-        <view class="detail-item-abstract">{{items.frozeno_introduction}}</view>
+				<view class="detail-item-abstract">{{items.frozeno_introduction}}</view>
 				<view class="detail-item-between">
 					<text class="detail-item-color">免邮</text>
 					<text class="detail-item-color">销量：{{items.sale}}件</text>
 				</view>
-      
-      </view>
 
-      <view  class="page-pd set-meal">
-          <view class="money-title">搭配商品</view>
-          <view class="set-meal-box" wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
-              <view class="set-meal-item" wx:if="{{g.category_id == items.dry_category_id}}">
-                  <view class="set-meal-bar">
-                      <view class="radio-group" >
-												<radio color='#262626' data-amount="{{items.dry_amount}}" data-id="{{g.category_id}}" bindtap='checkDry' checked='{{items.is_check_dry == 1}}'></radio>
-                      </view>
-                      <view class="set-meal-left">
-                        <image src="../img/main2.jpg" ></image>
-                      </view>
-                      <view class="set-meal-right">
-                        <view  class="set-meal-title">{{g.category_desc}}</view>
-                      <view class="set-meal-money">
-                            <view class="set-meal-money-left">
-                              <view class="detail-item-money wei" wx:if="{{items.dry_amount == 389}}">
-                                <text>￥</text>
-                                <text class="size-money ">{{items.dry_amount}}</text>
-                                <text >.00</text>
-                                <text class="set-meal-rent">(押金)</text>
-                              </view>
-															<view class="detail-item-money wei" wx:if="{{items.dry_amount != 389}}">
-                                <text>￥</text>
-                                <text class="size-money ">{{items.dry_amount}}</text>
-                                <text >.00</text>
-                              </view>
-                              <view class="detail-item-money-price">
-                                <text class="decoration">市场价￥{{g.frozeno_amount}}</text>
-                              </view>
-                          </view>
-                          <view class="set-meal-money-right" style="font-size:1.2rem;">×1</view>
-                      </view>
-                    </view>
-                  </view>
-              </view>
-              <view class="gift" wx:if="{{g.category_id != items.dry_category_id}}">
-                <text>{{g.category_desc}}× 1</text>
-              </view>
+			</view>
 
-          </view>
-          <!-- <view class='money-text' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
+			<view class="page-pd set-meal">
+				<view class="money-title">搭配商品</view>
+				<view class="set-meal-box" wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
+					<view class="set-meal-item" wx:if="{{g.category_id == items.dry_category_id}}">
+						<view class="set-meal-bar">
+							<view class="radio-group">
+								<radio color='#262626' data-amount="{{items.dry_amount}}" data-id="{{g.category_id}}" bindtap='checkDry' checked='{{items.is_check_dry == 1}}'></radio>
+							</view>
+							<view class="set-meal-left">
+								<image src="{{g.product_image[0].image_url}}"></image>
+							</view>
+							<view class="set-meal-right">
+								<view class="set-meal-title">{{g.category_desc}}</view>
+								<view class="set-meal-money">
+									<view class="set-meal-money-left">
+										<view class="detail-item-money wei" wx:if="{{items.dry_amount == 389}}">
+											<text>￥</text>
+											<text class="size-money ">{{items.dry_amount}}</text>
+											<text >.00</text>
+											<text class="set-meal-rent">(押金)</text>
+										</view>
+										<view class="detail-item-money wei" wx:if="{{items.dry_amount != 389}}">
+											<text>￥</text>
+											<text class="size-money ">{{items.dry_amount}}</text>
+											<text >.00</text>
+										</view>
+										<view class="detail-item-money-price">
+											<text class="decoration">市场价￥{{g.frozeno_amount}}</text>
+										</view>
+									</view>
+									<view class="set-meal-money-right" style="font-size:1.2rem;">×1</view>
+								</view>
+							</view>
+						</view>
+					</view>
+					<view class="gift" wx:if="{{g.category_id != items.dry_category_id}}">
+						<text>{{g.category_desc}}× 1</text>
+					</view>
+				</view>
+				<!-- <view class='money-text' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
             <view class='radio-group' wx:if="{{g.category_id == items.dry_category_id}}">
               <radio color='#262626' data-amount="{{items.dry_amount}}" data-id="{{g.category_id}}" bindtap='checkDry' checked='{{items.is_check_dry == 1}}'></radio>
               <text>{{g.category_desc}}:{{items.dry_amount}}</text>
@@ -153,10 +136,8 @@
               <text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
             </view>
           </view> -->
-        </view>
-      </view>
-
-
+			</view>
+		</view>
 		<!-- <view class='spec' bindtap="toggleDialog">
     <text>选择规格</text>
     <image src='../img/dv.png'></image>
@@ -179,7 +160,6 @@
 					</block>
 				</view>
 			</view>
-
 		</view>
 
 		<view class='bottom'>

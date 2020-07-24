@@ -76,7 +76,7 @@ function _refetch(params) {
  */
 function getTokenFromServer(params,callBack) {
   wx.login({
-    success: function (res) {
+    success: function (r) {
       // 既然时一个工具类，就应该存粹一点，不要用 base.js 里的 request(params) 方法发起网络请求了
       // 这一点很重要
       wx.getUserInfo({
@@ -96,14 +96,13 @@ function getTokenFromServer(params,callBack) {
             header: {
               "Content-Type": "application/x-www-form-urlencoded"
             },
-            success: function (res) {
+            success: function (ress) {
               // wx.setStorageSync('token', res.data.data.token);
-              callBack && callBack(res.data.data.token);
+              callBack && callBack(ress.data.data.token);
             }
           });
         }
       });
-      
     }
   });
 }

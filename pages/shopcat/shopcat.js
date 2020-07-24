@@ -237,8 +237,8 @@ Page({
   /**
    * 是否选中导入仪
    */
-  checkDry: function(e) {
-    var amount = e.currentTarget.dataset.amount;
+  checkDry: function() {
+    var amount = that.data.dryInfos.dry_amount ;//e.currentTarget.dataset.amount;
     var items = that.data.items;
     var dryInfos = that.data.dryInfos;
     if (dryInfos.is_check_dry == 1) {
@@ -304,18 +304,19 @@ Page({
         }
       }
     }
-    var fee = 0;
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].selected) {
-        // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
-        fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
-      }
-    }
     that.setData({
       check: check,
       items: items
     });
-    that.setTotalFee(fee); //赋值合计金额
+    that.checkDry();
+    // var fee = 0;
+    // for (var i = 0; i < items.length; i++) {
+    //   if (items[i].selected) {
+    //     // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+    //     fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
+    //   }
+    // }
+    // that.setTotalFee(fee); //赋值合计金额
   },
 
   returnFee: function (fee, product_count, frozeno_discount_amount) {

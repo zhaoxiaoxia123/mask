@@ -37,10 +37,9 @@ Page({
     that = this;
     that.setData({
       products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
-      isCheckDry:options.isCheckDry,
-      // discount: parseFloat(wx.getStorageSync('discount')),
-      experience : app.globalData.experience_id
-      // experience_amount: app.globalData.experience_amount
+      isCheckDry:options.isCheckDry == 'undefined'?2:options.isCheckDry,
+      experience : app.globalData.experience_id,
+      experience_amount: app.globalData.experience_amount
     });
     console.log('that.data.isCheckDry:----');
     console.log(that.data.isCheckDry);
@@ -190,7 +189,7 @@ Page({
       sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
-          transform: datas[0]
+          transform: datas
         })
       }
     };
@@ -204,7 +203,6 @@ Page({
       method:'GET',
       sCallback: function (res) {
         var datas = res.data.data;
-        console.log(datas);
         that.setData({
           items: datas
         });
@@ -225,12 +223,15 @@ Page({
     var dryAmount = 0;   //导入仪不参加任何折扣
     for (var i = 0; i < pInfo.length; i++) {
       var ret = that.returnProductAmountAndDRYCount(pInfo,i);
-      if(pInfo[i]['category_id'] == that.data.experience && parseInt(pInfo[i]['sale']) < parseInt(pInfo[i]['frozeno_promotion_count'])){
+      // if(pInfo[i]['category_id'] == that.data.experience && parseInt(pInfo[i]['sale']) < parseInt(pInfo[i]['frozeno_promotion_count'])){
+      //   productAmount488 += ret['productAmount'];
+      // }else{
+      if(pInfo[i]['customer_amount'] == that.data.experience_amount && parseInt(pInfo[i]['sale']) < parseInt(pInfo[i]['frozeno_promotion_count'])){
         productAmount488 += ret['productAmount'];
       }else{
         productAmount += ret['productAmount'];
       }
-      if((pInfo[i]['category_id'] == that.data.experience && parseInt(pInfo[i]['sale']) >= parseInt(pInfo[i]['frozeno_promotion_count'])) || pInfo[i]['category_id'] != that.data.experience){
+      if((pInfo[i]['customer_amount'] == that.data.experience_amount && parseInt(pInfo[i]['sale']) >= parseInt(pInfo[i]['frozeno_promotion_count'])) || pInfo[i]['customer_amount'] != that.data.experience_amount){
         dryCount += ret['dryCount'];
       }else{
         dryCount += 0;
@@ -275,12 +276,12 @@ Page({
     var dryAmount = 0;
     var ret = {};
       if (pInfo[i]['frozeno_is_discount'] == 1){
-        
-        // if(app.globalData.experience_amount == pInfo[i]['customer_amount']){
+        if(app.globalData.experience_amount == pInfo[i]['customer_amount']){
           productAmount = (parseFloat(pInfo[i]['customer_amount']) * pInfo[i]['join_product_count']);
-        // }else{
-        //   productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
-        // }
+          // productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        }else{
+          productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        }
         if (pInfo[i]['frozeno_is_sub_dry'] == 1){
           dryCount = parseInt(pInfo[i]['join_product_count']);
         }
@@ -302,9 +303,6 @@ Page({
     var tPayAmount = that.sumCheckTicket(); //减卡券价值后的总价
     var discountAmount = tPayAmount; //that.data.discountAmount;
     var productAmount = that.data.productAmount;
-    // var payAmount = 0; //实付款
-    console.log("sumUsingPoint:------");
-    console.log(cInfo.frozeno_point > 0 && that.data.isUsePoint);
     var dryAm = 0;
     if(that.data.isCheckDry == 1){
       dryAm = that.data.items.dryInfos.dry_amount;
@@ -328,9 +326,6 @@ Page({
         payAmount: parseFloat(discountAmount) + parseInt(dryAm)
       });
     }
-    
-    console.log('payAmount:----');
-    console.log(that.data.payAmount);
   },
 
   //计算使用卡券后的付款金额
@@ -381,8 +376,8 @@ Page({
     //可抵用积分数
     var usingPoint = (discountAmount * (parseFloat(rate) / 100));
     usingPoint = parseInt(usingPoint);// .toFixed(2);
+    var dryAm = 0;
     if (parseFloat(point) >= parseFloat(usingPoint)) { //用户积分大于等于可抵用积分数
-      var dryAm = 0;
       if(that.data.isCheckDry == 1){
         dryAm = that.data.items.dryInfos.dry_amount;
       }
@@ -520,7 +515,6 @@ Page({
           data:param,
           method:'POST',
           sCallback: function (res) {
-            console.log(res);
             var datas = res.data.data;
             wx.showToast({
               // icon: "none",

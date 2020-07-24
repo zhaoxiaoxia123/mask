@@ -1,4 +1,4 @@
-<view class="size-text col-content">
+<view>
   <view class="topbar">
     <view class="topbar-top">
     <view class="topbar-text" bindtap="clickTab" data-current="0">
@@ -48,15 +48,13 @@
               <view class='list-left'>
                 <image src='{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
               </view>
-              <view class='list-right  '>
+              <view class='list-right size-titleone '>
                 <view class='column '>
                   <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
                 <view class='column'>
-                  <view class='rmb-price'>
-                    <text class="">￥</text><text class="sale-price">{{item1.product_amount}}</text>
-                  </view>
-                  <!-- <text class='decoration'>￥{{item1.product_before_amount}}</text> -->
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
                 <view class='column col-content'>
@@ -66,7 +64,7 @@
             </view>
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class='rmb-price'><text class="">￥</text><text class="sale-price">{{item.frozeno_order_amount}}</text></text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
           <!-- 待付款——取消订单和付款、代发货——取消订单（需后台审核同意）和提醒发货、待收货——查看物流和确认发货（可人工确定或客户满多少天后系统自动改状态） -->
@@ -116,35 +114,26 @@
               <view class='list-left'>
                 <image src='{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
               </view>
-
-              <view class='list-right size-titletwo '>
-
+              <view class='list-right size-titleone '>
                 <view class='column '>
                   <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
-
                 <view class='column'>
-                  <view class='sale-price'>￥</view>
-                  <view class='rmb-price'>
-                      <text class="">￥</text><text class="sale-price">{{item1.product_amount}}</text>
-                  </view>
-                  <!-- <text class='decoration'>￥{{item1.product_before_amount}}</text> -->
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
-
                 <view class='column col-content'>
                   <view class='abstract'>{{item1.frozeno_introduction}}</view>
                 </view>
-
               </view>
             </view>
 
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-              <text class='rmb-price'><text class="">￥</text><text class="sale-price">{{item.frozeno_order_amount}}</text></text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
-
             <view class='push-button'>
               <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
               <view class='push push-active' data-id="{{item.o_id}}" bindtap='orderdetail'>付款</view>
@@ -174,15 +163,13 @@
               <view class='list-left'>
                 <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
               </view>
-              <view class='list-right size-titletwo '>
+              <view class='list-right size-titleone '>
                 <view class='column '>
                   <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
                 <view class='column'>
-                  <view class='rmb-price'>
-                      <text class="">￥</text><text class="sale-price">{{item1.product_amount}}</text>
-                  </view>
-                  <!-- <text class='decoration'>￥{{item1.product_before_amount}}</text> -->
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
                 <view class='column col-content'>
@@ -192,7 +179,7 @@
             </view>
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-              <text class='rmb-price'><text class="">￥</text><text class="sale-price">{{item.frozeno_order_amount}}</text></text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
             <view class='push-button'>
@@ -224,13 +211,13 @@
               <view class='list-left'>
                 <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
               </view>
-              <view class='list-right size-titletwo '>
+              <view class='list-right size-titleone '>
                 <view class='column '>
                   <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
                 <view class='column'>
-                  <view class='sale-price'>￥{{item1.product_amount}}</view>
-                  <!-- <text class='decoration'>￥{{item1.product_before_amount}}</text> -->
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
                 <view class='column col-content'>
@@ -240,7 +227,7 @@
             </view>
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-              <text class='rmb-price'><text class="">￥</text><text class="sale-price">{{item.frozeno_order_amount}}</text></text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
             <view class='push-button'>
@@ -275,16 +262,14 @@
                 <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
               </view>
 
-              <view class='list-right size-titletwo '>
+              <view class='list-right size-titleone '>
                 <view class='column '>
                   <view class='right-text'>{{item1.category_desc}}</view>
                 </view>
 
                 <view class='column'>
-                  <view class='rmb-price'>
-                      <text class="">￥</text><text class="sale-price">{{item1.product_amount}}</text>
-                  </view>
-                  <!-- <text class='decoration'>￥{{item1.product_before_amount}}</text> -->
+                  <view class='right-text'>￥{{item1.product_amount}}</view>
+                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
                   <view class='piece'>× {{item1.product_count}}</view>
                 </view>
 
@@ -297,7 +282,7 @@
 
             <view class='order'>
               <view class='pay'>共{{item.products_count}}件商品 实付款：
-              <text class='rmb-price'><text class="">￥</text><text class="sale-price">{{item.frozeno_order_amount}}</text></text>
+                <text class=''>￥{{item.frozeno_order_amount}}</text>
               </view>
             </view>
           </view>
@@ -337,7 +322,7 @@
           </view>
         </view>
 
-        <view class='plc-title col-title size-titletwo page-pd'>
+        <view class='plc-title col-title size-titleone page-pd'>
           <view class='plc-box'>已签收</view>
         </view>
 

@@ -23,9 +23,6 @@ Page({
     circular: true,
     items: [],
     productId:0,
-    // transform: [],
-    // point:0,
-    // growth:0,
     shoppingCount: 0,
     level:0,
     isClick:true,
@@ -35,9 +32,15 @@ Page({
     productTop: 0,
     detailTop: 0,
     aboutTop: 0,
-    // isShowTopBar:false,
     scrollStop:false,
     dryAmount:0,
+    promotionPicture:"../img/member/V001.jpg",
+    showPromotionTip:"活动中",
+    showPromotionClass:"",
+    experience_id:0,
+    experience_amount:0,
+    isOver:false,
+    surplusSale:0,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -50,6 +53,8 @@ Page({
     that.setData({
       productId: options.id,
       // productId: getApp().globalData.productId,
+      experience_id:app.globalData.experience_id,
+      experience_amount:app.globalData.experience_amount,
       level: wx.getStorageSync("level")
     });
     var param = {
@@ -78,7 +83,6 @@ Page({
         console.log(that.data.winHeight);
       },
     })
-
   },
 
   /**
@@ -321,8 +325,31 @@ Page({
         if(res.data.data){
           that.setData({
             items: res.data.data,
-            swipers: res.data.data.product_image
+            swipers: res.data.data.product_image,
           });
+          let img = '';
+          let tip = '';
+          let css = '';
+          let isover = parseInt(that.data.items.now_hour) < parseInt(that.data.items.frozeno_start_date) || parseInt(that.data.items.frozeno_promotion_count) <= parseInt(that.data.items.sale);
+          if(isover) {
+            img = "../img/member/V001.jpg";
+            tip="活动结束";
+            css = '';
+          } else {
+            img = "../img/member/V000.jpg";
+            tip="活动中";
+            css = 'activity-state-active';
+          }
+          let surCount = parseInt(that.data.items.frozeno_promotion_count) - parseInt(that.data.items.sale);
+          that.setData({
+            promotionPicture:img,
+            showPromotionTip:tip,
+            showPromotionClass:css,
+            isOver:isover,
+            surplusSale:surCount > 0 ? surCount: 0 ,
+          });
+          console.log("promotionPicture:-----");
+          console.log(that.data.promotionPicture);
           that.getTop();
         }
       }

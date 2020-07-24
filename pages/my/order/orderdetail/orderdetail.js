@@ -165,7 +165,7 @@ Page({
       sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
-          transform: datas[0]
+          transform: datas
         })
       }
     };

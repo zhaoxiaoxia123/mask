@@ -61,7 +61,7 @@
 			</view>
 		</view>
 
-		<view class="list-item">
+		<view class="list-item" wx:if="{{gift.length > 0}}">
 		<block wx:for="{{gift}}" wx:key="*this" wx:for-item="g">
 			<view class="list-box" wx:if="{{g.category_id == dryInfos.dry_category_id}}">
 				<view class='radio-group'>
