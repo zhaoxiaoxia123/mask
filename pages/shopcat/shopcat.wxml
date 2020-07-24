@@ -42,12 +42,12 @@
 						<!-- <view class='sale'>￥{{item.customer_amount}}</view>
 						<view class='sale'>(￥{{item.frozeno_discount_amount}})</view> -->
 						<view class='column-number '>
-							<view class='item-number'>
-								<image data-id='{{index}}' class='icon32' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
+							<view class='item-number '>
+								<image data-id='{{index}}' class='icon32 item-number-pd' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
 							</view>
-							<view class='item-number'>{{item.product_count}}</view>
+							<view class='item-number item-number-pd'>{{item.product_count}}</view>
 							<view class='item-number'>
-								<image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32' bind:tap="plusFn"></image>
+								<image data-id='{{index}}' src='{{icons[0]}}' src='../img/plus@2x.png' class='icon32 item-number-pd' bind:tap="plusFn"></image>
 							</view>
 						</view>
 					</view>
@@ -112,10 +112,9 @@
 				<radio color='#262626' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选
 			</view>
 			<view class="bottom-operate price">
-				<view>合计：</view>
 				<view style="color:#DAB866">
-					<view style="font-size:1.1rem;">￥{{totalfee}}</view>
-					<view style="font-size: 0.5rem;" wx:if="{{totalfee && totalfee != '0.00'}}">其他优惠见结算页面</view>
+					<view style="font-size:1rem;"><text style="font-size: 0.8rem;color: #c6c6c6;">优惠合计：</text><text style="font-size: 0.6rem;">￥</text>{{totalfee}}</view>
+					<view style="font-size: 0.4rem;" wx:if="{{totalfee && totalfee != '0.00'}}">其他优惠见结算页面</view>
 				</view>
 			</view>
 			<view class="bottom-operate space"></view>

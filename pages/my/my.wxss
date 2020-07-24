@@ -1,118 +1,141 @@
 /* pages/my/my.wxss */
-.parent{
+
+.parent {
   display: flex;
   justify-content: space-between;
   align-content: center;
-  padding:40rpx 20rpx;
-  border-radius:10px 10px 0 0;
+  padding: 40rpx 20rpx;
+  border-radius: 10px 10px 0 0;
 }
-.parent-left{
+
+.parent-left {
   display: flex;
   align-content: center;
 }
-.wx-image_SC1alK{
-  width:124rpx;
-  height:124rpx;
-  border-radius:80rpx;
-}
-.head-img{
-  width:124rpx;
-  height:124rpx;
+
+.wx-image_SC1alK {
+  width: 124rpx;
+  height: 124rpx;
   border-radius: 80rpx;
 }
-.content{
+
+.head-img {
+  width: 124rpx;
+  height: 124rpx;
+  border-radius: 80rpx;
+}
+
+.content {
   display: flex;
   flex-direction: column;
   align-content: center;
-  padding-left:20rpx;
+  padding-left: 20rpx;
 }
-.parent-right{
+
+.parent-right {
   display: flex;
   align-items: center;
 }
-.top{
+
+.top {
   display: flex;
 }
-.name{
-  font-size:1.2rem;
-  color: #ffffff;
-  padding-left:20rpx;
-  line-height:124rpx;
+
+.name {
+  font-size: 1.2rem;
+  color: #fff;
+  padding-left: 20rpx;
+  line-height: 124rpx;
 }
-.head{
+
+.head {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   padding-top: 40rpx;
 }
-.center-bg{
+
+.center-bg {
   display: flex;
-  background-color:#fff;
-  margin-top:60rpx;
-  border-radius:10rpx;
-  padding:40rpx;
-  box-shadow: 0 0 6px rgba(0,0,0,.2);
-}
-.center-box{
-  text-align:center;
-color: #999;
--webkit-box-flex: 1;
--webkit-flex: 1;
--ms-flex: 1;
-flex: 1;
--webkit-tap-highlight-color: transparent;
-font-size: 1rem;
-border-right: 1px solid #e6e6ea;
-padding: 12rpx 0;
-}
-.box-text{
-font-size: 1.8rem;
-display: block;
-flex-direction: row-reverse;
-color: #333;
-font-weight: 600;
-margin: 0 auto;
-
-}
-.center-box image{
-  width:58rpx;
-  height:58rpx;
-  padding-bottom:10rpx;
-}
-.box-text-img{
-  border-right:none;
+  background-color: #fff;
+  margin-top: 60rpx;
+  border-radius: 10rpx;
+  padding: 40rpx;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 }
 
-.payment{
-  padding:20rpx;
-  margin-top:20rpx;
+.center-box {
+  text-align: center;
+  color: #999;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 1rem;
+  border-right: 1px solid #e6e6ea;
+  padding: 12rpx 0;
+}
+
+.box-text {
+  font-size: 1.8rem;
+  display: block;
+  flex-direction: row-reverse;
+  color: #333;
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+.center-box image {
+  width: 58rpx;
+  height: 58rpx;
+  padding-bottom: 10rpx;
+}
+
+.box-text-img {
+  border-right: none;
+}
+
+.payment {
+  padding: 20rpx 20rpx 0 20rpx;
+  margin-top: 20rpx;
   border-radius: 10px;
 }
-.payment-list{
-  display:flex;
-  justify-content:space-between;
+
+.payment-list {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding-bottom:40rpx;
+  padding-bottom: 40rpx;
 }
-.payment-list-right image{
-  width:14rpx;
-  height:24rpx;
-  padding-left:10rpx;
+
+.payment-list-right image {
+  width: 14rpx;
+  height: 24rpx;
+  padding-left: 10rpx;
 }
-.payment-center{
+
+.payment-center {
   display: flex;
   justify-content: space-around;
 }
-.payment-1{
+
+.payment-1 {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
 }
-.payment-1 image{
-  padding-bottom:10rpx;
+
+.payment-1 image {
+  padding-bottom: 10rpx;
 }
 
-.money{
+.payment-1 text {
+  font-size: 0.8rem;
+  padding-top: 10rpx;
+}
+
+.money {
   width: 40%;
   display: flex;
   flex-direction: column;
@@ -120,7 +143,7 @@ margin: 0 auto;
   padding-top: 40rpx;
 }
 
-.btn{
+.btn {
   background: #ff43da;
   padding: 16rpx 40rpx;
   border-radius: 10rpx;
@@ -129,81 +152,90 @@ margin: 0 auto;
   justify-content: center;
   font-size: 1rem;
 }
-.orders{
+
+.orders {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 26rpx 40rpx; 
+  padding: 26rpx 40rpx;
   margin-top: 40rpx;
   border-radius: 10rpx;
 }
-.list{
+
+.list {
   text-align: center;
 }
 
-.lists{
+.lists {
   padding: 20rpx;
-  margin-top:20rpx;
+  margin-top: 20rpx;
   border-radius: 10px;
 }
-.list-wap{
-  display:flex;
-  justify-content:space-between;
-  padding-top:40rpx;
-  border-bottom:1px solid #4d4d4d;
-  padding-bottom:40rpx;
-  
+
+.list-wap {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 40rpx;
+  border-bottom: 1px solid #4d4d4d;
+  padding-bottom: 40rpx;
 }
-.border-none{
-  border:none;
+
+.border-none {
+  border: none;
 }
-.left{
+
+.left {
   display: flex;
   align-items: center;
 }
-.left image{
+
+.left image {
   width: 42rpx;
-  height:42rpx;
+  height: 42rpx;
 }
-.left text{
+
+.left text {
   padding-left: 20rpx;
 }
-.right image{
-  width:14rpx;
-  height:24rpx;
+
+.right image {
+  width: 14rpx;
+  height: 24rpx;
 }
 
- 
 /* 遮罩层 */
-.mask{
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #000;
-    z-index: 9000;
-    opacity: 0.5;
-}
-  
-/* 弹出层 */
-.modalDlg{
-    width: 70%;
-    position: fixed;
-    top: 50px;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius:5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+.mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: 9000;
+  opacity: 0.5;
 }
 
- /* 弹出层里面的图片 */
-.modalDlg image{
+/* 弹出层 */
+
+.modalDlg {
+  width: 70%;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 弹出层里面的图片 */
+
+.modalDlg image {
   width: 120px;
   height: 120px;
   margin-top: 30px;
@@ -214,9 +246,10 @@ margin: 0 auto;
   height: 362rpx;
   display: inline-block;
 } */
- 
+
 /* 弹出层里面的按钮 */
-.ok{
+
+.ok {
   width: 80px;
   height: 35px;
   background: #44b549;
@@ -224,12 +257,13 @@ margin: 0 auto;
   text-align: center;
   color: #fff;
   font-size: 0.8rem;
-  margin:20px auto;
+  margin: 20px auto;
   border-radius: 100px;
 }
- 
+
 /* 弹出层里面的文字 */
-.text{
+
+.text {
   text-align: justify;
   font-size: 0.8rem;
   color: #666;
@@ -238,28 +272,29 @@ margin: 0 auto;
 }
 
 /* 购物车数量 */
-.number{
-    position: relative;
-    top: -136rpx;
-    left: 30rpx;
-}
-.number text{
-    display: inline-block;
-    width:28rpx;
-    height:28rpx;
-    line-height:28rpx;
-    padding:6rpx;
-    border-radius: 50%;
-    background-color: #DAB866;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 0.6rem;
-    vertical-align: middle;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+
+.number {
+  position: relative;
+  top: -136rpx;
+  left: 30rpx;
 }
 
+.number text {
+  display: inline-block;
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  padding: 6rpx;
+  border-radius: 50%;
+  background-color: #dab866;
+  color: #fff;
+  text-align: center;
+  font-size: 0.6rem;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .contact_view {
   width: 30px;
@@ -272,49 +307,52 @@ margin: 0 auto;
   line-height: 42px;
   padding: 2px;
 }
-.cs_button{
-  background-color: #404040;
-  margin:0;
-  padding:20rpx;
-}
 
+.cs_button {
+  background-color: #404040;
+  margin: 0;
+  padding: 20rpx;
+}
 
 /*底部客服*/
-.ftservice{
+
+.ftservice {
   position: fixed;
-	bottom: 100rpx;
-  right:20rpx;
-	display: block;
+  bottom: 100rpx;
+  right: 20rpx;
+  display: block;
   opacity: 0.9;
 }
-.ftservice-bt{
+
+.ftservice-bt {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #09bb07;
-  width:80rpx;
-  height:80rpx;
+  width: 80rpx;
+  height: 80rpx;
   line-height: 80rpx;
   border-radius: 50%;
+}
 
+.ftservice-text {
+  font-size: 0.6rpx;
+  color: #fff;
 }
-.ftservice-text{
-  font-size:0.6rpx;
-  color:#fff;
-}
-.cs_ftservice{
-  background-color: #DAB866;
-  margin:0;
-  padding:20rpx;
+
+.cs_ftservice {
+  background-color: #dab866;
+  margin: 0;
+  padding: 20rpx;
   /* width:58rpx;
   height:58rpx;
   line-height: 58rpx; */
   border-radius: 50%;
 }
 
-
 /* 弹窗 */
-.frame{
+
+.frame {
   margin: 0px;
   padding: 0px;
   width: 100%;
@@ -327,7 +365,8 @@ margin: 0 auto;
   justify-content: center;
   z-index: 99999;
 }
-.frame1{
+
+.frame1 {
   margin: 0px;
   padding: 0px;
   width: 100%;
@@ -341,62 +380,72 @@ margin: 0 auto;
   z-index: 999;
 }
 
-.zy{
-display: none;
+.zy {
+  display: none;
 }
-.ftservice-item{
-  width:100%;
-  margin-bottom:2px;
+
+.ftservice-item {
+  width: 100%;
+  margin-bottom: 2px;
 }
-.ftservice-button{
-  width:100%;
+
+.ftservice-button {
+  width: 100%;
   background: #595959;
-  color:#fff;
+  color: #fff;
   font-weight: 10;
-  font-size:1rem;
-  padding:20rpx;
+  font-size: 1rem;
+  padding: 20rpx;
   border-radius: 0;
 }
-.ftservice-number{
-  padding-bottom:10rpx;
+
+.ftservice-number {
+  padding-bottom: 10rpx;
 }
-.ftservice-text{
-  width:100%;
-  margin-top:10rpx;
-  padding:20rpx;
+
+.ftservice-text {
+  width: 100%;
+  margin-top: 10rpx;
+  padding: 20rpx;
   text-align: center;
-  font-size:1rem;
+  font-size: 1rem;
   background: #595959;
 }
+
 /* 邀请好友 */
-.button-share{
+
+.button-share {
   display: flex;
-  background:#404040;
-  color:#c6c6c6;
+  background: #404040;
+  color: #c6c6c6;
   font-weight: 10;
-  margin:0;
-  padding:0;
-  font-size:1rem;
-  padding-left:20rpx;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  padding-left: 20rpx;
 }
 
 /* 智美币和押金 */
-.deposit-box{
+
+.deposit-box {
   display: flex;
   align-items: center;
-  padding:20rpx;
-  margin-top:0;
+  padding: 20rpx;
+  margin-top: 0;
   border-radius: 0 0 10px 10px;
-  border-top:1px solid #4d4d4d;
+  border-top: 1px solid #4d4d4d;
 }
-.deposit-item{
-  width:48%;
-  text-align:center;
+
+.deposit-item {
+  width: 48%;
+  text-align: center;
 }
-.deposit-line{
-  border-right:1px solid #4d4d4d;
+
+.deposit-line {
+  border-right: 1px solid #4d4d4d;
 }
-.deposit-text{
-  color:#fff;
-  font-size:1.2rem;
+
+.deposit-text {
+  color: #fff;
+  font-size: 1.2rem;
 }

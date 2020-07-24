@@ -1,5 +1,5 @@
 <!--pages/my/my.wxml-->
-<view class='page-pd '>
+<view class='page-pd  size-text col-content'>
 	<!-- <official-account>23233</official-account> -->
 	<view class='parent size-titletwo col-content bg-box' wx:if="{{isLogin}}" bindtap="goLogin">
 		<view class='parent-left'>登录/注册</view>

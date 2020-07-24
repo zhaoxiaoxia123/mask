@@ -79,7 +79,7 @@
   align-items:center;
 }
 .abstract{
-  font-size: 28rpx;
+  font-size: 0.8rem;
    display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -114,7 +114,7 @@ transform:scale(0.7);
 }
 .money{
   text-decoration:line-through;
-  font-size:10px;
+  font-size:0.4rem;
   padding-left:36rpx;
   padding-top:5rpx;
   display: flex;
@@ -124,14 +124,14 @@ transform:scale(0.7);
 .sale{
   color:#DAB866;
   font-weight:bold;
-  font-size:20px;
+  font-size:0.6rem;
 }
 .sell{
   width:40%;
   margin-right: 0px;
   padding-right: 0px;
   text-align: right;
-  font-size: 10px;
+  font-size: 0.4rem;
   color:#c6c6c6 ;
   display: flex;
   align-items: center;
@@ -152,7 +152,7 @@ height: 30rpx;
 .sale{
   color:#DAB866;
   font-weight:bold;
-  font-size:24rpx;
+  font-size:0.6rem;
   width: 80px;
 }
 
@@ -192,6 +192,7 @@ height: 30rpx;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  font-size:1rem;
   
 }
 .topbar-text {
@@ -274,7 +275,7 @@ display: none;
 .just .sale{
   color:#DAB866;
   font-weight:bold;
-  font-size:24rpx;
+  font-size:0.6rem;
   line-height:1.5;
   width: 80px;
 }
@@ -288,14 +289,14 @@ display: none;
 }
 .just .spec{
   padding: 20rpx;
-  font-size: 24rpx;
+  font-size: 0.6rem;
   line-height:1.5;
   color:#c6c6c6;
 }
 .just .btn{
   padding: 5rpx 15rpx;
   margin: 10rpx;
-  font-size: 24rpx;
+  font-size:0.6rem;
   line-height:1.5;
   width: 100px;
 }
@@ -321,7 +322,7 @@ display: none;
   justify-content: space-between;
 }
 .detail-sales{
-  font-size:40rpx;
+  font-size:1.2rem;
   color:#c6c6c6;
   line-height: 2;
 }
@@ -329,12 +330,12 @@ display: none;
   text-decoration: line-through;
 }
 .text-size{
-   font-size:32rpx;
+   font-size:1rem;
    line-height: 2;
    color:#c6c6c6;
 }
 .sales-spec{
-  font-size:32rpx;
+  font-size:1rem;
   line-height:1.5;
   color:#DAB866;
 }
@@ -431,4 +432,11 @@ display: none;
   height:360rpx;
   display:inline-block;
   padding-bottom:20rpx;
+}
+/* 价格 */
+.sale-price{
+  font-size:1.2rem;
+}
+.rmb-price{
+  font-size:0.8rem;
 }
