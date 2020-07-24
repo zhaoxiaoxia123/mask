@@ -32,7 +32,7 @@
       </view>
       <view class='list-right'>
         <view class='right-text'>{{item.category_desc}}</view>
-        <view class='sale'>￥{{item.customer_amount}}</view>
+        <view class='sale'>￥{{item.customer_amount_before}}.{{item.customer_amount_after?item.customer_amount_after:"00"}}</view>
          <!-- wx:if="{{customerInfo.frozeno_level > 1}}" -->
         <text class='decoration'>￥{{item.frozeno_amount}}</text>
         <view class='item'>
@@ -41,8 +41,8 @@
         </view>
       </view>
     </view>
-
-<view class='list' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
+<block wx:if="{{isCheckDry == 1}}">
+  <view class='list' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
     <block wx:if="{{g.category_id == items.dryInfos.dry_category_id}}">
       <view class='list-left'>
         <image src='{{g.product_image[0].image_url}}'></image>
@@ -50,7 +50,8 @@
       <view class='list-right'>
         <view class='right-text'>{{g.category_desc}}</view>
         <view class='sale'>￥{{items.dryInfos.dry_amount}}</view>
-        <text class='decoration' wx:if="{{customerInfo.frozeno_level > 1}}">￥{{g.frozeno_amount}}</text>
+         <!-- wx:if="{{customerInfo.frozeno_level > 1}}" -->
+        <text class='decoration'>￥{{g.frozeno_amount}}</text>
         <view class='item'>
           <view class='abstract'></view>
           <view class='piece'>× 1</view>
@@ -70,7 +71,7 @@
         <text>{{g.category_desc}}× 1</text>
       </view>
     </view>
-
+  </block>
     
     <view class='coupon'>
       <view class='coupon-wap' bindtap="delivery">

@@ -29,8 +29,8 @@
 					<view class="detail-item-box">
 						<view class="detail-item-money wei">
 							<text>￥</text>
-							<text class="size-money ">{{item.customer_amount}}</text>
-							<text >.00</text>
+							<text class="size-money ">{{item.customer_amount_before}}</text>
+							<text >.{{item.customer_amount_after?item.customer_amount_after:"00"}}</text>
 						</view>
 						<view class="detail-item-money-price">
 							<text class="decoration">￥{{item.frozeno_amount}}</text>

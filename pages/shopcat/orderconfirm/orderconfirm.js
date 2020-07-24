@@ -274,12 +274,8 @@ Page({
     var dryCount = 0;
     var dryAmount = 0;
     var ret = {};
-    console.log('frozeno_is_discount:=====');
-    console.log(pInfo[i]['frozeno_is_discount']);
       if (pInfo[i]['frozeno_is_discount'] == 1){
         
-        console.log('customer_amount:=====');
-        console.log(pInfo[i]['customer_amount']);
         // if(app.globalData.experience_amount == pInfo[i]['customer_amount']){
           productAmount = (parseFloat(pInfo[i]['customer_amount']) * pInfo[i]['join_product_count']);
         // }else{
