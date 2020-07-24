@@ -38,13 +38,13 @@ page{
 }
 .date{
   padding: 60rpx 0;
-  font-size:32rpx;
+  font-size:1rem;
 }
 .money-grade{
   display: flex;
   align-items: center;
   color: #DAB866;
-  font-size: 24rpx;
+  font-size: 1rem;
   font-weight: bold;
   background: #333;
   padding: 10rpx 20rpx;
@@ -64,7 +64,7 @@ page{
   -ms-flex: 1;
   flex: 1;
   -webkit-tap-highlight-color: transparent;
-  font-size: 32rpx;
+  font-size: 1rem;
   color: #DAB866;
   background: #646464;
   padding:20rpx;
@@ -75,7 +75,7 @@ page{
   display: block;
   flex-direction: row-reverse;
   color: #fff;
-  font-size: 48rpx;
+  font-size:1.5rem;
   /* margin: 0 auto; */
   padding-bottom: 10rpx;
 }
@@ -83,7 +83,7 @@ page{
   background-color: #333;
   padding:20rpx;
   color: #c6c6c6;
-  font-size: 32rpx;
+  font-size: 1.2rem;
 }
 .branch-content{
   display: flex;
@@ -97,7 +97,7 @@ page{
 
 .branch-text button{
   width: 80px;
-  font-size: 24rpx;
+  font-size: 1rem;
   background: #DAB866;
 }
 
@@ -114,14 +114,14 @@ align-items: center;
 line-height: 20px;
 margin-top: -6px;
 letter-spacing: 1rem;
-font-size:0.8rem;
+font-size:1rem;
 }
 
 /* 登录/注册 */
 .login-rt{
   line-height: 1.5;
   text-align: center;
-  font-size:40rpx;
+  font-size:1.5rem;
   padding:20rpx 0;
   margin-top: -140rpx;
   border-radius:10px;

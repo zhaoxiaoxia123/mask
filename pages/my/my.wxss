@@ -34,7 +34,7 @@
   display: flex;
 }
 .name{
-  font-size:28rpx;
+  font-size:1.2rem;
   color: #ffffff;
   padding-left:20rpx;
   line-height:124rpx;
@@ -61,12 +61,12 @@ color: #999;
 -ms-flex: 1;
 flex: 1;
 -webkit-tap-highlight-color: transparent;
-font-size: 24rpx;
+font-size: 1rem;
 border-right: 1px solid #e6e6ea;
 padding: 12rpx 0;
 }
 .box-text{
-font-size: 48rpx;
+font-size: 1.8rem;
 display: block;
 flex-direction: row-reverse;
 color: #333;
@@ -107,7 +107,6 @@ margin: 0 auto;
   display: flex;
   flex-direction:column;
   align-items: center;
-  font-size:0.8rem;
 }
 .payment-1 image{
   padding-bottom:10rpx;
@@ -128,7 +127,7 @@ margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24rpx;
+  font-size: 1rem;
 }
 .orders{
   display: flex;
@@ -224,7 +223,7 @@ margin: 0 auto;
   line-height: 35px;
   text-align: center;
   color: #fff;
-  font-size: 15px;
+  font-size: 0.8rem;
   margin:20px auto;
   border-radius: 100px;
 }
@@ -232,7 +231,7 @@ margin: 0 auto;
 /* 弹出层里面的文字 */
 .text{
   text-align: justify;
-  font-size: 14px;
+  font-size: 0.8rem;
   color: #666;
   width: 180px;
   margin-top: 10px;
@@ -241,7 +240,7 @@ margin: 0 auto;
 /* 购物车数量 */
 .number{
     position: relative;
-    top: -120rpx;
+    top: -136rpx;
     left: 30rpx;
 }
 .number text{
