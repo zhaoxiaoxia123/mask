@@ -44,7 +44,7 @@ page{
   display: flex;
   align-items: center;
   color: #DAB866;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
   background: #333;
   padding: 10rpx 20rpx;
