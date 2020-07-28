@@ -1,111 +1,104 @@
 <view>
-  <view class='lists'>
+	<view class='lists'>
 
-    <view class='goods' bindtap="goAddress">
-      <view class='goods-content'>
-        <view class='goods-icon'>
-          <image class='icon58' src='../../img/address.png'></image>
-        </view>
-        <!-- 没有默认的收货地址时显示 -->
-        <view class='goods-text' wx:if="{{address.length <= 0}}">
-          <view class='size-titletwo'>请先添加收货地址</view>
-        </view>
-        <view class='goods-text'>
-          <view class='goods-name'>
-            <text class='name'>{{address.name}}</text>
-            <text class='phone'>{{address.phone}}</text>
-          </view>
-          <view class='address'>{{address.province}} {{address.city}} {{address.area}} {{address.address}}</view>
-        </view>
-      </view>
-      <view class='goods-image'>
-        <image src='../../img/dv.png'></image>
-      </view>
-    </view>
-    <view class='order'>
-      <text>订单</text>
-    </view>
-    <!--bindtap绑定事件-->
-    <view class='list' bindtap='toDetail' wx:key="*this" wx:for="{{items.products}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
-      <view class='list-left'>
-        <image src='{{item.product_image[0].image_url}}'></image>
-      </view>
-      <view class='list-right'>
-        <view class='right-text'>{{item.category_desc}}</view>
-        <view class='sale'>￥{{item.customer_amount_before}}.{{item.customer_amount_after?item.customer_amount_after:"00"}}</view>
-         <!-- wx:if="{{customerInfo.frozeno_level > 1}}" -->
-        <text class='decoration'>￥{{item.frozeno_amount}}</text>
-        <view class='item'>
-          <view class='abstract'>{{item.frozeno_introduction}}</view>
-          <view class='piece'>× {{item.join_product_count}}</view>
-        </view>
-      </view>
-    </view>
-<block wx:if="{{isCheckDry == 1}}">
-  <view class='list' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
-    <block wx:if="{{g.category_id == items.dryInfos.dry_category_id}}">
-      <view class='list-left'>
-        <image src='{{g.product_image[0].image_url}}'></image>
-      </view>
-      <view class='list-right'>
-        <view class='right-text'>{{g.category_desc}}</view>
-        <view class='sale'>￥{{items.dryInfos.dry_amount}}</view>
-         <!-- wx:if="{{customerInfo.frozeno_level > 1}}" -->
-        <text class='decoration'>￥{{g.frozeno_amount}}</text>
-        <view class='item'>
-          <view class='abstract'></view>
-          <view class='piece'>× 1</view>
-        </view>
-				<!-- <view class='money-text' wx:for="{{item.gift}}" wx:key="*this" wx:for-item="g">
-					<view class='radio-group' wx:if="{{g.category_id == items.dryInfos.dry_category_id}}">
-						<radio color='#262626' data-amount="{{items.dryInfos.dry_amount}}" data-id="{{g.category_id}}" checked='{{isCheckDry == 1}}' disabled="true"></radio>
-						<text>{{g.category_desc}}:{{items.dryInfos.dry_amount}}</text>
+		<view class='goods' bindtap="goAddress">
+			<view class='goods-content'>
+				<view class='goods-icon'>
+					<image class='icon58' src='../../img/address.png'></image>
+				</view>
+				<!-- 没有默认的收货地址时显示 -->
+				<view class='goods-text' wx:if="{{address.length <= 0}}">
+					<view class='size-titletwo'>请先添加收货地址</view>
+				</view>
+				<view class='goods-text'>
+					<view class='goods-name'>
+						<text class='name'>{{address.name}}</text>
+						<text class='phone'>{{address.phone}}</text>
 					</view>
-					<view class='radio-group' wx:if="{{g.category_id != items.dryInfos.dry_category_id && isCheckDry == 1}}">
-						<text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
+					<view class='address'>{{address.province}} {{address.city}} {{address.area}} {{address.address}}</view>
+				</view>
+			</view>
+			<view class='goods-image'>
+				<image src='../../img/dv.png'></image>
+			</view>
+		</view>
+		<view class='order'>
+			<text>订单</text>
+		</view>
+		<!--bindtap绑定事件-->
+		<view class='list' bindtap='toDetail' wx:key="*this" wx:for="{{items.products}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
+			<view class='list-left'>
+				<image src='{{item.product_image[0].image_url}}'></image>
+			</view>
+			<view class='list-right'>
+				<view class='right-text'>{{item.category_desc}}</view>
+				<view class='sale'>￥{{item.customer_amount_before}}.{{item.customer_amount_after?item.customer_amount_after:"00"}}</view>
+				<!-- wx:if="{{customerInfo.frozeno_level > 1}}" -->
+				<text class='decoration'>￥{{item.frozeno_amount}}</text>
+				<view class='item'>
+					<view class='abstract'>{{item.frozeno_introduction}}</view>
+					<view class='piece'>× {{item.join_product_count}}</view>
+				</view>
+			</view>
+		</view>
+		<block wx:if="{{isCheckDry == 1}}">
+			<view class='list' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
+				<block wx:if="{{g.category_id == items.dryInfos.dry_category_id}}">
+					<view class='list-left'>
+						<image src='{{g.product_image[0].image_url}}'></image>
 					</view>
-				</view> -->
-      </view>
-      </block>
-      <view class='gift' wx:if="{{g.category_id != items.dryInfos.dry_category_id}}">
-        <text>{{g.category_desc}}× 1</text>
-      </view>
-    </view>
-  </block>
-    
-    <view class='coupon'>
-      <view class='coupon-wap' bindtap="delivery">
-        <view class='coupon-left'>
-          <text>配送方式</text>
-        </view>
-        <view class='coupon-right'>
-          <text>{{isCheckExpressCompany==1?'顺丰':'普通快递'}} 免邮</text>
-          <image src='../../img/dv.png'></image>
-        </view>
-      </view>
-    </view>
-    <view class='coupon'>
-      <view class='coupon-wap'>
-        <view class='coupon-left'>
-          <text>会员折扣</text>
-        </view>
-        <view class='coupon-right'>
-          <text>{{discount > 0 ? '享'+discount+'折':'没有会员折扣'}}</text>
-        </view>
-      </view>
-    </view>
-    <view class='coupon' wx:if="{{items.ticket.ticket_name}}">
-      <view class='coupon-wap'>
-        <view class='coupon-left'>
-          <text>请选择优惠券</text>
-        </view>
-        <view class='coupon-right'>
-          <text>使用新人卡券,减{{items.sub_amount}}</text>
-          <image src='../../img/dv.png'></image>
-        </view>
-      </view>
-    </view>
-    <!-- <view class='coupon' wx:if="{{ticketList.ticket.length <= 0 && !items.ticket.ticket_name}}">
+					<view class='list-right'>
+						<view class='right-text'>{{g.category_desc}}</view>
+						<view class='sale'>￥{{items.dryInfos.dry_amount}}</view>
+						<!-- wx:if="{{customerInfo.frozeno_level > 1}}" -->
+						<text class='decoration'>￥{{g.frozeno_amount}}</text>
+						<view class='item'>
+							<view class='abstract'></view>
+							<view class='piece'>× 1</view>
+						</view>
+						<block wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g1">
+							<view wx:if="{{g1.category_id != items.dryInfos.dry_category_id}}">
+								<text>{{g1.category_desc}}× 1</text>
+							</view>
+						</block>
+					</view>
+				</block>
+			</view>
+		</block>
+
+		<view class='coupon'>
+			<view class='coupon-wap' bindtap="delivery">
+				<view class='coupon-left'>
+					<text>配送方式</text>
+				</view>
+				<view class='coupon-right'>
+					<text>{{isCheckExpressCompany==1?'顺丰':'普通快递'}} 免邮</text>
+					<image src='../../img/dv.png'></image>
+				</view>
+			</view>
+		</view>
+		<view class='coupon'>
+			<view class='coupon-wap'>
+				<view class='coupon-left'>
+					<text>会员折扣</text>
+				</view>
+				<view class='coupon-right'>
+					<text>{{discount > 0 ? '享'+discount+'折':'没有会员折扣'}}</text>
+				</view>
+			</view>
+		</view>
+		<view class='coupon' wx:if="{{items.ticket.ticket_name}}">
+			<view class='coupon-wap'>
+				<view class='coupon-left'>
+					<text>请选择优惠券</text>
+				</view>
+				<view class='coupon-right'>
+					<text>使用新人卡券,减{{items.sub_amount}}</text>
+					<image src='../../img/dv.png'></image>
+				</view>
+			</view>
+		</view>
+		<!-- <view class='coupon' wx:if="{{ticketList.ticket.length <= 0 && !items.ticket.ticket_name}}">
       <view class='coupon-wap'>
         <view class='coupon-left'>
           <text>请选择优惠券</text>
@@ -116,82 +109,82 @@
         </view>
       </view>
     </view> -->
-    <!-- <view class='coupon' bindtap="coupon" wx:if="{{ticketList.ticket.length > 0 && !items.ticket.ticket_name}}"> -->
-    <view class='coupon' bindtap="coupon" wx:if="{{!items.ticket.ticket_name}}">
-      <view class='coupon-wap'>
-        <view class='coupon-left'>
-          <text>请选择优惠券</text>
-        </view>
-        <view class='coupon-right'>
-          <text wx:if="{{ticketList.ticket.length <= 0}}">您没有可用的券</text>
-          <text wx:if="{{isCheckTicket == 9999 && ticketList.ticket.length > 0}}">不使用优惠券</text>
-          <text wx:if="{{isCheckTicket != 9999}}">减{{usingTicketAmount}}</text>
-          <image src='../../img/dv.png'></image>
-        </view>
-      </view>
-    </view>
-    <view class='coupon' wx:if="{{customerInfo.frozeno_point}}">
-      <view class='coupon-wap'>
-        <view class='coupon-left'>
-          <text wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">积分可用共{{customerInfo.frozeno_point}},已抵扣¥{{usingPoint}}</text>
-          <text wx:if="{{customerInfo.frozeno_point<=0}}">当前没有积分可以使用</text>
-          <text wx:if="{{product_amount < tInfo.satisfy_amount}}">不可用积分。</text>
-        </view>
-        <view class='coupon-right' wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">
-          <checkbox-group>
-            <label class="checkbox">
-              <checkbox color='#333' catchtap="checkboxChange" data-type="isUsePoint" checked="{{isUsePoint == 1}}" />
-            </label>
-          </checkbox-group>
-        </view>
-      </view>
-    </view>
+		<!-- <view class='coupon' bindtap="coupon" wx:if="{{ticketList.ticket.length > 0 && !items.ticket.ticket_name}}"> -->
+		<view class='coupon' bindtap="coupon" wx:if="{{!items.ticket.ticket_name}}">
+			<view class='coupon-wap'>
+				<view class='coupon-left'>
+					<text>请选择优惠券</text>
+				</view>
+				<view class='coupon-right'>
+					<text wx:if="{{ticketList.ticket.length <= 0}}">您没有可用的券</text>
+					<text wx:if="{{isCheckTicket == 9999 && ticketList.ticket.length > 0}}">不使用优惠券</text>
+					<text wx:if="{{isCheckTicket != 9999}}">减{{usingTicketAmount}}</text>
+					<image src='../../img/dv.png'></image>
+				</view>
+			</view>
+		</view>
+		<view class='coupon' wx:if="{{customerInfo.frozeno_point}}">
+			<view class='coupon-wap'>
+				<view class='coupon-left'>
+					<text wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">积分可用共{{customerInfo.frozeno_point}},已抵扣¥{{usingPoint}}</text>
+					<text wx:if="{{customerInfo.frozeno_point<=0}}">当前没有积分可以使用</text>
+					<text wx:if="{{product_amount < tInfo.satisfy_amount}}">不可用积分。</text>
+				</view>
+				<view class='coupon-right' wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">
+					<checkbox-group>
+						<label class="checkbox">
+							<checkbox color='#333' catchtap="checkboxChange" data-type="isUsePoint" checked="{{isUsePoint == 1}}" />
+						</label>
+					</checkbox-group>
+				</view>
+			</view>
+		</view>
 
-    <view class='coupon'>
-      <view class='coupon-wap'>
-        <view class='coupon-left'>
-          <text>电子发票</text>
-        </view>
-        <view class='coupon-right' bindtap="goInvoice" wx:if="{{!invoice.username}}">
-          <text>不需要发票</text>
-          <image src='../../img/dv.png'></image>
-        </view>
+		<view class='coupon'>
+			<view class='coupon-wap'>
+				<view class='coupon-left'>
+					<text>电子发票</text>
+				</view>
+				<view class='coupon-right' bindtap="goInvoice" wx:if="{{!invoice.username}}">
+					<text>不需要发票</text>
+					<image src='../../img/dv.png'></image>
+				</view>
 
-        <view class='coupon-right invoice-item' bindtap="goInvoice" wx:if="{{invoice.username}}">
-          <view class="invoice-text">
-           <text>{{invoice.username}}</text>
-          <text>{{invoice.tax_number}}</text>
-          </view>
-        
-          <image src='../../img/dv.png'></image>
-        </view>
-      </view>
-    </view>
-  </view>
+				<view class='coupon-right invoice-item' bindtap="goInvoice" wx:if="{{invoice.username}}">
+					<view class="invoice-text">
+						<text>{{invoice.username}}</text>
+						<text>{{invoice.tax_number}}</text>
+					</view>
 
-  <view class="bottom">
-    <view class="bottom-operate">
-      <view class="bottom-operate price">合计：
-        <text style="color:#DAB866">￥{{payAmount?payAmount:'0.00'}}</text>
-      </view>
-      <view wx:if="{{items.products}}" class="bottom-operate button" catchtap='confirmPay' style='background-color:#DAB866;'>提交订单</view>
-      <view wx:if="{{!items.products}}" class="bottom-operate button" style='background-color:#ccc;'>提交订单</view>
-    </view>
-  </view>
-  <!-- 配送方式 -->
-  <view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
-  <view class="just {{flexwindow==true?'': 'y'}}">
-    <!--bindtap绑定事件-->
-    <view class='lists'>
-      <view class='list'>
-        <view class='detail-center'>
-          <view class='sales'>
-            <view class='detail-sales'>配送方式</view>
-            <image class='icon40' src='../../img/close@2x.png' bindtap='close'></image>
-          </view>
-        </view>
-      </view>
-      <!-- <view class='column'>
+					<image src='../../img/dv.png'></image>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="bottom">
+		<view class="bottom-operate">
+			<view class="bottom-operate price">合计：
+				<text style="color:#DAB866">￥{{payAmount?payAmount:'0.00'}}</text>
+			</view>
+			<view wx:if="{{items.products}}" class="bottom-operate button" catchtap='confirmPay' style='background-color:#DAB866;'>提交订单</view>
+			<view wx:if="{{!items.products}}" class="bottom-operate button" style='background-color:#ccc;'>提交订单</view>
+		</view>
+	</view>
+	<!-- 配送方式 -->
+	<view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
+	<view class="just {{flexwindow==true?'': 'y'}}">
+		<!--bindtap绑定事件-->
+		<view class='lists'>
+			<view class='list'>
+				<view class='detail-center'>
+					<view class='sales'>
+						<view class='detail-sales'>配送方式</view>
+						<image class='icon40' src='../../img/close@2x.png' bindtap='close'></image>
+					</view>
+				</view>
+			</view>
+			<!-- <view class='column'>
         <view>快递 免邮</view>
         <view class='item'>
           <checkbox-group>
@@ -201,80 +194,80 @@
           </checkbox-group>
         </view>
       </view> -->
-      <view class='column'>
-        <view>顺丰</view>
-        <view class='item'>
-          <checkbox-group>
-            <label class="checkbox">
-              <checkbox color='#333' catchtap="checkboxChange" data-v="1" data-type="isCheckExpressCompany" checked="{{isCheckExpressCompany == 1}}" />
-            </label>
-          </checkbox-group>
-        </view>
-      </view>
-      <view class='column'>
-        <view>普通快递</view>
-        <view class='item'>
-          <checkbox-group>
-            <label class="checkbox">
-              <checkbox color='#333' catchtap="checkboxChange" data-v="2" data-type="isCheckExpressCompany" checked="{{isCheckExpressCompany == 2}}" />
-            </label>
-          </checkbox-group>
-        </view>
-      </view>
-    </view>
-  </view>
+			<view class='column'>
+				<view>顺丰</view>
+				<view class='item'>
+					<checkbox-group>
+						<label class="checkbox">
+							<checkbox color='#333' catchtap="checkboxChange" data-v="1" data-type="isCheckExpressCompany" checked="{{isCheckExpressCompany == 1}}" />
+						</label>
+					</checkbox-group>
+				</view>
+			</view>
+			<view class='column'>
+				<view>普通快递</view>
+				<view class='item'>
+					<checkbox-group>
+						<label class="checkbox">
+							<checkbox color='#333' catchtap="checkboxChange" data-v="2" data-type="isCheckExpressCompany" checked="{{isCheckExpressCompany == 2}}" />
+						</label>
+					</checkbox-group>
+				</view>
+			</view>
+		</view>
+	</view>
 
-  <!-- 优惠券 -->
-  <view class="just1 {{couponflexwindow==true?'': 'y'}}" bindtap='close1'></view>
-  <view class="just {{couponflexwindow==true?'': 'y'}}">
-    <!--bindtap绑定事件-->
-    <view class='lists'>
-      <view class='list'>
-        <view class='detail-center'>
-          <view class='sales'>
-            <view class='detail-sales'>优惠活动</view>
-            <image class='icon40' src='../../img/close@2x.png' bindtap='close1'></image>
-          </view>
-        </view>
-      </view>
+	<!-- 优惠券 -->
+	<view class="just1 {{couponflexwindow==true?'': 'y'}}" bindtap='close1'></view>
+	<view class="just {{couponflexwindow==true?'': 'y'}}">
+		<!--bindtap绑定事件-->
+		<view class='lists'>
+			<view class='list'>
+				<view class='detail-center'>
+					<view class='sales'>
+						<view class='detail-sales'>优惠活动</view>
+						<image class='icon40' src='../../img/close@2x.png' bindtap='close1'></image>
+					</view>
+				</view>
+			</view>
 
-      <scroll-view scroll-y="true" style="height: 650rpx;">
-        <view class='column' wx:if="{{ticketList.ticket.length <= 0}}">
-          <view>您还没有可用的优惠券</view>
-        </view>
+			<scroll-view scroll-y="true" style="height: 650rpx;">
+				<view class='column' wx:if="{{ticketList.ticket.length <= 0}}">
+					<view>您还没有可用的优惠券</view>
+				</view>
 
-        <view class='column' wx:for="{{ticketList.ticket}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
-          <view>
-            <view class="coupon-hd">{{item.ticket_name}}(￥{{item.ticket_amount}})</view>
-            <view class="coupon-text" wx:if="{{item.ticket_type == 1}}">
-              全场通用
-            </view>
-            <view class="coupon-text" wx:if="{{item.ticket_type == 2}}">
-              满{{item.satisfy_amount}}元使用
-            </view>
-          </view>
-          <view class='item'>
-            <checkbox-group>
-              <label class="checkbox">
-                <checkbox color='#333' catchtap="checkboxChange" data-v="{{(index+1)}}" data-type="isCheckTicket" checked="{{isCheckTicket == (index+1)}}" />
-              </label>
-            </checkbox-group>
-          </view>
-        </view>
+				<view class='column' wx:for="{{ticketList.ticket}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
+					<view>
+						<view class="coupon-hd">{{item.ticket_name}}(￥{{item.ticket_amount}})</view>
+						<view class="coupon-text" wx:if="{{item.ticket_type == 1}}">
+							全场通用
+						</view>
+						<view class="coupon-text" wx:if="{{item.ticket_type == 2}}">
+							满{{item.satisfy_amount}}元使用
+						</view>
+					</view>
+					<view class='item'>
+						<checkbox-group>
+							<label class="checkbox">
+								<checkbox color='#333' catchtap="checkboxChange" data-v="{{(index+1)}}" data-type="isCheckTicket" checked="{{isCheckTicket == (index+1)}}" />
+							</label>
+						</checkbox-group>
+					</view>
+				</view>
 
-        <view class='column'>
-          <view class="coupon-hd">不使用优惠</view>
-          <view class='item'>
-            <checkbox-group>
-              <label class="checkbox">
-                <checkbox color='#333' catchtap="checkboxChange" data-v="9999" data-type="isCheckTicket" checked="{{isCheckTicket == 9999}}" />
-              </label>
-            </checkbox-group>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
+				<view class='column'>
+					<view class="coupon-hd">不使用优惠</view>
+					<view class='item'>
+						<checkbox-group>
+							<label class="checkbox">
+								<checkbox color='#333' catchtap="checkboxChange" data-v="9999" data-type="isCheckTicket" checked="{{isCheckTicket == 9999}}" />
+							</label>
+						</checkbox-group>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
 
-  </view>
+	</view>
 
 </view>

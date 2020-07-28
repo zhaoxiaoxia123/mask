@@ -1,10 +1,10 @@
 <view class="size-titletwo col-content">
   <view class="bg-box column">
     <view class="column-form">
-      <input placeholder='姓名' bindinput="setNameInput" bindconfirm="search" value='{{name}}'></input>
+      <input placeholder='姓名' bindinput="setNameInput" bindconfirm="search" value='{{name}}' maxlength="10"></input>
     </view>
     <view class="column-text" wx:if="{{isShowNameTip}}">
-        收货人姓名长度需要在2-25个字符之间，不能包含非法字符
+        收货人姓名长度需要在2-10个字之间，不能包含非法字符
     </view>
   </view>
   <view class='column bg-box'>
@@ -33,15 +33,15 @@
   </view>
   <view class='column bg-box'>
     <view class="column-form">
-      <input placeholder='邮编' type="number" bindinput="setZipInput" value='{{zip}}'></input>
+      <input placeholder='邮编' type="number" bindinput="setZipInput" value='{{zip}}' maxlength="6"></input>
     </view>
   </view>
   <view class='column bg-box'>
     <view class="column-form">
-      <textarea class='form-textarea' placeholder='详细地址：如道路、门牌号、小区、楼栋号、单元室等' bindinput="setAddressInput" value='{{address}}' maxlength="120"></textarea>
+      <textarea class='form-textarea' placeholder='详细地址：如道路、门牌号、小区、楼栋号、单元室等' bindinput="setAddressInput" value='{{address}}' maxlength="50"></textarea>
     </view>
     <view class="column-text" wx:if="{{isShowAddressTip}}">
-      详细地址长度需要在5-120个字符之间，不能包含非法字符
+      详细地址长度需要在5-50个字之间，不能包含非法字符
     </view>
   </view>
   <view class='column bg-box '>
@@ -56,12 +56,6 @@
     </view>
   </view>
 </view>
-  <!-- 提示消息
-  姓名：收货人姓名长度需要在2-25个字符之间，不能包含非法字符
-  手机号码：手机号码为十一位，格式不对，请重新输入
-  所在地区：请选择所在地区
-  详细地址：详细地址长度需要在5-120个字符之间，不能包含非法字符
- 保存成功 -->
   <view class="ft-bottom ">
     <view class="ft-bottom-box">
       <view class="ft-bottom-operate ft-button" bindtap='submitAddress'>保存</view>

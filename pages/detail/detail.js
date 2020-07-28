@@ -40,7 +40,7 @@ Page({
     experience_id:0,
     experience_amount:0,
     isOver:false,
-    surplusSale:0,
+    surplusSale:0
   },
   /**
    * 生命周期函数--监听页面加载

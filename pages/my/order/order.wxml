@@ -1,417 +1,243 @@
 <view>
-  <view class="topbar">
-    <view class="topbar-top">
-    <view class="topbar-text" bindtap="clickTab" data-current="0">
-        <view class="topbar-tab  {{currentTab=='0'?'active':''}} ">全部</view>
-      </view>
-      <view class="topbar-text" bindtap="clickTab" data-current="1">
-        <view class="topbar-tab  {{currentTab=='1'?'active':''}} ">待付款</view>
-      </view>
-      <view class="topbar-text" bindtap="clickTab" data-current="2">
-        <view class="topbar-tab  {{currentTab=='2'?'active':''}} ">待发货</view>
-      </view>
-      <view class="topbar-text" bindtap="clickTab" data-current="3">
-        <view class="topbar-tab  {{currentTab=='3'?'active':''}} ">待收货</view>
-      </view>
-      <view class="topbar-text" bindtap="clickTab" data-current="4">
-        <view class="topbar-tab  {{currentTab=='4'?'active':''}} ">交易完成</view>
-      </view>
-    </view>
-  </view>
+	<view class="topbar">
+		<view class="topbar-top">
+			<view class="topbar-text" bindtap="clickTab" data-current="0">
+				<view class="topbar-tab  {{currentTab=='0'?'active':''}} ">全部</view>
+			</view>
+			<view class="topbar-text" bindtap="clickTab" data-current="1">
+				<view class="topbar-tab  {{currentTab=='1'?'active':''}} ">待付款</view>
+			</view>
+			<view class="topbar-text" bindtap="clickTab" data-current="2">
+				<view class="topbar-tab  {{currentTab=='2'?'active':''}} ">待发货</view>
+			</view>
+			<view class="topbar-text" bindtap="clickTab" data-current="3">
+				<view class="topbar-tab  {{currentTab=='3'?'active':''}} ">待收货</view>
+			</view>
+			<view class="topbar-text" bindtap="clickTab" data-current="4">
+				<view class="topbar-tab  {{currentTab=='4'?'active':''}} ">交易完成</view>
+			</view>
+		</view>
+	</view>
 
-  <view class='content page-pd size-titletwo col-content'>
+	<view class='content page-pd size-titletwo col-content'>
+		<!-- class="{{currentTab == 4 ? 'show':'hidden'}}" -->
+		<view>
+			<scroll-view>
+				<!--没有相关订单时显示-->
+				<view class='search-no' wx:if="{{items.length <= 0}}">
+					<view>
+						<image class='scimg' src='{{imgLoad}}'></image>
+					</view>
+					<text>{{message}}~~</text>
+				</view>
+				<view class='lists'>
+					<!--bindtap绑定事件 交易成功或失败-->
+					<view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
+						<view class='order-top' data-id="{{item.o_id}}" bindtap='orderdetail'>
+							<view class='ordernum'>订单编号：{{item.o_order}}</view>
+							<view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
+							<view class='status' wx:if="{{item.frozeno_order_state == 2}}">待发货</view>
+							<view class='status' wx:if="{{item.frozeno_order_state == 3}}">待收货</view>
+							<view class='status' wx:if="{{item.frozeno_order_state == 4}}">交易完成</view>
+							<view class='status' wx:if="{{item.frozeno_order_state == 5}}">已取消</view>
+							<view class='status' wx:if="{{item.frozeno_order_state == 6}}">取消订单中</view>
+							<view class='status' wx:if="{{item.frozeno_order_state == 7}}">已退款</view>
+						</view>
+						<view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.o_id}}" bindtap='orderdetail'>
+							<block wx:if="{{item1.frozeno_is_gift != 1 || item1.category_id == dry_id}}">
+								<view class='list-left'>
+									<image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
+								</view>
+								<view class='list-right size-titleone '>
+									<view class='column '>
+										<view class='right-text'>{{item1.category_desc}}</view>
+									</view>
+									<view class='column'>
+										<view class='right-text'>￥{{item1.product_amount}}</view>
+										<text class='decoration'>[￥{{item1.product_before_amount}}]</text>
+										<view class='piece'>× {{item1.product_count}}</view>
+									</view>
+									<view class='column col-content'>
+										<view class='abstract'>{{item1.frozeno_introduction}}</view>
+									</view>
+									<block wx:if="{{item1.frozeno_is_gift == 1 && item1.category_id == dry_id}}">
+										<block wx:for="{{item.products}}" wx:key="*this" wx:for-item="g">
+											<view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">
+												<text>{{g.category_desc}}× 1</text>
+											</view>
+										</block>
+									</block>
+								</view>
+							</block>
+						</view>
 
-    <view class="{{currentTab == 0 ? 'show':'hidden'}}">
-      <scroll-view>
-        <!--没有相关订单时显示-->
-        <view class='search-no' wx:if="{{items.length <= 0}}">
-          <view>
-            <image class='scimg' src='{{imgLoad}}'></image>
-          </view>
-          <text>{{message}}~~</text>
-        </view>
+						<view class='order'>
+							<view class='pay'>共{{item.products_count}}件商品 实付款：
+								<text class=''>￥{{item.frozeno_order_amount}}</text>
+							</view>
+						</view>
 
-        <view class='lists'>
-          <!--bindtap绑定事件 待付款-->
-          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
-            <view class='order-top'>
-              <view class='ordernum'>订单编号：{{item.o_order}}</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 2}}">待发货</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 3}}">待收货</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 4}}">交易完成</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 5}}">已取消</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 6}}">取消订单中</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 7}}">已退款</view>
-            </view>
-            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.o_id}}" bindtap='orderdetail'>
-              <view class='list-left'>
-                <image src='{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
-              </view>
-              <view class='list-right size-titleone '>
-                <view class='column '>
-                  <view class='right-text'>{{item1.category_desc}}</view>
-                </view>
-                <view class='column'>
-                  <view class='right-text'>￥{{item1.product_amount}}</view>
-                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
-                  <view class='piece'>× {{item1.product_count}}</view>
-                </view>
-                <view class='column col-content'>
-                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                </view>
-              </view>
-            </view>
-            <view class='order'>
-              <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.frozeno_order_amount}}</text>
-              </view>
-            </view>
-          <!-- 待付款——取消订单和付款、代发货——取消订单（需后台审核同意）和提醒发货、待收货——查看物流和确认发货（可人工确定或客户满多少天后系统自动改状态） -->
-            <view class='push-button' wx:if="{{item.frozeno_order_state == 1}}">
-              <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
-              <view class='push push-active' data-id="{{item.o_id}}" bindtap='orderdetail'>付款</view>
-            </view>
-            <view class='push-button' wx:if="{{item.frozeno_order_state == 2}}">
-              <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
-              <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
-            </view>
-            <view class='push-button' wx:if="{{item.frozeno_order_state == 3}}">
-              <view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view>
-              <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk'>确认收货</view>
-            </view>
+						<block wx:if="{{currentTab == 0}}">
+							<!-- 待付款——取消订单和付款、代发货——取消订单（需后台审核同意）和提醒发货、待收货——查看物流和确认发货（可人工确定或客户满多少天后系统自动改状态） -->
+							<view class='push-button' wx:if="{{item.frozeno_order_state == 1}}">
+								<view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
+								<view class='push push-active' data-id="{{item.o_id}}" bindtap='orderdetail'>付款</view>
+							</view>
 
-          <!-- <view class='push-button'>
-              <view class='push'>取消订单</view>
-              <view class='push push-active'>付款</view>
-              <view class='push push-active'>提醒发货</view>
-              <view class='push' bindtap="logistics">查看物流</view>
-              <view class='push push-active'>确认收货</view>
-          </view> -->
-          </view>
-        </view>
-      </scroll-view>
-    </view>
+							<view class='push-button' wx:if="{{item.frozeno_order_state == 2}}">
+								<view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
+								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
+							</view>
+							<view class='push-button' wx:if="{{item.frozeno_order_state == 3}}">
+								<view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view>
+								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk'>确认收货</view>
+							</view>
+						</block>
+						<block wx:if="{{currentTab == 1}}">
+							<view class='push-button'>
+								<view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
+								<view class='push push-active' data-id="{{item.o_id}}" bindtap='orderdetail'>付款</view>
+							</view>
+						</block>
+						<block wx:if="{{currentTab == 2}}">
+							<view class='push-button'>
+								<view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
+								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
+							</view>
+						</block>
+						<block wx:if="{{currentTab == 3}}">
+							<view class='push-button'>
+								<!-- <view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view> -->
+								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk'>确认收货</view>
+							</view>
+						</block>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
 
-    <view class="{{currentTab == 1 ? 'show':'hidden'}}">
-      <scroll-view>
-        <!--没有相关订单时显示-->
-        <view class='search-no' wx:if="{{items.length <= 0}}">
-          <view>
-            <image class='scimg' src='{{imgLoad}}'></image>
-          </view>
-          <text>{{message}}~~</text>
-        </view>
-
-        <view class='lists'>
-          <!--bindtap绑定事件 待付款-->
-          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
-            <view class='order-top'>
-              <view class='ordernum'>订单编号：{{item.o_order}}</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
-            </view>
-            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.o_id}}" bindtap='orderdetail'>
-              <view class='list-left'>
-                <image src='{{item1.product_image.length > 0 ?item1.product_image[0].image_url:""}}'></image>
-              </view>
-              <view class='list-right size-titleone '>
-                <view class='column '>
-                  <view class='right-text'>{{item1.category_desc}}</view>
-                </view>
-                <view class='column'>
-                  <view class='right-text'>￥{{item1.product_amount}}</view>
-                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
-                  <view class='piece'>× {{item1.product_count}}</view>
-                </view>
-                <view class='column col-content'>
-                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                </view>
-              </view>
-            </view>
-
-            <view class='order'>
-              <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.frozeno_order_amount}}</text>
-              </view>
-            </view>
-            <view class='push-button'>
-              <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
-              <view class='push push-active' data-id="{{item.o_id}}" bindtap='orderdetail'>付款</view>
-            </view>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
-    <view class="{{currentTab == 2 ? 'show':'hidden'}}">
-      <scroll-view>
-        <!--没有相关订单时显示 -->
-        <view class='search-no' wx:if="{{items.length <= 0}}">
-          <view>
-            <image class='scimg' src='{{imgLoad}}'></image>
-          </view>
-          <text>{{message}}~~</text>
-        </view>
-
-        <view class='lists'>
-          <!--bindtap绑定事件 待发货-->
-          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item">
-            <view class='order-top'>
-              <view class='ordernum'>订单编号：{{item.o_order}}</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
-            </view>
-            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1"  data-id="{{item.o_id}}" bindtap='orderdetail'>
-              <view class='list-left'>
-                <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
-              </view>
-              <view class='list-right size-titleone '>
-                <view class='column '>
-                  <view class='right-text'>{{item1.category_desc}}</view>
-                </view>
-                <view class='column'>
-                  <view class='right-text'>￥{{item1.product_amount}}</view>
-                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
-                  <view class='piece'>× {{item1.product_count}}</view>
-                </view>
-                <view class='column col-content'>
-                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                </view>
-              </view>
-            </view>
-            <view class='order'>
-              <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.frozeno_order_amount}}</text>
-              </view>
-            </view>
-            <view class='push-button'>
-              <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
-              <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
-            </view>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
-    <view class="{{currentTab == 3 ? 'show':'hidden'}}">
-      <scroll-view>
-        <!--没有相关订单时显示-->
-        <view class='search-no' wx:if="{{items.length <= 0}}">
-          <view>
-            <image class='scimg' src='{{imgLoad}}'></image>
-          </view>
-          <text>{{message}}~~</text>
-        </view>
-
-        <view class='lists'>
-          <!--bindtap绑定事件 待收货-->
-          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item"  data-id="{{item.o_id}}" bindtap='orderdetail'>
-            <view class='order-top'>
-              <view class='ordernum'>订单编号：{{item.o_order}}</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 1}}">待付款</view>
-            </view>
-            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
-              <view class='list-left'>
-                <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
-              </view>
-              <view class='list-right size-titleone '>
-                <view class='column '>
-                  <view class='right-text'>{{item1.category_desc}}</view>
-                </view>
-                <view class='column'>
-                  <view class='right-text'>￥{{item1.product_amount}}</view>
-                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
-                  <view class='piece'>× {{item1.product_count}}</view>
-                </view>
-                <view class='column col-content'>
-                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                </view>
-              </view>
-            </view>
-            <view class='order'>
-              <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.frozeno_order_amount}}</text>
-              </view>
-            </view>
-            <view class='push-button'>
-              <!-- <view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view> -->
-              <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk'>确认收货</view>
-            </view>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
-    <view class="{{currentTab == 4 ? 'show':'hidden'}}">
-      <scroll-view>
-        <!--没有相关订单时显示-->
-        <view class='search-no' wx:if="{{items.length <= 0}}">
-          <view>
-            <image class='scimg' src='{{imgLoad}}'></image>
-          </view>
-          <text>{{message}}~~</text>
-        </view>
-        <view class='lists'>
-          <!--bindtap绑定事件 交易成功或失败-->
-          <view class='list-order' wx:key="*this" wx:for="{{items}}" wx:for-item="item"  data-id="{{item.o_id}}" bindtap='orderdetail'>
-            <view class='order-top'>
-              <view class='ordernum'>订单编号：{{item.o_order}}</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 4}}">交易完成</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 5}}">已取消</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 6}}">取消订单中</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 7}}">已退款</view>
-            </view>
-            <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1">
-              <view class='list-left'>
-                <image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
-              </view>
-
-              <view class='list-right size-titleone '>
-                <view class='column '>
-                  <view class='right-text'>{{item1.category_desc}}</view>
-                </view>
-
-                <view class='column'>
-                  <view class='right-text'>￥{{item1.product_amount}}</view>
-                  <text class='decoration'>[￥{{item1.product_before_amount}}]</text>
-                  <view class='piece'>× {{item1.product_count}}</view>
-                </view>
-
-                <view class='column col-content'>
-                  <view class='abstract'>{{item1.frozeno_introduction}}</view>
-                </view>
-
-              </view>
-            </view>
-
-            <view class='order'>
-              <view class='pay'>共{{item.products_count}}件商品 实付款：
-                <text class=''>￥{{item.frozeno_order_amount}}</text>
-              </view>
-            </view>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
-
-  </view>
+	</view>
 </view>
 
 
 <!-- 查看物流logistics -->
 <view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
 <view class="just {{flexwindow==true?'': 'y'}}">
-  <!--bindtap绑定事件-->
-  <view class='lists'>
-    <view class='list size-titletwo col-content page-pd'>
-      <view class='detail-center'>
+	<!--bindtap绑定事件-->
+	<view class='lists'>
+		<view class='list size-titletwo col-content page-pd'>
+			<view class='detail-center'>
 
-        <view class='sales'>
-          <view class='detail-sales'>查看物流 </view>
+				<view class='sales'>
+					<view class='detail-sales'>查看物流 </view>
 
-          <image class='icon40' src='../../img/close@2x.png' bindtap='close'></image>
-        </view>
-        <view class='time-pcl'>
+					<image class='icon40' src='../../img/close@2x.png' bindtap='close'></image>
+				</view>
+				<view class='time-pcl'>
 
-          <view class='time'>
-            <image class='time-img' src='{{items.imgUrl}}'></image>
-          </view>
+					<view class='time'>
+						<image class='time-img' src='{{items.imgUrl}}'></image>
+					</view>
 
-          <view class='time'>
-            <view class='time-text col-main'> 顺丰快递
-            </view>
-            <view class='time-text'>78322760064991
-              <text class='time-copy'>复制</text>
-            </view>
-          </view>
-        </view>
+					<view class='time'>
+						<view class='time-text col-main'> 顺丰快递
+						</view>
+						<view class='time-text'>78322760064991
+							<text class='time-copy'>复制</text>
+						</view>
+					</view>
+				</view>
 
-        <view class='plc-title col-title size-titleone page-pd'>
-          <view class='plc-box'>已签收</view>
-        </view>
+				<view class='plc-title col-title size-titleone page-pd'>
+					<view class='plc-box'>已签收</view>
+				</view>
 
-        <view class="plc-status col-content size-titletwo page-pd">
+				<view class="plc-status col-content size-titletwo page-pd">
 
-          <scroll-view scroll-y="true" style="height:420rpx;">
-            <view class="scroll-view-item demo-text-1">
-              <view class="status-box">
-                <view class="status-list">
-                  <view class='plc-content plc-active'>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class='plc-week wei'>周三</text>
-                      <text class='plc-time'>18:49:44</text>
-                      <text class='plc-text'>商品已经下单</text>
-                    </view>
-                  </view>
+					<scroll-view scroll-y="true" style="height:420rpx;">
+						<view class="scroll-view-item demo-text-1">
+							<view class="status-box">
+								<view class="status-list">
+									<view class='plc-content plc-active'>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class='plc-week wei'>周三</text>
+											<text class='plc-time'>18:49:44</text>
+											<text class='plc-text'>商品已经下单</text>
+										</view>
+									</view>
 
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
+									<view class='plc-content '>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class=' wei'>周三</text>
+											<text>18:49:44</text>
+											<text>商品已经下单</text>
+										</view>
+									</view>
 
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                </view>
-              </view>
-            </view>
-          </scroll-view>
-        </view>
-      </view>
-    </view>
-  </view>
+									<view class='plc-content '>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class=' wei'>周三</text>
+											<text>18:49:44</text>
+											<text>商品已经下单</text>
+										</view>
+									</view>
+									<view class='plc-content '>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class=' wei'>周三</text>
+											<text>18:49:44</text>
+											<text>商品已经下单</text>
+										</view>
+									</view>
+									<view class='plc-content '>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class=' wei'>周三</text>
+											<text>18:49:44</text>
+											<text>商品已经下单</text>
+										</view>
+									</view>
+									<view class='plc-content '>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class=' wei'>周三</text>
+											<text>18:49:44</text>
+											<text>商品已经下单</text>
+										</view>
+									</view>
+									<view class='plc-content '>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class=' wei'>周三</text>
+											<text>18:49:44</text>
+											<text>商品已经下单</text>
+										</view>
+									</view>
+									<view class='plc-content '>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class=' wei'>周三</text>
+											<text>18:49:44</text>
+											<text>商品已经下单</text>
+										</view>
+									</view>
+									<view class='plc-content '>
+										<view class='plc-text'>
+											<text class='plc-date'>2020-03-04</text>
+											<text class=' wei'>周三</text>
+											<text>18:49:44</text>
+											<text>商品已经下单</text>
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

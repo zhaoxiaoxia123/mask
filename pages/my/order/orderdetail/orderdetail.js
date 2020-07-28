@@ -29,7 +29,8 @@ Page({
     outTradeNo: '',    //此次支付的商户订单号
     setInter: '',   //存储计时器
     num: 30,   //记录订单失效时间  30*60 30分钟失效
-    isClick:true   //是否可以点击付款按钮
+    isClick:true,   //是否可以点击付款按钮
+    dry_id:0
   },
 
   /**
@@ -41,7 +42,8 @@ Page({
     // console.log(options.order_id);
     that.setData({
       orderId: options.order_id,
-      fromPage: options.from_page
+      fromPage: options.from_page,
+      dry_id:app.globalData.dry_id,
     });
 
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {

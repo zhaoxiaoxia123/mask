@@ -24,6 +24,7 @@ Page({
     items: [],
     imgLoad:'../../img/loading.gif',//'../../img/wu.png',
     message:'正在努力加载中',
+    dry_id:0
   },
 
   /**
@@ -33,7 +34,8 @@ Page({
     that = this;
     that.setData({
       currentTab: parseInt(options.id) - 1,
-      order_state: parseInt(options.id) - 1
+      order_state: parseInt(options.id) - 1,
+      dry_id:app.globalData.dry_id,
     });
     // console.log(that.data.order_state);
   },

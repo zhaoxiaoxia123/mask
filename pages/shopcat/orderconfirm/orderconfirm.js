@@ -245,7 +245,7 @@ Page({
     }
     
     productAmount = parseFloat(productAmount);
-    discountAmount = parseFloat(discountAmount);
+    discountAmount = Math.floor(parseFloat(discountAmount));
     dryAmount = parseFloat(dryAmount);
     var productAmounts = productAmount + dryAmount+productAmount488;
     var discountAmounts = discountAmount + dryAmount+productAmount488;

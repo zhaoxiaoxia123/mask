@@ -152,7 +152,7 @@ Page({
   //是否显示提示
   isShowTip:function(type,value=0){
     if(type == 'name'){
-      if((that.data.name.length < 2 || that.data.name.length > 25) && that.data.isHasSubmit){
+      if((that.data.name.length < 2 || that.data.name.length > 10) && that.data.isHasSubmit){
         that.setData({isShowNameTip:true});
       }else{
         that.setData({isShowNameTip:false});
@@ -171,7 +171,7 @@ Page({
         that.setData({isShowRegionTip:false});
       }
     }else if(type == 'address'){
-      if((that.data.address.length < 5 || that.data.address.length > 120) && that.data.isHasSubmit){
+      if((that.data.address.length < 5 || that.data.address.length > 50) && that.data.isHasSubmit){
         that.setData({isShowAddressTip:true});
       }else{
         that.setData({isShowAddressTip:false});
@@ -240,10 +240,10 @@ Page({
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
         that.isShowTip('submit',true);
       var myreg = /^1(3|4|5|7|8)\d{9}$/;
-      if (that.data.name.length < 2 || that.data.name.length > 25){
+      if (that.data.name.length < 2 || that.data.name.length > 10){
         wx.showModal({
           title: '提示',
-          content: '请输入姓名长度在2-25位之间，不能包含非法字符.',
+          content: '请输入姓名长度在2-10位之间，不能包含非法字符.',
           showCancel: false
         });
         return false;
@@ -261,10 +261,10 @@ Page({
           showCancel: false
         });
         return false;
-      } else if (that.data.address.length < 5 || that.data.address.length > 120){
+      } else if (that.data.address.length < 5 || that.data.address.length > 50){
         wx.showModal({
           title: '提示',
-          content: '请输入详细地址长度在5-120位之间，不能包含非法字符.',
+          content: '请输入详细地址长度在5-50位之间，不能包含非法字符.',
           showCancel: false
         });
         return false;

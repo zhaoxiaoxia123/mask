@@ -19,7 +19,26 @@
 				<image mode="widthFix" src="{{promotionPicture}}" style="width:100%;"></image>
 				<view class="activity-box">
 					<view class="activity-item activity-item-active">
-						<view class="activity-item-left">
+						<view class="activity-item-left" wx:if="{{isOver}}">
+							<view class="">
+								<text>新人首单价</text>
+								<text class="activity-state {{showPromotionClass}}">活动结束</text>
+							</view>
+							<view class="detail-item-box">
+								<view class="wei">
+									<text>￥</text>
+									<block wx:if="{{items.category_id == experience_id}}">
+										<text class="size-money">{{experience_amount}}</text>
+										<text>.00</text>
+									</block>
+									<text class="size-money" wx:if="{{items.category_id != experience_id}}">{{items.frozeno_discount_amount}}</text>
+								</view>
+								<view class="detail-item-money-price">
+									<text class="decoration">￥{{items.frozeno_amount}}</text>
+								</view>
+							</view>
+						</view>
+						<view class="activity-item-left" wx:if="{{ ! isOver}}">
 							<view class="">
 								<text wx:if="{{level == 1 || level == 0}}">新人首单价</text>
 								<text wx:if="{{level == 2}}">VIP抢购价</text>
@@ -65,8 +84,9 @@
 				<view class="detail-item-box" wx:if="{{isOver}}">
           <view class="detail-item-money wei">
             <text>￥</text>
-            <text class="size-money ">{{items.frozeno_discount_amount}}</text>
-            <text >.00</text>
+            <!-- <text class="size-money ">{{items.frozeno_discount_amount}}</text> -->
+						<text class="size-money ">{{items.customer_amount_before}}</text>
+						<text>.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
           </view>
           <view class="detail-item-money-price">
             <text class="decoration">( 市场价：</text>
