@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/home/home",
     "pages/detail/detail",
     "pages/shopcat/shopcat",
@@ -23,7 +22,8 @@
     "pages/member/integral/integral",
     "pages/member/grade/grade",
     "pages/member/grow/grow",
-    "pages/post/post"
+    "pages/post/post",
+    "pages/member/bean/bean"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,7 +31,7 @@
     "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "#333",
     "backgroundColor": "#f5f5f5",
-    "navigationStyle":"default"
+    "navigationStyle": "default"
   },
   "tabBar": {
     "color": "#999",

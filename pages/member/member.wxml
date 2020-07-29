@@ -55,9 +55,9 @@
         </view>
       </view>
       <view class='member-value'>
-        <view class='center-box' bindtap='integral'>
+        <view class='center-box' bindtap='bean'>
           <text class="box-text">{{items.frozeno_point?items.frozeno_point:0}}</text>
-          <text>积分</text>
+          <text>智美豆</text>
         </view>
         <!-- 会员页面不需要保留两位小数点 -->
         <view class='center-box' bindtap='grow'>

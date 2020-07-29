@@ -213,10 +213,10 @@ Page({
       url: '../member/integral/integral'
     })
   },
-  integral: function (e) {
+  bean: function (e) {
     console.log(e);
     wx.navigateTo({
-      url: '../member/integral/integral'
+      url: '../member/bean/bean'
     })
   },
   chanMask: function () {
