@@ -5,7 +5,7 @@
 	<!-- <navbar page-name="详情页" tabCount="1" wx:if="{{!isShowTopBar}}"></navbar> -->
 	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
 		<view id="product">
-			<swiper indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style='height:750rpx;background:#fff'>
+			<swiper indicator-dots="true" indicator-color="#000000" indicator-active-color="#b7aa00" autoplay="false" interval="3000" duration="500" circular="true" style='height:750rpx;background:#fff'>
 				<swiper-item>
 					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/402ce54f699ba9acf8d70c08e0515057.mp4"></video>
 				</swiper-item>
@@ -84,9 +84,11 @@
 				<view class="detail-item-box" wx:if="{{isOver}}">
           <view class="detail-item-money wei">
             <text>￥</text>
-            <!-- <text class="size-money ">{{items.frozeno_discount_amount}}</text> -->
+            <text class="size-money " wx:if="{{level <= 0}}">{{items.frozeno_discount_amount}}</text>
+						<block wx:if="{{level >= 1}}">
 						<text class="size-money ">{{items.customer_amount_before}}</text>
 						<text>.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
+						</block>
           </view>
           <view class="detail-item-money-price">
             <text class="decoration">( 市场价：</text>

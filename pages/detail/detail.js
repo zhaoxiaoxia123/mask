@@ -9,18 +9,10 @@ Page({
    */
   data: {
     collect:false,
-    flag:3,
     flexwindow:false,
     count:1,
     border:true,
     swipers: [],
-    indicatorDots: true,
-    indicatorColor: "#000000",
-    indicatorActiveColor: "#b7aa00",
-    autoplay: false,
-    interval: 3000,
-    duration: 500,
-    circular: true,
     items: [],
     productId:0,
     shoppingCount: 0,
@@ -348,8 +340,6 @@ Page({
             isOver:isover,
             surplusSale:surCount > 0 ? surCount: 0 ,
           });
-          console.log("promotionPicture:-----");
-          console.log(that.data.promotionPicture);
           that.getTop();
         }
       }

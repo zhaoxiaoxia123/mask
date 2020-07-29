@@ -377,10 +377,14 @@ Page({
     var usingPoint = (discountAmount * (parseFloat(rate) / 100));
     usingPoint = parseInt(usingPoint);// .toFixed(2);
     var dryAm = 0;
+    console.log('discountAmount:----');
+    console.log(point);
+    console.log(usingPoint);
+    console.log(parseFloat(point) >= parseFloat(usingPoint));
+    if(that.data.isCheckDry == 1){
+      dryAm = that.data.items.dryInfos.dry_amount;
+    }
     if (parseFloat(point) >= parseFloat(usingPoint)) { //用户积分大于等于可抵用积分数
-      if(that.data.isCheckDry == 1){
-        dryAm = that.data.items.dryInfos.dry_amount;
-      }
       that.setData({
         usingPoint: usingPoint,
         payAmount: parseFloat(discountAmount) - parseFloat(usingPoint) + parseInt(dryAm)
@@ -391,6 +395,10 @@ Page({
         payAmount: parseFloat(discountAmount) - parseFloat(point) + parseInt(dryAm)
       });
     }
+    console.log('dryAm:----');
+    console.log(dryAm);
+    console.log(discountAmount);
+    console.log(that.data.payAmount);
   },
 
   getAddress: function () {

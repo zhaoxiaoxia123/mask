@@ -123,7 +123,7 @@
 				</view>
 			</view>
 		</view>
-		<view class='coupon' wx:if="{{customerInfo.frozeno_point}}">
+		<!-- <view class='coupon' wx:if="{{customerInfo.frozeno_point}}">
 			<view class='coupon-wap'>
 				<view class='coupon-left'>
 					<text wx:if="{{customerInfo.frozeno_point>=usingPoint && customerInfo.frozeno_point!=0}}">积分可用共{{customerInfo.frozeno_point}},已抵扣¥{{usingPoint}}</text>
@@ -138,7 +138,7 @@
 					</checkbox-group>
 				</view>
 			</view>
-		</view>
+		</view> -->
 
 		<view class='coupon'>
 			<view class='coupon-wap'>
