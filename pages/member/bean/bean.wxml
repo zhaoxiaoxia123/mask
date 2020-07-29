@@ -12,6 +12,11 @@
     </view>
   </view>
   <view class='integral-content' >
+  <!-- 智美豆：
+1、通过分享好友首次下单  +   待入账：需要收货10天后入账
+2、通过好友下单奖励 +     待入账：需要收货10天后入账
+3、购物抵扣 -
+4、订单取消  + -->
     <view class='integral-text'>
       <view class='integral-title'>
         <text class='text-title'>通过分享好友首次下单</text>
@@ -21,7 +26,7 @@
       <view class="text-add">
         <view class="text-add-left">
             <text>+</text>
-            <text>+</text>
+            <text>-</text>
         </view>
         <view > 25.00</view>
       </view>
@@ -37,7 +42,7 @@
       <view class="text-add text-add-ash">
         <view class="text-add-left">
             <text>+</text>
-            <text>+</text>
+            <text>-</text>
         </view>
         <view > 25.00</view>
       </view>
