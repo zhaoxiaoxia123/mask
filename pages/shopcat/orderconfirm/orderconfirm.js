@@ -28,6 +28,7 @@ Page({
     discount:0,
     experience:0,
     isCheckDry:2, //2：未选中 1：选中导入仪
+    bean:0
   },
 
   /**
@@ -173,7 +174,7 @@ Page({
         let datas = res.data.data;
         that.setData({
           customerInfo: datas,
-          discount:datas['discount']
+          discount:parseInt(datas['discount'])
         });
         wx.setStorageSync('discount', datas['discount'])
       }
@@ -307,6 +308,8 @@ Page({
     if(that.data.isCheckDry == 1){
       dryAm = that.data.items.dryInfos.dry_amount;
     }
+    console.log('parseFloat(that.data.bean):----');
+    console.log(parseFloat(that.data.bean));
     if (cInfo.frozeno_point > 0 && that.data.isUsePoint) {
       if (tInfo.type == 2) { //若满减
         if (productAmount >= tInfo.satisfy_amount) { //商品总价是否大于等于满减金额设置
@@ -314,7 +317,7 @@ Page({
         } else { //小于：则不可使用积分。
           that.setData({
             usingPoint: 0,
-            payAmount: parseFloat(discountAmount) + parseInt(dryAm)
+            payAmount: parseFloat(discountAmount) + parseInt(dryAm) - parseFloat(that.data.bean)
           });
         }
       } else if (tInfo.type == 1) {
@@ -323,9 +326,12 @@ Page({
     } else {
       that.setData({
         usingPoint: 0,
-        payAmount: parseFloat(discountAmount) + parseInt(dryAm)
+        payAmount: parseFloat(discountAmount) + parseInt(dryAm) - parseFloat(that.data.bean)
       });
     }
+
+    console.log('payAmount:----');
+    console.log(that.data.payAmount);
   },
 
   //计算使用卡券后的付款金额
@@ -336,26 +342,26 @@ Page({
     var usingTicketAmount = 0;
     if (tIndex != 9998) { //上面索引减了个1
       var tList = that.data.ticketList.ticket; //卡券列表
-      var payAmount = 0;
+      var paysAmount = 0;
       if (tList[tIndex]['ticket_type'] == 1) { //通用
         usingTicketAmount = tList[tIndex]['ticket_amount'];
-        payAmount = discountAmount - tList[tIndex]['ticket_amount'];
-        if (payAmount < 0){
-          payAmount = 0;
+        paysAmount = discountAmount - tList[tIndex]['ticket_amount'];
+        if (paysAmount < 0){
+          paysAmount = 0;
         }
       } else if (tList[tIndex]['ticket_type'] == 2) { //满减
         if (productAmount >= tList[tIndex]['satisfy_amount']) {
           usingTicketAmount = tList[tIndex]['ticket_amount'];
-          payAmount = discountAmount - tList[tIndex]['ticket_amount'];
-          if (payAmount < 0) {
-            payAmount = 0;
+          paysAmount = discountAmount - tList[tIndex]['ticket_amount'];
+          if (paysAmount < 0) {
+            paysAmount = 0;
           }
         } else {
-          payAmount = discountAmount;
+          paysAmount = discountAmount;
         }
       }
       that.setData({
-        payAmount: parseFloat(payAmount),
+        payAmount: parseFloat(paysAmount),
         usingTicketAmount: usingTicketAmount
       });
     } else {
@@ -387,18 +393,14 @@ Page({
     if (parseFloat(point) >= parseFloat(usingPoint)) { //用户积分大于等于可抵用积分数
       that.setData({
         usingPoint: usingPoint,
-        payAmount: parseFloat(discountAmount) - parseFloat(usingPoint) + parseInt(dryAm)
+        payAmount: parseFloat(discountAmount) - parseFloat(usingPoint) + parseInt(dryAm) - parseFloat(that.data.bean)
       });
     } else {
       that.setData({
         usingPoint: point, //可用积分为用户积分值
-        payAmount: parseFloat(discountAmount) - parseFloat(point) + parseInt(dryAm)
+        payAmount: parseFloat(discountAmount) - parseFloat(point) + parseInt(dryAm) - parseFloat(that.data.bean)
       });
     }
-    console.log('dryAm:----');
-    console.log(dryAm);
-    console.log(discountAmount);
-    console.log(that.data.payAmount);
   },
 
   getAddress: function () {
@@ -510,6 +512,7 @@ Page({
           customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
           invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
           use_point: that.data.usingPoint,
+          bean: that.data.bean,
           amount: that.data.payAmount,
           is_check_dry: that.data.isCheckDry,
           // order_type: 1,//购买订单
@@ -572,16 +575,14 @@ Page({
   },
   close: function(e) {
     var flexwindow = false;
-
     that.setData({
       flexwindow: flexwindow
     })
   },
   // 适用门店
   beans: function (e) {
-    var that = this;
     var beansflexwindow;
-    if (this.data.beansflexwindow == true) {
+    if (that.data.beansflexwindow == true) {
       beansflexwindow = false;
     }
     else {
@@ -591,15 +592,12 @@ Page({
       beansflexwindow: beansflexwindow
     });
   },
-  close3: function (e) {
-    let self = this
+  close3: function () {
     let beansflexwindow = false;
-
-    self.setData({
+    that.setData({
       beansflexwindow: beansflexwindow
     })
   },
-
 
   //卡券弹框关闭
   close1: function(e) {
@@ -611,4 +609,24 @@ Page({
     that.sumUsingPoint();
   },
 
+  setBeanInput: function(e) {
+    that.setData({
+      bean: parseInt(e.detail.value)
+    })
+  },
+  /**
+   * 提交智美豆使用数,比较输入智美豆是否符合匹配数量
+   */
+  submitBean:function(){
+    if(that.data.customerInfo.frozeno_bean < that.data.bean || that.data.bean > that.data.payAmount ){
+      wx.showToast({
+        icon: "none",
+        title: "请输入正确数量"
+      });
+    }else{
+      that.close3();
+      //计算实付款
+      that.sumUsingPoint();
+    }
+  },
 })

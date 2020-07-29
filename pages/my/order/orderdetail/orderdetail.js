@@ -19,7 +19,6 @@ Page({
     duration: 500,
     circular: true,
     items: [],
-    // address: [],
     transform:[],
     orderAmount:0,
     rateAmount:0,
@@ -268,7 +267,7 @@ Page({
             page_code: 'p008',
             type: 'cancel',
             order_id: that.data.items[0].o_id,
-            order_type: that.data.items[0].frozeno_order_state
+            order_state: that.data.items[0].frozeno_order_state
           };
           var params = {
             url: app.globalData.domainUrl,

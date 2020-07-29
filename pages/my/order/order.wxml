@@ -83,9 +83,9 @@
 								<view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
 								<view class='push push-active' data-id="{{item.o_id}}" bindtap='orderdetail'>付款</view>
 							</view>
-
 							<view class='push-button' wx:if="{{item.frozeno_order_state == 2}}">
-								<view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
+							<!--取消订单7.29佳总确定暂时取消-->
+								<!-- <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view> -->
 								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
 							</view>
 							<view class='push-button' wx:if="{{item.frozeno_order_state == 3}}">
@@ -101,7 +101,7 @@
 						</block>
 						<block wx:if="{{currentTab == 2}}">
 							<view class='push-button'>
-								<view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view>
+								<!-- <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view> -->
 								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
 							</view>
 						</block>

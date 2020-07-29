@@ -174,6 +174,12 @@ Page({
 
   },
 
+  bean: function (e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '../member/bean/bean'
+    })
+  },
   setLevel:function(){
     that.setData({
       level:wx.getStorageSync('level')

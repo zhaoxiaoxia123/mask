@@ -14,10 +14,10 @@
     <view class="integral-box">
         <view class="progress-text">
           <view class="progress-left">成长值 {{customer.frozeno_growth?customer.frozeno_growth:0}}<image  class="progress-img" src='../../img/dv.png'></image></view>
-          <view class="progress-right" wx:if="{{customer.frozeno_level < 4}}">差{{customer.level_distance}}成长值升级为
+          <view class="progress-right" wx:if="{{customer.frozeno_level < 3}}">差{{customer.level_distance}}成长值升级为
             <block wx:if="{{customer.frozeno_level == 1}}">VIP</block>
             <block wx:if="{{customer.frozeno_level == 2}}">SVIP</block>
-            <block wx:if="{{customer.frozeno_level == 3}}">钻卡</block>
+            <!-- <block wx:if="{{customer.frozeno_level == 3}}">钻卡</block> -->
           </view>
         </view>
         <view class="progress-box">

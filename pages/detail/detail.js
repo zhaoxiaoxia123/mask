@@ -346,6 +346,12 @@ Page({
     };
     base.httpRequest(params);
   },
+  goLogin:function(){
+    console.log(22);
+    wx.navigateTo({
+      url: '/pages/my/login/login',
+    });
+  },
   shoppingList:function(){
     wx.switchTab({
       url: '../shopcat/shopcat',
@@ -422,7 +428,8 @@ Page({
         showCancel: false,
         confirmText: '确定',
         success: function (res) {
-          wx.switchTab({
+          // wx.switchTab({
+        wx.navigateTo({
             url: '/pages/my/login/login',
           });
         }

@@ -15,7 +15,7 @@
 					</swiper-item>
 				</block>
 			</swiper>
-			<view class="activity">
+			<view class="activity" wx:if="{{level >= 1}}">
 				<image mode="widthFix" src="{{promotionPicture}}" style="width:100%;"></image>
 				<view class="activity-box">
 					<view class="activity-item activity-item-active">
@@ -40,7 +40,7 @@
 						</view>
 						<view class="activity-item-left" wx:if="{{ ! isOver}}">
 							<view class="">
-								<text wx:if="{{level == 1 || level == 0}}">新人首单价</text>
+								<text wx:if="{{level == 1}}">新人首单价</text>
 								<text wx:if="{{level == 2}}">VIP抢购价</text>
 								<text wx:if="{{level == 3}}">SVIP抢购价</text>
 								<text wx:if="{{level == 4}}">钻石抢购价</text>
@@ -50,16 +50,10 @@
 								<text class="activity-state {{showPromotionClass}}">{{showPromotionTip}}</text>
 							</view>
 							<view class="detail-item-box">
-								<view class=" wei" wx:if="{{level != 0}}">
+								<view class="wei">
 									<text>￥</text>
 									<text class="size-money ">{{items.customer_amount_before}}</text>
 									<text>.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
-								</view>
-								<view class=" wei" wx:if="{{level == 0}}">
-									<text>￥</text>
-									<text class="size-money " wx:if="{{items.category_id == experience_id}}">{{experience_amount}}</text>
-									<text class="size-money " wx:if="{{items.category_id != experience_id}}">{{items.frozeno_discount_amount}}</text>
-									<text>.00</text>
 								</view>
 								<view class="detail-item-money-price">
 									<text class="decoration">￥{{items.frozeno_amount}}</text>
@@ -80,21 +74,27 @@
 			</view>
 
 			<view class="detail-item page-pd">
-				<!-- 活动结束显示 -->
-				<view class="detail-item-box" wx:if="{{isOver}}">
+				<!-- 活动结束和未登录显示 -->
+				<view class="detail-item-box" wx:if="{{isOver || level == 0}}">
+				<block wx:if="{{level >= 1}}">
           <view class="detail-item-money wei">
             <text>￥</text>
-            <text class="size-money " wx:if="{{level <= 0}}">{{items.frozeno_discount_amount}}</text>
-						<block wx:if="{{level >= 1}}">
 						<text class="size-money ">{{items.customer_amount_before}}</text>
 						<text>.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
-						</block>
           </view>
           <view class="detail-item-money-price">
             <text class="decoration">( 市场价：</text>
             <text class="decoration">￥{{items.frozeno_amount}}</text>
             <text class="decoration">)</text>
           </view>
+					</block>
+				<block wx:if="{{level == 0}}">
+          <view class="detail-item-money wei">
+            <text>市场价：</text>
+						<text class="size-money ">{{items.frozeno_amount}}</text>
+          </view>
+          <view bindtap="goLogin">(登录参加活动)</view>
+					</block>
         </view>
 				<view class="money-title">{{items.category_desc}}</view>
 				<view class='money-text'>
