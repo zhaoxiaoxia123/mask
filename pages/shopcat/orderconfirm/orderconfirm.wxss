@@ -3,6 +3,17 @@
   box-sizing: border-box;
   padding-bottom:220rpx;
 }
+.list-item {
+  padding: 40rpx 20rpx;
+  background: #404040;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+
+.list-box {
+  display: flex;
+  flex-direction: row;
+}
 .goods{
   display: flex;
   justify-content: space-around;
@@ -109,8 +120,8 @@ background: #404040;
 .gift{
   background:#404040;
   color:#DAB866;
-  font-size:32rpx;
-  padding:40rpx 20rpx;
+  font-size:0.8rem;
+  padding:6rpx;
 }
 .space{
   margin-bottom:90rpx;
@@ -343,3 +354,32 @@ display: none;
 .decoration{
   text-decoration: line-through;
 }
+/* 金额 */
+.detail-item-money {
+  color: #dab866;
+}
+
+/* 智美豆 */
+.beans{
+  display: flex;
+  justify-content: center;
+  padding:100rpx 20rpx;
+}
+.beans .column-form{
+  padding:28rpx 20rpx;
+  width:50%;
+  border:1px solid #c6c6c6;
+  margin-top:20rpx;
+}
+.beans .column-form input{
+  font-size:1.5rem;
+}
+.beans-bottom{
+  display: flex;
+  justify-content: center;
+  width:100%;
+  color:#fff;
+  background-color:#DAB866;
+  font-size:1.2rem;
+}
+  

@@ -577,6 +577,29 @@ Page({
       flexwindow: flexwindow
     })
   },
+  // 适用门店
+  beans: function (e) {
+    var that = this;
+    var beansflexwindow;
+    if (this.data.beansflexwindow == true) {
+      beansflexwindow = false;
+    }
+    else {
+      beansflexwindow = true;
+    }
+    that.setData({
+      beansflexwindow: beansflexwindow
+    });
+  },
+  close3: function (e) {
+    let self = this
+    let beansflexwindow = false;
+
+    self.setData({
+      beansflexwindow: beansflexwindow
+    })
+  },
+
 
   //卡券弹框关闭
   close1: function(e) {
