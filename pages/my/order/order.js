@@ -24,7 +24,9 @@ Page({
     items: [],
     imgLoad:'../../img/loading.gif',//'../../img/wu.png',
     message:'正在努力加载中',
-    dry_id:0
+    dry_id:0,
+    experience_amount:0,
+    level:0
   },
 
   /**
@@ -36,6 +38,8 @@ Page({
       currentTab: parseInt(options.id) - 1,
       order_state: parseInt(options.id) - 1,
       dry_id:app.globalData.dry_id,
+      experience_amount: app.globalData.experience_amount,
+      level:wx.getStorageSync('level')
     });
     // console.log(that.data.order_state);
   },

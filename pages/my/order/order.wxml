@@ -60,6 +60,10 @@
 									<view class='column col-content'>
 										<view class='abstract'>{{item1.frozeno_introduction}}</view>
 									</view>
+									 <!--  && level == 1-->
+									<view class="gift" wx:if="{{item1.product_amount == experience_amount && item.frozeno_customer_level == 1}}">
+										<text>赠送VIP会员</text>
+									</view>
 									<block wx:if="{{item1.frozeno_is_gift == 1 && item1.category_id == dry_id}}">
 										<block wx:for="{{item.products}}" wx:key="*this" wx:for-item="g">
 											<view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">

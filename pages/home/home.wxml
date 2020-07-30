@@ -20,6 +20,7 @@
       <swiper-item wx:if="{{item1.type == 9}}">
         <image mode="widthFix" src="{{item1.img_url[0]}}" class="slide-image" bindtap="goPost" data-id="{{item1.post_id}}" data-href="{{item1.href}}" wx:if="{{item1.is_href == 1}}"/>
         <image mode="widthFix" src="{{item1.img_url[0]}}" class="slide-image" wx:if="{{item1.is_href == 2}}"/>
+        <image mode="widthFix" src="{{item1.img_url[0]}}" data-href="{{item1.href}}" class="slide-image" wx:if="{{item1.is_href == 3}}" bindtap="goMyPage"/>
       </swiper-item>
     </block>
   </swiper>

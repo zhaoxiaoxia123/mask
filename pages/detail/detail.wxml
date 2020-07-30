@@ -6,13 +6,28 @@
 	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
 		<view id="product">
 			<swiper indicator-dots="true" indicator-color="#000000" indicator-active-color="#b7aa00" autoplay="false" interval="3000" duration="500" circular="true" style='height:750rpx;background:#fff'>
-				<swiper-item>
-					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/402ce54f699ba9acf8d70c08e0515057.mp4"></video>
+				<swiper-item wx:if="{{!isOver && items.customer_amount_before == experience_amount && items.category_id == experience_id}}">
+					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/99.mp4"></video>
+				</swiper-item>
+				<swiper-item wx:if="{{!isOver && items.customer_amount_before != experience_amount && items.category_id == experience_id}}">
+					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/168.mp4"></video>
+				</swiper-item>
+				<swiper-item wx:if="{{!isOver && items.category_id != experience_id}}">
+					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/423.mp4"></video>
 				</swiper-item>
 				<block wx:for="{{swipers}}" wx:key="*this">
-					<swiper-item wx:if="{{item.type == 1}}">
-						<image mode="widthFix" src="{{item.image_url}}" class="slide-image" />
-					</swiper-item>
+					<block wx:if="{{item.is_activity == 2}}">
+						<swiper-item wx:if="{{item.type == 1}}">
+							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" bindtap="goPost" data-href="{{item.weixin_url}}" wx:if="{{item.is_href == 1}}" />
+							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" wx:if="{{item.is_href == 0}}" />
+						</swiper-item>
+					</block>
+					<block wx:if="{{item.is_activity == 1 && isOver}}">
+						<swiper-item wx:if="{{item.type == 1}}">
+							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" bindtap="goPost" data-href="{{item.weixin_url}}" wx:if="{{item.is_href == 1}}" />
+							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" wx:if="{{item.is_href == 0}}" />
+						</swiper-item>
+					</block>
 				</block>
 			</swiper>
 			<view class="activity" wx:if="{{level >= 1}}">
@@ -31,7 +46,7 @@
 										<text class="size-money">{{experience_amount}}</text>
 										<text>.00</text>
 									</block>
-									<text class="size-money" wx:if="{{items.category_id != experience_id}}">{{items.frozeno_discount_amount}}</text>
+									<text class="size-money" wx:if="{{items.category_id != experience_id}}">{{items.frozeno_discount_amount1}}</text>
 								</view>
 								<view class="detail-item-money-price">
 									<text class="decoration">￥{{items.frozeno_amount}}</text>
@@ -63,8 +78,8 @@
 						<view class="activity-item-right">
 							<!-- 活动结束显示 -->
 							<view wx:if="{{isOver}}">
-                <view class="activity-border size-tagging">每天{{items.frozeno_start_date}}点开抢</view>
-              </view>
+								<view class="activity-border size-tagging">每天{{items.frozeno_start_date}}点开抢</view>
+							</view>
 							<view wx:if="{{ ! isOver}}">
 								<view class="activity-border size-tagging">剩余：{{surplusSale}}件</view>
 							</view>
@@ -76,41 +91,39 @@
 			<view class="detail-item page-pd">
 				<!-- 活动结束和未登录显示 -->
 				<view class="detail-item-box" wx:if="{{isOver || level == 0}}">
-				<block wx:if="{{level >= 1}}">
-          <view class="detail-item-money wei">
-            <text>￥</text>
-						<text class="size-money ">{{items.customer_amount_before}}</text>
-						<text>.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
-          </view>
-          <view class="detail-item-money-price">
-            <text class="decoration">( 市场价：</text>
-            <text class="decoration">￥{{items.frozeno_amount}}</text>
-            <text class="decoration">)</text>
-          </view>
+					<block wx:if="{{level >= 1}}">
+						<view class="detail-item-money wei">
+							<text>￥</text>
+							<text class="size-money ">{{items.customer_amount_before}}</text>
+							<text>.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
+						</view>
+						<view class="detail-item-money-price">
+							<text class="decoration">( 市场价：</text>
+							<text class="decoration">￥{{items.frozeno_amount}}</text>
+							<text class="decoration">)</text>
+						</view>
 					</block>
-				<block wx:if="{{level == 0}}">
-          <view class="detail-item-money wei">
-            <text>市场价：</text>
-						<text class="size-money ">{{items.frozeno_amount}}</text>
-          </view>
-          <view bindtap="goLogin">(登录参加活动)</view>
+					<block wx:if="{{level == 0}}">
+						<view class="detail-item-money wei">
+							<text>市场价：</text>
+							<text class="size-money ">{{items.frozeno_amount}}</text>
+						</view>
+						<view bindtap="goLogin">(登录参加活动)</view>
 					</block>
-        </view>
+				</view>
 				<view class="money-title">{{items.category_desc}}</view>
 				<view class='money-text'>
 					<text>成长值：{{items.growth}}</text>
-					<text>积分：{{items.point}}</text>
+					<!-- <text>积分：{{items.point}}</text> -->
 				</view>
-
 				<view class="detail-item-abstract">{{items.frozeno_introduction}}</view>
 				<view class="detail-item-between">
 					<text class="detail-item-color">免邮</text>
 					<text class="detail-item-color">销量：{{items.sale}}件</text>
 				</view>
-
 			</view>
 
-			<view class="page-pd set-meal">
+			<view class="page-pd set-meal" wx:if="{{items.gift.length > 0}}">
 				<view class="money-title">搭配商品</view>
 				<view class="set-meal-box" wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
 					<view class="set-meal-item" wx:if="{{g.category_id == items.dry_category_id}}">
@@ -149,15 +162,6 @@
 						<text>{{g.category_desc}}× 1</text>
 					</view>
 				</view>
-				<!-- <view class='money-text' wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
-            <view class='radio-group' wx:if="{{g.category_id == items.dry_category_id}}">
-              <radio color='#262626' data-amount="{{items.dry_amount}}" data-id="{{g.category_id}}" bindtap='checkDry' checked='{{items.is_check_dry == 1}}'></radio>
-              <text>{{g.category_desc}}:{{items.dry_amount}}</text>
-            </view>
-            <view class='radio-group' wx:if="{{g.category_id != items.dry_category_id && items.is_check_dry == 1}}">
-              <text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
-            </view>
-          </view> -->
 			</view>
 		</view>
 		<!-- <view class='spec' bindtap="toggleDialog">
@@ -166,11 +170,6 @@
   </view> -->
 		<view class='evaluate'>
 			<view class="detail">
-				<!-- <view class='detail-image' id="product">
-					<block wx:for="{{swipers}}" wx:key="*this" wx:for-index="index">
-            <image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{item.image_url}}" lazy-load></image>
-          </block>
-				</view> -->
 				<view class='detail-image' id="detail">
 					<block wx:for="{{swipers}}" wx:key="*this">
 						<image mode="widthFix" wx:if="{{item.type == 2 && item.detail_type == 1}}" src="{{item.image_url}}" lazy-load></image>

@@ -28,7 +28,8 @@ Page({
     discount:0,
     experience:0,
     isCheckDry:2, //2：未选中 1：选中导入仪
-    bean:0
+    bean:0,
+    level:0
   },
 
   /**
@@ -40,7 +41,8 @@ Page({
       products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
       isCheckDry:options.isCheckDry == 'undefined'?2:options.isCheckDry,
       experience : app.globalData.experience_id,
-      experience_amount: app.globalData.experience_amount
+      experience_amount: app.globalData.experience_amount,
+      level: wx.getStorageSync("level")
     });
     console.log('that.data.isCheckDry:----');
     console.log(that.data.isCheckDry);
@@ -174,9 +176,11 @@ Page({
         let datas = res.data.data;
         that.setData({
           customerInfo: datas,
-          discount:parseInt(datas['discount'])
+          discount:parseInt(datas['discount']),
+          level:datas['frozeno_level']
         });
-        wx.setStorageSync('discount', datas['discount'])
+        wx.setStorageSync('discount', datas['discount']);
+        wx.setStorageSync('level', datas['frozeno_level']);
       }
     };
     base.httpRequest(params);
@@ -240,17 +244,25 @@ Page({
       dryAmount += ret['dryAmount'];
     }
     //商品总价会员折扣后的价格  productAmount
-    var discountAmount = 0;
-    if (productAmount != 0){
-      discountAmount = (cInfo.discount != 0 ? ((productAmount - (that.data.dry * dryCount)) * (cInfo.discount / 100) + (that.data.dry * dryCount)).toFixed(2) : productAmount);
-    }
+    console.log('sumProductAmount计算商品总价):----');
+    console.log(productAmount);
+    console.log(cInfo.discount);
+    var discountAmount = productAmount;
+    // if (productAmount != 0){
+    //   discountAmount = (cInfo.discount != 0 ? ((productAmount - (that.data.dry * dryCount)) * (cInfo.discount / 100) + (that.data.dry * dryCount)).toFixed(2) : productAmount);
+    // }
     
+    console.log(discountAmount);
     productAmount = parseFloat(productAmount);
     discountAmount = Math.floor(parseFloat(discountAmount));
     dryAmount = parseFloat(dryAmount);
     var productAmounts = productAmount + dryAmount+productAmount488;
     var discountAmounts = discountAmount + dryAmount+productAmount488;
 
+    console.log(productAmount488);
+    console.log(productAmount);
+    console.log(discountAmounts);
+    console.log(productAmounts);
     //商品总价
     that.setData({
       productAmount: productAmounts,
@@ -277,18 +289,22 @@ Page({
     var dryAmount = 0;
     var ret = {};
       if (pInfo[i]['frozeno_is_discount'] == 1){
-        if(app.globalData.experience_amount == pInfo[i]['customer_amount']){
+        // if(app.globalData.experience_amount == pInfo[i]['customer_amount']){
           productAmount = (parseFloat(pInfo[i]['customer_amount']) * pInfo[i]['join_product_count']);
-          // productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
-        }else{
-          productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
-        }
+        // }else{
+        //   productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        // }
         if (pInfo[i]['frozeno_is_sub_dry'] == 1){
           dryCount = parseInt(pInfo[i]['join_product_count']);
         }
       }else{
-        dryAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
+        productAmount = (parseFloat(pInfo[i]['customer_amount']) * pInfo[i]['join_product_count']);
+        // dryAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
       }
+      console.log('returnProductAmountAndDRYCount:----');
+      console.log(productAmount);
+      console.log(dryCount);
+      console.log(dryAmount);
       ret['productAmount'] = productAmount;
       ret['dryCount'] = dryCount;
       ret['dryAmount'] = dryAmount;
@@ -301,7 +317,11 @@ Page({
     var tInfo = that.data.transform;
     var pInfo = that.data.items.products;
     that.sumProductAmount(pInfo, cInfo); //获取商品总价
+    console.log('sumProductAmount):----');
+    console.log(that.data.payAmount);
+    console.log(that.data.productAmount);
     var tPayAmount = that.sumCheckTicket(); //减卡券价值后的总价
+    console.log(tPayAmount);
     var discountAmount = tPayAmount; //that.data.discountAmount;
     var productAmount = that.data.productAmount;
     var dryAm = 0;
@@ -310,6 +330,8 @@ Page({
     }
     console.log('parseFloat(that.data.bean):----');
     console.log(parseFloat(that.data.bean));
+    console.log(parseFloat(discountAmount));
+    console.log(parseInt(dryAm));
     if (cInfo.frozeno_point > 0 && that.data.isUsePoint) {
       if (tInfo.type == 2) { //若满减
         if (productAmount >= tInfo.satisfy_amount) { //商品总价是否大于等于满减金额设置

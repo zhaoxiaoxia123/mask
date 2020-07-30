@@ -29,7 +29,9 @@ Page({
     setInter: '',   //存储计时器
     num: 30,   //记录订单失效时间  30*60 30分钟失效
     isClick:true,   //是否可以点击付款按钮
-    dry_id:0
+    dry_id:0,
+    experience_amount:0,
+    level:0
   },
 
   /**
@@ -37,12 +39,12 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    // console.log('onload:----');
-    // console.log(options.order_id);
     that.setData({
       orderId: options.order_id,
       fromPage: options.from_page,
       dry_id:app.globalData.dry_id,
+      experience_amount: app.globalData.experience_amount,
+      level:wx.getStorageSync('level')
     });
 
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
@@ -151,9 +153,12 @@ Page({
       data:param,
       method:'GET',
       sCallback: function (res) {
+        let datas = res.data.data;
         that.setData({
-          customerInfo: res.data.data
+          customerInfo: datas,
+          level:datas['frozeno_level']
         });
+        wx.setStorageSync('level', datas['frozeno_level']);
       }
     };
     base.httpRequest(params);

@@ -75,7 +75,6 @@
 						<view class='right-text'>{{g.category_desc}}</view>
 						<!-- <image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image> -->
 					</view>
-					<!-- <view class='right-text'>{{item.product_name}}</view> -->
 					<view class="detail-item-box">
 						<view class="detail-item-money wei">
 							<text>￥</text>
@@ -86,17 +85,6 @@
 							<text class="decoration">￥{{g.frozeno_amount}}</text>
 						</view>
 					</view>
-					<!-- <view>
-					<view class='money-text' wx:for="{{item.gift}}" wx:key="*this" wx:for-item="g">
-						<view class='radio-group' wx:if="{{g.category_id == dryInfos.dry_category_id}}">
-							<radio color='#262626' data-amount="{{dryInfos.dry_amount}}" bindtap='checkDry' checked='{{dryInfos.is_check_dry == 1}}'></radio>
-							<text>{{g.category_desc}}:{{dryInfos.dry_amount}}</text>
-						</view>
-						<view class='radio-group' wx:if="{{g.category_id != dryInfos.dry_category_id && dryInfos.is_check_dry == 1}}">
-							<text>{{g.category_desc}}:￥{{g.frozeno_discount_amount}}[￥{{g.frozeno_amount}}]</text>
-						</view>
-					</view>
-				</view> -->
 				</view>
 			</view>
 			<view class="gift" wx:if="{{g.category_id != dryInfos.dry_category_id}}">

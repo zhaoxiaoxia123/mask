@@ -35,6 +35,10 @@
 						</view>
 						<text class='decoration'>￥{{item.product_before_amount}}</text>
 						<view class='abstract'>{{item.frozeno_introduction}}</view>
+						 <!-- && level == 1 -->
+						<view class="gift" wx:if="{{item.product_amount == experience_amount && items[0].frozeno_customer_level == 1}}">
+							<text>赠送VIP会员</text>
+						</view>
 						<block wx:if="{{item.frozeno_is_gift == 1 && item.category_id == dry_id}}">
 							<block wx:for="{{items[0].products}}" wx:key="*this" wx:for-item="g">
 								<view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">
@@ -67,14 +71,6 @@
 				<text>智美豆抵扣</text>
 				<text>-￥{{items[0].frozeno_bean?items[0].frozeno_bean:0}}</text>
 			</view>
-			<!-- <view class='block-pa space-between'>
-        <text>积分抵扣</text>
-        <text>-￥{{items[0].frozeno_point}}</text>
-      </view> -->
-			<!-- <view class='block-pa space-between size-titleone'>
-        <text>商品金额（{{items[0].products_count}}件）</text>
-        <text class='col-main'>￥{{items[0].product_total_amount}}</text>
-      </view> -->
 			<view class='block-pa space-between'>
 				<view>实付款（含运费）</view>
 				<view class='sale rmb-price'><text>￥</text><text class="sale-price">{{items[0].frozeno_order_amount}}</text></view>
@@ -83,9 +79,6 @@
 
 		<!--下单信息-->
 		<view class='list1 bg-box' style='margin-top:15rpx;'>
-			<!-- <view class='time'>积分：
-        <text class='time-text'>获得{{items[0].point}}点积分</text>
-      </view> -->
 			<view class='time'>成长值：
 				<text class='time-text'>获得{{items[0].growth}}点成长值</text>
 			</view>

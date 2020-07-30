@@ -302,6 +302,18 @@ Page({
       })
     }
   },
+  goMyPage:function(e){
+    let href = e.currentTarget.dataset.href;
+    if(href){
+    wx.navigateTo({
+      url: href,
+    })
+  }else{
+    wx.showToast({
+      title: "地址为空"
+    })
+  }
+  },
   //进入设置生日
   information: function (e) {
     wx.navigateTo({

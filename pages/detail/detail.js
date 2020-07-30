@@ -71,8 +71,6 @@ Page({
         that.setData({
           winHeight: res.windowHeight - (res.windowWidth * 90 / 750) + 'px'
         })
-        console.log('winHeight::===');
-        console.log(that.data.winHeight);
       },
     })
   },
@@ -149,7 +147,6 @@ Page({
     })
   },
   scroll: function (e) {
-    console.log(e)
     if(!that.data.scrollStop){
       return ;
     }
@@ -163,7 +160,6 @@ Page({
         nowstatus:'detail'
       })
     }else if (st >= that.data.aboutTop){
-      console.log("true")
       that.setData({
         nowstatus: 'about'
       })
@@ -220,8 +216,6 @@ Page({
     that.setData({
       items: items
     });
-    console.log('that.data.items.is_check_dry:-------');
-    console.log(that.data.items.is_check_dry);
   },
   // 跳转规格弹窗
   toggleDialog:function(){
@@ -262,7 +256,6 @@ Page({
   selected: function (e) {
     var border=that.data.border;
     border=!border;
-    console.log("---", border)
     that.setData({
       border: border
     })
@@ -347,7 +340,6 @@ Page({
     base.httpRequest(params);
   },
   goLogin:function(){
-    console.log(22);
     wx.navigateTo({
       url: '/pages/my/login/login',
     });
@@ -435,6 +427,20 @@ Page({
         }
       })
     }
+  },
+
+  /**
+   * 跳转到微信文章页
+   * @param {*} e 
+   */
+  goPost: function (e) {
+    console.log(e);
+    let href = e.currentTarget.dataset.href;
+    console.log(href);
+    console.log(encodeURIComponent(href));
+    wx.navigateTo({
+      url: '../post/post?href=' + encodeURIComponent(href),
+    })
   },
 
 })
