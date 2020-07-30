@@ -19,7 +19,7 @@
 		</view>
 	</view>
 
-	<view class='content page-pd size-titletwo col-content'>
+	<view class='content page-pd size-text col-content'>
 		<!-- class="{{currentTab == 4 ? 'show':'hidden'}}" -->
 		<view>
 			<scroll-view>
@@ -54,7 +54,7 @@
 									</view>
 									<view class='column'>
 										<view class='right-text'>￥{{item1.product_amount}}</view>
-										<text class='decoration'>[￥{{item1.product_before_amount}}]</text>
+										<text class='decoration'>￥{{item1.product_before_amount}}</text>
 										<view class='piece'>× {{item1.product_count}}</view>
 									</view>
 									<view class='column col-content'>

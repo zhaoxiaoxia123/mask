@@ -134,7 +134,7 @@
 				</view>
 			</view>
 		</view>
-		<view class='coupon'>
+		<!-- <view class='coupon'>
 			<view class='coupon-wap'>
 				<view class='coupon-left'>
 					<text>电子发票</text>
@@ -151,7 +151,7 @@
 					<image src='../../img/dv.png'></image>
 				</view>
 			</view>
-		</view>
+		</view> -->
 	</view>
 
 	<view class="bottom">
@@ -292,9 +292,9 @@
 				<input placeholder='金额' type="number" bindinput="setBeanInput" value='{{bean}}' maxlength="6"></input>
 			</view>
 		</view>
-		<view class="coupon-text">
+		<!-- <view class="coupon-text">
 			1智美豆等于1元
-		</view>
+		</view> -->
 		<view class="bottom">
 			<view class="bottom-operate beans-bottom" style='background-color:#DAB866;text-align:cneter;width:100%;' bindtap="submitBean">
 				确定

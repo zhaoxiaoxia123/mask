@@ -124,7 +124,7 @@
 				<image src='../img/dv.png'></image>
 			</view>
 		</view>
-
+<!-- 
 		<view class='list-wap' bindtap='info'>
 			<view class='left'>
 				<image class='icon40' src='../img/invoice.png'></image>
@@ -133,7 +133,7 @@
 			<view class='right'>
 				<image class='icon40' src='../img/dv.png'></image>
 			</view>
-		</view>
+		</view> -->
 		<view class='list-wap' bindtap='news'>
 			<view class='left'>
 				<image class='icon40' src='../img/news.png'></image>

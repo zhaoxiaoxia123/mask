@@ -95,13 +95,13 @@
 			<view class='time'>发货时间：
 				<text class='time-text'>{{items[0].frozeno_send_time?items[0].frozeno_send_time:""}}</text>
 			</view>
-			<view class='time'>物流公司：
+			<!-- <view class='time'>物流公司：
 				<text class='time-text'>{{items[0].frozeno_express_company?items[0].frozeno_express_company:''}}</text>
 			</view>
 			<view class='time'>快递单号：
 				<text class='time-text'>{{items[0].frozeno_express_code?items[0].frozeno_express_code:''}}</text>
 				<text class='time-copy' wx:if="{{items[0].frozeno_express_code}}" data-code="{{items[0].frozeno_express_code}}" bindtap="copyInfo">复制</text>
-			</view>
+			</view> -->
 		</view>
 	</view>
 
