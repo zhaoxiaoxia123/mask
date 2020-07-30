@@ -283,7 +283,7 @@
 		</view>
 		<view class='column'>
 			<view class="coupon-text">
-				订单可使用智美豆：<text>{{payAmount?payAmount:'0.00'}}</text>
+				订单可使用智美豆：<text>{{payAmount>customerInfo.frozeno_bean?customerInfo.frozeno_bean:payAmount}}</text>
 			</view>
 		</view>
 		<!-- 默认为订单可使用金额，需要判断订总金额和订单可使用金额 -->

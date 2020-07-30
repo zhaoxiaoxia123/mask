@@ -214,6 +214,9 @@ Page({
         setTimeout(function() {
           //计算实付款
           that.sumUsingPoint();
+          // that.setData({
+          //   bean:(that.data.payAmount>that.data.customerInfo.frozeno_bean?that.data.customerInfo.frozeno_bean:that.data.payAmount)
+          // });
         }, 2000);
       }
     };

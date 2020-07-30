@@ -34,12 +34,18 @@
 				<image mode="widthFix" src="{{promotionPicture}}" style="width:100%;"></image>
 				<view class="activity-box">
 					<view class="activity-item activity-item-active">
-						<view class="activity-item-left" wx:if="{{isOver}}">
+						<view class="activity-item-left">
 							<view class="">
-								<text>新人首单价</text>
-								<text class="activity-state {{showPromotionClass}}">活动结束</text>
+								<text wx:if="{{level == 1}}">新人首单价</text>
+								<text wx:if="{{level == 2}}">VIP抢购价</text>
+								<text wx:if="{{level == 3}}">SVIP抢购价</text>
+								<text wx:if="{{level == 4}}">钻石抢购价</text>
+								<text wx:if="{{level == 5}}">执行董事抢购价</text>
+								<text wx:if="{{level == 6}}">高级董事抢购价</text>
+								<text wx:if="{{level == 7}}">城市合伙人抢购价</text>
+								<text class="activity-state {{showPromotionClass}}">{{showPromotionTip}}</text>
 							</view>
-							<view class="detail-item-box">
+							<view class="detail-item-box" wx:if="{{isOver}}">
 								<view class="wei">
 									<text>￥</text>
 									<block wx:if="{{items.category_id == experience_id}}">
@@ -52,19 +58,7 @@
 									<text class="decoration">￥{{items.frozeno_amount}}</text>
 								</view>
 							</view>
-						</view>
-						<view class="activity-item-left" wx:if="{{ ! isOver}}">
-							<view class="">
-								<text wx:if="{{level == 1}}">新人首单价</text>
-								<text wx:if="{{level == 2}}">VIP抢购价</text>
-								<text wx:if="{{level == 3}}">SVIP抢购价</text>
-								<text wx:if="{{level == 4}}">钻石抢购价</text>
-								<text wx:if="{{level == 5}}">执行董事抢购价</text>
-								<text wx:if="{{level == 6}}">高级董事抢购价</text>
-								<text wx:if="{{level == 7}}">城市合伙人抢购价</text>
-								<text class="activity-state {{showPromotionClass}}">{{showPromotionTip}}</text>
-							</view>
-							<view class="detail-item-box">
+							<view class="detail-item-box" wx:if="{{ ! isOver}}">
 								<view class="wei">
 									<text>￥</text>
 									<text class="size-money ">{{items.customer_amount_before}}</text>
@@ -132,7 +126,7 @@
 								<radio color='#262626' data-amount="{{items.dry_amount}}" data-id="{{g.category_id}}" bindtap='checkDry' checked='{{items.is_check_dry == 1}}'></radio>
 							</view>
 							<view class="set-meal-left">
-								<image src="{{g.product_image[0].image_url}}"></image>
+								<image src="{{g.image_url}}"></image>
 							</view>
 							<view class="set-meal-right">
 								<view class="set-meal-title">{{g.category_desc}}</view>

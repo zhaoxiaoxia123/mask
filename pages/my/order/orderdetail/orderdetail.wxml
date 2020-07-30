@@ -59,7 +59,11 @@
 				<text>运费</text>
 				<text>+￥0.00</text>
 			</view>
-			<view class='block-pa space-between'>
+			<view class='block-pa space-between' wx:if="{{items[0].frozeno_order_amount == experience_amount}}">
+				<text>享新用户首次下单优惠</text>
+				<text></text>
+			</view>
+			<view class='block-pa space-between' wx:if="{{items[0].frozeno_order_amount != experience_amount}}">
 				<text>会员优惠</text>
 				<text>-￥{{items[0].customer_discount_amount}}</text>
 			</view>

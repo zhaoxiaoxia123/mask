@@ -94,7 +94,8 @@
 							</view>
 							<view class='push-button' wx:if="{{item.frozeno_order_state == 3}}">
 								<view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view>
-								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk'>确认收货</view>
+								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk' wx:if="{{!cancelClick}}">确认收货</view>
+								<view class='push' wx:if="{{cancelClick}}">确认收货</view>
 							</view>
 						</block>
 						<block wx:if="{{currentTab == 1}}">
@@ -112,7 +113,8 @@
 						<block wx:if="{{currentTab == 3}}">
 							<view class='push-button'>
 								<!-- <view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view> -->
-								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk'>确认收货</view>
+								<view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk' wx:if="{{!cancelClick}}">确认收货</view>
+								<view class='push' wx:if="{{cancelClick}}">确认收货</view>
 							</view>
 						</block>
 					</view>

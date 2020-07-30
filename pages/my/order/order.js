@@ -26,7 +26,8 @@ Page({
     message:'正在努力加载中',
     dry_id:0,
     experience_amount:0,
-    level:0
+    level:0,
+    cancelClick:false
   },
 
   /**
@@ -261,6 +262,9 @@ Page({
 
   },
   submitOk: function(e){ //确认收货
+    that.setData({
+      cancelClick:true
+    });
     var order_id = e.currentTarget.dataset.id;
     let param = {
       page_code: 'p008',
@@ -278,6 +282,9 @@ Page({
             title: res.data.message
           });
           that.onShow();
+          that.setData({
+            cancelClick:false
+          });
         }
       }
     };
