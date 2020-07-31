@@ -288,6 +288,7 @@ display: none;
 	height: 90rpx;
   background: #333;
   border-top:1px solid #404040;
+  font-size:1rem;
 }
 .bottom-operate{
 	width: 100%;
@@ -347,6 +348,7 @@ display: none;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size:0.6rem;
 }
 
 
@@ -456,7 +458,7 @@ display: none;
   color:#DAB866;
 }
 .money-title{
-  font-size:1.2rem;
+  font-size:1rem;
   color: #fff;
 }
 .detail-item-abstract{

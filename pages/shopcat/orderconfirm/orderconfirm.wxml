@@ -1,4 +1,4 @@
-<view>
+<view class="size-text">
 	<view class='lists'>
 
 		<view class='goods' bindtap="goAddress">
@@ -157,6 +157,9 @@
 	<view class="bottom">
 		<view class="bottom-operate">
 			<view class="bottom-operate price">合计：
+       <!-- 加载 -->
+        <view class="loader-inner ball-clip-rotate"><view></view></view>
+
 				<text style="color:#DAB866">￥{{payAmount?payAmount:'0.00'}}</text>
 			</view>
 			<view wx:if="{{items.products}}" class="bottom-operate button" catchtap='confirmPay' style='background-color:#DAB866;'>提交订单</view>

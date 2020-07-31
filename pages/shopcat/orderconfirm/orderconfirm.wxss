@@ -20,7 +20,6 @@
   align-items:center;
   background:#404040;
   color:#c6c6c6;
-  font-size:28rpx;
   line-height:1.5;
   padding:20rpx;
 }
@@ -47,7 +46,6 @@
 }
 .name{
   color:#fff;
-  font-size:32rpx;
   padding-right:10px;
 }
 .goods-text{
@@ -94,7 +92,7 @@ background: #404040;
   -webkit-line-clamp: 1;
   overflow: hidden;
   color:#fff;
-  font-size:40rpx;
+  font-size:1rem;
 }
 
 .item{
@@ -105,12 +103,11 @@ background: #404040;
 
 .sale{
   color:#DAB866;
-  font-size:40rpx;
+  font-size:1.2rem;
   line-height:1.5;
 }
 
 .abstract{
-  font-size: 28rpx;
    display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -120,7 +117,6 @@ background: #404040;
 .gift{
   background:#404040;
   color:#DAB866;
-  font-size:0.8rem;
   padding:6rpx;
 }
 .space{
@@ -133,6 +129,7 @@ background: #404040;
   position: fixed;
 	bottom: 0;
 	display: block;
+  font-size: 1rem;
 }
 .bottom-operate{
 	width: 100%;
@@ -140,7 +137,7 @@ background: #404040;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-  font-size: 32rpx;
+  
   background-color: #333;
   border-top: 1px solid #404040;
   color:#c6c6c6;
@@ -152,7 +149,6 @@ background: #404040;
 	justify-content: left;
 	flex-direction: row;
 	align-items: center;
-  font-size: 32rpx;
   background-color: #FFF;
   color: #c6c6c6 ;
 }
@@ -192,7 +188,6 @@ background: #404040;
   height:42rpx;
 }
 .coupon-left text{
-  font-size:28rpx;
   color:#c6c6c6;
 }
 .coupon-right{
@@ -214,13 +209,7 @@ background: #404040;
   flex-direction: column;
 }
 .coupon-hd{
-  font-size:rem;
-  line-height:1.5;
   color:#fff;
-}
-.coupon-text{
-  font-size:0.8rem;
-  line-height: 1.5;
 }
 
 
@@ -263,7 +252,7 @@ display: none;
 .just .sale{
   color:#DAB866;
   font-weight:bold;
-  font-size:24rpx;
+  font-size:0.6rem;
   line-height:1.5;
   width: 80px;
 }
@@ -277,14 +266,14 @@ display: none;
 }
 .just .spec{
   padding: 20rpx;
-  font-size: 24rpx;
+  font-size: 0.6rem;
   line-height:1.5;
   color:#c6c6c6;
 }
 .just .btn{
   padding: 5rpx 15rpx;
   margin: 10rpx;
-  font-size: 24rpx;
+  font-size: 0.6rem;
   line-height:1.5;
   width: 100px;
 }
@@ -310,7 +299,7 @@ display: none;
   justify-content: space-between;
 }
 .detail-sales{
-  font-size:1.2rem;
+  font-size:1rem;
   color:#ffff;
   line-height: 2;
 }
@@ -318,12 +307,12 @@ display: none;
   text-decoration: line-through;
 }
 .text-size{
-   font-size:32rpx;
+   font-size:1rem;
    line-height: 2;
    color:#c6c6c6;
 }
 .sales-spec{
-  font-size:32rpx;
+  font-size:1rem;
   line-height:1.5;
   color:#DAB866;
 }
@@ -382,4 +371,43 @@ display: none;
   background-color:#DAB866;
   font-size:1.2rem;
 }
-  
+
+/* 加载效果 */
+.ball-clip-rotate > view {
+  border-radius: 100%;
+  margin: 4rpx;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  border: 2px solid #c6c6c6;
+  border-bottom-color: transparent;
+  height: 30rpx;
+  width: 30rpx;
+  background: transparent !important;
+  display: inline-block;
+  -webkit-animation: rotate 0.75s 0s linear infinite;
+          animation: rotate 0.75s 0s linear infinite; }
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg); }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg); }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
