@@ -48,15 +48,17 @@
 								<view class='list-left'>
 									<image src='{{item1.product_image?item1.product_image[0].image_url:""}}'></image>
 								</view>
-								<view class='list-right size-titleone '>
+								<view class='list-right  '>
 									<view class='column '>
 										<view class='right-text'>{{item1.category_desc}}</view>
 									</view>
 									<view class='column'>
 										<view class='right-text'>￥{{item1.product_amount}}</view>
-										<text class='decoration'>￥{{item1.product_before_amount}}</text>
 										<view class='piece'>× {{item1.product_count}}</view>
 									</view>
+                  <view class='column'>
+                    <text class='decoration'>￥{{item1.product_before_amount}}</text>
+                  </view>
 									<view class='column col-content'>
 										<view class='abstract'>{{item1.frozeno_introduction}}</view>
 									</view>
@@ -154,7 +156,7 @@
 					</view>
 				</view>
 
-				<view class='plc-title col-title size-titleone page-pd'>
+				<view class='plc-title col-title  page-pd'>
 					<view class='plc-box'>已签收</view>
 				</view>
 
