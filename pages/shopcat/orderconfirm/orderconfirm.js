@@ -29,7 +29,8 @@ Page({
     experience:0,
     isCheckDry:2, //2：未选中 1：选中导入仪
     bean:0,
-    level:0
+    level:0,
+    isLoadSum:true  //计算合计金额加个转圈
   },
 
   /**
@@ -209,7 +210,8 @@ Page({
       sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
-          items: datas
+          items: datas,
+          isLoadSum:true,
         });
         setTimeout(function() {
           //计算实付款
@@ -316,6 +318,9 @@ Page({
 
   //计算可用的积分数,并抵扣后获得实付款
   sumUsingPoint: function() {
+    that.setData({
+      isLoadSum:true
+    });
     var cInfo = that.data.customerInfo;
     var tInfo = that.data.transform;
     var pInfo = that.data.items.products;
@@ -355,6 +360,9 @@ Page({
       });
     }
 
+    that.setData({
+      isLoadSum:false
+    });
     console.log('payAmount:----');
     console.log(that.data.payAmount);
   },
@@ -426,6 +434,9 @@ Page({
         payAmount: parseFloat(discountAmount) - parseFloat(point) + parseInt(dryAm) - parseFloat(that.data.bean)
       });
     }
+    that.setData({
+      isLoadSum:false
+    });
   },
 
   getAddress: function () {

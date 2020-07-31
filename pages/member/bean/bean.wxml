@@ -6,7 +6,7 @@
     </view>
     <view class='integral-current1'>
       <text class='' >待入账： </text>
-      <text class="current1-text" >20 </text>
+      <text class="current1-text" >{{customer.not_entry_bean?customer.not_entry_bean:0}} </text>
     </view>
   </view>
   <view class='integral-content'>

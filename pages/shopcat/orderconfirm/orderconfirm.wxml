@@ -158,7 +158,7 @@
 		<view class="bottom-operate">
 			<view class="bottom-operate price">合计：
        <!-- 加载 -->
-        <view class="loader-inner ball-clip-rotate"><view></view></view>
+        <view class="loader-inner ball-clip-rotate" wx:if="{{isLoadSum}}"><view></view></view>
 
 				<text style="color:#DAB866">￥{{payAmount?payAmount:'0.00'}}</text>
 			</view>

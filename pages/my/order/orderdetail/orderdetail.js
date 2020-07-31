@@ -496,5 +496,9 @@ Page({
       });
     }
   },
-
+  goDepositPost:function(){
+    wx.navigateTo({
+      url: '/pages/post/post?type=22'
+    })
+  },
 })

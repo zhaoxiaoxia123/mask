@@ -30,7 +30,7 @@
 					</block>
 				</block>
 			</swiper>
-			<view class="activity" wx:if="{{level >= 1}}">
+			<view class="activity" wx:if="{{level >= 1 && items.category_id != dry_id}}">
 				<image mode="widthFix" src="{{promotionPicture}}" style="width:100%;"></image>
 				<view class="activity-box">
 					<view class="activity-item activity-item-active">

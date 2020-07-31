@@ -37,6 +37,7 @@ Page({
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
+        is_bean_entry:1
       };
       that.getUserDetail(param);
 

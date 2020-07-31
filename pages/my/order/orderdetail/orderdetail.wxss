@@ -327,3 +327,9 @@
 .rmb-price {
   font-size: 0.8rem;
 }
+
+.page-bottom {
+  padding-bottom:30px;
+  margin-bottom:30px;
+}
+

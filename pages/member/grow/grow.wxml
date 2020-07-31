@@ -29,17 +29,6 @@
       <text class="current1-text">截止到{{customer.frozeno_validity?customer.frozeno_validity:''}}，合计{{customer.growth?customer.growth:0}}成长值将失效 </text>
     </view>
   </view>
-<!-- 
-  <view class='integral'>
-    <view class='integral-current'>
-      <text class='current1'>{{customer.growth?customer.growth:0}}</text>
-      <text>当前成长值 </text>
-    </view>
-    <view class='integral-current1'>
-      <image class="icon32 pdr10" src="../../img/mark@2x.png"></image>
-      <text class=''>截止到{{customer.validity?customer.validity:''}}，合计{{customer.growth?customer.growth:0}}成长值将失效 </text>
-    </view>
-  </view> -->
  <view class='member-branch radius'>
     <view class='branch-content'>
       <view class='branch-text branch-hd'>
@@ -56,8 +45,6 @@
         <text>邀请好友成为会员</text>
       </view>
       <view class='branch-text'>
-      <!-- <view class='branch-text' bindtap='shareApp'> -->
-        <!-- <button>去邀请</button> -->
         <button class="button-share" open-type="share">去邀请</button>
       </view>
     </view>
@@ -68,7 +55,7 @@
       </view>
        <view class='branch-text' bindtap="gohome">
         <button>去购物</button>
-      </view>  
+      </view>
     </view>
   </view>
   <view class='integral-content'>

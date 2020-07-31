@@ -94,8 +94,7 @@
 			</view>
 		</view>
 
-
-		<view class='list-wap' bindtap='goWorkBench' wx:if="{{level > 1}}">
+		<view class='list-wap' bindtap='goWorkBench' wx:if="{{level >= 4}}">
 			<view class='left'>
 				<image class='icon40' src='../img/ftwork.png'></image>
 				<text>前往工作台</text>

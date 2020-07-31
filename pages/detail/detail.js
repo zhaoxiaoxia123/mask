@@ -32,7 +32,8 @@ Page({
     experience_id:0,
     experience_amount:0,
     isOver:false,
-    surplusSale:0
+    surplusSale:0,
+    dry_id:0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -47,6 +48,7 @@ Page({
       // productId: getApp().globalData.productId,
       experience_id:app.globalData.experience_id,
       experience_amount:app.globalData.experience_amount,
+      dry_id:app.globalData.dry_id,
       level: wx.getStorageSync("level")
     });
     var param = {
