@@ -99,7 +99,9 @@
 			<view class="time {{items[0].has_dry_deposit != 1?'page-bottom':''}}">发货时间：
 				<text class='time-text'>{{items[0].frozeno_send_time?items[0].frozeno_send_time:""}}</text>
 			</view>
-			<view wx:if="{{items[0].has_dry_deposit == 1}}" bindtap="goDepositPost"  class="time {{items[0].has_dry_deposit == 1?'page-bottom':''}}" style="font-size: 11px;">因本订单含有租赁商品,点击付款即同意押金“充值协议”</view>
+			<view wx:if="{{items[0].has_dry_deposit == 1}}" bindtap="goDepositPost"  class="time {{items[0].has_dry_deposit == 1?'page-bottom':''}}" style="font-size: 0.6rem;">
+      因本订单含有租赁商品,点击付款即同意押金<text class="deposit-a">《充值协议》</text>
+      </view>
 			<!-- <view class='time'>物流公司：
 				<text class='time-text'>{{items[0].frozeno_express_company?items[0].frozeno_express_company:''}}</text>
 			</view>

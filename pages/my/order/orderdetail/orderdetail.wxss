@@ -332,4 +332,7 @@
   padding-bottom:30px;
   margin-bottom:30px;
 }
-
+.deposit-a{
+  text-decoration:underline;
+    font-weight: bold;
+}
