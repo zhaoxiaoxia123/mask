@@ -120,15 +120,15 @@
 			<view class="page-pd set-meal" wx:if="{{items.gift.length > 0}}">
 				<view class="money-title">搭配商品</view>
 				<view class="set-meal-box" wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
-					<view class="set-meal-item" wx:if="{{g.category_id == items.dry_category_id}}" bindtap="goDryDetail" data-id="{{g.category_id}}">
+					<view class="set-meal-item" wx:if="{{g.category_id == items.dry_category_id}}">
 						<view class="set-meal-bar">
 							<view class="radio-group">
 								<radio color='#262626' data-amount="{{items.dry_amount}}" data-id="{{g.category_id}}" bindtap='checkDry' checked='{{items.is_check_dry == 1}}'></radio>
 							</view>
-							<view class="set-meal-left">
+							<view class="set-meal-left" bindtap="goDryDetail" data-id="{{g.category_id}}">
 								<image src="{{g.image_url}}"></image>
 							</view>
-							<view class="set-meal-right">
+							<view class="set-meal-right" bindtap="goDryDetail" data-id="{{g.category_id}}">
 								<view class="set-meal-title">{{g.category_desc}}</view>
 								<view class="set-meal-money">
 									<view class="set-meal-money-left">
