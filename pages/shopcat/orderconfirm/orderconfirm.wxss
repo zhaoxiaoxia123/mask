@@ -352,7 +352,7 @@ display: none;
 .beans{
   display: flex;
   justify-content: center;
-  padding:100rpx 20rpx;
+  padding:80rpx 20rpx;
 }
 .beans .column-form{
   padding:28rpx 20rpx;

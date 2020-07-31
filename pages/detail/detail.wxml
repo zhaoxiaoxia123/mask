@@ -75,7 +75,7 @@
 								<view class="activity-border size-tagging">每天{{items.frozeno_start_date}}点开抢</view>
 							</view>
 							<view wx:if="{{ ! isOver}}">
-								<view class="activity-border size-tagging">剩余：{{surplusSale}}件</view>
+								<view class="activity-border size-tagging">剩余:{{surplusSale}}件</view>
 							</view>
 						</view>
 					</view>
