@@ -355,13 +355,19 @@ display: none;
   padding:80rpx 20rpx;
 }
 .beans .column-form{
-  padding:28rpx 20rpx;
-  width:50%;
-  border:1px solid #c6c6c6;
+  /* padding:28rpx 20rpx; */
+  width:80%;
+  /* border:1px solid #c6c6c6; */
   margin-top:20rpx;
+  text-align:right;
+  color:#c6c6c6;
 }
 .beans .column-form input{
-  font-size:1.5rem;
+  font-size:3rem;
+  height:100rpx;
+  color:#c6c6c6;
+  border-bottom:1px solid #333;
+  padding:20rpx;
 }
 .beans-bottom{
   display: flex;

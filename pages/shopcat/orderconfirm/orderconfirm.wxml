@@ -274,25 +274,24 @@
 		<view class='list'>
 			<view class='detail-center'>
 				<view class='sales'>
-					<view class='detail-sales'>智美豆
-						<view class="detail-item-money">
+					<view class='detail-sales'>最多可使用智美豆：<text>{{payAmount>customerInfo.frozeno_bean?customerInfo.frozeno_bean:payAmount}}</text>
+						<!-- <view class="detail-item-money">
 							<text class="size-money ">{{customerInfo.frozeno_bean?customerInfo.frozeno_bean:0.00}}</text>
-							<!-- <text >.00</text> -->
-						</view>
+						</view> -->
 					</view>
 					<image class='icon40' src='../../img/close@2x.png' bindtap='close3'></image>
 				</view>
 			</view>
 		</view>
 		<view class='column'>
-			<view class="coupon-text">
-				订单可使用智美豆：<text>{{payAmount>customerInfo.frozeno_bean?customerInfo.frozeno_bean:payAmount}}</text>
-			</view>
+			<!-- <view class="coupon-text">
+				可使用智美豆：
+			</view> -->
 		</view>
 		<!-- 默认为订单可使用金额，需要判断订总金额和订单可使用金额 -->
 		<view class=' beans'>
 			<view class="column-form">
-				<input placeholder='金额' type="number" bindinput="setBeanInput" value='{{bean}}' maxlength="6"></input>
+				<input placeholder='0' type="number" bindinput="setBeanInput" value='{{bean}}' maxlength="6"></input>
 			</view>
 		</view>
 		<!-- <view class="coupon-text">
