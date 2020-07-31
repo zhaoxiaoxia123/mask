@@ -14,7 +14,7 @@
   <!-- <view bindtap="test">test</view> -->
 <!-- <web-view src="https://mp.weixin.qq.com/s/1eHAl1mx6-MPsTdtQTuCEw" wx:if=""></web-view> -->
   <!--滑块容器相关配置，以下为参数  广告"-->
-  <swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{false}}">
+  <swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{true}}">
     <!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名   mode="widthFix"-->
     <block wx:for="{{swipers}}" wx:key="*this" wx:for-item="item1">
       <swiper-item wx:if="{{item1.type == 9}}">
