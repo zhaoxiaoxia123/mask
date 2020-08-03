@@ -290,7 +290,7 @@
 		<!-- 默认为订单可使用金额，需要判断订总金额和订单可使用金额 -->
 		<view class=' beans'>
 			<view class="column-form">
-				<input placeholder='输入使用智美豆' type="number" bindinput="setBeanInput" value='{{bean}}' maxlength="6"></input>
+				<input placeholder='0' type="number" bindinput="setBeanInput" value='{{bean}}' maxlength="6"></input>
 			</view>
 		</view>
 		<!-- <view class="coupon-text">
