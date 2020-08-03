@@ -10,15 +10,10 @@ Page({
     products: '',
     items: [], //商品
     address: [], //地址
-    transform: [], //积分设置
     customerInfo: [], //用户信息
     ticketList: [], //卡券
-    productAmount: 0, //商品未做任何折扣和抵扣的总价
-    discountAmount: 0, //商品会员折扣后的总价
     payAmount: 0, //使用积分后的实付款
-    usingPoint: 0, //使用积分值
     usingTicketAmount: 0, //使用优惠券的抵扣值
-    isUsePoint: false,
     isCheckTicket: 9999, //存储选择卡券索引  9999为不用卡券
     isCheckExpressCompany: 2, //存储选择快递  9999为随机
     addressId:0,
@@ -45,8 +40,6 @@ Page({
       experience_amount: app.globalData.experience_amount,
       level: wx.getStorageSync("level")
     });
-    console.log('that.data.isCheckDry:----');
-    console.log(that.data.isCheckDry);
   },
 
   /**
@@ -73,14 +66,7 @@ Page({
         // customer_id: wx.getStorageSync('customerId')
       };
       that.getUserDetail(param);
-    
-      //查询积分是否可抵用
-      var transformParam = {
-        page_code: 'p017',
-        code: 'jf01'
-      };
-      that.getTransform(transformParam);
-
+  
       //获取商品信息
       var param_p = {
         page_code: 'p005',
@@ -92,9 +78,9 @@ Page({
       that.getProducts(param_p);
       that.getAddress(); //获取用户设置的默认地址
       
-      if(that.data.invoiceId){
-        that.getInvoice(); //获取用户设置的发票信息
-      }
+      // if(that.data.invoiceId){
+      //   that.getInvoice(); //获取用户设置的发票信息
+      // }
     }
   },
 
@@ -138,12 +124,7 @@ Page({
   },
 
   checkboxChange: function(e) {
-    if (e.target.dataset.type == 'isUsePoint') {
-      that.setData({
-        isUsePoint: !that.data.isUsePoint
-      });
-      that.sumUsingPoint(); //计算可用的积分数,并抵扣后获得实付款
-    } else if (e.target.dataset.type == 'isCheckTicket') {
+    if (e.target.dataset.type == 'isCheckTicket') {
       that.setData({
         isCheckTicket: (e.target.dataset.v == that.data.isCheckTicket ? 9999 : e.target.dataset.v)
       })
@@ -186,22 +167,6 @@ Page({
     };
     base.httpRequest(params);
   },
-
-  getTransform: function(param) {
-    var params = {
-      url: app.globalData.domainUrl,
-      data:param,
-      method:'GET',
-      sCallback: function (res) {
-        var datas = res.data.data;
-        that.setData({
-          transform: datas
-        })
-      }
-    };
-    base.httpRequest(params);
-  },
-
   getProducts: function(param) { //读取商品信息
     var params = {
       url: app.globalData.domainUrl,
@@ -214,163 +179,55 @@ Page({
           isLoadSum:true,
         });
         setTimeout(function() {
-          //计算实付款
-          that.sumUsingPoint();
-          // that.setData({
-          //   bean:(that.data.payAmount>that.data.customerInfo.frozeno_bean?that.data.customerInfo.frozeno_bean:that.data.payAmount)
-          // });
+          //计算商品总价（未减卡券智美豆前的会员折扣价相加的总价）
+          that.sumProductTotalAmount(1);
         }, 2000);
       }
     };
     base.httpRequest(params);
   },
 
-  //计算商品总价
-  sumProductAmount: function(pInfo, cInfo) {
-    var productAmount488 = 0;
+  //计算商品总价（未减卡券智美豆前的会员折扣价相加的总价）
+  //num 1: 可查询卡券等信息   2：不调用查看卡券信息
+  sumProductTotalAmount: function(num) {
+    var pInfo = that.data.items.products;
     var productAmount = 0;
-    var dryCount = 0;
-    var dryAmount = 0;   //导入仪不参加任何折扣
     for (var i = 0; i < pInfo.length; i++) {
-      var ret = that.returnProductAmountAndDRYCount(pInfo,i);
-      // if(pInfo[i]['category_id'] == that.data.experience && parseInt(pInfo[i]['sale']) < parseInt(pInfo[i]['frozeno_promotion_count'])){
-      //   productAmount488 += ret['productAmount'];
-      // }else{
-      if(pInfo[i]['customer_amount'] == that.data.experience_amount && parseInt(pInfo[i]['sale']) < parseInt(pInfo[i]['frozeno_promotion_count'])){
-        productAmount488 += ret['productAmount'];
-      }else{
-        productAmount += ret['productAmount'];
-      }
-      if((pInfo[i]['customer_amount'] == that.data.experience_amount && parseInt(pInfo[i]['sale']) >= parseInt(pInfo[i]['frozeno_promotion_count'])) || pInfo[i]['customer_amount'] != that.data.experience_amount){
-        dryCount += ret['dryCount'];
-      }else{
-        dryCount += 0;
-      }
-      dryAmount += ret['dryAmount'];
+      productAmount += parseInt(pInfo[i]['customer_amount_before'])*parseInt(pInfo[i]['join_product_count']);
     }
-    //商品总价会员折扣后的价格  productAmount
-    console.log('sumProductAmount计算商品总价):----');
-    console.log(productAmount);
-    console.log(cInfo.discount);
-    var discountAmount = productAmount;
-    // if (productAmount != 0){
-    //   discountAmount = (cInfo.discount != 0 ? ((productAmount - (that.data.dry * dryCount)) * (cInfo.discount / 100) + (that.data.dry * dryCount)).toFixed(2) : productAmount);
-    // }
-    
-    console.log(discountAmount);
-    productAmount = parseFloat(productAmount);
-    discountAmount = Math.floor(parseFloat(discountAmount));
-    dryAmount = parseFloat(dryAmount);
-    var productAmounts = productAmount + dryAmount+productAmount488;
-    var discountAmounts = discountAmount + dryAmount+productAmount488;
-
-    console.log(productAmount488);
-    console.log(productAmount);
-    console.log(discountAmounts);
-    console.log(productAmounts);
-    //商品总价
     that.setData({
-      productAmount: productAmounts,
-      discountAmount: discountAmounts,
-      payAmount: discountAmounts
+      payAmount: parseFloat(productAmount)
     });
-    if (that.data.payAmount && !that.data.items.is_have_new_ticket) {
+    if(num == 1){
+      //是否查询卡券
+      that.isSelectTicket();
+    }else{
+      //计算减去卡券金额后的实付款
+      that.subTicketAmount();
+      //商品总价减去智美豆后价格
+      that.subBeanAmount();
+    }
+  },
+  //是否查询卡券
+  isSelectTicket(){
+    var productAmount = that.data.payAmount;
+    if (productAmount && !that.data.items.is_have_new_ticket) {
       that.getTicketList(); //获取卡券列表
     }else{
       if (that.data.items.sub_amount != 0){
         //新人使用新人卡券商品总价计算
         that.setData({
-          productAmount: productAmounts,
-          discountAmount: (discountAmounts - parseFloat(that.data.items.sub_amount)),
-          payAmount: (discountAmounts - parseFloat(that.data.items.sub_amount))
+          payAmount: (productAmount - parseFloat(that.data.items.sub_amount))
         });
       }
     }
   },
-
-  returnProductAmountAndDRYCount: function(pInfo,i){
-    var productAmount = 0;
-    var dryCount = 0;
-    var dryAmount = 0;
-    var ret = {};
-      if (pInfo[i]['frozeno_is_discount'] == 1){
-        // if(app.globalData.experience_amount == pInfo[i]['customer_amount']){
-          productAmount = (parseFloat(pInfo[i]['customer_amount']) * pInfo[i]['join_product_count']);
-        // }else{
-        //   productAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
-        // }
-        if (pInfo[i]['frozeno_is_sub_dry'] == 1){
-          dryCount = parseInt(pInfo[i]['join_product_count']);
-        }
-      }else{
-        productAmount = (parseFloat(pInfo[i]['customer_amount']) * pInfo[i]['join_product_count']);
-        // dryAmount = (parseFloat(pInfo[i]['frozeno_discount_amount']) * pInfo[i]['join_product_count']);
-      }
-      console.log('returnProductAmountAndDRYCount:----');
-      console.log(productAmount);
-      console.log(dryCount);
-      console.log(dryAmount);
-      ret['productAmount'] = productAmount;
-      ret['dryCount'] = dryCount;
-      ret['dryAmount'] = dryAmount;
-      return ret;
-  },
-
-  //计算可用的积分数,并抵扣后获得实付款
-  sumUsingPoint: function() {
+  //商品总价减去卡券后价格
+  subTicketAmount:function(){
     that.setData({
       isLoadSum:true
     });
-    var cInfo = that.data.customerInfo;
-    var tInfo = that.data.transform;
-    var pInfo = that.data.items.products;
-    that.sumProductAmount(pInfo, cInfo); //获取商品总价
-    console.log('sumProductAmount):----');
-    console.log(that.data.payAmount);
-    console.log(that.data.productAmount);
-    var tPayAmount = that.sumCheckTicket(); //减卡券价值后的总价
-    console.log(tPayAmount);
-    var discountAmount = tPayAmount; //that.data.discountAmount;
-    var productAmount = that.data.productAmount;
-    var dryAm = 0;
-    if(that.data.isCheckDry == 1){
-      dryAm = that.data.items.dryInfos.dry_amount;
-    }
-    console.log('parseFloat(that.data.bean):----');
-    console.log(parseFloat(that.data.bean));
-    console.log(parseFloat(discountAmount));
-    console.log(parseInt(dryAm));
-    if (cInfo.frozeno_point > 0 && that.data.isUsePoint) {
-      if (tInfo.type == 2) { //若满减
-        if (productAmount >= tInfo.satisfy_amount) { //商品总价是否大于等于满减金额设置
-          that.sumAmount(cInfo.frozeno_point, tInfo.rate, discountAmount);
-        } else { //小于：则不可使用积分。
-          that.setData({
-            usingPoint: 0,
-            payAmount: parseFloat(discountAmount) + parseInt(dryAm) - parseFloat(that.data.bean)
-          });
-        }
-      } else if (tInfo.type == 1) {
-        that.sumAmount(cInfo.frozeno_point, tInfo.rate, discountAmount);
-      }
-    } else {
-      that.setData({
-        usingPoint: 0,
-        payAmount: parseFloat(discountAmount) + parseInt(dryAm) - parseFloat(that.data.bean)
-      });
-    }
-
-    that.setData({
-      isLoadSum:false
-    });
-    console.log('payAmount:----');
-    console.log(that.data.payAmount);
-  },
-
-  //计算使用卡券后的付款金额
-  sumCheckTicket: function() {
-    var productAmount = that.data.productAmount; //商品总价
-    var discountAmount = that.data.discountAmount; //商品会员折扣后的总价
+    var productAmount = parseFloat(that.data.payAmount);
     var tIndex = that.data.isCheckTicket - 1; //选中卡券索引
     var usingTicketAmount = 0;
     if (tIndex != 9998) { //上面索引减了个1
@@ -378,19 +235,19 @@ Page({
       var paysAmount = 0;
       if (tList[tIndex]['ticket_type'] == 1) { //通用
         usingTicketAmount = tList[tIndex]['ticket_amount'];
-        paysAmount = discountAmount - tList[tIndex]['ticket_amount'];
+        paysAmount = productAmount - tList[tIndex]['ticket_amount'];
         if (paysAmount < 0){
           paysAmount = 0;
         }
       } else if (tList[tIndex]['ticket_type'] == 2) { //满减
         if (productAmount >= tList[tIndex]['satisfy_amount']) {
           usingTicketAmount = tList[tIndex]['ticket_amount'];
-          paysAmount = discountAmount - tList[tIndex]['ticket_amount'];
+          paysAmount = productAmount - tList[tIndex]['ticket_amount'];
           if (paysAmount < 0) {
             paysAmount = 0;
           }
         } else {
-          paysAmount = discountAmount;
+          paysAmount = productAmount;
         }
       }
       that.setData({
@@ -399,39 +256,8 @@ Page({
       });
     } else {
       that.setData({
-        payAmount: discountAmount,
+        payAmount: productAmount,
         usingTicketAmount: 0
-      });
-    }
-    return that.data.payAmount;
-  },
-  /**
-   * 最终计算实付款
-   * point： 用户积分数
-   * rate:   transform表设置的积分抵扣价格的百分比例
-   * discountAmount：  商品的会员折扣价格
-   */
-  sumAmount: function(point, rate, discountAmount) {
-    //可抵用积分数
-    var usingPoint = (discountAmount * (parseFloat(rate) / 100));
-    usingPoint = parseInt(usingPoint);// .toFixed(2);
-    var dryAm = 0;
-    console.log('discountAmount:----');
-    console.log(point);
-    console.log(usingPoint);
-    console.log(parseFloat(point) >= parseFloat(usingPoint));
-    if(that.data.isCheckDry == 1){
-      dryAm = that.data.items.dryInfos.dry_amount;
-    }
-    if (parseFloat(point) >= parseFloat(usingPoint)) { //用户积分大于等于可抵用积分数
-      that.setData({
-        usingPoint: usingPoint,
-        payAmount: parseFloat(discountAmount) - parseFloat(usingPoint) + parseInt(dryAm) - parseFloat(that.data.bean)
-      });
-    } else {
-      that.setData({
-        usingPoint: point, //可用积分为用户积分值
-        payAmount: parseFloat(discountAmount) - parseFloat(point) + parseInt(dryAm) - parseFloat(that.data.bean)
       });
     }
     that.setData({
@@ -439,6 +265,12 @@ Page({
     });
   },
 
+  //商品总价减去智美豆后价格
+  subBeanAmount:function(){
+    that.setData({
+      payAmount: parseFloat(that.data.payAmount) - parseFloat(that.data.bean)
+    });
+  },
   getAddress: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
@@ -474,29 +306,6 @@ Page({
     base.httpRequest(params);
     }
   },
-  getInvoice:function(){
-    if (wx.getStorageSync('customerId') && that.data.invoiceId > 0) {
-      // var param = '/p002?is_default=1&customer_id='+wx.getStorageSync('customerId');
-      var param = {
-        page_code: 'p006',
-        invoice_id: that.data.invoiceId
-      };
-      var params = {
-        url: app.globalData.domainUrl,
-        data:param,
-        method:'GET',
-        sCallback: function (res) {
-          var datas = res.data.data;
-          if (datas) {
-            that.setData({
-              invoice: datas
-            });
-          }
-        }
-      };
-      base.httpRequest(params);
-    }
-  },
   getTicketList: function() { //获取有效卡券列表
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     //获取卡券列表
@@ -519,6 +328,13 @@ Page({
         that.setData({
           ticketList: datas
         });
+        if(res.data.data.ticket_check){
+          that.setData({
+            isCheckTicket:res.data.data.ticket_check.check_key+1
+          });
+          //计算减去卡券金额后的实付款
+          that.sumProductTotalAmount(2);
+        }
       }
     };
     base.httpRequest(params);
@@ -547,7 +363,7 @@ Page({
           express_company: that.data.isCheckExpressCompany,
           customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
           invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
-          use_point: that.data.usingPoint,
+          use_point: 0,//that.data.usingPoint,
           bean: that.data.bean,
           amount: that.data.payAmount,
           is_check_dry: that.data.isCheckDry,
@@ -641,8 +457,8 @@ Page({
     that.setData({
       couponflexwindow: couponflexwindow
     });
-    //计算实付款
-    that.sumUsingPoint();
+    //ji算商品总价
+    that.sumProductTotalAmount(2);
   },
 
   setBeanInput: function(e) {
@@ -661,8 +477,8 @@ Page({
       });
     }else{
       that.close3();
-      //计算实付款
-      that.sumUsingPoint();
+      //计算减去卡券金额后的实付款
+      that.sumProductTotalAmount(2);
     }
   },
 })
