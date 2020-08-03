@@ -30,7 +30,10 @@
 					<view class='list-right'>
 						<view class='right-text'>{{item.category_desc}}</view>
 						<view class='item'>
-							<view class='rmb-price'><text>￥</text><text class="sale-price">{{item.product_amount}}</text></view>
+							<view class='rmb-price'>
+							<text>￥</text><text class="sale-price">{{item.product_amount}}</text>
+							<text wx:if="{{item.is_yj == 1}}">(押金)</text>
+							</view>
 							<view class='piece'>× {{item.product_count}}</view>
 						</view>
 						<text class='decoration'>￥{{item.product_before_amount}}</text>
@@ -99,8 +102,10 @@
 			<view class="time {{items[0].has_dry_deposit != 1?'page-bottom':''}}">发货时间：
 				<text class='time-text'>{{items[0].frozeno_send_time?items[0].frozeno_send_time:""}}</text>
 			</view>
-			<view wx:if="{{items[0].has_dry_deposit == 1}}" bindtap="goDepositPost"  class="time {{items[0].has_dry_deposit == 1?'page-bottom':''}}" style="font-size: 0.6rem;">
-      因本订单含有租赁商品,点击付款即同意押金<text class="deposit-a">《充值协议》</text>
+			<view class='time'>补充说明：
+				<view wx:if="{{items[0].has_dry_deposit == 1}}" bindtap="goDepositPost"  class="time {{items[0].has_dry_deposit == 1?'page-bottom':''}}" style="font-size: 0.6rem;">
+				因本订单含有租赁商品,点击付款即同意押金<text class="deposit-a">《充值协议》</text>
+				</view>
       </view>
 			<!-- <view class='time'>物流公司：
 				<text class='time-text'>{{items[0].frozeno_express_company?items[0].frozeno_express_company:''}}</text>
@@ -117,9 +122,9 @@
 			<!-- || items[0].frozeno_order_state == 2  7.29佳总确定暂时取消 -->
 			<view class='push' bindtap="cancelOrder" wx:if="{{items[0].frozeno_order_state == 1}}">取消订单</view>
 			<view class='push push-active' bindtap="confirm" wx:if="{{items[0].frozeno_order_state == 3}}">确认收货</view>
-			<!-- <view class='push push-active' bindtap="payOrder" data-id="{{items[0].o_id}}" wx:if="{{items[0].frozeno_order_state == 1 && isClick}}">付款</view>
-      <view class='push push-active' wx:if="{{items[0].frozeno_order_state == 1 && !isClick}}">付款</view> -->
-			<view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view>
+			<view class='push push-active' bindtap="payOrder" data-id="{{items[0].o_id}}" wx:if="{{items[0].frozeno_order_state == 1 && isClick}}">付款</view>
+      <view class='push push-active' wx:if="{{items[0].frozeno_order_state == 1 && !isClick}}">付款</view>
+			<!-- <view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view> -->
 		</view>
 	</view>
 

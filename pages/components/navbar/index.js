@@ -46,9 +46,12 @@ Component({
   methods: {
     //回退
     _navBack: function () {
-      wx.navigateBack({
-        delta: 1
-      })      
+      // wx.navigateBack({
+      //   delta: 1
+      // })  
+      wx.switchTab({
+        url: '/pages/home/home',
+      }) 
     },
     //回主页
     _toIndex: function () {

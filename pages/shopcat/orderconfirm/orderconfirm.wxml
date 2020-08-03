@@ -59,6 +59,7 @@
 							<text>￥</text>
 							<text class="size-money ">{{items.dryInfos.dry_amount}}</text>
 							<text >.00</text>
+							<text wx:if="{{items.dryInfos.is_yj}}">(押金)</text>
 						</view>
 						<text class='decoration'>￥{{g.frozeno_amount}}</text>
 						<view class='item'>

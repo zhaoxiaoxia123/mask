@@ -1,93 +1,86 @@
 <!--pages/my/deposit/deposit.wxml-->
 <view class='page-pd size-text col-content'>
-  <view class='integral'>
-    <view class='integral-current'>
-      <text class='current1'>389</text>
-      <text>押金 </text>
-    </view>
-    <view class='integral-current1'>
-      <text class=''>20天后押金将转为导入仪购买款</text>
-      <!-- <text class="">2020-08-03 13:53</text> -->
-    </view>
-  </view>
+	<view class='integral'>
+		<view class='integral-current'>
+			<text class='current1'>{{customerInfo.dry_deposit?customerInfo.dry_deposit:'0.00'}}</text>
+			<text>押金</text>
+		</view>
+		<view class='integral-current1' wx:if="{{customerInfo.dry_deposit > 0}}">
+			<text class=''>20天后押金将转为导入仪购买款</text>
+			<!-- <text class="">2020-08-03 13:53</text> -->
+		</view>
+	</view>
 
-  <view class="lists">
-    <view class="list-item">
-      <view class="list-box">
-        <view class='list-left'>
-          <image src="{{item.product_image[0].image_url}}" lazy-load></image>
-        </view>
-        <view class='list-right'>
-          <view class='column'>
-            <view class='right-text'>冻龄智美钛金属导入仪</view>
-          </view>
-          <view class="detail-item-box">
-            <view class="detail-item-money wei">
-              <text>￥</text>
-              <text class="size-money ">389</text>
-              <text>.00</text>
-            </view>
-            <view class="detail-item-money-price">
-              <text class="decoration">￥998.00</text>
-            </view>
-          </view>
-        </view>
-      </view>
-      <!-- 申请退还押金和已退款 -->
-      <view class="push-button">
-        <view class="push push-active" bindtap="deposit">申请退还押金</view>
-      </view>
-    </view>
+	<view class="lists">
+		<view class="list-item">
+			<view class="list-box">
+				<view class='list-left'>
+					<image src="{{item.product_image[0].image_url}}" lazy-load></image>
+				</view>
+				<view class='list-right'>
+					<view class='column'>
+						<view class='right-text'>冻龄智美钛金属导入仪</view>
+					</view>
+					<view class="detail-item-box">
+						<view class="detail-item-money wei">
+							<text>￥</text>
+							<text class="size-money ">389</text>
+							<text>.00</text>
+						</view>
+						<view class="detail-item-money-price">
+							<text class="decoration">￥998.00</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<!-- 申请退还押金和已退款 -->
+			<view class="push-button">
+				<view class="push push-active" bindtap="deposit">申请退还押金</view>
+			</view>
+		</view>
 
-  </view>
+	</view>
 
 </view>
 
-<!-- 智美豆 -->
 <view class="just1 {{depositflexwindow==true?'': 'y'}}" bindtap='close3'></view>
 <view class="just {{depositflexwindow==true?'': 'y'}}">
-  <!--bindtap绑定事件-->
-  <view class='deposit size-text col-content'>
-    <view class='list-deposit'>
+	<!--bindtap绑定事件-->
+	<view class='deposit size-text col-content'>
+		<view class='list-deposit'>
 
-      <view class='detail-center'>
-        <view class='sales'>
-          <view class='detail-sales'>申请退还押金</view>
-          <image class='icon40' src='../../img/close@2x.png' bindtap='close3'></image>
-        </view>
-      </view>
+			<view class='detail-center'>
+				<view class='sales'>
+					<view class='detail-sales'>申请退还押金</view>
+					<image class='icon40' src='../../img/close@2x.png' bindtap='close3'></image>
+				</view>
+			</view>
 
-    </view>
+		</view>
 
-      <scroll-view scroll-y="true" style="height:650rpx;">
-          <view class='deposit-item page-pd'>
+		<scroll-view scroll-y="true" style="height:650rpx;">
+			<view class='deposit-item page-pd'>
 
-            <view class="deposit-hd">请在申请前阅读并同意以下条款：</view>
-            <view class="deposit-text">1、退还前请确认以下商品是否完好，没有出现人为造成的损坏，包括导入仪机身、充电线以及表皮电子连接线；</view>
-            <view class="deposit-text">2、请确认随单赠品是否完好，赠品内容请查看包括导入仪购买的订单；</view>
-            <view class="deposit-text">3、按下“同意并申请退还押金”按钮后，请将上述所有物品邮递至成都市下南大街59号世代锦江2502冻龄智美成都售后部；</view>
-            <view class="deposit-text">4、在我们收到货物并检查完好性后，我们会在24小时内退还押金；</view>
-            <view class="deposit-text">5、出现导入仪及赠品人为损坏或遗失，根据商品的损坏程度，冻龄智美有权要求用户进行赔偿；</view>
-            <view class="deposit-text">6、如导入仪出现非认为损坏，请申请保修，保修流程请查看导入仪说明书或咨询客服。</view>
-          
-          </view>
-      
-      </scroll-view>
+				<view class="deposit-hd">请在申请前阅读并同意以下条款：</view>
+				<view class="deposit-text">1、退还前请确认以下商品是否完好，没有出现人为造成的损坏，包括导入仪机身、充电线以及表皮电子连接线；</view>
+				<view class="deposit-text">2、请确认随单赠品是否完好，赠品内容请查看包括导入仪购买的订单；</view>
+				<view class="deposit-text">3、按下“同意并申请退还押金”按钮后，请将上述所有物品邮递至成都市下南大街59号世代锦江2502冻龄智美成都售后部；</view>
+				<view class="deposit-text">4、在我们收到货物并检查完好性后，我们会在24小时内退还押金；</view>
+				<view class="deposit-text">5、出现导入仪及赠品人为损坏或遗失，根据商品的损坏程度，冻龄智美有权要求用户进行赔偿；</view>
+				<view class="deposit-text">6、如导入仪出现非认为损坏，请申请保修，保修流程请查看导入仪说明书或咨询客服。</view>
 
+			</view>
 
+		</scroll-view>
 
-    <view class="ft-bottom ">
-      <view class="ft-bottom-box">
-        <view class="ft-bottom-operate ft-button" >同意并申请退还押金</view>
-      </view>
-    </view>
+		<view class="ft-bottom ">
+			<view class="ft-bottom-box">
+				<view class="ft-bottom-operate ft-button">同意并申请退还押金</view>
+			</view>
+		</view>
 
-    <!--按下按钮提示信息: 我们已经收到您的申请，请尽快将货物邮递至我们，感谢您的使用。 -->
+		<!--按下按钮提示信息: 我们已经收到您的申请，请尽快将货物邮递至我们，感谢您的使用。 -->
 
-    </view>
+	</view>
 
 </view>
-
-
-
-

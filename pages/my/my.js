@@ -171,7 +171,6 @@ Page({
       }
     };
     base.httpRequest(params);
-
   },
 
   bean: function (e) {

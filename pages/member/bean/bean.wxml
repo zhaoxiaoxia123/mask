@@ -5,7 +5,7 @@
       <text>可使用智美豆 </text>
     </view>
     <view class='integral-current1'>
-      <text class='' >待入账： </text>
+      <text class=''>待入账： </text>
       <text class="current1-text" >{{customer.not_entry_bean?customer.not_entry_bean:0}} </text>
     </view>
   </view>
@@ -17,11 +17,12 @@
 4、订单取消  + -->
     <view class='integral-text' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
       <view class='integral-title'>
-        <text class='text-title'>{{item.frozeno_order_name}}</text>
+        <text class='text-title'>{{item.log_title}}</text>
+        <text class='text-date' wx:if="{{item.frozeno_is_entry == 2}}">待入账</text>
         <text class='text-date'>{{item.created_at}} </text>
       </view>
       <!-- 待入账下添加面css：text-add-ash -->
-      <view class="text-add">
+      <view class="text-add {{item.frozeno_is_entry == 2?'text-add-ash':''}}">
         <view class="text-add-left">
             <text wx:if="{{item.frozeno_event_trend == 1}}">+</text>
             <text wx:if="{{item.frozeno_event_trend == 2}}">-</text>

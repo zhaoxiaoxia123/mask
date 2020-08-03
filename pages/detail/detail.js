@@ -445,11 +445,11 @@ Page({
     })
   },
   goDryDetail :function(e){
-    var product_id = e.currentTarget.dataset.id;
-    // app.globalData.productId = product_id;
-    console.log(product_id)
-    wx.navigateTo({
-      url: '../detail/detail?id='+product_id,
-    })
+    // var product_id = e.currentTarget.dataset.id;
+    // // app.globalData.productId = product_id;
+    // console.log(product_id)
+    // wx.navigateTo({
+    //   url: '../detail/detail?id='+product_id,
+    // })
   },
 })
