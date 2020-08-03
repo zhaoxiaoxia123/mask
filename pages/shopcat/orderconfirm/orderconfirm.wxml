@@ -230,15 +230,15 @@
 					<view>您还没有可用的优惠券</view>
 				</view>
 
-				<view class='column' wx:for="{{ticketList.ticket}}" wx:key="*this" wx:index="index" style="line-height: 50px" data-id="{{index}}" bindtap="checkTicket">
-					<view>
-						<view class="coupon-hd">{{item.ticket_name}}(￥{{item.ticket_amount}})</view>
-						<view class="coupon-text" wx:if="{{item.ticket_type == 1}}">
+				<view class='column' wx:for="{{ticketList.ticket}}" wx:key="*this" wx:index="index"  data-id="{{index}}" bindtap="checkTicket">
+					<view class="coupon-item">
+						<text class="coupon-hd">{{item.ticket_name}}(￥{{item.ticket_amount}})</text>
+						<text class="coupon-text" wx:if="{{item.ticket_type == 1}}">
 							全场通用
-						</view>
-						<view class="coupon-text" wx:if="{{item.ticket_type == 2}}">
+						</text>
+						<text class="coupon-text" wx:if="{{item.ticket_type == 2}}">
 							满{{item.satisfy_amount}}元使用
-						</view>
+						</text>
 					</view>
 					<view class='item'>
 						<checkbox-group>

@@ -106,7 +106,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 40rpx;
+  padding-bottom: 30rpx;
 }
 
 .payment-list-right image {
@@ -118,6 +118,7 @@
 .payment-center {
   display: flex;
   justify-content: space-around;
+  padding-bottom:30rpx;
 }
 
 .payment-1 {

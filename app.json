@@ -23,7 +23,8 @@
     "pages/member/grade/grade",
     "pages/member/grow/grow",
     "pages/post/post",
-    "pages/member/bean/bean"
+    "pages/member/bean/bean",
+    "pages/my/deposit/deposit"
   ],
   "window": {
     "backgroundTextStyle": "light",
