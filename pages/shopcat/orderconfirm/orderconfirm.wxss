@@ -211,6 +211,13 @@ background: #404040;
 .coupon-hd{
   color:#fff;
 }
+.coupon-item{
+  display: flex;
+  flex-direction: column;
+}
+.coupon-text{
+  line-height:1;
+}
 
 
 /* 弹窗 */

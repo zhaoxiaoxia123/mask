@@ -229,6 +229,11 @@ Page({
       url: '../my/service/service'
     })
   },
+  deposit: function (e) {
+    wx.navigateTo({
+      url: '../my/deposit/deposit'
+    })
+  },
   // customer: function (e) {
     // wx.navigateTo({
     //   url: '../my/customer/customer'
