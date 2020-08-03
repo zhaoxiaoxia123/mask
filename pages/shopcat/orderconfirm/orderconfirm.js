@@ -195,8 +195,12 @@ Page({
     for (var i = 0; i < pInfo.length; i++) {
       productAmount += parseInt(pInfo[i]['customer_amount_before'])*parseInt(pInfo[i]['join_product_count']);
     }
+    var dryAm = 0;
+    if(that.data.isCheckDry == 1){
+      dryAm = that.data.items.dryInfos.dry_amount;
+    }
     that.setData({
-      payAmount: parseFloat(productAmount)
+      payAmount: parseFloat(productAmount)+parseInt(dryAm)
     });
     if(num == 1){
       //是否查询卡券
@@ -232,22 +236,24 @@ Page({
     var usingTicketAmount = 0;
     if (tIndex != 9998) { //上面索引减了个1
       var tList = that.data.ticketList.ticket; //卡券列表
-      var paysAmount = 0;
-      if (tList[tIndex]['ticket_type'] == 1) { //通用
-        usingTicketAmount = tList[tIndex]['ticket_amount'];
-        paysAmount = productAmount - tList[tIndex]['ticket_amount'];
-        if (paysAmount < 0){
-          paysAmount = 0;
-        }
-      } else if (tList[tIndex]['ticket_type'] == 2) { //满减
-        if (productAmount >= tList[tIndex]['satisfy_amount']) {
+      var paysAmount = productAmount;
+      if(tList.length > 0){
+        if (tList[tIndex]['ticket_type'] == 1) { //通用
           usingTicketAmount = tList[tIndex]['ticket_amount'];
           paysAmount = productAmount - tList[tIndex]['ticket_amount'];
-          if (paysAmount < 0) {
+          if (paysAmount < 0){
             paysAmount = 0;
           }
-        } else {
-          paysAmount = productAmount;
+        } else if (tList[tIndex]['ticket_type'] == 2) { //满减
+          if (productAmount >= tList[tIndex]['satisfy_amount']) {
+            usingTicketAmount = tList[tIndex]['ticket_amount'];
+            paysAmount = productAmount - tList[tIndex]['ticket_amount'];
+            if (paysAmount < 0) {
+              paysAmount = 0;
+            }
+          } else {
+            paysAmount = productAmount;
+          }
         }
       }
       that.setData({
@@ -350,9 +356,12 @@ Page({
           title: "请选择收货地址。"
         });
       }else{
-        var ticket_id = that.data.isCheckTicket == 9999 ? 0 : that.data.ticketList.ticket[that.data.isCheckTicket - 1]['ticket_id'];
-        if (that.data.items.ticket.ticket_id && ticket_id == 0){  //使用新人卡券时候存在的值
-          ticket_id = that.data.items.ticket.ticket_id;
+        var ticket_id = 0;
+        if(that.data.ticketList.ticket.length > 0){
+          ticket_id = that.data.isCheckTicket == 9999 ? 0 : that.data.ticketList.ticket[that.data.isCheckTicket - 1]['ticket_id'];
+          if (that.data.items.ticket.ticket_id && ticket_id == 0){  //使用新人卡券时候存在的值
+            ticket_id = that.data.items.ticket.ticket_id;
+          }
         }
 
         let param = {

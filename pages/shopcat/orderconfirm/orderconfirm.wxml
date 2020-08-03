@@ -117,7 +117,7 @@
 				<view class='coupon-right'>
 					<text wx:if="{{ticketList.ticket.length <= 0}}">您没有可用的券</text>
 					<text wx:if="{{isCheckTicket == 9999 && ticketList.ticket.length > 0}}">不使用优惠券</text>
-					<text wx:if="{{isCheckTicket != 9999}}">减{{usingTicketAmount}}</text>
+					<text wx:if="{{isCheckTicket != 9999 && ticketList.ticket.length > 0}}">减{{usingTicketAmount}}</text>
 					<image src='../../img/dv.png'></image>
 				</view>
 			</view>

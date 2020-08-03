@@ -4,12 +4,7 @@
 <view class='page-pd'>
   <view class='integral'>
     <view class='integral-current'>
-      <text class='current1' wx:if="{{customer.frozeno_level == 1}}">注册会员</text>
-      <text class='current1' wx:if="{{customer.frozeno_level == 2}}">VIP</text>
-      <text class='current1' wx:if="{{customer.frozeno_level == 3}}">SVIP</text>
-      <text class='current1' wx:if="{{customer.frozeno_level == 4}}">钻卡</text>
-      <text class='current1' wx:if="{{customer.frozeno_level == 5}}">执行董事</text>
-      <text class='current1' wx:if="{{customer.frozeno_level == 6}}">二级渠道商</text>
+      <text class='current1'>{{customer.level_name}}</text>
     </view>
     <view class="integral-box">
         <view class="progress-text">

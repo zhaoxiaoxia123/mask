@@ -147,26 +147,6 @@ Page({
   },
   //以下为自定义点击事件
   getTicketList: function (param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       ticketList: that.data.ticketList.concat(datas.ticket),
-    //       show_amount: datas.show_amount
-    //     });
-    //     if (datas.ticket.length <= 0 || datas.ticket.length < that.data.pageCount) {
-    //       that.setData({
-    //         isLast: true
-    //       });
-    //     }
-    //   }
-    // });
-
     var params = {
       url: app.globalData.domainUrl,
       data:param,

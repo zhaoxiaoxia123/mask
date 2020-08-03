@@ -30,7 +30,7 @@
 					</block>
 				</block>
 			</swiper>
-			<view class="activity" wx:if="{{level >= 1 && items.category_id != dry_id}}">
+			<view class="activity" wx:if="{{level >= 1 && items.category_id != dry_id && ! isOver}}">
 				<image mode="widthFix" src="{{promotionPicture}}" style="width:100%;"></image>
 				<view class="activity-box">
 					<view class="activity-item activity-item-active">
@@ -39,13 +39,11 @@
 								<text wx:if="{{level == 1}}">新人首单价</text>
 								<text wx:if="{{level == 2}}">VIP抢购价</text>
 								<text wx:if="{{level == 3}}">SVIP抢购价</text>
-								<text wx:if="{{level == 4}}">钻石抢购价</text>
-								<text wx:if="{{level == 5}}">执行董事抢购价</text>
-								<text wx:if="{{level == 6}}">高级董事抢购价</text>
-								<text wx:if="{{level == 7}}">城市合伙人抢购价</text>
+								<text wx:if="{{level == 4}}">中级经销商抢购价</text>
+								<text wx:if="{{level == 5}}">高级经销商抢购价</text>
 								<text class="activity-state {{showPromotionClass}}">{{showPromotionTip}}</text>
 							</view>
-							<view class="detail-item-box" wx:if="{{isOver}}">
+							<!-- <view class="detail-item-box" wx:if="{{isOver}}">
 								<view class="wei">
 									<text>￥</text>
 									<block wx:if="{{items.category_id == experience_id}}">
@@ -57,8 +55,8 @@
 								<view class="detail-item-money-price">
 									<text class="decoration">￥{{items.frozeno_amount}}</text>
 								</view>
-							</view>
-							<view class="detail-item-box" wx:if="{{ ! isOver}}">
+							</view> -->
+							<view class="detail-item-box">
 								<view class="wei">
 									<text>￥</text>
 									<text class="size-money ">{{items.customer_amount_before}}</text>
@@ -71,10 +69,10 @@
 						</view>
 						<view class="activity-item-right">
 							<!-- 活动结束显示 -->
-							<view wx:if="{{isOver}}">
+							<!-- <view wx:if="{{isOver}}">
 								<view class="activity-border size-tagging">每天{{items.frozeno_start_date}}点开抢</view>
-							</view>
-							<view wx:if="{{ ! isOver}}">
+							</view> -->
+							<view>
 								<view class="activity-border size-tagging">剩余:{{surplusSale}}件</view>
 							</view>
 						</view>
