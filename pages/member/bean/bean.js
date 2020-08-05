@@ -97,7 +97,12 @@ Page({
   onShareAppMessage: function () {
 
   },
-
+  //进入会员体系介绍
+  grade: function () {
+    wx.navigateTo({
+      url: '/pages/member/grade/grade',
+    })
+  },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param) {
     var params = {

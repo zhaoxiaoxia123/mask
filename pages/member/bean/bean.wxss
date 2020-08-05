@@ -72,3 +72,35 @@
   line-height:1.5;
   padding-top:60rpx;
 }
+
+/* 我要赚成长值 */
+.member-branch{
+  background-color: #404040;
+  padding:30rpx 30rpx 0 30rpx;
+  color: #8b8b8b;
+  font-size: 0.8rem;
+  margin-top:30rpx;
+}
+.branch-content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.branch-hd{
+  font-size:1rem;
+  color:#c6c6c6;
+}
+.branch-text{
+  display: flex;
+  align-items: center;
+  padding-bottom: 20rpx;
+
+}
+
+.branch-text button{
+  width: 80px;
+  font-size: 0.8rem;
+  padding:12rpx 0;
+  background: #DAB866;
+}
+

@@ -9,6 +9,26 @@
       <text class="current1-text" >{{customer.not_entry_bean?customer.not_entry_bean:0}} </text>
     </view>
   </view>
+ <view class='member-branch radius'>
+    <view class='branch-content'>
+      <view class='branch-text branch-hd'>
+        <text>我要赚智美豆</text>
+      </view>
+       <view class='branch-text' bindtap="grade">
+        <text class='branch-text1'>智美豆说明？</text>
+      </view> 
+    </view>
+    <!-- 邀请好友成为会员（VIP、SVIP、钻卡）才显示，注册用户不显示； -->
+    <view class='branch-content' wx:if="{{customer.frozeno_level > 1}}">
+      <view class='branch-text'>
+      <image class="icon58 pdr10" src="../../img/vip_bg@2x.png"></image>
+        <text>邀请好友成为会员</text>
+      </view>
+      <view class='branch-text'>
+        <button class="button-share" open-type="share">去邀请</button>
+      </view>
+    </view>
+  </view>
   <view class='integral-content'>
   <!-- 智美豆：
 1、通过分享好友首次下单  +   待入账：需要收货10天后入账
