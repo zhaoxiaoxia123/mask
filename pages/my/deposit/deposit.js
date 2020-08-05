@@ -10,6 +10,7 @@ Page({
   data: {
     customerInfo:[],
     orderList:[],
+    dry_id:0,
   },
 
   /**
@@ -17,6 +18,9 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    that.setData({
+      dry_id:app.globalData.dry_id,
+    });
   },
 
   /**
@@ -131,6 +135,23 @@ Page({
     let depositflexwindow = false;
     that.setData({
       depositflexwindow: depositflexwindow
+    })
+  },
+
+  //申请退还押金
+  apply:function(){
+    wx.showModal({
+      title: '提示',
+      content: '你确定申请退还押金？',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定.');
+          that.close3();
+        } else if (res.cancel) {
+          console.log('用户点击取消.');
+          that.close3();
+        }
+      }
     })
   },
 

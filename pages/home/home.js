@@ -149,7 +149,6 @@ Page({
       that.getProductList(param_p);
     }
   },
-
   /**
    * 用户点击右上角分享
    */
@@ -179,6 +178,7 @@ Page({
       that.setData({
         storeflexwindow: storeflexwindow
       })
+      wx.setStorageSync('isFirst', true);
     }
   },
 

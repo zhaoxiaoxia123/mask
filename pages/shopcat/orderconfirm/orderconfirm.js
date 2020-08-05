@@ -273,8 +273,9 @@ Page({
 
   //商品总价减去智美豆后价格
   subBeanAmount:function(){
+    let bean = isNaN(parseFloat(that.data.bean))?0:parseFloat(that.data.bean);
     that.setData({
-      payAmount: parseFloat(that.data.payAmount) - parseFloat(that.data.bean)
+      payAmount: parseFloat(that.data.payAmount) - bean
     });
   },
   getAddress: function () {
@@ -373,7 +374,7 @@ Page({
           customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
           invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
           use_point: 0,//that.data.usingPoint,
-          bean: that.data.bean,
+          bean: that.data.bean == undefined?0:that.data.bean,
           amount: that.data.payAmount,
           is_check_dry: that.data.isCheckDry,
           // order_type: 1,//购买订单
@@ -469,11 +470,26 @@ Page({
     //ji算商品总价
     that.sumProductTotalAmount(2);
   },
-
+  
+  PointNum: function(obj) {
+      obj = obj.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+      obj = obj.replace(/^\./g, ""); //验证第一个字符是数字
+      obj = obj.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+      obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+      obj = obj.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+      if (obj.indexOf(".") < 0 && obj != "") { //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+          obj = parseFloat(obj);
+      }
+      if (!obj || obj == '0' || obj == '0.0' || obj == '0.00') {
+          return;
+      }
+      return obj;
+  },
   setBeanInput: function(e) {
     that.setData({
-      bean: parseInt(e.detail.value)
+      bean: this.PointNum(e.detail.value)
     })
+    return 
   },
   /**
    * 提交智美豆使用数,比较输入智美豆是否符合匹配数量
@@ -489,5 +505,11 @@ Page({
       //计算减去卡券金额后的实付款
       that.sumProductTotalAmount(2);
     }
+  },
+  onInputEvent(e) {
+    this.setData({
+      inputVal : this.PointNum(e.detail.value)
+    })
+    return // 必加，不然输入框可以输入多位小数
   },
 })

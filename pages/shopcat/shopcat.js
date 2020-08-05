@@ -173,38 +173,40 @@ Page({
   jianFn: function(e) {
     var items = that.data.items;
     var id = e.currentTarget.dataset.id;
-    if (items[id].product_count <= 1) {
-      items[id].product_count = 1;
-      if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
-        items[id].is_enough = true;
-        // items[id].selected = true;  //true  为1时点减号也会被选中
-      } else {
-        items[id].is_enough = false;
-        items[id].selected = false;
-      }
-      that.setData({
-        items: items
-      })
-    } else {
-      items[id].product_count = items[id].product_count - 1;
-      if (items[id].product_count <= items[id].stock){ //库存是否足够来显示单选按钮
-        items[id].is_enough = true;
-        items[id].selected = true;
-      }else{
-        items[id].is_enough = false;
-        items[id].selected = false;
-      }
-      var fee = 0;
-      for (var i = 0; i < items.length; i++) {
-        if (items[i].selected) {
-          // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
-          fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
+    if(items[id].customer_amount_before != that.data.experience_amount){
+      if (items[id].product_count <= 1) {
+        items[id].product_count = 1;
+        if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
+          items[id].is_enough = true;
+          // items[id].selected = true;  //true  为1时点减号也会被选中
+        } else {
+          items[id].is_enough = false;
+          items[id].selected = false;
         }
+        that.setData({
+          items: items
+        })
+      } else {
+        items[id].product_count = items[id].product_count - 1;
+        if (items[id].product_count <= items[id].stock){ //库存是否足够来显示单选按钮
+          items[id].is_enough = true;
+          items[id].selected = true;
+        }else{
+          items[id].is_enough = false;
+          items[id].selected = false;
+        }
+        var fee = 0;
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].selected) {
+            // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+            fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
+          }
+        }
+        that.setData({
+          items: items
+        });
+        that.setTotalFee(fee);
       }
-      that.setData({
-        items: items
-      });
-      that.setTotalFee(fee);
     }
   },
   // 加按钮控件
@@ -212,26 +214,32 @@ Page({
     var items = [];
     items = that.data.items; //获得items数组
     var id = e.currentTarget.dataset.id; // 获得wxml的data-id的值 data-id与dataset.id对应
-    items[id].product_count = parseInt(items[id].product_count) + 1;
-
-    if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
-      items[id].is_enough = true;
-      items[id].selected = true;
-    } else {
-      items[id].is_enough = false;
-      items[id].selected = false;
-    }
-    var fee = 0;
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].selected) {
-        // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
-        fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].customer_amount);
+    if(items[id].customer_amount_before != that.data.experience_amount){
+      items[id].product_count = parseInt(items[id].product_count) + 1;
+      if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
+        items[id].is_enough = true;
+        items[id].selected = true;
+      } else {
+        items[id].is_enough = false;
+        items[id].selected = false;
       }
+      var fee = 0;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].selected) {
+          // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
+          fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].customer_amount);
+        }
+      }
+      that.setData({
+        items: items
+      });
+      that.setTotalFee(fee);
+    }else{
+      wx.showToast({
+        icon: "none",
+        title: "限制只能购买一件"
+      });
     }
-    that.setData({
-      items: items
-    });
-    that.setTotalFee(fee);
   },
 
   /**

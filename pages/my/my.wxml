@@ -34,7 +34,7 @@
 			<view class="deposit-text">{{items.frozeno_bean?items.frozeno_bean:'0.00'}}</view>
 			<view>智美豆</view>
 		</view>
-		 <!-- bindtap="deposit" -->
+		 <!--  bindtap="deposit" -->
 		<view class="deposit-item">
 			<view class="deposit-text">{{items.dry_deposit?items.dry_deposit:'0.00'}}</view>
 			<view>押金</view>

@@ -1,8 +1,5 @@
 <!--pages/home/home.wxml-->
 <view class="size-text col-content">
-	<!--购物车空时显示
-    同时底部金额结算按钮不显示
-     -->
 	<view class='search-no' wx:if="{{items.length <= 0}}">
 		<view bindtap="gohome">
 			<image class='scimg' src='../img/shopcatwu@2x.png'></image>
@@ -13,7 +10,6 @@
 		<!--bindtap绑定事件 bindtap='toDetail'-->
 		<view class="list-item" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
 			<view class="list-box">
-
 				<view class='radio-group' wx:if="{{item.is_enough}}">
 					<radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
 				</view>
@@ -62,39 +58,39 @@
 		</view>
 
 		<view class="list-item" wx:if="{{gift.length > 0}}">
-		<block wx:for="{{gift}}" wx:key="*this" wx:for-item="g">
-			<view class="list-box" wx:if="{{g.category_id == dryInfos.dry_category_id}}">
-				<view class='radio-group'>
-					<radio color='#262626' data-amount="{{dryInfos.dry_amount}}" bindtap='checkDry' checked='{{dryInfos.is_check_dry == 1}}'></radio>
-				</view>
-				<view class='list-left'>
-					<image src="{{g.product_image[0].image_url}}" lazy-load></image>
-				</view>
-				<view class='list-right'>
-					<view class='column'>
-						<view class='right-text'>{{g.category_desc}}</view>
-						<!-- <image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image> -->
+			<block wx:for="{{gift}}" wx:key="*this" wx:for-item="g">
+				<view class="list-box" wx:if="{{g.category_id == dryInfos.dry_category_id}}">
+					<view class='radio-group'>
+						<radio color='#262626' data-amount="{{dryInfos.dry_amount}}" bindtap='checkDry' checked='{{dryInfos.is_check_dry == 1}}'></radio>
 					</view>
-					<view class="detail-item-box">
-						<view class="detail-item-money wei">
-							<text>￥</text>
-							<text class="size-money ">{{dryInfos.dry_amount}}</text>
-							<text >.00</text>
+					<view class='list-left'>
+						<image src="{{g.product_image[0].image_url}}" lazy-load></image>
+					</view>
+					<view class='list-right'>
+						<view class='column'>
+							<view class='right-text'>{{g.category_desc}}</view>
+							<!-- <image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image> -->
 						</view>
-						<view class="detail-item-money-price">
-							<text class="decoration">￥{{g.frozeno_amount}}</text>
+						<view class="detail-item-box">
+							<view class="detail-item-money wei">
+								<text>￥</text>
+								<text class="size-money ">{{dryInfos.dry_amount}}</text>
+								<text >.00</text>
+							</view>
+							<view class="detail-item-money-price">
+								<text class="decoration">￥{{g.frozeno_amount}}</text>
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-			<view class="gift" wx:if="{{g.category_id != dryInfos.dry_category_id}}">
-				<text>赠送{{g.category_desc}}× 1</text>
-			</view>
+				<view class="gift" wx:if="{{g.category_id != dryInfos.dry_category_id}}">
+					<text>{{g.category_desc}}× 1</text>
+				</view>
 			</block>
 		</view>
 	</view>
 
-	<view class="bottom">
+	<view class="bottom" wx:if="{{items.length > 0}}">
 		<view class="bottom-operate">
 			<view class="bottom-left count">
 				<radio color='#262626' class="radio-total" checked='{{check}}' bindtap='all'></radio>全选

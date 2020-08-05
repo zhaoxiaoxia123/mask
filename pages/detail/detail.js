@@ -51,23 +51,7 @@ Page({
       dry_id:app.globalData.dry_id,
       level: wx.getStorageSync("level")
     });
-    var param = {
-      page_code: 'p005',
-      product_id: that.data.productId,
-      // customer_id: wx.getStorageSync("customerId"),
-      level: wx.getStorageSync("level")
-    };
-    that.getProductDetail(param);
-
-    if (wx.getStorageSync("customerId")){
-      //查询购物车个数
-      var shoppingParam = {
-        page_code: 'p012',
-        type: 'shopping_count',
-      };
-      that.getShoppingCount(shoppingParam);
-    }
-
+    
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
@@ -88,6 +72,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var pagesArr = getCurrentPages();
+    var prevPage = pagesArr[pagesArr.length - 1];
+    that.setData({
+      productId: prevPage.options.id,
+    });
+    var param = {
+      page_code: 'p005',
+      product_id: that.data.productId,
+      // customer_id: wx.getStorageSync("customerId"),
+      level: wx.getStorageSync("level")
+    };
+    that.getProductDetail(param);
+
+    if (wx.getStorageSync("customerId")){
+      //查询购物车个数
+      var shoppingParam = {
+        page_code: 'p012',
+        type: 'shopping_count',
+      };
+      that.getShoppingCount(shoppingParam);
+    }
   },
 
   /**
@@ -366,8 +371,7 @@ Page({
         data:param,
         method:'POST',
         sCallback: function (res) {
-          var datas = res.data.data;
-          if (datas) {
+          if (res.data.code == 200) {
             wx.showToast({
               title: "加入购物车成功。"
             });
@@ -382,6 +386,10 @@ Page({
             //查询购物车个数  end
             that.setData({
                 flexwindow: false
+            });
+          }else {
+            wx.showToast({
+              title: res.data.message
             });
           }
         }
@@ -438,18 +446,21 @@ Page({
   goPost: function (e) {
     console.log(e);
     let href = e.currentTarget.dataset.href;
-    console.log(href);
-    console.log(encodeURIComponent(href));
     wx.navigateTo({
       url: '../post/post?href=' + encodeURIComponent(href),
     })
   },
   goDryDetail :function(e){
-    // var product_id = e.currentTarget.dataset.id;
-    // // app.globalData.productId = product_id;
-    // console.log(product_id)
-    // wx.navigateTo({
-    //   url: '../detail/detail?id='+product_id,
-    // })
+    var product_id = e.currentTarget.dataset.id;
+    // app.globalData.productId = product_id;
+    console.log(product_id)
+    wx.navigateTo({
+      url: '../detail/detail?id='+product_id,
+    })
+    // setTimeout(() => {
+      // wx.reLaunch({
+      //   url: '../detail/detail?id='+product_id,
+      // });
+    // }, 2000);
   },
 })

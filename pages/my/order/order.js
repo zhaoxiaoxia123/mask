@@ -42,7 +42,6 @@ Page({
       experience_amount: app.globalData.experience_amount,
       level:wx.getStorageSync('level')
     });
-    // console.log(that.data.order_state);
   },
 
   /**

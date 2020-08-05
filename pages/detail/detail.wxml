@@ -111,7 +111,7 @@
 				<view class="detail-item-abstract">{{items.frozeno_introduction}}</view>
 				<view class="detail-item-between">
 					<text class="detail-item-color">免邮</text>
-					<text class="detail-item-color">销量：{{items.sale}}件</text>
+					<text class="detail-item-color">销量：{{items.total_sale}}件</text>
 				</view>
 			</view>
 
