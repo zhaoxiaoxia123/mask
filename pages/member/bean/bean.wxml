@@ -16,7 +16,7 @@
       </view>
        <view class='branch-text' bindtap="grade">
         <text class='branch-text1'>智美豆说明？</text>
-      </view> 
+      </view>
     </view>
     <!-- 邀请好友成为会员（VIP、SVIP、钻卡）才显示，注册用户不显示； -->
     <view class='branch-content' wx:if="{{customer.frozeno_level > 1}}">
