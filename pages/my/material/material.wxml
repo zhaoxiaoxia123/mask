@@ -31,15 +31,17 @@
 						<image src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/head/default_head.jpg"></image>
 					</view>
 					<view class="item">
-						<view class="item-text" data-content="{{item.description?item.description:''}}" bindtap="copy">
+						<view class="item-text" >
 							<view><text class="name">{{item.title}} </text></view>
+						</view>
+            <view class="item-text" data-content="{{item.description?item.description:''}}" bindtap="copy">
 							{{item.description?item.description:''}}
 						</view>
 						<view class="item-text">
 							<block wx:if="{{item.img_url.length > 1 && item.img_url.length != 4}}">
 								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this">
-									<view style="width: 80px;height: 80px;overflow: hidden;margin-right: 10px;margin-bottom: 10px;">
-										<image class="picture-img" bindtap="imgYu" data-src='{{item1.url}}' data-list="{{item.img_url}}" src='{{item1.url}}' style="height: 120px;margin-top: 0px;margin-left: 0px;"></image>
+									<view style="width: 70px;height: 70px;overflow: hidden;margin-right: 10px;margin-bottom: 10px;">
+										<image class="picture-img" bindtap="imgYu" data-src='{{item1.url}}' data-list="{{item.img_url}}" src='{{item1.url}}' style="height: 70px;margin-top: 0px;margin-left: 0px;"></image>
 										<!-- width: 100px; -->
 									</view>
 								</block>
@@ -67,7 +69,7 @@
 				<view class="cricle-ft" data-index="{{index}}" bindtap="getMergePic" wx:if="{{isCanClick}}">
 					<view wx:if="{{(item.img_url[0] == ''?0:item.img_url.length) > 0}}" class="ft-item">
 						<view class="ft-t ft-icon">
-							<image class="img-icon" src='../images/circle/download@2x.png'></image>
+							<image class="img-icon" src='../../img/circle/download@2x.png'></image>
 						</view>
 						<view class="ft-t ft-text">下载素材</view>
 						<view class="ft-number">({{item.img_url[0] == ''?0:item.img_url.length}})</view>
@@ -76,7 +78,7 @@
 				<view class="cricle-ft" wx:if="{{!isCanClick}}">
 					<view wx:if="{{item.img_url.length > 0}}" class="ft-item">
 						<view class="ft-t ft-icon">
-							<image class="img-icon" src='../images/circle/download@2x.png'></image>
+							<image class="img-icon" src='../../img/circle/download@2x.png'></image>
 						</view>
 						<view class="ft-t ft-text">下载素材</view>
 						<view class="ft-number">({{item.img_url.length}})</view>

@@ -1,4 +1,8 @@
 /* pages/circle_ads/circle_ads.wxss */
+page{
+  background:#f5f5f5;
+
+}
 
 .pad{
   padding:24rpx;
