@@ -323,6 +323,8 @@ Page({
           let tip = '';
           let css = '';
           let isover = parseInt(that.data.items.now_hour) < parseInt(that.data.items.frozeno_start_date) || parseInt(that.data.items.frozeno_promotion_count) <= parseInt(that.data.items.sale);
+          console.log('isover:----');
+          console.log(isover);
           if(isover) {
             img = "../img/member/V001.jpg";
             tip="活动结束";
