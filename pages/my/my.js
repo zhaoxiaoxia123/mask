@@ -264,4 +264,12 @@ Page({
       }
     })
   },
+
+  //发圈
+  goMaterial:function(){
+    wx.navigateTo({
+      url: '/pages/my/material/material'
+    })
+  },
+  
 })

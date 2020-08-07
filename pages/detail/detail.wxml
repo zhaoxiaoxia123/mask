@@ -6,13 +6,13 @@
 	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
 		<view id="product">
 			<swiper indicator-dots="true" indicator-color="#000000" indicator-active-color="#b7aa00" autoplay="{{false}}" interval="3000" duration="500" circular="true" style='height:750rpx;background:#fff'>
-				<swiper-item wx:if="{{!isOver && items.customer_amount_before == experience_amount && items.category_id == experience_id}}">
+				<swiper-item wx:if="{{(!isOver && items.customer_amount_before == experience_amount && items.category_id == experience_id) && level > 0}}">
 					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/99.mp4"></video>
 				</swiper-item>
-				<swiper-item wx:if="{{!isOver && items.customer_amount_before != experience_amount && items.category_id == experience_id}}">
+				<swiper-item wx:if="{{!isOver && items.customer_amount_before != experience_amount && items.category_id == experience_id && level > 0}}">
 					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/168.mp4"></video>
 				</swiper-item>
-				<swiper-item wx:if="{{!isOver && items.category_id != experience_id}}">
+				<swiper-item wx:if="{{!isOver && items.category_id != experience_id && level > 0}}">
 					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/423.mp4"></video>
 				</swiper-item>
 				<block wx:for="{{swipers}}" wx:key="*this">
@@ -22,10 +22,10 @@
 							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" wx:if="{{item.is_href == 0}}" />
 						</swiper-item>
 					</block>
-					<block wx:if="{{item.is_activity == 1 && isOver}}">
+					<block wx:if="{{item.is_activity == 1 && (isOver || level == 0)}}">
 						<swiper-item wx:if="{{item.type == 1}}">
 							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" bindtap="goPost" data-href="{{item.weixin_url}}" wx:if="{{item.is_href == 1}}" />
-							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" wx:if="{{item.is_href == 0}}" />
+							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" wx:if="{{item.is_href == 0}}"/>
 						</swiper-item>
 					</block>
 				</block>

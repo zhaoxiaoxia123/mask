@@ -24,7 +24,8 @@
     "pages/member/grow/grow",
     "pages/post/post",
     "pages/member/bean/bean",
-    "pages/my/deposit/deposit"
+    "pages/my/deposit/deposit",
+    "pages/my/material/material"
   ],
   "window": {
     "backgroundTextStyle": "light",
