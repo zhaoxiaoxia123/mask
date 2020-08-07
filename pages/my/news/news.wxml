@@ -1,13 +1,11 @@
 <!--pages/news/news.wxml-->
 <wxs module="share" src="../../../utils/share.wxs"></wxs>
 <view class='page-pd size-titletwo col-content'>
-
-
 	<view class='search-no' wx:if="{{msgList.length <= 0}}">
 		<view>
-			<image class='scimg' src='../../img/wu.png'></image>
-		</view>
-		<text>暂时没有消息~~</text>
+        <image class='scimg' src='{{imgLoad}}'></image>
+      </view>
+      <text>{{message}}~~</text>
 	</view>
 
 	<view class='content'>

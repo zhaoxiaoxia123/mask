@@ -21,7 +21,9 @@ Page({
     dryInfos:[],
     gift:[],
     dryAmount:0,
-    experience_amount:0
+    experience_amount:0,
+    imgLoad:'../img/loading.gif',
+    message:'正在努力加载中',
   },
 
   /**
@@ -70,6 +72,11 @@ Page({
       };
       // var param_s = '/p012?type=shopping_list&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getShoppingList(param_s);
+      
+    that.setData({
+      imgLoad:'../img/loading.gif',
+      message:'正在努力加载中',
+    });
     }
   },
 
@@ -157,7 +164,9 @@ Page({
         that.setData({
           items: that.data.items.concat(datas.shopping),
           dryInfos:datas.dryInfos,
-          gift:datas.gift
+          gift:datas.gift,
+          message:'',
+          imgLoad:'../img/shopcatwu@2x.png',
         });
         if (datas.shopping.length <= 0 || datas.shopping.length < that.data.pageCount) {
           that.setData({

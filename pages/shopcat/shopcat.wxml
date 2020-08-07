@@ -2,8 +2,9 @@
 <view class="size-text col-content">
 	<view class='search-no' wx:if="{{items.length <= 0}}">
 		<view bindtap="gohome">
-			<image class='scimg' src='../img/shopcatwu@2x.png'></image>
+			<image class='scimg' src='{{imgLoad}}'></image>
 		</view>
+		<text>{{message}}</text>
 	</view>
 
 	<view class='lists' wx:if="{{items.length > 0}}">

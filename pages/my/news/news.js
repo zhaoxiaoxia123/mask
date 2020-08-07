@@ -13,7 +13,9 @@ Page({
     pageCount: 20,
     isLast: false,
     msgList: [],
-    type: '6,7'  //6：系统消息 7：冻龄智美通知
+    type: '6,7',  //6：系统消息 7：冻龄智美通知
+    imgLoad:'../../img/loading.gif',
+    message:'正在努力加载中',
   },
 
   /**
@@ -45,6 +47,11 @@ Page({
       };
     // var param = '/p007?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
     that.getMsgList(param);
+    
+    that.setData({
+      imgLoad:'../../img/loading.gif',
+      message:'正在努力加载中',
+    });
     }
   },
 
@@ -92,24 +99,6 @@ Page({
   },
   //以下为自定义点击事件
   getMsgList: function (param) {
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       msgList: that.data.msgList.concat(datas)
-    //     });
-    //     if (datas.length <= 0 || datas.length < that.data.pageCount) {
-    //       that.setData({
-    //         isLast: true
-    //       });
-    //     }
-    //   }
-    // });
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -117,7 +106,9 @@ Page({
       sCallback: function (res) {
         var datas = res.data.data;
         that.setData({
-          msgList: that.data.msgList.concat(datas)
+          msgList: that.data.msgList.concat(datas),
+          message:'您还没有相关订单',
+          imgLoad:'../../img/wu.png',
         });
         if (datas.length <= 0 || datas.length < that.data.pageCount) {
           that.setData({

@@ -18,6 +18,8 @@ Page({
     items: [],
     fromPage:'',   //orderconfirm 页面跳转此页面会带这个参数
     checkId: 0,  //选中地址id  当从orderconfirm页面过来需要此变量
+    imgLoad:'../../img/loading.gif',
+    message:'正在努力加载中',
   },
 
   /**
@@ -43,6 +45,11 @@ Page({
    */
   onShow: function () {
     that.getAddressList();
+    
+    that.setData({
+      imgLoad:'../../img/loading.gif',
+      message:'正在努力加载中',
+    });
   },
 
   /**
@@ -93,7 +100,9 @@ Page({
         console.log(res);
         var datas = res.data.data;
         that.setData({
-          items: datas
+          items: datas,
+          message:'您还没有相关订单',
+          imgLoad:'../../img/wu.png',
         });
       }
     };

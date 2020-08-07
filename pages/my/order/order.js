@@ -22,7 +22,7 @@ Page({
     order_state: 1,
     memberNo: wx.getStorageSync('memberNo'),
     items: [],
-    imgLoad:'../../img/loading.gif',//'../../img/wu.png',
+    imgLoad:'../../img/loading.gif',
     message:'正在努力加载中',
     dry_id:0,
     experience_amount:0,
