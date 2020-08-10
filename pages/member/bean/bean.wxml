@@ -29,7 +29,7 @@
     </view>
   </view>
   <view class='integral-content'>
-		<view class='search-no' wx:if="{{items.length <= 0 && imgLoad}}">
+		<view class='search-no' wx:if="{{items.length <= 0 && imgLoad}}" >
       <view>
         <image class='scimg' src='{{imgLoad}}'></image>
       </view>

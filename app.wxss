@@ -108,3 +108,12 @@ background-size: 300rpx;
 padding-bottom:20rpx;
 
 }
+.search-no text{
+  color:#c6c6c6;
+}
+.search-white{
+    color:#c6c6c6;
+}
+.search-black{
+    color:#333;
+}
