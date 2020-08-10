@@ -1,5 +1,6 @@
 <!--pages/home/home.wxml-->
 <view class="size-text col-content">
+
 	<view class='search-no' wx:if="{{items.length <= 0}}">
 		<view bindtap="gohome">
 			<image class='scimg' src='{{imgLoad}}'></image>
