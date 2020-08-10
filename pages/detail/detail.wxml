@@ -62,14 +62,6 @@
 					</view>
 				</view>
 			</view>
-			
-			<view class='search-no' wx:if="{{items.length <= 0}}">
-				<view>
-					<image class='scimg' src='{{imgLoad}}'></image>
-				</view>
-				<text>{{message}}~~</text>
-			</view>
-
 			<view class="detail-item page-pd">
 				<!-- 活动结束和未登录显示 -->
 				<view class="detail-item-box" wx:if="{{isOver || level == 0}}">

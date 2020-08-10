@@ -26,13 +26,14 @@ Page({
     imgsDownload:[],
     isCanClick:true,
     code:'',
-    imgLoad:'../../img/loading.gif',
-    message:'正在努力加载中',
+    message:'',
+    imgLoad:'',
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    base.loading();
     that = this;
     var param = {
       page_code:'p001',
@@ -95,10 +96,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    that.setData({
-      imgLoad:'../../img/loading.gif',
-      message:'正在努力加载中',
-    });
+
+    base.loading();
     that.onLoad();
   },
 

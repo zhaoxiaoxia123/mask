@@ -35,7 +35,7 @@
 			<view>智美豆</view>
 		</view>
 		 <!-- bindtap="deposit" -->
-		<view class="deposit-item" bindtap="loading">
+		<view class="deposit-item">
 			<view class="deposit-text">{{items.dry_deposit?items.dry_deposit:'0.00'}}</view>
 			<view>押金</view>
 		</view>

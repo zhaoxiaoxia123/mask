@@ -14,8 +14,8 @@ Page({
     isLast: false,
     ticketList: [],
     show_amount: '', //需展示的新会员卡券兑换金额
-    imgLoad:'../../img/loading.gif',
-    message:'正在努力加载中',
+    imgLoad:'',
+    message:'',
   },
 
 
@@ -44,10 +44,7 @@ Page({
     });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       
-      that.setData({
-        imgLoad:'../../img/loading.gif',
-        message:'正在努力加载中',
-      });
+      base.loading(800);
       var param = {
         page_code: "p013",
         // customer_id: wx.getStorageSync('customerId'),
@@ -86,6 +83,7 @@ Page({
         that.setData({
           offset: that.data.offset + 1
         });
+        base.loading(800);
         var param = {
           page_code: "p013",
           // customer_id: wx.getStorageSync('customerId'),
@@ -113,11 +111,7 @@ Page({
       show_amount: '',
       });
       if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-        
-      that.setData({
-        imgLoad:'../../img/loading.gif',
-        message:'正在努力加载中',
-      });
+        base.loading(800);
         var param = {
           page_code: "p013",
           // customer_id: wx.getStorageSync('customerId'),
@@ -143,13 +137,10 @@ Page({
         isLast: false,
         ticketList: [],
         show_amount:'',
+        imgLoad:'',
       })
       if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-        
-      that.setData({
-        imgLoad:'../../img/loading.gif',
-        message:'正在努力加载中',
-      });
+        base.loading(800);
         var param = {
           page_code: "p013",
           // customer_id: wx.getStorageSync('customerId'),

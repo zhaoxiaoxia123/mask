@@ -107,7 +107,16 @@ function getTokenFromServer(params,callBack) {
   });
 }
 
+function loading(duration=2000) {
+  wx.showToast({
+    title: "加载中...",
+    icon: "loading",
+    duration: duration
+  })
+}
+
 module.exports = {
   httpRequest:httpRequest,
+  loading:loading,
   _refetch:_refetch
 };

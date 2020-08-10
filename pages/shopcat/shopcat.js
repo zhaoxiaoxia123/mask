@@ -22,8 +22,8 @@ Page({
     gift:[],
     dryAmount:0,
     experience_amount:0,
-    imgLoad:'../img/loading.gif',
-    message:'正在努力加载中',
+    imgLoad:'',
+    message:'',
   },
 
   /**
@@ -63,6 +63,7 @@ Page({
     //   items:[]
     // });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info') && that.data.items.length <= 0) {
+      base.loading(1000);
       var param_s = {
         page_code: 'p012',
         type: "shopping_list",
@@ -70,13 +71,7 @@ Page({
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-      // var param_s = '/p012?type=shopping_list&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getShoppingList(param_s);
-      
-    that.setData({
-      imgLoad:'../img/loading.gif',
-      message:'正在努力加载中',
-    });
     }
   },
 
@@ -109,6 +104,7 @@ Page({
       that.setData({
         offset: that.data.offset + 1
       });
+      base.loading(1000);
       //列表
       var param_s = {
         page_code: 'p012',

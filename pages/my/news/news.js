@@ -14,8 +14,8 @@ Page({
     isLast: false,
     msgList: [],
     type: '6,7',  //6：系统消息 7：冻龄智美通知
-    imgLoad:'../../img/loading.gif',
-    message:'正在努力加载中',
+    imgLoad:'',
+    message:'',
   },
 
   /**
@@ -38,6 +38,7 @@ Page({
    */
   onShow: function() {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      base.loading(500);
       var param = {
         page_code: 'p001',
         type: that.data.type,
@@ -47,11 +48,6 @@ Page({
       };
     // var param = '/p007?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
     that.getMsgList(param);
-    
-    that.setData({
-      imgLoad:'../../img/loading.gif',
-      message:'正在努力加载中',
-    });
     }
   },
 
@@ -87,6 +83,7 @@ Page({
       that.setData({
         offset: that.data.offset + 1
       });
+        base.loading(500);
       var param = {
         page_code: 'p007',
         // customer_id: wx.getStorageSync('customerId'),

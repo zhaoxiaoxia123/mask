@@ -1,6 +1,6 @@
 <view class='page-pd size-titletwo col-content'>
   <view class='lists '>
-    <view class='search-no' wx:if="{{items.length <= 0}}">
+    <view class='search-no' wx:if="{{items.length <= 0 && imgLoad}}">
       <view>
         <image class='scimg' src='{{imgLoad}}'></image>
       </view>

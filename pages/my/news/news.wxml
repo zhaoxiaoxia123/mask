@@ -1,7 +1,7 @@
 <!--pages/news/news.wxml-->
 <wxs module="share" src="../../../utils/share.wxs"></wxs>
 <view class='page-pd size-titletwo col-content'>
-	<view class='search-no' wx:if="{{msgList.length <= 0}}">
+	<view class='search-no' wx:if="{{msgList.length <= 0 && imgLoad}}">
 		<view>
         <image class='scimg' src='{{imgLoad}}'></image>
       </view>

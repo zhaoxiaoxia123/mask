@@ -13,15 +13,14 @@ Page({
     pageCount: 20,
     isLast: false,
     items: [],
-    imgLoad:'../../img/loading.gif',
-    message:'正在努力加载中',
+    imgLoad:'',
+    message:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     that = this;
   },
 
@@ -49,10 +48,7 @@ Page({
       };
       that.getUserDetail(param);
 
-      that.setData({
-        imgLoad:'../../img/loading.gif',
-        message:'正在努力加载中',
-      });
+      base.loading(800);
       var paramg = {
         page_code: 'p004',
         type: "logList",  //growthList
@@ -62,7 +58,6 @@ Page({
         page: that.data.pageCount
       };
       that.getGrowthList(paramg);
-      
     }
   },
 
@@ -92,6 +87,7 @@ Page({
       that.setData({
         offset: that.data.offset + 1
       });
+      base.loading(800);
       //列表
       var param_p = {
         page_code: 'p004',

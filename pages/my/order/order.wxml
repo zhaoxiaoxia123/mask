@@ -24,7 +24,7 @@
 		<view>
 			<scroll-view>
 				<!--没有相关订单时显示-->
-				<view class='search-no' wx:if="{{items.length <= 0}}">
+				<view class='search-no' wx:if="{{items.length <= 0 && imgLoad}}">
 					<view>
 						<image class='scimg' src='{{imgLoad}}'></image>
 					</view>

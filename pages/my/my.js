@@ -81,14 +81,6 @@ Page({
   onUnload: function () {
 
   },
-  // 加载中
-  loading: function () {
-    wx.showToast({
-      title: "加载中...",
-      icon: "loading",
-      duration: 8000
-    })
-  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

@@ -24,7 +24,7 @@
 		</swiper>
 	</view>
 	<view class="cricle-content">
-		<view class='search-no' wx:if="{{post.length <= 0}}">
+		<view class='search-no' wx:if="{{post.length <= 0 && imgLoad}}">
       <view>
         <image class='scimg' src='{{imgLoad}}'></image>
       </view>
@@ -47,7 +47,7 @@
 							<block wx:if="{{item.img_url.length > 1 && item.img_url.length != 4}}">
 								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this">
 									<view style="width: 70px;height: 70px;overflow: hidden;margin-right: 10px;margin-bottom: 10px;">
-										<image class="picture-img" bindtap="imgYu" data-src='{{item1.url}}' data-list="{{item.img_url}}" src='{{item1.url}}' style="{{item1.is_width == 1?'width: 100px;':(item1.is_width == 2?'':'height: 100px;')}}margin-top: 0px;margin-left: 0px;"></image>
+										<image class="picture-img" bindtap="imgYu" data-src='{{item1.url}}' data-list="{{item.img_url}}" src='{{item1.url}}' style="{{item1.is_width == 1?'width: 115px;':(item1.is_width == 2?'':'height: 100px;')}}margin-top: 0px;margin-left: 0px;"></image>
 									</view>
 								</block>
 							</block>
@@ -63,7 +63,7 @@
 							<block wx:if="{{item.img_url.length == 4}}">
 								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this" wx:for-index="index">
 									<view style="width: 100px;height: 100px;overflow: hidden;margin-right: 10px;margin-bottom: 10px;">
-										<image class="picture-img" data-src='{{item1.url}}' data-list="{{item.img_url}}" bindtap="imgYu" src='{{item1.url}}' style="{{item1.is_width == 1?'width: 140px;':(item1.is_width == 2?'':'height: 140px;')}}margin-top: 0px;margin-left: 0px;"></image>
+										<image class="picture-img" data-src='{{item1.url}}' data-list="{{item.img_url}}" bindtap="imgYu" src='{{item1.url}}' style="{{item1.is_width == 1?'width: 150px;':(item1.is_width == 2?'':'height: 140px;')}}margin-top: 0px;margin-left: 0px;"></image>
 									</view>
 								</block>
 							</block>

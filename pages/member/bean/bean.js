@@ -13,8 +13,8 @@ Page({
     pageCount: 20,
     isLast: false,
     items:[],
-    imgLoad:'../../img/loading.gif',
-    message:'正在努力加载中',
+    imgLoad:'',
+    message:'',
   },
 
   /**
@@ -35,7 +35,6 @@ Page({
    */
   onShow: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
@@ -43,10 +42,7 @@ Page({
       };
       that.getUserDetail(param);
 
-      that.setData({
-        imgLoad:'../../img/loading.gif',
-        message:'正在努力加载中',
-      });
+      base.loading(1000);
       var param_p = {
         page_code: 'p004',
         type: "logList",//"beanList",
@@ -86,6 +82,7 @@ Page({
       that.setData({
         offset: that.data.offset + 1
       });
+      base.loading(1000);
       //商品列表
       var param_p = {
         page_code: 'p004',

@@ -77,26 +77,7 @@ Page({
   },
 
   getInvoiceList: function () {
-      // var param = '/p006?customer_id='+ wx.getStorageSync('customerId');
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-    //   wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: {
-    //     page_code: "p006",
-    //     customer_id: wx.getStorageSync('customerId')
-    //   },
-    //   header: {
-    //     'content-type': "application/json"
-    //   },
-    //   success: function (res) {
-    //     console.log(res);
-    //     var datas = res.data.data;
-    //     that.setData({
-    //       items: datas
-    //     });
-    //   }
-    // })
-    
     let param = {
       page_code: "p006",
       // customer_id: wx.getStorageSync('customerId')

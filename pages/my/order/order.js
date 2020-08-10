@@ -22,8 +22,8 @@ Page({
     order_state: 1,
     memberNo: wx.getStorageSync('memberNo'),
     items: [],
-    imgLoad:'../../img/loading.gif',
-    message:'正在努力加载中',
+    imgLoad:'',
+    message:'',
     dry_id:0,
     experience_amount:0,
     level:0,
@@ -61,6 +61,7 @@ Page({
     });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       
+      base.loading(1000);
     var param = {
       page_code: 'p008',
       type: "myOrder",
@@ -101,6 +102,7 @@ Page({
       that.setData({
         offset: that.data.offset + 1
       });
+      base.loading(1000);
       var param = {
         page_code: 'p008',
         type: "myOrder",
@@ -143,6 +145,9 @@ Page({
 
   //以下为自定义点击事件
   getOrderList: function (param) {
+    that.setData({
+      imgLoad:''
+    });
     var params = {
       url: app.globalData.domainUrl,
       data:param,
@@ -180,10 +185,7 @@ Page({
       })
       if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
         
-        that.setData({
-          imgLoad:'../../img/loading.gif',
-          message:'正在努力加载中',
-        });
+        base.loading(1000);
         var param = {
           page_code: 'p008',
           type: "myOrder",
