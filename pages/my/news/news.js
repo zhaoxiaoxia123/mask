@@ -107,7 +107,7 @@ Page({
         var datas = res.data.data;
         that.setData({
           msgList: that.data.msgList.concat(datas),
-          message:'您还没有相关订单',
+          message:'您还没有相关信息',
           imgLoad:'../../img/wu.png',
         });
         if (datas.length <= 0 || datas.length < that.data.pageCount) {

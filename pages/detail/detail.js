@@ -33,7 +33,9 @@ Page({
     experience_amount:0,
     isOver:false,
     surplusSale:0,
-    dry_id:0
+    dry_id:0,
+    imgLoad:'../img/loading.gif',
+    message:'正在努力加载中',
   },
   /**
    * 生命周期函数--监听页面加载

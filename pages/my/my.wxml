@@ -108,7 +108,7 @@
 		<view class='list-wap' bindtap='goMaterial' wx:if="{{level > 1}}">
 			<view class='left'>
 				<image class='icon40' src='../img/material.png'></image>
-				<text>冻龄智美素材</text>
+				<text>素材库</text>
 			</view>
 			<view class='right'>
 				<image src='../img/dv.png'></image>

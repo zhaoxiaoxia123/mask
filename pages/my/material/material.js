@@ -26,6 +26,8 @@ Page({
     imgsDownload:[],
     isCanClick:true,
     code:'',
+    imgLoad:'../../img/loading.gif',
+    message:'正在努力加载中',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -93,6 +95,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    that.setData({
+      imgLoad:'../../img/loading.gif',
+      message:'正在努力加载中',
+    });
     that.onLoad();
   },
 
@@ -156,7 +162,9 @@ Page({
           });
         }else if(num == 2){
           that.setData({
-            post: datas.data
+            post: datas.data,
+            message:'您还没有相关信息',
+            imgLoad:'../../img/wu.png',
           });
         }
       }
@@ -213,7 +221,7 @@ Page({
       return false;
     }
     that.setDownloadClick(false);
-    console.log(that.data.post[ind].img_url.toString());
+    console.log(that.data.post[ind].xz_img_url.toString());
     
     wx.showToast({
       title: "开始保存素材",
@@ -223,8 +231,9 @@ Page({
     
     let param = {
       page_code:'p019',
-      img:that.data.post[ind].img_url.toString(),
-      code:that.data.code
+      img:that.data.post[ind].xz_img_url.toString(),
+      code:that.data.code,
+      source:"app"
       // customer_id: wx.getStorageSync('customerId') ? wx.getStorageSync('customerId') : 0,
     };
     var params = {
@@ -282,38 +291,38 @@ Page({
     for (let i = 0; i < that.data.imgsDownload.length; i++) {
       wx.hideLoading();
       wx.showToast({
-        title: "保存第"+i+"张素材中",
+        title: "保存第"+(i==0?1:i)+"张素材中",
         icon: "loading",
         duration: 5000
       })
       wx.downloadFile({
         url: that.data.imgsDownload[i], // 需下载的每一张图片路径
         success: function (res) {
-      var path = res.tempFilePath;
-      wx.saveImageToPhotosAlbum({
-        filePath: path,
-        success(result) {
-          console.log("成功");
-          if ((i+1) == that.data.imgsDownload.length) {
-            wx.hideLoading();
-            wx.showToast({
-              title: '保存完成',
-              duration: 2000,
-              mask: true,
-            });
-          }
-          that.setDownloadClick(true);
-        },
-        fail(result) {
-          wx.openSetting({
-            success: (res) => {
-            console.log(res);
+        var path = res.tempFilePath;
+        wx.saveImageToPhotosAlbum({
+          filePath: path,
+          success(result) {
+            console.log("成功");
+            if ((i+1) == that.data.imgsDownload.length) {
+              wx.hideLoading();
+              wx.showToast({
+                title: '保存完成',
+                duration: 2000,
+                mask: true,
+              });
             }
-          })
-          that.setDownloadClick(true);
+            that.setDownloadClick(true);
+          },
+          fail(result) {
+            wx.openSetting({
+              success: (res) => {
+              console.log(res);
+              }
+            })
+            that.setDownloadClick(true);
+          }
+        });
         }
-      });
-      }
       });
     }
   },

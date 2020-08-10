@@ -12,7 +12,9 @@ Page({
     offset: 1,
     pageCount: 20,
     isLast: false,
-    items: []
+    items: [],
+    imgLoad:'../../img/loading.gif',
+    message:'正在努力加载中',
   },
 
   /**
@@ -47,6 +49,10 @@ Page({
       };
       that.getUserDetail(param);
 
+      that.setData({
+        imgLoad:'../../img/loading.gif',
+        message:'正在努力加载中',
+      });
       var paramg = {
         page_code: 'p004',
         type: "logList",  //growthList
@@ -157,7 +163,9 @@ Page({
       sCallback: function (res) {
         var datas = res.data.data.pointList;
         that.setData({
-          items: that.data.items.concat(datas)
+          items: that.data.items.concat(datas),
+          message:'您还没有相关信息',
+          imgLoad:'../../img/wu.png',
         });
         if (datas.length <= 0 || datas.length < that.data.pageCount) {
           that.setData({

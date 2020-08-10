@@ -24,9 +24,9 @@
           <!--没有相关优惠券时显示-->
           <view class='search-no' wx:if="{{ticketList.length <= 0}}">
             <view>
-              <image class='scimg' src='../../img/wu.png'></image>
+              <image class='scimg' src='{{imgLoad}}'></image>
             </view>
-            <text>您还没有优惠券~~</text>
+            <text>{{message}}~~</text>
           </view>
           <!-- 这里的优惠券金额不需要保留两位小数点 -->
           <view class="wrapper colour-bg1" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
@@ -68,9 +68,9 @@
           <!--没有相关优惠券时显示-->
           <view class='search-no' wx:if="{{ticketList.length <= 0}}">
             <view>
-              <image class='scimg' src='../../img/wu.png'></image>
+              <image class='scimg' src='{{imgLoad}}'></image>
             </view>
-            <text>您还没有优惠券~~</text>
+            <text>{{message}}~~</text>
           </view>
           <view class="wrapper colour-bg2" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
             <view class="content">
@@ -111,9 +111,9 @@
           <!--没有相关优惠券时显示-->
           <view class='search-no' wx:if="{{ticketList.length <= 0}}">
             <view>
-              <image class='scimg' src='../../img/wu.png'></image>
+              <image class='scimg' src='{{imgLoad}}'></image>
             </view>
-            <text>您还没有优惠券~~</text>
+            <text>{{message}}~~</text>
           </view>
           <view class="wrapper colour-bg2" wx:for="{{ticketList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
             <view class="content">

@@ -13,7 +13,9 @@ Page({
     pageCount: 20,
     isLast: false,
     ticketList: [],
-    show_amount: '' //需展示的新会员卡券兑换金额
+    show_amount: '', //需展示的新会员卡券兑换金额
+    imgLoad:'../../img/loading.gif',
+    message:'正在努力加载中',
   },
 
 
@@ -41,6 +43,11 @@ Page({
       isLast: false
     });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
+      
+      that.setData({
+        imgLoad:'../../img/loading.gif',
+        message:'正在努力加载中',
+      });
       var param = {
         page_code: "p013",
         // customer_id: wx.getStorageSync('customerId'),
@@ -106,6 +113,11 @@ Page({
       show_amount: '',
       });
       if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
+        
+      that.setData({
+        imgLoad:'../../img/loading.gif',
+        message:'正在努力加载中',
+      });
         var param = {
           page_code: "p013",
           // customer_id: wx.getStorageSync('customerId'),
@@ -133,6 +145,11 @@ Page({
         show_amount:'',
       })
       if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
+        
+      that.setData({
+        imgLoad:'../../img/loading.gif',
+        message:'正在努力加载中',
+      });
         var param = {
           page_code: "p013",
           // customer_id: wx.getStorageSync('customerId'),
@@ -155,7 +172,9 @@ Page({
         var datas = res.data.data;
         that.setData({
           ticketList: that.data.ticketList.concat(datas.ticket),
-          show_amount: datas.show_amount
+          show_amount: datas.show_amount,
+          message:'您还没有优惠券',
+          imgLoad:'../../img/wu.png',
         });
         if (datas.ticket.length <= 0 || datas.ticket.length < that.data.pageCount) {
           that.setData({

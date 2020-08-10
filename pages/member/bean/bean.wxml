@@ -18,7 +18,6 @@
         <text class='branch-text1'>智美豆说明？</text>
       </view>
     </view>
-    <!-- 邀请好友成为会员（VIP、SVIP、钻卡）才显示，注册用户不显示； -->
     <view class='branch-content' wx:if="{{customer.frozeno_level > 1}}">
       <view class='branch-text'>
       <image class="icon58 pdr10" src="../../img/vip_bg@2x.png"></image>
@@ -30,11 +29,12 @@
     </view>
   </view>
   <view class='integral-content'>
-  <!-- 智美豆：
-1、通过分享好友首次下单  +   待入账：需要收货10天后入账
-2、通过好友下单奖励 +     待入账：需要收货10天后入账
-3、购物抵扣 -
-4、订单取消  + -->
+		<view class='search-no' wx:if="{{items.length <= 0}}">
+      <view>
+        <image class='scimg' src='{{imgLoad}}'></image>
+      </view>
+      <text>{{message}}~~</text>
+    </view>
     <view class='integral-text' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
       <view class='integral-title'>
         <text class='text-title'>{{item.log_title}}</text>

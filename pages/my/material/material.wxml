@@ -24,6 +24,12 @@
 		</swiper>
 	</view>
 	<view class="cricle-content">
+		<view class='search-no' wx:if="{{post.length <= 0}}">
+      <view>
+        <image class='scimg' src='{{imgLoad}}'></image>
+      </view>
+      <text>{{message}}~~</text>
+    </view>
 		<block wx:for="{{post}}" wx:key="*this" wx:for-index="index">
 			<view class="cricle-box">
 				<view class="box-item">
@@ -41,8 +47,7 @@
 							<block wx:if="{{item.img_url.length > 1 && item.img_url.length != 4}}">
 								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this">
 									<view style="width: 70px;height: 70px;overflow: hidden;margin-right: 10px;margin-bottom: 10px;">
-										<image class="picture-img" bindtap="imgYu" data-src='{{item1.url}}' data-list="{{item.img_url}}" src='{{item1.url}}' style="height: 70px;margin-top: 0px;margin-left: 0px;"></image>
-										<!-- width: 100px; -->
+										<image class="picture-img" bindtap="imgYu" data-src='{{item1.url}}' data-list="{{item.img_url}}" src='{{item1.url}}' style="{{item1.is_width == 1?'width: 100px;':(item1.is_width == 2?'':'height: 100px;')}}margin-top: 0px;margin-left: 0px;"></image>
 									</view>
 								</block>
 							</block>
@@ -66,16 +71,17 @@
 						</view>
 					</view>
 				</view>
-				<view class="cricle-ft" data-index="{{index}}" bindtap="getMergePic" wx:if="{{isCanClick}}">
-					<view wx:if="{{(item.img_url[0] == ''?0:item.img_url.length) > 0}}" class="ft-item">
+				<!-- wx:if="{{isCanClick}}" -->
+				<view class="cricle-ft" data-index="{{index}}" bindtap="getMergePic" >
+					<view wx:if="{{(item.img_url[0].url == ''?0:item.img_url.length) > 0}}" class="ft-item">
 						<view class="ft-t ft-icon">
 							<image class="img-icon" src='../../img/circle/download@2x.png'></image>
 						</view>
 						<view class="ft-t ft-text">下载素材</view>
-						<view class="ft-number">({{item.img_url[0] == ''?0:item.img_url.length}})</view>
+						<view class="ft-number">({{item.img_url[0].url == ''?0:item.img_url.length}})</view>
 					</view>
 				</view>
-				<view class="cricle-ft" wx:if="{{!isCanClick}}">
+				<!-- <view class="cricle-ft" wx:if="{{!isCanClick}}">
 					<view wx:if="{{item.img_url.length > 0}}" class="ft-item">
 						<view class="ft-t ft-icon">
 							<image class="img-icon" src='../../img/circle/download@2x.png'></image>
@@ -83,7 +89,7 @@
 						<view class="ft-t ft-text">下载素材</view>
 						<view class="ft-number">({{item.img_url.length}})</view>
 					</view>
-				</view>
+				</view> -->
 			</view>
 
 		</block>
