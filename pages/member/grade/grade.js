@@ -17,6 +17,7 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    base.loading(1000);
     that.getPost();
   },
 
@@ -31,7 +32,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
@@ -94,6 +94,5 @@ Page({
       }
     };
     base.httpRequest(params);
-
   },
 })

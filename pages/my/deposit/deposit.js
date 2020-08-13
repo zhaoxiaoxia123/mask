@@ -11,6 +11,7 @@ Page({
     customerInfo:[],
     orderList:[],
     dry_id:0,
+    is_apply:false
   },
 
   /**
@@ -112,6 +113,7 @@ Page({
         if (datas){
           that.setData({
             orderList: datas,
+            is_apply:datas.is_apply
           });
         }
       }
@@ -142,10 +144,11 @@ Page({
   apply:function(){
     wx.showModal({
       title: '提示',
-      content: '你确定申请退还押金？',
+      content: '我们已经收到您的申请,请尽快将货物邮递至我们,感谢您的使用.',
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定.');
+          that.submitApply();
           that.close3();
         } else if (res.cancel) {
           console.log('用户点击取消.');
@@ -154,5 +157,35 @@ Page({
       }
     })
   },
+  
+  //提交申请退押金信息
+  submitApply: function(){
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      var param = {
+        page_code:'p009',
+        type:"applyDeposit"
+      };
+      var params = {
+        url: app.globalData.domainUrl,
+        data:param,
+        method:'POST',
+        sCallback: function (res) {
+          var datas = res.data;
+          if (datas.code == 200){
+            that.setData({
+              is_apply:true
+            });
+          }
+        }
+      };
+      base.httpRequest(params);
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再做申请。',
+        showCancel: false
+      });
+    }
+  }
 
 })

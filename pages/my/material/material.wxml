@@ -1,14 +1,5 @@
 <!--pages/circle_ads/circle_ads.wxml-->
 <view class="cricle">
-	<!-- 搜索框 -->
-	<!-- <view class="weui-search-bar">
-		<view class="weui-search-bar__form">
-			<view class="weui-search-bar__box">
-				<icon class="weui-icon-search_in-box" type="search" size="24"></icon>
-				<input type="text" class="weui-search-bar__input" placeholder="请输入搜索关键词"  bindinput="setKeywordInput" value='{{keyword}}' bindconfirm='search'/>
-			</view>
-		</view>
-	</view> -->
 	<view class="swiper pad">
 		<swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
 			<!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名-->

@@ -16,37 +16,38 @@ Page({
     interval: 6000,
     duration: 500,
     circular: true,
-    cricleShow: false,//控制下拉列表的显示隐藏，false隐藏、true显示
-    cricleData: ['无创水光礼盒装（8+1）', '精华液3支装', '表皮电子3片装', '导入仪单个装', '混合整箱装'],//下拉列表的数据
-    index: 0,//选择的下拉列表下标
     typeAd:18,//广告类型
     typePost:19,  //文章类型
     post:[], //文章列表
-    keyword:'',
     imgsDownload:[],
     isCanClick:true,
     code:'',
     message:'',
     imgLoad:'',
+    offset: 1,
+    pageCount: 5,
+    isLast: false,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    base.loading();
     that = this;
+    base.loading();
     var param = {
       page_code:'p001',
       type:that.data.typeAd,
     };
     that.getAdList(param,1);
-    
+
     var param = {
       page_code:'p001',
       type:that.data.typePost,
-      keyword:that.data.keyword
+      offset: (that.data.offset - 1) * that.data.pageCount,
+      page: that.data.pageCount
     };
     that.getAdList(param,2);
+
     setTimeout(function(){
       wx.stopPullDownRefresh();
     },1000);
@@ -63,6 +64,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
@@ -96,8 +98,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
-    base.loading();
+    that.setData({
+      post: [],
+      isLast: false,
+      offset: 1,
+      imgLoad:''
+    });
     that.onLoad();
   },
 
@@ -105,7 +111,19 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (!that.data.isLast) {
+      that.setData({
+        offset: that.data.offset + 1
+      });
+      base.loading(1000);
+      var param = {
+        page_code:'p001',
+        type:that.data.typePost,
+        offset: (that.data.offset - 1) * that.data.pageCount,
+        page: that.data.pageCount
+      };
+      that.getAdList(param,2);
+    }
   },
 
   /**
@@ -131,13 +149,6 @@ Page({
           //urls: imgarr // 替换http用这个，需要预览的图片http链接列表
     })   
   },
-  setKeywordInput:function(e){
-    var value = e.detail.value;
-    that.setData({
-      keyword: value
-    })
-    
-  },
   search:function(){
     var param = {
       page_code:'p001',
@@ -161,32 +172,21 @@ Page({
           });
         }else if(num == 2){
           that.setData({
-            post: datas.data,
-            message:'您还没有相关信息',
+            post: that.data.post.concat(datas.data),
+            message:'您还没有相关订单',
             imgLoad:'../../img/wu.png',
           });
+          if (datas.data.length <= 0 || datas.data.length < that.data.pageCount) {
+            that.setData({
+              isLast: true
+            });
+          }
         }
       }
     };
     base.httpRequest(params);
-
-
   },
 
-  // 点击下拉显示框
-  cricleTap() {
-    this.setData({
-      cricleShow: !this.data.cricleShow
-    });
-  },
-  // 点击下拉列表
-  optionTap(e) {
-    let Index = e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-    this.setData({
-      index: Index,
-      cricleShow: !this.data.cricleShow
-    });
-  },
   // 复制
   copy: function (e) {
     let content = e.currentTarget.dataset.content;

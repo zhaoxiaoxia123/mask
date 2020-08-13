@@ -42,7 +42,6 @@ Page({
         data:param,
         method:'GET',
         sCallback: function (res) {
-          console.log(res);
           var datas = res.data.data;
           that.setData({
             name: datas.name,
@@ -52,8 +51,6 @@ Page({
             is_default: datas.is_default==1?true:false,
             region:[datas.province,datas.city,datas.area]
           });
-          console.log('that.data.is_default');
-          console.log(that.data.is_default);
         }
       };
       base.httpRequest(params);
@@ -117,7 +114,6 @@ Page({
   },
   setPhoneInput: function (e) {
     let value = this.validateNumber(e.detail.value)
-    console.log(value);
       this.setData({
         phone:value
       })
@@ -125,7 +121,6 @@ Page({
   },
   setZipInput: function (e) {
     let value = that.validateNumber(e.detail.value)
-    console.log(value);
     that.setData({
       zip:value
     })
@@ -199,13 +194,11 @@ Page({
               type: "del",
               customer_addr_id: that.data.addressId
             };
-          
             var params = {
               url: app.globalData.domainUrl,
               data:param,
               method:'GET',
               sCallback: function (res) {
-                console.log(res);
                 var datas = res.data.data;
                 if (datas) {
                   wx.navigateBack({
@@ -288,7 +281,6 @@ Page({
         data:param,
         method:'POST',
         sCallback: function (res) {
-          console.log(res);
           var datas = res.data.data;
           if (datas){
             wx.navigateBack({
