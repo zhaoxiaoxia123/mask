@@ -24,8 +24,9 @@ Page({
     ftserviceflexwindow: false,
     storeflexwindow:false,
     step:0,
-    materialType:20,// 20:公众号发文对应 
-    // materialList:[],
+    materialType:20,// 20:公众号发文对应
+    message:'',
+    imgLoad:'',
   },
 
   /**
@@ -33,6 +34,7 @@ Page({
    */
   onLoad: function(options) {
     that = this;
+    base.loading(1000);
     if (options.shareBy) {
       wx.setStorageSync('shareBy', options.shareBy);
     }
@@ -75,18 +77,10 @@ Page({
       offset: (that.data.offset - 1) * that.data.pageCount,
       page: that.data.pageCount
     };
-    // var param_p = '?page_code=p005&offset='+(that.data.offset - 1) * that.data.pageCount+'&page='+that.data.pageCount;
     that.getProductList(param_p);
 
     //广告图片列表---------
     that.getAdList();
-    
-    //获取公众号素材列表
-    // var param_m = {
-    //   page_code: "p001",
-    //   type: that.data.materialType
-    // };
-    // that.getMaterialList(param_m);
   },
 
   /**
@@ -132,12 +126,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    console.log(that.data.offset);
-    console.log(that.data.isLast);
     if (!that.data.isLast) {
       that.setData({
         offset: that.data.offset + 1
       });
+      base.loading(1000);
       //商品列表
       var param_p = {
         page_code: "p005",
@@ -201,21 +194,6 @@ Page({
     tmpObj.calling(e);
   },
   
-  //获取公众号的素材列表
-  getMaterialList: function(param) {
-    var params = {
-      url: app.globalData.domainUrl,
-      data:param,
-      sCallback: function (res) {
-        var datas = res.data;
-        console.log(datas);
-        that.setData({
-          materialList: datas.data
-        });
-      }
-    };
-    base.httpRequest(params);
-  },
   //广告
   getAdList: function() {
     let param = {
@@ -252,10 +230,10 @@ Page({
       data:param,
       sCallback: function (res) {
         var datas = res.data.data;
-        // console.log(datas);
-        // console.log(datas.length);
         that.setData({
-          items: that.data.items.concat(datas)
+          items: that.data.items.concat(datas),
+          message:'没有相关信息',
+          imgLoad:'../img/wu.png',
         });
         if (datas && (datas.length <= 0 || datas.length < that.data.pageCount)) {
           that.setData({
@@ -265,27 +243,6 @@ Page({
       }
     };
     base.httpRequest(params);
-
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': "application/json"
-    //   },
-    //   success: function(res) {
-    //     var datas = res.data.data;
-    //     // console.log(datas);
-    //     // console.log(datas.length);
-    //     that.setData({
-    //       items: that.data.items.concat(datas)
-    //     });
-    //     if (datas && (datas.length <= 0 || datas.length < that.data.pageCount)) {
-    //       that.setData({
-    //         isLast: true
-    //       });
-    //     }
-    //   }
-    // })
   },
   goPost: function (e) {
     console.log(e);

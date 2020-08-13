@@ -211,6 +211,13 @@ Page({
     var amount = e.currentTarget.dataset.amount;
     var items = that.data.items;
     if (items.is_check_dry == 1) {
+      if(amount == 389){
+        wx.showModal({
+          title: '提示',
+          content:  "该产品需要配合导入仪使用,请确定您目前已经拥有导入仪.",
+          showCancel: false
+        });
+      }
       items.is_check_dry = 2;
       that.setData({
         dryAmount:0

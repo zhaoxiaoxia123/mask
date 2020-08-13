@@ -1,14 +1,5 @@
 <!--pages/circle_ads/circle_ads.wxml-->
 <view class="cricle">
-	<!-- 搜索框 -->
-	<!-- <view class="weui-search-bar">
-		<view class="weui-search-bar__form">
-			<view class="weui-search-bar__box">
-				<icon class="weui-icon-search_in-box" type="search" size="24"></icon>
-				<input type="text" class="weui-search-bar__input" placeholder="请输入搜索关键词"  bindinput="setKeywordInput" value='{{keyword}}' bindconfirm='search'/>
-			</view>
-		</view>
-	</view> -->
 	<view class="swiper pad">
 		<swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
 			<!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名-->
@@ -47,7 +38,8 @@
 							<block wx:if="{{item.img_url.length > 1 && item.img_url.length != 4}}">
 								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this">
 									<view style="width: 70px;height: 70px;overflow: hidden;margin-right: 10px;margin-bottom: 10px;">
-										<image class="picture-img" bindtap="imgYu" data-src='{{item1.url}}' data-list="{{item.img_url}}" src='{{item1.url}}' style="{{item1.is_width == 1?'width: 115px;':(item1.is_width == 2?'':'height: 100px;')}}margin-top: 0px;margin-left: 0px;"></image>
+										<image class="picture-img" bindtap="imgYu" data-src='{{item1.url}}' data-list="{{item.img_url}}" src='{{item1.url_resize}}'></image>
+										<!-- style="{{item1.is_width == 1?'width: 115px;':(item1.is_width == 2?'':'height: 100px;')}}margin-top: 0px;margin-left: 0px;" -->
 									</view>
 								</block>
 							</block>
@@ -63,7 +55,8 @@
 							<block wx:if="{{item.img_url.length == 4}}">
 								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this" wx:for-index="index">
 									<view style="width: 100px;height: 100px;overflow: hidden;margin-right: 10px;margin-bottom: 10px;">
-										<image class="picture-img" data-src='{{item1.url}}' data-list="{{item.img_url}}" bindtap="imgYu" src='{{item1.url}}' style="{{item1.is_width == 1?'width: 150px;':(item1.is_width == 2?'':'height: 140px;')}}margin-top: 0px;margin-left: 0px;"></image>
+										<image class="picture-img" data-src='{{item1.url}}' data-list="{{item.img_url}}" bindtap="imgYu" src='{{item1.url_resize}}'></image>
+										 <!-- style="{{item1.is_width == 1?'width: 150px;':(item1.is_width == 2?'':'height: 140px;')}}margin-top: 0px;margin-left: 0px;" -->
 									</view>
 								</block>
 							</block>

@@ -45,7 +45,7 @@ Page({
       base.loading(1000);
       var param_p = {
         page_code: 'p004',
-        type: "logList",//"beanList",
+        type: "logList",
         event:5,
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
@@ -83,7 +83,6 @@ Page({
         offset: that.data.offset + 1
       });
       base.loading(1000);
-      //商品列表
       var param_p = {
         page_code: 'p004',
         type: "logList",
@@ -106,7 +105,7 @@ Page({
       url: '/pages/member/grade/grade',
     })
   },
-  //获取用户信息 ： 积分 卡券数量 等
+  //获取用户信息
   getUserDetail: function (param) {
     var params = {
       url: app.globalData.domainUrl,
@@ -121,7 +120,7 @@ Page({
     base.httpRequest(params);
 
   },
-  //获取用户信息 ： 积分列表
+  //获取智美豆列表
   getBeanList: function (param) {
     var params = {
       url: app.globalData.domainUrl,

@@ -55,6 +55,11 @@ Page({
       };
       // var param = '/p013?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
       that.getTicketList(param);
+    }else{
+      that.setData({
+        message:'您还没有优惠券',
+        imgLoad:'../../img/wu.png',
+      });
     }
   },
 
@@ -122,6 +127,11 @@ Page({
         };
         // var param = '/p013?customer_id='+ wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
         that.getTicketList(param);
+      }else{
+        that.setData({
+          message:'您还没有优惠券',
+          imgLoad:'../../img/wu.png',
+        });
       }
     }
   },
@@ -150,6 +160,11 @@ Page({
           page: that.data.pageCount
         };
         that.getTicketList(param);
+      }else{
+        that.setData({
+          message:'您还没有优惠券',
+          imgLoad:'../../img/wu.png',
+        });
       }
     }
   },
@@ -175,7 +190,6 @@ Page({
       }
     };
     base.httpRequest(params);
-
   },
   goOrder: function(e) {  //去购物车使用卡券
     // var ticketId = e.currentTarget.dataset.id;

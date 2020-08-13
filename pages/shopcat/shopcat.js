@@ -72,6 +72,11 @@ Page({
         page: that.data.pageCount
       };
       that.getShoppingList(param_s);
+    }else{
+      that.setData({
+        message:'',
+        imgLoad:'../img/shopcatwu@2x.png',
+      });
     }
   },
 

@@ -106,7 +106,6 @@ Page({
   onShareAppMessage: function () {
   },
 
-
   ftservice: function (e) {
     let ret = tmpObj.ftservice(e);
     that.setData({
@@ -155,23 +154,6 @@ Page({
       }
     };
     base.httpRequest(params);
-
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   data: param,
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       items: res.data.data
-    //     });
-    //     if(that.data.items && res.data.code == 200){
-    //       wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
-    //       wx.setStorageSync('discount', that.data.items.discount);  //折扣
-    //     }
-    //   }
-    // });
   },
 
   writeCode: function () {  //在页面上打印条形码和二维码
@@ -186,26 +168,40 @@ Page({
     });
   },
 
-/***
-   * 点击进入各自页面
-   * ***/
+  //优惠券
   coupon: function (e) {
-    console.log(e);
-    wx.navigateTo({
-      url: '/pages/my/coupon/coupon'
-    })
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '/pages/my/coupon/coupon'
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
+
   grade: function (e) {
     console.log(e);
     wx.navigateTo({
       url: '../member/grade/grade'
     })
   },
+    // 成长值
   grow: function (e) {
-    console.log(e);
-    wx.navigateTo({
-      url: '../member/grow/grow'
-    })
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '../member/grow/grow'
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   integral: function (e) {
     console.log(e);
@@ -213,11 +209,19 @@ Page({
       url: '../member/integral/integral'
     })
   },
+  //智美豆
   bean: function (e) {
-    console.log(e);
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     wx.navigateTo({
       url: '../member/bean/bean'
     })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   chanMask: function () {
     var isShow = that.data.show ? false : true;//如果显示就隐藏，隐藏就显示

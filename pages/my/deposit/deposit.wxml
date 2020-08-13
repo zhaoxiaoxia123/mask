@@ -13,7 +13,6 @@
 	<view class="lists" wx:for="{{orderList.products}}" wx:for-index="index" wx:for-item="item1" wx:key="*this">
 		<block wx:if="{{item1.frozeno_is_gift != 1 || item1.category_id == dry_id}}">
 		<view class="list-item">
-		
 			<view class="list-box">
 				<view class='list-left'>
 					<image src="{{item1.product_image?item1.product_image[0].image_url:''}}" lazy-load></image>
@@ -31,7 +30,6 @@
 							<text class="decoration">￥{{item1.product_before_amount}}</text>
 						</view>
 					</view>
-
 					<block wx:if="{{item1.frozeno_is_gift == 1 && item1.category_id == dry_id}}">
 						<block wx:for="{{orderList.products}}" wx:key="*this" wx:for-item="g">
 							<view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">
@@ -43,8 +41,10 @@
 			</view>
 			<!-- 申请退还押金和已退款 -->
 			<view class="push-button" wx:if="{{item1.frozeno_is_gift == 1 && item1.category_id == dry_id}}">
-				<view class="push push-active" bindtap="deposit" wx:if="{{!orderList.is_back}}">申请退还押金</view>
-				<view class="push push-active" wx:if="{{orderList.is_back}}">已退还</view>
+				<view class="push push-active" bindtap="deposit" wx:if="{{!is_back && is_apply == 0}}">申请退还押金</view>
+				<view class="push push-active" wx:if="{{!is_back && is_apply == 1}}">待处理</view>
+				<view class="push push-active" wx:if="{{!is_back && is_apply == 3}}">拒绝退款</view>
+				<view class="push push-active" wx:if="{{is_back}}">已退还</view>
 			</view>
 		</view>
 	</block>
@@ -65,7 +65,6 @@
 		</view>
 		<scroll-view scroll-y="true" style="height:650rpx;">
 			<view class='deposit-item page-pd'>
-
 				<view class="deposit-hd">请在申请前阅读并同意以下条款：</view>
 				<view class="deposit-text">1、退还前请确认以下商品是否完好，没有出现人为造成的损坏，包括导入仪机身、充电线以及表皮电子连接线；</view>
 				<view class="deposit-text">2、请确认随单赠品是否完好，赠品内容请查看包括导入仪购买的订单；</view>
@@ -80,9 +79,5 @@
 				<view class="ft-bottom-operate ft-button" bindtap="apply">同意并申请退还押金</view>
 			</view>
 		</view>
-
-		<!--按下按钮提示信息: 我们已经收到您的申请，请尽快将货物邮递至我们，感谢您的使用。 -->
-
 	</view>
-
 </view>

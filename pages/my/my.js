@@ -173,11 +173,18 @@ Page({
     base.httpRequest(params);
   },
 
-  bean: function (e) {
-    console.log(e);
-    wx.navigateTo({
-      url: '../member/bean/bean'
-    })
+  bean: function (e) {    
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '../member/bean/bean'
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   setLevel:function(){
     that.setData({
@@ -189,7 +196,6 @@ Page({
    * 点击进入各自页面
    * ***/
   order: function (e) {
-    console.log(e)
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var orderId = e.currentTarget.dataset.id;
       wx.navigateTo({
@@ -198,30 +204,49 @@ Page({
     }else{
       wx.showModal({
         title: '提示',
-        content: '请完成授权后再查看订单列表',
+        content: '请完成授权后再点击查看',
         showCancel: false
       });
     }
   },
   info: function (e) {
-    wx.navigateTo({
-      url: '../my/invoice/invoice'
-    })
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '../my/invoice/invoice'
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   address: function (e) {
-    wx.navigateTo({
-      url: '../my/address/address'
-    })
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '../my/address/address'
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   news: function (e) {
-    wx.navigateTo({
-      url: '../my/news/news'
-    })
-  },
-  coupon: function (e) {
-    wx.navigateTo({
-      url: '../my/coupon/coupon'
-    })
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '../my/news/news'
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   service: function (e) {
     wx.navigateTo({
@@ -229,9 +254,17 @@ Page({
     })
   },
   deposit: function (e) {
-    wx.navigateTo({
-      url: '../my/deposit/deposit'
-    })
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '../my/deposit/deposit'
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   // customer: function (e) {
     // wx.navigateTo({
@@ -239,9 +272,17 @@ Page({
     // })
   // },
   setting: function (e) {
-    wx.navigateTo({
-      url: '../my/setting/setting'
-    })
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '../my/setting/setting'
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   shareApp: function (e) {   //邀请好友
     if (wx.getStorageSync('level') <= 1) {
