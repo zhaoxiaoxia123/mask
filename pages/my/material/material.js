@@ -25,7 +25,7 @@ Page({
     message:'',
     imgLoad:'',
     offset: 1,
-    pageCount: 5,
+    pageCount: 8,
     isLast: false,
   },
   /**
