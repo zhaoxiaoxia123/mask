@@ -419,7 +419,7 @@
   display: flex;
   background: #404040;
   color: #c6c6c6;
-  font-weight: 10;
+  font-weight: normal;
   margin: 0;
   padding: 0;
   font-size: 1rem;
