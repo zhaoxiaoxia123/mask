@@ -127,5 +127,4 @@
 			<!-- <view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view> -->
 		</view>
 	</view>
-
 </view>
