@@ -27,7 +27,7 @@ Page({
     offset: 1,
     pageCount: 8,
     isLast: false,
-    progress:''
+    // progress:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -224,7 +224,7 @@ Page({
     wx.showToast({
       title: "开始保存素材",
       icon: "loading",
-      duration: 2000
+      duration: 1000*60
     })
     let param = {
       page_code:'p019',
@@ -248,6 +248,7 @@ Page({
           imgsDownload: datas.data.path
         });
         if(datas.data.is_logout == 2){
+          wx.hideLoading();
           wx.clearStorage({
             complete: (res) => {
             wx.showToast({
@@ -280,6 +281,7 @@ Page({
   // 下载
   download: function () {
     let len = that.data.imgsDownload.length;
+    wx.hideLoading();
     for (let i = 0; i < len; i++) {
       wx.showToast({
         title: "保存素材中...",
