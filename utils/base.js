@@ -27,11 +27,9 @@ function httpRequest(params, noRefetch) {
     method: params.method,
     header: header,
     success: function (res) {
-      console.log(res);
+      // console.log(res);
       var code = res.data.code ? res.data.code.toString():'';
       var startChar = code.charAt(0);
-      // console.log('startChar:-----');
-      // console.log(startChar);
       if (startChar == '2') {
         params.sCallback && params.sCallback(res);
       } else {

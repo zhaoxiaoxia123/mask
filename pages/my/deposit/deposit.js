@@ -11,7 +11,8 @@ Page({
     customerInfo:[],
     orderList:[],
     dry_id:0,
-    is_apply:false
+    is_apply:false,
+    time_diff:0
   },
 
   /**
@@ -113,7 +114,8 @@ Page({
         if (datas){
           that.setData({
             orderList: datas,
-            is_apply:datas.is_apply
+            is_apply:datas.is_apply,
+            time_diff:datas.time_diff
           });
         }
       }

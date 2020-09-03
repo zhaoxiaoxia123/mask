@@ -266,11 +266,6 @@ Page({
       });
     }
   },
-  // customer: function (e) {
-    // wx.navigateTo({
-    //   url: '../my/customer/customer'
-    // })
-  // },
   setting: function (e) {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.navigateTo({
@@ -282,14 +277,6 @@ Page({
         content: '请完成授权后再点击查看',
         showCancel: false
       });
-    }
-  },
-  shareApp: function (e) {   //邀请好友
-    if (wx.getStorageSync('level') <= 1) {
-      wx.showToast({
-        icon: "info",
-        title: '无法邀请好友。'
-      })
     }
   },
   //前往工作台

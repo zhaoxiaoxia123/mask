@@ -23,11 +23,11 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.1",
+	"libVersion": "2.12.0",
 	"appid": "wxcded5821f08f92b4",
 	"projectname": "mask",
 	"debugOptions": {

@@ -27,6 +27,7 @@ Page({
     offset: 1,
     pageCount: 8,
     isLast: false,
+    // progress:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -133,8 +134,8 @@ Page({
 
   },
   imgYu:function(event){
-    var src = event.currentTarget.dataset.src;//获取data-src,(自动识别data-后面的 如果是data-aaa这边就直接写aaa)
-    var imgList = event.currentTarget.dataset.list;//获取data-list  是一个图片地址数据
+    var src = event.currentTarget.dataset.src;
+    var imgList = event.currentTarget.dataset.list;
   //---------如果安卓不能查看大图可以替换一下http
      var imgarr=[]
      for (var i = 0; i<imgList.length;i++){//https 查看大图时不显示，换成http就可以了
@@ -162,7 +163,6 @@ Page({
     var params = {
       url: app.globalData.domainUrl,
       data:param,
-      // method:'GET',
       sCallback: function (res) {
         var datas = res.data;
         console.log(datas);
@@ -220,14 +220,12 @@ Page({
       return false;
     }
     that.setDownloadClick(false);
-    console.log(that.data.post[ind].xz_img_url.toString());
-    
+    // console.log(that.data.post[ind].xz_img_url.toString());
     wx.showToast({
       title: "开始保存素材",
       icon: "loading",
-      duration: 2000
+      duration: 1000*60
     })
-    
     let param = {
       page_code:'p019',
       img:that.data.post[ind].xz_img_url.toString(),
@@ -242,19 +240,15 @@ Page({
       sCallback: function (res) {
         var datas = res.data;
         console.log(datas);
-        wx.showToast({
-          title: datas.message,
-          duration: 2000
-        });
+        // wx.showToast({
+        //   title: datas.message,
+        //   duration: 2000
+        // });
         that.setData({
           imgsDownload: datas.data.path
         });
-        console.log('datas.data.customer_code:-----');
-        console.log(datas.data.customer_code);
-        // if(datas.data.customer_code != ''){
-        //   that.addStorage(datas.data.customer_code);
-        // }
         if(datas.data.is_logout == 2){
+          wx.hideLoading();
           wx.clearStorage({
             complete: (res) => {
             wx.showToast({
@@ -286,14 +280,15 @@ Page({
   // },
   // 下载
   download: function () {
-    console.log(that.data.imgsDownload);
-    for (let i = 0; i < that.data.imgsDownload.length; i++) {
-      wx.hideLoading();
+    let len = that.data.imgsDownload.length;
+    wx.hideLoading();
+    for (let i = 0; i < len; i++) {
       wx.showToast({
-        title: "保存第"+(i==0?1:i)+"张素材中",
+        title: "保存素材中...",
         icon: "loading",
-        duration: 5000
-      })
+        duration: 1000*60
+      });
+      // const downloadTask = 
       wx.downloadFile({
         url: that.data.imgsDownload[i], // 需下载的每一张图片路径
         success: function (res) {
@@ -323,6 +318,17 @@ Page({
         });
         }
       });
+    //  downloadTask.onProgressUpdate((res) => {
+    //   if (res.progress === 100) {
+    //     this.setData({
+    //       progress: ''
+    //     });
+    //   } else {
+    //     this.setData({
+    //       progress: res.progress + '%'
+    //     });
+    //   }
+    // });
     }
   },
   // 我的

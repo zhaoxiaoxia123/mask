@@ -5,8 +5,9 @@
 			<text class='current1'>{{customerInfo.dry_deposit?customerInfo.dry_deposit:'0.00'}}</text>
 			<text>押金</text>
 		</view>
-		<view class='integral-current1' wx:if="{{customerInfo.dry_deposit > 0}}">
-			<text class=''>20天后押金将转为导入仪购买款</text>
+		 <!-- wx:if="{{customerInfo.dry_deposit > 0}}" -->
+		<view class='integral-current1'>
+			<text class=''>90天后押金将转为导入仪购买款</text>
 			<!-- <text class="">2020-08-03 13:53</text> -->
 		</view>
 	</view>
@@ -41,9 +42,10 @@
 			</view>
 			<!-- 申请退还押金和已退款 -->
 			<view class="push-button" wx:if="{{item1.frozeno_is_gift == 1 && item1.category_id == dry_id}}">
-				<view class="push push-active" bindtap="deposit" wx:if="{{!is_back && is_apply == 0}}">申请退还押金</view>
+				<view class="push push-active" bindtap="deposit" wx:if="{{!is_back && is_apply == 0 && time_diff <= 90}}">申请退还押金</view>
 				<view class="push push-active" wx:if="{{!is_back && is_apply == 1}}">待处理</view>
 				<view class="push push-active" wx:if="{{!is_back && is_apply == 3}}">拒绝退款</view>
+				<view class="push push-active" wx:if="{{!is_back && is_apply == 4 && time_diff > 90}}">已过期</view>
 				<view class="push push-active" wx:if="{{is_back}}">已退还</view>
 			</view>
 		</view>

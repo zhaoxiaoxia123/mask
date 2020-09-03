@@ -23,7 +23,6 @@
 
   </view>
 
-
   <!--订单-->
   <view class='payment bg-box col-content size-titletwo '>
     <view class='payment-list' data-id="1" bindtap='order'>
@@ -35,7 +34,6 @@
         <image src='../img/dv.png'></image>
       </view>
     </view>
-
     <view class='payment-center'>
       <view class='payment-1' data-id="2" bindtap='order'>
         <image class='icon58' src="../img/payment1.png"></image>
@@ -64,6 +62,7 @@
       </view>
     </view>
   </view>
+
 
   <view class='lists bg-box col-content size-titletwo'>
     <view class='list-wap' bindtap='coupon'>
@@ -96,16 +95,15 @@
         <image src='../img/dv.png'></image>
       </view>
     </view>
-
-    <view class='list-wap' bindtap='service'>
-      <view class='left'>
-        <image class='icon40' src='../img/refund.png'></image>
-        <text>售后</text>
-      </view>
-      <view class='right'>
-        <image src='../img/dv.png'></image>
-      </view>
-    </view>
+		<view class='list-wap' bindtap='service'>
+			<view class='left'>
+				<image class='icon40' src='../img/refund.png'></image>
+				<text>售后</text>
+			</view>
+			<view class='right'>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
 
     <view class='list-wap' bindtap='address'>
       <view class='left'>
