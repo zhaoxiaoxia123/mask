@@ -48,10 +48,10 @@
         "iconPath": "pages/img/home_false@2x.png"
       },
       {
-        "pagePath": "pages/member/member",
-        "text": "会员",
-        "selectedIconPath": "pages/img/member_true@2x.png",
-        "iconPath": "pages/img/member_false@2x.png"
+        "pagePath": "pages/my/material/material",
+        "text": "素材",
+        "selectedIconPath": "pages/img/ftcircle_true@2x.png",
+        "iconPath": "pages/img/ftcircle_false@2x.png"
       },
       {
         "pagePath": "pages/shopcat/shopcat",

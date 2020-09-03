@@ -30,41 +30,10 @@
 					</block>
 				</block>
 			</swiper>
-			<view class="activity" wx:if="{{level >= 1 && items.category_id != dry_id && ! isOver}}">
-				<image mode="widthFix" src="{{promotionPicture}}" style="width:100%;"></image>
-				<view class="activity-box">
-					<view class="activity-item activity-item-active">
-						<view class="activity-item-left">
-							<view class="">
-								<text wx:if="{{level == 1}}">新人首单价</text>
-								<text wx:if="{{level == 2}}">VIP抢购价</text>
-								<text wx:if="{{level == 3}}">SVIP抢购价</text>
-								<text wx:if="{{level == 4}}">中级经销商抢购价</text>
-								<text wx:if="{{level == 5}}">高级经销商抢购价</text>
-								<text class="activity-state {{showPromotionClass}}">{{showPromotionTip}}</text>
-							</view>
-							<view class="detail-item-box">
-								<view class="wei">
-									<text>￥</text>
-									<text class="size-money ">{{items.customer_amount_before}}</text>
-									<text>.{{items.customer_amount_after?items.customer_amount_after:"00"}}</text>
-								</view>
-								<view class="detail-item-money-price">
-									<text class="decoration">￥{{items.frozeno_amount}}</text>
-								</view>
-							</view>
-						</view>
-						<view class="activity-item-right">
-							<view>
-								<view class="activity-border size-tagging">剩余:{{surplusSale}}件</view>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
+	
 			<view class="detail-item page-pd">
-				<!-- 活动结束和未登录显示 -->
-				<view class="detail-item-box" wx:if="{{isOver || level == 0}}">
+				<!-- 登录有上级优惠显示 -->
+				<view class="detail-item-box" >
 					<block wx:if="{{level >= 1}}">
 						<view class="detail-item-money wei">
 							<text>￥</text>
@@ -77,19 +46,18 @@
 							<text class="decoration">)</text>
 						</view>
 					</block>
+          <!-- 无上级显示 -->
 					<block wx:if="{{level == 0}}">
 						<view class="detail-item-money wei">
 							<text>市场价：</text>
 							<text class="size-money ">{{items.frozeno_amount}}</text>
 						</view>
-						<view bindtap="goLogin">(登录参加活动)</view>
+            <!-- 未登录显示 -->
+						<view bindtap="goLogin">(登录参查看优惠)</view>
 					</block>
 				</view>
 				<view class="money-title">{{items.category_desc}}</view>
-				<view class='money-text'>
-					<text>成长值：{{items.growth}}</text>
-					<!-- <text>积分：{{items.point}}</text> -->
-				</view>
+			
 				<view class="detail-item-abstract">{{items.frozeno_introduction}}</view>
 				<view class="detail-item-between">
 					<text class="detail-item-color">免邮</text>

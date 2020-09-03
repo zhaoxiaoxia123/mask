@@ -18,7 +18,7 @@
 		</view>
 
 		<view class='order'>
-			<text>订单</text>
+			<text>冻龄智美</text>
 		</view>
 		<!--bindtap绑定事件-->
 		<block wx:key="*this" wx:for="{{items[0].products}}" wx:for-item="item">
@@ -32,16 +32,12 @@
 						<view class='item'>
 							<view class='rmb-price'>
 							<text>￥</text><text class="sale-price">{{item.product_amount}}</text>
-							<text wx:if="{{item.is_yj == 1}}">(押金)</text>
 							</view>
 							<view class='piece'>× {{item.product_count}}</view>
 						</view>
 						<text class='decoration'>￥{{item.product_before_amount}}</text>
 						<view class='abstract'>{{item.frozeno_introduction}}</view>
-						 <!-- && level == 1 -->
-						<view class="gift" wx:if="{{item.product_amount == experience_amount && items[0].frozeno_customer_level == 1}}">
-							<text>赠送VIP会员</text>
-						</view>
+			
 						<block wx:if="{{item.frozeno_is_gift == 1 && item.category_id == dry_id}}">
 							<block wx:for="{{items[0].products}}" wx:key="*this" wx:for-item="g">
 								<view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">
@@ -58,6 +54,11 @@
 				<text>商品总价</text>
 				<text>￥{{items[0].product_total_amount}}</text>
 			</view>
+      <!-- 当经销商设置折扣的时候显示 -->
+      <view class='block-pa space-between'>
+        <text>折扣价</text>
+				<text>￥</text>
+      </view>
 			<view class='block-pa space-between'>
 				<text>运费</text>
 				<text>+￥0.00</text>
@@ -66,17 +67,13 @@
 				<text>享新用户首次下单优惠</text>
 				<text></text>
 			</view>
-			<view class='block-pa space-between' wx:if="{{items[0].frozeno_order_amount != experience_amount}}">
+			<!-- <view class='block-pa space-between' wx:if="{{items[0].frozeno_order_amount != experience_amount}}">
 				<text>会员优惠</text>
 				<text>-￥{{items[0].customer_discount_amount}}</text>
-			</view>
+			</view> -->
 			<view class='block-pa space-between'>
 				<text>优惠券</text>
 				<text>-￥{{items[0].ticket_amount?items[0].ticket_amount:0}}</text>
-			</view>
-			<view class='block-pa space-between'>
-				<text>智美豆抵扣</text>
-				<text>-￥{{items[0].frozeno_bean?items[0].frozeno_bean:0}}</text>
 			</view>
 			<view class='block-pa space-between'>
 				<view>实付款（含运费）</view>
@@ -86,9 +83,6 @@
 
 		<!--下单信息-->
 		<view class='list1 bg-box' style='margin-top:15rpx;'>
-			<view class='time'>成长值：
-				<text class='time-text'>获得{{items[0].growth}}点成长值</text>
-			</view>
 			<view class='time'>订单编号：
 				<text class='time-text'>{{items[0].o_order}}</text>
 				<text class='time-copy' wx:if="{{items[0].o_order}}" data-code="{{items[0].o_order}}" bindtap="copyInfo">复制</text>
@@ -102,11 +96,6 @@
 			<view class="time {{items[0].has_dry_deposit != 1?'page-bottom':''}}">发货时间：
 				<text class='time-text'>{{items[0].frozeno_send_time?items[0].frozeno_send_time:""}}</text>
 			</view>
-			<view class='time' wx:if="{{items[0].has_dry_deposit == 1}}">补充说明：
-				<view bindtap="goDepositPost" class="time {{items[0].has_dry_deposit == 1?'page-bottom':''}}" style="font-size: 0.6rem;">
-				因本订单含有租赁商品,点击付款即同意押金<text class="deposit-a">《充值协议》</text>
-				</view>
-      </view>
 			<!-- <view class='time'>物流公司：
 				<text class='time-text'>{{items[0].frozeno_express_company?items[0].frozeno_express_company:''}}</text>
 			</view>

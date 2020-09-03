@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-content: center;
   padding: 40rpx 20rpx;
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px;
 }
 
 .parent-left {
@@ -118,7 +118,7 @@
 .payment-center {
   display: flex;
   justify-content: space-around;
-  padding-bottom:30rpx;
+  padding-bottom:10rpx;
 }
 
 .payment-1 {

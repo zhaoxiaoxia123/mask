@@ -306,11 +306,19 @@ Page({
     })
   },
 
-  //发圈
-  goMaterial:function(){
-    wx.navigateTo({
-      url: '/pages/my/material/material'
-    })
+  //优惠券
+  coupon: function (e) {
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
+      wx.navigateTo({
+        url: '/pages/my/coupon/coupon'
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   
 })
