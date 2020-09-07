@@ -13,7 +13,6 @@ Page({
     business_id1: 0,
     items:[],
     isLogin:false,
-    // qrcode: '',
     ftserviceflexwindow: false,
     level:0
   },
@@ -48,7 +47,6 @@ Page({
       var param = {
         page_code:'p004',
         type:"mainCustomer",
-        // customer_id:wx.getStorageSync('customerId'),
         has_order_count: true,
         has_deposit:true
       };
@@ -62,10 +60,6 @@ Page({
         isLogin: true
       });
     }
-
-    //生成邀请码  二维码图片
-    // that.getShareByQrCode();
-
   },
 
   /**
@@ -164,7 +158,6 @@ Page({
           });
           if(that.data.items && res.data.code == 200){
             wx.setStorageSync('level', that.data.items.frozeno_level);  //等级
-            wx.setStorageSync('discount', that.data.items.discount);  //折扣
             that.setLevel();
           }
         }

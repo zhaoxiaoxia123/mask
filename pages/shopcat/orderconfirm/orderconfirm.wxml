@@ -31,8 +31,8 @@
 					<view class='right-text'>{{item.category_desc}}</view>
 					<view class="detail-item-money">
 						<text>￥</text>
-						<text class="size-money ">{{item.customer_amount_before}}</text>
-						<text>.{{item.customer_amount_after?item.customer_amount_after:"00"}}</text>
+						<text class="size-money ">{{item.discount_amount_before}}</text>
+						<text>.{{item.discount_amount_after?item.discount_amount_after:"00"}}</text>
 					</view>
 					<text class='decoration'>￥{{item.frozeno_amount}}</text>
 					<view class='item'>
@@ -41,43 +41,14 @@
 					</view>
 				</view>
 			</view>
-			<view class="gift" wx:if="{{item.customer_amount == experience_amount && level == 1}}">
-				<text>赠送VIP会员</text>
-			</view>
-		</view>
-		<view wx:if="{{isCheckDry == 1}}">
-			<block wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g">
-			<block wx:if="{{g.category_id == items.dryInfos.dry_category_id}}">
-			<view class='list-item'>
-				<view class="list-box">
-					<view class='list-left'>
-						<image src='{{g.product_image[0].image_url}}'></image>
-					</view>
-					<view class='list-right'>
-						<view class='right-text'>{{g.category_desc}}</view>
-						<view class="detail-item-money wei">
-							<text>￥</text>
-							<text class="size-money ">{{items.dryInfos.dry_amount}}</text>
-							<text >.00</text>
-							<text wx:if="{{items.dryInfos.is_yj}}">(押金)</text>
-						</view>
-						<text class='decoration'>￥{{g.frozeno_amount}}</text>
-						<view class='item'>
-							<view class='abstract'></view>
-							<view class='piece'>× 1</view>
-						</view>
-					</view>
-				</view>
+			<block wx:if="{{item.category_id == dryId}}">
 				<view wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g1">
-					<view class="gift" wx:if="{{g1.category_id != items.dryInfos.dry_category_id}}">
+					<view class="gift">
 						<text>{{g1.category_desc}}× 1</text>
 					</view>
 				</view>
-			</view>
-			</block>
 			</block>
 		</view>
-
 		<view class='coupon'>
 			<view class='coupon-wap' bindtap="delivery">
 				<view class='coupon-left'>
@@ -95,7 +66,7 @@
 					<text>会员折扣</text>
 				</view>
 				<view class='coupon-right'>
-					<text>{{discount > 0 ? '享'+discount+'折':'没有会员折扣'}}</text>
+					<text>{{items.customer_discount > 0 ? '享'+items.customer_discount+'折':'没有会员折扣'}}</text>
 				</view>
 			</view>
 		</view>
@@ -119,18 +90,6 @@
 					<text wx:if="{{ticketList.ticket.length <= 0}}">您没有可用的券</text>
 					<text wx:if="{{isCheckTicket == 9999 && ticketList.ticket.length > 0}}">不使用优惠券</text>
 					<text wx:if="{{isCheckTicket != 9999 && ticketList.ticket.length > 0}}">减{{usingTicketAmount}}</text>
-					<image src='../../img/dv.png'></image>
-				</view>
-			</view>
-		</view>
-		<view class='coupon' bindtap="beans">
-			<view class='coupon-wap'>
-				<view class='coupon-left'>
-					<text >智美豆</text>
-				</view>
-				<view class='coupon-right'>
-					<text wx:if="{{customerInfo.frozeno_bean == 0}}">当前没有智美豆可以使用</text>
-					<text wx:if="{{customerInfo.frozeno_bean != 0 && bean > 0}}">使用{{bean}}智美豆</text>
 					<image src='../../img/dv.png'></image>
 				</view>
 			</view>
@@ -261,46 +220,6 @@
 					</view>
 				</view>
 			</scroll-view>
-		</view>
-	</view>
-</view>
-
-
-<!-- 智美豆 -->
-<view class="just1 {{beansflexwindow==true?'': 'y'}}" bindtap='close3'></view>
-<view class="just {{beansflexwindow==true?'': 'y'}}">
-	<!--bindtap绑定事件-->
-	<view class='lists'>
-		<view class='list'>
-			<view class='detail-center'>
-				<view class='sales'>
-					<view class='detail-sales'>最多可使用智美豆：<text>{{payAmount>customerInfo.frozeno_bean?customerInfo.frozeno_bean:payAmount}}</text>
-						<!-- <view class="detail-item-money">
-							<text class="size-money ">{{customerInfo.frozeno_bean?customerInfo.frozeno_bean:0.00}}</text>
-						</view> -->
-					</view>
-					<image class='icon40' src='../../img/close@2x.png' bindtap='close3'></image>
-				</view>
-			</view>
-		</view>
-		<view class='column'>
-			<!-- <view class="coupon-text">
-				可使用智美豆：
-			</view> -->
-		</view>
-		<!-- 默认为订单可使用金额，需要判断订总金额和订单可使用金额 -->
-		<view class=' beans'>
-			<view class="column-form">
-				<input placeholder='0' type="digit" bindinput="setBeanInput" value='{{bean}}' maxlength="6"></input>
-			</view>
-		</view>
-		<!-- <view class="coupon-text">
-			1智美豆等于1元
-		</view> -->
-		<view class="bottom">
-			<view class="bottom-operate beans-bottom" style='background-color:#DAB866;text-align:cneter;width:100%;' bindtap="submitBean">
-				确定
-			</view>
 		</view>
 	</view>
 </view>

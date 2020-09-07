@@ -22,22 +22,17 @@
 						<view class='right-text'>{{item.category_desc}}</view>
 						<image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image>
 					</view>
-					<!-- <view class='right-text'>{{item.product_name}}</view> -->
 					<view class="detail-item-box">
 						<view class="detail-item-money wei">
 							<text>￥</text>
-							<text class="size-money ">{{item.customer_amount_before}}</text>
-							<text >.{{item.customer_amount_after?item.customer_amount_after:"00"}}</text>
+							<text class="size-money ">{{item.discount_amount_before}}</text>
+							<text >.{{item.discount_amount_after?item.discount_amount_after:"00"}}</text>
 						</view>
 						<view class="detail-item-money-price">
 							<text class="decoration">￥{{item.frozeno_amount}}</text>
-							<!-- <text class="decoration">￥{{item.frozeno_discount_amount}}</text> -->
 						</view>
 					</view>
-					<!-- <view class='total'>库存：{{item.stock}}件</view> -->
 					<view class='column mt column-number-end'>
-						<!-- <view class='sale'>￥{{item.customer_amount}}</view>
-						<view class='sale'>(￥{{item.frozeno_discount_amount}})</view> -->
 						<view class='column-number '>
 							<view class='item-number '>
 								<image data-id='{{index}}' class='icon32 item-number-pd' src='{{icons[1]}}' src='../img/reduce@2x.png' bind:tap="jianFn"></image>
@@ -53,40 +48,12 @@
 					</view>
 				</view>
 			</view>
-			<view class="gift" wx:if="{{item.customer_amount == experience_amount && item.frozeno_level == 1}}">
-				<text>赠送VIP会员</text>
-			</view>
-		</view>
-
-		<view class="list-item" wx:if="{{gift.length > 0}}">
-			<block wx:for="{{gift}}" wx:key="*this" wx:for-item="g">
-				<view class="list-box" wx:if="{{g.category_id == dryInfos.dry_category_id}}">
-					<view class='radio-group'>
-						<radio color='#262626' data-amount="{{dryInfos.dry_amount}}" bindtap='checkDry' checked='{{dryInfos.is_check_dry == 1}}'></radio>
-					</view>
-					<view class='list-left'>
-						<image src="{{g.product_image[0].image_url}}" lazy-load></image>
-					</view>
-					<view class='list-right'>
-						<view class='column'>
-							<view class='right-text'>{{g.category_desc}}</view>
-							<!-- <image class='icon40' src='../img/del.png' data-id="{{item.shopping_id}}" bindtap="deleteShopping"></image> -->
-						</view>
-						<view class="detail-item-box">
-							<view class="detail-item-money wei">
-								<text>￥</text>
-								<text class="size-money ">{{dryInfos.dry_amount}}</text>
-								<text >.00</text>
-							</view>
-							<view class="detail-item-money-price">
-								<text class="decoration">￥{{g.frozeno_amount}}</text>
-							</view>
-						</view>
-					</view>
-				</view>
-				<view class="gift" wx:if="{{g.category_id != dryInfos.dry_category_id}}">
+			<block wx:if="{{item.category_id == dryId}}">
+				<block wx:for="{{gift}}" wx:key="*this" wx:for-item="g">
+				<view class="gift">
 					<text>{{g.category_desc}}× 1</text>
 				</view>
+				</block>
 			</block>
 		</view>
 	</view>

@@ -378,9 +378,7 @@ Page({
           page_code: 'p008',
           type: 'pay',
           order_id: that.data.items[0].o_id,
-          // amount: that.data.items[0].frozeno_order_amount,
           out_trade_no: that.data.outTradeNo,
-          // customer_id: wx.getStorageSync('customerId')
         };
       var params = {
         url: app.globalData.domainUrl,
@@ -464,9 +462,7 @@ Page({
         page_code: 'p008',
         type: 'pay',
         order_id: e.currentTarget.dataset.id,
-        // amount: e.currentTarget.dataset.amount,
         out_trade_no: '123456789',
-        // customer_id: wx.getStorageSync('customerId')
       };
       var params = {
         url: app.globalData.domainUrl,

@@ -20,10 +20,11 @@ Page({
     ftserviceflexwindow: false,
     dryInfos:[],
     gift:[],
-    dryAmount:0,
-    experience_amount:0,
+    // dryAmount:0,
+    // experience_amount:0,
     imgLoad:'',
     message:'',
+    dryId:0,
   },
 
   /**
@@ -33,7 +34,8 @@ Page({
     that = this;
     that.setData({
       isBack: false,
-      experience_amount:app.globalData.experience_amount
+      // experience_amount:app.globalData.experience_amount,
+      dryId:app.globalData.dry_id
     });
   },
 
@@ -183,7 +185,7 @@ Page({
   jianFn: function(e) {
     var items = that.data.items;
     var id = e.currentTarget.dataset.id;
-    if(items[id].customer_amount_before != that.data.experience_amount){
+    // if(items[id].discount_amount != that.data.experience_amount){
       if (items[id].product_count <= 1) {
         items[id].product_count = 1;
         if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
@@ -209,7 +211,7 @@ Page({
         for (var i = 0; i < items.length; i++) {
           if (items[i].selected) {
             // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
-            fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
+            fee = that.returnFee(fee, items[i].product_count, items[i].discount_amount);
           }
         }
         that.setData({
@@ -217,14 +219,14 @@ Page({
         });
         that.setTotalFee(fee);
       }
-    }
+    // }
   },
   // 加按钮控件
   plusFn: function(e) {
     var items = [];
     items = that.data.items; //获得items数组
     var id = e.currentTarget.dataset.id; // 获得wxml的data-id的值 data-id与dataset.id对应
-    if(items[id].customer_amount_before != that.data.experience_amount){
+    // if(items[id].discount_amount != that.data.experience_amount){
       items[id].product_count = parseInt(items[id].product_count) + 1;
       if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
         items[id].is_enough = true;
@@ -233,58 +235,60 @@ Page({
         items[id].is_enough = false;
         items[id].selected = false;
       }
-      var fee = 0;
-      for (var i = 0; i < items.length; i++) {
-        if (items[i].selected) {
-          // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
-          fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].customer_amount);
-        }
-      }
-      that.setData({
-        items: items
-      });
-      that.setTotalFee(fee);
-    }else{
-      wx.showToast({
-        icon: "none",
-        title: "限制只能购买一件"
-      });
-    }
+      
+    that.computeCheckAmount(items);
+      // var fee = 0;
+      // for (var i = 0; i < items.length; i++) {
+      //   if (items[i].selected) {
+      //     // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
+      //     fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].discount_amount);
+      //   }
+      // }
+      // that.setData({
+      //   items: items
+      // });
+      // that.setTotalFee(fee);
+    // }else{
+    //   wx.showToast({
+    //     icon: "none",
+    //     title: "限制只能购买一件"
+    //   });
+    // }
   },
 
-  /**
-   * 是否选中导入仪
-   */
-  checkDry: function() {
-    var amount = that.data.dryInfos.dry_amount ;//e.currentTarget.dataset.amount;
-    var items = that.data.items;
-    var dryInfos = that.data.dryInfos;
-    if (dryInfos.is_check_dry == 1) {
-      dryInfos.is_check_dry = 2;
-      that.setData({
-        dryAmount:0
-      });
-    } else {
-      dryInfos.is_check_dry = 1;
-      that.setData({
-        dryAmount:amount
-      });
-    }
-    that.setData({
-      dryInfos: dryInfos
-    });
+  // /**
+  //  * 是否选中导入仪
+  //  */
+  // checkDry: function(e) {
+  //   var amount = e.currentTarget.dataset.amount;//that.data.dryInfos.dry_amount ;//
+  //   var items = that.data.items;
+  //   var dryInfos = that.data.dryInfos;
+  //   if (dryInfos.is_check_dry == 1) {
+  //     dryInfos.is_check_dry = 2;
+  //     that.setData({
+  //       dryAmount:0
+  //     });
+  //   } else {
+  //     dryInfos.is_check_dry = 1;
+  //     that.setData({
+  //       dryAmount:amount
+  //     });
+  //   }
+  //   that.setData({
+  //     dryInfos: dryInfos
+  //   });
     
-    var fee = 0;
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].selected) {
-        // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
-        fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].customer_amount);
-      }
-    }
-    that.setTotalFee(fee);
-    console.log('that.data.dryInfos.is_check_dry:-------');
-    console.log(that.data.dryInfos.is_check_dry);
-  },
+  //   var fee = 0;
+  //   for (var i = 0; i < items.length; i++) {
+  //     if (items[i].selected) {
+  //       // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
+  //       fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].discount_amount);
+  //     }
+  //   }
+  //   that.setTotalFee(fee);
+  //   console.log('that.data.dryInfos.is_check_dry:-------');
+  //   console.log(that.data.dryInfos.is_check_dry);
+  // },
   radiocon: function(e) {
     var id = e.currentTarget.dataset.id;
     var items = that.data.items;
@@ -294,17 +298,19 @@ Page({
     } else {
       items[id].selected = true;
     }
-    var fee = 0;
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].selected) {
-        // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
-        fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
-      }
-    }
-    that.setData({
-      items: items
-    });
-    that.setTotalFee(fee);
+    // var fee = 0;
+    // for (var i = 0; i < items.length; i++) {
+    //   if (items[i].selected) {
+    //     // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
+    //     fee = that.returnFee(fee, items[i].product_count, items[i].discount_amount);
+    //   }
+    // }
+    // that.setData({
+    //   items: items
+    // });
+    // that.setTotalFee(fee);
+    
+    that.computeCheckAmount(items);
   },
   all: function(e) {
     var check = that.data.check;
@@ -326,30 +332,35 @@ Page({
       check: check,
       items: items
     });
-    that.checkDry();
-    // var fee = 0;
-    // for (var i = 0; i < items.length; i++) {
-    //   if (items[i].selected) {
-    //     // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
-    //     fee = that.returnFee(fee, items[i].product_count, items[i].customer_amount);
-    //   }
-    // }
-    // that.setTotalFee(fee); //赋值合计金额
+    that.computeCheckAmount(items);
+  },
+
+  //计算所有选中的商品的相加金额
+  computeCheckAmount:function(items){
+    var fee = 0;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].selected) {
+        fee = that.returnFee(fee, items[i].product_count, items[i].discount_amount);
+      }
+    }
+    that.setData({
+      items: items
+    });
+    that.setTotalFee(fee);
   },
 
   returnFee: function (fee, product_count, frozeno_discount_amount) {
-
     fee = fee + (product_count * frozeno_discount_amount); 
     return fee;
   },
   //赋值合计金额
   setTotalFee: function(fee) {
-    var dryAm = 0;
-    if(that.data.dryInfos.is_check_dry == 1){
-      dryAm = that.data.dryAmount;
-    }
+    // var dryAm = 0;
+    // if(that.data.dryInfos.is_check_dry == 1){
+    //   dryAm = that.data.dryAmount;
+    // }
     that.setData({
-      totalfee: (parseFloat(fee)+ parseInt(dryAm)).toFixed(2) //加入导入仪金额
+      totalfee: (parseFloat(fee)).toFixed(2) //加入导入仪金额  + parseInt(dryAm)
     })
   },
   //进入结算页面

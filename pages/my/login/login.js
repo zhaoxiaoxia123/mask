@@ -212,27 +212,7 @@ Page({
             title: ret.message
           });
         } else {
-          // app.globalData.canGetUserInfo = false;
           that.addStorage(datas);
-          // wx.setStorageSync('customerId', datas.c_id);
-          // wx.setStorageSync('openid', datas.frozeno_openid);
-          // wx.setStorageSync('memberNo', datas.c_number);  //会员号
-          // wx.setStorageSync('level', datas.frozeno_level);  //等级
-          // wx.setStorageSync('discount', datas.discount);  //折扣
-          // wx.setStorageSync('sessionKey', datas.session_id);
-          // that.setData({
-          //   canGetUserInfo: app.globalData.canGetUserInfo
-          // });
-          // if (datas.phone == null || datas.phone.length == 0) {
-          //   wx.showToast({
-          //     icon: "none",
-          //     title: '请继续点击手机号授权',
-          //   })
-          // } else {
-            // wx.switchTab({
-            //   url: '/pages/home/home',
-            // });
-          // }
         }
       }
     })
@@ -336,10 +316,9 @@ Page({
     wx.setStorageSync('openid', datas.frozeno_openid);
     wx.setStorageSync('unionid', datas.frozeno_unionid);
     wx.setStorageSync('token', datas.token);
-    if(datas.c_number){
-      wx.setStorageSync('memberNo', datas.c_number);  //会员号
+    if(datas.frozeno_dealer_number){
+      wx.setStorageSync('memberNo', datas.frozeno_dealer_number);  //会员号
       wx.setStorageSync('level', datas.frozeno_level);  //等级
-      wx.setStorageSync('discount', datas.discount);  //折扣
     }
     that.setData({
       get_user_info : wx.getStorageSync("get_user_info"), //是否继续获取用户信息

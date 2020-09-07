@@ -26,13 +26,7 @@ Page({
     aboutTop: 0,
     scrollStop:false,
     dryAmount:0,
-    promotionPicture:"../img/member/V001.jpg",
-    showPromotionTip:"活动中",
-    showPromotionClass:"",
     experience_id:0,
-    experience_amount:0,
-    isOver:false,
-    surplusSale:0,
     dry_id:0
   },
   /**
@@ -45,9 +39,7 @@ Page({
     }
     that.setData({
       productId: options.id,
-      // productId: getApp().globalData.productId,
       experience_id:app.globalData.experience_id,
-      experience_amount:app.globalData.experience_amount,
       dry_id:app.globalData.dry_id,
       level: wx.getStorageSync("level")
     });
@@ -211,13 +203,6 @@ Page({
     var amount = e.currentTarget.dataset.amount;
     var items = that.data.items;
     if (items.is_check_dry == 1) {
-      if(amount == 389){
-        wx.showModal({
-          title: '提示',
-          content:  "该产品需要配合导入仪使用,请确定您目前已经拥有导入仪.",
-          showCancel: false
-        });
-      }
       items.is_check_dry = 2;
       that.setData({
         dryAmount:0
@@ -327,29 +312,6 @@ Page({
             items: res.data.data,
             swipers: res.data.data.product_image,
           });
-          let img = '';
-          let tip = '';
-          let css = '';
-          let isover = parseInt(that.data.items.now_hour) < parseInt(that.data.items.frozeno_start_date) || parseInt(that.data.items.frozeno_promotion_count) <= parseInt(that.data.items.sale);
-          console.log('isover:----');
-          console.log(isover);
-          if(isover) {
-            img = "../img/member/V001.jpg";
-            tip="活动结束";
-            css = '';
-          } else {
-            img = "../img/member/V000.jpg";
-            tip="活动中";
-            css = 'activity-state-active';
-          }
-          let surCount = parseInt(that.data.items.frozeno_promotion_count) - parseInt(that.data.items.sale);
-          that.setData({
-            promotionPicture:img,
-            showPromotionTip:tip,
-            showPromotionClass:css,
-            isOver:isover,
-            surplusSale:surCount > 0 ? surCount: 0 ,
-          });
           that.getTop();
         }
       }
@@ -374,6 +336,7 @@ Page({
         type: 'insert',
         product_id: that.data.productId,
         product_count: that.data.count,  //商品个数
+        is_check_dry:that.data.items.is_check_dry,
         // customer_id: wx.getStorageSync('customerId')
       };
       var params = {

@@ -269,15 +269,6 @@ Page({
 
   },
 
-  // addStorage: function(datas){
-  //   wx.setStorageSync('customerId', datas.c_id);
-  //   wx.setStorageSync('unionid', datas.frozeno_unionid);
-  //   wx.setStorageSync('sessionKey', datas.session_id);
-  //   wx.setStorageSync('memberNo', datas.c_number);  //会员号
-  //   wx.setStorageSync('level', datas.frozeno_level);  //等级
-  //   wx.setStorageSync('phone', datas.c_phone);  //手机号
-  //   wx.setStorageSync('token', datas.token);
-  // },
   // 下载
   download: function () {
     let len = that.data.imgsDownload.length;
