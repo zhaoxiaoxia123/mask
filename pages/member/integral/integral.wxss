@@ -1,72 +1,97 @@
-/* pages/member/integral/integral.wxss */
-
-.integral{
-  display: flex;
-  flex-direction: column;
-  border-radius:10px;
-  font-size:0.8rem;
-  line-height:1.5;
+.growth-hd{
+  background:#fff;
   padding:30rpx;
-  background:#2b2b2b;
-  color:#c6c6c6;
+  border-top:1px solid #e4e4e4;
+  text-align: center;
+  height:280rpx;
 }
-.integral-current{
+.growth-bg{
+  width:100%;
+  height:100%;
+  text-align:center;
+}
+.growth-img{
+  width:280rpx;
+  height:268rpx;
+}
+.growth-text{
+  margin-top:-210rpx;
+}
+.growth-number{
+  font-size:56rpx;
+  font-weight: bold;
+}
+.growth-xs{
+  font-weight: bold;
+}
+
+/* 邀请好友 */
+.box{
+  padding:24rpx;
+}
+.box-item{
+  background:#fff;
+  padding:30rpx;
+  margin-bottom:30rpx;
+}
+.invite-top{
+  border-bottom:1px solid #e4e4e4;
+}
+.it-text{
   display: flex;
-  flex-direction: column;
-  align-items:center;
-  color: #c6c6c6;
- padding: 60rpx 0 40rpx 0;
+  justify-content: space-between;
+  font-weight: bold;
+  line-height: 1.5;
+  font-size:36rpx;
 }
-.current1{
-  color:#DAB866;
-  font-size:2.2rem;
-  line-height:1.5;
+.it-text1{
+  padding:16rpx 0;
 }
-.integral-current1{
-  display: flex;
-  justify-content: flex-end;
+.money-lg{
+  font-size:58rpx;
+  color:#dd2525;
 }
-.current1-text{
-  color:#DAB866;
+.money-sm{
+  font-size:36rpx;
+  color:#dd2525;
 }
-.integral-text{
+.money-xs{
+  font-size:28rpx;
+  color:#dd2525;
+}
+.invite-center{
+  color:#595959;
+  line-height: 1.5;
+}
+
+/* 消费订单 */
+.order-text{
+  padding-bottom:20rpx;
+}
+.order-top{
+  border-bottom:1px solid #e4e4e4;
+  padding-bottom:16rpx;
+}
+.between{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 10rpx;
-  background: #404040;
-  margin-top: 20rpx;
-  padding: 20rpx;
-  font-size: 1rem;
-  line-height:1.5;
 }
-.integral-title{
-  display:flex;
-  flex-direction: column;
-}
-.text-title{
-  color:#fff;
-}
-.text-date{
-  font-size:0.8rem;
-  line-height:1.5;
-  padding-top:10rpx;
-  color:#c6c6c6;
-}
-.text-add{
+/* 消费下单 */
+.invite-content{
   display: flex;
-  align-items: center;
-  color:#DAB866;
-  font-size:1.3rem;
-  line-height:1.5;
+  padding:20rpx 0;
 }
-.text-add-left{
-  padding-right:10rpx;
+.invite-image{
+  width:180rpx;
+  height:180rpx;
+  border-radius: 10px;
 }
-.footer{
-  text-align:center;
-  color:#c6c6c6;
-  font-size:0.8rem;
-  line-height:1.5;
-  padding-top:60rpx;
+.invite-text{
+  width:100%;
+  padding-left:40rpx;
+}
+.invite-money{
+  display: flex;
+  justify-content: flex-end;
 }
