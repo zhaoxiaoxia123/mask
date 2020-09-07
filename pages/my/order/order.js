@@ -121,6 +121,24 @@ Page({
   onShareAppMessage: function () {
 
   },
+  // 售后
+  service: function (e) {
+    var serviceflexwindow;
+    if (that.data.serviceflexwindow == true) {
+      serviceflexwindow = false;
+    } else {
+      serviceflexwindow = true;
+    }
+    that.setData({
+      serviceflexwindow: serviceflexwindow
+    });
+  },
+  close1: function (e) {
+    var serviceflexwindow = false;
+    that.setData({
+      serviceflexwindow: serviceflexwindow
+    })
+  },
 
   // 跳转规格弹窗
   logistics: function (e) {
