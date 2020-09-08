@@ -100,22 +100,24 @@
 			</view> -->
     </view>
     <!--售后信息-->
-    <view class='list1 bg-box' style='margin-top:15rpx;'>
+    <view class='list1 bg-box' style='margin-top:15rpx;' wx:if="{{items[0].apply_detail}}">
       <view class='time'>
         <text>售后信息</text>
       </view>
       <view class='time'>申请时间：
-        <text class='time-text'>2020-02-05 11:45:11</text>
+        <text class='time-text'>{{items[0].apply_detail.apply_date}}</text>
       </view>
-      <view class='time'>售后编号：
+      <!-- <view class='time'>售后编号：
         <text class='time-text'>654646464654544</text>
-      </view>
+      </view> -->
       <!-- 退款  退款中   已退款 部分退款 处理中  已完成  拒绝退款 -->
       <view class='time'>状态：
-        <text class='time-text'>处理中</text>
+        <text class='time-text' wx:if="{{items[0].frozeno_is_verify == 1}}">退款中</text>
+        <text class='time-text' wx:if="{{items[0].frozeno_is_verify == 2}}">已退款</text>
+        <text class='time-text' wx:if="{{items[0].frozeno_is_verify == 3}}">已拒绝</text>
       </view>
       <view class='time'>完成时间：
-        <text class='time-text'>2020-02-05 11:45:11</text>
+        <text class='time-text'>{{items[0].apply_detail.handle_date}}</text>
       </view>
     </view>
   </view>
@@ -126,9 +128,9 @@
       <!-- || items[0].frozeno_order_state == 2  7.29佳总确定暂时取消 -->
       <view class='push' bindtap="cancelOrder" wx:if="{{items[0].frozeno_order_state == 1}}">取消订单</view>
       <view class='push push-active' bindtap="confirm" wx:if="{{items[0].frozeno_order_state == 3}}">确认收货</view>
-      <view class='push push-active' bindtap="payOrder" data-id="{{items[0].o_id}}" wx:if="{{items[0].frozeno_order_state == 1 && isClick}}">付款</view>
-      <view class='push push-active' wx:if="{{items[0].frozeno_order_state == 1 && !isClick}}">付款</view>
-      <!-- <view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view> -->
+      <!-- <view class='push push-active' bindtap="payOrder" data-id="{{items[0].o_id}}" wx:if="{{items[0].frozeno_order_state == 1 && isClick}}">付款</view>
+      <view class='push push-active' wx:if="{{items[0].frozeno_order_state == 1 && !isClick}}">付款</view> -->
+      <view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view>
     </view>
   </view>
 </view>

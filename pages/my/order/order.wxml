@@ -40,7 +40,9 @@
               <view class='status' wx:if="{{item.frozeno_order_state == 3}}">待收货</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 4}}">交易完成</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 5}}">已取消</view>
-              <view class='status' wx:if="{{item.frozeno_order_state == 6}}">取消订单中</view>
+              <view class='status' wx:if="{{item.frozeno_order_state == 6 && item.frozeno_is_verify == 1}}">取消订单中</view>
+              <view class='status' wx:if="{{item.frozeno_order_state == 6&& item.frozeno_is_verify == 2}}">已退款</view>
+              <view class='status' wx:if="{{item.frozeno_order_state == 6&& item.frozeno_is_verify == 3}}">已拒绝</view>
               <view class='status' wx:if="{{item.frozeno_order_state == 7}}">已退款</view>
             </view>
             <view class='list' wx:key="*this" wx:for="{{item.products}}" wx:for-item="item1" data-id="{{item.o_id}}" bindtap='orderdetail'>
@@ -94,26 +96,22 @@
                 <!-- <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view> -->
                 <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
                 <!-- （同一时间只显示一种状态）未发货点退款：退款  退款中   已退款 部分-->
-                <view class='push '>退款</view>
-                <view class='push '>退款中</view>
-                <view class='push push-active'>已退款</view>
+                <view class='push' bindtap="applyRefund" data-apply_type="1" data-id="{{item.o_id}}" wx:if="{{item.frozeno_is_verify == 0}}">退款</view>
+                <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
+                <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2}}">已退款</view>
+                <view class='push push-active' wx:if="{{item.frozeno_is_verify == 3}}">已拒绝</view>
               </view>
               <view class='push-button' wx:if="{{item.frozeno_order_state == 3}}">
                 <view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view>
                 <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk' wx:if="{{!cancelClick}}">确认收货</view>
                 <view class='push' wx:if="{{cancelClick}}">确认收货</view>
 <!-- （同一时间只显示一种状态）已发货点售后：售后 退款  退款中   已退款 部分退款 处理中  已完成  拒绝退款 -->
-                <view class='push' bindtap="service">售后</view>
-                <view class='push'>退款</view>
-                <view class='push'>退款中</view>
-                <view class='push push-active'>已退款</view>
-                <view class='push push-active'>部分退款</view>
-                <view class='push'>拒绝退款</view>
-                <view class='push'>处理中</view>
-                <view class='push'>已完成</view>
-
+                <view class='push' bindtap="service" wx:if="{{item.frozeno_is_verify == 0}}">售后</view>
+                <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
+                <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2 && item.frozeno_order_state != 15}}">已退款</view>
+                <view class='push push-active' wx:if="{item.frozeno_is_verify == 2 && item.frozeno_order_state == 15}}">部分退款</view>
+                <view class='push' wx:if="{{item.frozeno_is_verify == 3}}">拒绝退款</view>
               </view>
-          
             </block>
             <block wx:if="{{currentTab == 1}}">
               <view class='push-button'>
@@ -125,6 +123,11 @@
               <view class='push-button'>
                 <!-- <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view> -->
                 <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
+                
+                <view class='push' bindtap="applyRefund" data-apply_type="1" data-id="{{item.o_id}}" wx:if="{{item.frozeno_is_verify == 0}}">退款</view>
+                <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
+                <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2}}">已退款</view>
+                <view class='push push-active' wx:if="{{item.frozeno_is_verify == 3}}">已拒绝</view>
               </view>
             </block>
             <block wx:if="{{currentTab == 3}}">
@@ -132,17 +135,20 @@
                 <!-- <view class='push' bindtap="logistics" data-id="{{item.o_id}}">查看物流</view> -->
                 <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk' wx:if="{{!cancelClick}}">确认收货</view>
                 <view class='push' wx:if="{{cancelClick}}">确认收货</view>
-
+                
+                <view class='push' bindtap="service" wx:if="{{item.frozeno_is_verify == 0}}">售后</view>
+                <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
+                <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2 && item.frozeno_order_state != 15}}">已退款</view>
+                <view class='push push-active' wx:if="{item.frozeno_is_verify == 2 && item.frozeno_order_state == 15}}">部分退款</view>
+                <view class='push' wx:if="{{item.frozeno_is_verify == 3}}">拒绝退款</view>
               </view>
             </block>
           </view>
         </view>
       </scroll-view>
     </view>
-
   </view>
 </view>
-
 
 <!-- 查看物流logistics -->
 <view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
@@ -154,15 +160,12 @@
 
         <view class='sales'>
           <view class='detail-sales'>查看物流 </view>
-
           <image class='icon40' src='../../img/close@2x.png' bindtap='close'></image>
         </view>
         <view class='time-pcl'>
-
           <view class='time'>
             <image class='time-img' src='{{items.imgUrl}}'></image>
           </view>
-
           <view class='time'>
             <view class='time-text col-main'> 顺丰快递
             </view>
@@ -177,7 +180,6 @@
         </view>
 
         <view class="plc-status col-content size-titletwo page-pd">
-
           <scroll-view scroll-y="true" style="height:420rpx;">
             <view class="scroll-view-item demo-text-1">
               <view class="status-box">
@@ -188,64 +190,6 @@
                       <text class='plc-week wei'>周三</text>
                       <text class='plc-time'>18:49:44</text>
                       <text class='plc-text'>商品已经下单</text>
-                    </view>
-                  </view>
-
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
-                    </view>
-                  </view>
-                  <view class='plc-content '>
-                    <view class='plc-text'>
-                      <text class='plc-date'>2020-03-04</text>
-                      <text class=' wei'>周三</text>
-                      <text>18:49:44</text>
-                      <text>商品已经下单</text>
                     </view>
                   </view>
                   <view class='plc-content '>
@@ -266,7 +210,6 @@
   </view>
 </view>
 
-
 <!-- 售后 -->
 <view class="just1 {{serviceflexwindow==true?'': 'y'}}" bindtap='close1'></view>
 <view class="just {{serviceflexwindow==true?'': 'y'}}">
@@ -285,16 +228,11 @@
         <view class="page-radio-title">售后类型（已发货）</view>
         <radio-group name="radio">
           <label class="page-radio-label">
-            <radio value="radio1" />退款退货</label>
+            <radio value="radio1" data-apply_type="2" bindtap='checkApply' checked="{{apply_type == 2}}"/>退款退货</label>
             <label class="page-radio-label">
-            <radio value="radio2" />仅导入仪退款</label>
-          <label class="page-radio-label">
-            <radio value="radio3" />维修</label>
-          <label class="page-radio-label">
-            <radio value="radio4" />换货</label>
+            <radio value="radio2" data-apply_type="3" bindtap='checkApply' checked="{{apply_type == 3}}"/>仅导入仪退款</label>
         </radio-group>
       </view>
-
     </view>
     <view class='column-service'>
       <view class="page-radio-title">说明信息</view>
@@ -305,14 +243,11 @@
     <view class='column-service'>
       <view class="page-radio-title">备注信息</view>
       <view class="column-form">
-        <input placeholder='请输入' type="text"></input>
+        <input placeholder='请输入备注信息' bindinput="setNoteInput" value='{{note}}' maxlength="100"></input>
       </view>
     </view>
     <view class="bottom">
-      <view class="bottom-operate beans-bottom" style='background-color:#DAB866;text-align:cneter;width:100%;'>
-        确定
-      </view>
+      <view class="bottom-operate beans-bottom" style='background-color:#DAB866;text-align:cneter;width:100%;' bindtap="applyService">确定</view>
     </view>
-
   </view>
 </view>

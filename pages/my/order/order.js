@@ -27,7 +27,9 @@ Page({
     dry_id:0,
     experience_amount:0,
     level:0,
-    cancelClick:false
+    cancelClick:false,
+    apply_type:0,
+    note:''
   },
 
   /**
@@ -304,6 +306,50 @@ Page({
           that.setData({
             cancelClick:false
           });
+        }
+      }
+    };
+    base.httpRequest(params);
+  },
+  //选中申请售后条件
+  checkApply:function(e){
+    that.setData({
+      apply_type: e.currentTarget.dataset.apply_type
+    })
+  },
+  //添加备注信息
+  setNoteInput: function (e) {
+    that.setData({
+      note: e.detail.value
+    })
+  },
+  //申请退款,售后(已发货,退款退货)
+  applyService:function(){
+
+  },
+
+  //申请退款(未发货,已发货均可退款)
+  applyRefund: function(e){
+    var order_id = e.currentTarget.dataset.id;
+    var apply_type = e.currentTarget.dataset.apply_type;
+    let param = {
+      page_code: 'p008',
+      type: 'applyRefund',
+      order_id: order_id,
+      apply_type:apply_type,
+      apply_note:that.data.note
+    };
+    var params = {
+      url: app.globalData.domainUrl,
+      data:param,
+      method:'POST',
+      sCallback: function (res) {
+        var datas = res.data.data;
+        if (datas) {
+          wx.showToast({
+            title: res.data.message
+          });
+          that.onShow();
         }
       }
     };
