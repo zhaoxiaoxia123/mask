@@ -19,7 +19,6 @@ Page({
     addressId:0,
     invoiceId: 0,
     invoice:[],
-    isCheckDry:2, //2：未选中 1：选中导入仪
     isLoadSum:true,  //计算合计金额加个转圈
     dryId:0,
   },
@@ -31,9 +30,9 @@ Page({
     that = this;
     that.setData({
       products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
-      isCheckDry:options.isCheckDry == 'undefined'?2:options.isCheckDry,
       dryId: app.globalData.dry_id
     });
+    console.log(that.data.products);
   },
 
   /**
@@ -358,8 +357,7 @@ Page({
           customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
           invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
           use_point: 0,//that.data.usingPoint,
-          amount: that.data.payAmount,
-          is_check_dry: that.data.isCheckDry,
+          amount: that.data.payAmount
         };
         var params = {
           url: app.globalData.domainUrl,

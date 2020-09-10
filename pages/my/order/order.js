@@ -29,7 +29,9 @@ Page({
     level:0,
     cancelClick:false,
     apply_type:0,
-    note:''
+    note:'',
+    orderId:0,
+    refundType:0
   },
 
   /**
@@ -132,7 +134,9 @@ Page({
       serviceflexwindow = true;
     }
     that.setData({
-      serviceflexwindow: serviceflexwindow
+      serviceflexwindow: serviceflexwindow,
+      orderId:e.currentTarget.dataset.id,
+      refundType:e.currentTarget.dataset.refund_type
     });
   },
   close1: function (e) {
@@ -325,13 +329,20 @@ Page({
   },
   //申请退款,售后(已发货,退款退货)
   applyService:function(){
-
+    let order_id = that.data.orderId;
+    let apply_type = that.data.apply_type;
+    that.sendRefundRequest(order_id,apply_type);
   },
 
   //申请退款(未发货,已发货均可退款)
   applyRefund: function(e){
     var order_id = e.currentTarget.dataset.id;
     var apply_type = e.currentTarget.dataset.apply_type;
+    that.sendRefundRequest(order_id,apply_type);
+  },
+
+  //退款提交
+  sendRefundRequest:function(order_id,apply_type){
     let param = {
       page_code: 'p008',
       type: 'applyRefund',
@@ -349,11 +360,12 @@ Page({
           wx.showToast({
             title: res.data.message
           });
+          that.close1();
           that.onShow();
         }
       }
     };
     base.httpRequest(params);
-  },
+  }
 })
 

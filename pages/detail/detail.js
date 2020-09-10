@@ -331,6 +331,7 @@ Page({
   joinShopping: function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       that.setClickState(false);
+      console.log(that.data.items.is_check_dry);
       let param = {
         page_code:'p012',
         type: 'insert',
@@ -393,8 +394,12 @@ Page({
       }else{
         products = that.data.productId + ",1--";
       }
+      if(that.data.items.is_check_dry == 1){
+        products += app.globalData.dry_id + ",1--";
+      }
+      console.log('/pages/shopcat/orderconfirm/orderconfirm?products=' + products+'&isCheckDry='+that.data.items.is_check_dry);
       wx.navigateTo({
-        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products+'&isCheckDry='+that.data.items.is_check_dry,
+        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
       })
     } else {
       wx.showModal({
