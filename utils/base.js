@@ -44,9 +44,9 @@ function httpRequest(params, noRefetch) {
         }
         //AOP
         if (code == '401') {
-          if (!noRefetch) {
+          // if (!noRefetch) {
             _refetch(params);
-          }
+          // }
         }else{
           wx.showToast({
             title: res.data.message
@@ -65,6 +65,8 @@ function httpRequest(params, noRefetch) {
 
 function _refetch(params) {
   getTokenFromServer(params,(token) => {
+    console.log('token:--~---');
+    console.log(token);
     wx.setStorageSync('token',token);
     httpRequest(params, true);
   });
@@ -85,7 +87,7 @@ function getTokenFromServer(params,callBack) {
             method: 'POST',
             data: {
               page_code:'p010',
-              code: r.code,
+              code: resc.code,
               type:'refresh',
               encryptedData:res.encryptedData, 
               iv:res.iv,
@@ -95,14 +97,27 @@ function getTokenFromServer(params,callBack) {
               "Content-Type": "application/x-www-form-urlencoded"
             },
             success: function (ress) {
-              // wx.setStorageSync('token', res.data.data.token);
               callBack && callBack(ress.data.data.token);
             }
           });
+        },fail(resfu){
+          wx.clearStorage();
+          wx.clearStorageSync();
+          wx.navigateTo({
+            url: "/pages/my/login/login",
+          })
         }
       });
+    },
+    complete(resc){
+      // console.log(resc);
+    
+    },
+    fail(resf){
+        // 这里打印发现微信账号登录错误
+      // console.log(resf);
     }
-  });
+  })
 }
 
 function loading(duration=2000) {

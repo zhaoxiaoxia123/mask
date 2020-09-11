@@ -94,6 +94,19 @@
 				</view>
 			</view>
 		</view>
+		<view class='coupon' bindtap="beans">
+			<view class='coupon-wap'>
+				<view class='coupon-left'>
+					<text >可抵用现金</text>
+				</view>
+				<view class='coupon-right'>
+					<text wx:if="{{customerInfo.frozeno_rebate_amount == 0}}">当前没有可抵用现金</text>
+					<text wx:if="{{customerInfo.frozeno_rebate_amount != 0 && bean > 0}}">抵用现金{{bean}}元
+					</text>
+					<image src='../../img/dv.png'></image>
+				</view>
+			</view>
+		</view>
 		<!-- <view class='coupon'>
 			<view class='coupon-wap'>
 				<view class='coupon-left'>
@@ -113,7 +126,6 @@
 			</view>
 		</view> -->
 	</view>
-
 	<view class="bottom">
 		<view class="bottom-operate">
 			<view class="bottom-operate price">合计：
@@ -220,6 +232,33 @@
 					</view>
 				</view>
 			</scroll-view>
+		</view>
+	</view>
+</view>
+
+<!-- 可抵用现金 -->
+<view class="just1 {{beansflexwindow==true?'': 'y'}}" bindtap='close3'></view>
+<view class="just {{beansflexwindow==true?'': 'y'}}">
+	<!--bindtap绑定事件-->
+	<view class='lists'>
+		<view class='list'>
+			<view class='detail-center'>
+				<view class='sales'>
+					<view class='detail-sales'>最多可抵用现金：<text>{{payAmount>customerInfo.frozeno_rebate_amount?customerInfo.frozeno_rebate_amount:payAmount}}元</text>
+					</view>
+					<image class='icon40' src='../../img/close@2x.png' bindtap='close3'></image>
+				</view>
+			</view>
+		</view>
+		<view class=' beans'>
+			<view class="column-form">
+				<input placeholder='0' type="digit" bindinput="setBeanInput" value='{{bean}}' maxlength="6"></input>
+			</view>
+		</view>
+		<view class="bottom">
+			<view class="bottom-operate beans-bottom" style='background-color:#DAB866;text-align:cneter;width:100%;' bindtap="submitBean">
+				确定
+			</view>
 		</view>
 	</view>
 </view>

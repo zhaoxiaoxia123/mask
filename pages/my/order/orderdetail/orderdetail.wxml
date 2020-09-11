@@ -67,6 +67,10 @@
         <text>-￥{{items[0].ticket_amount?items[0].ticket_amount:'0.00'}}</text>
       </view>
       <view class='block-pa space-between'>
+        <text>抵扣现金</text>
+        <text>-￥{{items[0].frozeno_rebate_amount?items[0].frozeno_rebate_amount:'0.00'}}</text>
+      </view>
+      <view class='block-pa space-between'>
         <view>实付款（含运费）</view>
         <view class='sale rmb-price'>
           <text>￥</text>

@@ -93,7 +93,7 @@
                 <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
                 <!-- （同一时间只显示一种状态）未发货点退款：退款  退款中   已退款 部分-->
                 <!-- <view class='push' bindtap="applyRefund" data-apply_type="1" data-id="{{item.o_id}}" wx:if="{{item.frozeno_is_verify == 0}}">退款</view> -->
-                <view class='push' bindtap="applyRefund" data-apply_type="1" data-id="{{item.o_id}}" wx:if="{{item.can_apply_refund == 1}}">退款</view>
+                <view class='push' bindtap="applyRefund" data-apply_type="6" data-id="{{item.o_id}}" wx:if="{{item.can_apply_refund == 6}}">退款</view>
                 <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
                 <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2}}">已退款</view>
                 <view class='push push-active' wx:if="{{item.frozeno_is_verify == 3}}">已拒绝</view>
@@ -103,7 +103,14 @@
                 <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk' wx:if="{{!cancelClick}}">确认收货</view>
                 <view class='push' wx:if="{{cancelClick}}">确认收货</view>
 <!-- （同一时间只显示一种状态）已发货点售后：售后 退款  退款中   已退款 部分退款 处理中  已完成  拒绝退款 -->
-                <view class='push' bindtap="service" wx:if="{{item.can_apply_refund == 1}}">售后</view>
+                <view class='push' bindtap="service" wx:if="{{item.can_apply_refund == 14 || item.can_apply_refund == 15}}">售后</view>
+                <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
+                <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2 && item.frozeno_order_state == 7}}">已退款</view>
+                <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2 && item.frozeno_order_state == 16}}">部分退款</view>
+                <view class='push' wx:if="{{item.frozeno_is_verify == 3}}">拒绝退款</view>
+              </view>
+              <view class='push-button' wx:if="{{item.frozeno_order_state == 4}}">
+                <view class='push' bindtap="service" wx:if="{{item.can_apply_refund == 14 || item.can_apply_refund == 15}}">售后</view>
                 <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
                 <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2 && item.frozeno_order_state == 7}}">已退款</view>
                 <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2 && item.frozeno_order_state == 16}}">部分退款</view>
@@ -121,7 +128,7 @@
                 <!-- <view class='push' data-id="{{item.o_id}}" data-state="{{item.frozeno_order_state}}" bindtap='cancelOrder'>取消订单</view> -->
                 <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitMessage'>提醒发货</view>
                 
-                <view class='push' bindtap="applyRefund" data-apply_type="1" data-id="{{item.o_id}}" wx:if="{{item.can_apply_refund == 1}}">退款</view>
+                <view class='push' bindtap="applyRefund" data-apply_type="6" data-id="{{item.o_id}}" wx:if="{{item.can_apply_refund == 6}}">退款</view>
                 <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
                 <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2}}">已退款</view>
                 <view class='push push-active' wx:if="{{item.frozeno_is_verify == 3}}">已拒绝</view>
@@ -133,11 +140,16 @@
                 <view class='push push-active' data-id="{{item.o_id}}" bindtap='submitOk' wx:if="{{!cancelClick}}">确认收货</view>
                 <view class='push' wx:if="{{cancelClick}}">确认收货</view>
                 
-                <view class='push' bindtap="service" data-id="{{item.o_id}}" data-refund_type="{{item.can_apply_refund}}"  wx:if="{{item.can_apply_refund == 1 || item.can_apply_refund == 2}}">售后</view>
+                <view class='push' bindtap="service" data-id="{{item.o_id}}" data-refund_type="{{item.can_apply_refund}}" wx:if="{{item.can_apply_refund == 14 || item.can_apply_refund == 15}}">售后</view>
                 <view class='push' wx:if="{{item.frozeno_is_verify == 1}}">退款中</view>
                 <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2 && item.frozeno_order_state == 7}}">已退款</view>
                 <view class='push push-active' wx:if="{{item.frozeno_is_verify == 2 && item.frozeno_order_state == 16}}">部分退款</view>
                 <view class='push' wx:if="{{item.frozeno_is_verify == 3}}">拒绝退款</view>
+              </view>
+            </block>
+            <block wx:if="{{currentTab == 4}}">
+              <view class='push-button'>
+                <view class='push' bindtap="service" data-id="{{item.o_id}}" data-refund_type="{{item.can_apply_refund}}" wx:if="{{item.can_apply_refund == 14 || item.can_apply_refund == 15}}">售后</view>
               </view>
             </block>
           </view>
@@ -224,10 +236,10 @@
       <view class="page-radio">
         <view class="page-radio-title">售后类型（已发货）</view>
         <radio-group name="radio">
-          <label class="page-radio-label" wx:if="{{refundType == 1}}">
-            <radio value="radio1" data-apply_type="2" bindtap='checkApply' checked="{{apply_type == 2}}"/>退款退货</label>
-          <label class="page-radio-label" wx:if="{{refundType <= 2}}">
-            <radio value="radio2" data-apply_type="3" bindtap='checkApply' checked="{{apply_type == 3}}"/>仅导入仪退款退货</label>
+          <label class="page-radio-label" wx:if="{{refundType == 14}}">
+            <radio value="radio1" data-apply_type="14" bindtap='checkApply' checked="{{apply_type == 14}}"/>退款退货</label>
+          <label class="page-radio-label" wx:if="{{refundType == 14 || refundType == 15}}">
+            <radio value="radio2" data-apply_type="15" bindtap='checkApply' checked="{{apply_type == 15}}"/>仅导入仪退款退货</label>
         </radio-group>
       </view>
     </view>

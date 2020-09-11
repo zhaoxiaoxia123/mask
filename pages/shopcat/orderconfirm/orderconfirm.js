@@ -21,6 +21,7 @@ Page({
     invoice:[],
     isLoadSum:true,  //计算合计金额加个转圈
     dryId:0,
+    bean:0,
   },
 
   /**
@@ -183,7 +184,7 @@ Page({
     var pInfo = that.data.items.products;
     var productAmount = 0;
     for (var i = 0; i < pInfo.length; i++) {
-      productAmount += parseInt(pInfo[i]['discount_amount'])*parseInt(pInfo[i]['join_product_count']);
+      productAmount += parseFloat(pInfo[i]['discount_amount'])*parseInt(pInfo[i]['join_product_count']);
     }
     that.setData({
       payAmount: parseFloat(productAmount)//+parseInt(dryAm)
@@ -194,6 +195,8 @@ Page({
     }else{
       //计算减去卡券金额后的实付款
       that.subTicketAmount();
+      //商品总价减去智美豆后价格
+      that.subBeanAmount();
     }
   },
   //是否查询卡券
@@ -255,13 +258,13 @@ Page({
     });
   },
 
-  //商品总价减去智美豆后价格
-  // subBeanAmount:function(){
-  //   let bean = isNaN(parseFloat(that.data.bean))?0:parseFloat(that.data.bean);
-  //   that.setData({
-  //     payAmount: parseFloat(that.data.payAmount) - bean
-  //   });
-  // },
+  // 商品总价减去智美豆后价格
+  subBeanAmount:function(){
+    let bean = isNaN(parseFloat(that.data.bean))?0:parseFloat(that.data.bean);
+    that.setData({
+      payAmount: parseFloat(that.data.payAmount) - bean
+    });
+  },
   getAddress: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
@@ -357,6 +360,7 @@ Page({
           customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
           invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
           use_point: 0,//that.data.usingPoint,
+          rebate_amount: that.data.bean == undefined?0:that.data.bean,
           amount: that.data.payAmount
         };
         var params = {
@@ -365,15 +369,16 @@ Page({
           method:'POST',
           sCallback: function (res) {
             var datas = res.data.data;
-            wx.showToast({
-              // icon: "none",
-              title: res.data.message
-            });
             //此处跳出来支付。调用微信支付
             if(res.data.code == 200){
               wx.redirectTo({
                 url: '/pages/my/order/orderdetail/orderdetail?order_id=' + datas +'&from_page=shopping',
               })
+            }else{
+              wx.showToast({
+                // icon: "none",
+                title: res.data.message
+              });
             }
           }
         };
@@ -418,24 +423,24 @@ Page({
     })
   },
   // 适用门店
-  // beans: function (e) {
-  //   var beansflexwindow;
-  //   if (that.data.beansflexwindow == true) {
-  //     beansflexwindow = false;
-  //   }
-  //   else {
-  //     beansflexwindow = true;
-  //   }
-  //   that.setData({
-  //     beansflexwindow: beansflexwindow
-  //   });
-  // },
-  // close3: function () {
-  //   let beansflexwindow = false;
-  //   that.setData({
-  //     beansflexwindow: beansflexwindow
-  //   })
-  // },
+  beans: function (e) {
+    var beansflexwindow;
+    if (that.data.beansflexwindow == true) {
+      beansflexwindow = false;
+    }
+    else {
+      beansflexwindow = true;
+    }
+    that.setData({
+      beansflexwindow: beansflexwindow
+    });
+  },
+  close3: function () {
+    let beansflexwindow = false;
+    that.setData({
+      beansflexwindow: beansflexwindow
+    })
+  },
 
   //卡券弹框关闭
   close1: function(e) {
@@ -447,45 +452,45 @@ Page({
     that.sumProductTotalAmount(2);
   },
   
-  // PointNum: function(obj) {
-  //     obj = obj.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
-  //     obj = obj.replace(/^\./g, ""); //验证第一个字符是数字
-  //     obj = obj.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
-  //     obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-  //     obj = obj.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
-  //     if (obj.indexOf(".") < 0 && obj != "") { //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
-  //         obj = parseFloat(obj);
-  //     }
-  //     if (!obj || obj == '0' || obj == '0.0' || obj == '0.00') {
-  //         return;
-  //     }
-  //     return obj;
-  // },
-  // setBeanInput: function(e) {
-  //   that.setData({
-  //     bean: this.PointNum(e.detail.value)
-  //   })
-  //   return 
-  // },
+  PointNum: function(obj) {
+      obj = obj.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+      obj = obj.replace(/^\./g, ""); //验证第一个字符是数字
+      obj = obj.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+      obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+      obj = obj.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+      if (obj.indexOf(".") < 0 && obj != "") { //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+          obj = parseFloat(obj);
+      }
+      if (!obj || obj == '0' || obj == '0.0' || obj == '0.00') {
+          return;
+      }
+      return obj;
+  },
+  setBeanInput: function(e) {
+    that.setData({
+      bean: this.PointNum(e.detail.value)
+    })
+    return 
+  },
   /**
    * 提交智美豆使用数,比较输入智美豆是否符合匹配数量
    */
-  // submitBean:function(){
-  //   if(that.data.customerInfo.frozeno_bean < that.data.bean || that.data.bean > that.data.payAmount ){
-  //     wx.showToast({
-  //       icon: "none",
-  //       title: "请输入正确数量"
-  //     });
-  //   }else{
-  //     that.close3();
-  //     //计算减去卡券金额后的实付款
-  //     that.sumProductTotalAmount(2);
-  //   }
-  // },
-  // onInputEvent(e) {
-  //   this.setData({
-  //     inputVal : this.PointNum(e.detail.value)
-  //   })
-  //   return // 必加，不然输入框可以输入多位小数
-  // },
+  submitBean:function(){
+    if(that.data.customerInfo.frozeno_rebate_amount < that.data.bean || that.data.bean > that.data.payAmount ){
+      wx.showToast({
+        icon: "none",
+        title: "请输入正确数量"
+      });
+    }else{
+      that.close3();
+      //计算减去卡券金额后的实付款
+      that.sumProductTotalAmount(2);
+    }
+  },
+  onInputEvent(e) {
+    this.setData({
+      inputVal : this.PointNum(e.detail.value)
+    })
+    return // 必加，不然输入框可以输入多位小数
+  },
 })
