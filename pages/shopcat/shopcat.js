@@ -13,7 +13,7 @@ Page({
     totalfee: 0,
     memberNo: wx.getStorageSync('memberNo'),
     offset: 1,
-    pageCount: 20,
+    pageCount: 8,
     isLast: false,
     items: [],
     isBack: false,
@@ -65,7 +65,7 @@ Page({
     //   items:[]
     // });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info') && that.data.items.length <= 0) {
-      base.loading(1000);
+      base.loading(2000);
       var param_s = {
         page_code: 'p012',
         type: "shopping_list",
@@ -111,7 +111,7 @@ Page({
       that.setData({
         offset: that.data.offset + 1
       });
-      base.loading(1000);
+      base.loading(2000);
       //列表
       var param_s = {
         page_code: 'p012',
@@ -160,6 +160,7 @@ Page({
       data:param,
       method:'GET',
       sCallback: function (res) {
+        wx.hideToast();
         var datas = res.data.data;
         that.setData({  //解决佳总手机返回不刷新
           items:[]

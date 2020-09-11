@@ -313,6 +313,7 @@ Page({
             swipers: res.data.data.product_image,
           });
           that.getTop();
+          // wx.hideToast();
         }
       }
     };

@@ -10,7 +10,7 @@ Page({
   data: {
     currentTab: '',
     offset: 1,
-    pageCount: 20,
+    pageCount: 8,
     isLast: false,
     msgList: [],
     type: '6,7',  //6：系统消息 7：冻龄智美通知

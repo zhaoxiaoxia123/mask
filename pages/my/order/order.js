@@ -17,7 +17,7 @@ Page({
     duration: 500,
     circular: true,
     offset: 1,
-    pageCount: 20,
+    pageCount: 8,
     isLast: false,
     order_state: 1,
     memberNo: wx.getStorageSync('memberNo'),
@@ -65,7 +65,7 @@ Page({
     });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       
-      base.loading(1000);
+    base.loading(6000);
     var param = {
       page_code: 'p008',
       type: "myOrder",
@@ -106,7 +106,7 @@ Page({
       that.setData({
         offset: that.data.offset + 1
       });
-      base.loading(1000);
+      base.loading(2000);
       var param = {
         page_code: 'p008',
         type: "myOrder",
@@ -177,6 +177,7 @@ Page({
       data:param,
       method:'GET',
       sCallback: function (res) {
+        wx.hideToast();
         var datas = res.data.data;
         if (datas){
           that.setData({
@@ -336,9 +337,19 @@ Page({
 
   //申请退款(未发货,已发货均可退款)
   applyRefund: function(e){
-    var order_id = e.currentTarget.dataset.id;
-    var apply_type = e.currentTarget.dataset.apply_type;
-    that.sendRefundRequest(order_id,apply_type);
+    wx.showModal({
+      title: '提示',
+      content: '您确定要退款？',
+      success: function (res) {
+        if (res.confirm) {
+          var order_id = e.currentTarget.dataset.id;
+          var apply_type = e.currentTarget.dataset.apply_type;
+          that.sendRefundRequest(order_id,apply_type);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
 
   //退款提交

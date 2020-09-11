@@ -10,7 +10,7 @@ Page({
   data: {
     currentIndex: 0,
     offset: 1,
-    pageCount: 20,
+    pageCount: 8,
     isLast: false,
     ticketList: [],
     show_amount: '', //需展示的新会员卡券兑换金额
@@ -176,6 +176,7 @@ Page({
       method:'GET',
       sCallback: function (res) {
         var datas = res.data.data;
+        wx.hideToast();
         that.setData({
           ticketList: that.data.ticketList.concat(datas.ticket),
           show_amount: datas.show_amount,

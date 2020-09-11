@@ -171,9 +171,10 @@ Page({
             swipers: datas.data
           });
         }else if(num == 2){
+          wx.hideToast();
           that.setData({
             post: that.data.post.concat(datas.data),
-            message:'您还没有相关订单',
+            message:'您还没有相关信息',
             imgLoad:'../../img/wu.png',
           });
           if (datas.data.length <= 0 || datas.data.length < that.data.pageCount) {

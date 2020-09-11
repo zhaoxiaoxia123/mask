@@ -17,8 +17,8 @@ Page({
     isCheckTicket: 9999, //存储选择卡券索引  9999为不用卡券
     isCheckExpressCompany: 2, //存储选择快递  9999为随机
     addressId:0,
-    invoiceId: 0,
-    invoice:[],
+    // invoiceId: 0,
+    // invoice:[],
     isLoadSum:true,  //计算合计金额加个转圈
     dryId:0,
     bean:0,
@@ -51,29 +51,27 @@ Page({
     let currPage = pages[pages.length - 1];
     that.setData({
       addressId: currPage.data.addressId,
-      invoiceId: currPage.data.invoiceId
+      // invoiceId: currPage.data.invoiceId
     });
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-      var param = {
-        page_code: 'p004',
-        type: "mainCustomer"
-      };
-      that.getUserDetail(param);
-  
       //获取商品信息
       var param_p = {
         page_code: 'p005',
         type: "confirmProduct",
         products: that.data.products,
-        // customer_id: wx.getStorageSync("customerId"),
         level: wx.getStorageSync("level")
       };
       that.getProducts(param_p);
+      // //是否查询卡券
+      // that.isSelectTicket();
+      // that.getTicketList(); //获取卡券列表
+
+      var param = {
+        page_code: 'p004',
+        type: "mainCustomer"
+      };
+      that.getUserDetail(param);
       that.getAddress(); //获取用户设置的默认地址
-      
-      // if(that.data.invoiceId){
-      //   that.getInvoice(); //获取用户设置的发票信息
-      // }
     }
   },
 
@@ -134,12 +132,12 @@ Page({
       url: '/pages/my/address/address?come=order'
     })
   },
-  //选择发票
-  goInvoice: function () {
-    wx.navigateTo({
-      url: '/pages/my/invoice/invoice?come=order'
-    })
-  },
+  // //选择发票
+  // goInvoice: function () {
+  //   wx.navigateTo({
+  //     url: '/pages/my/invoice/invoice?come=order'
+  //   })
+  // },
 
   //获取用户信息 ：积分 等
   getUserDetail: function(param) {
@@ -167,18 +165,27 @@ Page({
         var datas = res.data.data;
         that.setData({
           items: datas,
-          isLoadSum:true,
+          ticketList: datas.ticket_list,
+          isLoadSum:false,
+          payAmount:datas.default_show_total_amount,
+          usingTicketAmount:datas.ticket_amount
         });
-        setTimeout(function() {
-          //计算商品总价（未减卡券智美豆前的会员折扣价相加的总价）
-          that.sumProductTotalAmount(1);
-        }, 2000);
+        
+        if(datas.ticket_list.ticket_check){
+          that.setData({
+            isCheckTicket:datas.ticket_list.ticket_check.check_key+1
+          });
+        }
+        // setTimeout(function() {
+        //   //计算商品总价（未减卡券可提现金额前的会员折扣价相加的总价）
+        //   that.sumProductTotalAmount(1);
+        // }, 2000);
       }
     };
     base.httpRequest(params);
   },
 
-  //计算商品总价（未减卡券智美豆前的会员折扣价相加的总价）
+  //计算商品总价（未减卡券可提现金额前的会员折扣价相加的总价）
   //num 1: 可查询卡券等信息   2：不调用查看卡券信息
   sumProductTotalAmount: function(num) {
     var pInfo = that.data.items.products;
@@ -190,29 +197,27 @@ Page({
       payAmount: parseFloat(productAmount)//+parseInt(dryAm)
     });
     if(num == 1){
-      //是否查询卡券
-      that.isSelectTicket();
     }else{
       //计算减去卡券金额后的实付款
       that.subTicketAmount();
-      //商品总价减去智美豆后价格
+      //商品总价减去可提现金额后价格
       that.subBeanAmount();
     }
   },
   //是否查询卡券
-  isSelectTicket(){
-    var productAmount = that.data.payAmount;
-    if (productAmount ) {//&& !that.data.items.is_have_new_ticket
-      that.getTicketList(); //获取卡券列表
-    }else{
-      if (that.data.items.sub_amount != 0){
-        //新人使用新人卡券商品总价计算
-        that.setData({
-          payAmount: (productAmount - parseFloat(that.data.items.sub_amount))
-        });
-      }
-    }
-  },
+  // isSelectTicket(){
+    // var productAmount = that.data.payAmount;
+    // if (productAmount ) {//&& !that.data.items.is_have_new_ticket
+    //   that.getTicketList(); //获取卡券列表
+    // }else{
+    //   if (that.data.items.sub_amount != 0){
+    //     //新人使用新人卡券商品总价计算
+    //     that.setData({
+    //       payAmount: (productAmount - parseFloat(that.data.items.sub_amount))
+    //     });
+    //   }
+    // }
+  // },
   //商品总价减去卡券后价格
   subTicketAmount:function(){
     that.setData({
@@ -258,7 +263,7 @@ Page({
     });
   },
 
-  // 商品总价减去智美豆后价格
+  // 商品总价减去可提现金额后价格
   subBeanAmount:function(){
     let bean = isNaN(parseFloat(that.data.bean))?0:parseFloat(that.data.bean);
     that.setData({
@@ -358,7 +363,7 @@ Page({
           ticket_id: ticket_id,
           express_company: that.data.isCheckExpressCompany,
           customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
-          invoice_id: that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
+          invoice_id: 0,//that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
           use_point: 0,//that.data.usingPoint,
           rebate_amount: that.data.bean == undefined?0:that.data.bean,
           amount: that.data.payAmount
@@ -427,8 +432,7 @@ Page({
     var beansflexwindow;
     if (that.data.beansflexwindow == true) {
       beansflexwindow = false;
-    }
-    else {
+    } else {
       beansflexwindow = true;
     }
     that.setData({
@@ -436,12 +440,18 @@ Page({
     });
   },
   close3: function () {
+    that.closeBean();
+    that.setData({
+      bean:0
+    })
+    console.log(that.data.bean);
+  },
+  closeBean: function(){
     let beansflexwindow = false;
     that.setData({
       beansflexwindow: beansflexwindow
     })
   },
-
   //卡券弹框关闭
   close1: function(e) {
     var couponflexwindow = false;
@@ -473,7 +483,7 @@ Page({
     return 
   },
   /**
-   * 提交智美豆使用数,比较输入智美豆是否符合匹配数量
+   * 提交可提现金额使用数,比较输入可提现金额是否符合匹配数量
    */
   submitBean:function(){
     if(that.data.customerInfo.frozeno_rebate_amount < that.data.bean || that.data.bean > that.data.payAmount ){
@@ -482,7 +492,7 @@ Page({
         title: "请输入正确数量"
       });
     }else{
-      that.close3();
+      that.closeBean();
       //计算减去卡券金额后的实付款
       that.sumProductTotalAmount(2);
     }

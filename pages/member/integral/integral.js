@@ -10,7 +10,7 @@ Page({
   data: {
     customer:[],
     offset: 1,
-    pageCount: 20,
+    pageCount: 8,
     isLast: false,
     items:[]
   },
