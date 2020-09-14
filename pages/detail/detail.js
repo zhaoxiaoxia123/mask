@@ -26,7 +26,6 @@ Page({
     aboutTop: 0,
     scrollStop:false,
     dryAmount:0,
-    experience_id:0,
     dry_id:0
   },
   /**
@@ -39,7 +38,6 @@ Page({
     }
     that.setData({
       productId: options.id,
-      experience_id:app.globalData.experience_id,
       dry_id:app.globalData.dry_id,
       level: wx.getStorageSync("level")
     });

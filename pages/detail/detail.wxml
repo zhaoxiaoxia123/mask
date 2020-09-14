@@ -1,33 +1,14 @@
 <!--pages/detail/detail.wxml-->
 <view class="view-page size-text">
-	<!-- wx:if="{{isShowTopBar}}" -->
 	<navbar selectTab="{{nowstatus}}" tabCount="4" bind:icre="clickTab"></navbar>
-	<!-- <navbar page-name="详情页" tabCount="1" wx:if="{{!isShowTopBar}}"></navbar> -->
 	<scroll-view class='page-content' style="height:{{winHeight}}" scroll-into-view="{{toview}}" scroll-y="true" scroll-with-animation="true" bindscroll="scroll" bindtouchstart="touchStart" bindtouchend="touchEnd">
 		<view id="product">
 			<swiper indicator-dots="true" indicator-color="#000000" indicator-active-color="#b7aa00" autoplay="{{false}}" interval="3000" duration="500" circular="true" style='height:750rpx;background:#fff'>
-				<!-- <swiper-item wx:if="{{items.category_id == experience_id && level > 0}}">
-					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/99.mp4"></video>
-				</swiper-item> -->
-				<swiper-item wx:if="{{items.category_id == experience_id && level > 0}}">
-					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/168.mp4"></video>
-				</swiper-item>
-				<swiper-item wx:if="{{items.category_id != experience_id && items.category_id != dry_id && level > 0}}">
-					<video class="swiper-item" show-play-btn="{{true}}" controls="{{true}}" objectFit="cover" loop='{{false}}' show-mute-btn='{{true}}' vslide-gesture-in-fullscreen='{{true}}' src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/video/423.mp4"></video>
-				</swiper-item>
 				<block wx:for="{{swipers}}" wx:key="*this">
-					<block wx:if="{{item.is_activity == 2}}">
-						<swiper-item wx:if="{{item.type == 1}}">
-							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" bindtap="goPost" data-href="{{item.weixin_url}}" wx:if="{{item.is_href == 1}}" />
-							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" wx:if="{{item.is_href == 0}}" />
-						</swiper-item>
-					</block>
-					<block wx:if="{{item.is_activity == 1 && level == 0}}">
-						<swiper-item wx:if="{{item.type == 1}}">
-							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" bindtap="goPost" data-href="{{item.weixin_url}}" wx:if="{{item.is_href == 1}}" />
-							<image mode="widthFix" src="{{item.image_url}}" class="slide-image" wx:if="{{item.is_href == 0}}"/>
-						</swiper-item>
-					</block>
+					<swiper-item wx:if="{{item.type == 1}}">
+						<image mode="widthFix" src="{{item.image_url}}" class="slide-image" bindtap="goPost" data-href="{{item.weixin_url}}" wx:if="{{item.is_href == 1}}" />
+						<image mode="widthFix" src="{{item.image_url}}" class="slide-image" wx:if="{{item.is_href == 0}}"/>
+					</swiper-item>
 				</block>
 			</swiper>
 	
@@ -57,7 +38,6 @@
 					</block>
 				</view>
 				<view class="money-title">{{items.category_desc}}</view>
-			
 				<view class="detail-item-abstract">{{items.frozeno_introduction}}</view>
 				<view class="detail-item-between">
 					<text class="detail-item-color">免邮</text>
@@ -130,12 +110,6 @@
 						<image class="icon40" src="../img/shopcat1_false@2x.png"></image>
 					</button>
 				</view>
-				<!-- <view class='bottom-left count' catchtap="shoppingList">
-        <view class='number' wx:if="{{shoppingCount}}">
-          <text>{{shoppingCount}}</text>
-        </view>
-        <image class='icon40' src='../img/shopcat_false.png'></image>
-      </view> -->
 				<view class='bottom-operate button1' catchtap='joinShopping' wx:if="{{isClick}}">加入购物</view>
 				<view class='bottom-operate button1' wx:if="{{!isClick}}">加入购物</view>
 				<view class='bottom-operate button' data-type="one" catchtap='goConfirm'>立即购买</view>
@@ -182,7 +156,6 @@
 						<button class="cs_button" type="default-light" open-type="contact" session-from="weapp">
 							<image class="icon40" src="../img/service@2x.png"></image>
 						</button>
-						<!-- <contact-button type="default-light" size="20" session-from="weapp"></contact-button> -->
 					</view>
 					<view class='bottom-left count' catchtap="shoppingList">
 						<view class='number' wx:if="{{shoppingCount}}">
