@@ -1,0 +1,28 @@
+/* pages/home/financial_mgm/add_bank_acc/add_bank_acc.wxss */
+
+page{
+ background: #f5f5f5;
+}
+.top-border{
+  border-top:1px solid #e4e4e4;
+}
+.column{
+  display: flex;
+  padding:30rpx;
+  border-bottom:1px solid #e4e4e4;
+}
+.column label{
+  padding-right:40rpx;
+}
+.container-btn{
+  display: flex;
+  justify-content: center;
+  margin:120rpx 0 380rpx 0;
+}
+.container-btn .btn{
+  background: #333;
+  color:#fff;
+  padding:30rpx 320rpx;
+  border-radius: 10px;
+  font-size:32rpx;
+}

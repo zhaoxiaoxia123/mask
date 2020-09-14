@@ -89,6 +89,15 @@
         <image src='../img/dv.png'></image>
       </view>
     </view>
+    <view class='list-wap' bindtap='financial'>
+			<view class='left'>
+				<image class='icon40' src='../img/cl_finance.png'></image>
+				<text>财务管理</text>
+			</view>
+			<view class='right'>
+				<image src='../img/dv.png'></image>
+			</view>
+		</view>
 		<view class='list-wap' bindtap='service'>
 			<view class='left'>
 				<image class='icon40' src='../img/refund.png'></image>

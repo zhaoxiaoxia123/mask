@@ -1,0 +1,18 @@
+<!--pages/home/financial_mgm/add_bank_acc/add_bank_acc.wxml-->
+<!-- 添加银行卡 -->
+<view class=''>
+
+    <view class="column top-border">
+        <label>户名</label> <input placeholder='请输入姓名'  value=''></input>
+    </view>
+    <view class="column" >
+        <label>银行</label> <input placeholder='请输入开户行'  value=''></input>
+    </view>
+    <view class="column">
+        <label>卡号</label> <input placeholder='请输入卡号'  value=''></input>
+    </view>
+    <view class="container-btn">
+          <view class="btn">修改</view>
+      </view>
+
+</view>

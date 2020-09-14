@@ -1,0 +1,58 @@
+<!--pages/home/financial_mgm/financial/financial.wxml-->
+
+<view>
+  <view class="fin-hd">
+    <!-- 余额提现、收益入账、购物使用-->
+    <view class="fin-hd-title">余额提现</view>
+    <!-- 支出 -->
+    <view class="money">-12.00</view>
+    <!-- 提现 -->
+    <view class="money">12.00</view>
+    <!-- 收入 -->
+    <view class="money money-add">+12.00</view>
+  </view>
+  <!-- 当前状态、支付方式、时间（入账时间、支付时间、申请时间、到账时间）、订单号（有订单号显示）、交易单号 -->
+  <view class="fin-item">
+    <view class="fin-item-text">
+      <view class="fin-item-left">当前状态</view>
+     <!-- 当前状态：已存入余额、交易成功、处理中、已提现 -->
+      <view class="fin-item-right">已存入余额</view>
+    </view>
+
+    <view class="fin-item-text">
+      <view class="fin-item-left">支付方式</view>
+      <view class="fin-item-right">余额</view>
+    </view>
+    <!-- 收入：入账时间
+    支出：支付时间
+    提现：申请时间、到账时间 -->
+    <view class="fin-item-text">
+      <view class="fin-item-left">入账时间</view>
+      <view class="fin-item-right">2020-08-02 12:55:18</view>
+    </view>
+    <view class="fin-item-text">
+      <view class="fin-item-left">支付时间</view>
+      <view class="fin-item-right">2020-08-02 15:55:10</view>
+    </view>
+    <view class="fin-item-text">
+      <view class="fin-item-left">申请时间</view>
+      <view class="fin-item-right">2020-08-02 14:22:00</view>
+    </view>
+    <view class="fin-item-text">
+      <view class="fin-item-left">到账时间</view>
+      <view class="fin-item-right">2020-08-02 15:33:10</view>
+    </view>
+    <!-- 有商品订单号的时候显示 -->
+    <view class="fin-item-text">
+      <view class="fin-item-left">订单号</view>
+      <view class="fin-item-right">54646465465455</view>
+    </view>
+    <view class="fin-item-text">
+      <view class="fin-item-left">交易单号</view>
+      <view class="fin-item-right">4645654654664</view>
+    </view>
+
+  </view>
+
+
+</view>

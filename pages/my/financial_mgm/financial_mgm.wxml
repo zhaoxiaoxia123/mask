@@ -1,0 +1,35 @@
+<!--pages/home/financial_mgm/financial_mgm.wxml-->
+<!-- 财务管理 -->
+<view>
+
+    <view class="financial">
+        <view class="fin-hd">
+            <view class="fin-hd-content">
+                <view class="fin-hd-hd">
+                    <view class="fin-hd-top">账户金额(元)</view>
+                    <view class="fin-hd-in">
+                        <view class="balance">293.19</view>
+                        <view class="detailed" bindtap='balance'>
+                            <text>明细</text>
+                            <image class='' src='../../img/dv.png'></image>
+                        </view>
+                    </view>
+                    <!-- <view class="fin-hd-btn" >
+                        <text class="btn" bindtap='bankacc'>提现</text>
+                    </view> -->
+                </view>
+                <!-- <view class="fin-hd-bottom" bindtap='addbankacc'>
+                    <text>银行卡</text>
+                    <image class='' src='../../images/dv.png'></image>
+                </view> -->
+            </view>
+
+        </view>
+
+        <view class="fin-item">
+        </view>
+
+    </view>
+
+</view>
+

@@ -1,0 +1,54 @@
+<!--pages/home/financial_mgm/bank_acc/bank_acc.wxml-->
+<!-- 提现到银行卡 -->
+
+<view>
+
+    <view class="bankacc">
+
+        <view class="list">
+
+            <view class="item-list  top-border">
+                
+                <view class="item-content">
+                    <image class="item-img" src='../../../images/yms.jpg'></image>
+                    <view class="item-text">
+                        <view class="title">民生银行</view>
+                        <view class="text">尾号为1527的储蓄卡</view>
+                    </view>
+
+                </view>
+                <view class="item-ft">
+                    <image class='' src='../../../images/dv.png'></image>
+                </view>
+                
+            </view>
+
+
+            <view class="item-block">
+                  <view class='column-input'>
+                      <label>￥</label>
+                      <input placeholder='请输入提现金额' value=''></input>
+                  </view>
+                   <view class='column-text'>
+                      <view class="text1">全部转出</view>
+                      <view class="text2">提现余额：￥293.19元</view>
+                  </view>
+            </view>
+
+            <view class="item-container">
+
+                <view class="title">每周每个银行卡提现最多3笔，单笔最低提现金额为10元，最高不能超过50000元。
+每周二开始打款（如遇节假日顺延），7个工作日内分批次完成。</view>
+                <view class="text">每周二开始打款（如遇节假日顺延），7个工作日内分批次完成。</view>
+                <view class="text">注：每周二发放金额为截止到前一周周五24:00申请的提现金额</view>
+                <view class="container-btn">
+                    <view class="btn">确认转出</view>
+                </view>
+            </view>
+
+        </view>
+
+    </view>
+
+
+</view>

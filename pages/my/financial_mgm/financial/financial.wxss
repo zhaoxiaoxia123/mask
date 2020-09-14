@@ -1,0 +1,33 @@
+/* pages/home/financial_mgm/financial/financial.wxss */
+page{
+ background: #f5f5f5;
+}
+.fin-hd{
+  background:#fff;
+  text-align:center;
+  padding:40rpx 24rpx;
+  margin-bottom:30rpx;
+}
+.fin-hd-title{
+  font-size:1.2rem;
+}
+.money{
+  font-size:1.8rem;
+  font-weight: bold;
+  padding-top:20rpx;
+}
+.money-add{
+  color:#e64340;
+}
+.fin-item{
+  background:#fff;
+  padding:24rpx;
+}
+.fin-item-text{
+  display: flex;
+  padding:6rpx 0;
+}
+.fin-item-left{
+  width:180rpx;
+  color:#8b8b8b;
+}

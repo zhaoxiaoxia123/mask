@@ -1,0 +1,232 @@
+<!--pages/home/financial_mgm/balance/balance.wxml-->
+<!-- 余额明细 -->
+
+<view>
+
+  <!--没有相关订单时显示-->
+  <view class='search-no' style='display:none;'>
+    <view>
+      <image class='scimg' src='../../../images/wu.png'></image>
+    </view>
+    <text>您还没有相关信息~~</text>
+  </view>
+
+  <view class="balance">
+    <view class="balance-item">
+      <view class="balance-date">
+        <picker mode="date" value="{{date}}" fields="month" start="2020年9月" end="2020年9月" bindchange="bindDateChange">
+          <view class="weui-input">{{date}}</view>
+        </picker>
+        <image class='date-scimg' src='../../../images/b2.png'></image>
+      </view>
+      <view class="balance-money">
+        <text class="balance-money-text">支出 ¥356.00</text>
+        <text class="balance-money-text">收入 ¥356.00</text>
+        <text class="balance-money-text">提现 ¥356.00</text>
+      </view>
+    </view>
+    <view class='search-no' style="display:none;">
+      <view>
+        <image class='scimg' src='../../../images/wu.png'></image>
+      </view>
+      <text>您还没有相关信息~~</text>
+    </view>
+    <view class="list">
+      <view class="item"  bindtap='financial'>
+        <view class="item-title">
+          <view class="title">余额提现</view>
+          <view class="money">28.00</view>
+        </view>
+        <view class="item-text size-text">
+          <view class="text">提现</view>
+          <view class="text">9月8日 10:15</view>
+        </view>
+      </view>
+
+      <view class="item">
+        <view class="item-title"  bindtap='financial'>
+          <view class="title">购物使用</view>
+          <view class="money">-42.00</view>
+        </view>
+        <view class="item-text size-text">
+          <view class="text">支出</view>
+          <view class="text">9月8日 10:15</view>
+        </view>
+      </view>
+
+      <view class="item"  bindtap='financial'>
+        <view class="item-title">
+          <view class="title">收益入账</view>
+          <view class="money money-add">+12.00</view>
+        </view>
+        <view class="item-text size-text">
+          <view class="text">收入</view>
+          <view class="text">9月8日 10:15</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <view class="balance">
+    <view class="balance-item">
+      <view class="balance-date">
+        <picker mode="date" value="{{date}}" fields="month" start="2020年8月" end="2020年8月" bindchange="bindDateChange">
+          <view class="weui-input">{{date1}}</view>
+        </picker>
+        <image class='date-scimg' src='../../../images/b2.png'></image>
+      </view>
+      <view class="balance-money">
+        <text class="balance-money-text">支出 ¥356.00</text>
+        <text class="balance-money-text">收入 ¥356.00</text>
+        <text class="balance-money-text">提现 ¥356.00</text>
+      </view>
+    </view>
+    <view class='search-no' style="display:none;">
+      <view>
+        <image class='scimg' src='../../../images/wu.png'></image>
+      </view>
+      <text>您还没有相关信息~~</text>
+    </view>
+    <view class="list">
+      <view class="item" bindtap='financial'>
+        <view class="item-title">
+          <view class="title">余额提现</view>
+          <view class="money">28.00</view>
+        </view>
+        <view class="item-text size-text">
+          <view class="text">提现</view>
+          <view class="text">8月8日 10:15</view>
+        </view>
+      </view>
+
+      <view class="item" bindtap='financial'>
+        <view class="item-title">
+          <view class="title">购物使用</view>
+          <view class="money">-42.00</view>
+        </view>
+        <view class="item-text size-text">
+          <view class="text">支出</view>
+          <view class="text">8月8日 10:15</view>
+        </view>
+      </view>
+
+      <view class="item"  bindtap='financial'>
+        <view class="item-title">
+          <view class="title">收益入账</view>
+          <view class="money money-add">+12.00</view>
+        </view>
+        <view class="item-text size-text">
+          <view class="text">收入</view>
+          <view class="text">8月8日 10:15</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <!-- <view class="topbar">
+    <view class="topbar-top">
+      <view class="topbar-text" bindtap="clickTab" data-current="0">
+        <view class="topbar-tab  {{currentTab=='0'?'active':''}} ">全部</view>
+      </view>
+
+      <view class="topbar-text" bindtap="clickTab" data-current="1">
+        <view class="topbar-tab  {{currentTab=='1'?'active':''}} ">入账</view>
+      </view>
+      <view class="topbar-text" bindtap="clickTab" data-current="2">
+        <view class="topbar-tab  {{currentTab=='2'?'active':''}} ">提现</view>
+      </view>
+      <view class="topbar-text" bindtap="clickTab" data-current="3">
+        <view class="topbar-tab  {{currentTab=='3'?'active':''}} ">出账</view>
+      </view>
+
+
+    </view>
+  </view>
+  <view class='content page-pd size-titletwo'>
+    <view class="{{currentTab == 0 ? 'show':'hidden'}}">
+      <scroll-view>
+
+
+        <view class="balance">
+          <view class="list">
+            <view class="item">
+              <view class="item-title">
+                <view class="title">订单完成可提现收益</view>
+                <view class="money">+28.00</view>
+              </view>
+              <view class="item-text">
+                <view class="">订单号：W2019111117325499190744023</view>
+                <view class="text">2020-03-31 10:15:17</view>
+              </view>
+            </view>
+
+            <view class="item">
+              <view class="item-title">
+                <view class="title">代理商订单完成可提现收益</view>
+                <view class="money">+42.00</view>
+              </view>
+              <view class="item-text">
+                <view class="">单号：W2019111117325499190744023</view>
+                <view class="text">2020-03-31 10:15:17</view>
+              </view>
+            </view>
+
+            <view class="item">
+              <view class="item-title">
+                <view class="title">代理商订单完成可提现收益</view>
+                <view class="money">+12.00</view>
+              </view>
+              <view class="item-text">
+                <view class="">单号：W2019111117325499190744023</view>
+                <view class="text">2020-03-31 10:15:17</view>
+              </view>
+            </view>
+
+          </view>
+        </view>
+
+
+
+      </scroll-view>
+    </view>
+    <view class="{{currentTab == 1 ? 'show':'hidden'}}">
+      <scroll-view>
+        <view class='search-no'>
+          <view>
+            <image class='scimg' src='../../../images/wu.png'></image>
+          </view>
+          <text>您还没有相关信息~~</text>
+        </view>
+
+
+      </scroll-view>
+    </view>
+    <view class="{{currentTab == 2 ? 'show':'hidden'}}">
+      <scroll-view>
+        <view class='search-no'>
+          <view>
+            <image class='scimg' src='../../../images/wu.png'></image>
+          </view>
+          <text>您还没有相关信息~~</text>
+        </view>
+
+      </scroll-view>
+    </view>
+    <view class="{{currentTab == 3 ? 'show':'hidden'}}">
+      <scroll-view>
+        <view class='search-no'>
+          <view>
+            <image class='scimg' src='../../../images/wu.png'></image>
+          </view>
+          <text>您还没有相关信息~~</text>
+        </view>
+
+
+
+      </scroll-view>
+    </view>
+
+
+  </view> -->
+</view>

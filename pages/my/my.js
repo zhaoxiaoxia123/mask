@@ -140,6 +140,13 @@ Page({
       url: '/pages/member/member',
     })
   },
+  // 财务管理
+  financial: function (e) {
+    // console.log(e)
+    wx.navigateTo({
+      url: '../my/financial_mgm/financial_mgm',
+    })
+  },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param){
     var params = {
