@@ -63,10 +63,10 @@
 		<view class='coupon'>
 			<view class='coupon-wap'>
 				<view class='coupon-left'>
-					<text>会员折扣</text>
+					<text>折扣</text>
 				</view>
 				<view class='coupon-right'>
-					<text>{{items.customer_discount > 0 ? '享'+items.customer_discount+'折':'没有会员折扣'}}</text>
+					<text>{{items.customer_discount > 0 ? '享'+items.customer_discount+'折':'没有折扣'}}</text>
 				</view>
 			</view>
 		</view>
