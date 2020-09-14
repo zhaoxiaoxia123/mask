@@ -46,7 +46,7 @@ Page({
           that.setData({
             name: datas.name,
             phone: datas.phone,
-            zip: datas.zip,
+            zip: (datas.zip===null)?"":datas.zip,
             address: datas.address,
             is_default: datas.is_default==1?true:false,
             region:[datas.province,datas.city,datas.area]

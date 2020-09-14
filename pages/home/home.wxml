@@ -27,23 +27,6 @@
       <image mode="widthFix" src="{{item.image_url[0]}}" lazy-load bindtap='toDetail' data-obj='{{item}}'/>
     </block>
   </view>
-
-  <view class="detail-image">
-    <block wx:for="{{swipers}}" wx:key="*this" >
-      <image wx:if="{{item.type == 13}}" mode="widthFix" src="{{item.img_url[0]}}" class="slide-image"/>
-    </block>
-  </view>
-  <view class="detail-ft">
-    <view class="detail-ft-item">
-    <!-- 需要判断是否是会员，是否下发了优惠券 -->
-        <view class="ft-item" bindtap="goLogin"></view>
-        <view class="ft-item" bindtap="information"></view>
-    </view>
-    <view class="detail-ft-item">
-        <view class="ft-item" bindtap="grade"></view>
-        <view class="ft-item" bindtap="goMember"></view>
-    </view>
-  </view>
 </view>
 
 <!-- <button bindtap="goWx">go mp weixin</button> -->
@@ -60,7 +43,7 @@
       <image class="guide-img" mode="widthFix" src="../img/guide-t@2x.png"></image>
     </view>
     <view class="guide-ft">
-        <view class="guide-btn" data-step='2' bindtap='close3'>下一步 1/2</view>
+      <view class="guide-btn" data-step='2' bindtap='close3'>下一步 1/2</view>
     </view>
   </view>
   <view class="guide {{step == 2?'':'zy'}}">
@@ -68,8 +51,7 @@
       <image class="guide-simg" mode="widthFix" src="../img/guide-s@2x.png"></image>
     </view>
     <view class="guide-ft guide-sft">
-        <view class="guide-btn" data-step='3' bindtap='close3'>知道啦 2/2</view>
+      <view class="guide-btn" data-step='3' bindtap='close3'>知道啦 2/2</view>
     </view>
   </view>
-    
 </view>
