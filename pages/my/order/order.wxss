@@ -59,6 +59,7 @@
 .pay {
   display: flex;
   justify-content: flex-end;
+  padding-top:10rpx;
 }
 
 .push-button {
