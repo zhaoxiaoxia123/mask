@@ -25,7 +25,6 @@ Page({
     imgLoad:'',
     message:'',
     dry_id:0,
-    experience_amount:0,
     level:0,
     cancelClick:false,
     apply_type:0,
@@ -43,7 +42,6 @@ Page({
       currentTab: parseInt(options.id) - 1,
       order_state: parseInt(options.id) - 1,
       dry_id:app.globalData.dry_id,
-      experience_amount: app.globalData.experience_amount,
       level:wx.getStorageSync('level')
     });
   },

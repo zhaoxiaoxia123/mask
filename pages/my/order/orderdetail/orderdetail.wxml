@@ -20,7 +20,7 @@
       <text>冻龄智美</text>
     </view>
     <!--bindtap绑定事件-->
-    <block wx:key="*this" wx:for="{{items[0].products}}" wx:for-item="item">
+    <block wx:key="index" wx:for="{{items[0].products}}" wx:for-item="item">
       <block wx:if="{{item.frozeno_is_gift != 1 || item.category_id == dry_id}}">
         <view class='list' data-id="{{item.category_id}}" bindtap="productDetail">
           <view class='list-left'>
@@ -39,7 +39,7 @@
             <view class='abstract'>{{item.frozeno_introduction}}</view>
 
             <block wx:if="{{item.frozeno_is_gift == 1 && item.category_id == dry_id}}">
-              <block wx:for="{{items[0].products}}" wx:key="*this" wx:for-item="g">
+              <block wx:for="{{items[0].products}}" wx:key="index" wx:for-item="g">
                 <view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">
                   <text>{{g.category_desc}}× 1</text>
                 </view>
@@ -132,9 +132,9 @@
       <!-- || items[0].frozeno_order_state == 2  7.29佳总确定暂时取消 -->
       <view class='push' bindtap="cancelOrder" wx:if="{{items[0].frozeno_order_state == 1}}">取消订单</view>
       <view class='push push-active' bindtap="confirm" wx:if="{{items[0].frozeno_order_state == 3}}">确认收货</view>
-      <!-- <view class='push push-active' bindtap="payOrder" data-id="{{items[0].o_id}}" wx:if="{{items[0].frozeno_order_state == 1 && isClick}}">付款</view>
-      <view class='push push-active' wx:if="{{items[0].frozeno_order_state == 1 && !isClick}}">付款</view> -->
-      <view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view>
+      <view class='push push-active' bindtap="payOrder" data-id="{{items[0].o_id}}" wx:if="{{items[0].frozeno_order_state == 1 && isClick}}">付款</view>
+      <view class='push push-active' wx:if="{{items[0].frozeno_order_state == 1 && !isClick}}">付款</view>
+      <!-- <view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view> -->
     </view>
   </view>
 </view>

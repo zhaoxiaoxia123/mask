@@ -3,8 +3,8 @@
 	<view class="swiper pad">
 		<swiper class="slide-bolk" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
 			<!--滑块容器内只能有swiper-item组件，并且属性默认为item.属性名-->
-			<block wx:for="{{swipers}}" wx:key="*this">
-				<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this">
+			<block wx:for="{{swipers}}" wx:key="index">
+				<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="index">
 					<swiper-item>
 						<image src="{{item1}}" class="slide-image" />
 					</swiper-item>
@@ -19,7 +19,7 @@
       </view>
       <text>{{message}}~~</text>
     </view>
-		<block wx:for="{{post}}" wx:key="*this" wx:for-index="index">
+		<block wx:for="{{post}}" wx:key="index" wx:for-index="index">
 			<view class="cricle-box">
 				<view class="box-item">
 					<view class="img">
@@ -41,7 +41,7 @@
 								</block>
 							</block>
 							<block wx:if="{{item.img_url.length == 1}}">
-								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this">
+								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="index">
 									<view class="picture-1">
 										<image class="picture-img" mode="widthFix" data-src='{{item1.url}}' data-list="{{item.img_url}}" bindtap="imgYu" src='{{item1.url}}'></image>
 									</view>
@@ -49,7 +49,7 @@
 							</block>
 							<!-- 四张图片的时候显示 -->
 							<block wx:if="{{item.img_url.length == 4}}">
-								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="*this" wx:for-index="index">
+								<block wx:for="{{item.img_url}}" wx:for-item="item1" wx:key="index" wx:for-index="index">
 									<view style="width: 100px;height: 100px;overflow: hidden;margin-right: 10px;margin-bottom: 10px;">
 										<image class="picture-img" data-src='{{item1.url}}' data-list="{{item.img_url}}" bindtap="imgYu" src='{{item1.url_resize}}'></image>
 									</view>

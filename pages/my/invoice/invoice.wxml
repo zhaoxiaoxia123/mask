@@ -9,7 +9,7 @@
       <text>暂无发票地址~~</text>
     </view>
     <!--bindtap绑定事件-->
-    <view class='list  bg-box col-content size-titletwo' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
+    <view class='list  bg-box col-content size-titletwo' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="index" data-obj='{{item}}'>
       <view class='column' wx:if="{{fromPage == 'order'}}">
         <checkbox class='checkbox' data-index="{{index}}" data-value="{{item.invoice_id}}" bindtap="checkSendInvoice" checked="{{item.checked}}">选择</checkbox>
       </view>

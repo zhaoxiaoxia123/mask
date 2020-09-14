@@ -9,7 +9,7 @@
 
 	<view class='lists' wx:if="{{items.length > 0}}">
 		<!--bindtap绑定事件 bindtap='toDetail'-->
-		<view class="list-item" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
+		<view class="list-item" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="index" data-obj='{{item}}'>
 			<view class="list-box">
 				<view class='radio-group' wx:if="{{item.is_enough}}">
 					<radio color='#262626' data-id='{{index}}' bindtap='radiocon' checked='{{item.selected}}'></radio>
@@ -49,7 +49,7 @@
 				</view>
 			</view>
 			<block wx:if="{{item.category_id == dryId}}">
-				<block wx:for="{{gift}}" wx:key="*this" wx:for-item="g">
+				<block wx:for="{{gift}}" wx:key="index" wx:for-item="g">
 				<view class="gift">
 					<text>{{g.category_desc}}× 1</text>
 				</view>

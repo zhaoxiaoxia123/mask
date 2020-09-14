@@ -7,7 +7,7 @@
       <text>{{message}}~~</text>
     </view>
     <!--bindtap绑定事件-->
-    <view class='list bg-box col-content size-titletwo' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+    <view class='list bg-box col-content size-titletwo' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="index">
       <view class='column' wx:if="{{fromPage == 'order'}}">
         <checkbox class='checkbox' data-index="{{index}}" data-value="{{item.customer_addr_id}}" bindtap="checkSendAddress" checked="{{item.checked}}">选择</checkbox>
       </view>

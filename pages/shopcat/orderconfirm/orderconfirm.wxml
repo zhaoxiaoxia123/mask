@@ -22,7 +22,7 @@
 				<image src='../../img/dv.png'></image>
 			</view>
 		</view>
-		<view class='list-item' bindtap='toDetail' wx:key="*this" wx:for="{{items.products}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
+		<view class='list-item' bindtap='toDetail' wx:key="index" wx:for="{{items.products}}" wx:for-index="index" wx:for-item="item" data-obj='{{item}}'>
 			<view class="list-box">
 				<view class='list-left'>
 					<image src='{{item.product_image[0].image_url}}'></image>
@@ -42,7 +42,7 @@
 				</view>
 			</view>
 			<block wx:if="{{item.category_id == dryId}}">
-				<view wx:for="{{items.gift}}" wx:key="*this" wx:for-item="g1">
+				<view wx:for="{{items.gift}}" wx:key="index" wx:for-item="g1">
 					<view class="gift">
 						<text>{{g1.category_desc}}× 1</text>
 					</view>
@@ -202,7 +202,7 @@
 					<view>您还没有可用的优惠券</view>
 				</view>
 
-				<view class='column' wx:for="{{ticketList.ticket}}" wx:key="*this" wx:index="index"  data-id="{{index}}" bindtap="checkTicket">
+				<view class='column' wx:for="{{ticketList.ticket}}" wx:key="index" wx:index="index"  data-id="{{index}}" bindtap="checkTicket">
 					<view class="coupon-item">
 						<text class="coupon-hd">{{item.ticket_name}}(￥{{item.ticket_amount}})</text>
 						<text class="coupon-text" wx:if="{{item.ticket_type == 1}}">

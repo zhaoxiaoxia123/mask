@@ -35,7 +35,7 @@
       </view>
       <text>{{message}}~~</text>
     </view>
-    <view class='integral-text' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="*this" data-obj='{{item}}'>
+    <view class='integral-text' wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="index" data-obj='{{item}}'>
       <view class='integral-title'>
         <text class='text-title'>{{item.log_title}}</text>
         <text class='text-date' wx:if="{{item.frozeno_is_entry == 2}}">待入账</text>
