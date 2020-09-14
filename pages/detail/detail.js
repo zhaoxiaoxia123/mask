@@ -396,7 +396,6 @@ Page({
       if(that.data.items.is_check_dry == 1){
         products += app.globalData.dry_id + ",1--";
       }
-      console.log('/pages/shopcat/orderconfirm/orderconfirm?products=' + products+'&isCheckDry='+that.data.items.is_check_dry);
       wx.navigateTo({
         url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
       })

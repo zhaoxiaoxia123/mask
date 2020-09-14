@@ -11,7 +11,7 @@
 			<!-- <text class="">2020-08-03 13:53</text> -->
 		</view>
 	</view>
-	<view class="lists" wx:for="{{orderList.products}}" wx:for-index="index" wx:for-item="item1" wx:key="*this">
+	<view class="lists" wx:for="{{orderList.products}}" wx:for-index="index" wx:for-item="item1" wx:key="index">
 		<block wx:if="{{item1.frozeno_is_gift != 1 || item1.category_id == dry_id}}">
 		<view class="list-item">
 			<view class="list-box">
@@ -32,7 +32,7 @@
 						</view>
 					</view>
 					<block wx:if="{{item1.frozeno_is_gift == 1 && item1.category_id == dry_id}}">
-						<block wx:for="{{orderList.products}}" wx:key="*this" wx:for-item="g">
+						<block wx:for="{{orderList.products}}" wx:key="index" wx:for-item="g">
 							<view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">
 								<text>{{g.category_desc}}× 1</text>
 							</view>

@@ -1,8 +1,8 @@
 <view class="service">
 	<view class='grade'>
 		<!-- <image class="grade-img" mode="widthFix" src="{{item[0].s_image_url}}"></image> -->
-		<block wx:for="{{items}}" wx:key="*this" wx:for-item="item">
-			<block wx:for="{{item.img_url}}" wx:key="*this" wx:for-item="item1">
+		<block wx:for="{{items}}" wx:key="index" wx:for-item="item">
+			<block wx:for="{{item.img_url}}" wx:key="index" wx:for-item="item1">
 				<image class="grade-img" mode="widthFix" src="{{item1}}" />
 			</block>
 		</block>

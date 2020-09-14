@@ -33,7 +33,6 @@ Page({
       products: options.products, //获取上一页传来的商品id和数量，如：1,2--3,4--15,2--
       dryId: app.globalData.dry_id
     });
-    console.log(that.data.products);
   },
 
   /**
@@ -176,18 +175,13 @@ Page({
             isCheckTicket:datas.ticket_list.ticket_check.check_key+1
           });
         }
-        // setTimeout(function() {
-        //   //计算商品总价（未减卡券可提现金额前的会员折扣价相加的总价）
-        //   that.sumProductTotalAmount(1);
-        // }, 2000);
       }
     };
     base.httpRequest(params);
   },
 
   //计算商品总价（未减卡券可提现金额前的会员折扣价相加的总价）
-  //num 1: 可查询卡券等信息   2：不调用查看卡券信息
-  sumProductTotalAmount: function(num) {
+  sumProductTotalAmount: function() {
     var pInfo = that.data.items.products;
     var productAmount = 0;
     for (var i = 0; i < pInfo.length; i++) {
@@ -196,13 +190,11 @@ Page({
     that.setData({
       payAmount: parseFloat(productAmount)//+parseInt(dryAm)
     });
-    if(num == 1){
-    }else{
-      //计算减去卡券金额后的实付款
-      that.subTicketAmount();
-      //商品总价减去可提现金额后价格
-      that.subBeanAmount();
-    }
+    //计算减去卡券金额后的实付款
+    that.subTicketAmount();
+    //商品总价减去可提现金额后价格
+    that.subBeanAmount();
+    
   },
   //是否查询卡券
   // isSelectTicket(){
@@ -332,7 +324,7 @@ Page({
             isCheckTicket:res.data.data.ticket_check.check_key+1
           });
           //计算减去卡券金额后的实付款
-          that.sumProductTotalAmount(2);
+          that.sumProductTotalAmount();
         }
       }
     };
@@ -364,7 +356,7 @@ Page({
           express_company: that.data.isCheckExpressCompany,
           customer_addr_id: (that.data.address ? that.data.address.customer_addr_id:0),
           invoice_id: 0,//that.data.invoice.invoice_id ? that.data.invoice.invoice_id:0,
-          use_point: 0,//that.data.usingPoint,
+          use_point: 0,
           rebate_amount: that.data.bean == undefined?0:that.data.bean,
           amount: that.data.payAmount
         };
@@ -459,7 +451,7 @@ Page({
       couponflexwindow: couponflexwindow
     });
     //ji算商品总价
-    that.sumProductTotalAmount(2);
+    that.sumProductTotalAmount();
   },
   
   PointNum: function(obj) {
@@ -494,7 +486,7 @@ Page({
     }else{
       that.closeBean();
       //计算减去卡券金额后的实付款
-      that.sumProductTotalAmount(2);
+      that.sumProductTotalAmount();
     }
   },
   onInputEvent(e) {

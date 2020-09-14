@@ -24,13 +24,11 @@ Page({
     rateAmount:0,
     customerInfo: [],
     finalSum: 0,   //使用积分后的实付款
-    usingPoint:0,   //使用积分值
     outTradeNo: '',    //此次支付的商户订单号
     setInter: '',   //存储计时器
     num: 30,   //记录订单失效时间  30*60 30分钟失效
     isClick:true,   //是否可以点击付款按钮
     dry_id:0,
-    experience_amount:0,
     level:0
   },
 
@@ -43,7 +41,6 @@ Page({
       orderId: options.order_id,
       fromPage: options.from_page,
       dry_id:app.globalData.dry_id,
-      experience_amount: app.globalData.experience_amount,
       level:wx.getStorageSync('level')
     });
 
@@ -205,14 +202,6 @@ Page({
           that.setData({
             items: datas
           });
-          console.log('that.data.items:----');
-          console.log(that.data.items[0].minute);
-          // if (that.data.items[0].minute){
-          //   that.setData({
-          //     items: datas
-          //   });
-          // }
-          console.log(that.data.items[0].minute);
           that.setData({
             num: that.data.items[0].minute
           });
@@ -248,12 +237,10 @@ Page({
   sumAmount: function (point, rateAmount, amount) {
     if (parseFloat(point) >= parseFloat(rateAmount)) {
     that.setData({
-      usingPoint: rateAmount,
       finalSum: parseFloat(amount) - parseFloat(rateAmount)
     });
   } else {
     that.setData({
-      usingPoint: point,
       finalSum: parseFloat(amount) - parseFloat(point)
     });
     }

@@ -20,8 +20,6 @@ Page({
     ftserviceflexwindow: false,
     dryInfos:[],
     gift:[],
-    // dryAmount:0,
-    // experience_amount:0,
     imgLoad:'',
     message:'',
     dryId:0,
@@ -34,7 +32,6 @@ Page({
     that = this;
     that.setData({
       isBack: false,
-      // experience_amount:app.globalData.experience_amount,
       dryId:app.globalData.dry_id
     });
   },
@@ -186,7 +183,6 @@ Page({
   jianFn: function(e) {
     var items = that.data.items;
     var id = e.currentTarget.dataset.id;
-    // if(items[id].discount_amount != that.data.experience_amount){
       if (items[id].product_count <= 1) {
         items[id].product_count = 1;
         if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
@@ -227,7 +223,6 @@ Page({
     var items = [];
     items = that.data.items; //获得items数组
     var id = e.currentTarget.dataset.id; // 获得wxml的data-id的值 data-id与dataset.id对应
-    // if(items[id].discount_amount != that.data.experience_amount){
       items[id].product_count = parseInt(items[id].product_count) + 1;
       if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
         items[id].is_enough = true;

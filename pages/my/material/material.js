@@ -210,9 +210,7 @@ Page({
     })
   },
   getMergePic:function(e){
-    let ind = e.currentTarget.dataset.index;　　　　　　//触发函数
-    console.log(!wx.getStorageSync('customerId'));
-
+    let ind = e.currentTarget.dataset.index;//触发函数
     if(!wx.getStorageSync('customerId')){
       wx.showToast({
         title: "请先登录",
@@ -221,7 +219,6 @@ Page({
       return false;
     }
     that.setDownloadClick(false);
-    // console.log(that.data.post[ind].xz_img_url.toString());
     wx.showToast({
       title: "开始保存素材",
       icon: "loading",
@@ -232,7 +229,6 @@ Page({
       img:that.data.post[ind].xz_img_url.toString(),
       code:that.data.code,
       source:"app"
-      // customer_id: wx.getStorageSync('customerId') ? wx.getStorageSync('customerId') : 0,
     };
     var params = {
       url: app.globalData.domainUrl,

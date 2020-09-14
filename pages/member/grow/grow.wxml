@@ -60,7 +60,7 @@
       </view>
       <text>{{message}}~~</text>
     </view>
-    <view class='integral-text' wx:for="{{items}}" wx:for-item="item" wx:key="*this">
+    <view class='integral-text' wx:for="{{items}}" wx:for-item="item" wx:key="index">
       <view class='integral-title'>
         <text class='text-title'>{{item.log_title?item.log_title:''}}</text>
         <text class='text-date'>{{item.created_at}}</text>

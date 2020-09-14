@@ -11,7 +11,7 @@
 	<view class='content'>
 		<view class="{{currentTab == 0 ? 'show':'hidden'}}">
 			<scroll-view>
-				<view class='news' wx:for="{{msgList}}" wx:for-index="index" wx:for-item="item" wx:key="*this">
+				<view class='news' wx:for="{{msgList}}" wx:for-index="index" wx:for-item="item" wx:key="index">
 					<text>{{item.description}}</text>
 					<view class='bottom'>
 						<text wx:if="{{item.type == 1}}">系統消息</text>

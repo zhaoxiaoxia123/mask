@@ -38,7 +38,6 @@ Page({
     if (options.shareBy) {
       wx.setStorageSync('shareBy', options.shareBy);
     }
-    console.log(wx.getStorageSync('shareBy'));
     if (wx.getStorageSync("isFirst")){
       that.setData({
         storeflexwindow: false
@@ -64,8 +63,6 @@ Page({
         //   });
         // }
       }
-    } else {
-      console.log("no scene");
     }
 
     //商品列表
@@ -217,14 +214,11 @@ Page({
    * ***/
   toDetail: function(e) {
     var product_id = e.currentTarget.dataset.obj.category_id;
-    // app.globalData.productId = product_id;
-    console.log(product_id)
     wx.navigateTo({
       url: '../detail/detail?id='+product_id,
     })
   },
   getProductList: function(param) { //获取商品列表
-    
     var params = {
       url: app.globalData.domainUrl,
       data:param,
