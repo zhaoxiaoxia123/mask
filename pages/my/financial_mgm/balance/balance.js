@@ -35,6 +35,9 @@ Page({
   onShow: function () {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
       base.loading(2000);
+      that.setData({
+        financeList:[]
+      });
       var param = {
         page_code: 'p007',
         type: "list"
