@@ -146,7 +146,7 @@
 .lists {
   padding: 10rpx 0rpx;
   box-sizing: border-box;
-  margin-bottom: 260rpx;
+  /* margin-bottom: 260rpx; */
 }
 
 .list1 {

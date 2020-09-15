@@ -23,13 +23,13 @@
 				<!-- <text class="balance-money-text">提现 ¥356.00</text> -->
 			</view>
 		</view>
-		<!-- <view class='search-no' style="display:none;">
+		<view class='search-no' wx:if="{{item.finance_list.length == 0}}">
 			<view>
-				<image class='scimg' src='../../../images/wu.png'></image>
+				<image class='scimg' src='../../../img/wu.png'></image>
 			</view>
 			<text>您还没有相关信息~~</text>
-		</view> -->
-		<view class="list">
+		</view>
+		<view class="list" wx:if="{{item.finance_list.length > 0}}">
       <block wx:key="index" wx:for="{{item.finance_list}}" wx:for-item="item1">
         <view class="item" bindtap='financial' data-id="{{item1.log_id}}" wx:if="{{item1.frozeno_event_trend == 2}}">
           <view class="item-title">
