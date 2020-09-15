@@ -253,19 +253,7 @@ Page({
       url: '../my/service/service'
     })
   },
-  deposit: function (e) {
-    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-      wx.navigateTo({
-        url: '../my/deposit/deposit'
-      })
-    }else{
-      wx.showModal({
-        title: '提示',
-        content: '请完成授权后再点击查看',
-        showCancel: false
-      });
-    }
-  },
+
   setting: function (e) {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.navigateTo({
