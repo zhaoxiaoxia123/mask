@@ -54,7 +54,8 @@ Page({
       });
     } else{
       that.setData({
-        isLogin: true
+        isLogin: true,
+        items:[]
       });
     }
   },
