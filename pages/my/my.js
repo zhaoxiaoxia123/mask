@@ -92,8 +92,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    wx.showToast({ title: res, icon: 'success', duration: 2000 });
-    if (res.from === 'button') {
+    if (res.from === "button") {
       // 来自页面内转发按钮
       return {
         title: '邀请好友成为会员',
@@ -101,9 +100,11 @@ Page({
         // desc: '描述',  // 看你需要不需要，不需要不加
         imageUrl: app.globalData.shareImg,
         success: (res) => {
+          console.log(res);
           wx.showToast({ title: res, icon: 'success', duration: 2000 })
         },
         fail: (res) => {
+          console.log(res);
           wx.showToast({ title: res, icon: 'success', duration: 2000 })
         }
       }

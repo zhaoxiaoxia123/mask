@@ -248,13 +248,13 @@ Page({
           wx.hideLoading();
           wx.clearStorage({
             complete: (res) => {
-            wx.showToast({
-              title: "即将退出登录",
-              icon: "loading"
-            })
-            wx.switchTab({
-              url: '/pages/home/home',
-            })
+              wx.showToast({
+                title: "即将退出登录",
+                icon: "loading"
+              })
+              wx.switchTab({
+                url: '/pages/home/home',
+              })
             },
           })
         }else{

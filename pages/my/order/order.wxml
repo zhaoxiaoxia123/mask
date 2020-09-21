@@ -18,7 +18,6 @@
       </view>
     </view>
   </view>
-
   <view class='content page-pd size-text col-content'>
     <!-- class="{{currentTab == 4 ? 'show':'hidden'}}" -->
     <view>
@@ -60,7 +59,7 @@
                       <view class='right-text'>￥{{item1.product_amount}}</view>
                       <view class='piece'>× {{item1.product_count}}</view>
                     </view>
-                    <view class='column'>
+                    <view class='column' wx:if="{{item1.product_amount != item1.product_before_amount}}">
                       <text class='decoration'>￥{{item1.product_before_amount}}</text>
                     </view>
                     <view class='column col-content'>

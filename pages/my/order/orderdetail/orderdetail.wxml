@@ -33,7 +33,7 @@
 							</view>
 							<view class='piece'>× {{item.product_count}}</view>
 						</view>
-						<text class='decoration'>￥{{item.product_before_amount}}</text>
+						<text class='decoration' wx:if="{{item.product_amount != item.product_before_amount}}">￥{{item.product_before_amount}}</text>
 						<view class='abstract'>{{item.frozeno_introduction}}</view>
 						<block wx:if="{{item.frozeno_is_gift == 1 && item.category_id == dry_id}}">
 							<block wx:for="{{items[0].products}}" wx:key="index" wx:for-item="g">
@@ -133,3 +133,4 @@
 		</view>
 	</view>
 </view>
+

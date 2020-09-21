@@ -243,9 +243,7 @@ Page({
     that.setData({
       finalSum: parseFloat(amount) - parseFloat(point)
     });
-    }
-    // console.log('finalSum:----------');
-    // console.log(that.data.finalSum);
+  }
 },
 
 //取消订单
