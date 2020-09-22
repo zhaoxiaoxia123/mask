@@ -6,7 +6,6 @@
 			<image class='scimg' src='{{imgLoad}}'></image>
 		</view>
 	</view>
-
 	<view class='lists' wx:if="{{items.length > 0}}">
 		<!--bindtap绑定事件 bindtap='toDetail'-->
 		<view class="list-item" wx:for="{{items}}" wx:for-index="index" wx:for-item="item" wx:key="index" data-obj='{{item}}'>
@@ -28,7 +27,7 @@
 							<text class="size-money ">{{item.discount_amount_before}}</text>
 							<text >.{{item.discount_amount_after?item.discount_amount_after:"00"}}</text>
 						</view>
-						<view class="detail-item-money-price">
+						<view class="detail-item-money-price" wx:if="{{item.discount_amount != item.frozeno_amount}}">
 							<text class="decoration">￥{{item.frozeno_amount}}</text>
 						</view>
 					</view>

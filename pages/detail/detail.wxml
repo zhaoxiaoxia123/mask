@@ -21,7 +21,7 @@
 							<text class="size-money ">{{items.discount_amount_before}}</text>
 							<text>.{{items.discount_amount_after?items.discount_amount_after:"00"}}</text>
 						</view>
-						<view class="detail-item-money-price">
+						<view class="detail-item-money-price" wx:if="{{items.discount_amount != items.frozeno_amount}}">
 							<text class="decoration">( 市场价：</text>
 							<text class="decoration">￥{{items.frozeno_amount}}</text>
 							<text class="decoration">)</text>

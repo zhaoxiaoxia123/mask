@@ -243,9 +243,7 @@ Page({
     that.setData({
       finalSum: parseFloat(amount) - parseFloat(point)
     });
-    }
-    // console.log('finalSum:----------');
-    // console.log(that.data.finalSum);
+  }
 },
 
 //取消订单
@@ -478,10 +476,5 @@ Page({
         title: "请先完成授权并登录"
       });
     }
-  },
-  goDepositPost:function(){
-    wx.navigateTo({
-      url: '/pages/post/post?type=22'
-    })
   },
 })

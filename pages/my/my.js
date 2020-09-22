@@ -42,22 +42,20 @@ Page({
         selected: 3
       })
     }
-    
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       var param = {
         page_code:'p004',
         type:"mainCustomer",
-        has_order_count: true,
-        has_deposit:true
+        has_order_count: true
       };
       that.getUserDetail(param);
-
       that.setData({
         isLogin: false
       });
     } else{
       that.setData({
-        isLogin: true
+        isLogin: true,
+        items:[]
       });
     }
   },
@@ -94,8 +92,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    wx.showToast({ title: res, icon: 'success', duration: 2000 });
-    if (res.from === 'button') {
+    if (res.from === "button") {
       // 来自页面内转发按钮
       return {
         title: '邀请好友成为会员',
@@ -103,9 +100,11 @@ Page({
         // desc: '描述',  // 看你需要不需要，不需要不加
         imageUrl: app.globalData.shareImg,
         success: (res) => {
+          console.log(res);
           wx.showToast({ title: res, icon: 'success', duration: 2000 })
         },
         fail: (res) => {
+          console.log(res);
           wx.showToast({ title: res, icon: 'success', duration: 2000 })
         }
       }
@@ -142,10 +141,17 @@ Page({
   },
   // 财务管理
   financial: function (e) {
-    // console.log(e)
-    wx.navigateTo({
-      url: '../my/financial_mgm/financial_mgm',
-    })
+    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
+      wx.navigateTo({
+        url: '../my/financial_mgm/financial_mgm',
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请完成授权后再点击查看',
+        showCancel: false
+      });
+    }
   },
   //获取用户信息 ： 积分 卡券数量 等
   getUserDetail: function (param){
@@ -253,19 +259,7 @@ Page({
       url: '../my/service/service'
     })
   },
-  deposit: function (e) {
-    if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
-      wx.navigateTo({
-        url: '../my/deposit/deposit'
-      })
-    }else{
-      wx.showModal({
-        title: '提示',
-        content: '请完成授权后再点击查看',
-        showCancel: false
-      });
-    }
-  },
+
   setting: function (e) {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.navigateTo({
@@ -307,5 +301,4 @@ Page({
       });
     }
   },
-  
 })

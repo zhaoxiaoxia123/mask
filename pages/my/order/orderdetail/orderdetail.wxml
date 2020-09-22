@@ -1,140 +1,136 @@
 <view>
-  <view class='lists size-text col-content'>
-    <!--待付款时显示-->
-    <view class='wait col-title' wx:if="{{num <= 30 && items[0].frozeno_order_state == 1}}">
-      <text class='wait-text'>等待买家付款</text>
-      <text class='wait-text'>请在{{num}}分钟内支付</text>
-    </view>
-
-    <!--个人信息-->
-    <view class='block bg-box'>
-      <view class='column1'>
-        <view class='name'>收货人：{{items[0].address.name}}</view>
-        <view class='phone'>{{items[0].address.phone}}</view>
-      </view>
-      <view class='column1'>
-        <view class='address'>{{items[0].address.province}} {{items[0].address.city}} {{items[0].address.area}} {{items[0].address.address}}</view>
-      </view>
-    </view>
-    <view class='order'>
-      <text>冻龄智美</text>
-    </view>
-    <!--bindtap绑定事件-->
-    <block wx:key="index" wx:for="{{items[0].products}}" wx:for-item="item">
-      <block wx:if="{{item.frozeno_is_gift != 1 || item.category_id == dry_id}}">
-        <view class='list' data-id="{{item.category_id}}" bindtap="productDetail">
-          <view class='list-left'>
-            <image src='{{item.product_image?item.product_image[0].image_url:""}}'></image>
-          </view>
-          <view class='list-right'>
-            <view class='right-text'>{{item.category_desc}}</view>
-            <view class='item'>
-              <view class='rmb-price'>
-                <text>￥</text>
-                <text class="sale-price">{{item.product_amount}}</text>
-              </view>
-              <view class='piece'>× {{item.product_count}}</view>
-            </view>
-            <text class='decoration'>￥{{item.product_before_amount}}</text>
-            <view class='abstract'>{{item.frozeno_introduction}}</view>
-
-            <block wx:if="{{item.frozeno_is_gift == 1 && item.category_id == dry_id}}">
-              <block wx:for="{{items[0].products}}" wx:key="index" wx:for-item="g">
-                <view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">
-                  <text>{{g.category_desc}}× 1</text>
-                </view>
-              </block>
-            </block>
-          </view>
-        </view>
-      </block>
-    </block>
-    <view class='bg-box'>
-      <view class='block-pa space-between'>
-        <text>商品总价</text>
-        <text>￥{{items[0].product_total_amount}}</text>
-      </view>
-      <view class='block-pa space-between' wx:if="{{items[0].frozeno_customer_discount > 0}}">
-        <text>优惠</text>
-        <text>￥{{items[0].customer_discount_amount}}</text>
-      </view>
-      <view class='block-pa space-between'>
-        <text>运费</text>
-        <text>+￥0.00</text>
-      </view>
-      <view class='block-pa space-between'>
-        <text>优惠券</text>
-        <text>-￥{{items[0].ticket_amount?items[0].ticket_amount:'0.00'}}</text>
-      </view>
-      <view class='block-pa space-between'>
-        <text>抵扣现金</text>
-        <text>-￥{{items[0].frozeno_rebate_amount?items[0].frozeno_rebate_amount:'0.00'}}</text>
-      </view>
-      <view class='block-pa space-between'>
-        <view>实付款（含运费）</view>
-        <view class='sale rmb-price'>
-          <text>￥</text>
-          <text class="sale-price">{{items[0].frozeno_order_amount}}</text>
-        </view>
-      </view>
-    </view>
-
-    <!--下单信息-->
-    <view class='list1 bg-box' style='margin-top:15rpx;'>
-      <view class='time'>订单编号：
-        <text class='time-text'>{{items[0].o_order}}</text>
-        <text class='time-copy' wx:if="{{items[0].o_order}}" data-code="{{items[0].o_order}}" bindtap="copyInfo">复制</text>
-      </view>
-      <view class='time'>支付方式：
-        <text class='time-text'>微信</text>
-      </view>
-      <view class='time'>下单时间：
-        <text class='time-text'>{{items[0].created_at?items[0].created_at:""}}</text>
-      </view>
-      <view class="time {{items[0].has_dry_deposit != 1?'page-bottom':''}}">发货时间：
-        <text class='time-text'>{{items[0].frozeno_send_time?items[0].frozeno_send_time:""}}</text>
-      </view>
-
-      <!-- <view class='time'>物流公司：
+	<view class='lists size-text col-content'>
+		<!--待付款时显示-->
+		<view class='wait col-title' wx:if="{{num <= 30 && items[0].frozeno_order_state == 1}}">
+			<text class='wait-text'>等待买家付款</text>
+			<text class='wait-text'>请在{{num}}分钟内支付</text>
+		</view>
+		<!--个人信息-->
+		<view class='block bg-box'>
+			<view class='column1'>
+				<view class='name'>收货人：{{items[0].address.name}}</view>
+				<view class='phone'>{{items[0].address.phone}}</view>
+			</view>
+			<view class='column1'>
+				<view class='address'>{{items[0].address.province}} {{items[0].address.city}} {{items[0].address.area}} {{items[0].address.address}}</view>
+			</view>
+		</view>
+		<view class='order'>
+			<text>冻龄智美</text>
+		</view>
+		<block wx:key="index" wx:for="{{items[0].products}}" wx:for-item="item">
+			<block wx:if="{{item.frozeno_is_gift != 1 || item.category_id == dry_id}}">
+				<view class='list' data-id="{{item.category_id}}" bindtap="productDetail">
+					<view class='list-left'>
+						<image src='{{item.product_image?item.product_image[0].image_url:""}}'></image>
+					</view>
+					<view class='list-right'>
+						<view class='right-text'>{{item.category_desc}}</view>
+						<view class='item'>
+							<view class='rmb-price'>
+								<text>￥</text>
+								<text class="sale-price">{{item.product_amount}}</text>
+							</view>
+							<view class='piece'>× {{item.product_count}}</view>
+						</view>
+						<text class='decoration' wx:if="{{item.product_amount != item.product_before_amount}}">￥{{item.product_before_amount}}</text>
+						<view class='abstract'>{{item.frozeno_introduction}}</view>
+						<block wx:if="{{item.frozeno_is_gift == 1 && item.category_id == dry_id}}">
+							<block wx:for="{{items[0].products}}" wx:key="index" wx:for-item="g">
+								<view wx:if="{{g.frozeno_is_gift == 1 && g.category_id != dry_id}}">
+									<text>{{g.category_desc}}× 1</text>
+								</view>
+							</block>
+						</block>
+					</view>
+				</view>
+			</block>
+		</block>
+		<view class='bg-box'>
+			<view class='block-pa space-between'>
+				<text>商品总价</text>
+				<text>￥{{items[0].product_total_amount}}</text>
+			</view>
+			<view class='block-pa space-between' wx:if="{{items[0].frozeno_customer_discount > 0}}">
+				<text>优惠</text>
+				<text>￥{{items[0].customer_discount_amount}}</text>
+			</view>
+			<view class='block-pa space-between'>
+				<text>运费</text>
+				<text>+￥0.00</text>
+			</view>
+			<view class='block-pa space-between'>
+				<text>优惠券</text>
+				<text>-￥{{items[0].ticket_amount?items[0].ticket_amount:'0.00'}}</text>
+			</view>
+			<view class='block-pa space-between'>
+				<text>抵扣现金</text>
+				<text>-￥{{items[0].frozeno_rebate_amount?items[0].frozeno_rebate_amount:'0.00'}}</text>
+			</view>
+			<view class='block-pa space-between'>
+				<view>实付款（含运费）</view>
+				<view class='sale rmb-price'>
+					<text>￥</text>
+					<text class="sale-price">{{items[0].frozeno_order_amount}}</text>
+				</view>
+			</view>
+		</view>
+		<!--下单信息-->
+		<view class='list1 bg-box' style='margin-top:15rpx;'>
+			<view class='time'>订单编号：
+				<text class='time-text'>{{items[0].o_order}}</text>
+				<text class='time-copy' wx:if="{{items[0].o_order}}" data-code="{{items[0].o_order}}" bindtap="copyInfo">复制</text>
+			</view>
+			<view class='time'>支付方式：
+				<text class='time-text'>微信</text>
+			</view>
+			<view class='time'>下单时间：
+				<text class='time-text'>{{items[0].created_at?items[0].created_at:""}}</text>
+			</view>
+			<view class="time {{! items[0].apply_detail?'page-bottom':''}}">
+      发货时间：
+				<text class='time-text'>{{items[0].frozeno_send_time?items[0].frozeno_send_time:""}}</text>
+			</view>
+			<!-- <view class='time'>物流公司：
 				<text class='time-text'>{{items[0].frozeno_express_company?items[0].frozeno_express_company:''}}</text>
 			</view>
 			<view class='time'>快递单号：
 				<text class='time-text'>{{items[0].frozeno_express_code?items[0].frozeno_express_code:''}}</text>
 				<text class='time-copy' wx:if="{{items[0].frozeno_express_code}}" data-code="{{items[0].frozeno_express_code}}" bindtap="copyInfo">复制</text>
 			</view> -->
-    </view>
-    <!--售后信息-->
-    <view class='list1 bg-box' style='margin-top:15rpx;' wx:if="{{items[0].apply_detail}}">
-      <view class='time'>
-        <text>售后信息</text>
-      </view>
-      <view class='time'>申请时间：
-        <text class='time-text'>{{items[0].apply_detail.apply_date}}</text>
-      </view>
-      <!-- <view class='time'>售后编号：
+		</view>
+		<!--售后信息-->
+		<view class='list1 bg-box' style='margin-top:15rpx;' wx:if="{{items[0].apply_detail}}">
+			<view class='time'>
+				<text>售后信息</text>
+			</view>
+			<view class='time'>申请时间：
+				<text class='time-text'>{{items[0].apply_detail.apply_date}}</text>
+			</view>
+			<!-- <view class='time'>售后编号：
         <text class='time-text'>654646464654544</text>
       </view> -->
-      <!-- 退款  退款中   已退款 部分退款 处理中  已完成  拒绝退款 -->
-      <view class='time'>状态：
-        <text class='time-text' wx:if="{{items[0].frozeno_is_verify == 1}}">退款中</text>
-        <text class='time-text' wx:if="{{items[0].frozeno_is_verify == 2}}">已退款</text>
-        <text class='time-text' wx:if="{{items[0].frozeno_is_verify == 3}}">已拒绝</text>
-      </view>
-      <view class='time'>完成时间：
-        <text class='time-text'>{{items[0].apply_detail.handle_date}}</text>
-      </view>
-    </view>
-  </view>
+			<!-- 退款  退款中   已退款 部分退款 处理中  已完成  拒绝退款 -->
+			<view class='time'>状态：
+				<text class='time-text' wx:if="{{items[0].frozeno_is_verify == 1}}">退款中</text>
+				<text class='time-text' wx:if="{{items[0].frozeno_is_verify == 2}}">已退款</text>
+				<text class='time-text' wx:if="{{items[0].frozeno_is_verify == 3}}">已拒绝</text>
+			</view>
+			<view class='time page-bottom'>完成时间：
+				<text class='time-text'>{{items[0].apply_detail.handle_date}}</text>
+			</view>
+		</view>
+	</view>
 
-
-  <view class="bottom-button">
-    <view class='push-button ma-button'>
-      <!-- || items[0].frozeno_order_state == 2  7.29佳总确定暂时取消 -->
-      <view class='push' bindtap="cancelOrder" wx:if="{{items[0].frozeno_order_state == 1}}">取消订单</view>
-      <view class='push push-active' bindtap="confirm" wx:if="{{items[0].frozeno_order_state == 3}}">确认收货</view>
-      <view class='push push-active' bindtap="payOrder" data-id="{{items[0].o_id}}" wx:if="{{items[0].frozeno_order_state == 1 && isClick}}">付款</view>
-      <view class='push push-active' wx:if="{{items[0].frozeno_order_state == 1 && !isClick}}">付款</view>
-      <!-- <view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view> -->
-    </view>
-  </view>
+	<view class="bottom-button">
+		<view class='push-button ma-button'>
+			<!-- || items[0].frozeno_order_state == 2  7.29佳总确定暂时取消 -->
+			<view class='push' bindtap="cancelOrder" wx:if="{{items[0].frozeno_order_state == 1}}">取消订单</view>
+			<view class='push push-active' bindtap="confirm" wx:if="{{items[0].frozeno_order_state == 3}}">确认收货</view>
+			<view class='push push-active' bindtap="payOrder" data-id="{{items[0].o_id}}" wx:if="{{items[0].frozeno_order_state == 1 && isClick}}">付款</view>
+			<view class='push push-active' wx:if="{{items[0].frozeno_order_state == 1 && !isClick}}">付款</view>
+			<!-- <view class='push push-active' data-id="{{items[0].o_id}}" data-amount="{{items[0].frozeno_order_amount}}" bindtap="testPayAfter" wx:if="{{items[0].frozeno_order_state == 1}}">付款</view> -->
+		</view>
+	</view>
 </view>
+

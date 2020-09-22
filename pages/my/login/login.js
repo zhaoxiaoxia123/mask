@@ -316,8 +316,8 @@ Page({
     wx.setStorageSync('openid', datas.frozeno_openid);
     wx.setStorageSync('unionid', datas.frozeno_unionid);
     wx.setStorageSync('token', datas.token);
-    if(datas.frozeno_dealer_number){
-      wx.setStorageSync('memberNo', datas.frozeno_dealer_number);  //会员号
+    if(datas.c_number){
+      wx.setStorageSync('memberNo', datas.c_number);  //会员号
       wx.setStorageSync('level', datas.frozeno_level);  //等级
     }
     that.setData({

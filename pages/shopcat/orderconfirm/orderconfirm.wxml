@@ -34,7 +34,7 @@
 						<text class="size-money ">{{item.discount_amount_before}}</text>
 						<text>.{{item.discount_amount_after?item.discount_amount_after:"00"}}</text>
 					</view>
-					<text class='decoration'>￥{{item.frozeno_amount}}</text>
+					<text class='decoration' wx:if="{{item.discount_amount != item.frozeno_amount}}">￥{{item.frozeno_amount}}</text>
 					<view class='item'>
 						<view class='abstract'>{{item.frozeno_introduction}}</view>
 						<view class='piece'>× {{item.join_product_count}}</view>
