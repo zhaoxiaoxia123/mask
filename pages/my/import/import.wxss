@@ -1,0 +1,53 @@
+/* pages/my/import/import.wxss */
+page{
+  background:#f5f5f5;
+}
+.import-image{
+  margin-bottom:30rpx;
+}
+.import-image-img{
+  width:100%;
+}
+.import-box{
+  background:#fff;
+  padding:20rpx 0;
+  margin-bottom:120rpx;
+}
+
+.import-box-hd{
+  font-size:1.4rem;
+  font-weight: bold;
+  padding:0 0 20rpx 20rpx; 
+}
+.import-item-image{
+  width:100rpx;
+  height:100rpx;
+}
+.import-box-item{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.import-item{
+  background:#f6f6f5;
+  width:42%;
+  border-radius: 10rpx;
+  margin:10rpx;
+  display: flex;
+  padding:30rpx 20rpx;
+  min-height:200rpx;
+}
+.import-ite-active{
+  background:#e4e4e4;
+}
+.import-item-right{
+  padding-left:20rpx;
+}
+.import-ti{
+  font-size:1.2rem;
+  font-weight: bold;
+}
+.import-text{
+  padding-top:10rpx;
+  color:#909090;
+}

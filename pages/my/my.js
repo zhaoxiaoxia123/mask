@@ -259,7 +259,12 @@ Page({
       url: '../my/service/service'
     })
   },
-
+  // 设置导入仪
+  import: function (e) {
+    wx.navigateTo({
+      url: '../my/import/import'
+    })
+  },
   setting: function (e) {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.navigateTo({

@@ -1,0 +1,55 @@
+<!--pages/my/import/import.wxml-->
+<view>
+
+  <view class="import-image">
+    <image mode="widthFix" src='../../img/Import@2x.png' class="import-image-img" />
+  </view>
+
+  <view class="import-box">
+    <view class="import-box-hd">快速设置通道</view>
+
+    <view class="import-box-item">
+    <!--当前状态 import-ite-active -->
+      <view class="import-item">
+        <view class="import-item-left">
+          <image  src='../../img/icon1@2x.png' class="import-item-image" />
+        </view>
+        <view class="import-item-right">
+          <view class="import-ti">保湿设置</view>
+          <view class="import-text">玻尿酸等保湿精华</view>
+        </view>
+      </view>
+      <view class="import-item import-ite-active">
+        <view class="import-item-left">
+          <image  src='../../img/icon2@2x.png' class="import-item-image" />
+        </view>
+        <view class="import-item-right">
+          <view class="import-ti">美白设置</view>
+          <view class="import-text">以维生素C，谷胱甘 肽和传明酸等精华</view>
+        </view>
+      </view>
+
+      <view class="import-item">
+        <view class="import-item-left">
+          <image  src='../../img/icon3@2x.png' class="import-item-image" />
+        </view>
+        <view class="import-item-right">
+          <view class="import-ti">紧致设置</view>
+          <view class="import-text">主要成分胶原蛋白</view>
+        </view>
+      </view>
+
+      <view class="import-item">
+        <view class="import-item-left">
+          <image  src='../../img/icon4@2x.png' class="import-item-image" />
+        </view>
+        <view class="import-item-right">
+          <view class="import-ti">舒敏设置</view>
+          <view class="import-text">甘草酸二甲、CBD （大麻二酚）</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</view>

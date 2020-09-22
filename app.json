@@ -29,7 +29,9 @@
     "pages/my/financial_mgm/bank_acc/bank_acc",
     "pages/my/financial_mgm/add_bank_acc/add_bank_acc",
     "pages/my/financial_mgm/financial/financial",
-    "pages/my/material/material"
+    "pages/my/material/material",
+    "pages/my/import/import"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -61,6 +61,15 @@
   </view>
 
   <view class='lists bg-box col-content size-titletwo'>
+    <view class='list-wap' bindtap='import'>
+      <view class='left'>
+        <image class='icon40' src='../img/icon5x.png'></image>
+        <text>导入仪设置</text>
+      </view>
+      <view class='right'>
+        <image src='../img/dv.png'></image>
+      </view>
+    </view>
     <view class='list-wap' bindtap='coupon'>
       <view class='left'>
         <image class='icon40' src='../img/invoice.png'></image>
