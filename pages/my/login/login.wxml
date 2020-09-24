@@ -4,17 +4,6 @@
     <view class="timg">
       <image class="" src="../../img/frozen.png"></image>
     </view>
-    <!-- <view>
-      <checkbox-group>
-        <label class="checkbox">
-          <checkbox color='#333' catchtap="checkboxChange" checked="{{isShareBy}}" />
-        </label>
-      </checkbox-group>
-      是否需要填写邀请码</view>
-    <view >邀请码为：<input class="use" placeholder='请输入邀请码' bindinput="setShareByInput" value='{{shareBy}}'></input></view> -->
-    <!-- <view class="t2">
-      <input class="t2-use" placeholder='有邀请码的请输入邀请码' bindinput="setShareByInput" value='{{shareBy}}'></input>
-    </view> -->
     <view class="login-button">
       <button class="login-bt bcolor-golden" style="width: 100%;" lang="zh_CN" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:if="{{get_phone_info}}">手机号一键登录</button>
       <!-- <button class="login-bt bcolor-golden" style="width: 100%;" lang="zh_CN" wx:if="{{!isClick}}">手机号一键登录</button> -->
