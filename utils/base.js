@@ -87,7 +87,7 @@ function getTokenFromServer(params,callBack) {
             method: 'POST',
             data: {
               page_code:'p010',
-              code: resc.code,
+              code: r.code,
               type:'refresh',
               encryptedData:res.encryptedData, 
               iv:res.iv,

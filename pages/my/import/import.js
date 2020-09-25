@@ -86,7 +86,9 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //打开蓝牙适配器
   openBluetoothAdapter() {
+    //蓝牙初始化
     wx.openBluetoothAdapter({
       success: (res) => {
         console.log('openBluetoothAdapter success', res)
@@ -104,12 +106,14 @@ Page({
       }
     })
   },
+  //2.适配器打开后可以开始搜索蓝牙设备了
   startBluetoothDevicesDiscovery() {
     if (that._discoveryStarted) {
       return
     }
     that._discoveryStarted = true
     wx.startBluetoothDevicesDiscovery({
+//   services: [],   //sevices里不要填参数，要不然只能搜索特定的设备
       allowDuplicatesKey: true,
       success: (res) => {
         console.log('startBluetoothDevicesDiscovery success', res)
@@ -117,6 +121,7 @@ Page({
       },
     })
   },
+  //监听寻找到新设备的事件
   onBluetoothDeviceFound() {
     wx.onBluetoothDeviceFound((res) => {
       res.devices.forEach(device => {
@@ -151,6 +156,7 @@ Page({
         that.getBLEDeviceServices(deviceId)
       }
     })
+    //停止搜寻附近的蓝牙外围设备。搜索到需要设备时或者连接时候停止搜索
     that.stopBluetoothDevicesDiscovery()
   },
 
@@ -193,17 +199,21 @@ Page({
             that.writeBLECharacteristicValue()
           }
           if (item.properties.notify || item.properties.indicate) {
+            //开启notify并读取蓝牙发过来的数据，开启这个后我们就能实时获取蓝牙发过来的值了
             wx.notifyBLECharacteristicValueChange({
               deviceId,
               serviceId,
               characteristicId: item.uuid,
               state: true,
+              success: function (resNotify) {
+                console.log('notifyBLECharacteristicValueChange success', resNotify.errMsg)
+              }
             })
           }
         }
       },
-      fail(res) {
-        console.error('getBLEDeviceCharacteristics', res)
+      fail(resFail) {
+        console.error('getBLEDeviceCharacteristics', resFail)
       }
     })
     // 操作之前先监听，保证第一时间获取数据
