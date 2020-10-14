@@ -91,13 +91,11 @@ Page({
     //蓝牙初始化
     wx.openBluetoothAdapter({
       success: (res) => {
-        console.log('openBluetoothAdapter success', res)
         that.startBluetoothDevicesDiscovery()
       },
       fail: (res) => {
         if (res.errCode === 10001) {
           wx.onBluetoothAdapterStateChange(function (res) {
-            console.log('onBluetoothAdapterStateChange', res)
             if (res.available) {
               that.startBluetoothDevicesDiscovery()
             }
@@ -116,7 +114,6 @@ Page({
 //   services: [],   //sevices里不要填参数，要不然只能搜索特定的设备
       allowDuplicatesKey: true,
       success: (res) => {
-        console.log('startBluetoothDevicesDiscovery success', res)
         that.onBluetoothDeviceFound()
       },
     })
@@ -179,7 +176,6 @@ Page({
       deviceId,
       serviceId,
       success: (res) => {
-        console.log('getBLEDeviceCharacteristics success', res.characteristics)
         for (let i = 0; i < res.characteristics.length; i++) {
           let item = res.characteristics[i]
           if (item.properties.read) {
@@ -213,7 +209,6 @@ Page({
         }
       },
       fail(resFail) {
-        console.error('getBLEDeviceCharacteristics', resFail)
       }
     })
     // 操作之前先监听，保证第一时间获取数据
@@ -265,7 +260,6 @@ Page({
       characteristicId: that._characteristicId,
       value: buffer,
       success(res) {
-        console.log('写入数据成功', res.errMsg)
         that.readDevice(that.deviceId, that._serviceId, that._characteristicId)
       },
       fail(err) {
@@ -274,7 +268,6 @@ Page({
       complete() {
       }
     })
-    console.log(buffer);
   },
   closeBLEConnection() {
     wx.closeBLEConnection({
@@ -292,7 +285,6 @@ Page({
   readDevice(deviceId, serviceId, characteristicId) {
     // 必须在这里的回调才能获取
     wx.onBLECharacteristicValueChange(function (characteristic) {
-      console.log('characteristic value comed:', characteristic)
     })
     
     wx.readBLECharacteristicValue({

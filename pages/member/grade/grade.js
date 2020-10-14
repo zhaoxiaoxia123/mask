@@ -87,7 +87,6 @@ Page({
       data:param,
       sCallback: function (res) {
         var datas = res.data;
-        console.log(datas);
         that.setData({
           items: datas.data
         });

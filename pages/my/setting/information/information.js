@@ -22,7 +22,6 @@ Page({
     that.setData({
       endDate: nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1) + '-' + nowDate.getDate()
     });
-    console.log(that.data.endDate);
   },
 
   /**
@@ -82,43 +81,19 @@ Page({
   },
 
   bindDateChange: function (e) {
-    
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-    let value = e.detail.value;
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    let param = {
-      page_code: 'p004',
-      type:'updateCustomer',
-      birthday: value,
-      // customer_id: wx.getStorageSync('customerId')
-    };
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: param,
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     console.log(res);
-    //     var ret = res.data;
-    //     var datas = ret.data;
-    //     if (ret.code == 200) {
-    //       that.setData({
-    //         birthday: value
-    //       });
-    //     }
-    //   }
-    // })
-
+      let value = e.detail.value;
+      let param = {
+        page_code: 'p004',
+        type:'updateCustomer',
+        birthday: value,
+      };
       var params = {
         url: app.globalData.domainUrl,
         data:param,
         method:'POST',
         sCallback: function (res) {
-          console.log(res);
           var ret = res.data;
-          var datas = ret.data;
           if (ret.code == 200) {
             that.setData({
               birthday: value

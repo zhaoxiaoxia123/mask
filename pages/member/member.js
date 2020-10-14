@@ -134,9 +134,6 @@ Page({
       data:param,
       method:'get',
       sCallback: function (res) {
-        // callback && callback(data);
-        console.log(res);
-        
         if(res.data.code == 404){
           that.setData({
             items: [],
@@ -183,7 +180,6 @@ Page({
   },
 
   grade: function (e) {
-    console.log(e);
     wx.navigateTo({
       url: '../member/grade/grade'
     })
@@ -203,7 +199,6 @@ Page({
     }
   },
   integral: function (e) {
-    console.log(e);
     wx.navigateTo({
       url: '../member/integral/integral'
     })
@@ -227,13 +222,5 @@ Page({
     that.setData({
       show: isShow
     });
-    console.log(that.data.show);
-    // setTimeout(function () {
-    //   if (that.data.show){
-    //     that.setData({
-    //       hidden: !that.data.hidden
-    //     })
-    //   }
-    // }.bind(that), 1000)
   },
 })

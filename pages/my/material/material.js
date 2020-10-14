@@ -165,7 +165,6 @@ Page({
       data:param,
       sCallback: function (res) {
         var datas = res.data;
-        console.log(datas);
         if(num == 1){
           that.setData({
             swipers: datas.data
@@ -194,7 +193,6 @@ Page({
     wx.setClipboardData({
       data: content,
       success: function (res) {
-        console.log(res);
         wx.showToast({
           title: "复制成功",
           duration: 3000
@@ -236,11 +234,6 @@ Page({
       method:'GET',
       sCallback: function (res) {
         var datas = res.data;
-        console.log(datas);
-        // wx.showToast({
-        //   title: datas.message,
-        //   duration: 2000
-        // });
         that.setData({
           imgsDownload: datas.data.path
         });
@@ -276,7 +269,6 @@ Page({
         icon: "loading",
         duration: 1000*60
       });
-      // const downloadTask = 
       wx.downloadFile({
         url: that.data.imgsDownload[i], // 需下载的每一张图片路径
         success: function (res) {
@@ -284,7 +276,6 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: path,
           success(result) {
-            console.log("成功");
             if ((i+1) == that.data.imgsDownload.length) {
               wx.hideLoading();
               wx.showToast({
@@ -298,7 +289,6 @@ Page({
           fail(result) {
             wx.openSetting({
               success: (res) => {
-              console.log(res);
               }
             })
             that.setDownloadClick(true);
@@ -306,22 +296,10 @@ Page({
         });
         }
       });
-    //  downloadTask.onProgressUpdate((res) => {
-    //   if (res.progress === 100) {
-    //     this.setData({
-    //       progress: ''
-    //     });
-    //   } else {
-    //     this.setData({
-    //       progress: res.progress + '%'
-    //     });
-    //   }
-    // });
     }
   },
   // 我的
   myads: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '../circle_ads/my_ads/my_ads',
     })

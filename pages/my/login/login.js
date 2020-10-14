@@ -68,7 +68,6 @@ Page({
     wx.login({
       success: r => {
         app.globalData.code = r.code;
-        // that.phoneLogin(ency, iv);
       }
     })
   },
@@ -77,7 +76,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log('onHide');
     clearInterval(that.data.timer);
   },
 
@@ -85,7 +83,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log('unload');
     clearInterval(that.data.timer);
   },
 
@@ -128,68 +125,35 @@ Page({
       isUserInfoClick:value
     });
   },
-  // bindGetUserInfo: function () {
-  //   console.log('userInfo');
-  //   if (!app.globalData.code) {
-  //     wx.login({
-  //       success: r => {
-  //         app.globalData.code = r.code;  //无权，显示向用户获取权限
-  //         that.wxGetUserInfo();
-  //       }
-  //     })
-  //   }else{
-  //     that.wxGetUserInfo();
-  //   }
-  //   // } else {
-  //   //   wx.showToast({
-  //   //     icon: "none",
-  //   //     title: "请清除缓存重新登录"
-  //   //   });
-  //   // }
-  // },
-  // wxGetUserInfo:function(){
-    
   bindGetUserInfo: function () {
-    // wx.checkSession({
-    //   success: function (res) {
     wx.login({
       success: r => {
         app.globalData.code = r.code;  //无权，显示向用户获取权限
-      wx.getUserInfo({
-        withCredentials:true,
-        success: function (res) {
-          console.log("getUserInfo:-----");
-          console.log(res);
+        wx.getUserInfo({
+          withCredentials:true,
+          success: function (res) {
+            wx.setStorageSync('username', res.userInfo.nickName);
+            wx.setStorageSync('avatar', res.userInfo.avatarUrl);
 
-          wx.setStorageSync('username', res.userInfo.nickName);
-          wx.setStorageSync('avatar', res.userInfo.avatarUrl);
-
-          //获取openid，并更新到用户表
-          that.updateUserInfo({
-            page_code: 'p010',
-            type: 'wxLogin',
-            code: app.globalData.code,  //获取openid的code码
-            nickname: res.userInfo.nickName,
-            avatarUrl: res.userInfo.avatarUrl,
-            phone:wx.getStorageSync('phone')?wx.getStorageSync('phone'):'',
-            openid:wx.getStorageSync('openid')?wx.getStorageSync('openid'):'',
-            unionid:wx.getStorageSync('unionid')?wx.getStorageSync('unionid'):'',
-            sessionid:wx.getStorageSync('sessionKey')?wx.getStorageSync('sessionKey'):'',
-            encryptedData:res.encryptedData, 
-            iv:res.iv,
-            share_by: that.data.shareBy,
-          });
-        }
-      });
-    // },fail:function(){
-      // wx.login({
-      //   success: r => {
-      //     app.globalData.code = r.code;  //无权，显示向用户获取权限
-      //     that.bindGetUserInfo();
-      //   }
-      // });
-    }
-  })
+            //获取openid，并更新到用户表
+            that.updateUserInfo({
+              page_code: 'p010',
+              type: 'wxLogin',
+              code: app.globalData.code,  //获取openid的code码
+              nickname: res.userInfo.nickName,
+              avatarUrl: res.userInfo.avatarUrl,
+              phone:wx.getStorageSync('phone')?wx.getStorageSync('phone'):'',
+              openid:wx.getStorageSync('openid')?wx.getStorageSync('openid'):'',
+              unionid:wx.getStorageSync('unionid')?wx.getStorageSync('unionid'):'',
+              sessionid:wx.getStorageSync('sessionKey')?wx.getStorageSync('sessionKey'):'',
+              encryptedData:res.encryptedData, 
+              iv:res.iv,
+              share_by: that.data.shareBy,
+            });
+          }
+        });
+      }
+    })
   },
   updateUserInfo: function (param) {  //更新用户信息
     wx.request({
@@ -200,10 +164,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        // wx.navigateBack({
-        //     delta: 1  //小程序关闭当前页面返回上一页面
-        // })
-        console.log(res);
         var ret = res.data;
         var datas = ret.data;
         if (ret.code != 200) {
@@ -229,14 +189,6 @@ Page({
             showCancel: false,
             confirmText: '确定',
             success: function (res) {
-              // 用户没有授权成功，不需要改变 isHide 的值
-              // if (res.confirm) {
-              //   wx.setStorageSync('enws', '1');
-              //   wx.switchTab({
-              //     url: "/wurui_house/pages/index/index"
-              //   })
-              //   console.log('用户点击了“返回授权”');
-              // };
               wx.switchTab({
                 url: '/pages/home/home',
               });
@@ -300,7 +252,6 @@ Page({
         }
       },
       fail: function (res) {
-        console.log('fail' + res);
       }
     });
   },
@@ -341,7 +292,6 @@ Page({
 
   setCodeInput: function (e) {
     let value = that.validateNumber(e.detail.value)
-    console.log(value);
     that.setData({
       code:value
     })
@@ -349,7 +299,6 @@ Page({
   },
   setPhoneInput: function (e) {
     let value = that.validateNumber(e.detail.value)
-    console.log(value);
     that.setData({
       phone:value
     })
@@ -360,7 +309,6 @@ Page({
   },
   //返回按钮状态来 是否可以找回密码
   setbuttonStatus: function () {
-    console.log('setbuttonStatus:----');
     if (that.data.phone.length == 11 && that.data.code.length == 4 ) {
       that.setData({
         isSubmit: true
@@ -391,7 +339,6 @@ Page({
         success: function (res) {
           var ret = res.data;
           var datas = ret.data;
-          console.log(datas);
           if (ret.code == 200){
             that.setData({
               sessId:datas.sess_id
@@ -481,7 +428,6 @@ Page({
 
   goPage:function(e){
     var type = e.currentTarget.dataset.type;
-    console.log(type);
     if (type == 'agree'){
       wx.navigateTo({
         url: '/pages/post/post?type=14'

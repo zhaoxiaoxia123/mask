@@ -95,18 +95,4 @@ Page({
       url: '../../my/financial_mgm/balance/balance',
     })
   },
-  // // 提现到银行卡
-  // bankacc: function (e) {
-  //   console.log(e)
-  //   wx.navigateTo({
-  //     url: '../../my/financial_mgm/bank_acc/bank_acc',
-  //   })
-  // },
-  // // 添加银行卡
-  // addbankacc: function (e) {
-  //   console.log(e)
-  //   wx.navigateTo({
-  //     url: '../../my/financial_mgm/add_bank_acc/add_bank_acc',
-  //   })
-  // }
 })

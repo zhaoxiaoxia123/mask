@@ -26,7 +26,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("onLoad");
     that = this;
     that.setData({
       fromPage: options.come
@@ -93,7 +92,6 @@ Page({
       data:param,
       method:'GET',
       sCallback: function (res) {
-        console.log(res);
         var datas = res.data.data;
         that.setData({
           items: datas,
@@ -113,7 +111,6 @@ Page({
     }
   },
   addAddress: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '../../my/address/addressdetail/addressdetail',
     })
@@ -138,8 +135,6 @@ Page({
         data:param,
         method:'POST',
         sCallback: function (res) {
-          console.log(res);
-          // var datas = res.data.data;
           that.setData({
             items: that.deleteItem(that.data.items, index)
           });

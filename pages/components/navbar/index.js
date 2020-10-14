@@ -60,7 +60,6 @@ Component({
       })
     },
     clickTab: function (e) {
-      // console.log(e)
       let dash = e.target.dataset.hash;
       this.triggerEvent("icre", { "dash": dash }, {})
     }

@@ -80,14 +80,12 @@ Page({
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
     let param = {
       page_code: "p006",
-      // customer_id: wx.getStorageSync('customerId')
     };
     var params = {
       url: app.globalData.domainUrl,
       data:param,
       method:'GET',
       sCallback: function (res) {
-        console.log(res);
         var datas = res.data.data;
         that.setData({
           items: datas
@@ -105,7 +103,6 @@ Page({
     }
   },
   addInvoice: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: 'invoicedetail/invoicedetail',
     })
@@ -129,30 +126,12 @@ Page({
         data:param,
         method:'POST',
         sCallback: function (res) {
-          console.log(res);
-          // var datas = res.data.data;
           that.setData({
             items: that.deleteItem(that.data.items, index)
           });
         }
       };
       base.httpRequest(params);
-
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   method: "POST",
-      //   data: param,
-      //   header: {
-      //     "Content-Type": "application/x-www-form-urlencoded"
-      //   },
-      //   success: function (res) {
-      //     console.log(res);
-      //     var datas = res.data.data;
-      //     that.setData({
-      //       items: that.deleteItem(that.data.items, index)
-      //     });
-      //   }
-      // })
     }
   },
   deleteItem: function (data, delIndex) {

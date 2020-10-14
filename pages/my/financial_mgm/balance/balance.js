@@ -142,17 +142,4 @@ Page({
       url: '../../../my/financial_mgm/financial/financial?id='+id
     })
   },
-  // // tab切换
-  // clickTab: function (e) {
-  //   var that = this;
-  //   console.log("-1", this.data.currentTab)
-  //   console.log("-2", e.currentTarget.dataset.current)
-  //   if (this.data.currentTab == e.currentTarget.dataset.current) {
-  //     return false;
-  //   } else {
-  //     that.setData({
-  //       currentTab: e.currentTarget.dataset.current,
-  //     })
-  //   }
-  // }
 })

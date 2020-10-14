@@ -104,7 +104,6 @@ Page({
           wx.showToast({ title: res, icon: 'success', duration: 2000 })
         },
         fail: (res) => {
-          console.log(res);
           wx.showToast({ title: res, icon: 'success', duration: 2000 })
         }
       }
@@ -287,7 +286,6 @@ Page({
       success(res) {
       },
       fail: function (err) {
-        console.log(err);
       }
     })
   },

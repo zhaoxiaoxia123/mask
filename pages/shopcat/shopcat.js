@@ -66,7 +66,6 @@ Page({
       var param_s = {
         page_code: 'p012',
         type: "shopping_list",
-        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
@@ -113,12 +112,10 @@ Page({
       var param_s = {
         page_code: 'p012',
         type: "shopping_list",
-        // customer_id: wx.getStorageSync('customerId'),
         offset: (that.data.offset - 1) * that.data.pageCount,
         page: that.data.pageCount
       };
-        // var param_s = '/p012?type=shopping_list&customer_id='+wx.getStorageSync('customerId')+'&offset='+((that.data.offset - 1) * that.data.pageCount)+'&page='+that.data.pageCount;
-        that.getShoppingList(param_s);
+      that.getShoppingList(param_s);
     }
   },
   /**
@@ -187,7 +184,6 @@ Page({
         items[id].product_count = 1;
         if (items[id].product_count <= items[id].stock) { //库存是否足够来显示单选按钮
           items[id].is_enough = true;
-          // items[id].selected = true;  //true  为1时点减号也会被选中
         } else {
           items[id].is_enough = false;
           items[id].selected = false;
@@ -207,7 +203,6 @@ Page({
         var fee = 0;
         for (var i = 0; i < items.length; i++) {
           if (items[i].selected) {
-            // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
             fee = that.returnFee(fee, items[i].product_count, items[i].discount_amount);
           }
         }
@@ -216,7 +211,6 @@ Page({
         });
         that.setTotalFee(fee);
       }
-    // }
   },
   // 加按钮控件
   plusFn: function(e) {
@@ -233,79 +227,16 @@ Page({
       }
       
     that.computeCheckAmount(items);
-      // var fee = 0;
-      // for (var i = 0; i < items.length; i++) {
-      //   if (items[i].selected) {
-      //     // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
-      //     fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].discount_amount);
-      //   }
-      // }
-      // that.setData({
-      //   items: items
-      // });
-      // that.setTotalFee(fee);
-    // }else{
-    //   wx.showToast({
-    //     icon: "none",
-    //     title: "限制只能购买一件"
-    //   });
-    // }
   },
 
-  // /**
-  //  * 是否选中导入仪
-  //  */
-  // checkDry: function(e) {
-  //   var amount = e.currentTarget.dataset.amount;//that.data.dryInfos.dry_amount ;//
-  //   var items = that.data.items;
-  //   var dryInfos = that.data.dryInfos;
-  //   if (dryInfos.is_check_dry == 1) {
-  //     dryInfos.is_check_dry = 2;
-  //     that.setData({
-  //       dryAmount:0
-  //     });
-  //   } else {
-  //     dryInfos.is_check_dry = 1;
-  //     that.setData({
-  //       dryAmount:amount
-  //     });
-  //   }
-  //   that.setData({
-  //     dryInfos: dryInfos
-  //   });
-    
-  //   var fee = 0;
-  //   for (var i = 0; i < items.length; i++) {
-  //     if (items[i].selected) {
-  //       // fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].frozeno_discount_amount);
-  //       fee = that.returnFee(fee, parseInt(items[i].product_count), items[i].discount_amount);
-  //     }
-  //   }
-  //   that.setTotalFee(fee);
-  //   console.log('that.data.dryInfos.is_check_dry:-------');
-  //   console.log(that.data.dryInfos.is_check_dry);
-  // },
   radiocon: function(e) {
     var id = e.currentTarget.dataset.id;
     var items = that.data.items;
-    // var selected = items[id].selected;
     if (items[id].selected) {
       items[id].selected = false;
     } else {
       items[id].selected = true;
     }
-    // var fee = 0;
-    // for (var i = 0; i < items.length; i++) {
-    //   if (items[i].selected) {
-    //     // fee = that.returnFee(fee, items[i].product_count, items[i].frozeno_discount_amount);
-    //     fee = that.returnFee(fee, items[i].product_count, items[i].discount_amount);
-    //   }
-    // }
-    // that.setData({
-    //   items: items
-    // });
-    // that.setTotalFee(fee);
-    
     that.computeCheckAmount(items);
   },
   all: function(e) {
@@ -351,10 +282,6 @@ Page({
   },
   //赋值合计金额
   setTotalFee: function(fee) {
-    // var dryAm = 0;
-    // if(that.data.dryInfos.is_check_dry == 1){
-    //   dryAm = that.data.dryAmount;
-    // }
     that.setData({
       totalfee: (parseFloat(fee)).toFixed(2) //加入导入仪金额  + parseInt(dryAm)
     })
@@ -391,7 +318,6 @@ Page({
       data:param,
       method:'POST',
       sCallback: function (res) {
-        // var datas = res.data.data;
         wx.showToast({
           title: res.data.message
         });

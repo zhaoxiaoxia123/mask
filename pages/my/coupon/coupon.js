@@ -193,9 +193,6 @@ Page({
     base.httpRequest(params);
   },
   goOrder: function(e) {  //去购物车使用卡券
-    // var ticketId = e.currentTarget.dataset.id;
-    // console.log(ticketId);
-    // app.globalData.ticketId = ticketId;
     wx.switchTab({
       url: '/pages/shopcat/shopcat',
     })

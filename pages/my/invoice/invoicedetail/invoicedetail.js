@@ -30,30 +30,6 @@ Page({
       invoiceId: id ? id : 0
     });
     if (that.data.invoiceId) {
-      // var param = '/p006?invoice_id='+that.data.invoiceId;
-      // wx.request({
-      //   url: app.globalData.domainUrl,
-      //   data: {
-      //     page_code: "p006",
-      //     invoice_id: that.data.invoiceId
-      //   },
-      //   header: {
-      //     'content-type': "application/json"
-      //   },
-      //   success: function (res) {
-      //     console.log(res);
-      //     var datas = res.data.data;
-      //     that.setData({
-      //       username: datas.username,
-      //       phone: datas.phone,
-      //       taxNumber: datas.tax_number,
-      //       address: datas.address,
-      //       bank: datas.bank,
-      //       bankAccount: datas.bank_account
-      //     });
-      //   }
-      // })
-
       let param =  {
         page_code: "p006",
         invoice_id: that.data.invoiceId
@@ -63,7 +39,6 @@ Page({
         data:param,
         method:'GET',
         sCallback: function (res) {
-          console.log(res);
           var datas = res.data.data;
           that.setData({
             username: datas.username,
@@ -200,13 +175,11 @@ Page({
               type: "delete",
               invoice_id: that.data.invoiceId
             };
-            console.log(param);
             var params = {
               url: app.globalData.domainUrl,
               data:param,
               method:'POST',
               sCallback: function (res) {
-                console.log(res);
                 var datas = res.data.data;
                 if (datas) {
                   wx.navigateBack({
@@ -216,24 +189,6 @@ Page({
               }
             };
             base.httpRequest(params);
-      
-            // wx.request({
-            //   url: app.globalData.domainUrl,
-            //   method: "POST",
-            //   data: param,
-            //   header: {
-            //     "Content-Type": "application/x-www-form-urlencoded"
-            //   },
-            //   success: function (res) {
-            //     console.log(res);
-            //     var datas = res.data.data;
-            //     if (datas) {
-            //       wx.navigateBack({
-            //         delta: 1
-            //       });
-            //     }
-            //   }
-            // })
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
@@ -287,17 +242,14 @@ Page({
       address: that.data.address,
       bank: that.data.bank,
       bank_account: that.data.bankAccount?that.data.bankAccount:'',
-      // customer_id: wx.getStorageSync('customerId'),
       invoice_id: that.data.invoiceId
     };
-    console.log(param);
 
     var params = {
       url: app.globalData.domainUrl,
       data:param,
       method:'POST',
       sCallback: function (res) {
-        console.log(res);
         var datas = res.data.data;
         if (datas) {
           wx.navigateBack({
@@ -307,24 +259,6 @@ Page({
       }
     };
     base.httpRequest(params);
-    // wx.request({
-    //   url: app.globalData.domainUrl,
-    //   method: "POST",
-    //   data: param,
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   success: function (res) {
-    //     console.log(res);
-    //     var datas = res.data.data;
-    //     if (datas) {
-    //       wx.navigateBack({
-    //         delta: 1
-    //       });
-    //     }
-    //   }
-    // })
-
     } else {
       wx.showModal({
         title: '提示',

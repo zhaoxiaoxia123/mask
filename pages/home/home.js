@@ -50,18 +50,11 @@ Page({
     }
     if (options.scene) {
       var scene = decodeURIComponent(options.scene);
-      console.log("scene is ", scene);
       var arrPara = scene.split("&");
       var arr = [];
       for (var i in arrPara) {
         arr = arrPara[i].split("=");
         wx.setStorageSync(arr[0], arr[1]);
-        console.log("setStorageSync:", arr[0], "=", arr[1]);
-        // if (arr[0] == 'shareBy') {
-        //   that.setData({
-        //     shareBy: arr[1]
-        //   });
-        // }
       }
     }
 
@@ -75,8 +68,7 @@ Page({
       page: that.data.pageCount
     };
     that.getProductList(param_p);
-
-    //广告图片列表---------
+    //广告图片列表
     that.getAdList();
   },
 
@@ -84,7 +76,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
   },
 
   /**
@@ -110,14 +101,12 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {},
-
 
   /**
    * 页面上拉触底事件的处理函数
@@ -178,14 +167,12 @@ Page({
     that.setData({
       ftserviceflexwindow: ret
     });
-    // wx.hideTabBar();
   },
   ftserviceq: function(e) {
     let ret = tmpObj.ftserviceq(e);
     that.setData({
       ftserviceflexwindow: ret
     })
-    // wx.showTabBar();
   },
   calling: function(e) {
     tmpObj.calling(e);
@@ -209,9 +196,7 @@ Page({
     };
     base.httpRequest(params);
   },
-  /***
-   * 点击进入详情页
-   * ***/
+   // 点击进入详情页
   toDetail: function(e) {
     var product_id = e.currentTarget.dataset.obj.category_id;
     wx.navigateTo({
@@ -239,11 +224,8 @@ Page({
     base.httpRequest(params);
   },
   goPost: function (e) {
-    console.log(e);
     let post_id = e.currentTarget.dataset.id;
     let href = e.currentTarget.dataset.href;
-    console.log(href);
-    console.log(encodeURIComponent(href));
     if(href){
       wx.navigateTo({
         url: '../post/post?href=' + encodeURIComponent(href),
@@ -257,14 +239,13 @@ Page({
   goMyPage:function(e){
     let href = e.currentTarget.dataset.href;
     if(href){
-    wx.navigateTo({
-      url: href,
-    })
-  }else{
-    wx.showToast({
-      title: "地址为空"
-    })
-  }
+      wx.navigateTo({
+        url: href,
+      })
+    }else{
+      wx.showToast({
+        title: "地址为空"
+      })
+    }
   },
-
 })

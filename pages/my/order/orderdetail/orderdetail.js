@@ -48,9 +48,7 @@ Page({
       var param = {
         page_code: 'p004',
         type: "mainCustomer",
-        // customer_id: wx.getStorageSync('customerId')
       };
-      // var param = '/p004?type=mainCustomer&customer_id='+ wx.getStorageSync('customerId');
       that.getUserDetail(param);
     }
     //查询积分是否可抵用
@@ -58,7 +56,6 @@ Page({
       page_code: 'p017',
       code: 'jf01'
     };
-    // var transformParam = '/p017?code=jf01';
     that.getTransform(transformParam);
 
     //获取订单详情
@@ -67,19 +64,8 @@ Page({
       has_address:1,   //查询该订单使用地址
       order_id: that.data.orderId
     };
-    // var param_o = '/p008?has_address=1&order_id='+that.data.order_id;
     that.getOrder(param_o);
 
-    // //将计时器赋值给setInter
-    // that.data.setInter = setInterval(
-    //   function () {
-    //     var numVal = that.data.num - 1;
-    //     that.setData({ num: numVal });
-    //     // console.log('setInterval==' + that.data.num);
-    //     if(numVal <= 0){
-    //       clearInterval(that.data.setInter)
-    //     }
-    //   }, 1000*60);
   },
   
 
@@ -107,17 +93,14 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    // console.log('orderdetail onUnload:====');
-    // console.log(that.data.fromPage);
     if (that.data.fromPage == 'shopping'){
-      var pages = getCurrentPages();  // 当前页的数据，可以输出来看看有什么东西
-      var prevPage = pages[pages.length - 2];  // 上一页的数据，也可以输出来看看有什么东西
+      var pages = getCurrentPages();  // 当前页的数据
+      var prevPage = pages[pages.length - 2];  // 上一页的数据
       /** 设置数据 这里面的 value 是上一页你想被携带过去的数据，后面是本方法里你得到的数据，我这里是detail.value，根据自己实际情况设置 */
       prevPage.setData({
         isBack: false,
       })
     }
-
     //清除计时器  即清除setInter
     clearInterval(that.data.setInter)
 
@@ -182,7 +165,6 @@ Page({
       method:'GET',
       sCallback: function (res) {
         var datas = res.data.data;
-        // console.log(datas);
         if(res.data.code == 201){
           wx.showToast({
             title: res.data.message
@@ -211,7 +193,6 @@ Page({
             function () {
               var numVal = that.data.num - 1;
               that.setData({ num: numVal });
-              // console.log('setInterval==' + that.data.num);
               if(numVal <= 0){
                 clearInterval(that.data.setInter)
               }
@@ -282,7 +263,6 @@ Page({
       }
     })
   },
-  
   //是否让确认按钮可点击
   setClickState:function(value){
     that.setData({
@@ -314,8 +294,6 @@ Page({
               outTradeNo: res.data.out_trade_no
             });
             if (datas) {
-              // console.log('datas:-----');
-              // console.log(datas);
               wx.requestPayment({
                 'timeStamp': datas.timeStamp,
                 'nonceStr': datas.nonceStr,
@@ -323,23 +301,30 @@ Page({
                 'signType': 'MD5',
                 'paySign': datas.paySign,
                 'success': function (res) {
-                  console.log('success');
-                  // console.log(res);
                   wx.showToast({
                     title: '支付成功',
                     icon: 'success',
                     duration: 3000
                   });
+                  //获取订阅消息权限
+                  wx.getSetting({
+                    withSubscriptions: true,
+                    success (res) {
+                      if(res.subscriptionsSetting.mainSwitch){
+                        wx.requestSubscribeMessage({
+                          tmplIds: ['SiM2xJUYwtsNbRTjOrjUdGFocUwC6hEOcK1_W0KqV0M'],
+                          success (res) { 
+                          }
+                        })
+                      }
+                    }
+                  })
                   that.payAfter();
                 },
                 'fail': function (res) {
-                  console.log('fail');
-                  // console.log(res);
                   that.setClickState(true);
                 },
                 'complete': function (res) {
-                  console.log('complete');
-                  // console.log(res);
                   that.setClickState(true);
                 }
               });
@@ -347,7 +332,6 @@ Page({
           }
         };
         base.httpRequest(params);
-
       }
     }else{
       wx.showToast({
@@ -364,6 +348,7 @@ Page({
           type: 'pay',
           order_id: that.data.items[0].o_id,
           out_trade_no: that.data.outTradeNo,
+          from:"app",
         };
       var params = {
         url: app.globalData.domainUrl,
@@ -371,13 +356,8 @@ Page({
         method:'POST',
         sCallback: function (res) {
           var ret = res.data;
-          // var datas = ret.data;
           that.setClickState(true);
           if (ret.code == 201) {
-            // console.log(ret.message);
-            // that.setData({
-            //   shopping_count: parseInt(that.data.shopping_count) + 1
-            // });
           }else{
             wx.navigateBack({
               delta: 1
@@ -386,7 +366,6 @@ Page({
         }
       };
       base.httpRequest(params);
-
     } else {
       wx.showToast({
         title: "请先完成授权并登录"
@@ -398,8 +377,6 @@ Page({
     wx.setClipboardData({
       data: code,
       success: function (res) {
-        // console.log('copyCode:------');
-        // console.log(res);
         wx.showToast({
           title: "复制成功"
         });
@@ -438,31 +415,23 @@ Page({
       url: '/pages/detail/detail?id='+id,
     })
   },
-
   //测试付款成功则修改订单状态。
   testPayAfter: function (e) {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-
       let param = {
         page_code: 'p008',
         type: 'pay',
         order_id: e.currentTarget.dataset.id,
         out_trade_no: '123456789',
+        from:'workbench'
       };
       var params = {
         url: app.globalData.domainUrl,
         data:param,
         method:'POST',
         sCallback: function (res) {
-          console.log(res);
           var ret = res.data;
-          var datas = ret.data;
-          console.log(ret);
           if (ret.code == 201) {
-            // console.log(ret.message);
-            // that.setData({
-            //   shopping_count: parseInt(that.data.shopping_count) + 1
-            // });
           } else {
             wx.navigateBack({
               delta: 1

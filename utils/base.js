@@ -2,7 +2,6 @@
 // 当noRefech为true时，不做未授权重试机制
 function httpRequest(params, noRefetch) {
   let header = {};
-  // console.log(wx.getStorageSync('token'));
   if(params.method == 'get' || params.method == 'GET'){
     header = {
       'content-type': "application/json",
@@ -27,7 +26,6 @@ function httpRequest(params, noRefetch) {
     method: params.method,
     header: header,
     success: function (res) {
-      // console.log(res);
       var code = res.data.code ? res.data.code.toString():'';
       var startChar = code.charAt(0);
       if (startChar == '2') {
@@ -65,8 +63,6 @@ function httpRequest(params, noRefetch) {
 
 function _refetch(params) {
   getTokenFromServer(params,(token) => {
-    console.log('token:--~---');
-    console.log(token);
     wx.setStorageSync('token',token);
     httpRequest(params, true);
   });
@@ -110,12 +106,8 @@ function getTokenFromServer(params,callBack) {
       });
     },
     complete(resc){
-      // console.log(resc);
-    
     },
     fail(resf){
-        // 这里打印发现微信账号登录错误
-      // console.log(resf);
     }
   })
 }

@@ -29,9 +29,6 @@ Page({
         href:decodeURIComponent(options.href)
       });
     }
-    
-    console.log('href');
-    console.log(that.data.href);
     if (that.data.type){
       var param = {
         page_code: "p001",
@@ -45,8 +42,6 @@ Page({
       };
       that.getPost(param);
     }
-    //  else if (that.data.href) {
-    // }
   },
 
   /**

@@ -1,5 +1,5 @@
 <view>
-	<view class='lists size-text col-content'>
+	<view class='lists size-text col-content' report-submit='true'>
 		<!--待付款时显示-->
 		<view class='wait col-title' wx:if="{{num <= 30 && items[0].frozeno_order_state == 1}}">
 			<text class='wait-text'>等待买家付款</text>
@@ -107,9 +107,6 @@
 			<view class='time'>申请时间：
 				<text class='time-text'>{{items[0].apply_detail.apply_date}}</text>
 			</view>
-			<!-- <view class='time'>售后编号：
-        <text class='time-text'>654646464654544</text>
-      </view> -->
 			<!-- 退款  退款中   已退款 部分退款 处理中  已完成  拒绝退款 -->
 			<view class='time'>状态：
 				<text class='time-text' wx:if="{{items[0].frozeno_is_verify == 1}}">退款中</text>

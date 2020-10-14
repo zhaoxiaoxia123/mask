@@ -330,7 +330,6 @@ Page({
   joinShopping: function(){
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       that.setClickState(false);
-      console.log(that.data.items.is_check_dry);
       let param = {
         page_code:'p012',
         type: 'insert',
@@ -386,19 +385,29 @@ Page({
   //进入结算页面  加入订单，即立即购买
   goConfirm: function (e) {
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')) {
-      var type = e.currentTarget.dataset.type;
-      var products = '';
-      if (type == "more"){
-        products = that.data.productId + "," + that.data.count + "--";
-      }else{
-        products = that.data.productId + ",1--";
-      }
-      if(that.data.items.is_check_dry == 1){
-        products += app.globalData.dry_id + ",1--";
-      }
-      wx.navigateTo({
-        url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
-      })
+      // wx.showModal({
+      //   title: '提示',
+      //   content: '国庆期间无法正常发货,是否继续购买?',
+      //   success: function (res) {
+      //     if (res.confirm) {
+            var type = e.currentTarget.dataset.type;
+            var products = '';
+            if (type == "more"){
+              products = that.data.productId + "," + that.data.count + "--";
+            }else{
+              products = that.data.productId + ",1--";
+            }
+            if(that.data.items.is_check_dry == 1){
+              products += app.globalData.dry_id + ",1--";
+            }
+            wx.navigateTo({
+              url: '/pages/shopcat/orderconfirm/orderconfirm?products=' + products,
+            });
+      //     } else if (res.cancel) {
+      //       console.log('用户点击取消')
+      //     }
+      //   }
+      // });
     } else {
       wx.showModal({
         title: '提示',
@@ -407,7 +416,7 @@ Page({
         confirmText: '确定',
         success: function (res) {
           // wx.switchTab({
-        wx.navigateTo({
+          wx.navigateTo({
             url: '/pages/my/login/login',
           });
         }
@@ -420,7 +429,6 @@ Page({
    * @param {*} e 
    */
   goPost: function (e) {
-    console.log(e);
     let href = e.currentTarget.dataset.href;
     wx.navigateTo({
       url: '../post/post?href=' + encodeURIComponent(href),
@@ -428,15 +436,8 @@ Page({
   },
   goDryDetail :function(e){
     var product_id = e.currentTarget.dataset.id;
-    // app.globalData.productId = product_id;
-    console.log(product_id)
     wx.navigateTo({
       url: '../detail/detail?id='+product_id,
     })
-    // setTimeout(() => {
-      // wx.reLaunch({
-      //   url: '../detail/detail?id='+product_id,
-      // });
-    // }, 2000);
   },
 })
