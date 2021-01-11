@@ -28,20 +28,13 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    if (options.shareBy || wx.getStorageSync("shareBy") != '') {
-      that.setData({
-        isShareBy:true,
-        shareBy: options.shareBy?options.shareBy: wx.getStorageSync("shareBy"),
-      });
-    }else{
-      const scene = decodeURIComponent(options.scene);
-      if(scene){
-        that.setData({
-          isShareBy:true,
-          shareBy: scene,
-        });
-        wx.setStorageSync("shareBy",scene);
-      }
+    const scene = options.shareBy || decodeURIComponent(options.scene);
+    that.setData({
+      isShareBy:true,
+      shareBy: scene ? scene : wx.getStorageSync("shareBy"),
+    });
+    if(scene){
+      wx.setStorageSync("shareBy",scene);
     }
     if (wx.getStorageSync('customerId') && !wx.getStorageSync('get_user_info') && !wx.getStorageSync('get_phone_info')){
       wx.switchTab({

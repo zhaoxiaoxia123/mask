@@ -25,7 +25,7 @@
 </view>
 
 <!-- 引导页分两步 -->
- <view class="just1 {{storeflexwindow==true?'': 'y'}}" >
+ <!-- <view class="just1 {{storeflexwindow==true?'': 'y'}}" >
   <view class="guide {{step == 1?'':'zy'}}">
     <view class="guide-item" style="padding-top:20rpx;padding:20rpx;margin-top:80px;">
       <image class="guide-img" mode="widthFix" src="../img/guide-t@2x.png"></image>
@@ -42,4 +42,9 @@
       <view class="guide-btn" data-step='3' bindtap='close3'>知道啦 2/2</view>
     </view>
   </view>
-</view>
+</view> -->
+
+<!-- 
+<view>
+  <image mode="widthFix" src="https://donglingzhimei-bucket.oss-cn-beijing.aliyuncs.com/ad.jpg"  class="slide-image"/>
+</view> -->

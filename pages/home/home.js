@@ -35,9 +35,10 @@ Page({
   onLoad: function(options) {
     that = this;
     base.loading(1000);
-    if (options.shareBy) {
-      wx.setStorageSync('shareBy', options.shareBy);
-    }
+
+    const scene = options.shareBy || decodeURIComponent(options.scene);
+    wx.setStorageSync("shareBy",scene);
+      
     if (wx.getStorageSync("isFirst")){
       that.setData({
         storeflexwindow: false
@@ -49,7 +50,7 @@ Page({
       });
     }
     if (options.scene) {
-      var scene = decodeURIComponent(options.scene);
+      const scene = decodeURIComponent(options.scene);
       var arrPara = scene.split("&");
       var arr = [];
       for (var i in arrPara) {

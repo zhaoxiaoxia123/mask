@@ -2,30 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="190413f9-7aba-4177-a74a-879d4f6bd676" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/detail/detail.js" afterPath="$PROJECT_DIR$/pages/detail/detail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/detail/detail.wxml" afterPath="$PROJECT_DIR$/pages/detail/detail.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/home/home.js" afterPath="$PROJECT_DIR$/pages/home/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/home/home.wxml" afterPath="$PROJECT_DIR$/pages/home/home.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grade/grade.js" afterPath="$PROJECT_DIR$/pages/member/grade/grade.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grade/grade.wxml" afterPath="$PROJECT_DIR$/pages/member/grade/grade.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grow/grow.js" afterPath="$PROJECT_DIR$/pages/member/grow/grow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/grow/grow.wxml" afterPath="$PROJECT_DIR$/pages/member/grow/grow.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/member/member.js" afterPath="$PROJECT_DIR$/pages/member/member.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/login/login.js" afterPath="$PROJECT_DIR$/pages/my/login/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/my.js" afterPath="$PROJECT_DIR$/pages/my/my.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/my.wxml" afterPath="$PROJECT_DIR$/pages/my/my.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/order.js" afterPath="$PROJECT_DIR$/pages/my/order/order.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/order.wxml" afterPath="$PROJECT_DIR$/pages/my/order/order.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js" afterPath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.wxml" afterPath="$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/service/service.js" afterPath="$PROJECT_DIR$/pages/my/service/service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/my/service/service.wxml" afterPath="$PROJECT_DIR$/pages/my/service/service.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js" afterPath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.wxml" afterPath="$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/shopcat.js" afterPath="$PROJECT_DIR$/pages/shopcat/shopcat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/shopcat/shopcat.wxml" afterPath="$PROJECT_DIR$/pages/shopcat/shopcat.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.config.json" afterPath="$PROJECT_DIR$/project.config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/base.js" afterPath="$PROJECT_DIR$/utils/base.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,24 +19,9 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
+            <state relative-caret-position="252">
               <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orderdetail.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-              <folding>
-                <marker date="1592879287156" expanded="true" signature="19087:19098" ph="{&quot;title&quot;: &quot;请先登录&quot;...}" />
-                <marker date="1592879287156" expanded="true" signature="19087:19106" ph="{...}" />
-                <marker date="1592879287156" expanded="true" signature="19087:19110" ph="{...}" />
-                <marker date="1592879287156" expanded="true" signature="19087:19114" ph="{...}" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -65,8 +29,8 @@
       <file leaf-file-name="orderdetail.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2886">
-              <caret line="74" column="13" lean-forward="false" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
+            <state relative-caret-position="2664">
+              <caret line="74" column="12" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -85,8 +49,18 @@
       <file leaf-file-name="member.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/member/member.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+            <state relative-caret-position="782">
+              <caret line="50" column="48" lean-forward="false" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="member.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/member/member.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1610">
+              <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -95,22 +69,19 @@
       <file leaf-file-name="orderconfirm.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11544">
+            <state relative-caret-position="10656">
               <caret line="296" column="5" lean-forward="false" selection-start-line="296" selection-start-column="5" selection-end-line="296" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/home/home.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
               <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-              <folding>
-                <marker date="1592893517010" expanded="true" signature="7368:7371" ph="//..." />
-                <marker date="1592893517010" expanded="true" signature="7368:7374" ph="{...}" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,7 +89,7 @@
       <file leaf-file-name="home.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/home/home.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="741">
+            <state relative-caret-position="684">
               <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
               <folding />
             </state>
@@ -128,8 +99,8 @@
       <file leaf-file-name="grow.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/member/grow/grow.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="9" column="78" lean-forward="false" selection-start-line="9" selection-start-column="78" selection-end-line="10" selection-end-column="80" />
+            <state relative-caret-position="324">
+              <caret line="9" column="36" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="10" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -138,11 +109,9 @@
       <file leaf-file-name="grow.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/member/grow/grow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
+            <state relative-caret-position="324">
               <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-              <folding>
-                <marker date="1592882652343" expanded="true" signature="3617:3627" ph="{...}" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -151,8 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>share_b</find>
-      <find>share_</find>
       <find>kind/kind</find>
       <find>login/login</find>
       <find>goMember</find>
@@ -181,6 +148,8 @@
       <find>products</find>
       <find>domainName</find>
       <find>frozeno_rate_amount</find>
+      <find>barcode</find>
+      <find>writeCode</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -233,10 +202,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
+    <option name="x" value="2391" />
     <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="width" value="1368" />
+    <option name="height" value="2368" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -254,6 +223,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -308,13 +278,12 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="home" />
+              <option name="myItemId" value="member" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -428,21 +397,21 @@
       <workItem from="1590549546880" duration="610000" />
       <workItem from="1590557578538" duration="428000" />
       <workItem from="1593743985976" duration="17000" />
+      <workItem from="1606358188313" duration="777000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36769000" />
+    <option name="totallyTimeSpent" value="37546000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="2391" y="-9" width="1368" height="2368" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2446352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35703245" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -454,6 +423,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -500,13 +470,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/member/agreementone/agreementone.js" />
-    <entry file="file://$PROJECT_DIR$/pages/member/member.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1677">
-          <caret line="171" column="10" lean-forward="true" selection-start-line="171" selection-start-column="10" selection-end-line="171" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/shopcat/shopcat.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -522,13 +485,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/agree/agree.js" />
-    <entry file="file://$PROJECT_DIR$/pages/my/bind/bind.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1755">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/my/bind/bind.js" />
     <entry file="file://$PROJECT_DIR$/pages/my/address/addressdetail/addressdetail.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
@@ -685,21 +642,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
+        <state relative-caret-position="324">
           <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-          <folding>
-            <marker date="1592879287156" expanded="true" signature="19087:19098" ph="{&quot;title&quot;: &quot;请先登录&quot;...}" />
-            <marker date="1592879287156" expanded="true" signature="19087:19106" ph="{...}" />
-            <marker date="1592879287156" expanded="true" signature="19087:19110" ph="{...}" />
-            <marker date="1592879287156" expanded="true" signature="19087:19114" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/my/order/orderdetail/orderdetail.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2886">
-          <caret line="74" column="13" lean-forward="false" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
+        <state relative-caret-position="2664">
+          <caret line="74" column="12" lean-forward="false" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -714,33 +666,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/member/grow/grow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
+        <state relative-caret-position="324">
           <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-          <folding>
-            <marker date="1592882652343" expanded="true" signature="3617:3627" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/member/grow/grow.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="9" column="78" lean-forward="false" selection-start-line="9" selection-start-column="78" selection-end-line="10" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/member/member.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+        <state relative-caret-position="324">
+          <caret line="9" column="36" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="10" selection-end-column="80" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/shopcat/orderconfirm/orderconfirm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11544">
+        <state relative-caret-position="10656">
           <caret line="296" column="5" lean-forward="false" selection-start-line="296" selection-start-column="5" selection-end-line="296" selection-end-column="5" />
           <folding />
         </state>
@@ -748,7 +690,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/home/home.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
+        <state relative-caret-position="684">
           <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
           <folding />
         </state>
@@ -756,7 +698,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
+        <state relative-caret-position="252">
           <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
           <folding />
         </state>
@@ -766,10 +708,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding>
-            <marker date="1592893517010" expanded="true" signature="7368:7371" ph="//..." />
-            <marker date="1592893517010" expanded="true" signature="7368:7374" ph="{...}" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/member/member.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="50" column="48" lean-forward="false" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/member/member.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1610">
+          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

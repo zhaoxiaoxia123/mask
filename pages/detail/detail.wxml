@@ -95,7 +95,7 @@
 			</view>
 		</view>
 
-		<view class='bottom'>
+		<view class='bottom' wx:if="{{items.parent_info.frozeno_level == 3}}" >
 			<view class='bottom-operate'>
 				<view class='bottom-left count'>
 					<button class="cs_button" type="default-light" open-type="contact" session-from="weapp">
@@ -110,10 +110,10 @@
 						<image class="icon40" src="../img/shopcat1_false@2x.png"></image>
 					</button>
 				</view>
-				<view class='bottom-operate button1' catchtap='joinShopping' wx:if="{{isClick}}">加入购物</view>
-				<view class='bottom-operate button1' wx:if="{{!isClick}}">加入购物</view>
-				<view class='bottom-operate button' data-type="one" catchtap='goConfirm'>立即购买</view>
-			</view>
+					<view class='bottom-operate button1' catchtap='joinShopping' wx:if="{{isClick}}">加入购物</view>
+					<view class='bottom-operate button1' wx:if="{{!isClick}}">加入购物</view>
+					<view class='bottom-operate button' data-type="one" catchtap='goConfirm'>立即购买</view>
+				</view>
 		</view>
 		<view class="just1 {{flexwindow==true?'': 'y'}}" bindtap='close'></view>
 		<view class="just {{flexwindow==true?'': 'y'}}">
